@@ -262,33 +262,142 @@ def get_functional_set(sourceCode, testCases):
 # functional_set = get_functional_set(source_code, test_cases)
 # print(functional_set)
 
-def get_compilation_set(sourceB):
+import ast
+
+def get_compilation_set(sourceCode, functional_set):
     '''
-    Elements that are referenced by the functional set.
+    keep the element Elements that are referenced by the functional set.
 
     Following the test execution, all code entities referenced within the functional set are 
     ensured to be defined, regardless of whether they were traversed during the tests. 
-    The entities included in the compilation set are {Boo, Boo.b, Bar}.
     '''
-    pass
 
-def adapttoSCM(self, sourceB = None):
+    # Parse the source code into an abstract syntax tree (AST)
+    tree = ast.parse(sourceCode)
+
+    # Create a set to store referenced code entities
+    referenced_entities = set()
+
+    # Helper function to recursively traverse the AST and find references
+    def visit(node):
+        if isinstance(node, ast.Name):
+            referenced_entities.add(node.id)
+        for child in ast.iter_child_nodes(node):
+            visit(child)
+
+    # Traverse the AST and find references in the functional set
+    for func_entity in functional_set:
+        # Search for the entity in the AST and add its references
+        for node in ast.walk(tree):
+            if isinstance(node, ast.FunctionDef) and node.name == func_entity:
+                visit(node)
+
+    return referenced_entities
+
+# # Example usage
+# source_code = '''
+# def add(a, b):
+#     return a + b
+
+# def subtract(a, b):
+#     return a - b
+
+# def multiply(a, b):
+#     return a * b
+
+# def divide(a, b):
+#     return a / b
+# '''
+
+# functional_entities = ['add', 'multiply']
+
+# compilation_set = get_compilation_set(source_code, functional_entities)
+# print(compilation_set)
+
+# def adapttoSCM(self, sourceB = None):
+#     '''
+#     - Mapped back to the original commits/reverting unwanted changes
+#     - Hunk dependencies
+#     '''
+#     dependencies = get_hunk_sets()
+    
+
+# def get_origin(fun_set=None, com_set= None):
+#     commits = []
+#     return commits
+
+# def get_hunk_sets(commit=None):
+#     dependencies = []
+#     # Gether context 
+#     return dependencies
+
+def get_stable_version_libraries(owner, repo, branch, github_token=None):
     '''
-    - mapped back to the original commits/reverting unwanted changes
-    - hunk dependencies
+    This function uses the GitHub API to retrieve the contents of the repository's branch, searches for Python files (.py extension), and parses the code using the ast module. It identifies import and from ... import statements to extract library usage, function definitions, and function calls.
 
+    Replace github_username, repository_name, and your_github_personal_access_token with appropriate values. Also, remember to handle pagination if the repository has a large number of files.
+
+    Keep in mind that this approach has limitations and may not catch all forms of function calls or more complex code patterns. You might need to enhance this function or use additional parsing techniques if your repository's codebase is intricate.
     '''
-    dependencies = get_hunk_sets()
-    pass
+    base_url = f"https://api.github.com/repos/{owner}/{repo}/contents"
+    headers = {}
 
-def get_origin(fun_set=None, com_set= None):
-    commits = []
-    return commits
+    if github_token:
+        headers['Authorization'] = f"Bearer {github_token}"
 
-def get_hunk_sets(commit=None):
-    dependencies = []
-    # Gether context 
-    return dependencies
+    response = requests.get(f"{base_url}?ref={branch}", headers=headers)
 
-def get_stable_version_libraries(sVersion, sourceB):
-    pass
+    library_info = {}
+
+    if response.status_code == 200:
+        contents = response.json()
+
+        for item in contents:
+            if item['type'] == 'file' and item['name'].endswith('.py'):
+                file_url = item['download_url']
+                file_content = requests.get(file_url, headers=headers).text
+
+                try:
+                    tree = ast.parse(file_content)
+                except SyntaxError:
+                    print(f"Error parsing {item['name']}. Skipping.")
+                    continue
+
+                libraries = []
+                function_names = []
+                function_calls = []
+
+                for node in ast.walk(tree):
+                    if isinstance(node, ast.Import):
+                        for alias in node.names:
+                            libraries.append(alias.name)
+                    elif isinstance(node, ast.ImportFrom):
+                        for alias in node.names:
+                            if node.module:
+                                libraries.append(f"{node.module}.{alias.name}")
+                    elif isinstance(node, ast.FunctionDef):
+                        function_names.append(node.name)
+                    elif isinstance(node, ast.Call):
+                        if isinstance(node.func, ast.Name):
+                            function_calls.append(node.func.id)
+
+                library_info[item['name']] = {
+                    'libraries': list(set(libraries)),
+                    'function_names': list(set(function_names)),
+                    'function_calls': list(set(function_calls))
+                }
+
+        return library_info
+
+    else:
+        print(f"Failed to fetch repository contents: {response.status_code}")
+        return None
+
+# # Example usage
+# owner = "github_username"
+# repo = "repository_name"
+# branch = "main"
+# github_token = "your_github_personal_access_token"
+
+# library_info = get_stable_version_libraries(owner, repo, branch, github_token)
+# print(library_info)
