@@ -34,7 +34,7 @@ def checking_compatibility_and_incompability_withTests_among_PRs(prlist = 'prlis
     compatible_listwithTest = []
     no_of_incompatiblewithTest = 0
     incompatible_listwithTest = []
-    no_of_referenced_found = 0
+    no_of_referenced_found = 1
     chnaged_parcent = 0
     manual_listwithTest = []
     has_test_code  = False     
@@ -112,10 +112,10 @@ def checking_compatibility_and_incompability_withTests_among_PRs(prlist = 'prlis
                 manual_listwithTest.append(new_line) 
 
                 if diff_parcent > 0:
-                    no_of_incompatible = no_of_incompatible + 1
+                    no_of_incompatiblewithTest = no_of_incompatiblewithTest + 1
                     incompatible_listwithTest.append(line)
                 else:
-                    no_of_compatible = no_of_compatible + 1
+                    no_of_compatiblewithTest = no_of_compatiblewithTest + 1
                     compatible_listwithTest.append(line)
 
                            
@@ -135,8 +135,8 @@ def checking_compatibility_and_incompability_withTests_among_PRs(prlist = 'prlis
                                 
     print("Total Labeled Backporting PRs", len(data_read))
     print("No_of_referenced_found:", no_of_referenced_found)
-    print("No_of_compatible:", no_of_compatible)
-    print("No_of_incompatible:", no_of_incompatible)
+    print("No_of_compatible:", no_of_compatiblewithTest)
+    print("No_of_incompatible:", no_of_incompatiblewithTest)
     print("Avearge chnaged_parcent:", chnaged_parcent/no_of_referenced_found)
 
 

@@ -1,7 +1,53 @@
-def get_ast_diffs(sourceO, sourceB):
-    pass
+import ast
+import difflib
 
-def get_hunk_dependencies(hunksB):
+def get_ast_diffs(source_commits):
+    asts = []  # List to store parsed ASTs for each commit
+
+    # Parse source code and generate AST for each commit
+    for commit in source_commits:
+        with open(commit, 'r') as f:
+            source_code = f.read()
+            try:
+                parsed_ast = ast.parse(source_code)
+                asts.append((commit, parsed_ast))
+            except SyntaxError as e:
+                print(f"SyntaxError in {commit}: {e}")
+                asts.append((commit, None))  # Append None for invalid ASTs
+
+    # Compare ASTs and generate differences
+    diff_results = []
+
+    for i in range(len(asts) - 1):
+        commit_a, ast_a = asts[i]
+        commit_b, ast_b = asts[i + 1]
+
+        if ast_a is None or ast_b is None:
+            diff_results.append((commit_a, commit_b, ["Invalid AST"]))
+            continue
+
+        stmts_a = [node for node in ast.walk(ast_a) if isinstance(node, ast.stmt)]
+        stmts_b = [node for node in ast.walk(ast_b) if isinstance(node, ast.stmt)]
+
+        stmts_a_str = [ast.dump(stmt) for stmt in stmts_a]
+        stmts_b_str = [ast.dump(stmt) for stmt in stmts_b]
+
+        diff = difflib.ndiff(stmts_a_str, stmts_b_str)
+        diff_results.append((commit_a, commit_b, list(diff)))
+
+    return diff_results
+
+# # Example usage
+# source_commits = ["commit1.py", "commit2.py", "commit3.py"]
+# ast_diffs = get_ast_diffs(source_commits)
+
+# for commit_a, commit_b, diff in ast_diffs:
+#     print(f"Differences between {commit_a} and {commit_b}:")
+#     for line in diff:
+#         print(line)
+#     print()
+
+def get_hunk_dependencies(sourceB):
     pass
 
 def get_changeset_dependencies(sourceB):
