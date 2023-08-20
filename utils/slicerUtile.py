@@ -1,7 +1,7 @@
 import ast
 import difflib
 
-def get_ast_diffs(source_commits):
+def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = None, endDate = None):
     asts = []  # List to store parsed ASTs for each commit
 
     # Parse source code and generate AST for each commit

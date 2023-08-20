@@ -6,6 +6,7 @@ import os
 import sys
 sys.path.insert(1, os.getcwd())
 from helperZER.pygithub_helper import *
+from utils.slicerUtile import *
 import git
 import subprocess
 PIPE = subprocess.PIPE
@@ -50,38 +51,47 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                 commits_diffs_original = gLocal.execute(["git", "show", original_mergeCommits, ":*.py"]).split("\n@@ ")
                 commits_diffs_backport = gLocal.execute(["git", "show", backport_mergeCommits, ":*.py"]).split("\n@@ ")
 
-                if len(commits_diffs_original) == len(commits_diffs_backport):
-                    for indexO in range(1, len(commits_diffs_original)):
-                        if commits_diffs_original[indexO] is not None and commits_diffs_backport[indexO] is not None:
-                            commits_diffs_original_contextHunks = commits_diffs_original[indexO].split("\n \n")
-                            commits_diffs_backport_contextHunks = commits_diffs_backport[indexO].split("\n \n")
-                            for indexHunks0 in range(0, len(commits_diffs_original_contextHunks)):
-                                commits_diffs_original_context = commits_diffs_original_contextHunks[indexHunks0].split("\n")
-                                commits_diffs_backport_context = commits_diffs_backport_contextHunks[indexHunks0].split("\n")
-                                
-                                commits_diffs_originalLines = ""
-                                commits_diffs_backportLines = ""
 
-                                leadingSpacesOri = len(commits_diffs_original_context[0].replace("+", "").replace("-", "")) - len(commits_diffs_original_context[0].replace("+", "").replace("-", "").lstrip())
-                                leadingSpacesBac = len(commits_diffs_backport_context[0].replace("+", "").replace("-", "")) - len(commits_diffs_backport_context[0].replace("+", "").replace("-", "").lstrip())
-                                for c_line in commits_diffs_original_context:
-                                    if c_line.startswith(("+")):
-                                        c_line = c_line.replace("+", "")
-                                        commits_diffs_originalLines = commits_diffs_originalLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n" 
-                                for c_line in commits_diffs_backport_context:
-                                    if c_line.startswith(("+")):
-                                        c_line = c_line.replace("+", "")
-                                        commits_diffs_backportLines = commits_diffs_backportLines + c_line.replace(c_line[:leadingSpacesBac], "") + "\n"   
-                                numberofSlicingRequired = numberofSlicingRequired + 1
-                                cslicer = Cslicer(commits_diffs_backportLines)
-                                if cslicer:
-                                    break                                   
+                for indexO in range(1, len(commits_diffs_original)):
+                    if commits_diffs_original[indexO] is not None:
+                        commits_diffs_original_contextHunks = commits_diffs_original[indexO].split("\n \n")
+                        # commits_diffs_backport_contextHunks = commits_diffs_backport[indexO].split("\n \n")
+                        for indexHunks0 in range(0, len(commits_diffs_original_contextHunks)):
+                            commits_diffs_original_context = commits_diffs_original_contextHunks[indexHunks0].split("\n")
+                            # commits_diffs_backport_context = commits_diffs_backport_contextHunks[indexHunks0].split("\n")
+                            
+                            commits_diffs_originalLines = ""
+                            # commits_diffs_backportLines = ""
+
+                            leadingSpacesOri = len(commits_diffs_original_context[0].replace("+", "").replace("-", "")) - len(commits_diffs_original_context[0].replace("+", "").replace("-", "").lstrip())
+                            # leadingSpacesBac = len(commits_diffs_backport_context[0].replace("+", "").replace("-", "")) - len(commits_diffs_backport_context[0].replace("+", "").replace("-", "").lstrip())
+                            for c_line in commits_diffs_original_context:
+                                if c_line.startswith(("+")):
+                                    c_line = c_line.replace("+", "")
+                                    commits_diffs_originalLines = commits_diffs_originalLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n" 
+                            # for c_line in commits_diffs_backport_context:
+                            #     if c_line.startswith(("+")):
+                            #         c_line = c_line.replace("+", "")
+                            #         commits_diffs_backportLines = commits_diffs_backportLines + c_line.replace(c_line[:leadingSpacesBac], "") + "\n"   
+                            numberofSlicingRequired = numberofSlicingRequired + 1
+                            cslicer = Cslicer(sourceOriginal = commits_diffs_originalLines, 
+                                              astdiffsHistory = get_ast_diffs(source_commits = original_mergeCommits, startCommit=None, endCommit=None, startDate = None, endDate = None), 
+                                              context = get_hunk_context(file_content = indexHunks0, hunk_start = 0, hunk_end = 0, context_lines=3), 
+                                              dependencies = get_changeset_dependencies(commits_diffs_original), 
+                                              metadata = get_changesets_and_metadata(pull_request = 0, sourceB = indexHunks0), 
+                                              functionalSet = get_functional_set(commits_diffs_originalLines, testCases = []), 
+                                              compilationSet= get_compilation_set(sourceCode = commits_diffs_originalLines, functional_set = functionalSet), 
+                                              stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = dictOfActiveBranches, github_token=None))
+                            slicebyCslicer = cslicer.analyzeProgram()
+                            
+                            if slicebyCslicer:
+                                break                                   
                     
-                    if cslicer:
+                    if slicebyCslicer:
                         numberOfSuccesfulSlicing = numberOfSuccesfulSlicing + 1                
 
                     print("Working on pulls ", pull_id_original, pull_id_backport)
-                    slicedPRs.append(cslicer)
+                    slicedPRs.append(slicebyCslicer)
 
             except Exception as e:
                 print("Problem in pulls")

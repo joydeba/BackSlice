@@ -1,13 +1,17 @@
-from utils.slicerUtile import *
+
 
 class Cslicer():
-    def __init__(self, startCommit=None, endCommit=None, startDate = None, endDate = None):
-        self.startCommit = startCommit
-        self.endCommit = endCommit
-        self.startDate = startDate
-        self.endDate = endDate
+    def __init__(self, sourceOriginal= None, astdiffsHistory = None, context = None, dependencies = None, metadata = None, functionalSet = None, compilationSet= None, stableLibraris = None):
+        self.sourceOriginal = sourceOriginal
+        self.astdiffsHistory = astdiffsHistory
+        self.context = context
+        self.dependencies = dependencies 
+        self.metadata = metadata
+        self.functionalSet = functionalSet
+        self.compilationSet= compilationSet
+        self.stableLibraris = stableLibraris
   
-    def analyzeProgram(self, sourceBbase= None, originalHistory = None, testCases = None):
+    def analyzeProgram(self):
         slices = []
         '''
         - To preserve the "behavior" of the functional and compilation set elements, 
