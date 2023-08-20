@@ -74,13 +74,14 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                             #         c_line = c_line.replace("+", "")
                             #         commits_diffs_backportLines = commits_diffs_backportLines + c_line.replace(c_line[:leadingSpacesBac], "") + "\n"   
                             numberofSlicingRequired = numberofSlicingRequired + 1
+                            functionalSetforHunk = get_functional_set(commits_diffs_originalLines, testCases = [])
                             cslicer = Cslicer(sourceOriginal = commits_diffs_originalLines, 
                                               astdiffsHistory = get_ast_diffs(source_commits = original_mergeCommits, startCommit=None, endCommit=None, startDate = None, endDate = None), 
                                               context = get_hunk_context(file_content = indexHunks0, hunk_start = 0, hunk_end = 0, context_lines=3), 
                                               dependencies = get_changeset_dependencies(commits_diffs_original), 
                                               metadata = get_changesets_and_metadata(pull_request = 0, sourceB = indexHunks0), 
-                                              functionalSet = get_functional_set(commits_diffs_originalLines, testCases = []), 
-                                              compilationSet= get_compilation_set(sourceCode = commits_diffs_originalLines, functional_set = functionalSet), 
+                                              functionalSet = functionalSetforHunk, 
+                                              compilationSet= get_compilation_set(sourceCode = commits_diffs_originalLines, functional_set = functionalSetforHunk), 
                                               stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = dictOfActiveBranches, github_token=None))
                             slicebyCslicer = cslicer.analyzeProgram()
                             
