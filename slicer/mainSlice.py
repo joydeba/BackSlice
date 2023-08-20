@@ -52,7 +52,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                 commits_diffs_backport = gLocal.execute(["git", "show", backport_mergeCommits, ":*.py"]).split("\n@@ ")
 
                 # Todo
-                testCommits_diffs_original = None
+                testCommits_diffs_original = []
                 codeCommits_diffs_original = None
                 commitStart = None
                 commitEnd = None 
@@ -62,7 +62,8 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                 hunkEndlnNo = None
 
 
-                for indexO in range(1, len(commits_diffs_original)):
+                for indexO in range(0, len(commits_diffs_original)):
+                    # Check the odd index for test cases [Todo]
                     if commits_diffs_original[indexO] is not None:
                         commits_diffs_original_contextHunks = commits_diffs_original[indexO].split("\n \n")
                         # commits_diffs_backport_contextHunks = commits_diffs_backport[indexO].split("\n \n")
