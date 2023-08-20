@@ -51,6 +51,16 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                 commits_diffs_original = gLocal.execute(["git", "show", original_mergeCommits, ":*.py"]).split("\n@@ ")
                 commits_diffs_backport = gLocal.execute(["git", "show", backport_mergeCommits, ":*.py"]).split("\n@@ ")
 
+                # Todo
+                testCommits_diffs_original = None
+                codeCommits_diffs_original = None
+                commitStart = None
+                commitEnd = None 
+                commitStartDate = None
+                commitEndDate = None 
+                hunkStartLnNo = None 
+                hunkEndlnNo = None
+
 
                 for indexO in range(1, len(commits_diffs_original)):
                     if commits_diffs_original[indexO] is not None:
@@ -79,7 +89,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                               astdiffsHistory = get_ast_diffs(source_commits = original_mergeCommits, startCommit=None, endCommit=None, startDate = None, endDate = None), 
                                               context = get_hunk_context(file_content = indexHunks0, hunk_start = 0, hunk_end = 0, context_lines=3), 
                                               dependencies = get_changeset_dependencies(commits_diffs_original), 
-                                              metadata = get_changesets_and_metadata(pull_request = 0, sourceB = indexHunks0), 
+                                              metadata = get_changesets_and_metadata(pull_request = pull_id_original, sourceB = indexHunks0), 
                                               functionalSet = functionalSetforHunk, 
                                               compilationSet= get_compilation_set(sourceCode = commits_diffs_originalLines, functional_set = functionalSetforHunk), 
                                               stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = dictOfActiveBranches, github_token=None))
