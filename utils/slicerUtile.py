@@ -1,6 +1,19 @@
 import ast
 import difflib
 
+def has_test_files(files):
+    test_patterns = [
+        r'^test.*\.py$',  
+        r'^.*test\.py$', 
+        
+    ]
+
+    for file in files:
+        for pattern in test_patterns:
+            if re.match(pattern, file):
+                return True
+    return False
+
 def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = None, endDate = None):
     asts = []  # List to store parsed ASTs for each commit
 

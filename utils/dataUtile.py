@@ -12,21 +12,7 @@ import git
 import subprocess
 PIPE = subprocess.PIPE
 import git
-
-def has_test_files(files):
-    test_patterns = [
-        r'^test.*\.py$',  
-        r'^.*test\.py$', 
-        
-    ]
-
-    for file in files:
-        for pattern in test_patterns:
-            if re.match(pattern, file):
-                return True
-    return False
-
-
+from utils.slicerUtile import *
 
 def checking_compatibility_and_incompability_withTests_among_PRs(prlist = 'prlist.csv', output1='incmp.csv', output2='cmp.csv', output3='manual.csv'):
     g, backup_keys, no_bused_key, accesskey = initialize_G()
