@@ -26,7 +26,10 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
         stdoutput, stderroutput = process.communicate()
         numberofSlicingRequired = 0
         numberOfSuccesfulSlicing = 0
-        slicedPRs = []                             
+        slicedPRs = []
+        branches = gLocal.branch()
+        
+                             
 
         sliced_prs_commits = []        
         for idx, line in enumerate(data_read):
@@ -46,13 +49,28 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                 pull_commitOriginal = gLocal.execute(["gh", "pr", "view", pull_id_original, "--json", "mergeCommit"])
                 pull_commitBackports = gLocal.execute(["gh", "pr", "view", pull_id_backport, "--json", "mergeCommit"])
                 targetStableBranch = ast.literal_eval(gLocal.execute(["gh", "pr", "view", pull_id_backport, "--json", "baseRefName"]))['baseRefName']
-                creationStableBranch = ast.literal_eval(gLocal.execute(["gh", "repo", "view", repository, "--branch", targetStableBranch]))
+                branch_exists = any(branch.strip() == targetStableBranch for branch in branches.split('\n'))
                 
+                
+                if not branch_exists:
+                        gLocal.branch(targetStableBranch)
+
+                else:
+                        creationStableBranch = gLocal.execute(["git", "log", "--reverse", "--pretty=format:%h %ad %s", targetStableBranch])
+
+                        lines = creationStableBranch.strip().split('\n')
+                        earliest_commit_hash = lines[0].split()[0]
+
+                        # Get the creation date of the earliest commit
+                        creation_date_command = ["git", "show", "-s", "--format=%ci", earliest_commit_hash]
+                        creation_date = gLocal.execute(creation_date_command)
+
                 original_mergeCommits = ast.literal_eval(pull_commitOriginal)['mergeCommit']["oid"]          
                 backport_mergeCommits = ast.literal_eval(pull_commitBackports)['mergeCommit']["oid"]   
 
                 commits_diffs_original = gLocal.execute(["git", "show", original_mergeCommits, ":*.py"]).split("\ndiff ")
                 commits_diffs_backport = gLocal.execute(["git", "show", backport_mergeCommits, ":*.py"]).split("\ndiff ")
+
 
                 # Todo
                 testhunks_original = []
