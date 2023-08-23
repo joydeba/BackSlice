@@ -56,14 +56,9 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                         gLocal.branch(targetStableBranch)
 
                 else:
-                        creationStableBranch = gLocal.execute(["git", "log", "--reverse", "--pretty=format:%h %ad %s", targetStableBranch])
+                        creationStableBranch = gLocal.execute(["git", "log", "--reverse", "--pretty=format:'%h %ad %s'", "--date=iso", targetStableBranch]).split('\n')[1]
+                        # git log --reverse  <branch-name> | tail -1
 
-                        lines = creationStableBranch.strip().split('\n')
-                        earliest_commit_hash = lines[0].split()[0]
-
-                        # Get the creation date of the earliest commit
-                        creation_date_command = ["git", "show", "-s", "--format=%ci", earliest_commit_hash]
-                        creation_date = gLocal.execute(creation_date_command)
 
                 original_mergeCommits = ast.literal_eval(pull_commitOriginal)['mergeCommit']["oid"]          
                 backport_mergeCommits = ast.literal_eval(pull_commitBackports)['mergeCommit']["oid"]   
@@ -75,66 +70,72 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                 # Todo
                 testhunks_original = []
                 codehunks_original = []
-                commitStart = commits_diffs_original[0].split("\n")[2].split("Date:   ")[1]
-                commitEnd = commits_diffs_original[0].split("\n")[2].split("Date:   ")[1] 
-                commitStartDate = None
-                commitEndDate = None 
-                hunkStartLnNo = None 
-                hunkEndlnNo = None
+                commitStartDate = commits_diffs_original[0].split("\n")[2].split("Date:   ")[1]
+                commitEndDate = creationStableBranch.split(" ")[1]
 
 
                 for indexO in range(1, len(commits_diffs_original)):
                     # Check the odd index for test cases [Todo]
                     is_test_code = False
                     if commits_diffs_original[indexO] is not None:
-                        filepath = commits_diffs_original_contextHunks[0].split("\n")[0]
-                    if has_test_files(filepath):
+                        filepath = commits_diffs_original[indexO].split("\n")[0]
+                    if has_test_files([filepath]):
                         is_test_code = True                        
-                        commits_diffs_original_contextHunks = commits_diffs_original[indexO].split("\n@@ ")
-                        # commits_diffs_backport_contextHunks = commits_diffs_backport[indexO].split("\n \n")
-                        for indexHunks0 in range(0, len(commits_diffs_original_contextHunks)):
-                            commits_hunkline_original_context = commits_diffs_original_contextHunks[indexHunks0].split("\n")
-                            # commits_diffs_backport_context = commits_diffs_backport_contextHunks[indexHunks0].split("\n")
-                            
-                            commits_hunk_originalLines = ""
-                            commits_hunkTest_originalLines = ""
-                            # commits_diffs_backportLines = ""
+                    commits_diffs_original_contextHunks = commits_diffs_original[indexO].split("\n@@ ")
+                    # commits_diffs_backport_contextHunks = commits_diffs_backport[indexO].split("\n \n")
+                    for indexHunks0 in range(1, len(commits_diffs_original_contextHunks)):
 
-                            leadingSpacesOri = len(commits_hunkline_original_context[0].replace("+", "").replace("-", "")) - len(commits_hunkline_original_context[0].replace("+", "").replace("-", "").lstrip())
-                            # leadingSpacesBac = len(commits_diffs_backport_context[0].replace("+", "").replace("-", "")) - len(commits_diffs_backport_context[0].replace("+", "").replace("-", "").lstrip())
-                            for c_line in commits_hunkline_original_context:
-                                if c_line.startswith(("+")):
-                                    c_line = c_line.replace("+", "")
-                                    if is_test_code:
-                                        commits_hunkTest_originalLines = commits_hunkTest_originalLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n"
-                                    else:
-                                        commits_hunk_originalLines = commits_hunk_originalLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n"
+                        commits_hunkline_original_context = commits_diffs_original_contextHunks[indexHunks0].split("\n")
+                        # commits_diffs_backport_context = commits_diffs_backport_contextHunks[indexHunks0].split("\n")
+                        hunkStartLnNo = commits_hunkline_original_context[0].split(" ")[0][1:].split(",")
+                        hunkEndlnNo = commits_hunkline_original_context[0].split(" ")[1][1:].split(",")
+
+                        commits_hunk_originalLines = ""
+                        commits_hunkTest_originalLines = ""
+                        # commits_diffs_backportLines = ""
+
+                        leadingSpacesOri = len(commits_hunkline_original_context[0].replace("+", "").replace("-", "")) - len(commits_hunkline_original_context[0].replace("+", "").replace("-", "").lstrip())
+                        # leadingSpacesBac = len(commits_diffs_backport_context[0].replace("+", "").replace("-", "")) - len(commits_diffs_backport_context[0].replace("+", "").replace("-", "").lstrip())
+                        for c_line in commits_hunkline_original_context:
+                            if c_line.startswith(("+")):
+                                c_line = c_line.replace("+", "")
+                                if is_test_code:
+                                    commits_hunkTest_originalLines = commits_hunkTest_originalLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n"
+                                else:
+                                    commits_hunk_originalLines = commits_hunk_originalLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n"
+                        if commits_hunkTest_originalLines:            
                             testhunks_original.append(commits_hunkTest_originalLines) 
+                        if commits_hunk_originalLines:    
                             codehunks_original.append(commits_hunk_originalLines)            
-                            # for c_line in commits_diffs_backport_context:
-                            #     if c_line.startswith(("+")):
-                            #         c_line = c_line.replace("+", "")
-                            #         commits_diffs_backportLines = commits_diffs_backportLines + c_line.replace(c_line[:leadingSpacesBac], "") + "\n"   
-                            numberofSlicingRequired = numberofSlicingRequired + 1
+                        # for c_line in commits_diffs_backport_context:
+                        #     if c_line.startswith(("+")):
+                        #         c_line = c_line.replace("+", "")
+                        #         commits_diffs_backportLines = commits_diffs_backportLines + c_line.replace(c_line[:leadingSpacesBac], "") + "\n"   
+                        numberofSlicingRequired = numberofSlicingRequired + 1
 
-                functionalSetforHunk = get_functional_set(commits_hunk_originalLines, testCases = [])
-                cslicer = Cslicer(sourceOriginal = commits_hunk_originalLines, 
-                                    astdiffsHistory = get_ast_diffs(source_commits = original_mergeCommits, startCommit=None, endCommit=None, startDate = None, endDate = None), 
-                                    context = get_hunk_context(file_content = indexHunks0, hunk_start = 0, hunk_end = 0, context_lines=3), 
-                                    dependencies = get_changeset_dependencies(commits_diffs_original), 
-                                    metadata = get_changesets_and_metadata(pull_request = pull_id_original, sourceB = indexHunks0), 
-                                    functionalSet = functionalSetforHunk, 
-                                    compilationSet= get_compilation_set(sourceCode = commits_hunk_originalLines, functional_set = functionalSetforHunk), 
-                                    stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = dictOfActiveBranches, github_token=None))
-                slicebyCslicer = cslicer.analyzeProgram()
-                             
-                                  
-                    
-                if slicebyCslicer:
-                    numberOfSuccesfulSlicing = numberOfSuccesfulSlicing + 1                
+
+                slicebyCslicer = None
+                slicesfromCSLICER = []
+                if testhunks_original and codehunks_original:
+
+                    for codeHunk in codehunks_original:
+                        functionalSetforHunk = get_functional_set(codeHunk, testCases = testhunks_original)
+                        cslicer = Cslicer(sourceOriginal = codeHunk, 
+                                            astdiffsHistory = get_ast_diffs(source_commits = original_mergeCommits, startCommit=None, endCommit=None, startDate = None, endDate = None), 
+                                            context = get_hunk_context(file_content = codeHunk, hunk_start = hunkStartLnNo, hunk_end = hunkEndlnNo, context_lines=3), 
+                                            dependencies = get_changeset_dependencies(commits_diffs_original), 
+                                            metadata = get_changesets_and_metadata(pull_request = pull_id_original, sourceO = codeHunk), 
+                                            functionalSet = functionalSetforHunk, 
+                                            compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
+                                            stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=gLocal))
+                        slicebyCslicer = cslicer.analyzeProgram()  
+
+                        if slicebyCslicer:
+                            numberOfSuccesfulSlicing = numberOfSuccesfulSlicing + 1                
+                            slicesfromCSLICER.append(slicebyCslicer)
 
                 print("Working on pulls ", pull_id_original, pull_id_backport)
-                slicedPRs.append(slicebyCslicer)
+                slicedPRs.append(slicesfromCSLICER)
 
             except Exception as e:
                 print("Problem in pulls")

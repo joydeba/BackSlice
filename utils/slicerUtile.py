@@ -1,10 +1,12 @@
 import ast
 import difflib
+import re
 
 def has_test_files(files):
     test_patterns = [
-        r'^test.*\.py$',  
-        r'^.*test\.py$', 
+        # r'^test.*\.py$',  
+        # r'^.*test\.py$',
+        r".*test.*" 
         
     ]
 
