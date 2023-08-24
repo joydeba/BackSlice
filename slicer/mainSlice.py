@@ -94,11 +94,14 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                         commits_hunkTest_originalLines = ""
                         # commits_diffs_backportLines = ""
 
-                        leadingSpacesOri = len(commits_hunkline_original_context[0].replace("+", "").replace("-", "")) - len(commits_hunkline_original_context[0].replace("+", "").replace("-", "").lstrip())
+                        # Todo check first hunk line 
                         # leadingSpacesBac = len(commits_diffs_backport_context[0].replace("+", "").replace("-", "")) - len(commits_diffs_backport_context[0].replace("+", "").replace("-", "").lstrip())
+                        leadingSpacesOri = 0
                         for c_line in commits_hunkline_original_context:
                             if c_line.startswith(("+")):
                                 c_line = c_line.replace("+", "")
+                                if leadingSpacesOri == 0:
+                                    leadingSpacesOri = len(c_line) - len(c_line.lstrip())
                                 if is_test_code:
                                     commits_hunkTest_originalLines = commits_hunkTest_originalLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n"
                                 else:

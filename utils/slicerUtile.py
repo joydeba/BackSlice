@@ -1,6 +1,20 @@
-import ast
+import ast, astunparse
 import difflib
 import re
+
+def remove_comments_docstrings_fromString(fsring):
+    '''
+    Strips comments and docstrings from a python file.
+    '''
+    stripped_code = ""
+
+    lines = astunparse.unparse(ast.parse(fsring)).split('\n')
+    for line in lines:
+        if line.lstrip()[:1] not in ("'", '"'):
+            if line != '':
+                stripped_code = stripped_code + line + '\n'
+
+    return stripped_code
 
 def has_test_files(files):
     test_patterns = [
@@ -249,7 +263,9 @@ def get_functional_set(sourceCode, testCases):
     functional_set = set()
 
     for testCase in testCases:
-        for line in testCase:
+        testCase = remove_comments_docstrings_fromString(testCase)
+        sourceCode = remove_comments_docstrings_fromString(sourceCode)
+        for line in testCase.split("\n"):
             entity = find_source_code_entity(sourceCode, line)
             if entity:
                 functional_set.add(entity)
