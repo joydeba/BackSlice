@@ -226,12 +226,12 @@ def find_source_code_entity(source_code, target_line):
 
         def visit_FunctionDef(self, node):
             # Check if the target line is within the function's range
-            if node.lineno <= self.target_line <= node.end_lineno:
+            if node.name in self.target_line:
                 self.found_entity = node.name
 
         def visit_ClassDef(self, node):
             # Check if the target line is within the class's range
-            if node.lineno <= self.target_line <= node.end_lineno:
+            if node.name in self.target_line:
                 self.found_entity = node.name
 
     # Create an instance of the EntityVisitor and visit the parsed tree
@@ -273,27 +273,17 @@ def get_functional_set(sourceCode, testCases):
     return functional_set
 
 # # Example usage
-# source_code = '''
-# class MathUtils:
-#     def add(self, a, b):
-#         return a + b
-
-# def square(x):
-#     return x * x
-
-# result = MathUtils().add(3, 5)
-# squared_result = square(result)
-# '''
+# source_code = "class MathUtils:\n    def add(self, a, b):\n        return a + b\n\ndef square(x):\n    return x * x\n\nresult = MathUtils().add(3, 5)\nsquared_result = square(result)"
 
 # test_cases = [
 #     ['result = MathUtils().add(3, 5)'],
 #     ['squared_result = square(result)']
 # ]
 
-# functional_set = get_functional_set(source_code, test_cases)
+# functional_set = get_functional_set(source_code, test_cases[0])
 # print(functional_set)
 
-import ast
+
 
 def get_compilation_set(sourceCode, functional_set):
     '''

@@ -35,6 +35,7 @@ def checking_compatibility_and_incompability_withTests_among_PRs(prlist = 'prlis
             backport_code = ""               
             main_code = "" 
             new_line = [] 
+            diff_parcent = 0
             try:
                 repository = line[0].replace('https://api.github.com/repos/', '')
                 user_name, repo_name = repository.split("/")
