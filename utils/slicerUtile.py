@@ -1,6 +1,8 @@
 import ast, astunparse
 import difflib
 import re
+import tokenize
+import io
 
 def remove_comments_docstrings_fromString(fsring):
     '''
@@ -214,31 +216,79 @@ def get_changesets_and_metadata(pull_request, sourceB):
 # print("Tags:", tags)
 # print("Comments:", comments)
 
-def find_source_code_entity(source_code, target_line):
-    # Parse the source code
-    parsed_tree = ast.parse(source_code)
 
-    # Define a visitor to traverse the parsed tree
+def find_source_code_entity(source_code_toTest, test_case_line):
+    parsed_source_code_tree = ast.parse(source_code_toTest)
+
     class EntityVisitor(ast.NodeVisitor):
-        def __init__(self, target_line):
-            self.target_line = target_line
+        def __init__(self, test_case_line):
+            self.test_case_line = test_case_line
             self.found_entity = None
 
         def visit_FunctionDef(self, node):
-            # Check if the target line is within the function's range
-            if node.name in self.target_line:
+            if self._matches_test_case(node.name):
                 self.found_entity = node.name
 
         def visit_ClassDef(self, node):
-            # Check if the target line is within the class's range
-            if node.name in self.target_line:
+            if self._matches_test_case(node.name):
                 self.found_entity = node.name
 
-    # Create an instance of the EntityVisitor and visit the parsed tree
-    visitor = EntityVisitor(target_line)
-    visitor.visit(parsed_tree)
+        def visit_Assign(self, node):
+            for target in node.targets:
+                if isinstance(target, ast.Name) and self._matches_test_case(target.id):
+                    self.found_entity = target.id
+
+        def visit_Import(self, node):
+            for alias in node.names:
+                if self._matches_test_case(alias.name):
+                    self.found_entity = alias.name
+
+        def visit_ImportFrom(self, node):
+            for alias in node.names:
+                if self._matches_test_case(alias.name):
+                    self.found_entity = alias.name
+        """
+        User-defined and built-in entities only - excluded common keywords while, for, if, try, and except
+        """
+        # def visit_While(self, node):
+        #     if self._matches_test_case("while"):
+        #         self.found_entity = "while"
+
+        # def visit_For(self, node):
+        #     if self._matches_test_case("for"):
+        #         self.found_entity = "for"
+
+        # def visit_If(self, node):
+        #     if self._matches_test_case("if"):
+        #         self.found_entity = "if"
+
+        # def visit_Try(self, node):
+        #     if self._matches_test_case("try"):
+        #         self.found_entity = "try"
+
+        # def visit_Except(self, node):
+        #     if self._matches_test_case("except"):
+        #         self.found_entity = "except"
+
+        def visit_Module(self, node):
+            # Traverse module-level entities
+            for item in node.body:
+                self.visit(item)
+
+        def _matches_test_case(self, entity_name):
+            if entity_name:
+                if entity_name in self.test_case_line:
+                    return True
+                else:
+                    return False
+            else:
+                return False    
+
+    visitor = EntityVisitor(test_case_line)
+    visitor.visit(parsed_source_code_tree)
 
     return visitor.found_entity
+
 
 def get_functional_set(sourceCode, testCases):
     '''
