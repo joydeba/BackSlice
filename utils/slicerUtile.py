@@ -3,6 +3,7 @@ import difflib
 import re
 import tokenize
 import io
+import git
 
 def remove_comments_docstrings_fromString(fsring):
     '''
@@ -32,19 +33,18 @@ def has_test_files(files):
                 return True
     return False
 
-def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = None, endDate = None):
+def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = None, endDate = None, projectName = None):
     asts = []  # List to store parsed ASTs for each commit
-
+    gLocal = git.Git(projectName)
     # Parse source code and generate AST for each commit
     for commit in source_commits:
-        with open(commit, 'r') as f:
-            source_code = f.read()
-            try:
-                parsed_ast = ast.parse(source_code)
-                asts.append((commit, parsed_ast))
-            except SyntaxError as e:
-                print(f"SyntaxError in {commit}: {e}")
-                asts.append((commit, None))  # Append None for invalid ASTs
+        source_code = gLocal.execute(["git", "show", commit['oid'], ":*.py"])
+        try:
+            parsed_ast = ast.parse(source_code)
+            asts.append((commit, parsed_ast))
+        except SyntaxError as e:
+            print(f"SyntaxError in {commit}: {e}")
+            asts.append((commit, None))  # Append None for invalid ASTs
 
     # Compare ASTs and generate differences
     diff_results = []

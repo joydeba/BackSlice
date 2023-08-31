@@ -18,7 +18,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
     """ 
     This function slices for changesets by CSLICER.
     """
-    with open(prlist,"rU") as fp:
+    with open(prlist,"r") as fp:
         reader = csv.reader(fp, delimiter=",", quotechar='"', dialect=csv.excel_tab)
         data_read = [row for row in reader]
         gLocal = git.Git(projectName)
@@ -46,6 +46,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                 pull_id_original = line[1].replace("https://github.com/"+repository.strip()+"/pull/", "").split("/")[0].strip()
                 pull_id_backport = line[0].replace("https://github.com/"+repository.strip()+"/pull/", "").split("/")[0].strip()
 
+                pull_commitsSubmitted = ast.literal_eval(gLocal.execute(["gh", "pr", "view", pull_id_original, "--json", "commits"]))['commits']
                 pull_commitOriginal = gLocal.execute(["gh", "pr", "view", pull_id_original, "--json", "mergeCommit"])
                 pull_commitBackports = gLocal.execute(["gh", "pr", "view", pull_id_backport, "--json", "mergeCommit"])
                 targetStableBranch = ast.literal_eval(gLocal.execute(["gh", "pr", "view", pull_id_backport, "--json", "baseRefName"]))['baseRefName']
@@ -124,7 +125,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     for codeHunk in codehunks_original:
                         functionalSetforHunk = get_functional_set(codeHunk, testCases = testhunks_original)
                         cslicer = Cslicer(sourceOriginal = codeHunk, 
-                                            astdiffsHistory = get_ast_diffs(source_commits = original_mergeCommits, startCommit=None, endCommit=None, startDate = None, endDate = None), 
+                                            astdiffsHistory = get_ast_diffs(source_commits = pull_commitsSubmitted, startCommit=None, endCommit=None, startDate = commitStartDate, endDate = commitEndDate, projectName =projectName), 
                                             context = get_hunk_context(file_content = codeHunk, hunk_start = hunkStartLnNo, hunk_end = hunkEndlnNo, context_lines=3), 
                                             dependencies = get_changeset_dependencies(commits_diffs_original), 
                                             metadata = get_changesets_and_metadata(pull_request = pull_id_original, sourceO = codeHunk), 
