@@ -41,14 +41,22 @@ def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = 
     # gLocal = git.Git(projectName)
     # Parse source code and generate AST for each commit
     for commit in source_commits:
-        source_code = repo.get_commit(commit)
-        try:
-            parsed_ast = ast.parse(source_code)
-            asts.append((commit, parsed_ast))
-        except SyntaxError as e:
-            print(f"SyntaxError in {commit}: {e}")
-            asts.append((commit, None))  # Append None for invalid ASTs
+        source_code = ""
+        source_commit = repo.get_commit(commit['oid'])
 
+        for file in source_commit.files:
+            if file.filename.endswith('.py'):
+                source_hunks = file.patch
+                for indexhunk in range(1, len(source_hunks.split("@@ "))):
+                    cleanhunk = source_hunks[1].split("@@\n")[1]
+                    source_code = remove_comments_docstrings_fromString(cleanhunk)
+                    try:
+                        parsed_ast = ast.parse(source_code)
+                        asts.append((commit, parsed_ast))
+                    except SyntaxError as e:
+                        print(f"SyntaxError in {commit}: {e}")
+                        asts.append((commit, None))  # Append None for invalid ASTs
+                        continue
     # Compare ASTs and generate differences
     diff_results = []
 
