@@ -12,6 +12,7 @@ import subprocess
 PIPE = subprocess.PIPE
 import ast
 from CSLICER import Cslicer
+from github import Github
 
 
 def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranches = {}, repoName="repoName", projectName = 'projectName', output1="outputCSLICER.csv"):
@@ -125,7 +126,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     for codeHunk in codehunks_original:
                         functionalSetforHunk = get_functional_set(codeHunk, testCases = testhunks_original)
                         cslicer = Cslicer(sourceOriginal = codeHunk, 
-                                            astdiffsHistory = get_ast_diffs(source_commits = pull_commitsSubmitted, startCommit=None, endCommit=None, startDate = commitStartDate, endDate = commitEndDate, projectName =projectName), 
+                                            astdiffsHistory = get_ast_diffs(source_commits = pull_commitsSubmitted, startCommit=None, endCommit=None, startDate = commitStartDate, endDate = commitEndDate, repoName=repoName, projectName =projectName), 
                                             context = get_hunk_context(file_content = codeHunk, hunk_start = hunkStartLnNo, hunk_end = hunkEndlnNo, context_lines=3), 
                                             dependencies = get_changeset_dependencies(commits_diffs_original), 
                                             metadata = get_changesets_and_metadata(pull_request = pull_id_original, sourceO = codeHunk), 

@@ -4,6 +4,7 @@ import re
 import tokenize
 import io
 import git
+from helperZER.pygithub_helper import *
 
 def remove_comments_docstrings_fromString(fsring):
     '''
@@ -33,12 +34,14 @@ def has_test_files(files):
                 return True
     return False
 
-def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = None, endDate = None, projectName = None):
+def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = None, endDate = None, repoName=None, projectName = None):
     asts = []  # List to store parsed ASTs for each commit
-    gLocal = git.Git(projectName)
+    g, backup_keys, no_bused_key, accesskey = initialize_G()
+    repo = g.get_repo(repoName+"/"+projectName)
+    # gLocal = git.Git(projectName)
     # Parse source code and generate AST for each commit
     for commit in source_commits:
-        source_code = gLocal.execute(["git", "show", commit['oid'], ":*.py"])
+        source_code = repo.get_commit(commit)
         try:
             parsed_ast = ast.parse(source_code)
             asts.append((commit, parsed_ast))
