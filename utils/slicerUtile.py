@@ -46,16 +46,25 @@ def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = 
 
         for file in source_commit.files:
             if file.filename.endswith('.py'):
-                source_hunks = file.patch
-                for indexhunk in range(1, len(source_hunks.split("@@ "))):
-                    cleanhunk = source_hunks[1].split("@@\n")[1]
-                    source_code = remove_comments_docstrings_fromString(cleanhunk)
+                source_hunks = file.patch.split("@@ ")
+                for indexhunk in range(1, len(source_hunks)):
+                    cleanhunk = source_hunks[indexhunk].split("@@\n")[1]
+                    cleanhunk = cleanhunk.split("\n")
+                    leadingSpacesOri = 0
+                    cleanhunkLines = ""
+                    for c_line in cleanhunk:
+                        if c_line.startswith(("+")):
+                            c_line = c_line.replace("+", "")
+                            if leadingSpacesOri == 0:
+                                leadingSpacesOri = len(c_line) - len(c_line.lstrip())
+                                cleanhunkLines = cleanhunkLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n"
                     try:
+                        source_code = remove_comments_docstrings_fromString(cleanhunkLines)
                         parsed_ast = ast.parse(source_code)
-                        asts.append((commit, parsed_ast))
+                        asts.append((commit['oid'], parsed_ast))
                     except SyntaxError as e:
-                        print(f"SyntaxError in {commit}: {e}")
-                        asts.append((commit, None))  # Append None for invalid ASTs
+                        print(f"SyntaxError in {commit['oid']}: {e}")
+                        asts.append((commit['oid'], None))  # Append None for invalid ASTs
                         continue
     # Compare ASTs and generate differences
     diff_results = []
