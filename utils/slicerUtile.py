@@ -41,31 +41,32 @@ def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = 
     # gLocal = git.Git(projectName)
     # Parse source code and generate AST for each commit
     for commit in source_commits:
-        source_code = ""
-        source_commit = repo.get_commit(commit['oid'])
+        try:
+            source_code = ""
+            source_commit = repo.get_commit(commit['oid'])
 
-        for file in source_commit.files:
-            if file.filename.endswith('.py'):
-                source_hunks = file.patch.split("@@ ")
-                for indexhunk in range(1, len(source_hunks)):
-                    cleanhunk = source_hunks[indexhunk].split("@@\n")[1]
-                    cleanhunk = cleanhunk.split("\n")
-                    leadingSpacesOri = 0
-                    cleanhunkLines = ""
-                    for c_line in cleanhunk:
-                        if c_line.startswith(("+")):
-                            c_line = c_line.replace("+", "")
-                            if leadingSpacesOri == 0:
-                                leadingSpacesOri = len(c_line) - len(c_line.lstrip())
-                                cleanhunkLines = cleanhunkLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n"
-                    try:
+            for file in source_commit.files:
+                if file.filename.endswith('.py'):
+                    source_hunks = file.patch.split("@@ ")
+                    for indexhunk in range(1, len(source_hunks)):
+                        cleanhunk = source_hunks[indexhunk].split("@@\n")[1]
+                        cleanhunk = cleanhunk.split("\n")
+                        leadingSpacesOri = 0
+                        cleanhunkLines = ""
+                        for c_line in cleanhunk:
+                            if c_line.startswith(("+")):
+                                c_line = c_line.replace("+", "")
+                                if leadingSpacesOri == 0:
+                                    leadingSpacesOri = len(c_line) - len(c_line.lstrip())
+                                    cleanhunkLines = cleanhunkLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n"
+                        
                         source_code = remove_comments_docstrings_fromString(cleanhunkLines)
                         parsed_ast = ast.parse(source_code)
                         asts.append((commit['oid'], parsed_ast))
-                    except SyntaxError as e:
-                        print(f"SyntaxError in {commit['oid']}: {e}")
-                        asts.append((commit['oid'], None))  # Append None for invalid ASTs
-                        continue
+        except SyntaxError as e:
+            print(f"SyntaxError in {commit['oid']}: {e}")
+            asts.append((commit['oid'], None))  # Append None for invalid ASTs
+            continue
     # Compare ASTs and generate differences
     diff_results = []
 
@@ -297,10 +298,11 @@ def find_source_code_entity(source_code_toTest, test_case_line):
 
         def _matches_test_case(self, entity_name):
             if entity_name:
-                if entity_name in self.test_case_line:
-                    return True
-                else:
-                    return False
+                return True
+                # if entity_name in self.test_case_line:
+                #     return True
+                # else:
+                #     return False
             else:
                 return False    
 
