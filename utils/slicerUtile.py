@@ -49,6 +49,7 @@ def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = 
                 if file.filename.endswith('.py'):
                     source_hunks = file.patch.split("@@ ")
                     for indexhunk in range(1, len(source_hunks)):
+                        # Todo problem here
                         cleanhunk = source_hunks[indexhunk].split("@@\n")[1]
                         cleanhunk = cleanhunk.split("\n")
                         leadingSpacesOri = 0
@@ -63,7 +64,7 @@ def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = 
                         source_code = remove_comments_docstrings_fromString(cleanhunkLines)
                         parsed_ast = ast.parse(source_code)
                         asts.append((commit['oid'], parsed_ast))
-        except SyntaxError as e:
+        except Exception as e:
             print(f"SyntaxError in {commit['oid']}: {e}")
             asts.append((commit['oid'], None))  # Append None for invalid ASTs
             continue
@@ -452,7 +453,7 @@ def get_stable_version_libraries(owner, repo, branch, github_token=None):
 
                 try:
                     tree = ast.parse(file_content)
-                except SyntaxError:
+                except Exception:
                     print(f"Error parsing {item['name']}. Skipping.")
                     continue
 
