@@ -72,6 +72,8 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                 # Todo
                 testhunks_original = []
                 codehunks_original = []
+                codehunks_original_withContext = []
+                
                 commitStartDate = commits_diffs_original[0].split("\n")[2].split("Date:   ")[1]
                 commitEndDate = creationStableBranch.split(" ")[1]
 
@@ -111,7 +113,8 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                         if commits_hunkTest_originalLines:            
                             testhunks_original.append(commits_hunkTest_originalLines) 
                         if commits_hunk_originalLines:    
-                            codehunks_original.append(commits_hunk_originalLines)            
+                            codehunks_original.append(commits_hunk_originalLines)
+                            codehunks_original_withContext.append(commits_diffs_original_contextHunks[indexHunks0])            
                         # for c_line in commits_diffs_backport_context:
                         #     if c_line.startswith(("+")):
                         #         c_line = c_line.replace("+", "")
@@ -122,13 +125,13 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                 slicebyCslicer = None
                 slicesfromCSLICER = []
                 if testhunks_original and codehunks_original:
-
+                    context_index = 0 
                     for codeHunk in codehunks_original:
                         functionalSetforHunk = get_functional_set(codeHunk, testCases = testhunks_original)
                         astdiffshistory = get_ast_diffs(source_commits = pull_commitsSubmitted, startCommit=None, endCommit=None, startDate = commitStartDate, endDate = commitEndDate, repoName=repoName, projectName =projectName) 
                         cslicer = Cslicer(sourceOriginal = codeHunk, 
                                             astdiffsHistory = astdiffshistory, 
-                                            context = get_hunk_context(file_content = codeHunk, hunk_start = hunkStartLnNo, hunk_end = hunkEndlnNo, context_lines=3), 
+                                            context = get_hunk_context(file_content = codehunks_original_withContext[context_index], hunk_start = hunkStartLnNo, hunk_end = hunkEndlnNo, context_lines=3), 
                                             dependencies = get_changeset_dependencies(commits_diffs_original), 
                                             metadata = get_changesets_and_metadata(pull_request = pull_id_original, sourceO = codeHunk), 
                                             functionalSet = functionalSetforHunk, 
@@ -139,6 +142,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                         if slicebyCslicer:
                             numberOfSuccesfulSlicing = numberOfSuccesfulSlicing + 1                
                             slicesfromCSLICER.append(slicebyCslicer)
+                        context_index = context_index +1     
 
                 print("Working on pulls ", pull_id_original, pull_id_backport)
                 slicedPRs.append(slicesfromCSLICER)
