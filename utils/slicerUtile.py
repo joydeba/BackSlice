@@ -101,8 +101,9 @@ def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = 
 #     print()
 
 def get_hunk_context(file_content, hunk_start, hunk_end, context_lines=3):
+    file_content = file_content.split("@@ ")[1]
     lines = file_content.split('\n')
-    hunk_range = range(hunk_start, hunk_end)
+    hunk_range = range(0, int(hunk_end[1]))
     context = []
 
     for lineno in hunk_range:
