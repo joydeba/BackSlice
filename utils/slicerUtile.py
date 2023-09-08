@@ -170,9 +170,21 @@ def get_changesets_and_metadata(pull_request, sourceO):
     Returns:
         tuple: A tuple containing pull request title (str), body (str), tags (list of str), and comments (list of str).
     """
-    title = pull_request.get('title', '')
-    body = pull_request.get('body', '')
-    tags = pull_request.get('tags', [])
+
+    title = ""
+    body = ""
+    tags = ""
+
+    pull_lines = pull_request.split("\n")
+    for index in range(len(pull_lines)):
+        if index <= 11:
+            key, value = pull_lines[index].split("\t")
+            if key == "title:":
+                title = value
+            if key == 'labels:':
+                 tags = value
+        else: 
+            body = body + pull_lines[index]        
     
     # Extract comments from the source code
     comments = []
