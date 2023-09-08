@@ -103,26 +103,13 @@ def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = 
 def get_hunk_context(file_content, hunk_start, hunk_end, context_lines=3):
     file_content = file_content.split("@@ ")[1]
     lines = file_content.split('\n')
-    hunk_range = range(0, int(hunk_end[1]))
     context = []
 
-    for lineno in hunk_range:
-        if lineno < 1 or lineno > len(lines):
+    for i in range(len(lines)):
+        if lines[i].startswith('+') or lines[i].startswith('-'):    
             continue
-
-        line = lines[lineno - 1]
-        context.append(line)
-
-    # Add surrounding lines as context
-    for i in range(context_lines):
-        before = hunk_start - i - 2
-        after = hunk_end + i - 1
-
-        if before >= 0:
-            context.insert(0, lines[before])
-
-        if after < len(lines):
-            context.append(lines[after])
+        else:
+            context.append(lines[i])
 
     return '\n'.join(context)
 
