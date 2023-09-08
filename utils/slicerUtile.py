@@ -159,7 +159,7 @@ def get_changeset_dependencies(source_code):
 # dependencies = get_changeset_dependencies(source_code)
 # print(dependencies)
 
-def get_changesets_and_metadata(pull_request, sourceB):
+def get_changesets_and_metadata(pull_request, sourceO):
     """
     Extracts pull request title, body, tags, and comments from submitted source code.
 
@@ -176,7 +176,7 @@ def get_changesets_and_metadata(pull_request, sourceB):
     
     # Extract comments from the source code
     comments = []
-    lines = sourceB.split('\n')
+    lines = sourceO.split('\n')
     is_comment_block = False
     comment_block = []
 
