@@ -383,9 +383,13 @@ def get_compilation_set(sourceCode, functional_set):
     for func_entity in functional_set:
         # Search for the entity in the AST and add its references
         for node in ast.walk(tree):
-            if isinstance(node, ast.FunctionDef) or isinstance(node, ast.ClassDef) or isinstance(node, ast.Assign) or isinstance(node, ast.Import) or isinstance(node, ast.ImportFrom):
+            if isinstance(node, ast.FunctionDef) or isinstance(node, ast.ClassDef) or isinstance(node, ast.Import) or isinstance(node, ast.ImportFrom):
                 if node.name == func_entity:
                     visit(node)
+            if isinstance(node, ast.Assign):
+                for target in node.targets:
+                    if isinstance(target, ast.Name) and target.id == func_entity:
+                        visit(node)                  
 
     return referenced_entities
 
