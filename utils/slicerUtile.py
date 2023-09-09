@@ -5,6 +5,7 @@ import tokenize
 import io
 import git
 from helperZER.pygithub_helper import *
+import requests
 
 def remove_comments_docstrings_fromString(fsring):
     '''

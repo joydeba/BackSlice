@@ -29,6 +29,8 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
         numberOfSuccesfulSlicing = 0
         slicedPRs = []
         branches = gLocal.branch()
+        with open("ghKeysconfig", "r") as fpkey:
+            ghkey = fpkey.read().rstrip()
         
                              
 
@@ -137,7 +139,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                             metadata = get_changesets_and_metadata(pull_request = pull_original, sourceO = codeHunk), 
                                             functionalSet = functionalSetforHunk, 
                                             compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
-                                            stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=gLocal))
+                                            stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=ghkey))
                         slicebyCslicer = cslicer.analyzeProgram()  
 
                         if slicebyCslicer:
