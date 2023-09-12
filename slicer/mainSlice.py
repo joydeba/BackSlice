@@ -76,6 +76,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                 testhunks_original = []
                 codehunks_original = []
                 codehunks_original_withContext = []
+                codeFiles = []
                 
                 commitStartDate = commits_diffs_original[0].split("\n")[2].split("Date:   ")[1]
                 commitEndDate = creationStableBranch.split(" ")[1]
@@ -113,11 +114,18 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                     commits_hunkTest_originalLines = commits_hunkTest_originalLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n"
                                 else:
                                     commits_hunk_originalLines = commits_hunk_originalLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n"
+
+                        repo_url = repository.strip()
+                        file_path = filepath.split(" ")[2]
+
+                        fullFile = gLocal.execute(['gh', 'repo', 'view', f'{repo_name}/{file_path}'])
+            
                         if commits_hunkTest_originalLines:            
                             testhunks_original.append(commits_hunkTest_originalLines) 
                         if commits_hunk_originalLines:    
                             codehunks_original.append(commits_hunk_originalLines)
-                            codehunks_original_withContext.append(commits_diffs_original_contextHunks[indexHunks0])            
+                            codehunks_original_withContext.append(commits_diffs_original_contextHunks[indexHunks0])
+                            codeFiles.append(None)
                         # for c_line in commits_diffs_backport_context:
                         #     if c_line.startswith(("+")):
                         #         c_line = c_line.replace("+", "")
