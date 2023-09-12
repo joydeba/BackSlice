@@ -6,6 +6,8 @@ import io
 import git
 from helperZER.pygithub_helper import *
 import requests
+import os
+import json
 
 def remove_comments_docstrings_fromString(fsring):
     '''
@@ -431,14 +433,13 @@ def get_compilation_set(sourceCode, functional_set):
 #     # Gether context 
 #     return dependencies
 
-def get_stable_version_libraries(owner, repo, branch, github_token=None):
-    '''
-    This function uses the GitHub API to retrieve the contents of the repository's branch, searches for Python files (.py extension), and parses the code using the ast module. It identifies import and from ... import statements to extract library usage, function definitions, and function calls.
 
-    Replace github_username, repository_name, and your_github_personal_access_token with appropriate values. Also, remember to handle pagination if the repository has a large number of files.
+def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_file="AnsibleCache.txt"):
+    # Check if a cache file exists and load information from it if available.
+    if cache_file and os.path.exists(cache_file):
+        with open(cache_file, 'r') as f:
+            return json.load(f)
 
-    Keep in mind that this approach has limitations and may not catch all forms of function calls or more complex code patterns. You might need to enhance this function or use additional parsing techniques if your repository's codebase is intricate.
-    '''
     base_url = f"https://api.github.com/repos/{owner}/{repo}/contents"
     headers = {}
 
@@ -449,49 +450,138 @@ def get_stable_version_libraries(owner, repo, branch, github_token=None):
 
     library_info = {}
 
+    def process_file(file_url):
+        file_content = requests.get(file_url, headers=headers).text
+
+        try:
+            tree = ast.parse(file_content)
+        except Exception:
+            print(f"Error parsing {file_url}. Skipping.")
+            return
+
+        libraries = []
+        function_names = []
+        function_calls = []
+        class_names = []
+        class_method_calls = []
+
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                for alias in node.names:
+                    libraries.append(alias.name)
+            elif isinstance(node, ast.ImportFrom):
+                for alias in node.names:
+                    if node.module:
+                        libraries.append(f"{node.module}.{alias.name}")
+            elif isinstance(node, ast.FunctionDef):
+                function_names.append(node.name)
+            elif isinstance(node, ast.Call):
+                if isinstance(node.func, ast.Name):
+                    function_calls.append(node.func.id)
+            elif isinstance(node, ast.ClassDef):
+                class_names.append(node.name)
+            elif isinstance(node, ast.Attribute):
+                if isinstance(node.value, ast.Name):
+                    class_method_calls.append(f"{node.value.id}.{node.attr}")
+
+        return {
+            'libraries': list(set(libraries)),
+            'function_names': list(set(function_names)),
+            'function_calls': list(set(function_calls)),
+            'class_names': list(set(class_names)),
+            'class_method_calls': list(set(class_method_calls))
+        }
+
     if response.status_code == 200:
         contents = response.json()
 
         for item in contents:
             if item['type'] == 'file' and item['name'].endswith('.py'):
-                file_url = item['download_url']
-                file_content = requests.get(file_url, headers=headers).text
+                file_info = process_file(item['download_url'])
+                library_info[item['name']] = file_info
+            elif item['type'] == 'dir':
+                dir_response = requests.get(item['url'], headers=headers)
+                if dir_response.status_code == 200:
+                    dir_contents = dir_response.json()
+                    for dir_item in dir_contents:
+                        if dir_item['type'] == 'file' and dir_item['name'].endswith('.py'):
+                            file_info = process_file(dir_item['download_url'])
+                            library_info[dir_item['name']] = file_info
 
-                try:
-                    tree = ast.parse(file_content)
-                except Exception:
-                    print(f"Error parsing {item['name']}. Skipping.")
-                    continue
-
-                libraries = []
-                function_names = []
-                function_calls = []
-
-                for node in ast.walk(tree):
-                    if isinstance(node, ast.Import):
-                        for alias in node.names:
-                            libraries.append(alias.name)
-                    elif isinstance(node, ast.ImportFrom):
-                        for alias in node.names:
-                            if node.module:
-                                libraries.append(f"{node.module}.{alias.name}")
-                    elif isinstance(node, ast.FunctionDef):
-                        function_names.append(node.name)
-                    elif isinstance(node, ast.Call):
-                        if isinstance(node.func, ast.Name):
-                            function_calls.append(node.func.id)
-
-                library_info[item['name']] = {
-                    'libraries': list(set(libraries)),
-                    'function_names': list(set(function_names)),
-                    'function_calls': list(set(function_calls))
-                }
+        # Save the retrieved information to the cache file.
+        if cache_file:
+            with open(cache_file, 'w') as f:
+                json.dump(library_info, f)
 
         return library_info
 
     else:
         print(f"Failed to fetch repository contents: {response.status_code}")
         return None
+
+
+
+# def get_stable_version_libraries(owner, repo, branch, github_token=None):
+#     '''
+#     This function uses the GitHub API to retrieve the contents of the repository's branch, searches for Python files (.py extension), and parses the code using the ast module. It identifies import and from ... import statements to extract library usage, function definitions, and function calls.
+
+#     Replace github_username, repository_name, and your_github_personal_access_token with appropriate values. Also, remember to handle pagination if the repository has a large number of files.
+
+#     Keep in mind that this approach has limitations and may not catch all forms of function calls or more complex code patterns. You might need to enhance this function or use additional parsing techniques if your repository's codebase is intricate.
+#     '''
+#     base_url = f"https://api.github.com/repos/{owner}/{repo}/contents"
+#     headers = {}
+
+#     if github_token:
+#         headers['Authorization'] = f"Bearer {github_token}"
+
+#     response = requests.get(f"{base_url}?ref={branch}", headers=headers)
+
+#     library_info = {}
+
+#     if response.status_code == 200:
+#         contents = response.json()
+
+#         for item in contents:
+#             if item['type'] == 'file' and item['name'].endswith('.py'):
+#                 file_url = item['download_url']
+#                 file_content = requests.get(file_url, headers=headers).text
+
+#                 try:
+#                     tree = ast.parse(file_content)
+#                 except Exception:
+#                     print(f"Error parsing {item['name']}. Skipping.")
+#                     continue
+
+#                 libraries = []
+#                 function_names = []
+#                 function_calls = []
+
+#                 for node in ast.walk(tree):
+#                     if isinstance(node, ast.Import):
+#                         for alias in node.names:
+#                             libraries.append(alias.name)
+#                     elif isinstance(node, ast.ImportFrom):
+#                         for alias in node.names:
+#                             if node.module:
+#                                 libraries.append(f"{node.module}.{alias.name}")
+#                     elif isinstance(node, ast.FunctionDef):
+#                         function_names.append(node.name)
+#                     elif isinstance(node, ast.Call):
+#                         if isinstance(node.func, ast.Name):
+#                             function_calls.append(node.func.id)
+
+#                 library_info[item['name']] = {
+#                     'libraries': list(set(libraries)),
+#                     'function_names': list(set(function_names)),
+#                     'function_calls': list(set(function_calls))
+#                 }
+
+#         return library_info
+
+#     else:
+#         print(f"Failed to fetch repository contents: {response.status_code}")
+#         return None
 
 # # Example usage
 # owner = "github_username"
