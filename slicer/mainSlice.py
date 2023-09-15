@@ -118,9 +118,21 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                         host = "https://github.com/"
                         repo_url = host + repository.strip() + "/blob/" + targetStableBranch + "/"
                         file_path = filepath.split(" ")[2] 
+
+                        command = [
+                            'gh',
+                            'repo',
+                            'view',
+                            'https://github.com/ansible/ansible/blob/stable-2.10/test/lib/ansible_test/_internal/classification.py',
+                            '--branch',
+                            'stable-2.10'
+                        ]
+
                         # https://github.com/ansible/ansible/blob/stable-2.10/b/test/lib/ansible_test/_internal/classification.py
                         # 
-                        fullFile = gLocal.execute(['gh', 'repo', 'view', f'{repo_url}/{file_path[2:]}'])
+                        # fullFile = gLocal.execute(['gh', 'repo', 'view', f'{repo_url}/{file_path[2:]}'])
+
+                        fullFile2 = gLocal.execute(command)
             
                         if commits_hunkTest_originalLines:            
                             testhunks_original.append(commits_hunkTest_originalLines) 
