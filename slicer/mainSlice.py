@@ -22,6 +22,8 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
     with open(prlist,"r") as fp:
         reader = csv.reader(fp, delimiter=",", quotechar='"', dialect=csv.excel_tab)
         data_read = [row for row in reader]
+        g, backup_keys, no_bused_key, accesskey = initialize_G()
+        repo = g.get_repo(repoName+"/"+projectName)        
         gLocal = git.Git(projectName)
         process = subprocess.Popen(["gh","auth","login","--with-token"], stdin=open("ghKeysconfig", "r"), cwd=projectName)
         stdoutput, stderroutput = process.communicate()
@@ -116,14 +118,12 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                     commits_hunk_originalLines = commits_hunk_originalLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n"
 
                         host = "https://github.com/"
-                        # repo_url = host + repository.strip() + "/blob/" + targetStableBranch + "/"
-                        repo_url = host + repository.strip() 
+                        repo_url = host + repository.strip() + "/blob/" + targetStableBranch + "/"
+                        # repo_url = host + repository.strip() 
                         file_path = filepath.split(" ")[1] 
-                        
-                        fullFile = gLocal.execute(['gh', 'repo', 'view', f'{repo_url}/{file_path[2:]}'])
 
-                    
-            
+                        fullFileTarget = repo.get_contents(file_path[2:], ref=targetStableBranch).decoded_content.decode("utf-8")
+                        
                         if commits_hunkTest_originalLines:            
                             testhunks_original.append(commits_hunkTest_originalLines) 
                         if commits_hunk_originalLines:    
@@ -151,7 +151,8 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                             metadata = get_changesets_and_metadata(pull_request = pull_original, sourceO = codeHunk), 
                                             functionalSet = functionalSetforHunk, 
                                             compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
-                                            stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=ghkey))
+                                            stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=ghkey)),
+                                            targetfile = fullFileTarget
                         slicebyCslicer = cslicer.analyzeProgram()  
 
                         if slicebyCslicer:

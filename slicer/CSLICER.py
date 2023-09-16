@@ -1,7 +1,7 @@
 
 
 class Cslicer():
-    def __init__(self, sourceOriginal= None, astdiffsHistory = None, context = None, dependencies = None, metadata = None, functionalSet = None, compilationSet= None, stableLibraris = None):
+    def __init__(self, sourceOriginal= None, astdiffsHistory = None, context = None, dependencies = None, metadata = None, functionalSet = None, compilationSet= None, stableLibraris = None, targetfile = None):
         self.sourceOriginal = sourceOriginal
         self.astdiffsHistory = astdiffsHistory
         self.context = context
