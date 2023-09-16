@@ -35,7 +35,6 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
             ghkey = fpkey.read().rstrip()
         
                              
-
         sliced_prs_commits = []        
         for idx, line in enumerate(data_read):
             backport_slices = ""               
@@ -50,6 +49,10 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
 
                 pull_id_original = line[1].replace("https://github.com/"+repository.strip()+"/pull/", "").split("/")[0].strip()
                 pull_id_backport = line[0].replace("https://github.com/"+repository.strip()+"/pull/", "").split("/")[0].strip()
+
+                pullOriginal = repo.get_pull(int(pull_id_original))
+                pullBackport = repo.get_pull(int(pull_id_original))
+                blobOriginal = pullOriginal.get_files()[0].blob_url
 
                 pull_commitsSubmitted = ast.literal_eval(gLocal.execute(["gh", "pr", "view", pull_id_original, "--json", "commits"]))['commits']
                 pull_original = gLocal.execute(["gh", "pr", "view", pull_id_original])
@@ -151,8 +154,9 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                             metadata = get_changesets_and_metadata(pull_request = pull_original, sourceO = codeHunk), 
                                             functionalSet = functionalSetforHunk, 
                                             compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
-                                            stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=ghkey)),
-                                            targetfile = fullFileTarget
+                                            stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=ghkey), 
+                                            targetfile = fullFileTarget)
+                                            
                         slicebyCslicer = cslicer.analyzeProgram()  
 
                         if slicebyCslicer:
