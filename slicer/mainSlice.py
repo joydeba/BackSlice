@@ -53,6 +53,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                 pullOriginal = repo.get_pull(int(pull_id_original))
                 pullBackport = repo.get_pull(int(pull_id_original))
                 blobOriginal = pullOriginal.get_files()[0].blob_url
+                blobBackport = pullBackport.get_files()[0].blob_url
 
                 pull_commitsSubmitted = ast.literal_eval(gLocal.execute(["gh", "pr", "view", pull_id_original, "--json", "commits"]))['commits']
                 pull_original = gLocal.execute(["gh", "pr", "view", pull_id_original])
