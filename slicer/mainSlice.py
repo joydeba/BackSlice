@@ -51,9 +51,16 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                 pull_id_backport = line[0].replace("https://github.com/"+repository.strip()+"/pull/", "").split("/")[0].strip()
 
                 pullOriginal = repo.get_pull(int(pull_id_original))
-                pullBackport = repo.get_pull(int(pull_id_original))
-                blobOriginal = pullOriginal.get_files()[0].blob_url
-                blobBackport = pullBackport.get_files()[0].blob_url
+                pullBackport = repo.get_pull(int(pull_id_backport))
+
+                original_filesContents = []
+                backport_filesContents = []
+
+                for fileO in pullOriginal.get_files():
+                    original_filesContents.append({fileO.filename:repo.get_contents(fileO.filename, ref=pullOriginal.head.sha).decoded_content.decode('utf-8')})
+                for fileB in pullBackport.get_files():
+                    backport_filesContents.append({fileB.filename:repo.get_contents(fileB.filename, ref=pullBackport.head.sha).decoded_content.decode('utf-8')})
+
 
                 pull_commitsSubmitted = ast.literal_eval(gLocal.execute(["gh", "pr", "view", pull_id_original, "--json", "commits"]))['commits']
                 pull_original = gLocal.execute(["gh", "pr", "view", pull_id_original])
@@ -76,7 +83,6 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
 
                 commits_diffs_original = gLocal.execute(["git", "show", original_mergeCommits, ":*.py"]).split("\ndiff ")
                 commits_diffs_backport = gLocal.execute(["git", "show", backport_mergeCommits, ":*.py"]).split("\ndiff ")
-
 
                 # Todo
                 testhunks_original = []
@@ -121,12 +127,18 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                 else:
                                     commits_hunk_originalLines = commits_hunk_originalLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n"
 
-                        host = "https://github.com/"
-                        repo_url = host + repository.strip() + "/blob/" + targetStableBranch + "/"
+                        # If you need to know the current full file on the target stable version.  
+                        # host = "https://github.com/"
+                        # repo_url = host + repository.strip() + "/blob/" + targetStableBranch + "/"
                         # repo_url = host + repository.strip() 
-                        file_path = filepath.split(" ")[1] 
+                        # file_path = filepath.split(" ")[1] 
+                        # fullFileTarget = repo.get_contents(file_path[2:], ref=targetStableBranch).decoded_content.decode("utf-8")
 
-                        fullFileTarget = repo.get_contents(file_path[2:], ref=targetStableBranch).decoded_content.decode("utf-8")
+                        file_path = filepath.split(" ")[2]
+                        for itemFcontent in original_filesContents:
+                            filepathFull, fullFilecontentOriginal = itemFcontent
+                        if fullFilecontentOriginal == file_path[2:]:    
+                            fullFileTarget = fullFilecontentOriginal    
                         
                         if commits_hunkTest_originalLines:            
                             testhunks_original.append(commits_hunkTest_originalLines) 
