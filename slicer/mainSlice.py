@@ -78,11 +78,11 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                         # git log --reverse  <branch-name> | tail -1
 
 
-                original_mergeCommits = ast.literal_eval(pull_commitOriginal)['mergeCommit']["oid"]          
-                backport_mergeCommits = ast.literal_eval(pull_commitBackports)['mergeCommit']["oid"]   
+                original_mergeCommits = ast.literal_eval(pull_commitOriginal)['mergeCommit']["oid"] if "null" not in pull_commitOriginal else None        
+                backport_mergeCommits = ast.literal_eval(pull_commitBackports)['mergeCommit']["oid"] if "null" not in pull_commitBackports else None  
 
-                commits_diffs_original = gLocal.execute(["git", "show", original_mergeCommits, ":*.py"]).split("\ndiff ")
-                commits_diffs_backport = gLocal.execute(["git", "show", backport_mergeCommits, ":*.py"]).split("\ndiff ")
+                commits_diffs_original = gLocal.execute(["git", "show", original_mergeCommits, ":*.py"]).split("\ndiff ") if original_mergeCommits else print("Merge commit missing")
+                commits_diffs_backport = gLocal.execute(["git", "show", backport_mergeCommits, ":*.py"]).split("\ndiff ") if backport_mergeCommits else print("Merge commit missing")
 
                 # Todo
                 testhunks_original = []
@@ -90,7 +90,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                 codehunks_original_withContext = []
                 codeFiles = []
                 
-                commitStartDate = commits_diffs_original[0].split("\n")[2].split("Date:   ")[1]
+                commitStartDate = commits_diffs_original[0].split("\n")[2].split("Date:   ")[1] if commits_diffs_original[0]!='' else print("Commit has no py files")
                 commitEndDate = creationStableBranch.split(" ")[1]
 
 
@@ -136,8 +136,9 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
 
                         file_path = filepath.split(" ")[2]
                         for itemFcontent in original_filesContents:
-                            filepathFull, fullFilecontentOriginal = itemFcontent
-                        if fullFilecontentOriginal == file_path[2:]:    
+                            temp_itemFcontent = itemFcontent.copy()
+                            filepathFull, fullFilecontentOriginal = temp_itemFcontent.popitem()
+                        if filepathFull == file_path[2:]:    
                             fullFileTarget = fullFilecontentOriginal    
                         
                         if commits_hunkTest_originalLines:            
