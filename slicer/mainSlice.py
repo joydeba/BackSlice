@@ -161,7 +161,8 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     for codeHunk in codehunks_original:
                         functionalSetforHunk = get_functional_set(codeHunk, testCases = testhunks_original)
                         astdiffshistory = get_ast_diffs(source_commits = pull_commitsSubmitted, startCommit=None, endCommit=None, startDate = commitStartDate, endDate = commitEndDate, repoName=repoName, projectName =projectName) 
-                        cslicer = Cslicer(sourceOriginal = codeHunk, 
+                        cslicer = Cslicer(sourceOriginal = codeHunk,
+                                            sourcebackport = backportHunk, 
                                             astdiffsHistory = astdiffshistory, 
                                             context = get_hunk_context(file_content = codehunks_original_withContext[context_index], hunk_start = hunkStartLnNo, hunk_end = hunkEndlnNo, context_lines=3), 
                                             dependencies = get_changeset_dependencies(codeHunk), 

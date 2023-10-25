@@ -1,7 +1,7 @@
 
 
 class Cslicer():
-    def __init__(self, sourceOriginal= None, astdiffsHistory = None, context = None, dependencies = None, metadata = None, functionalSet = None, compilationSet= None, stableLibraris = None, targetfile = None):
+    def __init__(self, sourceOriginal= None, sourcebackport = None, astdiffsHistory = None, context = None, dependencies = None, metadata = None, functionalSet = None, compilationSet= None, stableLibraris = None, targetfile = None):
         self.sourceOriginal = sourceOriginal
         self.astdiffsHistory = astdiffsHistory
         self.context = context
@@ -10,6 +10,7 @@ class Cslicer():
         self.functionalSet = functionalSet
         self.compilationSet= compilationSet
         self.stableLibraris = stableLibraris
+        self.targetfile = targetfile
   
     def analyzeProgram(self):
         slices = []
@@ -35,8 +36,8 @@ class Cslicer():
         # Set (Λ) includes all fields explicitly initialized during declaration and all
         #  methods (and constructors) called during runtime.
 
-        functinalSet = get_functional_set()
-        compilationSet = get_compilation_set()
+        functinalSet = self.functionalSet
+        compilationSet = self.compilationSet
 
         # The procedure COMPDEP analyzes refer- ence relations in pk and includes 
         # all referenced code entities of Λ into the compilation set Π.

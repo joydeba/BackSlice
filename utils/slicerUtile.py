@@ -68,7 +68,8 @@ def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = 
                         parsed_ast = ast.parse(source_code)
                         asts.append((commit['oid'], parsed_ast))
         except Exception as e:
-            print(f"SyntaxError in {commit['oid']}: {e}")
+            # We have to ignore this since the error is mostly for incomplete code
+            print(f"Ignore for some - SyntaxError in {commit['oid']}: {e}")
             asts.append((commit['oid'], None))  # Append None for invalid ASTs
             continue
     # Compare ASTs and generate differences
