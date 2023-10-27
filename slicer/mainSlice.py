@@ -87,82 +87,104 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                 # Todo
                 testhunks_original = []
                 codehunks_original = []
+                codehunks_backport = []
                 codehunks_original_withContext = []
-                codeFiles = []
+                # codeFiles = []
                 
                 commitStartDate = commits_diffs_original[0].split("\n")[2].split("Date:   ")[1] if commits_diffs_original[0]!='' else print("Commit has no py files")
                 commitEndDate = creationStableBranch.split(" ")[1]
 
+                if len(commits_diffs_backport) == len(commits_diffs_original):
+                    for indexO in range(1, len(commits_diffs_original)):
+                        # Check the odd index for test cases [Todo]
+                        is_test_code = False
+                        is_test_codeB = False
+                        if commits_diffs_original[indexO] is not None:
+                            filepath = commits_diffs_original[indexO].split("\n")[0]
+                            filepathBackport = commits_diffs_backport[indexO].split("\n")[0]                            
+                        if has_test_files([filepath]):
+                            is_test_code = True
+                        if has_test_files([filepathBackport]):
+                            is_test_codeB = True                                                    
+                        commits_diffs_original_contextHunks = commits_diffs_original[indexO].split("\n@@ ")
+                        commits_diffs_backport_contextHunks = commits_diffs_backport[indexO].split("\n@@ ")
+                        for indexHunks0 in range(1, len(commits_diffs_original_contextHunks)):
 
-                for indexO in range(1, len(commits_diffs_original)):
-                    # Check the odd index for test cases [Todo]
-                    is_test_code = False
-                    if commits_diffs_original[indexO] is not None:
-                        filepath = commits_diffs_original[indexO].split("\n")[0]
-                    if has_test_files([filepath]):
-                        is_test_code = True                        
-                    commits_diffs_original_contextHunks = commits_diffs_original[indexO].split("\n@@ ")
-                    # commits_diffs_backport_contextHunks = commits_diffs_backport[indexO].split("\n \n")
-                    for indexHunks0 in range(1, len(commits_diffs_original_contextHunks)):
+                            commits_hunkline_original_context = commits_diffs_original_contextHunks[indexHunks0].split("\n")
+                            commits_hunkline_backport_context = commits_diffs_backport_contextHunks[indexHunks0].split("\n")
+                            hunkStartLnNo = commits_hunkline_original_context[0].split(" ")[0][1:].split(",")
+                            hunkEndlnNo = commits_hunkline_original_context[0].split(" ")[1][1:].split(",")
 
-                        commits_hunkline_original_context = commits_diffs_original_contextHunks[indexHunks0].split("\n")
-                        # commits_diffs_backport_context = commits_diffs_backport_contextHunks[indexHunks0].split("\n")
-                        hunkStartLnNo = commits_hunkline_original_context[0].split(" ")[0][1:].split(",")
-                        hunkEndlnNo = commits_hunkline_original_context[0].split(" ")[1][1:].split(",")
+                            commits_hunk_originalLines = ""
+                            commits_hunk_backportLines = ""                            
+                            commits_hunkTest_originalLines = ""
+                            commits_hunkTest_backportLines = ""
+                            # commits_diffs_backportLines = ""
 
-                        commits_hunk_originalLines = ""
-                        commits_hunkTest_originalLines = ""
-                        # commits_diffs_backportLines = ""
+                            # Todo check first hunk line 
+                            # leadingSpacesBac = len(commits_diffs_backport_context[0].replace("+", "").replace("-", "")) - len(commits_diffs_backport_context[0].replace("+", "").replace("-", "").lstrip())
+                            leadingSpacesOri = 0
+                            for c_line in commits_hunkline_original_context:
+                                if c_line.startswith(("+")):
+                                    c_line = c_line.replace("+", "")
+                                    if leadingSpacesOri == 0:
+                                        leadingSpacesOri = len(c_line) - len(c_line.lstrip())
+                                    if is_test_code:
+                                        commits_hunkTest_originalLines = commits_hunkTest_originalLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n"
+                                    else:
+                                        commits_hunk_originalLines = commits_hunk_originalLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n"
 
-                        # Todo check first hunk line 
-                        # leadingSpacesBac = len(commits_diffs_backport_context[0].replace("+", "").replace("-", "")) - len(commits_diffs_backport_context[0].replace("+", "").replace("-", "").lstrip())
-                        leadingSpacesOri = 0
-                        for c_line in commits_hunkline_original_context:
-                            if c_line.startswith(("+")):
-                                c_line = c_line.replace("+", "")
-                                if leadingSpacesOri == 0:
-                                    leadingSpacesOri = len(c_line) - len(c_line.lstrip())
-                                if is_test_code:
-                                    commits_hunkTest_originalLines = commits_hunkTest_originalLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n"
-                                else:
-                                    commits_hunk_originalLines = commits_hunk_originalLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n"
+                            leadingSpacesBackport = 0
+                            for c_lineB in commits_hunkline_backport_context:
+                                if c_lineB.startswith(("+")):
+                                    c_lineB = c_lineB.replace("+", "")
+                                    if leadingSpacesBackport == 0:
+                                        leadingSpacesBackport = len(c_lineB) - len(c_lineB.lstrip())
+                                    if is_test_codeB:
+                                        commits_hunkTest_backportLines = commits_hunkTest_backportLines + c_lineB.replace(c_lineB[:leadingSpacesBackport], "") + "\n"
+                                    else:
+                                        commits_hunk_backportLines = commits_hunk_backportLines + c_lineB.replace(c_line[:leadingSpacesBackport], "") + "\n"
 
-                        # If you need to know the current full file on the target stable version.  
-                        # host = "https://github.com/"
-                        # repo_url = host + repository.strip() + "/blob/" + targetStableBranch + "/"
-                        # repo_url = host + repository.strip() 
-                        # file_path = filepath.split(" ")[1] 
-                        # fullFileTarget = repo.get_contents(file_path[2:], ref=targetStableBranch).decoded_content.decode("utf-8")
 
-                        file_path = filepath.split(" ")[2]
-                        for itemFcontent in original_filesContents:
-                            temp_itemFcontent = itemFcontent.copy()
-                            filepathFull, fullFilecontentOriginal = temp_itemFcontent.popitem()
-                        if filepathFull == file_path[2:]:    
-                            fullFileTarget = fullFilecontentOriginal    
-                        
-                        if commits_hunkTest_originalLines:            
-                            testhunks_original.append(commits_hunkTest_originalLines) 
-                        if commits_hunk_originalLines:    
-                            codehunks_original.append(commits_hunk_originalLines)
-                            codehunks_original_withContext.append(commits_diffs_original_contextHunks[indexHunks0])
-                            codeFiles.append(None)
-                        # for c_line in commits_diffs_backport_context:
-                        #     if c_line.startswith(("+")):
-                        #         c_line = c_line.replace("+", "")
-                        #         commits_diffs_backportLines = commits_diffs_backportLines + c_line.replace(c_line[:leadingSpacesBac], "") + "\n"   
-                        numberofSlicingRequired = numberofSlicingRequired + 1
+                            # If you need to know the current full file on the target stable version.  
+                            # host = "https://github.com/"
+                            # repo_url = host + repository.strip() + "/blob/" + targetStableBranch + "/"
+                            # repo_url = host + repository.strip() 
+                            # file_path = filepath.split(" ")[1] 
+                            # fullFileTarget = repo.get_contents(file_path[2:], ref=targetStableBranch).decoded_content.decode("utf-8")
+
+                            file_path = filepath.split(" ")[2]
+                            for itemFcontent in original_filesContents:
+                                temp_itemFcontent = itemFcontent.copy()
+                                filepathFull, fullFilecontentOriginal = temp_itemFcontent.popitem()
+                            if filepathFull == file_path[2:]:    
+                                fullFileTarget = fullFilecontentOriginal    
+                            
+                            if commits_hunkTest_originalLines:            
+                                testhunks_original.append(commits_hunkTest_originalLines) 
+
+                            if commits_hunk_originalLines:    
+                                codehunks_original.append(commits_hunk_originalLines)
+                                codehunks_original_withContext.append(commits_diffs_original_contextHunks[indexHunks0])
+                                # codeFiles.append(None)
+
+                            if commits_hunk_backportLines:    
+                                codehunks_backport.append(commits_hunk_backportLines)
+                                codehunks_original_withContext.append(commits_diffs_backport_contextHunks[indexHunks0])
+                                # codeFiles.append(None)
+
+                            numberofSlicingRequired = numberofSlicingRequired + 1
 
 
                 slicebyCslicer = None
                 slicesfromCSLICER = []
-                if testhunks_original and codehunks_original:
+                if testhunks_original and codehunks_original and codehunks_backport:
                     context_index = 0 
-                    for codeHunk in codehunks_original:
+                    for codeHunk, codeHunkBackport  in zip(codehunks_original, codehunks_backport):
                         functionalSetforHunk = get_functional_set(codeHunk, testCases = testhunks_original)
                         astdiffshistory = get_ast_diffs(source_commits = pull_commitsSubmitted, startCommit=None, endCommit=None, startDate = commitStartDate, endDate = commitEndDate, repoName=repoName, projectName =projectName) 
                         cslicer = Cslicer(sourceOriginal = codeHunk,
-                                            sourcebackport = backportHunk, 
+                                            sourcebackport = codeHunkBackport, 
                                             astdiffsHistory = astdiffshistory, 
                                             context = get_hunk_context(file_content = codehunks_original_withContext[context_index], hunk_start = hunkStartLnNo, hunk_end = hunkEndlnNo, context_lines=3), 
                                             dependencies = get_changeset_dependencies(codeHunk), 
