@@ -89,6 +89,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                 codehunks_original = []
                 codehunks_backport = []
                 codehunks_original_withContext = []
+                codehunks_backport_withContext = []
                 # codeFiles = []
                 
                 commitStartDate = commits_diffs_original[0].split("\n")[2].split("Date:   ")[1] if commits_diffs_original[0]!='' else print("Commit has no py files")
@@ -143,7 +144,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                     if is_test_codeB:
                                         commits_hunkTest_backportLines = commits_hunkTest_backportLines + c_lineB.replace(c_lineB[:leadingSpacesBackport], "") + "\n"
                                     else:
-                                        commits_hunk_backportLines = commits_hunk_backportLines + c_lineB.replace(c_line[:leadingSpacesBackport], "") + "\n"
+                                        commits_hunk_backportLines = commits_hunk_backportLines + c_lineB.replace(c_lineB[:leadingSpacesBackport], "") + "\n"
 
 
                             # If you need to know the current full file on the target stable version.  
@@ -170,7 +171,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
 
                             if commits_hunk_backportLines:    
                                 codehunks_backport.append(commits_hunk_backportLines)
-                                codehunks_original_withContext.append(commits_diffs_backport_contextHunks[indexHunks0])
+                                codehunks_backport_withContext.append(commits_diffs_backport_contextHunks[indexHunks0])
                                 # codeFiles.append(None)
 
                             numberofSlicingRequired = numberofSlicingRequired + 1
