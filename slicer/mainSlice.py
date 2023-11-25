@@ -64,6 +64,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
 
                 pull_commitsSubmitted = ast.literal_eval(gLocal.execute(["gh", "pr", "view", pull_id_original, "--json", "commits"]))['commits']
                 pull_original = gLocal.execute(["gh", "pr", "view", pull_id_original])
+                pull_backport = gLocal.execute(["gh", "pr", "view", pull_id_backport])
                 pull_commitOriginal = gLocal.execute(["gh", "pr", "view", pull_id_original, "--json", "mergeCommit"])
                 pull_commitBackports = gLocal.execute(["gh", "pr", "view", pull_id_backport, "--json", "mergeCommit"])
                 targetStableBranch = ast.literal_eval(gLocal.execute(["gh", "pr", "view", pull_id_backport, "--json", "baseRefName"]))['baseRefName']
@@ -189,7 +190,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                             astdiffsHistory = astdiffshistory, 
                                             context = get_hunk_context(file_content = codehunks_original_withContext[context_index], hunk_start = hunkStartLnNo, hunk_end = hunkEndlnNo, context_lines=3), 
                                             dependencies = get_changeset_dependencies(codeHunk), 
-                                            metadata = get_changesets_and_metadata(pull_request = pull_original, sourceO = codeHunk), 
+                                            metadata = get_changesets_and_metadata(pull_request = pull_backport, sourceO = codeHunkBackport), 
                                             functionalSet = functionalSetforHunk, 
                                             compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
                                             stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=ghkey), 

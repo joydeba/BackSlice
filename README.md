@@ -13,6 +13,7 @@ ProSlice (PropagationSlicer) - Provide semantic slices by analyzing changesets i
 - pip3 install pytz [Checked]
 - pip/pip3 install GitPython [Checked]
 - pip3 install astunparse [Checked]
+- pip install cve-bin-tool [Checked]
 
 - /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" 
 - (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/joydeba/.zprofile
