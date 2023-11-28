@@ -12,6 +12,7 @@ import subprocess
 PIPE = subprocess.PIPE
 import ast
 from CSLICER import Cslicer
+from BACkSLICE import BackSlicer
 from github import Github
 
 
@@ -185,7 +186,17 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     for codeHunk, codeHunkBackport  in zip(codehunks_original, codehunks_backport):
                         functionalSetforHunk = get_functional_set(codeHunk, testCases = testhunks_original)
                         astdiffshistory = get_ast_diffs(source_commits = pull_commitsSubmitted, startCommit=None, endCommit=None, startDate = commitStartDate, endDate = commitEndDate, repoName=repoName, projectName =projectName) 
-                        cslicer = Cslicer(sourceOriginal = codeHunk,
+                        # cslicer = Cslicer(sourceOriginal = codeHunk,
+                        #                     sourcebackport = codeHunkBackport, 
+                        #                     astdiffsHistory = astdiffshistory, 
+                        #                     context = get_hunk_context(file_content = codehunks_original_withContext[context_index], hunk_start = hunkStartLnNo, hunk_end = hunkEndlnNo, context_lines=3), 
+                        #                     dependencies = get_changeset_dependencies(codeHunk), 
+                        #                     metadata = get_changesets_and_metadata(pull_request = pull_backport, sourceO = codeHunkBackport), 
+                        #                     functionalSet = functionalSetforHunk, 
+                        #                     compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
+                        #                     stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=ghkey), 
+                        #                     targetfile = fullFileTarget)
+                        cslicer = BackSlicer(sourceOriginal = codeHunk,
                                             sourcebackport = codeHunkBackport, 
                                             astdiffsHistory = astdiffshistory, 
                                             context = get_hunk_context(file_content = codehunks_original_withContext[context_index], hunk_start = hunkStartLnNo, hunk_end = hunkEndlnNo, context_lines=3), 
@@ -194,7 +205,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                             functionalSet = functionalSetforHunk, 
                                             compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
                                             stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=ghkey), 
-                                            targetfile = fullFileTarget)
+                                            targetfile = fullFileTarget)                        
                                             
                         slicebyCslicer = cslicer.analyzeProgram()  
 

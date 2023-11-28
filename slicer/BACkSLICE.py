@@ -1,11 +1,12 @@
-# https://pypi.org/project/cve-bin-tool/
-
-from cve_bin_tool.bin_tools import CveBinTool
+# https://pypi.org/project/cve-bin-tool/ [forFuture]
+# https://pypi.org/project/nvdlib/
+import nvdlib  
 import json
 import re
+import Levenshtein
 
 
-class backSlicer():
+class BackSlicer():
     def __init__(self, sourceOriginal= None, sourcebackport = None, astdiffsHistory = None, context = None, dependencies = None, metadata = None, functionalSet = None, compilationSet= None, stableLibraris = None, targetfile = None):
         self.sourceOriginal = sourceOriginal
         self.sourcebackport = sourcebackport
@@ -17,8 +18,6 @@ class backSlicer():
         self.compilationSet= compilationSet
         self.stableLibraris = stableLibraris
         self.targetfile = targetfile
-        # Initialize the CVE Bin Tool when initializing the class
-        self.cve_tool = CveBinTool()
         # Assuming the CVE dataset is stored in a JSON file
         self.cve_dataset_file_path = 'path/to/cve_dataset.json'
         self.cve_dataset = self.load_cve_dataset()                
@@ -37,7 +36,6 @@ class backSlicer():
         if self.dependencies:
             # Convert dependencies list to a set for efficient matching
             existing_dependencies = set(self.dependencies)
-            
             # Iterate over lines in the adaptedSource to check for existing dependencies
             source_lines = adaptedSource.split('\n')
             for i, line in enumerate(source_lines):
@@ -48,7 +46,6 @@ class backSlicer():
             else:
                 # If no existing dependency is found, add new dependencies at the top
                 source_lines.insert(0, ', '.join(self.dependencies))
-
             # Update adaptedSource with modified lines
             adaptedSource = '\n'.join(source_lines)
 
@@ -69,11 +66,11 @@ class backSlicer():
             for lib_name, lib_info in self.stableLibraris.items():
                 # Replace information about method names
                 for method_name in lib_info['function_names']:
-                    adaptedSource = self.replace_semantically_related(adaptedSource, method_name, f"{lib_name}_{method_name}")
+                    adaptedSource = self.replace_semantically_related(adaptedSource, method_name, method_name)
 
                 # Replace information about method calls
                 for method_call in lib_info['function_calls']:
-                    adaptedSource = self.replace_semantically_related(adaptedSource, method_call, f"{lib_name}_{method_call}")
+                    adaptedSource = self.replace_semantically_related(adaptedSource, method_call, method_call)
 
 
         # Extract keywords from pull request metadata
@@ -111,10 +108,10 @@ class backSlicer():
         Returns:
             list: List of keywords.
         """
-        title_keywords = self.extract_keywords_from_text(self.metadata['title'])
-        body_keywords = self.extract_keywords_from_text(self.metadata['body'])
-        tag_keywords = self.extract_keywords_from_tags(self.metadata['tags'])
-        comment_keywords = self.extract_keywords_from_comments(self.metadata['comments'])
+        title_keywords = self.extract_keywords_from_text(self.metadata[0])
+        body_keywords = self.extract_keywords_from_text(self.metadata[1])
+        tag_keywords = self.extract_keywords_from_tags(self.metadata[2].split(","))
+        comment_keywords = self.extract_keywords_from_comments(self.metadata[3])
 
         # Combine keywords from different sources
         all_keywords = title_keywords + body_keywords + tag_keywords + comment_keywords
@@ -148,7 +145,7 @@ class backSlicer():
             list: List of keywords.
         """
         # Assuming tags are simple strings, extract keywords similarly to text
-        tag_keywords = [tag.lower() for tag in tags]
+        tag_keywords = [tag.lower().strip() for tag in tags]
         return tag_keywords
 
     def extract_keywords_from_comments(self, comments):
@@ -176,15 +173,15 @@ class backSlicer():
         Returns:
             str: The modified source code.
         """
-        # Example: Handle CVE-related keywords
-        if keyword.lower() == 'cve':
-            cve_id = self.extract_cve_id_from_metadata()
-            if cve_id:
-                cve_info = self.get_cve_info_from_dataset(cve_id)
-                if cve_info:
-                    # Modify the code to remove the identified vulnerability
-                    adapted_source = self.remove_vulnerability(source, cve_info)
-                    return adapted_source
+        # # Example: Handle CVE-related keywords
+        # if keyword.lower() == 'cve':
+        #     cve_id = self.extract_cve_id_from_metadata()
+        #     if cve_id:
+        cve_info = self.get_cve_info_from_dataset(keyword)
+        if cve_info:
+            # Modify the code to remove the identified vulnerability
+            adapted_source = self.remove_vulnerability(source, cve_info)
+            return adapted_source
 
         # If the keyword is not recognized or not CVE-related, return the original source
         return source
@@ -229,7 +226,7 @@ class backSlicer():
             dict: CVE information or None if not found.
         """
         try:
-            cve_info = self.cve_tool.get_cve_info(cve_id)
+            cve_info = nvdlib.searchCVE(keywordSearch = cve_id)
             return cve_info
         except Exception as e:
             print(f"Error: Unable to retrieve CVE information for {cve_id}. Error: {str(e)}")
