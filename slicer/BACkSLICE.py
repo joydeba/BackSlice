@@ -1,10 +1,15 @@
 # https://pypi.org/project/cve-bin-tool/ [forFuture]
 # https://pypi.org/project/nvdlib/
-import nvdlib  
+# https://bandit.readthedocs.io/en/latest/
+# https://pyre-check.org
+# https://github.com/pyupio/safety
+# import nvdlib  
 import json
 import re
 import Levenshtein
-
+import bandit
+import subprocess
+import json
 
 class BackSlicer():
     def __init__(self, sourceOriginal= None, sourcebackport = None, astdiffsHistory = None, context = None, dependencies = None, metadata = None, functionalSet = None, compilationSet= None, stableLibraris = None, targetfile = None):
@@ -17,10 +22,7 @@ class BackSlicer():
         self.functionalSet = functionalSet
         self.compilationSet= compilationSet
         self.stableLibraris = stableLibraris
-        self.targetfile = targetfile
-        # Assuming the CVE dataset is stored in a JSON file
-        self.cve_dataset_file_path = 'path/to/cve_dataset.json'
-        self.cve_dataset = self.load_cve_dataset()                
+        self.targetfile = targetfile             
 
 
     def analyzeProgram(self):
@@ -76,9 +78,9 @@ class BackSlicer():
         # Extract keywords from pull request metadata
         keywords = self.extract_keywords_from_metadata()
 
-        # Use the extracted keywords to guide the adaptation process
-        for keyword in keywords:
-            adaptedSource = self.adapt_code_based_on_keyword(adaptedSource, keyword)
+        # Security check to guide the adaptation process
+        
+        adaptedSource = self.adapt_code_based_on_SecurityCheck(adaptedSource)
 
         return adaptedSource
 
@@ -162,22 +164,8 @@ class BackSlicer():
         comment_keywords = [self.extract_keywords_from_text(comment) for comment in comments]
         return [keyword for sublist in comment_keywords for keyword in sublist]  # Flatten the list
 
-    def adapt_code_based_on_keyword(self, source, keyword):
-        """
-        Adapt the code based on a specific keyword, with a focus on CVE-related keywords.
-
-        Parameters:
-            source (str): The source code to be modified.
-            keyword (str): The keyword to guide the adaptation process.
-
-        Returns:
-            str: The modified source code.
-        """
-        # # Example: Handle CVE-related keywords
-        # if keyword.lower() == 'cve':
-        #     cve_id = self.extract_cve_id_from_metadata()
-        #     if cve_id:
-        cve_info = self.get_cve_info_from_dataset(keyword)
+    def adapt_code_based_on_SecurityCheck(self, source):
+        cve_info = self.get_security_issuesBandit(source)
         if cve_info:
             # Modify the code to remove the identified vulnerability
             adapted_source = self.remove_vulnerability(source, cve_info)
@@ -203,49 +191,97 @@ class BackSlicer():
 
         adapted_source = source.replace(vulnerable_code, safe_alternative)
         return adapted_source
-
-    def extract_cve_id_from_metadata(self):
-        """
-        Extract CVE ID from metadata.
-
-        Returns:
-            str: CVE ID or None if not found.
-        """
-        # Example: Extract CVE ID from title or body (adjust based on your metadata structure)
-        cve_id_candidates = [word for word in (self.metadata['title'] + ' ' + self.metadata['body']).split() if word.startswith('CVE-')]
-        return cve_id_candidates[0] if cve_id_candidates else None         
-
-    def get_cve_info_from_dataset(self, cve_id):
-        """
-        Retrieve CVE information from the CVE Bin Tool.
-
-        Parameters:
-            cve_id (str): CVE ID.
-
-        Returns:
-            dict: CVE information or None if not found.
-        """
+       
+        
+    def get_security_issuesBandit(self, source_code):
         try:
-            cve_info = nvdlib.searchCVE(keywordSearch = cve_id)
-            return cve_info
+            # Running Bandit scan on the provided source code
+            issues = bandit.mgr().run([source_code])
+
+            # Extracting information about identified issues
+            issue_info = []
+            for result in issues:
+                for issue in result.get_issue_list():
+                    issue_info.append({
+                        'filename': issue.fname,
+                        'line_number': issue.lineno,
+                        'issue_text': issue.test,
+                        'severity': issue.severity,
+                    })
+
+            return issue_info
         except Exception as e:
-            print(f"Error: Unable to retrieve CVE information for {cve_id}. Error: {str(e)}")
-            return None
+            # Handle exceptions if any
+            print(f"An error occurred: {e}")
+            return None 
 
-    def load_cve_dataset(self):
-        """
-        Load the CVE dataset from a JSON file.
-
-        Returns:
-            dict: CVE dataset.
-        """
+    def get_security_issuesPyre(self, source_code):
         try:
-            with open(self.cve_dataset_file_path, 'r') as file:
-                cve_dataset = json.load(file)
-            return cve_dataset
-        except FileNotFoundError:
-            print(f"Error: CVE dataset file not found at {self.cve_dataset_file_path}")
-            return {}
-        except json.JSONDecodeError:
-            print(f"Error: Unable to decode JSON in CVE dataset file at {self.cve_dataset_file_path}")
-            return {}            
+            # Write the source code to a temporary file
+            with open('temp_file.py', 'w') as file:
+                file.write(source_code)
+
+            # Run Pyre for static analysis
+            pyre_output = subprocess.check_output(['pyre', 'analyze', '--source-directory', '.'])
+
+            # Parse Pyre output and extract information about identified issues
+            issue_info = []
+            try:
+                pyre_data = json.loads(pyre_output)
+                for issue in pyre_data.get('errors', []):
+                    issue_info.append({
+                        'filename': issue.get('path'),
+                        'line_number': issue.get('line'),
+                        'issue_text': issue.get('message'),
+                        'severity': 'Pyre does not provide explicit severity levels, so set it accordingly',
+                    })
+            except json.JSONDecodeError as json_error:
+                print(f"Error decoding Pyre output: {json_error}")
+
+            return issue_info
+        except subprocess.CalledProcessError as e:
+            # Handle exceptions if any
+            print(f"An error occurred while running Pyre: {e}")
+            return None
+        finally:
+            # Clean up temporary file
+            try:
+                subprocess.run(['rm', 'temp_file.py'])
+            except Exception as cleanup_error:
+                print(f"Error cleaning up temporary file: {cleanup_error}")
+
+    def get_security_issuesSafty(self, source_code):
+        try:
+            # Write the source code to a temporary file
+            with open('temp_file.py', 'w') as file:
+                file.write(source_code)
+
+            # Run safety check on the temporary file
+            safety_output = subprocess.check_output(['safety', 'check', '--file', 'temp_file.py'])
+
+            # Parse safety output and extract information about identified issues
+            issue_info = []
+            try:
+                safety_data = json.loads(safety_output)
+                for vulnerability in safety_data.get('results', []):
+                    issue_info.append({
+                        'vulnerability_id': vulnerability.get('vulnerability_id'),
+                        'package': vulnerability.get('name'),
+                        'version': vulnerability.get('installed_version'),
+                        'description': vulnerability.get('advisory'),
+                        'severity': vulnerability.get('severity'),
+                    })
+            except json.JSONDecodeError as json_error:
+                print(f"Error decoding safety output: {json_error}")
+
+            return issue_info
+        except subprocess.CalledProcessError as e:
+            # Handle exceptions if any
+            print(f"An error occurred while running safety check: {e}")
+            return None
+        finally:
+            # Clean up temporary file
+            try:
+                subprocess.run(['rm', 'temp_file.py'])
+            except Exception as cleanup_error:
+                print(f"Error cleaning up temporary file: {cleanup_error}")
