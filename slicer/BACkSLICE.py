@@ -202,7 +202,7 @@ class BackSlicer():
         return [keyword for sublist in comment_keywords for keyword in sublist]  # Flatten the list
 
     def adapt_code_based_on_SecurityCheck(self, source):
-        security_info = self.get_security_issuesBandit(source)
+        security_info = self.get_security_issuesSafty(source)
         if security_info:
             # Modify the code to remove the identified vulnerability
             adapted_source = self.remove_vulnerability(source, security_info)
@@ -274,7 +274,7 @@ class BackSlicer():
                 file.write(source_code)
 
             # Run Pyre for static analysis
-            pyre_output = subprocess.check_output(['pyre', 'analyze', '--source-directory', '.'])
+            pyre_output = subprocess.check_output(['pyre', 'analyze', '--source-directory', '.']) 
 
             # Parse Pyre output and extract information about identified issues
             issue_info = []
