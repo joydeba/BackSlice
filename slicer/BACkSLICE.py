@@ -230,7 +230,7 @@ class BackSlicer():
         return adapted_source
        
         
-    def get_security_issues(self, source_code):
+    def get_security_issuesBandit(self, source_code):
         try:
             # Write the source code to a temporary file
             with open('temp_file.py', 'w') as file:
