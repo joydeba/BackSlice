@@ -8,6 +8,8 @@ import json
 import re
 import Levenshtein
 import bandit
+from bandit.core import config
+from bandit.core import manager as b_manager
 import subprocess
 import json
 
@@ -88,37 +90,37 @@ class BackSlicer():
         return adaptedSource
 
 
-def adapt_code_based_on_metadata(self, source, keywords):
-    """
-    Adapt the source code based on pull request metadata.
+    def adapt_code_based_on_metadata(self, source, keywords):
+        """
+        Adapt the source code based on pull request metadata.
 
-    Parameters:
-        source (str): The source code to be modified.
-        keywords (list): List of keywords extracted from pull request metadata.
+        Parameters:
+            source (str): The source code to be modified.
+            keywords (list): List of keywords extracted from pull request metadata.
 
-    Returns:
-        str: The modified source code.
-    """
-    # Example: Modify the code based on the presence of specific keywords
-    for keyword in keywords:
-        if keyword.lower() == 'fix':
-            # Add a fix comment in the code
-            source += '\n# This code includes a fix for the reported issue.'
-        
-        elif keyword.lower() == 'feature':
-            # Add feature-specific code or comments
-            source += '\n# New feature added based on the pull request.'
+        Returns:
+            str: The modified source code.
+        """
+        # Example: Modify the code based on the presence of specific keywords
+        for keyword in keywords:
+            if keyword.lower() == 'fix':
+                # Add a fix comment in the code
+                source += '\n# This code includes a fix for the reported issue.'
+            
+            elif keyword.lower() == 'feature':
+                # Add feature-specific code or comments
+                source += '\n# New feature added based on the pull request.'
 
-        elif keyword.lower() == 'test':
-            # Include additional testing-related code or comments
-            source += '\n# Additional testing included in the code.'
+            elif keyword.lower() == 'test':
+                # Include additional testing-related code or comments
+                source += '\n# Additional testing included in the code.'
 
-        # Add more conditions based on other specific keywords
-        # elif keyword.lower() == 'keyword':
-        #     # Corresponding modification for the specific keyword
-        #     source += '\n# Code modification related to the keyword.'
+            # Add more conditions based on other specific keywords
+            # elif keyword.lower() == 'keyword':
+            #     # Corresponding modification for the specific keyword
+            #     source += '\n# Code modification related to the keyword.'
 
-    return source
+        return source
 
 
     def replace_semantically_related(self, source, old_value, new_value):
@@ -200,10 +202,10 @@ def adapt_code_based_on_metadata(self, source, keywords):
         return [keyword for sublist in comment_keywords for keyword in sublist]  # Flatten the list
 
     def adapt_code_based_on_SecurityCheck(self, source):
-        cve_info = self.get_security_issuesBandit(source)
-        if cve_info:
+        security_info = self.get_security_issuesBandit(source)
+        if security_info:
             # Modify the code to remove the identified vulnerability
-            adapted_source = self.remove_vulnerability(source, cve_info)
+            adapted_source = self.remove_vulnerability(source, security_info)
             return adapted_source
 
         # If the keyword is not recognized or not CVE-related, return the original source
@@ -228,27 +230,42 @@ def adapt_code_based_on_metadata(self, source, keywords):
         return adapted_source
        
         
-    def get_security_issuesBandit(self, source_code):
+    def get_security_issues(self, source_code):
         try:
-            # Running Bandit scan on the provided source code
-            issues = bandit.mgr().run([source_code])
+            # Write the source code to a temporary file
+            with open('temp_file.py', 'w') as file:
+                file.write(source_code)
 
-            # Extracting information about identified issues
+            # Run Bandit scan on the temporary file
+            bandit_command = ['bandit', '--format', 'json', 'temp_file.py']
+            bandit_output = subprocess.check_output(bandit_command, text=True)
+
+            # Parse Bandit output and extract information about identified issues
             issue_info = []
-            for result in issues:
-                for issue in result.get_issue_list():
+            try:
+                bandit_data = json.loads(bandit_output)
+                for issue in bandit_data['results']:
                     issue_info.append({
-                        'filename': issue.fname,
-                        'line_number': issue.lineno,
-                        'issue_text': issue.test,
-                        'severity': issue.severity,
+                        'filename': issue['filename'],
+                        'line_number': issue['line'],
+                        'issue_text': issue['test_id'],
+                        'severity': issue['issue_severity'],
                     })
+            except json.JSONDecodeError as json_error:
+                print(f"Error decoding Bandit output: {json_error}")
 
             return issue_info
-        except Exception as e:
+        except subprocess.CalledProcessError as e:
             # Handle exceptions if any
-            print(f"An error occurred: {e}")
-            return None 
+            print(f"An error occurred while running Bandit: {e}")
+            return None
+        finally:
+            # Clean up temporary file
+            try:
+                subprocess.run(['rm', 'temp_file.py'])
+            except Exception as cleanup_error:
+                print(f"Error cleaning up temporary file: {cleanup_error}")
+
 
     def get_security_issuesPyre(self, source_code):
         try:
