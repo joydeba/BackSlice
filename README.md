@@ -17,6 +17,7 @@ ProSlice (PropagationSlicer) - Provide semantic slices by analyzing changesets i
 - pip install Levenshtein [Checked]
 - pip install safety [Checked]
 - pip install pyre-check [optional]
+- pyre init
 - pip install bandit [Optional]
 
 - /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" 

@@ -12,6 +12,7 @@ from bandit.core import config
 from bandit.core import manager as b_manager
 import subprocess
 import json
+import os
 
 class BackSlicer():
     def __init__(self, sourceOriginal= None, sourcebackport = None, astdiffsHistory = None, context = None, dependencies = None, metadata = None, functionalSet = None, compilationSet= None, stableLibraris = None, targetfile = None):
@@ -202,7 +203,7 @@ class BackSlicer():
         return [keyword for sublist in comment_keywords for keyword in sublist]  # Flatten the list
 
     def adapt_code_based_on_SecurityCheck(self, source):
-        security_info = self.get_security_issuesSafty(source)
+        security_info = self.get_security_issuesBandit(source)
         if security_info:
             # Modify the code to remove the identified vulnerability
             adapted_source = self.remove_vulnerability(source, security_info)
@@ -268,25 +269,33 @@ class BackSlicer():
 
 
     def get_security_issuesPyre(self, source_code):
+        # Does not work properly for me : works with directory and so many dependencies
         try:
-            # Write the source code to a temporary file
-            with open('temp_file.py', 'w') as file:
+            # Create a temporary directory
+            temp_dir = 'temp_dir'
+            os.makedirs(temp_dir, exist_ok=True)
+
+            # Write the source code to a temporary file in the temporary directory
+            temp_file_path = os.path.join(temp_dir, 'temp_file.py')
+            with open(temp_file_path, 'w') as file:
                 file.write(source_code)
 
-            # Run Pyre for static analysis
-            pyre_output = subprocess.check_output(['pyre', 'analyze', '--source-directory', '.']) 
+            # Run Pyre for static analysis on the temporary directory
+            pyre_command = ['pyre', 'analyze', '--source-directory', temp_dir]
+            pyre_output = subprocess.check_output(pyre_command, text=True)
 
             # Parse Pyre output and extract information about identified issues
             issue_info = []
             try:
                 pyre_data = json.loads(pyre_output)
                 for issue in pyre_data.get('errors', []):
-                    issue_info.append({
-                        'filename': issue.get('path'),
-                        'line_number': issue.get('line'),
-                        'issue_text': issue.get('message'),
-                        'severity': 'Pyre does not provide explicit severity levels, so set it accordingly',
-                    })
+                    if issue['path'] == temp_file_path:
+                        issue_info.append({
+                            'filename': issue.get('path'),
+                            'line_number': issue.get('line'),
+                            'issue_text': issue.get('message'),
+                            'severity': 'Pyre does not provide explicit severity levels, so set it accordingly',
+                        })
             except json.JSONDecodeError as json_error:
                 print(f"Error decoding Pyre output: {json_error}")
 
@@ -296,11 +305,12 @@ class BackSlicer():
             print(f"An error occurred while running Pyre: {e}")
             return None
         finally:
-            # Clean up temporary file
+            # Clean up temporary directory
             try:
-                subprocess.run(['rm', 'temp_file.py'])
+                subprocess.run(['rm', '-r', temp_dir])
             except Exception as cleanup_error:
-                print(f"Error cleaning up temporary file: {cleanup_error}")
+                print(f"Error cleaning up temporary directory: {cleanup_error}")
+
 
     def get_security_issuesSafty(self, source_code):
         try:
