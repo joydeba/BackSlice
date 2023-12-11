@@ -1,9 +1,11 @@
+
+# Dependencies
 # https://pypi.org/project/cve-bin-tool/ [forFuture]
 # https://pypi.org/project/nvdlib/
 # https://bandit.readthedocs.io/en/latest/
 # https://pyre-check.org
 # https://github.com/pyupio/safety
-# import nvdlib  
+
 import json
 import re
 import Levenshtein
