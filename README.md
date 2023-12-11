@@ -1,10 +1,10 @@
-# ProSlice
-ProSlice (PropagationSlicer) - Provide semantic slices by analyzing changesets in backporting.
+# BackSlice
+BackSlice (BackportSlicer) - Provide semantic slices by analyzing changesets in backporting.
 
 # Installation
-- git clone https://joydeba@github.com/joydeba/ProSlice.git
+- git clone https://joydeba@github.com/joydeba/BackSlice.git
     - if password is not working, use PAT
-- python3 -m venv . venvProSlice
+- python3 -m venv . venvBackSlice
 - source bin/activate [locations]
  
 
