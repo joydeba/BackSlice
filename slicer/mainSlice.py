@@ -255,4 +255,3 @@ ansibleDictOfActiveBranches,
 'ansible',
 'ansible',
 'data_cmp_incmpWithTest/Incmp_CSLICER_Ansible_backport_keywordsPRs.csv')
-
