@@ -71,6 +71,8 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     pull_commitOriginal = gLocal.execute(["gh", "pr", "view", pull_id_original, "--json", "mergeCommit"])
                     pull_commitBackports = gLocal.execute(["gh", "pr", "view", pull_id_backport, "--json", "mergeCommit"])
                     # targetStableBranch = ast.literal_eval(gLocal.execute(["gh", "pr", "view", pull_id_backport, "--json", "baseRefName"]))['baseRefName']
+                    if pull_commitOriginal == '{"mergeCommit":null}' or pull_commitBackports == '{"mergeCommit":null}':
+                        continue 
                     targetStableBranch = line[3].strip()
                     branch_exists = any(branch.strip() == targetStableBranch for branch in branches.split('\n'))
                     
@@ -210,13 +212,11 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                                 compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
                                                 stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=ghkey), 
                                                 targetfile = fullFileTarget)                        
-                                                
+                            context_index = context_index +1                    
                             slicebyCslicer = cslicer.analyzeProgram()  
-
                             if slicebyCslicer:
                                 numberOfSuccesfulSlicing = numberOfSuccesfulSlicing + 1                
-                                slicesfromCSLICER.append(slicebyCslicer)
-                            context_index = context_index +1     
+                                slicesfromCSLICER.append((codeHunk ,slicebyCslicer))                                 
 
                     print("Working on pulls ", pull_id_original, pull_id_backport)
                     slicedPRs.append(slicesfromCSLICER)
@@ -231,14 +231,18 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
         print("Total Sliced Required", numberofSlicingRequired, file=f)
         print("Total hunks have test and code", has_test_and_code, file=f)
         print("Total Succesfully Sliced", numberOfSuccesfulSlicing, file=f)
-
-
-
     
     with open(output1, "wt") as fp:
         writer = csv.writer(fp, delimiter=",")
-        writer.writerows(slicedPRs)   
+        flattened_data = [item for sublist in slicedPRs for item in sublist]
+        for pair in flattened_data:
+            writer.writerow([pair[0]])
+            writer.writerow(["-------------------------------------------------------------------------"])
+            writer.writerow([pair[1]])
+            writer.writerow(["-------------------------------------------------------------------------"])
 
+        writer.writerow(["======================================================================"])
+    
 
 # # Updated on 11th April 2023
 ansibleDictOfActiveBranches = {'devel':{}, 'stable-2.9':{}, 'stable-2.12':{}, 'stable-2.14':{}, 'stable-2.13':{}, 'stable-2.15':{}}

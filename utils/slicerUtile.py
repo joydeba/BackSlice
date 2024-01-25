@@ -37,6 +37,7 @@ def has_test_files(files):
                 return True
     return False
 
+# Todo - Cslicer may have different history
 def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = None, endDate = None, repoName=None, projectName = None):
     asts = []  # List to store parsed ASTs for each commit
     g, backup_keys, no_bused_key, accesskey = initialize_G()
@@ -434,7 +435,7 @@ def get_compilation_set(sourceCode, functional_set):
 #     # Gether context 
 #     return dependencies
 
-
+#  Todo- check for the getting all 
 def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_file="AnsibleCache.txt"):
     # Check if a cache file exists and load information from it if available.
     if cache_file and os.path.exists(cache_file):

@@ -116,7 +116,7 @@ class BackSlicer():
 
             elif keyword.lower() == 'test':
                 # Include additional testing-related code or comments
-                source += '\n# Additional testing included in the code.'
+                source += '\n# Test cases might require backporting as well.'
 
             # Add more conditions based on other specific keywords
             # elif keyword.lower() == 'keyword':
