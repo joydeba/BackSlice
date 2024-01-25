@@ -7,6 +7,7 @@ import sys
 sys.path.insert(1, os.getcwd())
 from helperZER.pygithub_helper import *
 from utils.slicerUtile import *
+from utils.metricUtile import *
 import git
 import subprocess
 PIPE = subprocess.PIPE
@@ -242,6 +243,18 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
             writer.writerow(["-------------------------------------------------------------------------"])
 
         writer.writerow(["======================================================================"])
+
+    average_bleu_score = calculate_average_bleu_score(slicedPRs)
+    print(f"Average BLEU Score: {average_bleu_score}")
+    average_meteor_score = calculate_average_meteor_score(slicedPRs)
+    print(f"Average METEOR Score: {average_meteor_score}") 
+    average_code_bleu = calculate_average_code_bleu_score(slicedPRs)
+    print(f"Average CodeBLEU Score: {average_code_bleu}")       
+    average_rouge_l_score = calculate_average_rouge_l(slicedPRs)
+    print(f"Average ROUGE-L Score: {average_rouge_l_score}")
+    average_chrf_score = calculate_average_chrf_score(slicedPRs)
+    print(f"Average CHRF Score: {average_chrf_score}")
+
     
 
 # # Updated on 11th April 2023
