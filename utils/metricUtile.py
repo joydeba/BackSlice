@@ -20,9 +20,9 @@ def calculate_average_bleu_score(paired_list):
     total_bleu_score = 0
 
     for pull_request in paired_list:
-        references, candidates = zip(*pull_request)
-        for reference, candidate in zip(references, candidates):
-            total_bleu_score += calculate_bleu_score(reference, candidate)
+        references, candidates, targets = zip(*pull_request)
+        for reference, candidate, target in zip(references, candidates, targets):
+            total_bleu_score += calculate_bleu_score(target, candidate)
 
     average_bleu_score = total_bleu_score / len(paired_list)
     return average_bleu_score
@@ -57,9 +57,9 @@ def calculate_average_meteor_score(paired_list):
     total_meteor_score = 0
 
     for pull_request in paired_list:
-        references, candidates = zip(*pull_request)
-        for reference, candidate in zip(references, candidates):
-            meteor_score = calculate_meteor_score(reference, candidate)
+        references, candidates, targets = zip(*pull_request)
+        for reference, candidate, target in zip(references, candidates, targets):
+            meteor_score = calculate_meteor_score(target, candidate)
             if meteor_score is not None:
                 total_meteor_score += meteor_score
 
@@ -75,9 +75,9 @@ def calculate_average_code_bleu_score(paired_list):
     total_code_bleu_score = 0
 
     for pull_request in paired_list:
-        references, candidates = zip(*pull_request)
-        for reference, candidate in zip(references, candidates):
-            code_bleu_score = calculate_code_bleu_score(reference, candidate)
+        references, candidates, targets = zip(*pull_request)
+        for reference, candidate, target in zip(references, candidates, targets):
+            code_bleu_score = calculate_code_bleu_score(target, candidate)
             total_code_bleu_score += code_bleu_score
 
     average_code_bleu_score = total_code_bleu_score / len(paired_list)
@@ -94,9 +94,9 @@ def calculate_average_rouge_l(paired_list):
     total_rouge_l_score = 0
 
     for pull_request in paired_list:
-        references, candidates = zip(*pull_request)
-        for reference, candidate in zip(references, candidates):
-            rouge_l_score = calculate_rouge_l_score(reference, candidate)
+        references, candidates, targets = zip(*pull_request)
+        for reference, candidate, target in zip(references, candidates, targets):
+            rouge_l_score = calculate_rouge_l_score(target, candidate)
             total_rouge_l_score += rouge_l_score
 
     average_rouge_l_score = total_rouge_l_score / len(paired_list)
@@ -111,9 +111,9 @@ def calculate_average_chrf_score(paired_list):
     total_chrf_score = 0
 
     for pull_request in paired_list:
-        references, candidates = zip(*pull_request)
-        for reference, candidate in zip(references, candidates):
-            chrf_score = calculate_chrf_score(reference, candidate)
+        references, candidates, targets = zip(*pull_request)
+        for reference, candidate, target in zip(references, candidates, targets):
+            chrf_score = calculate_chrf_score(target, candidate)
             total_chrf_score += chrf_score
 
     average_chrf_score = total_chrf_score / len(paired_list)

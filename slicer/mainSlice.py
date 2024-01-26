@@ -42,6 +42,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
         for idx, line in enumerate(data_read):
             backport_slices = ""               
             original_slices = "" 
+            slicesfromCSLICER = []
             if line[2].strip() != '0':
                 try:
                     repository = line[1].replace('https://github.com/', '')
@@ -186,7 +187,6 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
 
 
                     slicebyCslicer = None
-                    slicesfromCSLICER = []
                     if testhunks_original and codehunks_original and codehunks_backport:
                         has_test_and_code = has_test_and_code + 1
                         context_index = 0 
@@ -217,7 +217,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                             slicebyCslicer = cslicer.analyzeProgram()  
                             if slicebyCslicer:
                                 numberOfSuccesfulSlicing = numberOfSuccesfulSlicing + 1                
-                                slicesfromCSLICER.append((codeHunk ,slicebyCslicer))                                 
+                                slicesfromCSLICER.append((codeHunk ,slicebyCslicer, codeHunkBackport))                                 
 
                     print("Working on pulls ", pull_id_original, pull_id_backport)
                     slicedPRs.append(slicesfromCSLICER)
@@ -227,12 +227,24 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     print(e)
                     continue
 
-    with open(projectName+"InconICFDiff", 'w') as f:   
+    average_bleu_score = calculate_average_bleu_score(slicedPRs)
+    average_meteor_score = calculate_average_meteor_score(slicedPRs)
+    average_code_bleu = calculate_average_code_bleu_score(slicedPRs)  
+    average_rouge_l_score = calculate_average_rouge_l(slicedPRs)  
+    average_chrf_score = calculate_average_chrf_score(slicedPRs)        
+    with open(projectName+"InconICFDiffBackSlice", 'w') as f:   
         print("Total Labeled Backporting PRs", len(data_read), file=f)
         print("Total Sliced Required", numberofSlicingRequired, file=f)
         print("Total hunks have test and code", has_test_and_code, file=f)
         print("Total Succesfully Sliced", numberOfSuccesfulSlicing, file=f)
-    
+
+        print(f"Average BLEU Score: {average_bleu_score}", file=f)
+        print(f"Average METEOR Score: {average_meteor_score}", file=f) 
+        print(f"Average CodeBLEU Score: {average_code_bleu}", file=f)       
+        print(f"Average ROUGE-L Score: {average_rouge_l_score}", file=f)
+        print(f"Average CHRF Score: {average_chrf_score}", file=f)    
+
+
     with open(output1, "wt") as fp:
         writer = csv.writer(fp, delimiter=",")
         flattened_data = [item for sublist in slicedPRs for item in sublist]
@@ -241,19 +253,11 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
             writer.writerow(["-------------------------------------------------------------------------"])
             writer.writerow([pair[1]])
             writer.writerow(["-------------------------------------------------------------------------"])
+            writer.writerow([pair[2]])
+            writer.writerow(["-------------------------------------------------------------------------"])
+            writer.writerow(["========================================================================="])
 
-        writer.writerow(["======================================================================"])
 
-    average_bleu_score = calculate_average_bleu_score(slicedPRs)
-    print(f"Average BLEU Score: {average_bleu_score}")
-    average_meteor_score = calculate_average_meteor_score(slicedPRs)
-    print(f"Average METEOR Score: {average_meteor_score}") 
-    average_code_bleu = calculate_average_code_bleu_score(slicedPRs)
-    print(f"Average CodeBLEU Score: {average_code_bleu}")       
-    average_rouge_l_score = calculate_average_rouge_l(slicedPRs)
-    print(f"Average ROUGE-L Score: {average_rouge_l_score}")
-    average_chrf_score = calculate_average_chrf_score(slicedPRs)
-    print(f"Average CHRF Score: {average_chrf_score}")
 
     
 
@@ -272,9 +276,9 @@ ansibleDefault_branch = 'devel'
 # RailsDefault_branch = 'main'
 # KibanaDefault_branch = 'main'
 # cpythonDefault_branch = 'main'
-mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRs.csv', 
+mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRsSample.csv', 
 ansibleDefault_branch,
 ansibleDictOfActiveBranches,
 'ansible',
 'ansible',
-'data_cmp_incmpWithTest/Incmp_CSLICER_Ansible_backport_keywordsPRs.csv')
+'data_cmp_incmpWithTest/Incmp_BackSlice_Ansible_backport_keywordsPRs.csv')
