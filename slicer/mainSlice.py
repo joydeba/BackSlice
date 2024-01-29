@@ -220,18 +220,20 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                 slicesfromCSLICER.append((codeHunk ,slicebyCslicer, codeHunkBackport))                                 
 
                     print("Working on pulls ", pull_id_original, pull_id_backport)
-                    slicedPRs.append(slicesfromCSLICER)
+                    if slicesfromCSLICER:
+                        slicedPRs.append(slicesfromCSLICER)
 
                 except Exception as e:
                     print("Problem in pulls")
                     print(e)
                     continue
+    if slicedPRs:
+        average_bleu_score = calculate_average_bleu_score(slicedPRs)
+        average_meteor_score = calculate_average_meteor_score(slicedPRs)
+        average_code_bleu = calculate_average_code_bleu_score(slicedPRs)  
+        average_rouge_l_score = calculate_average_rouge_l(slicedPRs)  
+        average_chrf_score = calculate_average_chrf_score(slicedPRs) 
 
-    average_bleu_score = calculate_average_bleu_score(slicedPRs)
-    average_meteor_score = calculate_average_meteor_score(slicedPRs)
-    average_code_bleu = calculate_average_code_bleu_score(slicedPRs)  
-    average_rouge_l_score = calculate_average_rouge_l(slicedPRs)  
-    average_chrf_score = calculate_average_chrf_score(slicedPRs)        
     with open(projectName+"InconICFDiffBackSlice", 'w') as f:   
         print("Total Labeled Backporting PRs", len(data_read), file=f)
         print("Total Sliced Required", numberofSlicingRequired, file=f)
@@ -276,7 +278,7 @@ ansibleDefault_branch = 'devel'
 # RailsDefault_branch = 'main'
 # KibanaDefault_branch = 'main'
 # cpythonDefault_branch = 'main'
-mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRsSample.csv', 
+mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRs.csv', 
 ansibleDefault_branch,
 ansibleDictOfActiveBranches,
 'ansible',
