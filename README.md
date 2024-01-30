@@ -22,6 +22,7 @@ BackSlice (BackportSlicer) - Provide semantic slices by analyzing changesets in 
 - pip install nltk
 - pip install sacrebleu
 - pip install py-rouge
+- pip install codebleu
 
 - /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" 
 - (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/joydeba/.zprofile

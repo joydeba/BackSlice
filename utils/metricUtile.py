@@ -4,11 +4,12 @@ import nltk
 # nltk.download('perluniprops')
 # nltk.download('codebleu')
 # nltk.download('perluniprops')
-# nltk.download('punkt')
+nltk.download('punkt')
 from nltk.translate.bleu_score import sentence_bleu
 from rouge import Rouge
 import csv
 import sacrebleu
+from codebleu import calc_codebleu
 
 def calculate_bleu_score(reference, candidate):
     reference_tokens = nltk.word_tokenize(reference)
@@ -30,7 +31,7 @@ def calculate_average_bleu_score(paired_list):
 
 # Function to calculate METEOR score using the METEOR jar file
 def calculate_meteor_score(reference, candidate):
-    meteor_jar = 'path/to/meteor-1.5.jar'  # Replace with the actual path to meteor-1.5.jar
+    meteor_jar = 'utils/meteor-1.5.jar'  # Replace with the actual path to meteor-1.5.jar
 
     # Tokenize the reference and candidate strings
     reference_tokens = nltk.word_tokenize(reference)
@@ -68,8 +69,8 @@ def calculate_average_meteor_score(paired_list):
 
 
 def calculate_code_bleu_score(reference, candidate):
-    code_bleu_score = sacrebleu.corpus_bleu(candidate, [reference], tokenize='code')
-    return code_bleu_score.score
+    code_bleu_score = calc_codebleu([reference], [candidate], lang="python", weights=(0.25, 0.25, 0.25, 0.25), tokenizer=None)
+    return code_bleu_score['codebleu']
 
 def calculate_average_code_bleu_score(paired_list):
     total_code_bleu_score = 0
