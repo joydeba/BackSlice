@@ -88,8 +88,10 @@ def calculate_average_code_bleu_score(paired_list):
 def calculate_rouge_l_score(reference, candidate):
     rouge = Rouge()
     scores = rouge.get_scores(candidate, reference)
-    rouge_l_score = scores[0]['rouge-l']['f']
-    return rouge_l_score
+    if(scores):
+        rouge_l_score = scores[0]['rouge-l']['f']
+        return rouge_l_score
+    return 0
 
 def calculate_average_rouge_l(paired_list):
     total_rouge_l_score = 0

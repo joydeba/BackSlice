@@ -43,6 +43,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
             backport_slices = ""               
             original_slices = "" 
             slicesfromCSLICER = []
+            fullFileTarget = None
             if line[2].strip() != '0':
                 try:
                     repository = line[1].replace('https://github.com/', '')
@@ -228,23 +229,24 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     print("Problem in pulls")
                     print(e)
                     continue
-    if slicedPRs:
-        average_bleu_score = calculate_average_bleu_score(slicedPRs)
-        average_meteor_score = calculate_average_meteor_score(slicedPRs)
-        average_code_bleu = calculate_average_code_bleu_score(slicedPRs)  
-        average_rouge_l_score = calculate_average_rouge_l(slicedPRs)  
-        average_chrf_score = calculate_average_chrf_score(slicedPRs) 
-        print(f"Average BLEU Score: {average_bleu_score}", file=f)
-        print(f"Average METEOR Score: {average_meteor_score}", file=f) 
-        print(f"Average CodeBLEU Score: {average_code_bleu}", file=f)       
-        print(f"Average ROUGE-L Score: {average_rouge_l_score}", file=f)
-        print(f"Average CHRF Score: {average_chrf_score}", file=f)            
+        
 
     with open(projectName+"InconICFDiffBackSlice", 'w') as f:   
         print("Total Labeled Backporting PRs", len(data_read), file=f)
         print("Total Sliced Required", numberofSlicingRequired, file=f)
         print("Total hunks have test and code", has_test_and_code, file=f)
         print("Total Succesfully Sliced", numberOfSuccesfulSlicing, file=f)
+        if slicedPRs:
+            average_bleu_score = calculate_average_bleu_score(slicedPRs)
+            average_meteor_score = calculate_average_meteor_score(slicedPRs)
+            average_code_bleu = calculate_average_code_bleu_score(slicedPRs)  
+            average_rouge_l_score = calculate_average_rouge_l(slicedPRs)  
+            average_chrf_score = calculate_average_chrf_score(slicedPRs) 
+            print(f"Average BLEU Score: {average_bleu_score}", file=f)
+            print(f"Average METEOR Score: {average_meteor_score}", file=f) 
+            print(f"Average CodeBLEU Score: {average_code_bleu}", file=f)       
+            print(f"Average ROUGE-L Score: {average_rouge_l_score}", file=f)
+            print(f"Average CHRF Score: {average_chrf_score}", file=f)            
 
 
 

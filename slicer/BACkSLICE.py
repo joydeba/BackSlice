@@ -140,9 +140,16 @@ class BackSlicer():
             str: The modified source code.
         """
         # Calculate Levenshtein distance for each word in the source and replace if below a certain threshold
-        words = source.split()
-        updated_words = [new_value if Levenshtein.distance(word, old_value) < 3 else word for word in words]
-        return ' '.join(updated_words)
+        lines = source.split('\n')
+        updated_lines = []
+
+        for line in lines:
+            words = line.split()
+            updated_words = [new_value if Levenshtein.distance(word, old_value) < 3 else word for word in words]
+            updated_line = ' '.join(updated_words)
+            updated_lines.append(updated_line)
+
+        return '\n'.join(updated_lines)
 
     def extract_keywords_from_metadata(self):
         """

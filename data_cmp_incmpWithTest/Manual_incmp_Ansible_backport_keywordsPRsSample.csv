@@ -1,2 +1,4 @@
-https://github.com/ansible/ansible/pull/70997/files, https://github.com/ansible/ansible/pull/70665/files, 17, stable-2.9
-https://github.com/ansible/ansible/pull/70996/files, https://github.com/ansible/ansible/pull/70665/files, 17, stable-2.10
+https://github.com/ansible/ansible/pull/70389/files, https://github.com/ansible/ansible/pull/70240/files, 4, stable-2.10
+https://github.com/ansible/ansible/pull/70388/files, https://github.com/ansible/ansible/pull/70056/files, 29, stable-2.9
+https://github.com/ansible/ansible/pull/70387/files, https://github.com/ansible/ansible/pull/70056/files, 1, stable-2.10
+https://github.com/ansible/ansible/pull/70316/files, https://github.com/ansible/ansible/pull/70313/files, 5, stable-2.7
