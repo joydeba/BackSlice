@@ -185,10 +185,11 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
 
                                 numberofSlicingRequired = numberofSlicingRequired + 1
 
-
-                    slicebyCslicer = None
                     if testhunks_original and codehunks_original and codehunks_backport:
                         has_test_and_code = has_test_and_code + 1
+
+                    slicebyCslicer = None
+                    if codehunks_original and codehunks_backport:
                         context_index = 0 
                         for codeHunk, codeHunkBackport  in zip(codehunks_original, codehunks_backport):
                             functionalSetforHunk = get_functional_set(codeHunk, testCases = testhunks_original)
@@ -214,10 +215,10 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                                 stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=ghkey), 
                                                 targetfile = fullFileTarget)                        
                             context_index = context_index +1                    
-                            slicebyCslicer = cslicer.analyzeProgram()  
+                            slicebyCslicer, recommendation = cslicer.analyzeProgram()  
                             if slicebyCslicer:
                                 numberOfSuccesfulSlicing = numberOfSuccesfulSlicing + 1                
-                                slicesfromCSLICER.append((codeHunk ,slicebyCslicer, codeHunkBackport))                                 
+                                slicesfromCSLICER.append((codeHunk ,slicebyCslicer, codeHunkBackport, recommendation))                                 
 
                     print("Working on pulls ", pull_id_original, pull_id_backport)
                     if slicesfromCSLICER:
@@ -233,6 +234,11 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
         average_code_bleu = calculate_average_code_bleu_score(slicedPRs)  
         average_rouge_l_score = calculate_average_rouge_l(slicedPRs)  
         average_chrf_score = calculate_average_chrf_score(slicedPRs) 
+        print(f"Average BLEU Score: {average_bleu_score}", file=f)
+        print(f"Average METEOR Score: {average_meteor_score}", file=f) 
+        print(f"Average CodeBLEU Score: {average_code_bleu}", file=f)       
+        print(f"Average ROUGE-L Score: {average_rouge_l_score}", file=f)
+        print(f"Average CHRF Score: {average_chrf_score}", file=f)            
 
     with open(projectName+"InconICFDiffBackSlice", 'w') as f:   
         print("Total Labeled Backporting PRs", len(data_read), file=f)
@@ -240,11 +246,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
         print("Total hunks have test and code", has_test_and_code, file=f)
         print("Total Succesfully Sliced", numberOfSuccesfulSlicing, file=f)
 
-        print(f"Average BLEU Score: {average_bleu_score}", file=f)
-        print(f"Average METEOR Score: {average_meteor_score}", file=f) 
-        print(f"Average CodeBLEU Score: {average_code_bleu}", file=f)       
-        print(f"Average ROUGE-L Score: {average_rouge_l_score}", file=f)
-        print(f"Average CHRF Score: {average_chrf_score}", file=f)    
+
 
 
     with open(output1, "wt") as fp:
@@ -256,6 +258,8 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
             writer.writerow([pair[1]])
             writer.writerow(["-------------------------------------------------------------------------"])
             writer.writerow([pair[2]])
+            writer.writerow(["-------------------------------------------------------------------------"])
+            writer.writerow([pair[3]])
             writer.writerow(["-------------------------------------------------------------------------"])
             writer.writerow(["========================================================================="])
 
@@ -278,7 +282,7 @@ ansibleDefault_branch = 'devel'
 # RailsDefault_branch = 'main'
 # KibanaDefault_branch = 'main'
 # cpythonDefault_branch = 'main'
-mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRs.csv', 
+mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRsSample.csv', 
 ansibleDefault_branch,
 ansibleDictOfActiveBranches,
 'ansible',

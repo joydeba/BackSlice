@@ -84,13 +84,13 @@ class BackSlicer():
         keywords = self.extract_keywords_from_metadata()
 
         # Use metadata information to guide code adaptation
-        adaptedSource = self.adapt_code_based_on_metadata(adaptedSource, keywords)
+        adaptedSource, recommendation = self.adapt_code_based_on_metadata(adaptedSource, keywords)
 
         # Security check to guide the adaptation process
         
         adaptedSource = self.adapt_code_based_on_SecurityCheck(adaptedSource)
 
-        return adaptedSource
+        return adaptedSource, recommendation
 
 
     def adapt_code_based_on_metadata(self, source, keywords):
@@ -104,26 +104,27 @@ class BackSlicer():
         Returns:
             str: The modified source code.
         """
+        recommendation = ""
         # Example: Modify the code based on the presence of specific keywords
         for keyword in keywords:
             if keyword.lower() == 'fix':
                 # Add a fix comment in the code
-                source += '\n# This code includes a fix for the reported issue.'
+                recommendation += '\n# This code includes a fix for the reported issue.'
             
             elif keyword.lower() == 'feature':
                 # Add feature-specific code or comments
-                source += '\n# New feature added based on the pull request.'
+                recommendation += '\n# New feature added based on the pull request.'
 
             elif keyword.lower() == 'test':
                 # Include additional testing-related code or comments
-                source += '\n# Test cases might require backporting as well.'
+                recommendation += '\n# Test cases might require backporting as well.'
 
             # Add more conditions based on other specific keywords
             # elif keyword.lower() == 'keyword':
             #     # Corresponding modification for the specific keyword
             #     source += '\n# Code modification related to the keyword.'
 
-        return source
+        return source, recommendation
 
 
     def replace_semantically_related(self, source, old_value, new_value):
