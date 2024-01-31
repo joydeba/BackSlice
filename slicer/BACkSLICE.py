@@ -144,9 +144,16 @@ class BackSlicer():
         updated_lines = []
 
         for line in lines:
-            words = line.split()
-            updated_words = [new_value if Levenshtein.distance(word, old_value) < 3 else word for word in words]
-            updated_line = ' '.join(updated_words)
+            words_and_spaces = line.split(' ')
+            updated_words_and_spaces = []
+
+            for item in words_and_spaces:
+                if Levenshtein.distance(item, old_value) < 3:
+                    updated_words_and_spaces.append(new_value)
+                else:
+                    updated_words_and_spaces.append(item)
+
+            updated_line = ' '.join(updated_words_and_spaces)
             updated_lines.append(updated_line)
 
         return '\n'.join(updated_lines)

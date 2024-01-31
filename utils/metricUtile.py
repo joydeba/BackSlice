@@ -5,6 +5,7 @@ import nltk
 # nltk.download('codebleu')
 # nltk.download('perluniprops')
 nltk.download('punkt')
+nltk.download('wordnet')
 from nltk.translate.bleu_score import sentence_bleu
 from rouge import Rouge
 import csv
@@ -31,27 +32,15 @@ def calculate_average_bleu_score(paired_list):
 
 # Function to calculate METEOR score using the METEOR jar file
 def calculate_meteor_score(reference, candidate):
-    meteor_jar = 'utils/meteor-1.5.jar'  # Replace with the actual path to meteor-1.5.jar
 
-    # Tokenize the reference and candidate strings
     reference_tokens = nltk.word_tokenize(reference)
     candidate_tokens = nltk.word_tokenize(candidate)
 
-    # Convert tokens to lowercase (METEOR is case-sensitive)
     reference_tokens = [token.lower() for token in reference_tokens]
     candidate_tokens = [token.lower() for token in candidate_tokens]
 
-    # Call METEOR using subprocess
-    command = ['java', '-Xmx2G', '-jar', meteor_jar, candidate, reference, '-l', 'en', '-norm']
-    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    output, error = process.communicate()
-
-    if process.returncode == 0:
-        meteor_score = float(output.strip())
-        return meteor_score
-    else:
-        print(f"Error calculating METEOR score: {error}")
-        return None
+    meteor_score = nltk.translate.meteor_score.meteor_score([reference_tokens], candidate_tokens)
+    return meteor_score
     
 
 def calculate_average_meteor_score(paired_list):
@@ -87,11 +76,8 @@ def calculate_average_code_bleu_score(paired_list):
 
 def calculate_rouge_l_score(reference, candidate):
     rouge = Rouge()
-    scores = rouge.get_scores(candidate, reference)
-    if(scores):
-        rouge_l_score = scores[0]['rouge-l']['f']
-        return rouge_l_score
-    return 0
+    scores = rouge.get_scores(candidate, reference, avg=True)
+    return scores['rouge-l']['f']
 
 def calculate_average_rouge_l(paired_list):
     total_rouge_l_score = 0
