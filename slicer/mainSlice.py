@@ -15,6 +15,8 @@ import ast
 from CSLICER import Cslicer
 from BACkSLICE import BackSlicer
 from github import Github
+from sklearn.metrics import confusion_matrix, cohen_kappa_score
+import numpy as np
 
 
 def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranches = {}, repoName="repoName", projectName = 'projectName', output1="outputCSLICER.csv"):
@@ -195,17 +197,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                         for codeHunk, codeHunkBackport  in zip(codehunks_original, codehunks_backport):
                             functionalSetforHunk = get_functional_set(codeHunk, testCases = testhunks_original)
                             astdiffshistory = get_ast_diffs(source_commits = pull_commitsSubmitted, startCommit=None, endCommit=None, startDate = commitStartDate, endDate = commitEndDate, repoName=repoName, projectName =projectName) 
-                            # cslicer = Cslicer(sourceOriginal = codeHunk,
-                            #                     sourcebackport = codeHunkBackport, 
-                            #                     astdiffsHistory = astdiffshistory, 
-                            #                     context = get_hunk_context(file_content = codehunks_original_withContext[context_index], hunk_start = hunkStartLnNo, hunk_end = hunkEndlnNo, context_lines=3), 
-                            #                     dependencies = get_changeset_dependencies(codeHunk), 
-                            #                     metadata = get_changesets_and_metadata(pull_request = pull_backport, sourceO = codeHunkBackport), 
-                            #                     functionalSet = functionalSetforHunk, 
-                            #                     compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
-                            #                     stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=ghkey), 
-                            #                     targetfile = fullFileTarget)
-                            cslicer = BackSlicer(sourceOriginal = codeHunk,
+                            cslicer = Cslicer(sourceOriginal = codeHunk,
                                                 sourcebackport = codeHunkBackport, 
                                                 astdiffsHistory = astdiffshistory, 
                                                 context = get_hunk_context(file_content = codehunks_original_withContext[context_index], hunk_start = hunkStartLnNo, hunk_end = hunkEndlnNo, context_lines=3), 
@@ -214,7 +206,17 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                                 functionalSet = functionalSetforHunk, 
                                                 compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
                                                 stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=ghkey), 
-                                                targetfile = fullFileTarget)                        
+                                                targetfile = fullFileTarget)
+                            # cslicer = BackSlicer(sourceOriginal = codeHunk,
+                            #                     sourcebackport = codeHunkBackport, 
+                            #                     astdiffsHistory = astdiffshistory, 
+                            #                     context = get_hunk_context(file_content = codehunks_original_withContext[context_index], hunk_start = hunkStartLnNo, hunk_end = hunkEndlnNo, context_lines=3), 
+                            #                     dependencies = get_changeset_dependencies(codeHunk), 
+                            #                     metadata = get_changesets_and_metadata(pull_request = pull_backport, sourceO = codeHunkBackport), 
+                            #                     functionalSet = functionalSetforHunk, 
+                            #                     compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
+                            #                     stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=ghkey), 
+                            #                     targetfile = fullFileTarget)                        
                             context_index = context_index +1                    
                             slicebyCslicer, recommendation = cslicer.analyzeProgram()  
                             if slicebyCslicer:
@@ -231,24 +233,56 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     continue
         
 
-    with open(projectName+"InconICFDiffBackSlice", 'w') as f:   
+    with open(projectName+"InconICFDiffCSlicer", 'w') as f:   
         print("Total Labeled Backporting PRs", len(data_read), file=f)
         print("Total Sliced Required", numberofSlicingRequired, file=f)
         print("Total hunks have test and code", has_test_and_code, file=f)
         print("Total Succesfully Sliced", numberOfSuccesfulSlicing, file=f)
         if slicedPRs:
-            average_bleu_score = calculate_average_bleu_score(slicedPRs)
-            average_meteor_score = calculate_average_meteor_score(slicedPRs)
-            average_code_bleu = calculate_average_code_bleu_score(slicedPRs)  
-            average_rouge_l_score = calculate_average_rouge_l(slicedPRs)  
-            average_chrf_score = calculate_average_chrf_score(slicedPRs) 
+            average_bleu_score, bleu_scores = calculate_average_bleu_score(slicedPRs)
+            average_meteor_score, meteor_scores = calculate_average_meteor_score(slicedPRs)
+            average_code_bleu, code_bleu_scores = calculate_average_code_bleu_score(slicedPRs)  
+            average_rouge_l_score, rouge_l_scores = calculate_average_rouge_l(slicedPRs)  
+            average_chrf_score, chrf_scores = calculate_average_chrf_score(slicedPRs) 
             print(f"Average BLEU Score: {average_bleu_score}", file=f)
             print(f"Average METEOR Score: {average_meteor_score}", file=f) 
             print(f"Average CodeBLEU Score: {average_code_bleu}", file=f)       
             print(f"Average ROUGE-L Score: {average_rouge_l_score}", file=f)
             print(f"Average CHRF Score: {average_chrf_score}", file=f)            
 
+            threshold = 0.5
 
+            binary_bleu = np.array([1 if score >= threshold else 0 for score in bleu_scores])
+            binary_meteor = np.array([1 if score >= threshold else 0 for score in meteor_scores])
+            binary_code_bleu = np.array([1 if score >= threshold else 0 for score in code_bleu_scores])
+            binary_rouge_l = np.array([1 if score >= threshold else 0 for score in rouge_l_scores])
+            binary_chrf = np.array([1 if score >= threshold else 0 for score in chrf_scores])
+
+            conf_matrix_bleu_meteor = confusion_matrix(binary_bleu, binary_meteor)
+            conf_matrix_bleu_code_bleu = confusion_matrix(binary_bleu, binary_code_bleu)
+            conf_matrix_bleu_rouge_l = confusion_matrix(binary_bleu, binary_rouge_l)
+            conf_matrix_bleu_chrf = confusion_matrix(binary_bleu, binary_chrf)
+
+            kappa_bleu_meteor = cohen_kappa_score(binary_bleu, binary_meteor)
+            kappa_bleu_code_bleu = cohen_kappa_score(binary_bleu, binary_code_bleu)
+            kappa_bleu_rouge_l = cohen_kappa_score(binary_bleu, binary_rouge_l)
+            kappa_bleu_chrf = cohen_kappa_score(binary_bleu, binary_chrf)
+
+            print(f"Cohen's Kappa between BLEU and Meteor: {kappa_bleu_meteor}", file=f)
+            print("Confusion Matrix BLEU vs Meteor:", file=f)
+            print(conf_matrix_bleu_meteor, file=f)
+
+            print(f"Cohen's Kappa between BLEU and CodeBLEU: {kappa_bleu_code_bleu}", file=f)
+            print("Confusion Matrix BLEU vs CodeBLEU:", file=f)
+            print(conf_matrix_bleu_code_bleu, file=f)
+
+            print(f"Cohen's Kappa between BLEU and ROUGE-L: {kappa_bleu_rouge_l}", file=f)
+            print("Confusion Matrix BLEU vs ROUGE-L:", file=f)
+            print(conf_matrix_bleu_rouge_l, file=f)
+
+            print(f"Cohen's Kappa between BLEU and CHRF: {kappa_bleu_chrf}", file=f)
+            print("Confusion Matrix BLEU vs CHRF:", file=f)
+            print(conf_matrix_bleu_chrf, file=f)
 
 
     with open(output1, "wt") as fp:
@@ -264,8 +298,6 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
             writer.writerow([pair[3]])
             writer.writerow(["-------------------------------------------------------------------------"])
             writer.writerow(["========================================================================="])
-
-
 
     
 
@@ -289,4 +321,4 @@ ansibleDefault_branch,
 ansibleDictOfActiveBranches,
 'ansible',
 'ansible',
-'data_cmp_incmpWithTest/Incmp_BackSlice_Ansible_backport_keywordsPRs.csv')
+'data_cmp_incmpWithTest/Incmp_CSlicer_Ansible_backport_keywordsPRs.csv')

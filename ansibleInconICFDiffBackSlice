@@ -1,9 +1,9 @@
-Total Labeled Backporting PRs 4
-Total Sliced Required 1
-Total hunks have test and code 0
-Total Succesfully Sliced 1
-Average BLEU Score: 0.8218029012564257
-Average METEOR Score: 0.9291298218633859
-Average CodeBLEU Score: 0.6902758266115714
-Average ROUGE-L Score: 0.874999995
-Average CHRF Score: 2.3809523809523805
+Total Labeled Backporting PRs 753
+Total Sliced Required 1530
+Total hunks have test and code 74
+Total Succesfully Sliced 115
+Average BLEU Score: 0.9895586558965646
+Average METEOR Score: 1.2227654012441715
+Average CodeBLEU Score: 0.9296250084811207
+Average ROUGE-L Score: 1.2143138874629895
+Average CHRF Score: 11.824366288514327

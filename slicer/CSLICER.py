@@ -58,7 +58,7 @@ class Cslicer():
         # Add the adaptedSource in the middle of the context for further adaptation
         # adaptedSource = self.context.replace('{{INSERT_HERE}}', adaptedSource)
         
-        return adaptedSource
+        return adaptedSource, ""
 
 
     
