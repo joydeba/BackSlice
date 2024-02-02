@@ -33,6 +33,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
         stdoutput, stderroutput = process.communicate()
         numberofSlicingRequired = 0
         numberOfSuccesfulSlicing = 0
+        numberofDifferences = 0
         has_test_and_code = 0
         slicedPRs = []
         branches = gLocal.branch()
@@ -195,6 +196,13 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     if codehunks_original and codehunks_backport:
                         context_index = 0 
                         for codeHunk, codeHunkBackport  in zip(codehunks_original, codehunks_backport):
+                            output_parcent = int(difflib.SequenceMatcher(None, codeHunk, codeHunkBackport).ratio()*100)
+                            diff_parcent = 100-output_parcent
+                            if diff_parcent == 0:
+                                continue
+                            else:
+                                numberofDifferences = numberofDifferences + 1
+
                             functionalSetforHunk = get_functional_set(codeHunk, testCases = testhunks_original)
                             astdiffshistory = get_ast_diffs(source_commits = pull_commitsSubmitted, startCommit=None, endCommit=None, startDate = commitStartDate, endDate = commitEndDate, repoName=repoName, projectName =projectName) 
                             # cslicer = Cslicer(sourceOriginal = codeHunk,
@@ -233,10 +241,11 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     continue
         
 
-    with open(projectName+"InconICFDiffBackSliceSample", 'w') as f:   
+    with open(projectName+"InconICFDiffBackSlice", 'w') as f:   
         print("Total Labeled Backporting PRs", len(data_read), file=f)
         print("Total Sliced Required", numberofSlicingRequired, file=f)
-        print("Total hunks have test and code", has_test_and_code, file=f)
+        print("Total Number of Hunk Differences", numberofDifferences, file=f)
+        print("Total Hunks Have Test and Code", has_test_and_code, file=f)
         print("Total Succesfully Sliced", numberOfSuccesfulSlicing, file=f)
         if slicedPRs:
             average_bleu_score, bleu_scores = calculate_average_bleu_score(slicedPRs)
@@ -321,4 +330,4 @@ ansibleDefault_branch,
 ansibleDictOfActiveBranches,
 'ansible',
 'ansible',
-'data_cmp_incmpWithTest/Incmp_BackSliceSample_Ansible_backport_keywordsPRs.csv')
+'data_cmp_incmpWithTest/Incmp_BackSlice_Ansible_backport_keywordsPRs.csv')
