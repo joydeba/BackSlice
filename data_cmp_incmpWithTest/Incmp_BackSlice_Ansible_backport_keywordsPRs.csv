@@ -69,7 +69,8 @@ context.CLIARGS = ImmutableDict(connection='smart', module_path=['/to/mymodules'
 -------------------------------------------------------------------------
 "
 # Test cases might require backporting as well.
-# New feature added based on the pull request."
+# New feature added based on the pull request.
+ PRs: 70842, 70851"
 -------------------------------------------------------------------------
 =========================================================================
 "# Instantiate our ResultsCollector for handling results as
@@ -143,7 +144,8 @@ context.CLIARGS = ImmutableDict(connection='smart', module_path=['/to/mymodules'
 -------------------------------------------------------------------------
 "
 # Test cases might require backporting as well.
-# New feature added based on the pull request."
+# New feature added based on the pull request.
+ PRs: 70445, 70850"
 -------------------------------------------------------------------------
 =========================================================================
 "from ansible.module_utils.common.text.converters import container_to_text, to_native
@@ -160,7 +162,8 @@ from ansible.module_utils.six import string_types, PY2
 "
 -------------------------------------------------------------------------
 "
-# New feature added based on the pull request."
+# New feature added based on the pull request.
+ PRs: 68576, 69626"
 -------------------------------------------------------------------------
 =========================================================================
 "try:
@@ -194,7 +197,8 @@ except OpenSSL.crypto.Error as e:
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well."
+# Test cases might require backporting as well.
+ PRs: 53201, 53345"
 -------------------------------------------------------------------------
 =========================================================================
 "cert.set_notBefore(to_bytes(self.notBefore))
@@ -212,7 +216,8 @@ ult: no
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well."
+# Test cases might require backporting as well.
+ PRs: 47508, 53203"
 -------------------------------------------------------------------------
 =========================================================================
 "s3.put_object(Bucket=bucket, Key=obj, Body=b'')
@@ -228,6 +233,7 @@ module.exit_json(msg=""Virtual directory %s created main bucket %s"" % (obj, buc
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well."
+# Test cases might require backporting as well.
+ PRs: 32169, 32198"
 -------------------------------------------------------------------------
 =========================================================================

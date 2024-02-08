@@ -148,7 +148,7 @@ class BackSlicer():
             updated_words_and_spaces = []
 
             for item in words_and_spaces:
-                if Levenshtein.distance(item, old_value) < 3:
+                if Levenshtein.distance(item, old_value) < 2: # Todo here
                     updated_words_and_spaces.append(new_value)
                 else:
                     updated_words_and_spaces.append(item)
