@@ -226,7 +226,8 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                                 stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=ghkey), 
                                                 targetfile = fullFileTarget)                        
                             context_index = context_index +1                    
-                            slicebyCslicer, recommendation = cslicer.analyzeProgram()  
+                            slicebyCslicer, recommendation = cslicer.analyzeProgram()
+                            recommendation = recommendation + "\n PRs: "+ pull_id_original  + ", "  + pull_id_backport
                             if slicebyCslicer:
                                 numberOfSuccesfulSlicing = numberOfSuccesfulSlicing + 1                
                                 slicesfromCSLICER.append((codeHunk ,slicebyCslicer, codeHunkBackport, recommendation))                                 
@@ -241,7 +242,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     continue
         
 
-    with open(projectName+"InconICFDiffBackSliceSample", 'w') as f:   
+    with open(projectName+"InconICFDiffBackSlice", 'w') as f:   
         print("Total Labeled Backporting PRs", len(data_read), file=f)
         print("Total Sliced Required", numberofSlicingRequired, file=f)
         print("Total Number of Hunk Differences", numberofDifferences, file=f)
@@ -325,9 +326,9 @@ ansibleDefault_branch = 'devel'
 # RailsDefault_branch = 'main'
 # KibanaDefault_branch = 'main'
 # cpythonDefault_branch = 'main'
-mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRsSample.csv', 
+mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRs.csv', 
 ansibleDefault_branch,
 ansibleDictOfActiveBranches,
 'ansible',
 'ansible',
-'data_cmp_incmpWithTest/Incmp_BackSliceSample_Ansible_backport_keywordsPRs.csv')
+'data_cmp_incmpWithTest/Incmp_BackSlice_Ansible_backport_keywordsPRs.csv')
