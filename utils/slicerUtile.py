@@ -436,7 +436,7 @@ def get_compilation_set(sourceCode, functional_set):
 #     return dependencies
 
 #  Todo- check for the getting all 
-def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_file="AnsibleCache.txt"):
+def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_file="StableCacheLibrary.txt"):
     # Check if a cache file exists and load information from it if available.
     if cache_file and os.path.exists(cache_file):
         with open(cache_file, 'r') as f:
@@ -451,6 +451,17 @@ def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_f
     response = requests.get(f"{base_url}?ref={branch}", headers=headers)
 
     library_info = {}
+
+    def process_directory(url, headers, library_info):
+        dir_response = requests.get(url, headers=headers)
+        if dir_response.status_code == 200:
+            dir_contents = dir_response.json()
+            for item in dir_contents:
+                if item['type'] == 'file' and item['name'].endswith('.py'):
+                    file_info = process_file(item['download_url'])
+                    library_info[item['name']] = file_info
+                elif item['type'] == 'dir':
+                    process_directory(item['url'], headers, library_info)
 
     def process_file(file_url):
         file_content = requests.get(file_url, headers=headers).text
@@ -502,13 +513,7 @@ def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_f
                 file_info = process_file(item['download_url'])
                 library_info[item['name']] = file_info
             elif item['type'] == 'dir':
-                dir_response = requests.get(item['url'], headers=headers)
-                if dir_response.status_code == 200:
-                    dir_contents = dir_response.json()
-                    for dir_item in dir_contents:
-                        if dir_item['type'] == 'file' and dir_item['name'].endswith('.py'):
-                            file_info = process_file(dir_item['download_url'])
-                            library_info[dir_item['name']] = file_info
+                process_directory(item['url'], headers, library_info)
 
         # Save the retrieved information to the cache file.
         if cache_file:
@@ -520,7 +525,6 @@ def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_f
     else:
         print(f"Failed to fetch repository contents: {response.status_code}")
         return None
-
 
 
 # def get_stable_version_libraries(owner, repo, branch, github_token=None):

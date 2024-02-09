@@ -63,12 +63,17 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     pullBackport = repo.get_pull(int(pull_id_backport))
 
                     original_filesContents = []
+                    previous_original_filesContents = []                    
                     backport_filesContents = []
+                    previous_backport_filesContents = []
 
                     for fileO in pullOriginal.get_files():
+                        # previous_original_filesContents.append({fileO.filename:repo.get_contents(fileO.filename, ref=pullOriginal.base.sha).decoded_content.decode('utf-8')})
                         original_filesContents.append({fileO.filename:repo.get_contents(fileO.filename, ref=pullOriginal.head.sha).decoded_content.decode('utf-8')})
                     for fileB in pullBackport.get_files():
-                        backport_filesContents.append({fileB.filename:repo.get_contents(fileB.filename, ref=pullBackport.head.sha).decoded_content.decode('utf-8')})
+                        previous_backport_filesContents.append({fileB.filename:repo.get_contents(fileB.filename, ref=pullBackport.base.sha).decoded_content.decode('utf-8')})
+                        # backport_filesContents.append({fileB.filename:repo.get_contents(fileB.filename, ref=pullBackport.head.sha).decoded_content.decode('utf-8')})
+
 
 
                     pull_commitsSubmitted = ast.literal_eval(gLocal.execute(["gh", "pr", "view", pull_id_original, "--json", "commits"]))['commits']
@@ -171,8 +176,14 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                 for itemFcontent in original_filesContents:
                                     temp_itemFcontent = itemFcontent.copy()
                                     filepathFull, fullFilecontentOriginal = temp_itemFcontent.popitem()
-                                if filepathFull == file_path[2:]:    
-                                    fullFileTarget = fullFilecontentOriginal    
+                                    if filepathFull == file_path[2:]:    
+                                        fullFileTarget = fullFilecontentOriginal    
+
+                                for itemBcontent in previous_backport_filesContents:
+                                    temp_itemBcontent = itemBcontent.copy()
+                                    filepathBackport, fullFilecontentBackport = temp_itemBcontent.popitem()
+                                    if filepathBackport == file_path[2:]:    
+                                        previousBackportfullFileTarget = fullFilecontentBackport                                                                   
                                 
                                 if commits_hunkTest_originalLines:            
                                     testhunks_original.append(commits_hunkTest_originalLines) 
