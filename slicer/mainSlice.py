@@ -224,7 +224,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                             #                     metadata = get_changesets_and_metadata(pull_request = pull_backport, sourceO = codeHunkBackport), 
                             #                     functionalSet = functionalSetforHunk, 
                             #                     compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
-                            #                     stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=ghkey), 
+                            #                     stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=ghkey, cache_file= projectName+"StableLibraryCsche"), 
                             #                     targetfile = fullFileTarget)
                             cslicer = BackSlicer(sourceOriginal = codeHunk,
                                                 sourcebackport = codeHunkBackport, 
@@ -234,7 +234,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                                 metadata = get_changesets_and_metadata(pull_request = pull_backport, sourceO = codeHunkBackport), 
                                                 functionalSet = functionalSetforHunk, 
                                                 compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
-                                                stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=ghkey), 
+                                                stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=ghkey, cache_file= projectName+"StableLibraryCsche"), 
                                                 targetfile = fullFileTarget)                        
                             context_index = context_index +1                    
                             slicebyCslicer, recommendation = cslicer.analyzeProgram()
