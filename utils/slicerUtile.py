@@ -8,6 +8,9 @@ from helperZER.pygithub_helper import *
 import requests
 import os
 import json
+import mypy.api
+import io
+
 
 def remove_comments_docstrings_fromString(fsring):
     '''
@@ -597,3 +600,33 @@ def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_f
 
 # library_info = get_stable_version_libraries(owner, repo, branch, github_token)
 # print(library_info)
+
+def check_imports_from_string(file_content: str) -> None:
+    file_like_object = io.StringIO(file_content)
+    result = mypy.api.run(["-c", file_content, "--show-error-codes"])
+    print(result[0])
+    return result[0]
+
+def find_missing_imports(code: str) -> list:
+    # Parse the code into an Abstract Syntax Tree (AST)
+    tree = ast.parse(code)
+
+    # Collect all import names from the AST
+    import_names = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            for alias in node.names:
+                import_names.add(alias.name)
+        elif isinstance(node, ast.ImportFrom):
+            import_names.add(node.module)
+
+    # Collect all module names used in the code
+    module_names = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Name) and isinstance(node.ctx, ast.Load):
+            module_names.add(node.id)
+
+    # Identify missing imports
+    missing_imports = [module for module in module_names if module not in import_names]
+
+    return missing_imports

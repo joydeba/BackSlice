@@ -15,6 +15,7 @@ from bandit.core import manager as b_manager
 import subprocess
 import json
 import os
+from utils.slicerUtile import *
 
 class BackSlicer():
     def __init__(self, sourceOriginal= None, sourcebackport = None, astdiffsHistory = None, context = None, dependencies = None, metadata = None, functionalSet = None, compilationSet= None, stableLibraris = None, targetfile = None):
@@ -55,6 +56,10 @@ class BackSlicer():
                 source_lines.insert(0, ', '.join(self.dependencies))
             # Update adaptedSource with modified lines
             adaptedSource = '\n'.join(source_lines)
+
+        missing_dependenciesAST = find_missing_imports(adaptedSource)
+        missing_dependenciesMyPy = check_imports_from_string(adaptedSource)
+
 
         if self.astdiffsHistory and self.functionalSet and self.compilationSet:
             # Iterate over astdiffsHistory to check for statements related to functionalSet or compilationSet
