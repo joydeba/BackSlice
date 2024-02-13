@@ -440,7 +440,7 @@ def get_compilation_set(sourceCode, functional_set):
 
 #  Todo- check for the getting all 
 def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_file="StableCacheLibrary.txt"):
-    return {} # Todo remove it 
+    # return {} # Todo remove it 
     # Check if a cache file exists and load information from it if available.
     if cache_file and os.path.exists(cache_file):
         with open(cache_file, 'r') as f:
