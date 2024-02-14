@@ -81,10 +81,20 @@ def calculate_average_code_bleu_score(paired_list):
     return average_code_bleu_score, all_code_bleu_scores
 
 
+# def calculate_rouge_l_score(reference, candidate):
+#     rouge = Rouge()
+#     scores = rouge.get_scores(candidate, reference, avg=True)
+#     return scores['rouge-l']['f']
+
 def calculate_rouge_l_score(reference, candidate):
     rouge = Rouge()
-    scores = rouge.get_scores(candidate, reference, avg=True)
-    return scores['rouge-l']['f']
+    scores = rouge.get_scores(candidate, reference)
+    rouge_l_f_scores = [score['rouge-l']['f'] for score in scores]
+    if rouge_l_f_scores == []:
+        return 0
+    else:
+        avg_rouge_l_f_score = sum(rouge_l_f_scores) / len(rouge_l_f_scores)
+        return avg_rouge_l_f_score
 
 def calculate_average_rouge_l(paired_list):
     total_rouge_l_score = 0

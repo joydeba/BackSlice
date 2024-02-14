@@ -19,6 +19,7 @@ BackSlice (BackportSlicer) - Provide semantic slices by analyzing changesets in 
 - pip install pyre-check [optional]
 - pyre init
 - pip install bandit [Optional]
+- brew install bandit
 - pip install nltk
 - pip install sacrebleu
 - pip install py-rouge

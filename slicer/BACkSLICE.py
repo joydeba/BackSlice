@@ -76,15 +76,16 @@ class BackSlicer():
         # Check and update stableLibraris
         if self.stableLibraris:
             for lib_name, lib_info in self.stableLibraris.items():
+                if lib_info:
                 # Replace information about method names
-                if lib_info['function_names']:
-                    for method_name in lib_info['function_names']:
-                        adaptedSource = self.replace_semantically_related(adaptedSource, method_name, method_name)
+                    if lib_info['function_names']:
+                        for method_name in lib_info['function_names']:
+                            adaptedSource = self.replace_semantically_related(adaptedSource, method_name, method_name)
 
-                # Replace information about method calls
-                if lib_info['function_calls']:    
-                    for method_call in lib_info['function_calls']:
-                        adaptedSource = self.replace_semantically_related(adaptedSource, method_call, method_call)
+                    # Replace information about method calls
+                    if lib_info['function_calls']:    
+                        for method_call in lib_info['function_calls']:
+                            adaptedSource = self.replace_semantically_related(adaptedSource, method_call, method_call)
 
 
         # Extract keywords from pull request metadata
