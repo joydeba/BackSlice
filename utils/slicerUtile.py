@@ -605,7 +605,7 @@ def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_f
 def check_imports_from_string(file_content: str) -> None:
     file_like_object = io.StringIO(file_content)
     result = mypy.api.run(["-c", file_content, "--show-error-codes"])
-    print(result[0])
+    # print(result[0])
     return result[0]
 
 def find_missing_imports(code: str) -> list:

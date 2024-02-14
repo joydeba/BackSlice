@@ -77,12 +77,14 @@ class BackSlicer():
         if self.stableLibraris:
             for lib_name, lib_info in self.stableLibraris.items():
                 # Replace information about method names
-                for method_name in lib_info['function_names']:
-                    adaptedSource = self.replace_semantically_related(adaptedSource, method_name, method_name)
+                if lib_info['function_names']:
+                    for method_name in lib_info['function_names']:
+                        adaptedSource = self.replace_semantically_related(adaptedSource, method_name, method_name)
 
                 # Replace information about method calls
-                for method_call in lib_info['function_calls']:
-                    adaptedSource = self.replace_semantically_related(adaptedSource, method_call, method_call)
+                if lib_info['function_calls']:    
+                    for method_call in lib_info['function_calls']:
+                        adaptedSource = self.replace_semantically_related(adaptedSource, method_call, method_call)
 
 
         # Extract keywords from pull request metadata
@@ -145,6 +147,9 @@ class BackSlicer():
             str: The modified source code.
         """
         # Calculate Levenshtein distance for each word in the source and replace if below a certain threshold
+        if source is None:
+            return None
+
         lines = source.split('\n')
         updated_lines = []
 
@@ -153,7 +158,7 @@ class BackSlicer():
             updated_words_and_spaces = []
 
             for item in words_and_spaces:
-                if len(item) > 3 and Levenshtein.distance(item, old_value) < 2: # Todo here
+                if len(item) > 3 and Levenshtein.distance(item, old_value) < 2:
                     updated_words_and_spaces.append(new_value)
                 else:
                     updated_words_and_spaces.append(item)
