@@ -57,8 +57,6 @@ class BackSlicer():
             # Update adaptedSource with modified lines
             adaptedSource = '\n'.join(source_lines)
 
-        missing_dependenciesAST = find_missing_imports(adaptedSource)
-        missing_dependenciesMyPy = check_imports_from_string(adaptedSource)
 
 
         if self.astdiffsHistory and self.functionalSet and self.compilationSet:
@@ -97,6 +95,11 @@ class BackSlicer():
         # Security check to guide the adaptation process
         
         adaptedSource = self.adapt_code_based_on_SecurityCheck(adaptedSource)
+
+        missing_dependenciesAST = find_missing_imports(adaptedSource)
+        # missing_dependenciesMyPy = check_imports_from_string(adaptedSource)       
+
+        recommendation = recommendation + "\n Ensure that these dependencies are included in the stable script.:" + missing_dependenciesAST
 
         return adaptedSource, recommendation
 

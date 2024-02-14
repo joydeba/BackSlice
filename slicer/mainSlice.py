@@ -70,9 +70,9 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     for fileO in pullOriginal.get_files():
                         # previous_original_filesContents.append({fileO.filename:repo.get_contents(fileO.filename, ref=pullOriginal.base.sha).decoded_content.decode('utf-8')})
                         original_filesContents.append({fileO.filename:repo.get_contents(fileO.filename, ref=pullOriginal.head.sha).decoded_content.decode('utf-8')})
-                    for fileB in pullBackport.get_files():
-                        previous_backport_filesContents.append({fileB.filename:repo.get_contents(fileB.filename, ref=pullBackport.base.sha).decoded_content.decode('utf-8')})
-                        # backport_filesContents.append({fileB.filename:repo.get_contents(fileB.filename, ref=pullBackport.head.sha).decoded_content.decode('utf-8')})
+                    # for fileB in pullBackport.get_files():
+                    #     previous_backport_filesContents.append({fileB.filename:repo.get_contents(fileB.filename, ref=pullBackport.base.sha).decoded_content.decode('utf-8')})
+                    #     # backport_filesContents.append({fileB.filename:repo.get_contents(fileB.filename, ref=pullBackport.head.sha).decoded_content.decode('utf-8')})
 
 
 
@@ -179,11 +179,11 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                     if filepathFull == file_path[2:]:    
                                         fullFileTarget = fullFilecontentOriginal    
 
-                                for itemBcontent in previous_backport_filesContents:
-                                    temp_itemBcontent = itemBcontent.copy()
-                                    filepathBackport, fullFilecontentBackport = temp_itemBcontent.popitem()
-                                    if filepathBackport == file_path[2:]:    
-                                        previousBackportfullFileTarget = fullFilecontentBackport                                                                   
+                                # for itemBcontent in previous_backport_filesContents:
+                                #     temp_itemBcontent = itemBcontent.copy()
+                                #     filepathBackport, fullFilecontentBackport = temp_itemBcontent.popitem()
+                                #     if filepathBackport == file_path[2:]:    
+                                #         previousBackportfullFileTarget = fullFilecontentBackport                                                                   
                                 
                                 if commits_hunkTest_originalLines:            
                                     testhunks_original.append(commits_hunkTest_originalLines) 
@@ -199,7 +199,8 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                     # codeFiles.append(None)
 
                                 numberofSlicingRequired = numberofSlicingRequired + 1
-
+                    else:
+                        pass
                     if testhunks_original and codehunks_original and codehunks_backport:
                         has_test_and_code = has_test_and_code + 1
 
@@ -253,7 +254,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     continue
         
 
-    with open(projectName+"InconICFDiffBackSliceSample", 'w') as f:   
+    with open(projectName+"InconICFDiffBackSlice", 'w') as f:   
         print("Total Labeled Backporting PRs", len(data_read), file=f)
         print("Total Sliced Required", numberofSlicingRequired, file=f)
         print("Total Number of Hunk Differences", numberofDifferences, file=f)
@@ -337,9 +338,9 @@ ansibleDefault_branch = 'devel'
 # RailsDefault_branch = 'main'
 # KibanaDefault_branch = 'main'
 # cpythonDefault_branch = 'main'
-mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRsSample.csv', 
+mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRs.csv', 
 ansibleDefault_branch,
 ansibleDictOfActiveBranches,
 'ansible',
 'ansible',
-'data_cmp_incmpWithTest/Incmp_BackSliceSample_Ansible_backport_keywordsPRs.csv')
+'data_cmp_incmpWithTest/Incmp_BackSlice_Ansible_backport_keywordsPRs.csv')

@@ -602,11 +602,11 @@ def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_f
 # library_info = get_stable_version_libraries(owner, repo, branch, github_token)
 # print(library_info)
 
-def check_imports_from_string(file_content: str) -> None:
-    file_like_object = io.StringIO(file_content)
-    result = mypy.api.run(["-c", file_content, "--show-error-codes"])
-    # print(result[0])
-    return result[0]
+# def check_imports_from_string(file_content: str) -> None:
+#     file_like_object = io.StringIO(file_content)
+#     result = mypy.api.run(["-c", file_content, "--show-error-codes"])
+#     # print(result[0])
+#     return result[0]
 
 def find_missing_imports(code: str) -> list:
     # Parse the code into an Abstract Syntax Tree (AST)
@@ -630,4 +630,4 @@ def find_missing_imports(code: str) -> list:
     # Identify missing imports
     missing_imports = [module for module in module_names if module not in import_names]
 
-    return missing_imports
+    return ", ".join(missing_imports)
