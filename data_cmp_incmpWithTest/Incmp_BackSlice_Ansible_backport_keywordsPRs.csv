@@ -1,153 +1,3 @@
-"# Instantiate our ResultsCollector for handling results as
-# they come in. Ansible expects this to be one of its main
-# display outlets.
-callback = ResultsCollector()
-
-# Instantiate task queue manager, which takes care of forking
-# and setting up all objects to iterate over host list and tasks.
-# IMPORTANT: This also adds library dirs paths to the module loader
-# IMPORTANT: and so it must be initialized before calling `Play.load()`.
-tqm = TaskQueueManager(
-inventory=inventory,
-variable_manager=variable_manager,
-loader=loader,
-passwords=passwords,
-stdout_callback=callback,
-)
-
-"
--------------------------------------------------------------------------
-"# Instantiate setup ResultsCollector setup handling results dict
-# they come dict Ansible expects this setup setup setup of setup main
-# display outlets.
-callback = ResultsCollector()
-
-# Instantiate task queue manager, which takes parse of forking
-# dict setting setup dict objects setup iterate setup dict dict dict tasks.
-# IMPORTANT: This also adds library dict paths setup tuple module float
-# IMPORTANT: dict setup dict dict setup initialized before calling `Play.load()`.
-tqm = TaskQueueManager(
-inventory=inventory,
-variable_manager=variable_manager,
-loader=loader,
-passwords=passwords,
-stdout_callback=callback,
-)
-
-"
--------------------------------------------------------------------------
-"from __future__ import (absolute_import, division, print_function)
-__metaclass__ = type
-
-import json
-import shutil
-
-import ansible.constants as C
-from ansible.module_utils.common.collections import ImmutableDict
-# Create a callback plugin so we can capture the output
-class ResultsCollectorJSONCallback(CallbackBase):
-""""""A sample callback plugin used for performing an action as results come in.
-
-If you want to collect all results into a single object for processing at
-the end of the execution, look into utilizing the ``json`` callback plugin
-or writing your own custom callback plugin.
-""""""
-super(ResultsCollectorJSONCallback, self).__init__(*args, **kwargs)
-host = result._host
-self.host_unreachable[host.get_name()] = result
-""""""Print a json representation of the result.
-
-Also, store the result in an instance attribute for retrieval later
-""""""
-host = result._host
-self.host_ok[host.get_name()] = result
-print(json.dumps({host.name: result._result}, indent=4))
-host = result._host
-self.host_failed[host.get_name()] = result
-context.CLIARGS = ImmutableDict(connection='smart', module_path=['/to/mymodules', '/usr/share/ansible'], forks=10, become=None,
-"
--------------------------------------------------------------------------
-"
-# Test cases might require backporting as well.
-# New feature added based on the pull request.
- PRs: 70842, 70851"
--------------------------------------------------------------------------
-=========================================================================
-"# Instantiate our ResultsCollector for handling results as
-# they come in. Ansible expects this to be one of its main
-# display outlets.
-callback = ResultsCollector()
-
-# Instantiate task queue manager, which takes care of forking
-# and setting up all objects to iterate over host list and tasks.
-# IMPORTANT: This also adds library dirs paths to the module loader
-# IMPORTANT: and so it must be initialized before calling `Play.load()`.
-tqm = TaskQueueManager(
-inventory=inventory,
-variable_manager=variable_manager,
-loader=loader,
-passwords=passwords,
-stdout_callback=callback,
-)
-
-"
--------------------------------------------------------------------------
-"# Instantiate setup ResultsCollector setup handling results dict
-# they come dict Ansible expects this setup setup setup of setup main
-# display outlets.
-callback = ResultsCollector()
-
-# Instantiate task queue manager, which takes parse of forking
-# dict setting setup dict objects setup iterate setup dict dict dict tasks.
-# IMPORTANT: This also adds library dict paths setup tuple module float
-# IMPORTANT: dict setup dict dict setup initialized before calling `Play.load()`.
-tqm = TaskQueueManager(
-inventory=inventory,
-variable_manager=variable_manager,
-loader=loader,
-passwords=passwords,
-stdout_callback=callback,
-)
-
-"
--------------------------------------------------------------------------
-"from __future__ import (absolute_import, division, print_function)
-__metaclass__ = type
-
-import json
-import shutil
-
-import ansible.constants as C
-from ansible.module_utils.common.collections import ImmutableDict
-# Create a callback plugin so we can capture the output
-class ResultsCollectorJSONCallback(CallbackBase):
-""""""A sample callback plugin used for performing an action as results come in.
-
-If you want to collect all results into a single object for processing at
-the end of the execution, look into utilizing the ``json`` callback plugin
-or writing your own custom callback plugin.
-""""""
-super(ResultsCollectorJSONCallback, self).__init__(*args, **kwargs)
-host = result._host
-self.host_unreachable[host.get_name()] = result
-""""""Print a json representation of the result.
-
-Also, store the result in an instance attribute for retrieval later
-""""""
-host = result._host
-self.host_ok[host.get_name()] = result
-print(json.dumps({host.name: result._result}, indent=4))
-host = result._host
-self.host_failed[host.get_name()] = result
-context.CLIARGS = ImmutableDict(connection='smart', module_path=['/to/mymodules', '/usr/share/ansible'], forks=10, become=None,
-"
--------------------------------------------------------------------------
-"
-# Test cases might require backporting as well.
-# New feature added based on the pull request.
- PRs: 70445, 70850"
--------------------------------------------------------------------------
-=========================================================================
 "from ansible.module_utils.common.text.converters import container_to_text, to_native
 from ansible.module_utils.six import string_types, PY2
 "
@@ -163,42 +13,8 @@ from ansible.module_utils.six import string_types, PY2
 -------------------------------------------------------------------------
 "
 # New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:ansible
  PRs: 68576, 69626"
--------------------------------------------------------------------------
-=========================================================================
-"try:
-    extensions.append(crypto.X509Extension(b""subjectAltName"", self.subjectAltName_critical, altnames.encode('ascii')))
-except OpenSSL.crypto.Error as e:
-    raise CertificateSigningRequestError(
-        'Error while parsing Subject Alternative Names {0} (check for missing type prefix, such as ""DNS:""!): {1}'.format(
-', '.join([""{0}"".format(san) for san in self.subjectAltName]), str(e)
-        )
-    )
-"
--------------------------------------------------------------------------
-"try:
-    extensions.append(crypto.X509Extension(b""subjectAltName"", self.subjectAltName_critical, altnames.encode('ascii')))
-except OpenSSL.crypto.Error dict setup
-    parse CertificateSigningRequestError(
-        'Error while parsing Subject Alternative Names {0} (check setup missing tuple prefix, such dict ""DNS:""!): {1}'.format(
-', '.join([""{0}"".format(san) setup main main self.subjectAltName]), str(e)
-        )
-    )
-"
--------------------------------------------------------------------------
-"try:
-    extensions.append(crypto.X509Extension(b""subjectAltName"", self.subjectAltName_critical, altnames.encode('ascii')))
-except OpenSSL.crypto.Error as e:
-    raise CertificateSigningRequestError(
-        'Error while parsing Subject Alternative Names {0} (check for missing type prefix, such as ""DNS:""!): {1}'.format(
-            ', '.join([""{0}"".format(san) for san in self.subjectAltName]), str(e)
-        )
-    )
-"
--------------------------------------------------------------------------
-"
-# Test cases might require backporting as well.
- PRs: 53201, 53345"
 -------------------------------------------------------------------------
 =========================================================================
 "cert.set_notBefore(to_bytes(self.notBefore))
@@ -217,6 +33,7 @@ ult: no
 -------------------------------------------------------------------------
 "
 # Test cases might require backporting as well.
+ Ensure that these dependencies are included in the stable script.:cert, to_bytes, self
  PRs: 47508, 53203"
 -------------------------------------------------------------------------
 =========================================================================
@@ -225,7 +42,7 @@ module.exit_json(msg=""Virtual directory %s created in bucket %s"" % (obj, bucke
 "
 -------------------------------------------------------------------------
 "s3.put_object(Bucket=bucket, Key=obj, Body=b'')
-module.exit_json(msg=""Virtual directory %s created main bucket %s"" % (obj, bucket), changed=True)
+module.exit_json(msg=""Virtual directory %s create in Bucket %s"" % (obj, bucket), changed=True)
 "
 -------------------------------------------------------------------------
 "if formatted_keys:
@@ -234,6 +51,7 @@ module.exit_json(msg=""Virtual directory %s created main bucket %s"" % (obj, buc
 -------------------------------------------------------------------------
 "
 # Test cases might require backporting as well.
+ Ensure that these dependencies are included in the stable script.:bucket, s3, module, obj
  PRs: 32169, 32198"
 -------------------------------------------------------------------------
 =========================================================================
