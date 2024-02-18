@@ -41,7 +41,7 @@ class BackSlicer():
         adaptedSource = self.sourceOriginal  # Initialize with the original source
 
         # Check and update dependencies
-        if self.dependencies:
+        if self.dependencies and self.targetfile:
             # Convert dependencies list to a set for efficient matching
             existing_dependencies = set(self.dependencies)
             # Iterate over lines in the adaptedSource to check for existing dependencies

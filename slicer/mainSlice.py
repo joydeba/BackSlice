@@ -47,6 +47,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
             original_slices = "" 
             slicesfromCSLICER = []
             fullFileTarget = None
+            previousBackportfullFileTarget = None
             if line[2].strip() != '0':
                 try:
                     repository = line[1].replace('https://github.com/', '')
@@ -69,10 +70,16 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
 
                     for fileO in pullOriginal.get_files():
                         # previous_original_filesContents.append({fileO.filename:repo.get_contents(fileO.filename, ref=pullOriginal.base.sha).decoded_content.decode('utf-8')})
-                        original_filesContents.append({fileO.filename:repo.get_contents(fileO.filename, ref=pullOriginal.head.sha).decoded_content.decode('utf-8')})
-                    # for fileB in pullBackport.get_files():
-                    #     previous_backport_filesContents.append({fileB.filename:repo.get_contents(fileB.filename, ref=pullBackport.base.sha).decoded_content.decode('utf-8')})
+                        if repo.get_contents(fileO.filename, ref=pullOriginal.head.sha):
+                            original_filesContents.append({fileO.filename:repo.get_contents(fileO.filename, ref=pullOriginal.head.sha).decoded_content.decode('utf-8')})
+                        else:
+                            original_filesContents = None    
+                    for fileB in pullBackport.get_files():
+                        if repo.get_contents(fileB.filename, ref=pullBackport.base.sha):
+                            previous_backport_filesContents.append({fileB.filename:repo.get_contents(fileB.filename, ref=pullBackport.base.sha).decoded_content.decode('utf-8')})
                     #     # backport_filesContents.append({fileB.filename:repo.get_contents(fileB.filename, ref=pullBackport.head.sha).decoded_content.decode('utf-8')})
+                        else:
+                            previous_backport_filesContents = None
 
 
 
@@ -173,17 +180,19 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                 # fullFileTarget = repo.get_contents(file_path[2:], ref=targetStableBranch).decoded_content.decode("utf-8")
 
                                 file_path = filepath.split(" ")[2]
-                                for itemFcontent in original_filesContents:
-                                    temp_itemFcontent = itemFcontent.copy()
-                                    filepathFull, fullFilecontentOriginal = temp_itemFcontent.popitem()
-                                    if filepathFull == file_path[2:]:    
-                                        fullFileTarget = fullFilecontentOriginal    
+                                if original_filesContents:
+                                    for itemFcontent in original_filesContents:
+                                        temp_itemFcontent = itemFcontent.copy()
+                                        filepathFull, fullFilecontentOriginal = temp_itemFcontent.popitem()
+                                        if filepathFull == file_path[2:]:    
+                                            fullFileTarget = fullFilecontentOriginal    
 
-                                # for itemBcontent in previous_backport_filesContents:
-                                #     temp_itemBcontent = itemBcontent.copy()
-                                #     filepathBackport, fullFilecontentBackport = temp_itemBcontent.popitem()
-                                #     if filepathBackport == file_path[2:]:    
-                                #         previousBackportfullFileTarget = fullFilecontentBackport                                                                   
+                                if previous_backport_filesContents:
+                                    for itemBcontent in previous_backport_filesContents:
+                                        temp_itemBcontent = itemBcontent.copy()
+                                        filepathBackport, fullFilecontentBackport = temp_itemBcontent.popitem()
+                                        if filepathBackport == file_path[2:]:    
+                                            previousBackportfullFileTarget = fullFilecontentBackport                                                                   
                                 
                                 if commits_hunkTest_originalLines:            
                                     testhunks_original.append(commits_hunkTest_originalLines) 
@@ -231,12 +240,12 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                                 sourcebackport = codeHunkBackport, 
                                                 astdiffsHistory = astdiffshistory, 
                                                 context = get_hunk_context(file_content = codehunks_original_withContext[context_index], hunk_start = hunkStartLnNo, hunk_end = hunkEndlnNo, context_lines=3), 
-                                                dependencies = get_changeset_dependencies(codeHunk), 
+                                                dependencies = get_changeset_dependencies(previousBackportfullFileTarget), 
                                                 metadata = get_changesets_and_metadata(pull_request = pull_backport, sourceO = codeHunkBackport), 
                                                 functionalSet = functionalSetforHunk, 
                                                 compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
                                                 stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=ghkey, cache_file= projectName+"StableLibraryCsche"), 
-                                                targetfile = fullFileTarget)                        
+                                                targetfile = previousBackportfullFileTarget)                        
                             context_index = context_index +1                    
                             slicebyCslicer, recommendation = cslicer.analyzeProgram()
                             recommendation = recommendation + "\n PRs: "+ pull_id_original  + ", "  + pull_id_backport
