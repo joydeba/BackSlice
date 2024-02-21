@@ -70,15 +70,15 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
 
                     for fileO in pullOriginal.get_files():
                         # previous_original_filesContents.append({fileO.filename:repo.get_contents(fileO.filename, ref=pullOriginal.base.sha).decoded_content.decode('utf-8')})
-                        if repo.get_contents(fileO.filename, ref=pullOriginal.head.sha):
+                        try:
                             original_filesContents.append({fileO.filename:repo.get_contents(fileO.filename, ref=pullOriginal.head.sha).decoded_content.decode('utf-8')})
-                        else:
+                        except:
                             original_filesContents = None    
                     for fileB in pullBackport.get_files():
-                        if repo.get_contents(fileB.filename, ref=pullBackport.base.sha):
+                        try:
                             previous_backport_filesContents.append({fileB.filename:repo.get_contents(fileB.filename, ref=pullBackport.base.sha).decoded_content.decode('utf-8')})
-                    #     # backport_filesContents.append({fileB.filename:repo.get_contents(fileB.filename, ref=pullBackport.head.sha).decoded_content.decode('utf-8')})
-                        else:
+                          # backport_filesContents.append({fileB.filename:repo.get_contents(fileB.filename, ref=pullBackport.head.sha).decoded_content.decode('utf-8')})
+                        except:
                             previous_backport_filesContents = None
 
 

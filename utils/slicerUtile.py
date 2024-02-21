@@ -137,6 +137,8 @@ def get_hunk_context(file_content, hunk_start, hunk_end, context_lines=3):
 # print(context)
 
 def get_changeset_dependencies(source_code):
+    if source_code is None:
+        return None
     dependencies = set()
 
     def visit_Import(node):

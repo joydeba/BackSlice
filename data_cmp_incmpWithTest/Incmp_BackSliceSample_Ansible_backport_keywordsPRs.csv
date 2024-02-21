@@ -1,0 +1,19 @@
+"from ansible.module_utils.common.text.converters import container_to_text, to_native
+from ansible.module_utils.six import string_types, PY2
+"
+-------------------------------------------------------------------------
+"from ansible.module_utils.common.text.converters import container_to_text, to_native
+from ansible.module_utils.six import string_types, PY2
+"
+-------------------------------------------------------------------------
+"from ansible.module_utils._text import to_native
+from ansible.module_utils.common.text.converters import container_to_text
+from ansible.module_utils.six import string_types, PY2
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 68576, 69626"
+-------------------------------------------------------------------------
+=========================================================================

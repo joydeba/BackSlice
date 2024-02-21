@@ -40,22 +40,24 @@ class BackSlicer():
         """
         adaptedSource = self.sourceOriginal  # Initialize with the original source
 
-        # Check and update dependencies
-        if self.dependencies and self.targetfile:
-            # Convert dependencies list to a set for efficient matching
-            existing_dependencies = set(self.dependencies)
-            # Iterate over lines in the adaptedSource to check for existing dependencies
-            source_lines = adaptedSource.split('\n')
-            for i, line in enumerate(source_lines):
-                if any(dep in line for dep in existing_dependencies):
+        # Convert dependencies list to a set for efficient matching
+        existing_dependencies = set(self.dependencies)
+        # Iterate over lines in the adaptedSource to check for existing dependencies
+        source_lines = adaptedSource.split('\n')
+        for i, line in enumerate(source_lines):
+            for dep in existing_dependencies:
+                if dep in line:
                     # If any existing dependency is found, replace it with the new dependencies
-                    source_lines[i] = ', '.join(self.dependencies)
+                    source_lines[i] = line.replace(dep, ', '.join(existing_dependencies))
                     break
             else:
-                # If no existing dependency is found, add new dependencies at the top
-                source_lines.insert(0, ', '.join(self.dependencies))
-            # Update adaptedSource with modified lines
-            adaptedSource = '\n'.join(source_lines)
+                continue
+            break
+        else:
+            # If no existing dependency is found, add new dependencies at the top
+            source_lines.insert(0, ', '.join(self.dependencies))
+        # Update adaptedSource with modified lines
+        adaptedSource = '\n'.join(source_lines)
 
 
 
@@ -162,7 +164,7 @@ class BackSlicer():
             updated_words_and_spaces = []
 
             for item in words_and_spaces:
-                if len(item) > 3 and Levenshtein.distance(item, old_value) < 2 and item[-1] != "(":
+                if len(item) > 3 and Levenshtein.distance(item, old_value) < 2 and item[-1] != "(" and item[-1] != ",":
                     updated_words_and_spaces.append(new_value)
                 else:
                     updated_words_and_spaces.append(item)
