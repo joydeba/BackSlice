@@ -78,12 +78,12 @@ class BackSlicer():
                 # Replace information about method names
                     if lib_info['function_names']:
                         for method_name in lib_info['function_names']:
-                            adaptedSource = self.replace_semantically_related(adaptedSource, method_name, method_name)
+                                adaptedSource = self.replace_semantically_related(adaptedSource, method_name, method_name)
 
                     # Replace information about method calls
                     if lib_info['function_calls']:    
                         for method_call in lib_info['function_calls']:
-                            adaptedSource = self.replace_semantically_related(adaptedSource, method_call, method_call)
+                                adaptedSource = self.replace_semantically_related(adaptedSource, method_call, method_call)
 
 
         # Extract keywords from pull request metadata
@@ -162,7 +162,7 @@ class BackSlicer():
             updated_words_and_spaces = []
 
             for item in words_and_spaces:
-                if len(item) > 3 and Levenshtein.distance(item, old_value) < 2:
+                if len(item) > 3 and Levenshtein.distance(item, old_value) < 2 and item[-1] != "(":
                     updated_words_and_spaces.append(new_value)
                 else:
                     updated_words_and_spaces.append(item)
