@@ -345,13 +345,16 @@ def get_functional_set(sourceCode, testCases):
 
     functional_set = set()
 
-    for testCase in testCases:
-        testCase = remove_comments_docstrings_fromString(testCase)
-        sourceCode = remove_comments_docstrings_fromString(sourceCode)
-        for line in testCase.split("\n"):
-            entity = find_source_code_entity(sourceCode, line)
-            if entity:
-                functional_set.add(entity)
+    try:
+        for testCase in testCases:
+            testCase = remove_comments_docstrings_fromString(testCase)
+            sourceCode = remove_comments_docstrings_fromString(sourceCode)
+            for line in testCase.split("\n"):
+                entity = find_source_code_entity(sourceCode, line)
+                if entity:
+                    functional_set.add(entity)
+    except:
+        return functional_set                
 
     return functional_set
 
@@ -376,11 +379,15 @@ def get_compilation_set(sourceCode, functional_set):
     ensured to be defined, regardless of whether they were traversed during the tests. 
     '''
 
-    # Parse the source code into an abstract syntax tree (AST)
-    tree = ast.parse(sourceCode)
-
     # Create a set to store referenced code entities
     referenced_entities = set()
+
+    try:
+    # Parse the source code into an abstract syntax tree (AST)
+        tree = ast.parse(sourceCode)
+    except:
+        return referenced_entities     
+
 
     # Helper function to recursively traverse the AST and find references
     def visit(node):
@@ -611,25 +618,29 @@ def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_f
 #     return result[0]
 
 def find_missing_imports(code: str) -> list:
-    # Parse the code into an Abstract Syntax Tree (AST)
-    tree = ast.parse(code)
 
-    # Collect all import names from the AST
-    import_names = set()
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Import):
-            for alias in node.names:
-                import_names.add(alias.name)
-        elif isinstance(node, ast.ImportFrom):
-            import_names.add(node.module)
+    try: 
+        # Parse the code into an Abstract Syntax Tree (AST)
+        tree = ast.parse(code)
 
-    # Collect all module names used in the code
-    module_names = set()
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Name) and isinstance(node.ctx, ast.Load):
-            module_names.add(node.id)
+        # Collect all import names from the AST
+        import_names = set()
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                for alias in node.names:
+                    import_names.add(alias.name)
+            elif isinstance(node, ast.ImportFrom):
+                import_names.add(node.module)
 
-    # Identify missing imports
-    missing_imports = [module for module in module_names if module not in import_names]
+        # Collect all module names used in the code
+        module_names = set()
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Name) and isinstance(node.ctx, ast.Load):
+                module_names.add(node.id)
+
+        # Identify missing imports
+        missing_imports = [module for module in module_names if module not in import_names]
+    except:
+        return ""    
 
     return ", ".join(missing_imports)

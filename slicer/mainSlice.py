@@ -259,6 +259,8 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
 
                 except Exception as e:
                     print("Problem in pulls")
+                    if slicesfromCSLICER:
+                        slicedPRs.append(slicesfromCSLICER)                    
                     print(e)
                     continue
         

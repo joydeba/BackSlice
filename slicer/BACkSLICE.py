@@ -40,25 +40,25 @@ class BackSlicer():
         """
         adaptedSource = self.sourceOriginal  # Initialize with the original source
 
-        # Convert dependencies list to a set for efficient matching
-        existing_dependencies = set(self.dependencies)
-        # Iterate over lines in the adaptedSource to check for existing dependencies
-        source_lines = adaptedSource.split('\n')
-        for i, line in enumerate(source_lines):
-            for dep in existing_dependencies:
-                if dep in line:
-                    # If any existing dependency is found, replace it with the new dependencies
-                    source_lines[i] = line.replace(dep, ', '.join(existing_dependencies))
-                    break
+        if self.dependencies:
+            # Convert dependencies list to a set for efficient matching
+            existing_dependencies = set(self.dependencies)
+            # Iterate over lines in the adaptedSource to check for existing dependencies
+            source_lines = adaptedSource.split('\n')
+            for i, line in enumerate(source_lines):
+                for dep in existing_dependencies:
+                    if dep in line:
+                        # If any existing dependency is found, replace it with the new dependencies
+                        source_lines[i] = line.replace(dep, ', '.join(existing_dependencies))
+                        break
+                else:
+                    continue
+                break
             else:
-                continue
-            break
-        else:
-            # If no existing dependency is found, add new dependencies at the top
-            source_lines.insert(0, ', '.join(self.dependencies))
-        # Update adaptedSource with modified lines
-        adaptedSource = '\n'.join(source_lines)
-
+                # If no existing dependency is found, add new dependencies at the top
+                source_lines.insert(0, ', '.join(self.dependencies))
+            # Update adaptedSource with modified lines
+            adaptedSource = '\n'.join(source_lines)
 
 
         if self.astdiffsHistory and self.functionalSet and self.compilationSet:
