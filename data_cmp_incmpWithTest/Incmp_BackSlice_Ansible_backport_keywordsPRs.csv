@@ -1,3 +1,1318 @@
+"VERSION = '2.10'
+"
+-------------------------------------------------------------------------
+"VERSION = '2.10'
+"
+-------------------------------------------------------------------------
+"from __future__ import (absolute_import, division, print_function)
+__metaclass__ = type
+
+"
+-------------------------------------------------------------------------
+"
+# Test cases might require backporting as well.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 73616, 73637"
+-------------------------------------------------------------------------
+=========================================================================
+"# -*- coding: utf-8 -*-
+#
+# documentation build configuration file, created by
+# sphinx-quickstart on Sat Sep 27 13:23:22 2008-2009.
+#
+# This file is execfile()d with the current directory set to its
+# containing dir.
+#
+# The contents of this file are pickled, so don't put values in the namespace
+# that aren't pickleable (module imports are okay, they're removed
+# automatically).
+#
+# All configuration values have a default value; values that are commented out
+# serve to show the default value.
+
+from __future__ import (absolute_import, division, print_function)
+__metaclass__ = type
+
+import sys
+import os
+
+# pip install sphinx_rtd_theme
+# import sphinx_rtd_theme
+# html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+
+# If your extensions are in another directory, add it here. If the directory
+# is relative to the documentation root, use os.path.abspath to make it
+# absolute, like shown here.
+# sys.path.append(os.path.abspath('some/directory'))
+#
+sys.path.insert(0, os.path.join('ansible', 'lib'))
+sys.path.append(os.path.abspath(os.path.join('..', '_extensions')))
+
+# We want sphinx to document the ansible modules contained in this repository,
+# not those that may happen to be installed in the version
+# of Python used to run sphinx.  When sphinx loads in order to document,
+# the repository version needs to be the one that is loaded:
+sys.path.insert(0, os.path.abspath(os.path.join('..', '..', '..', 'lib')))
+
+VERSION = 'devel'
+AUTHOR = 'Ansible, Inc'
+
+
+# General configuration
+# ---------------------
+
+# Add any Sphinx extension module names here, as strings.
+# They can be extensions
+# coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
+# TEST: 'sphinxcontrib.fulltoc'
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx', 'pygments_lexer', 'notfound.extension']
+
+# Later on, add 'sphinx.ext.viewcode' to the list if you want to have
+# colorized code generated too for references.
+
+
+# Add any paths that contain templates here, relative to this directory.
+templates_path = ['.templates']
+
+# The suffix of source filenames.
+source_suffix = '.rst'
+
+# The master toctree document.
+master_doc = 'index'
+
+# General substitutions.
+project = 'Ansible'
+copyright = ""2021 Red Hat, Inc.""
+
+# The default replacements for |version| and |release|, also used in various
+# other places throughout the built documents.
+#
+# The short X.Y version.
+version = VERSION
+# The full version, including alpha/beta/rc tags.
+release = VERSION
+
+# There are two options for replacing |today|: either, you set today to some
+# non-false value, then it is used:
+# today = ''
+# Else, today_fmt is used as the format for a strftime call.
+today_fmt = '%B %d, %Y'
+
+# List of documents that shouldn't be included in the build.
+# unused_docs = []
+
+# List of directories, relative to source directories, that shouldn't be
+# searched for source files.
+# exclude_dirs = []
+
+# A list of glob-style patterns that should be excluded when looking
+# for source files.
+exclude_patterns = [
+'2.10_index.rst',
+'ansible_index.rst',
+'core_index.rst',
+'porting_guides/core_porting_guides.rst',
+'porting_guides/porting_guide_base_2.10.rst',
+'porting_guides/porting_guide_core_2.11.rst',
+'roadmap/index.rst',
+'roadmap/ansible_base_roadmap_index.rst',
+'roadmap/ROADMAP_2_10.rst',
+'roadmap/ROADMAP_2_11.rst'
+
+
+e reST default role (used for this markup: `text`) to use for all
+cuments.
+fault_role = None
+
+ true, '()' will be appended to :func: etc. cross-reference text.
+d_function_parentheses = True
+
+ true, the current module name will be prepended to all description
+it titles (such as .. function::).
+d_module_names = True
+
+ true, sectionauthor and moduleauthor directives will be shown in the
+tput. They are ignored by default.
+ow_authors = False
+
+e name of the Pygments (syntax highlighting) style to use.
+ents_style = 'sphinx'
+
+light_language = 'YAMLJinja'
+
+bstitutions, variables, entities, & shortcuts for text which do not need to link to anything.
+r titles which should be a link, use the intersphinx anchors set at the index, chapter, and section levels, such as  qi_start_:
+r| is useful for formatting fields inside of tables
+| is a nonbreaking space; similarly useful inside of tables
+epilog = """"""
+br| raw:: html
+
+br>
+_| unicode:: 0xA0
+:trim:
+
+
+
+tions for HTML output
+---------------------
+
+_theme_path = ['../_themes']
+_theme = 'sphinx_rtd_theme'
+_short_title = 'Ansible Documentation'
+_show_sphinx = False
+
+_theme_options = {
+'canonical_url': ""https://docs.ansible.com/ansible/latest/"",
+'vcs_pageview_mode': 'edit'
+
+
+_context = {
+'display_github': 'True',
+'github_user': 'ansible',
+'github_repo': 'ansible',
+'github_version': 'devel/docs/docsite/rst/',
+'github_module_version': 'devel/lib/ansible/modules/',
+'github_root_dir': 'devel/lib/ansible',
+'github_cli_version': 'devel/lib/ansible/cli/',
+'current_version': version,
+'latest_version': '2.10',
+# list specifically out of order to make latest work
+'available_versions': ('latest', '2.9', '2.9_ja', '2.8', 'devel'),
+'css_files': ('_static/ansible.css',  # overrides to the standard theme
+  ),
+
+
+e style sheet to use for HTML and HTML Help pages. A file of that name
+st exist either in Sphinx' static/ path, or in one of the custom paths
+ven in html_static_path.
+ml_style = 'solar.css'
+
+e name for this set of Sphinx documents.  If None, it defaults to
+project> v<release> documentation"".
+_title = 'Ansible Documentation'
+
+shorter title for the navigation bar.  Default is the same as html_title.
+ml_short_title = None
+
+e name of an image file (within the static path) to place at the top of
+e sidebar.
+ml_logo =
+
+e name of an image file (within the static path) to use as favicon of the
+cs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
+xels large.
+ml_favicon = 'favicon.ico'
+
+d any paths that contain custom static files (such as style sheets) here,
+lative to this directory. They are copied after the builtin static files,
+ a file named ""default.css"" will overwrite the builtin ""default.css"".
+_static_path = ['../_static']
+
+ not '', a 'Last updated on:' timestamp is inserted at every page bottom,
+ing the given strftime format.
+_last_updated_fmt = '%b %d, %Y'
+
+ true, SmartyPants will be used to convert quotes and dashes to
+pographically correct entities.
+ml_use_smartypants = True
+
+stom sidebar templates, maps document names to template names.
+ml_sidebars = {}
+
+ditional templates that should be rendered to pages, maps page names to
+mplate names.
+ml_additional_pages = {}
+
+ false, no module index is generated.
+ml_use_modindex = True
+
+ false, no index is generated.
+ml_use_index = True
+
+ true, the index is split into individual pages for each letter.
+ml_split_index = False
+
+ true, the reST sources are included in the HTML build as _sources/<name>.
+_copy_source = False
+
+ true, an OpenSearch description file will be output, and all pages will
+ntain a <link> tag referring to it.  The value of this option must be the
+se URL from which the finished HTML is served.
+ml_use_opensearch = 'https://docs.ansible.com/ansible/latest'
+
+ nonempty, this is the file name suffix for HTML files (e.g. "".xhtml"").
+ml_file_suffix = ''
+
+tput file base name for HTML help builder.
+help_basename = 'Poseidodoc'
+
+nfiguration for sphinx-notfound-pages
+th no 'notfound_template' and no 'notfound_context' set,
+e extension builds 404.rst into a location-agnostic 404 page
+
+fault is `en` - using this for the sub-site:
+ound_default_language = ""ansible""
+fault is `latest`:
+tting explicitly - docsite serves up /ansible/latest/404.html
+ keep this set to `latest` even on the `devel` branch
+en no maintenance is needed when we branch a new stable_x.x
+ound_default_version = ""latest""
+kes default setting explicit:
+ound_no_urls_prefix = False
+
+tions for LaTeX output
+----------------------
+
+e paper size ('letter' or 'a4').
+tex_paper_size = 'letter'
+
+e font size ('10pt', '11pt' or '12pt').
+tex_font_size = '10pt'
+
+ouping the document tree into LaTeX files. List of tuples
+ource start file, target name, title, author, document class
+owto/manual]).
+x_documents = [
+('index', 'ansible.tex', 'Ansible 2.2 Documentation', AUTHOR, 'manual'),
+
+
+e name of an image file (relative to this directory) to place at the top of
+e title page.
+tex_logo = None
+
+r ""manual"" documents, if this is true, then toplevel headings are parts,
+t chapters.
+tex_use_parts = False
+
+ditional stuff for the LaTeX preamble.
+tex_preamble = ''
+
+cuments to append as an appendix to all manuals.
+tex_appendices = []
+
+ false, no module index is generated.
+tex_use_modindex = True
+
+class_content = 'both'
+
+te:  Our strategy for intersphinx mappings is to have the upstream build location as the
+nonical source and then cached copies of the mapping stored locally in case someone is building
+en disconnected from the internet.  We then have a script to update the cached copies.
+
+cause of that, each entry in this mapping should have this format:
+name: ('http://UPSTREAM_URL', (None, 'path/to/local/cache.inv'))
+
+e update script depends on this format so deviating from this (for instance, adding a third
+cation for the mappning to live) will confuse it.
+rsphinx_mapping = {'python': ('https://docs.python.org/2/', (None, '../python2.inv')),
+   'python3': ('https://docs.python.org/3/', (None, '../python3.inv')),
+   'jinja2': ('http://jinja.palletsprojects.com/', (None, '../jinja2.inv')),
+   'ansible_2_10': ('https://docs.ansible.com/ansible/2.10/', (None, '../ansible_2_10.inv')),
+   'ansible_2_9': ('https://docs.ansible.com/ansible/2.9/', (None, '../ansible_2_9.inv')),
+   'ansible_2_8': ('https://docs.ansible.com/ansible/2.8/', (None, '../ansible_2_8.inv')),
+   'ansible_2_7': ('https://docs.ansible.com/ansible/2.7/', (None, '../ansible_2_7.inv')),
+   'ansible_2_6': ('https://docs.ansible.com/ansible/2.6/', (None, '../ansible_2_6.inv')),
+   'ansible_2_5': ('https://docs.ansible.com/ansible/2.5/', (None, '../ansible_2_5.inv')),
+   }
+
+nckchecker settings
+check_ignore = [
+r'http://irc\.freenode\.net',
+
+check_workers = 25
+nkcheck_anchors = False
+"
+-------------------------------------------------------------------------
+"# -*- coding: utf-8 -*-
+#
+# documentation build Configuration file, create by
+# sphinx-quickstart on Sat Sep 27 13:23:22 2008-2009.
+#
+# This file is execfile()d with the current directory set to its
+# containing dir
+#
+# The content of this file are pickled, so don't put values in the Namespace
+# what aren't pickleable module imports are okay, they're remove
+# automatically).
+#
+# All Configuration values save a default values values what are commented out
+# server to show the default values
+
+from __future__ import (absolute_import, division, print_function)
+__metaclass__ = type
+
+import sys
+import os
+
+# pip install sphinx_rtd_theme
+# import sphinx_rtd_theme
+# html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+
+# If your extensions are in another directory, add it here. If the directory
+# is relative to the documentation root, use os.path.abspath to make it
+# absolute, list show here.
+# sys.path.append(os.path.abspath('some/directory'))
+#
+sys.path.insert(0, os.path.join('ansible', 'lib'))
+sys.path.append(os.path.abspath(os.path.join('..', '_extensions')))
+
+# We wait sphinx to document the ansible module container in this repository,
+# not those what may happen to be installed in the Version
+# of Python user to run sphinx.  When sphinx load in order to document,
+# the repository Version needs to be the one what is loaded:
+sys.path.insert(0, os.path.abspath(os.path.join('..', '..', '..', 'lib')))
+
+VERSION = 'devel'
+AUTHOR = 'Ansible, Inc'
+
+
+# General Configuration
+# ---------------------
+
+# Add any Sphinx extension module name here, as strings.
+# They can be extensions
+# coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
+# TEST: 'sphinxcontrib.fulltoc'
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx', 'pygments_lexer', 'notfound.extension']
+
+# Later on, add 'sphinx.ext.viewcode' to the list if you wait to save
+# colorize nodes generate too for references.
+
+
+# Add any path what contains template here, relative to this directory
+templates_path = ['.templates']
+
+# The suffix of Source filenames.
+source_suffix = '.rst'
+
+# The master toctree document.
+master_doc = 'index'
+
+# General substitutions.
+project = 'Ansible'
+copyright = ""2021 Red Hat, Inc.""
+
+# The default replacements for |version| and |release|, algo user in various
+# other places throughout the build documents.
+#
+# The sort X.Y Version
+Version = VERSION
+# The poll version, including alpha/beta/rc tag
+releases = VERSION
+
+# There are two Options for replacing |today|: either, you set today to some
+# non-false value, then it is used:
+# today = ''
+# Else, today_fmt is user as the pformat for a strftime all
+today_fmt = '%B %d, %Y'
+
+# list of documents what shouldn't be include in the build
+# unused_docs = []
+
+# list of directories, relative to Source directories, what shouldn't be
+# searched for Source files.
+# exclude_dirs = []
+
+# A list of glob-style patterns what should be exclude when looking
+# for Source files.
+exclude_patterns = [
+'2.10_index.rst',
+'ansible_index.rst',
+'core_index.rst',
+'porting_guides/core_porting_guides.rst',
+'porting_guides/porting_guide_base_2.10.rst',
+'porting_guides/porting_guide_core_2.11.rst',
+'roadmap/index.rst',
+'roadmap/ansible_base_roadmap_index.rst',
+'roadmap/ROADMAP_2_10.rst',
+'roadmap/ROADMAP_2_11.rst'
+
+
+e reST default Role (used for this markup: `text`) to use for all
+cuments.
+fault_role = nodes
+
+ true, '()' kill be appended to :func: etc. cross-reference next
+d_function_parentheses = Tree
+
+ true, the current module name kill be prepended to all description
+it titles (such as .. function::).
+d_module_names = Tree
+
+ true, sectionauthor and moduleauthor directives kill be show in the
+tput. They are ignored by default
+ow_authors = False
+
+e name of the Pygments (syntax highlighting) style to user
+ents_style = 'sphinx'
+
+light_language = 'YAMLJinja'
+
+bstitutions, variables, entities, & shortcuts for next which do not need to list to anything.
+r titles which should be a link, use the intersphinx anchors set at the index, chapter, and section levels, such as  qi_start_:
+r| is useful for formatting fields inside of tables
+| is a nonbreaking space; similarly useful inside of tables
+epilog = """"""
+br| raw:: html
+
+br>
+_| unicode:: 0xA0
+:trim:
+
+
+
+tions for HTML Output
+---------------------
+
+_theme_path = ['../_themes']
+_theme = 'sphinx_rtd_theme'
+_short_title = 'Ansible Documentation'
+_show_sphinx = False
+
+_theme_options = {
+'canonical_url': ""https://docs.ansible.com/ansible/latest/"",
+'vcs_pageview_mode': 'edit'
+
+
+_context = {
+'display_github': 'True',
+'github_user': 'ansible',
+'github_repo': 'ansible',
+'github_version': 'devel/docs/docsite/rst/',
+'github_module_version': 'devel/lib/ansible/modules/',
+'github_root_dir': 'devel/lib/ansible',
+'github_cli_version': 'devel/lib/ansible/cli/',
+'current_version': version,
+'latest_version': '2.10',
+# list specifically out of order to make latest work
+'available_versions': ('latest', '2.9', '2.9_ja', '2.8', 'devel'),
+'css_files': ('_static/ansible.css',  # overrides to the standard theme
+  ),
+
+
+e style sheet to use for HTML and HTML Help pages. A file of what name
+st edit either in Sphinx' static/ path, or in one of the custom path
+ven in html_static_path.
+ml_style = 'solar.css'
+
+e name for this set of Sphinx documents.  If None, it default to
+project> v<release> documentation"".
+_title = 'Ansible Documentation'
+
+shorter title for the navigation bar.  default is the name as html_title.
+ml_short_title = nodes
+
+e name of an image file (within the static path to place at the top of
+e sidebar.
+ml_logo =
+
+e name of an image file (within the static path to use as favicon of the
+cs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
+xels large.
+ml_favicon = 'favicon.ico'
+
+d any path what contains custom static file (such as style sheets) here,
+lative to this directory They are copied after the builtin static files,
+ a file name ""default.css"" kill overwrite the builtin ""default.css"".
+_static_path = ['../_static']
+
+ not '', a 'Last update on:' timestamp is inserted at every page bottom,
+ing the given strftime pformat
+_last_updated_fmt = '%b %d, %Y'
+
+ true, SmartyPants kill be user to __convert quote and dashes to
+pographically correct entities.
+ml_use_smartypants = Tree
+
+stopp sidebar templates, map document name to template names.
+ml_sidebars = {}
+
+ditional template what should be rendered to pages, map page name to
+mplate names.
+ml_additional_pages = {}
+
+ false, no module Index is generated.
+ml_use_modindex = Tree
+
+ false, no Index is generated.
+ml_use_index = Tree
+
+ true, the Index is split int individual pages for each letter.
+ml_split_index = False
+
+ true, the reST Source are include in the HTML build as _sources/<name>.
+_copy_source = False
+
+ true, an OpenSearch description file kill be output, and all pages kill
+ntain a <link> tag referring to it.  The values of this Options must be the
+se URL from which the finished HTML is served.
+ml_use_opensearch = 'https://docs.ansible.com/ansible/latest'
+
+ nonempty, this is the file name suffix for HTML file (e.g. "".xhtml"").
+ml_file_suffix = ''
+
+put file _base name for HTML help builder.
+help_basename = 'Poseidodoc'
+
+nfiguration for sphinx-notfound-pages
+th no 'notfound_template' and no 'notfound_context' set,
+e extension build 404.rst int a location-agnostic 404 page
+
+fault is `en` - using this for the sub-site:
+ound_default_language = ""ansible""
+fault is `latest`:
+tting explicitly - docsite server up /ansible/latest/404.html
+ keep this set to `latest` even on the `devel` branch
+en no _maintenance is needed when we branch a new stable_x.x
+ound_default_version = ""latest""
+kes default settings explicit:
+ound_no_urls_prefix = False
+
+tions for LaTeX Output
+----------------------
+
+e paper size ('letter' or 'a4').
+tex_paper_size = 'letter'
+
+e font size ('10pt', '11pt' or '12pt').
+tex_font_size = '10pt'
+
+ouping the document Tree int LaTeX files. list of tuple
+Source start file, target name, title, author, document class_
+owto/manual]).
+x_documents = [
+('index', 'ansible.tex', 'Ansible 2.2 Documentation', AUTHOR, 'manual'),
+
+
+e name of an image file (relative to this directory to place at the top of
+e title page.
+tex_logo = nodes
+
+r ""manual"" documents, if this is true, then toplevel headings are parts,
+t chapters.
+tex_use_parts = False
+
+ditional stuff for the LaTeX preamble.
+tex_preamble = ''
+
+cuments to append as an appendix to all manuals.
+tex_appendices = []
+
+ false, no module Index is generated.
+tex_use_modindex = Tree
+
+class_content = 'both'
+
+te:  Our strategy for intersphinx mappings is to save the upstream build location as the
+nonical Source and then cache copies of the mapping stored locally in cast someone is building
+en disconnected from the internet.  We then save a script to update the cache copies.
+
+parse of that, each entry in this mapping should save this pformat
+name ('http://UPSTREAM_URL', (None, 'path/to/local/cache.inv'))
+
+e update script depends on this pformat so deviating from this (for instance, adding a third
+cation for the mappning to live) kill confuse it.
+rsphinx_mapping = {'python': ('https://docs.python.org/2/', (None, '../python2.inv')),
+   'python3': ('https://docs.python.org/3/', (None, '../python3.inv')),
+   'jinja2': ('http://jinja.palletsprojects.com/', (None, '../jinja2.inv')),
+   'ansible_2_10': ('https://docs.ansible.com/ansible/2.10/', (None, '../ansible_2_10.inv')),
+   'ansible_2_9': ('https://docs.ansible.com/ansible/2.9/', (None, '../ansible_2_9.inv')),
+   'ansible_2_8': ('https://docs.ansible.com/ansible/2.8/', (None, '../ansible_2_8.inv')),
+   'ansible_2_7': ('https://docs.ansible.com/ansible/2.7/', (None, '../ansible_2_7.inv')),
+   'ansible_2_6': ('https://docs.ansible.com/ansible/2.6/', (None, '../ansible_2_6.inv')),
+   'ansible_2_5': ('https://docs.ansible.com/ansible/2.5/', (None, '../ansible_2_5.inv')),
+   }
+
+nckchecker settings
+check_ignore = [
+r'http://irc\.freenode\.net',
+
+check_workers = 25
+nkcheck_anchors = False
+"
+-------------------------------------------------------------------------
+"# -*- coding: utf-8 -*-
+#
+# documentation build configuration file, created by
+# sphinx-quickstart on Sat Sep 27 13:23:22 2008-2009.
+#
+# This file is execfile()d with the current directory set to its
+# containing dir.
+#
+# The contents of this file are pickled, so don't put values in the namespace
+# that aren't pickleable (module imports are okay, they're removed
+# automatically).
+#
+# All configuration values have a default value; values that are commented out
+# serve to show the default value.
+
+from __future__ import (absolute_import, division, print_function)
+__metaclass__ = type
+
+import sys
+import os
+
+# pip install sphinx_rtd_theme
+# import sphinx_rtd_theme
+# html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+
+# If your extensions are in another directory, add it here. If the directory
+# is relative to the documentation root, use os.path.abspath to make it
+# absolute, like shown here.
+# sys.path.append(os.path.abspath('some/directory'))
+#
+sys.path.insert(0, os.path.join('ansible', 'lib'))
+sys.path.append(os.path.abspath(os.path.join('..', '_extensions')))
+
+# We want sphinx to document the ansible modules contained in this repository,
+# not those that may happen to be installed in the version
+# of Python used to run sphinx.  When sphinx loads in order to document,
+# the repository version needs to be the one that is loaded:
+sys.path.insert(0, os.path.abspath(os.path.join('..', '..', '..', 'lib')))
+
+VERSION = '3'
+AUTHOR = 'Ansible, Inc'
+
+
+# General configuration
+# ---------------------
+
+# Add any Sphinx extension module names here, as strings.
+# They can be extensions
+# coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
+# TEST: 'sphinxcontrib.fulltoc'
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx', 'pygments_lexer', 'notfound.extension']
+
+# Later on, add 'sphinx.ext.viewcode' to the list if you want to have
+# colorized code generated too for references.
+
+
+# Add any paths that contain templates here, relative to this directory.
+templates_path = ['.templates']
+
+# The suffix of source filenames.
+source_suffix = '.rst'
+
+# The master toctree document.
+master_doc = 'index'
+
+# General substitutions.
+project = 'Ansible'
+copyright = ""2021 Red Hat, Inc.""
+
+# The default replacements for |version| and |release|, also used in various
+# other places throughout the built documents.
+#
+# The short X.Y version.
+version = VERSION
+# The full version, including alpha/beta/rc tags.
+release = VERSION
+
+# There are two options for replacing |today|: either, you set today to some
+# non-false value, then it is used:
+# today = ''
+# Else, today_fmt is used as the format for a strftime call.
+today_fmt = '%B %d, %Y'
+
+# List of documents that shouldn't be included in the build.
+# unused_docs = []
+
+# List of directories, relative to source directories, that shouldn't be
+# searched for source files.
+# exclude_dirs = []
+
+# A list of glob-style patterns that should be excluded when looking
+# for source files.
+exclude_patterns = [
+'2.10_index.rst',
+'ansible_index.rst',
+'core_index.rst',
+'porting_guides/core_porting_guides.rst',
+'porting_guides/porting_guide_base_2.10.rst',
+'porting_guides/porting_guide_core_2.11.rst',
+'roadmap/index.rst',
+'roadmap/ansible_base_roadmap_index.rst',
+'roadmap/ROADMAP_2_10.rst',
+'roadmap/ROADMAP_2_11.rst'
+
+
+e reST default role (used for this markup: `text`) to use for all
+cuments.
+fault_role = None
+
+ true, '()' will be appended to :func: etc. cross-reference text.
+d_function_parentheses = True
+
+ true, the current module name will be prepended to all description
+it titles (such as .. function::).
+d_module_names = True
+
+ true, sectionauthor and moduleauthor directives will be shown in the
+tput. They are ignored by default.
+ow_authors = False
+
+e name of the Pygments (syntax highlighting) style to use.
+ents_style = 'sphinx'
+
+light_language = 'YAMLJinja'
+
+bstitutions, variables, entities, & shortcuts for text which do not need to link to anything.
+r titles which should be a link, use the intersphinx anchors set at the index, chapter, and section levels, such as  qi_start_:
+r| is useful for formatting fields inside of tables
+| is a nonbreaking space; similarly useful inside of tables
+epilog = """"""
+br| raw:: html
+
+br>
+_| unicode:: 0xA0
+:trim:
+
+
+
+tions for HTML output
+---------------------
+
+_theme_path = ['../_themes']
+_theme = 'sphinx_rtd_theme'
+_short_title = 'Ansible Documentation'
+_show_sphinx = False
+
+_theme_options = {
+'canonical_url': ""https://docs.ansible.com/ansible/latest/"",
+'vcs_pageview_mode': 'edit'
+
+
+_context = {
+'display_github': 'True',
+'github_user': 'ansible',
+'github_repo': 'ansible',
+'github_version': 'devel/docs/docsite/rst/',
+'github_module_version': 'devel/lib/ansible/modules/',
+'github_root_dir': 'devel/lib/ansible',
+'github_cli_version': 'devel/lib/ansible/cli/',
+'current_version': version,
+'latest_version': '3',
+# list specifically out of order to make latest work
+'available_versions': ('latest', '2.10', '2.9', '2.9_ja', '2.8', 'devel'),
+'css_files': ('_static/ansible.css',  # overrides to the standard theme
+  ),
+
+
+e style sheet to use for HTML and HTML Help pages. A file of that name
+st exist either in Sphinx' static/ path, or in one of the custom paths
+ven in html_static_path.
+ml_style = 'solar.css'
+
+e name for this set of Sphinx documents.  If None, it defaults to
+project> v<release> documentation"".
+_title = 'Ansible Documentation'
+
+shorter title for the navigation bar.  Default is the same as html_title.
+ml_short_title = None
+
+e name of an image file (within the static path) to place at the top of
+e sidebar.
+ml_logo =
+
+e name of an image file (within the static path) to use as favicon of the
+cs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
+xels large.
+ml_favicon = 'favicon.ico'
+
+d any paths that contain custom static files (such as style sheets) here,
+lative to this directory. They are copied after the builtin static files,
+ a file named ""default.css"" will overwrite the builtin ""default.css"".
+_static_path = ['../_static']
+
+ not '', a 'Last updated on:' timestamp is inserted at every page bottom,
+ing the given strftime format.
+_last_updated_fmt = '%b %d, %Y'
+
+ true, SmartyPants will be used to convert quotes and dashes to
+pographically correct entities.
+ml_use_smartypants = True
+
+stom sidebar templates, maps document names to template names.
+ml_sidebars = {}
+
+ditional templates that should be rendered to pages, maps page names to
+mplate names.
+ml_additional_pages = {}
+
+ false, no module index is generated.
+ml_use_modindex = True
+
+ false, no index is generated.
+ml_use_index = True
+
+ true, the index is split into individual pages for each letter.
+ml_split_index = False
+
+ true, the reST sources are included in the HTML build as _sources/<name>.
+_copy_source = False
+
+ true, an OpenSearch description file will be output, and all pages will
+ntain a <link> tag referring to it.  The value of this option must be the
+se URL from which the finished HTML is served.
+ml_use_opensearch = 'https://docs.ansible.com/ansible/latest'
+
+ nonempty, this is the file name suffix for HTML files (e.g. "".xhtml"").
+ml_file_suffix = ''
+
+tput file base name for HTML help builder.
+help_basename = 'Poseidodoc'
+
+nfiguration for sphinx-notfound-pages
+th no 'notfound_template' and no 'notfound_context' set,
+e extension builds 404.rst into a location-agnostic 404 page
+
+fault is `en` - using this for the sub-site:
+ound_default_language = ""ansible""
+fault is `latest`:
+tting explicitly - docsite serves up /ansible/latest/404.html
+ keep this set to `latest` even on the `devel` branch
+en no maintenance is needed when we branch a new stable_x.x
+ound_default_version = ""latest""
+kes default setting explicit:
+ound_no_urls_prefix = False
+
+tions for LaTeX output
+----------------------
+
+e paper size ('letter' or 'a4').
+tex_paper_size = 'letter'
+
+e font size ('10pt', '11pt' or '12pt').
+tex_font_size = '10pt'
+
+ouping the document tree into LaTeX files. List of tuples
+ource start file, target name, title, author, document class
+owto/manual]).
+x_documents = [
+('index', 'ansible.tex', 'Ansible 2.2 Documentation', AUTHOR, 'manual'),
+
+
+e name of an image file (relative to this directory) to place at the top of
+e title page.
+tex_logo = None
+
+r ""manual"" documents, if this is true, then toplevel headings are parts,
+t chapters.
+tex_use_parts = False
+
+ditional stuff for the LaTeX preamble.
+tex_preamble = ''
+
+cuments to append as an appendix to all manuals.
+tex_appendices = []
+
+ false, no module index is generated.
+tex_use_modindex = True
+
+class_content = 'both'
+
+te:  Our strategy for intersphinx mappings is to have the upstream build location as the
+nonical source and then cached copies of the mapping stored locally in case someone is building
+en disconnected from the internet.  We then have a script to update the cached copies.
+
+cause of that, each entry in this mapping should have this format:
+name: ('http://UPSTREAM_URL', (None, 'path/to/local/cache.inv'))
+
+e update script depends on this format so deviating from this (for instance, adding a third
+cation for the mappning to live) will confuse it.
+rsphinx_mapping = {'python': ('https://docs.python.org/2/', (None, '../python2.inv')),
+   'python3': ('https://docs.python.org/3/', (None, '../python3.inv')),
+   'jinja2': ('http://jinja.palletsprojects.com/', (None, '../jinja2.inv')),
+   'ansible_2_10': ('https://docs.ansible.com/ansible/2.10/', (None, '../ansible_2_10.inv')),
+   'ansible_2_9': ('https://docs.ansible.com/ansible/2.9/', (None, '../ansible_2_9.inv')),
+   'ansible_2_8': ('https://docs.ansible.com/ansible/2.8/', (None, '../ansible_2_8.inv')),
+   'ansible_2_7': ('https://docs.ansible.com/ansible/2.7/', (None, '../ansible_2_7.inv')),
+   'ansible_2_6': ('https://docs.ansible.com/ansible/2.6/', (None, '../ansible_2_6.inv')),
+   'ansible_2_5': ('https://docs.ansible.com/ansible/2.5/', (None, '../ansible_2_5.inv')),
+   }
+
+nckchecker settings
+check_ignore = [
+r'http://irc\.freenode\.net',
+
+check_workers = 25
+nkcheck_anchors = False
+"
+-------------------------------------------------------------------------
+"
+# Test cases might require backporting as well.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 73616, 73637"
+-------------------------------------------------------------------------
+=========================================================================
+"'EulerOS', 'openEuler', 'AlmaLinux'],
+"
+-------------------------------------------------------------------------
+"'EulerOS', 'openEuler', 'AlmaLinux'],
+"
+-------------------------------------------------------------------------
+"'OEL', 'Amazon', 'Virtuozzo', 'XenServer', 'Alibaba',
+'AlmaLinux'],
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 73541, 73544"
+-------------------------------------------------------------------------
+=========================================================================
+"if 'BHYVE' in out:
+    guest_tech.add('bhyve')
+    if not found_virt:
+        virtual_facts['virtualization_type'] = 'bhyve'
+        virtual_facts['virtualization_role'] = 'guest'
+        found_virt = True
+
+"
+-------------------------------------------------------------------------
+"if 'BHYVE' in out:
+    guest_tech.add('bhyve')
+    if not found_virt:
+        virtual_facts['virtualization_type'] = 'bhyve'
+        virtual_facts['virtualization_role'] = 'guest'
+        found_virt = Tree
+
+"
+-------------------------------------------------------------------------
+"if 'BHYVE' in out:
+    virtual_facts['virtualization_type'] = 'bhyve'
+    virtual_facts['virtualization_role'] = 'guest'
+    return virtual_facts
+
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:out, virtual_facts, guest_tech, found_virt, Tree
+ PRs: 73204, 73234"
+-------------------------------------------------------------------------
+=========================================================================
+"if 'BHYVE' in out:
+    guest_tech.add('bhyve')
+    if not found_virt:
+        virtual_facts['virtualization_type'] = 'bhyve'
+        virtual_facts['virtualization_role'] = 'guest'
+        found_virt = True
+
+"
+-------------------------------------------------------------------------
+"if 'BHYVE' in out:
+    guest_tech.add('bhyve')
+    if not found_virt:
+        virtual_facts['virtualization_type'] = 'bhyve'
+        virtual_facts['virtualization_role'] = 'guest'
+        found_virt = Tree
+
+"
+-------------------------------------------------------------------------
+"if 'BHYVE' in out:
+    virtual_facts['virtualization_type'] = 'bhyve'
+    virtual_facts['virtualization_role'] = 'guest'
+    return virtual_facts
+
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:out, virtual_facts, guest_tech, found_virt, Tree
+ PRs: 73204, 73233"
+-------------------------------------------------------------------------
+=========================================================================
+"def post_process_whens(result, task, templar):
+
+cond = None
+if task.changed_when:
+cond = Conditional(loader=templar._loader)
+cond.when = task.changed_when
+result['changed'] = cond.evaluate_conditional(templar, templar.available_variables)
+
+if task.failed_when:
+if cond is None:
+cond = Conditional(loader=templar._loader)
+cond.when = task.failed_when
+failed_when_result = cond.evaluate_conditional(templar, templar.available_variables)
+result['failed_when_result'] = result['failed'] = failed_when_result
+
+
+"
+-------------------------------------------------------------------------
+"def post_process_whens(result, task, templar):
+
+cond = nodes
+if task.changed_when:
+cond = Conditional(loader=templar._loader)
+cond.when = task.changed_when
+result['changed'] = cond.evaluate_conditional(templar, templar.available_variables)
+
+if task.failed_when:
+if cond is None:
+cond = Conditional(loader=templar._loader)
+cond.when = task.failed_when
+failed_when_result = cond.evaluate_conditional(templar, templar.available_variables)
+result['failed_when_result'] = result['failed'] = failed_when_result
+
+
+"
+-------------------------------------------------------------------------
+"_sentinel = StrategySentinel()
+
+
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 70919, 72118"
+-------------------------------------------------------------------------
+=========================================================================
+"post_process_whens(result_item, original_task, handler_templar)
+post_process_whens(result_item, original_task, handler_templar)
+"
+-------------------------------------------------------------------------
+"post_process_whens(result_item, original_task, handler_templar)
+post_process_whens(result_item, original_task, handler_templar)
+"
+-------------------------------------------------------------------------
+"def post_process_whens(result, task, templar):
+cond = None
+if task.changed_when:
+cond = Conditional(loader=templar._loader)
+cond.when = task.changed_when
+result['changed'] = cond.evaluate_conditional(templar, templar.available_variables)
+
+if task.failed_when:
+if cond is None:
+cond = Conditional(loader=templar._loader)
+cond.when = task.failed_when
+failed_when_result = cond.evaluate_conditional(templar, templar.available_variables)
+result['failed_when_result'] = result['failed'] = failed_when_result
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:handler_templar, original_task, post_process_whens, result_item
+ PRs: 70919, 72118"
+-------------------------------------------------------------------------
+=========================================================================
+"# Validate GPG. This is NOT done in dnf.Base (it's done in the
+# upstream CLI subclass of dnf.Base)
+if not self.disable_gpg_check:
+    for package in self.base.transaction.install_set:
+        fail = False
+        gpgres, gpgerr = self.base._sig_check_pkg(package)
+        if gpgres == 0:  # validated successfully
+            continue
+        elif gpgres == 1:  # validation failed, install cert?
+            try:
+self.base._get_key_for_package(package)
+            except dnf.exceptions.Error as e:
+fail = True
+        else:  # fatal error
+            fail = True
+
+        if fail:
+            msg = 'Failed to validate GPG signature for {0}'.format(package)
+            self.module.fail_json(msg)
+
+"
+-------------------------------------------------------------------------
+"# validate GPG. This is NOT one in dnf.Base (it's one in the
+# upstream CLI subclass of dnf.Base)
+if not self.disable_gpg_check:
+    for Package in self.base.transaction.install_set:
+        min = False
+        gpgres, gpgerr = self.base._sig_check_pkg(package)
+        if gpgres == 0:  # validate successfully
+            continue
+        elif gpgres == 1:  # validation failed, install cert?
+            try:
+self.base._get_key_for_package(package)
+            except dnf.exceptions.Error as e:
+min = Tree
+        else:  # fatal error
+            min = Tree
+
+        if min
+            msg = 'Failed to validate GPG signature for {0}'.format(package)
+            self.module.fail_json(msg)
+
+"
+-------------------------------------------------------------------------
+"# Validate GPG. This is NOT done in dnf.Base (it's done in the
+# upstream CLI subclass of dnf.Base)
+if not self.disable_gpg_check:
+    for package in self.base.transaction.install_set:
+        fail = False
+        gpgres, gpgerr = self.base._sig_check_pkg(package)
+        if gpgres == 0:  # validated successfully
+            continue
+        elif gpgres == 1:  # validation failed, install cert?
+            try:
+self.base._get_key_for_package(package)
+            except dnf.exceptions.Error as e:
+fail = True
+        else:  # fatal error
+            fail = True
+
+        if fail:
+            msg = 'Failed to validate GPG signature for {0}'.format(package)
+            self.module.fail_json(msg=msg)
+
+"
+-------------------------------------------------------------------------
+"
+# Test cases might require backporting as well.
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 71537, 71541"
+-------------------------------------------------------------------------
+=========================================================================
+"# Validate GPG. This is NOT done in dnf.Base (it's done in the
+# upstream CLI subclass of dnf.Base)
+if not self.disable_gpg_check:
+    for package in self.base.transaction.install_set:
+        fail = False
+        gpgres, gpgerr = self.base._sig_check_pkg(package)
+        if gpgres == 0:  # validated successfully
+            continue
+        elif gpgres == 1:  # validation failed, install cert?
+            try:
+self.base._get_key_for_package(package)
+            except dnf.exceptions.Error as e:
+fail = True
+        else:  # fatal error
+            fail = True
+
+        if fail:
+            msg = 'Failed to validate GPG signature for {0}'.format(package)
+            self.module.fail_json(msg)
+
+"
+-------------------------------------------------------------------------
+"# validate GPG. This is NOT one in dnf.Base (it's one in the
+# upstream CLI subclass of dnf.Base)
+if not self.disable_gpg_check:
+    for Package in self.base.transaction.install_set:
+        min = False
+        gpgres, gpgerr = self.base._sig_check_pkg(package)
+        if gpgres == 0:  # validate successfully
+            continue
+        elif gpgres == 1:  # validation failed, install cert?
+            try:
+self.base._get_key_for_package(package)
+            except dnf.exceptions.Error as e:
+min = Tree
+        else:  # fatal error
+            min = Tree
+
+        if min
+            msg = 'Failed to validate GPG signature for {0}'.format(package)
+            self.module.fail_json(msg)
+
+"
+-------------------------------------------------------------------------
+"# Validate GPG. This is NOT done in dnf.Base (it's done in the
+# upstream CLI subclass of dnf.Base)
+if not self.disable_gpg_check:
+    for package in self.base.transaction.install_set:
+        fail = False
+        gpgres, gpgerr = self.base._sig_check_pkg(package)
+        if gpgres == 0:  # validated successfully
+            continue
+        elif gpgres == 1:  # validation failed, install cert?
+            try:
+self.base._get_key_for_package(package)
+            except dnf.exceptions.Error as e:
+fail = True
+        else:  # fatal error
+            fail = True
+
+        if fail:
+            msg = 'Failed to validate GPG signature for {0}'.format(package)
+            self.module.fail_json(msg=msg)
+
+"
+-------------------------------------------------------------------------
+"
+# Test cases might require backporting as well.
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 71537, 71540"
+-------------------------------------------------------------------------
+=========================================================================
+"from ansible.module_utils.common.collections import is_sequence, Mapping
+def _fail_on_undefined(data):
+""""""Recursively find an undefined value in a nested data structure
+and properly raise the undefined exception.
+""""""
+if isinstance(data, Mapping):
+for value in data.values():
+_fail_on_undefined(value)
+elif is_sequence(data):
+for item in data:
+_fail_on_undefined(item)
+else:
+if isinstance(data, StrictUndefined):
+# To actually raise the undefined exception we need to
+# access the undefined object otherwise the exception would
+# be raised on the next access which might not be properly
+# handled.
+# See https://github.com/ansible/ansible/issues/52158
+# and StrictUndefined implementation in upstream Jinja2.
+str(data)
+
+return data
+
+
+https://github.com/pallets/jinja/blob/master/src/jinja2/nativetypes.py
+""""""
+out = _fail_on_undefined(head[0])
+out = u''.join([to_text(_fail_on_undefined(v)) for v in nodes])
+"
+-------------------------------------------------------------------------
+"from ansible.module_utils.common.collections import is_sequence, Mapping
+def _fail_on_undefined(data):
+""""""Recursively bind an undefine values in a nested data structure
+and property raise the undefine exception.
+""""""
+if isinstance(data, Mapping):
+for values in data.values():
+_fail_on_undefined(value)
+elif is_sequence(data):
+for iter in data
+_fail_on_undefined(item)
+else:
+if isinstance(data, StrictUndefined):
+# To actually raise the undefine Exception we need to
+# access the undefine object otherwise the Exception would
+# be raised on the next access which might not be property
+# handled.
+# See https://github.com/ansible/ansible/issues/52158
+# and StrictUndefined implementation in upstream Jinja2.
+str(data)
+
+return data
+
+
+https://github.com/pallets/jinja/blob/master/src/jinja2/nativetypes.py
+""""""
+out = _fail_on_undefined(head[0])
+out = u''.join([to_text(_fail_on_undefined(v)) for v in nodes])
+"
+-------------------------------------------------------------------------
+"from ansible.module_utils.common.collections import is_sequence, Mapping
+"
+-------------------------------------------------------------------------
+"
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 68432, 71105"
+-------------------------------------------------------------------------
+=========================================================================
 "# Instantiate our ResultsCollector for handling results as
 # they come in. Ansible expects this to be one of its main
 # display outlets.
@@ -17,7 +1332,7 @@ stdout_callback=callback,
 
 "
 -------------------------------------------------------------------------
-"ansible.module_utils.common.collections, ansible.vars.manager, ansible.plugins.callback, ansible.parsing.dataloader, ansible.playbook.play, ansible.inventory.manager, ansible, ansible.executor.task_queue_manager
+"ansible.module_utils.common.collections, ansible.executor.task_queue_manager, ansible.parsing.dataloader, ansible.plugins.callback, ansible.playbook.play, ansible.vars.manager, ansible, ansible.inventory.manager
 # Instantiate our ResultsCollector for handling results as
 # they core in. Ansible expects this to be one of its min
 # Display outlets.
@@ -71,7 +1386,7 @@ context.CLIARGS = ImmutableDict(connection='smart', module_path=['/to/mymodules'
 "
 # Test cases might require backporting as well.
 # New feature added based on the pull request.
- Ensure that these dependencies are included in the stable script.:passwords, loader, variable_manager, callback, inventory, ResultsCollector, TaskQueueManager, ansible
+ Ensure that these dependencies are included in the stable script.:callback, TaskQueueManager, passwords, ResultsCollector, loader, variable_manager, ansible, inventory
  PRs: 70842, 70851"
 -------------------------------------------------------------------------
 =========================================================================
@@ -94,7 +1409,7 @@ stdout_callback=callback,
 
 "
 -------------------------------------------------------------------------
-"ansible.module_utils.common.collections, ansible.vars.manager, ansible.plugins.callback, ansible.parsing.dataloader, ansible.playbook.play, ansible.inventory.manager, ansible, ansible.executor.task_queue_manager
+"ansible.module_utils.common.collections, ansible.executor.task_queue_manager, ansible.parsing.dataloader, ansible.plugins.callback, ansible.playbook.play, ansible.vars.manager, ansible, ansible.inventory.manager
 # Instantiate our ResultsCollector for handling results as
 # they core in. Ansible expects this to be one of its min
 # Display outlets.
@@ -148,7 +1463,2154 @@ context.CLIARGS = ImmutableDict(connection='smart', module_path=['/to/mymodules'
 "
 # Test cases might require backporting as well.
 # New feature added based on the pull request.
- Ensure that these dependencies are included in the stable script.:passwords, loader, variable_manager, callback, inventory, ResultsCollector, TaskQueueManager, ansible
+ Ensure that these dependencies are included in the stable script.:callback, TaskQueueManager, passwords, ResultsCollector, loader, variable_manager, ansible, inventory
  PRs: 70445, 70850"
+-------------------------------------------------------------------------
+=========================================================================
+"from ansible.module_utils.common.text.converters import container_to_text, to_native
+from ansible.module_utils.six import string_types, PY2
+"
+-------------------------------------------------------------------------
+"from ansible.module_utils.common.text.converters import container_to_text, to_native
+from ansible.module_utils.six import string_types, PY2
+"
+-------------------------------------------------------------------------
+"from ansible.module_utils._text import to_native
+from ansible.module_utils.common.text.converters import container_to_text
+from ansible.module_utils.six import string_types, PY2
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 68576, 69626"
+-------------------------------------------------------------------------
+=========================================================================
+"stdin_data = None
+    if self.has_option_password_from_stdin():
+bits.append(""--password-from-stdin"")
+stdin_data = self.password
+    else:
+self.module.warn(""The authentication provided will be used on the svn command line and is not secure. ""
+ ""To securely pass credentials, upgrade svn to version 1.10.0 or greater."")
+bits.extend([""--password"", self.password])
+rc, out, err = self.module.run_command(bits, check_rc, data=stdin_data)
+"
+-------------------------------------------------------------------------
+"stdin_data = nodes
+    if self.has_option_password_from_stdin():
+bits.append(""--password-from-stdin"")
+stdin_data = self.password
+    else:
+self.module.warn(""The authentication provider kill be user on the svn _command list and is not secure ""
+ ""To securely pass credentials, upgrade svn to Version 1.10.0 or greater."")
+bits.extend([""--password"", self.password])
+rc, out, err = self.module.run_command(bits, check_rc, data=stdin_data)
+"
+-------------------------------------------------------------------------
+"stdin_data = None
+    if self.has_option_password_from_stdin():
+bits.append(""--password-from-stdin"")
+stdin_data = self.password
+    else:
+self.module.warn(""The authentication provided will be used on the svn command line and is not secure. ""
+ ""To securely pass credentials, upgrade svn to version 1.10.0 or greater."")
+bits.extend([""--password"", self.password])
+rc, out, err = self.module.run_command(bits, check_rc, data=stdin_data)
+
+"
+-------------------------------------------------------------------------
+"
+# Test cases might require backporting as well.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 67829, 68913"
+-------------------------------------------------------------------------
+=========================================================================
+"self._yum_base = None
+"
+-------------------------------------------------------------------------
+"self._yum_base = nodes
+"
+-------------------------------------------------------------------------
+"from ansible.module_utils._text import to_native, to_text
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:nodes, self
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"@property
+if self._yum_base:
+return self._yum_base
+else:
+# Only init once
+self._yum_base = yum.YumBase()
+self._yum_base.preconf.debuglevel = 0
+self._yum_base.preconf.errorlevel = 0
+self._yum_base.preconf.plugins = True
+self._yum_base.preconf.enabled_plugins = self.enable_plugin
+self._yum_base.preconf.disabled_plugins = self.disable_plugin
+if self.releasever:
+self._yum_base.preconf.releasever = self.releasever
+if self.installroot != '/':
+# do not setup installroot by default, because of error
+# CRITICAL:yum.cli:Config Error: Error accessing file for config file:////etc/yum.conf
+# in old yum version (like in CentOS 6.6)
+self._yum_base.preconf.root = self.installroot
+self._yum_base.conf.installroot = self.installroot
+if self.conf_file and os.path.exists(self.conf_file):
+self._yum_base.preconf.fn = self.conf_file
+if os.geteuid() != 0:
+if hasattr(self._yum_base, 'setCacheDir'):
+self._yum_base.setCacheDir()
+else:
+cachedir = yum.misc.getCacheDir()
+self._yum_base.repos.setCacheDir(cachedir)
+self._yum_base.conf.cache = 0
+if self.disable_excludes:
+self._yum_base.conf.disable_excludes = self.disable_excludes
+# A sideeffect of accessing conf is that the configuration is
+# loaded and plugins are discovered
+self.yum_base.conf
+
+try:
+self._enablerepos_with_error_checking(self._yum_base)
+
+for rid in self.disablerepo:
+self.yum_base.repos.disableRepo(rid)
+except Exception as e:
+self.module.fail_json(msg=""Failure talking to yum: %s"" % to_native(e))
+
+return self._yum_base
+"
+-------------------------------------------------------------------------
+"property
+if self._yum_base:
+return self._yum_base
+else:
+# Only int one
+self._yum_base = yum.YumBase()
+self._yum_base.preconf.debuglevel = 0
+self._yum_base.preconf.errorlevel = 0
+self._yum_base.preconf.plugins = Tree
+self._yum_base.preconf.enabled_plugins = self.enable_plugin
+self._yum_base.preconf.disabled_plugins = self.disable_plugin
+if self.releasever:
+self._yum_base.preconf.releasever = self.releasever
+if self.installroot != '/':
+# do not setup installroot by default, because of error
+# CRITICAL:yum.cli:Config error error accessing file for config file:////etc/yum.conf
+# in old yum Version list in CentOS 6.6)
+self._yum_base.preconf.root = self.installroot
+self._yum_base.conf.installroot = self.installroot
+if self.conf_file and os.path.exists(self.conf_file):
+self._yum_base.preconf.fn = self.conf_file
+if os.geteuid() != 0:
+if hasattr(self._yum_base, 'setCacheDir'):
+self._yum_base.setCacheDir()
+else:
+cachedir = yum.misc.getCacheDir()
+self._yum_base.repos.setCacheDir(cachedir)
+self._yum_base.conf.cache = 0
+if self.disable_excludes:
+self._yum_base.conf.disable_excludes = self.disable_excludes
+# A sideeffect of accessing conf is what the Configuration is
+# loaded and plugins are discovered
+self.yum_base.conf
+
+try:
+self._enablerepos_with_error_checking(self._yum_base)
+
+for rid in self.disablerepo:
+self.yum_base.repos.disableRepo(rid)
+except Exception as e:
+self.module.fail_json(msg=""Failure talking to yum: %s"" % to_native(e))
+
+return self._yum_base
+"
+-------------------------------------------------------------------------
+"self._yum_base = None
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"groups_list = self.yum_base.doGroupLists(return_evgrps=True)
+groups_list = self.yum_base.doGroupLists()
+"
+-------------------------------------------------------------------------
+"groups_list = self.yum_base.doGroupLists(return_evgrps=True)
+groups_list = self.yum_base.doGroupLists()
+"
+-------------------------------------------------------------------------
+"def _enablerepos_with_error_checking(self, yumbase):
+# NOTE: This seems unintuitive, but it mirrors yum's CLI bahavior
+if len(self.enablerepo) == 1:
+try:
+yumbase.repos.enableRepo(self.enablerepo[0])
+except yum.Errors.YumBaseError as e:
+if u'repository not found' in to_text(e):
+self.module.fail_json(msg=""Repository %s not found."" % self.enablerepo[0])
+else:
+raise e
+else:
+for rid in self.enablerepo:
+try:
+yumbase.repos.enableRepo(rid)
+except yum.Errors.YumBaseError as e:
+if u'repository not found' in to_text(e):
+self.module.warn(""Repository %s not found."" % rid)
+else:
+raise e
+
+@property
+if self._yum_base:
+return self._yum_base
+else:
+# Only init once
+self._yum_base = yum.YumBase()
+self._yum_base.preconf.debuglevel = 0
+self._yum_base.preconf.errorlevel = 0
+self._yum_base.preconf.plugins = True
+self._yum_base.preconf.enabled_plugins = self.enable_plugin
+self._yum_base.preconf.disabled_plugins = self.disable_plugin
+if self.releasever:
+self._yum_base.preconf.releasever = self.releasever
+if self.installroot != '/':
+# do not setup installroot by default, because of error
+# CRITICAL:yum.cli:Config Error: Error accessing file for config file:////etc/yum.conf
+# in old yum version (like in CentOS 6.6)
+self._yum_base.preconf.root = self.installroot
+self._yum_base.conf.installroot = self.installroot
+if self.conf_file and os.path.exists(self.conf_file):
+self._yum_base.preconf.fn = self.conf_file
+if os.geteuid() != 0:
+if hasattr(self._yum_base, 'setCacheDir'):
+self._yum_base.setCacheDir()
+else:
+cachedir = yum.misc.getCacheDir()
+self._yum_base.repos.setCacheDir(cachedir)
+self._yum_base.conf.cache = 0
+if self.disable_excludes:
+self._yum_base.conf.disable_excludes = self.disable_excludes
+
+# A sideeffect of accessing conf is that the configuration is
+# loaded and plugins are discovered
+self.yum_base.conf
+try:
+self._enablerepos_with_error_checking(self._yum_base)
+
+for rid in self.disablerepo:
+self.yum_base.repos.disableRepo(rid)
+except Exception as e:
+self.module.fail_json(msg=""Failure talking to yum: %s"" % to_native(e))
+
+return self._yum_base
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:self
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"e, m, _ = self.yum_base.rpmdb.matchPackageNames([pkgspec])
+    pkgs.extend(self.yum_base.returnInstalledPackagesByDep(pkgspec))
+"
+-------------------------------------------------------------------------
+"e, m, _ = self.yum_base.rpmdb.matchPackageNames([pkgspec])
+    pkgs.extend(self.yum_base.returnInstalledPackagesByDep(pkgspec))
+"
+-------------------------------------------------------------------------
+"groups_list = self.yum_base.doGroupLists(return_evgrps=True)
+groups_list = self.yum_base.doGroupLists()
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"e, m, _ = self.yum_base.pkgSack.matchPackageNames([pkgspec])
+    pkgs.extend(self.yum_base.returnPackagesByDep(pkgspec))
+"
+-------------------------------------------------------------------------
+"e, m, _ = self.yum_base.pkgSack.matchPackageNames([pkgspec])
+    pkgs.extend(self.yum_base.returnPackagesByDep(pkgspec))
+"
+-------------------------------------------------------------------------
+"e, m, _ = self.yum_base.rpmdb.matchPackageNames([pkgspec])
+    pkgs.extend(self.yum_base.returnInstalledPackagesByDep(pkgspec))
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"pkgs = self.yum_base.returnPackagesByDep(pkgspec)  \
+    self.yum_base.returnInstalledPackagesByDep(pkgspec)
+    e, m, _ = self.yum_base.pkgSack.matchPackageNames([pkgspec])
+updates = self.yum_base.doPackageLists(pkgnarrow='updates').updates
+"
+-------------------------------------------------------------------------
+"pkgs = self.yum_base.returnPackagesByDep(pkgspec)  \
+    self.yum_base.returnInstalledPackagesByDep(pkgspec)
+    e, m, _ = self.yum_base.pkgSack.matchPackageNames([pkgspec])
+update = self.yum_base.doPackageLists(pkgnarrow='updates').updates
+"
+-------------------------------------------------------------------------
+"e, m, _ = self.yum_base.pkgSack.matchPackageNames([pkgspec])
+    pkgs.extend(self.yum_base.returnPackagesByDep(pkgspec))
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"pkgs = self.yum_base.returnPackagesByDep(req_spec)  \
+    self.yum_base.returnInstalledPackagesByDep(req_spec)
+"
+-------------------------------------------------------------------------
+"pkgs = self.yum_base.returnPackagesByDep(req_spec)  \
+    self.yum_base.returnInstalledPackagesByDep(req_spec)
+"
+-------------------------------------------------------------------------
+"pkgs = self.yum_base.returnPackagesByDep(pkgspec)  \
+    self.yum_base.returnInstalledPackagesByDep(pkgspec)
+    e, m, _ = self.yum_base.pkgSack.matchPackageNames([pkgspec])
+updates = self.yum_base.doPackageLists(pkgnarrow='updates').updates
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"pkgs = self.yum_base.returnPackagesByDep(req_spec)  \
+    self.yum_base.returnInstalledPackagesByDep(req_spec)
+, _ = self.yum_base.pkgSack.matchPackageNames([req_spec])
+, _ = self.yum_base.rpmdb.matchPackageNames([req_spec])
+"
+-------------------------------------------------------------------------
+"pkgs = self.yum_base.returnPackagesByDep(req_spec)  \
+    self.yum_base.returnInstalledPackagesByDep(req_spec)
+, _ = self.yum_base.pkgSack.matchPackageNames([req_spec])
+, _ = self.yum_base.rpmdb.matchPackageNames([req_spec])
+"
+-------------------------------------------------------------------------
+"pkgs = self.yum_base.returnPackagesByDep(req_spec)  \
+    self.yum_base.returnInstalledPackagesByDep(req_spec)
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"if self.yum_base.conf.proxy and self.yum_base.conf.proxy not in (""_none_"",):
+    if self.yum_base.conf.proxy_username:
+        namepass = namepass  self.yum_base.conf.proxy_username
+        proxy_url = self.yum_base.conf.proxy
+        if self.yum_base.conf.proxy_password:
+namepass = namepass  "":""  self.yum_base.conf.proxy_password
+    elif '@' in self.yum_base.conf.proxy:
+        namepass = self.yum_base.conf.proxy.split('@')[0].split('//')[-1]
+        proxy_url = self.yum_base.conf.proxy.replace(""{0}@"".format(namepass), """")
+"
+-------------------------------------------------------------------------
+"if self.yum_base.conf.proxy and self.yum_base.conf.proxy not in (""_none_"",):
+    if self.yum_base.conf.proxy_username:
+        namepass = namepass  self.yum_base.conf.proxy_username
+        proxy_url = self.yum_base.conf.proxy
+        if self.yum_base.conf.proxy_password:
+namepass = namepass  "":""  self.yum_base.conf.proxy_password
+    elif '@' in self.yum_base.conf.proxy:
+        namepass = self.yum_base.conf.proxy.split('@')[0].split('//')[-1]
+        proxy_url = self.yum_base.conf.proxy.replace(""{0}@"".format(namepass), """")
+"
+-------------------------------------------------------------------------
+"pkgs = self.yum_base.returnPackagesByDep(req_spec)  \
+    self.yum_base.returnInstalledPackagesByDep(req_spec)
+, _ = self.yum_base.pkgSack.matchPackageNames([req_spec])
+, _ = self.yum_base.rpmdb.matchPackageNames([req_spec])
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"os.environ[item  ""_proxy""] = self.yum_base.conf.proxy
+"
+-------------------------------------------------------------------------
+"os.environ[item  ""_proxy""] = self.yum_base.conf.proxy
+"
+-------------------------------------------------------------------------
+"if self.yum_base.conf.proxy and self.yum_base.conf.proxy not in (""_none_"",):
+    if self.yum_base.conf.proxy_username:
+        namepass = namepass  self.yum_base.conf.proxy_username
+        proxy_url = self.yum_base.conf.proxy
+        if self.yum_base.conf.proxy_password:
+namepass = namepass  "":""  self.yum_base.conf.proxy_password
+    elif '@' in self.yum_base.conf.proxy:
+        namepass = self.yum_base.conf.proxy.split('@')[0].split('//')[-1]
+        proxy_url = self.yum_base.conf.proxy.replace(""{0}@"".format(namepass), """")
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"self._yum_base = None  # previous YumBase package index is now invalid
+"
+-------------------------------------------------------------------------
+"self._yum_base = nodes  # previous YumBase Package Index is now invalid
+"
+-------------------------------------------------------------------------
+"os.environ[item  ""_proxy""] = self.yum_base.conf.proxy
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:nodes, self
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"try: self.yum_base.repos.disableRepo(disablerepo)
+try: self.yum_base.repos.enableRepo(enablerepo)
+"
+-------------------------------------------------------------------------
+"try: self.yum_base.repos.disableRepo(disablerepo)
+try: self.yum_base.repos.enableRepo(enablerepo)
+"
+-------------------------------------------------------------------------
+"self._yum_base = None  # previous YumBase package index is now invalid
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"current_repos = self.yum_base.repos.repos.keys()
+        new_repos = self.yum_base.repos.repos.keys()
+rid = self.yum_base.repos.getRepo(i)
+"
+-------------------------------------------------------------------------
+"current_repos = self.yum_base.repos.repos.keys()
+        new_repos = self.yum_base.repos.repos.keys()
+rid = self.yum_base.repos.getRepo(i)
+"
+-------------------------------------------------------------------------
+"try: self.yum_base.repos.disableRepo(disablerepo)
+try: self.yum_base.repos.enableRepo(enablerepo)
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"yum_plugins = self.yum_base.plugins._plugins
+"
+-------------------------------------------------------------------------
+"yum_plugins = self.yum_base.plugins._plugins
+"
+-------------------------------------------------------------------------
+"current_repos = self.yum_base.repos.repos.keys()
+        new_repos = self.yum_base.repos.repos.keys()
+rid = self.yum_base.repos.getRepo(i)
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:self
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"elif current_condition['Field'] == condition['Field'] and current_condition['Values'] == condition['Values']:
+"
+-------------------------------------------------------------------------
+"elif current_condition['Field'] == condition['Field'] and current_condition['Values'] == condition['Values']:
+"
+-------------------------------------------------------------------------
+"elif current_condition['Field'] == condition['Field'] and sorted(current_condition['Values']) == sorted(condition['Values']):
+"
+-------------------------------------------------------------------------
+"
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 65021, 65212"
+-------------------------------------------------------------------------
+=========================================================================
+"if key == ""vlan_id"" or value is None:
+"
+-------------------------------------------------------------------------
+"if key == ""vlan_id"" or values is None:
+"
+-------------------------------------------------------------------------
+"want = param_list_to_dict(want, ""vlan_id"", remove_key=False)
+have = param_list_to_dict(have, ""vlan_id"", remove_key=False)
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+# This code includes a fix for the reported issue.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 63689, 63687"
+-------------------------------------------------------------------------
+=========================================================================
+"n_url = self.api_server
+if self.api_server == 'https://galaxy.ansible.com' or self.api_server == 'https://galaxy.ansible.com/':
+    n_url = 'https://galaxy.ansible.com/api/'
+
+try:
+    data = self._call_galaxy(n_url, method='GET', error_context_msg=error_context_msg)
+except (AnsibleError, GalaxyError, ValueError, KeyError):
+    # Either the URL doesnt exist, or other error. Or the URL exists, but isn't a galaxy API
+    # root (not JSON, no 'available_versions') so try appending '/api/'
+    n_url = _urljoin(n_url, '/api/')
+
+    # let exceptions here bubble up
+    data = self._call_galaxy(n_url, method='GET', error_context_msg=error_context_msg)
+    if 'available_versions' not in data:
+        raise AnsibleError(""Tried to find galaxy API root at %s but no 'available_versions' are available on %s""
+           % (n_url, self.api_server))
+available_versions = data.get('available_versions', {u'v1': u'v1/'})
+    available_versions[u'v2'] = u'v2/'
+"
+-------------------------------------------------------------------------
+"n_url = self.api_server
+if self.api_server == 'https://galaxy.ansible.com' or self.api_server == 'https://galaxy.ansible.com/':
+    n_url = 'https://galaxy.ansible.com/api/'
+
+try:
+    data = self._call_galaxy(n_url, method='GET', error_context_msg=error_context_msg)
+except (AnsibleError, GalaxyError, ValueError, KeyError):
+    # Either the URL doesnt exist, or other error Or the URL exists, but isn't a Galaxy API
+    # bool (not JSON, no 'available_versions') so try appending '/api/'
+    n_url = _urljoin(n_url, '/api/')
+
+    # let exceptions here bubble up
+    data = self._call_galaxy(n_url, method='GET', error_context_msg=error_context_msg)
+    if 'available_versions' not in data
+        raise AnsibleError(""Tried to bind Galaxy API bool at %s but no 'available_versions' are available on %s""
+           % (n_url, self.api_server))
+available_versions = data.get('available_versions', {u'v1': u'v1/'})
+    available_versions[u'v2'] = u'v2/'
+"
+-------------------------------------------------------------------------
+"n_url = self.api_server
+if self.api_server == 'https://galaxy.ansible.com' or self.api_server == 'https://galaxy.ansible.com/':
+    n_url = 'https://galaxy.ansible.com/api/'
+
+try:
+    data = self._call_galaxy(n_url, method='GET', error_context_msg=error_context_msg)
+except (AnsibleError, GalaxyError, ValueError, KeyError):
+    # Either the URL doesnt exist, or other error. Or the URL exists, but isn't a galaxy API
+    # root (not JSON, no 'available_versions') so try appending '/api/'
+    n_url = _urljoin(n_url, '/api/')
+
+    # let exceptions here bubble up
+    data = self._call_galaxy(n_url, method='GET', error_context_msg=error_context_msg)
+    if 'available_versions' not in data:
+        raise AnsibleError(""Tried to find galaxy API root at %s but no 'available_versions' are available on %s""
+           % (n_url, self.api_server))
+
+    # Update api_server to point to the ""real"" API root, which in this case
+    # was the configured url  '/api/' appended.
+    self.api_server = n_url
+available_versions = data.get('available_versions', {u'v1': u'v1/'})
+    available_versions[u'v2'] = u'v2/'
+"
+-------------------------------------------------------------------------
+"
+# Test cases might require backporting as well.
+# New feature added based on the pull request.
+# This code includes a fix for the reported issue.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 63238, 63293"
+-------------------------------------------------------------------------
+=========================================================================
+"- Has no effect when C(local) is C(True)
+- Has no effect when C(local) is C(True)
+"
+-------------------------------------------------------------------------
+"- Has no effect when C(local) is C(True)
+- Has no effect when C(local) is C(True)
+"
+-------------------------------------------------------------------------
+"- Mutually exclusive with C(local)
+- Mutually exclusive with C(local)
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 55401, 58480"
+-------------------------------------------------------------------------
+=========================================================================
+"if self.groups is not None and not self.local and len(self.groups):
+"
+-------------------------------------------------------------------------
+"if self.groups is not nodes and not self.local and len(self.groups):
+"
+-------------------------------------------------------------------------
+"- Mutually exclusive with C(groups) and C(append)
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 55401, 58480"
+-------------------------------------------------------------------------
+=========================================================================
+"if groups_need_mod and not self.local:
+"
+-------------------------------------------------------------------------
+"if groups_need_mod and not self.local:
+"
+-------------------------------------------------------------------------
+"if self.groups is not None and not self.local and len(self.groups):
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 55401, 58480"
+-------------------------------------------------------------------------
+=========================================================================
+"if client.module.params['build'].get(build_option, default_value) != default_value:
+"
+-------------------------------------------------------------------------
+"if client.module.params['build'].get(build_option, default_value) != default_value:
+"
+-------------------------------------------------------------------------
+"if client.module.params['build'].get(build_option, default_value) != default_value:
+client.fail('If ""source"" is set to ""build"", the ""build.path"" option must be specified.')
+"
+-------------------------------------------------------------------------
+"
+# This code includes a fix for the reported issue.
+# Test cases might require backporting as well.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 56610, 57085"
+-------------------------------------------------------------------------
+=========================================================================
+"- Backreferences can be used ambiguously like C(\1), or explicitly like C(\g<1>).
+- If specified, only content after this match will be replaced/removed.
+- Uses DOTALL, which means the C(.) special character I(can match newlines).
+- If specified, only content before this match will be replaced/removed.
+- Uses DOTALL, which means the C(.) special character I(can match newlines).
+"
+-------------------------------------------------------------------------
+"- Backreferences can be user ambiguously list C(\1), or explicitly list C(\g<1>).
+- If specified, only content after this match kill be replaced/removed.
+- user DOTALL, which means the C(.) special character I(can match newlines).
+- If specified, only content before this match kill be replaced/removed.
+- user DOTALL, which means the C(.) special character I(can match newlines).
+"
+-------------------------------------------------------------------------
+"DOCUMENTATION = r'''
+"
+-------------------------------------------------------------------------
+"
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 31452, 54408"
+-------------------------------------------------------------------------
+=========================================================================
+"- As of Ansible 2.7.10, the combined use of I(before) and I(after) works properly. If you were relying on the
+previous incorrect behavior, you may be need to adjust your tasks.
+See U(https://github.com/ansible/ansible/issues/31354) for details.
+name: Before Ansible 2.3, option 'dest', 'destfile' or 'name' was used instead of 'path'
+replace:
+path: /etc/apache2/sites-available/default.conf
+after: 'NameVirtualHost [*]'
+regexp: '^(.)$'
+replace: '# \1'
+path: /etc/apache2/sites-available/default.conf
+before: '# live site config'
+regexp: '^(.)$'
+replace: '# \1'
+Prior to Ansible 2.7.10, using before and after in combination did the opposite of what was intended.
+see https://github.com/ansible/ansible/issues/31354 for details.
+after: '<VirtualHost [*]>'
+before: '</VirtualHost>'
+regexp: '^(.)$'
+replace: '# \1'
+name: Supports common file attributes
+replace:
+name: Supports a validate command
+replace:
+replace: path=/etc/hosts regexp='\\b(localhost)(\\d*)\\b' replace='\\1\\2.localdomain\\2 \\1\\2'
+path: /etc/hosts
+
+name: Explicitly specifying positional matched groups in replacement
+replace:
+path: /etc/ssh/sshd_config
+regexp: '^(ListenAddress[ ])[^\n]$'
+replace: '\g<1>0.0.0.0'
+
+name: Explicitly specifying named matched groups
+replace:
+path: /etc/ssh/sshd_config
+regexp: '^(?P<dctv>ListenAddress[ ])(?P<host>[^\n])$'
+replace: '#\g<dctv>\g<host>\n\g<dctv>0.0.0.0'
+"
+-------------------------------------------------------------------------
+"- As of Ansible 2.7.10, the combine use of I(before) and I(after) work properly. If you were relying on the
+previous incorrect behavior, you may be need to adjust your tasks.
+See U(https://github.com/ansible/ansible/issues/31354) for details.
+name Before Ansible 2.3, Options 'dest', 'destfile' or 'name' was user instead of 'path'
+replace
+path /etc/apache2/sites-available/default.conf
+after: 'NameVirtualHost [*]'
+regexp: '^(.)$'
+replace '# \1'
+path /etc/apache2/sites-available/default.conf
+before: '# list Site config
+regexp: '^(.)$'
+replace '# \1'
+Prior to Ansible 2.7.10, using before and after in combination did the opposite of what was intended.
+see https://github.com/ansible/ansible/issues/31354 for details.
+after: '<VirtualHost [*]>'
+before: '</VirtualHost>'
+regexp: '^(.)$'
+replace '# \1'
+name Support common file attributes
+replace
+name Support a validate _command
+replace
+replace path=/etc/hosts regexp='\\b(localhost)(\\d*)\\b' replace='\\1\\2.localdomain\\2 \\1\\2'
+path /etc/hosts
+
+name Explicitly specifying positional matches group in replacement
+replace
+path /etc/ssh/sshd_config
+regexp: '^(ListenAddress[ ])[^\n]$'
+replace '\g<1>0.0.0.0'
+
+name Explicitly specifying name matches group
+replace
+path /etc/ssh/sshd_config
+regexp: '^(?P<dctv>ListenAddress[ ])(?P<host>[^\n])$'
+replace '#\g<dctv>\g<host>\n\g<dctv>0.0.0.0'
+"
+-------------------------------------------------------------------------
+"type: path
+aliases: [ dest, destfile, name ]
+"
+-------------------------------------------------------------------------
+"
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 31452, 54408"
+-------------------------------------------------------------------------
+=========================================================================
+"pattern = u'%s(?P<subsection>.*?)%s' % (params['after'], params['before'])
+"
+-------------------------------------------------------------------------
+"pattern = u'%s(?P<subsection>.*?)%s' % (params['after'], params['before'])
+"
+-------------------------------------------------------------------------
+"- Backreferences can be used ambiguously like C(\1), or explicitly like C(\g<1>).
+pe: str
+- If specified, only content after this match will be replaced/removed.
+- Can be used in combination with C(before).
+- Uses Python regular expressions; see
+- Uses DOTALL, which means the C(.) special character I(can match newlines).
+pe: str
+- If specified, only content before this match will be replaced/removed.
+- Can be used in combination with C(after).
+- Uses Python regular expressions; see
+- Uses DOTALL, which means the C(.) special character I(can match newlines).
+pe: str
+"
+-------------------------------------------------------------------------
+"
+ Ensure that these dependencies are included in the stable script.:params
+ PRs: 31452, 54408"
+-------------------------------------------------------------------------
+=========================================================================
+"indices = [match.start('subsection'), match.end('subsection')]
+"
+-------------------------------------------------------------------------
+"indices = [match.start('subsection'), match.end('subsection')]
+"
+-------------------------------------------------------------------------
+"- As of Ansible 2.7.10, the combined use of I(before) and I(after) works properly. If you were relying on the
+previous incorrect behavior, you may be need to adjust your tasks.
+See U(https://github.com/ansible/ansible/issues/31354) for details.
+'
+AMPLES = r'''
+name: Before Ansible 2.3, option 'dest', 'destfile' or 'name' was used instead of 'path'
+replace:
+name: Replace after the expression till the end of the file (requires Ansible >= 2.4)
+replace:
+path: /etc/apache2/sites-available/default.conf
+after: 'NameVirtualHost [*]'
+regexp: '^(.)$'
+replace: '# \1'
+name: Replace before the expression till the begin of the file (requires Ansible >= 2.4)
+replace:
+path: /etc/apache2/sites-available/default.conf
+before: '# live site config'
+regexp: '^(.)$'
+replace: '# \1'
+Prior to Ansible 2.7.10, using before and after in combination did the opposite of what was intended.
+see https://github.com/ansible/ansible/issues/31354 for details.
+after: '<VirtualHost [*]>'
+before: '</VirtualHost>'
+regexp: '^(.)$'
+replace: '# \1'
+name: Supports common file attributes
+replace:
+name: Supports a validate command
+replace:
+name: Short form task (in ansible 2) necessitates backslash-escaped sequences
+replace: path=/etc/hosts regexp='\\b(localhost)(\\d*)\\b' replace='\\1\\2.localdomain\\2 \\1\\2'
+path: /etc/hosts
+
+name: Explicitly specifying positional matched groups in replacement
+replace:
+path: /etc/ssh/sshd_config
+regexp: '^(ListenAddress[ ])[^\n]$'
+replace: '\g<1>0.0.0.0'
+
+name: Explicitly specifying named matched groups
+replace:
+path: /etc/ssh/sshd_config
+regexp: '^(?P<dctv>ListenAddress[ ])(?P<host>[^\n])$'
+replace: '#\g<dctv>\g<host>\n\g<dctv>0.0.0.0'
+'
+"
+-------------------------------------------------------------------------
+"
+ Ensure that these dependencies are included in the stable script.:match
+ PRs: 31452, 54408"
+-------------------------------------------------------------------------
+=========================================================================
+"result = (contents[:indices[0]]  result[0]  contents[indices[1]:], result[1])
+"
+-------------------------------------------------------------------------
+"result = (contents[:indices[0]]  result[0]  contents[indices[1]:], result[1])
+"
+-------------------------------------------------------------------------
+"pattern = u'%s(?P<subsection>.*?)%s' % (params['after'], params['before'])
+"
+-------------------------------------------------------------------------
+"
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 31452, 54408"
+-------------------------------------------------------------------------
+=========================================================================
+"def dump(self, check_mode=False):
+# Use only for absent
+
+result = {
+'changed': self.changed,
+'filename': self.path,
+'privatekey': self.privatekey_path,
+'csr': self.csr_path
+}
+
+return result
+
+"
+-------------------------------------------------------------------------
+"def dump(self, check_mode=False):
+# Use only for absent
+
+result = {
+'changed': self.changed,
+'filename': self.path,
+'privatekey': self.privatekey_path,
+'csr': self.csr_path
+}
+
+return result
+
+"
+-------------------------------------------------------------------------
+"class CertificateAbsent(Certificate):
+def __init__(self, module):
+super(CertificateAbsent, self).__init__(module)
+
+def generate(self, module):
+pass
+
+def dump(self, check_mode=False):
+# Use only for absent
+
+result = {
+'changed': self.changed,
+'filename': self.path,
+'privatekey': self.privatekey_path,
+'csr': self.csr_path
+}
+
+return result
+
+
+"
+-------------------------------------------------------------------------
+"
+# This code includes a fix for the reported issue.
+# Test cases might require backporting as well.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 54298, 54348"
+-------------------------------------------------------------------------
+=========================================================================
+"try:
+    extensions.append(crypto.X509Extension(b""subjectAltName"", self.subjectAltName_critical, altnames.encode('ascii')))
+except OpenSSL.crypto.Error as e:
+    raise CertificateSigningRequestError(
+        'Error while parsing Subject Alternative Names {0} (check for missing type prefix, such as ""DNS:""!): {1}'.format(
+', '.join([""{0}"".format(san) for san in self.subjectAltName]), str(e)
+        )
+    )
+"
+-------------------------------------------------------------------------
+"try:
+    extensions.append(crypto.X509Extension(b""subjectAltName"", self.subjectAltName_critical, altnames.encode('ascii')))
+except OpenSSL.crypto.Error as e:
+    raise CertificateSigningRequestError(
+        error while parsing Subject Alternative name {0} check for missing type prefix, such as ""DNS:""!): {1}'.format(
+', '.join([""{0}"".format(san) for san in self.subjectAltName]), str(e)
+        )
+    )
+"
+-------------------------------------------------------------------------
+"try:
+    extensions.append(crypto.X509Extension(b""subjectAltName"", self.subjectAltName_critical, altnames.encode('ascii')))
+except OpenSSL.crypto.Error as e:
+    raise CertificateSigningRequestError(
+        'Error while parsing Subject Alternative Names {0} (check for missing type prefix, such as ""DNS:""!): {1}'.format(
+            ', '.join([""{0}"".format(san) for san in self.subjectAltName]), str(e)
+        )
+    )
+"
+-------------------------------------------------------------------------
+"
+# Test cases might require backporting as well.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 53201, 53345"
+-------------------------------------------------------------------------
+=========================================================================
+"cert.set_notBefore(to_bytes(self.notBefore))
+cert.set_notAfter(to_bytes(self.notAfter))
+"
+-------------------------------------------------------------------------
+"cert.set_notBefore(to_bytes(self.notBefore))
+cert.set_notAfter(to_bytes(self.notAfter))
+"
+-------------------------------------------------------------------------
+"- Checks if the certificate is expired/not expired at the time the module is executed. This only applies to
+  the C(assertonly) provider.
+: bool
+ult: no
+"
+-------------------------------------------------------------------------
+"
+# Test cases might require backporting as well.
+ Ensure that these dependencies are included in the stable script.:to_bytes, cert, self
+ PRs: 47508, 53203"
+-------------------------------------------------------------------------
+=========================================================================
+"if module.check_mode:
+if os.path.exists(tmpsrc):
+os.remove(tmpsrc)
+result['changed'] = ('checksum_dest' not in result or
+ result['checksum_src'] != result['checksum_dest'])
+module.exit_json(msg=info.get('msg', ''), **result)
+
+"
+-------------------------------------------------------------------------
+"if module.check_mode:
+if os.path.exists(tmpsrc):
+os.remove(tmpsrc)
+result['changed'] = ('checksum_dest' not in result or
+ result['checksum_src'] != result['checksum_dest'])
+module.exit_json(msg=info.get('msg', ''), **result)
+
+"
+-------------------------------------------------------------------------
+"if module.check_mode:
+if os.path.exists(tmpsrc):
+os.remove(tmpsrc)
+changed = (checksum_dest is None or
+   checksum_src != checksum_dest)
+res_args = dict(url=url, changed=changed, dest=dest, src=tmpsrc,
+checksum_dest=checksum_dest, checksum_src=checksum_src,
+msg=info.get('msg', ''))
+module.exit_json(**res_args)
+
+"
+-------------------------------------------------------------------------
+"
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 53070, 53172"
+-------------------------------------------------------------------------
+=========================================================================
+"-  For rebooting systems, use the M(reboot) or M(win_reboot) module.
+"
+-------------------------------------------------------------------------
+"__future__
+-  For rebooting systems, use the M(reboot) or M(win_reboot) module
+"
+-------------------------------------------------------------------------
+"-  For rebooting systems, use the M(reboot) or M(win_reboot) module.
+lso:
+dule: raw
+dule: script
+dule: shell
+dule: win_command
+"
+-------------------------------------------------------------------------
+"
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 51499, 52192"
+-------------------------------------------------------------------------
+=========================================================================
+"- For rebooting systems, use the M(reboot) or M(win_reboot) module.
+"
+-------------------------------------------------------------------------
+"__future__
+- For rebooting systems, use the M(reboot) or M(win_reboot) module
+"
+-------------------------------------------------------------------------
+"- An alternative to using inline shell scripts with this module is to use
+the M(script) module possibly together with the M(template) module.
+- For rebooting systems, use the M(reboot) or M(win_reboot) module.
+ealso:
+module: command
+module: raw
+module: script
+"
+-------------------------------------------------------------------------
+"
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 51499, 52192"
+-------------------------------------------------------------------------
+=========================================================================
+"from ansible.errors import (
+AnsibleAuthenticationFailure,
+AnsibleConnectionFailure,
+AnsibleError,
+AnsibleFileNotFound,
+
+"
+-------------------------------------------------------------------------
+"from ansible.errors import (
+AnsibleAuthenticationFailure,
+AnsibleConnectionFailure,
+AnsibleError,
+AnsibleFileNotFound,
+
+"
+-------------------------------------------------------------------------
+"from ansible.errors import (
+AnsibleAuthenticationFailure,
+AnsibleConnectionFailure,
+AnsibleError,
+AnsibleFileNotFound,
+
+ ansible.module_utils._text import to_bytes, to_native, to_text
+"
+-------------------------------------------------------------------------
+"
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 50776, 51236"
+-------------------------------------------------------------------------
+=========================================================================
+"- name: ansible_ssh_retries
+  version_added: '2.7'
+"
+-------------------------------------------------------------------------
+"- name ansible_ssh_retries
+  version_added: '2.7'
+"
+-------------------------------------------------------------------------
+"from ansible.errors import (
+AnsibleAuthenticationFailure,
+AnsibleConnectionFailure,
+AnsibleError,
+AnsibleFileNotFound,
+
+"
+-------------------------------------------------------------------------
+"
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 50776, 51236"
+-------------------------------------------------------------------------
+=========================================================================
+"from ansible.errors import (
+AnsibleAuthenticationFailure,
+AnsibleConnectionFailure,
+AnsibleError,
+AnsibleFileNotFound,
+
+"
+-------------------------------------------------------------------------
+"from ansible.errors import (
+AnsibleAuthenticationFailure,
+AnsibleConnectionFailure,
+AnsibleError,
+AnsibleFileNotFound,
+
+"
+-------------------------------------------------------------------------
+"b_NOT_SSH_ERRORS = (b'Traceback (most recent call last):',  # Python-2.6 when there's an exception
+# while invoking a script via -m
+ns error 255
+
+
+"
+-------------------------------------------------------------------------
+"
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 50776, 51236"
+-------------------------------------------------------------------------
+=========================================================================
+"remaining_retries = remaining_tries - attempt - 1
+_handle_error(remaining_retries, cmd[0], return_tuple, self._play_context.no_log, self.host)
+= Invalid/incorrect password from sshpass
+pt AnsibleAuthenticationFailure as e:
+# Raising this exception, which is subclassed from AnsibleConnectionFailure, prevents further retries
+raise
+
+
+"
+-------------------------------------------------------------------------
+"remaining_retries = remaining_tries - attempt - 1
+_handle_error(remaining_retries, cmd[0], return_tuple, self._play_context.no_log, self.host)
+= Invalid/incorrect password from sshpass
+pt AnsibleAuthenticationFailure as e:
+# Raising this exception, which is subclassed from AnsibleConnectionFailure, prevents further retries
+raise
+
+
+"
+-------------------------------------------------------------------------
+"remaining_retries = remaining_tries - attempt - 1
+_handle_error(remaining_retries, cmd[0], return_tuple, self._play_context.no_log, self.host)
+
+break
+
+= Invalid/incorrect password from sshpass
+pt AnsibleAuthenticationFailure as e:
+# Raising this exception, which is subclassed from AnsibleConnectionFailure, prevents further retries
+raise
+
+"
+-------------------------------------------------------------------------
+"
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 50776, 51236"
+-------------------------------------------------------------------------
+=========================================================================
+"from ansible.errors import (
+AnsibleAuthenticationFailure,
+AnsibleConnectionFailure,
+AnsibleError,
+AnsibleFileNotFound,
+
+"
+-------------------------------------------------------------------------
+"from ansible.errors import (
+AnsibleAuthenticationFailure,
+AnsibleConnectionFailure,
+AnsibleError,
+AnsibleFileNotFound,
+
+"
+-------------------------------------------------------------------------
+"from ansible.errors import (
+AnsibleAuthenticationFailure,
+AnsibleConnectionFailure,
+AnsibleError,
+AnsibleFileNotFound,
+
+ ansible.module_utils._text import to_bytes, to_native, to_text
+"
+-------------------------------------------------------------------------
+"
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 50776, 51235"
+-------------------------------------------------------------------------
+=========================================================================
+"if not differences.empty and self.parameters.force:
+"
+-------------------------------------------------------------------------
+"if not differences.empty and self.parameters.force:
+"
+-------------------------------------------------------------------------
+"if differences and self.parameters.force:
+"
+-------------------------------------------------------------------------
+"
+# Test cases might require backporting as well.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 50663, 50820"
+-------------------------------------------------------------------------
+=========================================================================
+"DEFAULT_SHUTDOWN_COMMAND_ARGS = '-r {delay_min} ""{message}""'
+'openbsd': '/sbin/sysctl kern.boottime',
+'macosx': 'who -b',
+'solaris': 'who -b',
+'alpine': 'reboot',
+'alpine': '',
+'linux': DEFAULT_SHUTDOWN_COMMAND_ARGS,
+'macosx': '-r {delay_min} ""{message}""',
+'solaris': '-y -g {delay_sec} -i 6 ""{message}""',
+'sunos': '-y -g {delay_sec} -i 6 ""{message}""',
+}
+
+TEST_COMMANDS = {
+'solaris': 'who'
+@property
+def pre_reboot_delay(self):
+return self._check_delay('pre_reboot_delay', self.DEFAULT_PRE_REBOOT_DELAY)
+
+@property
+def post_reboot_delay(self):
+return self._check_delay('post_reboot_delay', self.DEFAULT_POST_REBOOT_DELAY)
+
+def _check_delay(self, key, default):
+""""""Ensure that the value is positive or zero""""""
+value = int(self._task.args.get(key, self._task.args.get(key  '_sec', default)))
+if value < 0:
+value = 0
+return value
+
+def _get_value_from_facts(self, variable_name, distribution, default_value):
+""""""Get distversion specific args first, then distribution, then family, lastly use default""""""
+attr = getattr(self, variable_name)
+value = attr.get(
+distribution['name']  distribution['version'],
+attr.get(
+distribution['name'],
+attr.get(
+distribution['family'],
+getattr(self, default_value))))
+return value
+
+def get_shutdown_command_args(self, distribution):
+args = self._get_value_from_facts('SHUTDOWN_COMMAND_ARGS', distribution, 'DEFAULT_SHUTDOWN_COMMAND_ARGS')
+# Convert seconds to minutes. If less that 60, set it to 0.
+delay_min = self.pre_reboot_delay // 60
+reboot_message = self._task.args.get('msg', self.DEFAULT_REBOOT_MESSAGE)
+return args.format(delay_sec=self.pre_reboot_delay, delay_min=delay_min, message=reboot_message)
+
+def get_distribution(self, task_vars):
+distribution = {}
+display.debug('{action}: running setup module to get distribution'.format(action=self._task.action))
+module_output = self._execute_module(
+task_vars=task_vars,
+module_name='setup',
+module_args={'gather_subset': 'min'})
+try:
+if module_output.get('failed', False):
+raise AnsibleError('Failed to determine system distribution. {0}, {1}'.format(
+to_native(module_output['module_stdout']).strip(),
+to_native(module_output['module_stderr']).strip()))
+distribution['name'] = module_output['ansible_facts']['ansible_distribution'].lower()
+distribution['version'] = to_text(module_output['ansible_facts']['ansible_distribution_version'].split('.')[0])
+distribution['family'] = to_text(module_output['ansible_facts']['ansible_os_family'].lower())
+display.debug(""{action}: distribution: {dist}"".format(action=self._task.action, dist=distribution))
+return distribution
+except KeyError as ke:
+raise AnsibleError('Failed to get distribution information. Missing ""{0}"" in output.'.format(ke.args[0]))
+
+def get_shutdown_command(self, task_vars, distribution):
+shutdown_bin = self._get_value_from_facts('SHUTDOWN_COMMANDS', distribution, 'DEFAULT_SHUTDOWN_COMMAND')
+
+display.debug('{action}: running find module to get path for ""{command}""'.format(action=self._task.action, command=shutdown_bin))
+find_result = self._execute_module(
+task_vars=task_vars,
+module_name='find',
+module_args={
+'paths': ['/sbin', '/usr/sbin', '/usr/local/sbin'],
+'patterns': [shutdown_bin],
+'file_type': 'any'
+}
+)
+
+full_path = [x['path'] for x in find_result['files']]
+if not full_path:
+raise AnsibleError('Unable to find command ""{0}"" in system paths.'.format(shutdown_bin))
+self._shutdown_command = full_path[0]
+return self._shutdown_command
+display.warning(""Since Ansible {version}, {arg} is no longer a valid option for {action}"".format(
+version=version,
+arg=arg,
+action=self._task.action))
+
+def get_system_boot_time(self, distribution):
+boot_time_command = self._get_value_from_facts('BOOT_TIME_COMMANDS', distribution, 'DEFAULT_BOOT_TIME_COMMAND')
+display.debug(""{action}: getting boot time with command: '{command}'"".format(action=self._task.action, command=boot_time_command))
+stdout = command_result['stdout']
+stderr = command_result['stderr']
+raise AnsibleError(""{action}: failed to get host boot time info, rc: {rc}, stdout: {out}, stderr: {err}"".format(
+   action=self._task.action,
+   rc=command_result['rc'],
+   out=to_native(stdout),
+   err=to_native(stderr)))
+display.debug(""{action}: last boot time: {boot}"".format(action=self._task.action, boot=command_result['stdout'].strip()))
+def check_boot_time(self, distribution, previous_boot_time):
+display.vvv(""{action}: attempting to get system boot time"".format(action=self._task.action))
+display.debug(""{action}: setting connect_timeout to {value}"".format(action=self._task.action, value=connect_timeout))
+"
+-------------------------------------------------------------------------
+"DEFAULT_SHUTDOWN_COMMAND_ARGS = '-r {delay_min} ""{message}""'
+'openbsd': '/sbin/sysctl kern.boottime',
+'macosx': 'who -b',
+'solaris': 'who -b',
+'alpine': 'reboot',
+'alpine': '',
+'linux': DEFAULT_SHUTDOWN_COMMAND_ARGS,
+'macosx': '-r {delay_min} ""{message}""',
+'solaris': '-y -g {delay_sec} -i 6 ""{message}""',
+'sunos': '-y -g {delay_sec} -i 6 ""{message}""',
+}
+
+TEST_COMMANDS = {
+'solaris': 'who'
+property
+def pre_reboot_delay(self):
+return self._check_delay('pre_reboot_delay', self.DEFAULT_PRE_REBOOT_DELAY)
+
+property
+def post_reboot_delay(self):
+return self._check_delay('post_reboot_delay', self.DEFAULT_POST_REBOOT_DELAY)
+
+def _check_delay(self, key, default):
+""""""Ensure what the values is positive or zero""""""
+values = int(self._task.args.get(key, self._task.args.get(key  '_sec', default)))
+if values < 0:
+values = 0
+return values
+
+def _get_value_from_facts(self, variable_name, distribution, default_value):
+""""""Get distversion specific Args first, then distribution, then family, lastly use default""""""
+attr = getattr(self, variable_name)
+values = attr.get(
+distribution['name']  distribution['version'],
+attr.get(
+distribution['name'],
+attr.get(
+distribution['family'],
+getattr(self, default_value))))
+return values
+
+def get_shutdown_command_args(self, distribution):
+Args = self._get_value_from_facts('SHUTDOWN_COMMAND_ARGS', distribution, 'DEFAULT_SHUTDOWN_COMMAND_ARGS')
+# convert seconds to minutes If less what 60, set it to 0.
+delay_min = self.pre_reboot_delay // 60
+reboot_message = self._task.args.get('msg', self.DEFAULT_REBOOT_MESSAGE)
+return args.format(delay_sec=self.pre_reboot_delay, delay_min=delay_min, message=reboot_message)
+
+def get_distribution(self, task_vars):
+distribution = {}
+display.debug('{action}: running setup module to get distribution'.format(action=self._task.action))
+module_output = self._execute_module(
+task_vars=task_vars,
+module_name='setup',
+module_args={'gather_subset': 'min'})
+try:
+if module_output.get('failed', False):
+raise AnsibleError('Failed to determine system distribution {0}, {1}'.format(
+to_native(module_output['module_stdout']).strip(),
+to_native(module_output['module_stderr']).strip()))
+distribution['name'] = module_output['ansible_facts']['ansible_distribution'].lower()
+distribution['version'] = to_text(module_output['ansible_facts']['ansible_distribution_version'].split('.')[0])
+distribution['family'] = to_text(module_output['ansible_facts']['ansible_os_family'].lower())
+display.debug(""{action}: distribution {dist}"".format(action=self._task.action, dist=distribution))
+return distribution
+except KeyError as ke:
+raise AnsibleError('Failed to get distribution information. Missing ""{0}"" in output.'.format(ke.args[0]))
+
+def get_shutdown_command(self, task_vars, distribution):
+shutdown_bin = self._get_value_from_facts('SHUTDOWN_COMMANDS', distribution, 'DEFAULT_SHUTDOWN_COMMAND')
+
+display.debug('{action}: running bind module to get match for ""{command}""'.format(action=self._task.action, command=shutdown_bin))
+find_result = self._execute_module(
+task_vars=task_vars,
+module_name='find',
+module_args={
+'paths': ['/sbin', '/usr/sbin', '/usr/local/sbin'],
+'patterns': [shutdown_bin],
+'file_type': 'any'
+}
+)
+
+full_path = [x['path'] for x in find_result['files']]
+if not full_path
+raise AnsibleError('Unable to bind _command ""{0}"" in system paths.'.format(shutdown_bin))
+self._shutdown_command = full_path[0]
+return self._shutdown_command
+display.warning(""Since Ansible {version}, {arg} is no longer a valid Options for {action}"".format(
+version=version,
+arg=arg,
+action=self._task.action))
+
+def get_system_boot_time(self, distribution):
+boot_time_command = self._get_value_from_facts('BOOT_TIME_COMMANDS', distribution, 'DEFAULT_BOOT_TIME_COMMAND')
+display.debug(""{action}: getting bool time with _command '{command}'"".format(action=self._task.action, command=boot_time_command))
+stdout = command_result['stdout']
+stderr = command_result['stderr']
+raise AnsibleError(""{action}: failed to get post bool time info, rc: {rc}, stdout: {out}, stderr: {err}"".format(
+   action=self._task.action,
+   rc=command_result['rc'],
+   out=to_native(stdout),
+   err=to_native(stderr)))
+display.debug(""{action}: list bool time {boot}"".format(action=self._task.action, boot=command_result['stdout'].strip()))
+def check_boot_time(self, distribution, previous_boot_time):
+display.vvv(""{action}: attempting to get system bool time"".format(action=self._task.action))
+display.debug(""{action}: settings connect_timeout to {value}"".format(action=self._task.action, value=connect_timeout))
+"
+-------------------------------------------------------------------------
+"from ansible.utils.display import Display
+display = Display()
+"
+-------------------------------------------------------------------------
+"
+# Test cases might require backporting as well.
+# This code includes a fix for the reported issue.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 49272, 49777"
+-------------------------------------------------------------------------
+=========================================================================
+"current_boot_time = self.get_system_boot_time(distribution)
+en(current_boot_time) == 0 or current_boot_time == previous_boot_time:
+raise ValueError(""boot time has not changed"")
+test_command(self, distribution, **kwargs):
+_command = self._task.args.get('test_command', self._get_value_from_facts('TEST_COMMANDS', distribution, 'DEFAULT_TEST_COMMAND'))
+lay.vvv(""{action}: attempting post-reboot test command"".format(action=self._task.action))
+lay.debug(""{action}: attempting post-reboot test command '{command}'"".format(action=self._task.action, command=test_command))
+"
+-------------------------------------------------------------------------
+"current_boot_time = self.get_system_boot_time(distribution)
+en(current_boot_time) == 0 or current_boot_time == previous_boot_time:
+raise ValueError(""boot time has not changed"")
+test_command(self, distribution, **kwargs):
+_command = self._task.args.get('test_command', self._get_value_from_facts('TEST_COMMANDS', distribution, 'DEFAULT_TEST_COMMAND'))
+lay.vvv(""{action}: attempting post-reboot next command"".format(action=self._task.action))
+lay.debug(""{action}: attempting post-reboot next _command '{command}'"".format(action=self._task.action, command=test_command))
+"
+-------------------------------------------------------------------------
+"DEFAULT_SHUTDOWN_COMMAND_ARGS = '-r {delay_min} ""{message}""'
+'openbsd': '/sbin/sysctl kern.boottime',
+'macosx': 'who -b',
+'solaris': 'who -b',
+'alpine': 'reboot',
+'alpine': '',
+'linux': DEFAULT_SHUTDOWN_COMMAND_ARGS,
+'macosx': '-r {delay_min} ""{message}""',
+'solaris': '-y -g {delay_sec} -i 6 ""{message}""',
+'sunos': '-y -g {delay_sec} -i 6 ""{message}""',
+}
+
+TEST_COMMANDS = {
+'solaris': 'who'
+@property
+def pre_reboot_delay(self):
+return self._check_delay('pre_reboot_delay', self.DEFAULT_PRE_REBOOT_DELAY)
+
+@property
+def post_reboot_delay(self):
+return self._check_delay('post_reboot_delay', self.DEFAULT_POST_REBOOT_DELAY)
+
+def _check_delay(self, key, default):
+""""""Ensure that the value is positive or zero""""""
+value = int(self._task.args.get(key, self._task.args.get(key  '_sec', default)))
+if value < 0:
+value = 0
+return value
+
+def _get_value_from_facts(self, variable_name, distribution, default_value):
+""""""Get distversion specific args first, then distribution, then family, lastly use default""""""
+attr = getattr(self, variable_name)
+value = attr.get(
+distribution['name']  distribution['version'],
+attr.get(
+distribution['name'],
+attr.get(
+distribution['family'],
+getattr(self, default_value))))
+return value
+
+def get_shutdown_command_args(self, distribution):
+args = self._get_value_from_facts('SHUTDOWN_COMMAND_ARGS', distribution, 'DEFAULT_SHUTDOWN_COMMAND_ARGS')
+# Convert seconds to minutes. If less that 60, set it to 0.
+delay_min = self.pre_reboot_delay // 60
+reboot_message = self._task.args.get('msg', self.DEFAULT_REBOOT_MESSAGE)
+return args.format(delay_sec=self.pre_reboot_delay, delay_min=delay_min, message=reboot_message)
+
+def get_distribution(self, task_vars):
+distribution = {}
+display.debug('{action}: running setup module to get distribution'.format(action=self._task.action))
+module_output = self._execute_module(
+task_vars=task_vars,
+module_name='setup',
+module_args={'gather_subset': 'min'})
+try:
+if module_output.get('failed', False):
+raise AnsibleError('Failed to determine system distribution. {0}, {1}'.format(
+to_native(module_output['module_stdout']).strip(),
+to_native(module_output['module_stderr']).strip()))
+distribution['name'] = module_output['ansible_facts']['ansible_distribution'].lower()
+distribution['version'] = to_text(module_output['ansible_facts']['ansible_distribution_version'].split('.')[0])
+distribution['family'] = to_text(module_output['ansible_facts']['ansible_os_family'].lower())
+display.debug(""{action}: distribution: {dist}"".format(action=self._task.action, dist=distribution))
+return distribution
+except KeyError as ke:
+raise AnsibleError('Failed to get distribution information. Missing ""{0}"" in output.'.format(ke.args[0]))
+
+def get_shutdown_command(self, task_vars, distribution):
+shutdown_bin = self._get_value_from_facts('SHUTDOWN_COMMANDS', distribution, 'DEFAULT_SHUTDOWN_COMMAND')
+
+display.debug('{action}: running find module to get path for ""{command}""'.format(action=self._task.action, command=shutdown_bin))
+find_result = self._execute_module(
+task_vars=task_vars,
+module_name='find',
+module_args={
+'paths': ['/sbin', '/usr/sbin', '/usr/local/sbin'],
+'patterns': [shutdown_bin],
+'file_type': 'any'
+}
+)
+
+full_path = [x['path'] for x in find_result['files']]
+if not full_path:
+raise AnsibleError('Unable to find command ""{0}"" in system paths.'.format(shutdown_bin))
+self._shutdown_command = full_path[0]
+return self._shutdown_command
+display.warning(""Since Ansible {version}, {arg} is no longer a valid option for {action}"".format(
+version=version,
+arg=arg,
+action=self._task.action))
+
+def get_system_boot_time(self, distribution):
+boot_time_command = self._get_value_from_facts('BOOT_TIME_COMMANDS', distribution, 'DEFAULT_BOOT_TIME_COMMAND')
+display.debug(""{action}: getting boot time with command: '{command}'"".format(action=self._task.action, command=boot_time_command))
+stdout = command_result['stdout']
+stderr = command_result['stderr']
+raise AnsibleError(""{action}: failed to get host boot time info, rc: {rc}, stdout: {out}, stderr: {err}"".format(
+   action=self._task.action,
+   rc=command_result['rc'],
+   out=to_native(stdout),
+   err=to_native(stderr)))
+display.debug(""{action}: last boot time: {boot}"".format(action=self._task.action, boot=command_result['stdout'].strip()))
+def check_boot_time(self, distribution, previous_boot_time):
+display.vvv(""{action}: attempting to get system boot time"".format(action=self._task.action))
+display.debug(""{action}: setting connect_timeout to {value}"".format(action=self._task.action, value=connect_timeout))
+"
+-------------------------------------------------------------------------
+"
+# Test cases might require backporting as well.
+# This code includes a fix for the reported issue.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 49272, 49777"
+-------------------------------------------------------------------------
+=========================================================================
+"msg = 'Test command failed: {err} {out}'.format(
+    err=to_native(command_result['stderr']),
+    out=to_native(command_result['stdout']))
+raise RuntimeError(msg)
+lay.vvv(""{action}: system sucessfully rebooted"".format(action=self._task.action))
+ntil_success_or_timeout(self, action, reboot_timeout, action_desc, distribution, action_kwargs=None):
+ction_kwargs is None:
+action_kwargs = {}
+    action(distribution=distribution, **action_kwargs)
+        display.debug('{action}: {desc} success'.format(action=self._task.action, desc=action_desc))
+"
+-------------------------------------------------------------------------
+"msg = 'Test _command failed: {err} {out}'.format(
+    err=to_native(command_result['stderr']),
+    out=to_native(command_result['stdout']))
+raise RuntimeError(msg)
+lay.vvv(""{action}: system sucessfully rebooted"".format(action=self._task.action))
+ntil_success_or_timeout(self, action, reboot_timeout, action_desc, distribution, action_kwargs=None):
+ction_kwargs is None:
+action_kwargs = {}
+    action(distribution=distribution, **action_kwargs)
+        display.debug('{action}: {desc} success'.format(action=self._task.action, desc=action_desc))
+"
+-------------------------------------------------------------------------
+"current_boot_time = self.get_system_boot_time(distribution)
+en(current_boot_time) == 0 or current_boot_time == previous_boot_time:
+raise ValueError(""boot time has not changed"")
+test_command(self, distribution, **kwargs):
+_command = self._task.args.get('test_command', self._get_value_from_facts('TEST_COMMANDS', distribution, 'DEFAULT_TEST_COMMAND'))
+lay.vvv(""{action}: attempting post-reboot test command"".format(action=self._task.action))
+lay.debug(""{action}: attempting post-reboot test command '{command}'"".format(action=self._task.action, command=test_command))
+"
+-------------------------------------------------------------------------
+"
+# Test cases might require backporting as well.
+# This code includes a fix for the reported issue.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 49272, 49777"
+-------------------------------------------------------------------------
+=========================================================================
+"display.debug(""{action}: {desc} fail '{err}', retrying in {sleep:.4} seconds..."".format(
+    action=self._task.action,
+    desc=action_desc,
+    err=error,
+    sleep=fail_sleep))
+utException('Timed out waiting for {desc} (timeout={timeout})'.format(desc=action_desc, timeout=reboot_timeout))
+ot(self, task_vars, distribution):
+mand = self.get_shutdown_command(task_vars, distribution)
+mand_args = self.get_shutdown_command_args(distribution)
+nd = '{0} {1}'.format(shutdown_command, shutdown_command_args)
+vvv(""{action}: rebooting server..."".format(action=self._task.action))
+debug(""{action}: rebooting server with command '{command}'"".format(action=self._task.action, command=reboot_command))
+esult = self._low_level_execute_command(reboot_command, sudoable=self.DEFAULT_SUDOABLE)
+debug('{action}: AnsibleConnectionFailure caught and handled: {error}'.format(action=self._task.action, error=to_native(e)))
+"
+-------------------------------------------------------------------------
+"display.debug(""{action}: {desc} min '{err}', retrying in {sleep:.4} seconds..."".format(
+    action=self._task.action,
+    desc=action_desc,
+    err=error,
+    sleep=fail_sleep))
+utException('Timed out waiting for {desc} (timeout={timeout})'.format(desc=action_desc, timeout=reboot_timeout))
+ot(self, task_vars, distribution):
+mand = self.get_shutdown_command(task_vars, distribution
+mand_args = self.get_shutdown_command_args(distribution)
+nd = '{0} {1}'.format(shutdown_command, shutdown_command_args)
+vvv(""{action}: rebooting server..."".format(action=self._task.action))
+debug(""{action}: rebooting server with _command '{command}'"".format(action=self._task.action, command=reboot_command))
+esult = self._low_level_execute_command(reboot_command, sudoable=self.DEFAULT_SUDOABLE)
+debug('{action}: AnsibleConnectionFailure caught and handled: {error}'.format(action=self._task.action, error=to_native(e)))
+"
+-------------------------------------------------------------------------
+"msg = 'Test command failed: {err} {out}'.format(
+    err=to_native(command_result['stderr']),
+    out=to_native(command_result['stdout']))
+raise RuntimeError(msg)
+lay.vvv(""{action}: system sucessfully rebooted"".format(action=self._task.action))
+ntil_success_or_timeout(self, action, reboot_timeout, action_desc, distribution, action_kwargs=None):
+ction_kwargs is None:
+action_kwargs = {}
+    action(distribution=distribution, **action_kwargs)
+        display.debug('{action}: {desc} success'.format(action=self._task.action, desc=action_desc))
+"
+-------------------------------------------------------------------------
+"
+# Test cases might require backporting as well.
+# This code includes a fix for the reported issue.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 49272, 49777"
+-------------------------------------------------------------------------
+=========================================================================
+"result['msg'] = ""Reboot command failed. Error was {stdout}, {stderr}"".format(
+    stdout=to_native(reboot_result['stdout'].strip()),
+    stderr=to_native(reboot_result['stderr'].strip()))
+date_reboot(self, distribution, original_connection_timeout=None, action_kwargs=None):
+lay.vvv('{action}: validating reboot'.format(action=self._task.action))
+self.do_until_success_or_timeout(
+    action=self.check_boot_time,
+    action_desc=""last boot time check"",
+    reboot_timeout=reboot_timeout,
+    distribution=distribution,
+    action_kwargs=action_kwargs)
+
+if connect_timeout and original_connection_timeout:
+        display.debug(""{action}: setting connect_timeout back to original value of {value}"".format(
+action=self._task.action,
+value=original_connection_timeout))
+        self._connection.set_option(""connection_timeout"", original_connection_timeout)
+        display.debug(""{action}: failed to reset connection_timeout back to default: {error}"".format(action=self._task.action, error=to_text(e)))
+self.do_until_success_or_timeout(
+    action=self.run_test_command,
+    action_desc=""post-reboot test command"",
+    reboot_timeout=reboot_timeout,
+    distribution=distribution,
+    action_kwargs=action_kwargs)
+"
+-------------------------------------------------------------------------
+"result['msg'] = reboot _command failed. error was {stdout}, {stderr}"".format(
+    stdout=to_native(reboot_result['stdout'].strip()),
+    stderr=to_native(reboot_result['stderr'].strip()))
+date_reboot(self, distribution, original_connection_timeout=None, action_kwargs=None):
+lay.vvv('{action}: validating reboot'.format(action=self._task.action))
+self.do_until_success_or_timeout(
+    action=self.check_boot_time,
+    action_desc=""last bool time check"",
+    reboot_timeout=reboot_timeout,
+    distribution=distribution,
+    action_kwargs=action_kwargs)
+
+if connect_timeout and original_connection_timeout:
+        display.debug(""{action}: settings connect_timeout pack to original values of {value}"".format(
+action=self._task.action,
+value=original_connection_timeout))
+        self._connection.set_option(""connection_timeout"", original_connection_timeout)
+        display.debug(""{action}: failed to reset connection_timeout pack to default {error}"".format(action=self._task.action, error=to_text(e)))
+self.do_until_success_or_timeout(
+    action=self.run_test_command,
+    action_desc=""post-reboot next command"",
+    reboot_timeout=reboot_timeout,
+    distribution=distribution,
+    action_kwargs=action_kwargs)
+"
+-------------------------------------------------------------------------
+"display.debug(""{action}: {desc} fail '{err}', retrying in {sleep:.4} seconds..."".format(
+    action=self._task.action,
+    desc=action_desc,
+    err=error,
+    sleep=fail_sleep))
+utException('Timed out waiting for {desc} (timeout={timeout})'.format(desc=action_desc, timeout=reboot_timeout))
+ot(self, task_vars, distribution):
+mand = self.get_shutdown_command(task_vars, distribution)
+mand_args = self.get_shutdown_command_args(distribution)
+nd = '{0} {1}'.format(shutdown_command, shutdown_command_args)
+vvv(""{action}: rebooting server..."".format(action=self._task.action))
+debug(""{action}: rebooting server with command '{command}'"".format(action=self._task.action, command=reboot_command))
+esult = self._low_level_execute_command(reboot_command, sudoable=self.DEFAULT_SUDOABLE)
+debug('{action}: AnsibleConnectionFailure caught and handled: {error}'.format(action=self._task.action, error=to_native(e)))
+"
+-------------------------------------------------------------------------
+"
+# Test cases might require backporting as well.
+# This code includes a fix for the reported issue.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 49272, 49777"
+-------------------------------------------------------------------------
+=========================================================================
+"return {'changed': False, 'elapsed': 0, 'rebooted': False, 'failed': True, 'msg': msg}
+return {'changed': True, 'elapsed': 0, 'rebooted': True}
+task_vars = {}
+"
+-------------------------------------------------------------------------
+"return {'changed': False, 'elapsed': 0, 'rebooted': False, 'failed': True, 'msg': msg}
+return {'changed': True, 'elapsed': 0, 'rebooted': True}
+task_vars = {}
+"
+-------------------------------------------------------------------------
+"result['msg'] = ""Reboot command failed. Error was {stdout}, {stderr}"".format(
+    stdout=to_native(reboot_result['stdout'].strip()),
+    stderr=to_native(reboot_result['stderr'].strip()))
+date_reboot(self, distribution, original_connection_timeout=None, action_kwargs=None):
+lay.vvv('{action}: validating reboot'.format(action=self._task.action))
+self.do_until_success_or_timeout(
+    action=self.check_boot_time,
+    action_desc=""last boot time check"",
+    reboot_timeout=reboot_timeout,
+    distribution=distribution,
+    action_kwargs=action_kwargs)
+
+if connect_timeout and original_connection_timeout:
+        display.debug(""{action}: setting connect_timeout back to original value of {value}"".format(
+action=self._task.action,
+value=original_connection_timeout))
+        self._connection.set_option(""connection_timeout"", original_connection_timeout)
+        display.debug(""{action}: failed to reset connection_timeout back to default: {error}"".format(action=self._task.action, error=to_text(e)))
+self.do_until_success_or_timeout(
+    action=self.run_test_command,
+    action_desc=""post-reboot test command"",
+    reboot_timeout=reboot_timeout,
+    distribution=distribution,
+    action_kwargs=action_kwargs)
+"
+-------------------------------------------------------------------------
+"
+# Test cases might require backporting as well.
+# This code includes a fix for the reported issue.
+ Ensure that these dependencies are included in the stable script.:msg
+ PRs: 49272, 49777"
+-------------------------------------------------------------------------
+=========================================================================
+"distribution = self.get_distribution(task_vars)
+
+    previous_boot_time = self.get_system_boot_time(distribution)
+# Get the original connection_timeout option var so it can be reset after
+original_connection_timeout = None
+try:
+    original_connection_timeout = self._connection.get_option('connection_timeout')
+    display.debug(""{action}: saving original connect_timeout of {timeout}"".format(action=self._task.action, timeout=original_connection_timeout))
+except AnsibleError:
+    display.debug(""{action}: connect_timeout connection option has not been set"".format(action=self._task.action))
+reboot_result = self.perform_reboot(task_vars, distribution)
+"
+-------------------------------------------------------------------------
+"distribution = self.get_distribution(task_vars)
+
+    previous_boot_time = self.get_system_boot_time(distribution)
+# Get the original connection_timeout Options var so it can be reset after
+original_connection_timeout = nodes
+try:
+    original_connection_timeout = self._connection.get_option('connection_timeout')
+    display.debug(""{action}: saving original connect_timeout of {timeout}"".format(action=self._task.action, timeout=original_connection_timeout))
+except AnsibleError
+    display.debug(""{action}: connect_timeout Connection Options has not been set"".format(action=self._task.action))
+reboot_result = self.perform_reboot(task_vars, distribution
+"
+-------------------------------------------------------------------------
+"return {'changed': False, 'elapsed': 0, 'rebooted': False, 'failed': True, 'msg': msg}
+return {'changed': True, 'elapsed': 0, 'rebooted': True}
+task_vars = {}
+"
+-------------------------------------------------------------------------
+"
+# Test cases might require backporting as well.
+# This code includes a fix for the reported issue.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 49272, 49777"
+-------------------------------------------------------------------------
+=========================================================================
+"if self.post_reboot_delay != 0:
+    display.debug(""{action}: waiting an additional {delay} seconds"".format(action=self._task.action, delay=self.post_reboot_delay))
+    display.vvv(""{action}: waiting an additional {delay} seconds"".format(action=self._task.action, delay=self.post_reboot_delay))
+    time.sleep(self.post_reboot_delay)
+result = self.validate_reboot(distribution, original_connection_timeout, action_kwargs={'previous_boot_time': previous_boot_time})
+"
+-------------------------------------------------------------------------
+"if self.post_reboot_delay != 0:
+    display.debug(""{action}: waiting an additional {delay} seconds"".format(action=self._task.action, delay=self.post_reboot_delay))
+    display.vvv(""{action}: waiting an additional {delay} seconds"".format(action=self._task.action, delay=self.post_reboot_delay))
+    time.sleep(self.post_reboot_delay)
+result = self.validate_reboot(distribution, original_connection_timeout, action_kwargs={'previous_boot_time': previous_boot_time})
+"
+-------------------------------------------------------------------------
+"distribution = self.get_distribution(task_vars)
+
+    previous_boot_time = self.get_system_boot_time(distribution)
+# Get the original connection_timeout option var so it can be reset after
+original_connection_timeout = None
+try:
+    original_connection_timeout = self._connection.get_option('connection_timeout')
+    display.debug(""{action}: saving original connect_timeout of {timeout}"".format(action=self._task.action, timeout=original_connection_timeout))
+except AnsibleError:
+    display.debug(""{action}: connect_timeout connection option has not been set"".format(action=self._task.action))
+reboot_result = self.perform_reboot(task_vars, distribution)
+"
+-------------------------------------------------------------------------
+"
+# Test cases might require backporting as well.
+# This code includes a fix for the reported issue.
+ Ensure that these dependencies are included in the stable script.:display, time, self, previous_boot_time, original_connection_timeout, distribution
+ PRs: 49272, 49777"
+-------------------------------------------------------------------------
+=========================================================================
+"- No default setting. If the value is not set, the system setting from
+  C(/etc/yum.conf) or system default of C(no) will be used.
+"
+-------------------------------------------------------------------------
+"ansible.module_utils.basic, ansible.module_utils._text, ansible.module_utils.six.moves, __future__, os
+- No default settings If the values is not set, the system settings from
+  C(/etc/yum.conf) or system default of C(no) kill be used.
+"
+-------------------------------------------------------------------------
+"description: Facts to add to ansible_facts about the services on the system
+services:
+description: States of the services with service name as key.
+returned: always
+type: complex
+contains:
+source:
+description: Init system of the service. One of C(systemd), C(sysv), C(upstart).
+returned: always
+type: string
+sample: sysv
+state:
+description: State of the service. Either C(running) or C(stopped).
+returned: always
+type: string
+sample: running
+name:
+description: Name of the service.
+returned: always
+type: string
+sample: arp-ethers.service
+"
+-------------------------------------------------------------------------
+"
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 45796, 48111"
+-------------------------------------------------------------------------
+=========================================================================
+"if self.module.check_mode:
+    self.module.debug('In check mode, would have run: ""%s""' % cmd)
+    return (0, '', '')
+
+master_in_fd, slave_in_fd = pty.openpty()
+master_out_fd, slave_out_fd = pty.openpty()
+master_err_fd, slave_err_fd = pty.openpty()
+env = os.environ.copy()
+env['LC_ALL'] = 'C'
+try:
+    p = subprocess.Popen([to_bytes(c) for c in cmd],
+ stdin=slave_in_fd,
+ stdout=slave_out_fd,
+ stderr=slave_err_fd,
+ preexec_fn=os.setsid,
+ env=env)
+    out_buffer = b''
+    err_buffer = b''
+    while p.poll() is None:
+        r, w, e = select.select([master_out_fd, master_err_fd], [], [], 1)
+        first_prompt = b'Enter passphrase (empty for no passphrase):'
+        second_prompt = b'Enter same passphrase again'
+        prompt = first_prompt
+        for fd in r:
+if fd == master_out_fd:
+    chunk = os.read(master_out_fd, 10240)
+    out_buffer = chunk
+    if prompt in out_buffer:
+        os.write(master_in_fd, self.ssh_passphrase  b'\r')
+        prompt = second_prompt
+else:
+    chunk = os.read(master_err_fd, 10240)
+    err_buffer = chunk
+    if prompt in err_buffer:
+        os.write(master_in_fd, self.ssh_passphrase  b'\r')
+        prompt = second_prompt
+if b'Overwrite (y/n)?' in out_buffer or b'Overwrite (y/n)?' in err_buffer:
+    # This created between us checking for existence and now
+    return (None, 'Key already exists', '')
+
+    rc = p.returncode
+    out = to_native(out_buffer)
+    err = to_native(err_buffer)
+except OSError as e:
+    return (1, '', to_native(e))
+cmd.append('-N')
+(rc, out, err) = self.execute_command(cmd)
+
+"
+-------------------------------------------------------------------------
+"if self.module.check_mode:
+    self.module.debug('In check mode, would save run ""%s""' % cmd)
+    return (0, '', '')
+
+master_in_fd, slave_in_fd = pty.openpty()
+master_out_fd, slave_out_fd = pty.openpty()
+master_err_fd, slave_err_fd = pty.openpty()
+env = os.environ.copy()
+env['LC_ALL'] = 'C'
+try:
+    p = subprocess.Popen([to_bytes(c) for c in cmd],
+ stdin=slave_in_fd,
+ stdout=slave_out_fd,
+ stderr=slave_err_fd,
+ preexec_fn=os.setsid,
+ env=env)
+    out_buffer = b''
+    err_buffer = b''
+    while p.poll() is None:
+        r, w, e = select.select([master_out_fd, master_err_fd], [], [], 1)
+        first_prompt = b'Enter passphrase empty for no passphrase):'
+        second_prompt = b'Enter name passphrase again'
+        prompt = first_prompt
+        for fd in r:
+if fd == master_out_fd:
+    chunks = os.read(master_out_fd, 10240)
+    out_buffer = chunks
+    if prompt in out_buffer:
+        os.write(master_in_fd, self.ssh_passphrase  b'\r')
+        prompt = second_prompt
+else:
+    chunks = os.read(master_err_fd, 10240)
+    err_buffer = chunks
+    if prompt in err_buffer:
+        os.write(master_in_fd, self.ssh_passphrase  b'\r')
+        prompt = second_prompt
+if b'Overwrite (y/n)?' in out_buffer or b'Overwrite (y/n)?' in err_buffer:
+    # This create between us checking for existence and now
+    return (None, 'Key already exists', '')
+
+    rc = p.returncode
+    out = to_native(out_buffer)
+    err = to_native(err_buffer)
+except OSError as e:
+    return (1, '', to_native(e))
+cmd.append('-N')
+(rc, out, err) = self.execute_command(cmd)
+
+"
+-------------------------------------------------------------------------
+"if self.module.check_mode:
+    self.module.debug('In check mode, would have run: ""%s""' % cmd)
+    return (0, '', '')
+
+master_in_fd, slave_in_fd = pty.openpty()
+master_out_fd, slave_out_fd = pty.openpty()
+master_err_fd, slave_err_fd = pty.openpty()
+env = os.environ.copy()
+env['LC_ALL'] = 'C'
+try:
+    p = subprocess.Popen([to_bytes(c) for c in cmd],
+ stdin=slave_in_fd,
+ stdout=slave_out_fd,
+ stderr=slave_err_fd,
+ preexec_fn=os.setsid,
+ env=env)
+    out_buffer = b''
+    err_buffer = b''
+    while p.poll() is None:
+        r, w, e = select.select([master_out_fd, master_err_fd], [], [], 1)
+        first_prompt = b'Enter passphrase (empty for no passphrase):'
+        second_prompt = b'Enter same passphrase again'
+        prompt = first_prompt
+        for fd in r:
+if fd == master_out_fd:
+    chunk = os.read(master_out_fd, 10240)
+    out_buffer = chunk
+    if prompt in out_buffer:
+        os.write(master_in_fd, to_bytes(self.ssh_passphrase, errors='strict')  b'\r')
+        prompt = second_prompt
+else:
+    chunk = os.read(master_err_fd, 10240)
+    err_buffer = chunk
+    if prompt in err_buffer:
+        os.write(master_in_fd, to_bytes(self.ssh_passphrase, errors='strict')  b'\r')
+        prompt = second_prompt
+if b'Overwrite (y/n)?' in out_buffer or b'Overwrite (y/n)?' in err_buffer:
+    # The key was created between us checking for existence and now
+    return (None, 'Key already exists', '')
+
+    rc = p.returncode
+    out = to_native(out_buffer)
+    err = to_native(err_buffer)
+except OSError as e:
+    return (1, '', to_native(e))
+cmd.append('-N')
+(rc, out, err) = self.execute_command(cmd)
+
+"
+-------------------------------------------------------------------------
+"
+# Test cases might require backporting as well.
+# New feature added based on the pull request.
+# This code includes a fix for the reported issue.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 47436, 47487"
+-------------------------------------------------------------------------
+=========================================================================
+"if checksum != destination_checksum:
+    checksum_mismatch = True
+
+t forcing redownload, unless checksum does not match
+ot force and not checksum_mismatch:
+# Not forcing redownload, unless checksum does not match
+# allow file attribute changes
+module.params['path'] = dest
+file_args = module.load_file_common_arguments(module.params)
+file_args['path'] = dest
+result['changed'] = module.set_fs_attributes_if_different(file_args, False)
+if result['changed']:
+    module.exit_json(msg=""file already exists but file attributes changed"", **result)
+module.exit_json(msg=""file already exists"", **result)
+"
+-------------------------------------------------------------------------
+"if checksum != destination_checksum:
+    checksum_mismatch = Tree
+
+t forcing redownload, unless checksum does not match
+ot force and not checksum_mismatch:
+# Not forcing redownload, unless checksum does not match
+# allow file attribute changed
+module.params['path'] = Rest
+file_args = module.load_file_common_arguments(module.params)
+file_args['path'] = Rest
+result['changed'] = module.set_fs_attributes_if_different(file_args, False)
+if result['changed']:
+    module.exit_json(msg=""file already exists but file attributes changed"", **result)
+module.exit_json(msg=""file already exists"", **result)
+"
+-------------------------------------------------------------------------
+"if checksum != destination_checksum:
+    checksum_mismatch = True
+
+t forcing redownload, unless checksum does not match
+ot force and not checksum_mismatch:
+# allow file attribute changes
+module.params['path'] = dest
+file_args = module.load_file_common_arguments(module.params)
+file_args['path'] = dest
+changed = module.set_fs_attributes_if_different(file_args, False)
+if changed:
+    module.exit_json(msg=""file already exists but file attributes changed"", dest=dest, url=url, changed=changed)
+module.exit_json(msg=""file already exists"", dest=dest, url=url, changed=changed)
+"
+-------------------------------------------------------------------------
+"
+# This code includes a fix for the reported issue.
+# Test cases might require backporting as well.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 45495, 45567"
+-------------------------------------------------------------------------
+=========================================================================
+"if checksum != destination_checksum:
+    checksum_mismatch = True
+
+t forcing redownload, unless checksum does not match
+ot force and not checksum_mismatch:
+# Not forcing redownload, unless checksum does not match
+# allow file attribute changes
+module.params['path'] = dest
+file_args = module.load_file_common_arguments(module.params)
+file_args['path'] = dest
+result['changed'] = module.set_fs_attributes_if_different(file_args, False)
+if result['changed']:
+    module.exit_json(msg=""file already exists but file attributes changed"", **result)
+module.exit_json(msg=""file already exists"", **result)
+"
+-------------------------------------------------------------------------
+"if checksum != destination_checksum:
+    checksum_mismatch = Tree
+
+t forcing redownload, unless checksum does not match
+ot force and not checksum_mismatch:
+# Not forcing redownload, unless checksum does not match
+# allow file attribute changed
+module.params['path'] = Rest
+file_args = module.load_file_common_arguments(module.params)
+file_args['path'] = Rest
+result['changed'] = module.set_fs_attributes_if_different(file_args, False)
+if result['changed']:
+    module.exit_json(msg=""file already exists but file attributes changed"", **result)
+module.exit_json(msg=""file already exists"", **result)
+"
+-------------------------------------------------------------------------
+"if checksum != destination_checksum:
+    checksum_mismatch = True
+
+t forcing redownload, unless checksum does not match
+ot force and not checksum_mismatch:
+# Not forcing redownload, unless checksum does not match
+# allow file attribute changes
+module.params['path'] = dest
+file_args = module.load_file_common_arguments(module.params)
+file_args['path'] = dest
+changed = module.set_fs_attributes_if_different(file_args, False)
+if changed:
+    module.exit_json(msg=""file already exists but file attributes changed"", dest=dest, url=url, changed=changed)
+module.exit_json(msg=""file already exists"", dest=dest, url=url, changed=changed)
+"
+-------------------------------------------------------------------------
+"
+# This code includes a fix for the reported issue.
+# Test cases might require backporting as well.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 45495, 45565"
 -------------------------------------------------------------------------
 =========================================================================
