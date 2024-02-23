@@ -68,12 +68,12 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     backport_filesContents = []
                     previous_backport_filesContents = []
 
-                    for fileO in pullOriginal.get_files():
-                        # previous_original_filesContents.append({fileO.filename:repo.get_contents(fileO.filename, ref=pullOriginal.base.sha).decoded_content.decode('utf-8')})
-                        try:
-                            original_filesContents.append({fileO.filename:repo.get_contents(fileO.filename, ref=pullOriginal.head.sha).decoded_content.decode('utf-8')})
-                        except:
-                            original_filesContents = None    
+                    # for fileO in pullOriginal.get_files():
+                    #     # previous_original_filesContents.append({fileO.filename:repo.get_contents(fileO.filename, ref=pullOriginal.base.sha).decoded_content.decode('utf-8')})
+                    #     try:
+                    #         original_filesContents.append({fileO.filename:repo.get_contents(fileO.filename, ref=pullOriginal.head.sha).decoded_content.decode('utf-8')})
+                    #     except:
+                    #         original_filesContents = None    
                     for fileB in pullBackport.get_files():
                         try:
                             previous_backport_filesContents.append({fileB.filename:repo.get_contents(fileB.filename, ref=pullBackport.base.sha).decoded_content.decode('utf-8')})
@@ -88,19 +88,19 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     pull_backport = gLocal.execute(["gh", "pr", "view", pull_id_backport])
                     pull_commitOriginal = gLocal.execute(["gh", "pr", "view", pull_id_original, "--json", "mergeCommit"])
                     pull_commitBackports = gLocal.execute(["gh", "pr", "view", pull_id_backport, "--json", "mergeCommit"])
-                    # targetStableBranch = ast.literal_eval(gLocal.execute(["gh", "pr", "view", pull_id_backport, "--json", "baseRefName"]))['baseRefName']
+                    targetStableBranch = ast.literal_eval(gLocal.execute(["gh", "pr", "view", pull_id_backport, "--json", "baseRefName"]))['baseRefName']
                     if pull_commitOriginal == '{"mergeCommit":null}' or pull_commitBackports == '{"mergeCommit":null}':
                         continue 
-                    targetStableBranch = line[3].strip()
-                    branch_exists = any(branch.strip() == targetStableBranch for branch in branches.split('\n'))
+                    # targetStableBranch = line[3].strip()
+                    # branch_exists = any(branch.strip() == targetStableBranch for branch in branches.split('\n'))
                     
-                    
-                    if not branch_exists:
-                            gLocal.branch(targetStableBranch)
+                    # creationStableBranch = None
+                    # if not branch_exists:
+                    #         gLocal.branch(targetStableBranch)
 
-                    else:
-                            creationStableBranch = gLocal.execute(["git", "log", "--reverse", "--pretty=format:'%h %ad %s'", "--date=iso", targetStableBranch]).split('\n')[1]
-                            # git log --reverse  <branch-name> | tail -1
+                    # else:
+                    #         creationStableBranch = gLocal.execute(["git", "log", "--reverse", "--pretty=format:'%h %ad %s'", "--date=iso", targetStableBranch]).split('\n')[1]
+                    #         # git log --reverse  <branch-name> | tail -1
 
 
                     original_mergeCommits = ast.literal_eval(pull_commitOriginal)['mergeCommit']["oid"] if "null" not in pull_commitOriginal else None        
@@ -117,8 +117,8 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     codehunks_backport_withContext = []
                     # codeFiles = []
                     
-                    commitStartDate = commits_diffs_original[0].split("\n")[2].split("Date:   ")[1] if commits_diffs_original[0]!='' else print("Commit has no py files")
-                    commitEndDate = creationStableBranch.split(" ")[1]
+                    # commitStartDate = commits_diffs_original[0].split("\n")[2].split("Date:   ")[1] if commits_diffs_original[0]!='' else print("Commit has no py files")
+                    # commitEndDate = creationStableBranch.split(" ")[1]
 
                     if len(commits_diffs_backport) == len(commits_diffs_original):
                         for indexO in range(1, len(commits_diffs_original)):
@@ -134,10 +134,16 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                 is_test_codeB = True                                                    
                             commits_diffs_original_contextHunks = commits_diffs_original[indexO].split("\n@@ ")
                             commits_diffs_backport_contextHunks = commits_diffs_backport[indexO].split("\n@@ ")
-                            for indexHunks0 in range(1, len(commits_diffs_original_contextHunks)):
 
-                                commits_hunkline_original_context = commits_diffs_original_contextHunks[indexHunks0].split("\n")
-                                commits_hunkline_backport_context = commits_diffs_backport_contextHunks[indexHunks0].split("\n")
+                            original_hunks_count = len(commits_diffs_original_contextHunks)
+                            backport_hunks_count = len(commits_diffs_backport_contextHunks)
+
+                            min_hunks_count = min(original_hunks_count, backport_hunks_count)
+
+                            for indexHunks0 in range(1, min_hunks_count):
+
+                                commits_hunkline_original_context = commits_diffs_original_contextHunks[original_hunks_count - indexHunks0].split("\n")
+                                commits_hunkline_backport_context = commits_diffs_backport_contextHunks[backport_hunks_count - indexHunks0].split("\n")
                                 hunkStartLnNo = commits_hunkline_original_context[0].split(" ")[0][1:].split(",")
                                 hunkEndlnNo = commits_hunkline_original_context[0].split(" ")[1][1:].split(",")
 
@@ -180,12 +186,12 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                 # fullFileTarget = repo.get_contents(file_path[2:], ref=targetStableBranch).decoded_content.decode("utf-8")
 
                                 file_path = filepath.split(" ")[2]
-                                if original_filesContents:
-                                    for itemFcontent in original_filesContents:
-                                        temp_itemFcontent = itemFcontent.copy()
-                                        filepathFull, fullFilecontentOriginal = temp_itemFcontent.popitem()
-                                        if filepathFull == file_path[2:]:    
-                                            fullFileTarget = fullFilecontentOriginal    
+                                # if original_filesContents:
+                                #     for itemFcontent in original_filesContents:
+                                #         temp_itemFcontent = itemFcontent.copy()
+                                #         filepathFull, fullFilecontentOriginal = temp_itemFcontent.popitem()
+                                #         if filepathFull == file_path[2:]:    
+                                #             fullFileTarget = fullFilecontentOriginal    
 
                                 if previous_backport_filesContents:
                                     for itemBcontent in previous_backport_filesContents:
@@ -225,7 +231,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                 numberofDifferences = numberofDifferences + 1
 
                             functionalSetforHunk = get_functional_set(codeHunk, testCases = testhunks_original)
-                            astdiffshistory = get_ast_diffs(source_commits = pull_commitsSubmitted, startCommit=None, endCommit=None, startDate = commitStartDate, endDate = commitEndDate, repoName=repoName, projectName =projectName) 
+                            astdiffshistory = get_ast_diffs(source_commits = pull_commitsSubmitted, startCommit=None, endCommit=None, startDate = None, endDate = None, repoName=repoName, projectName =projectName) 
                             # cslicer = Cslicer(sourceOriginal = codeHunk,
                             #                     sourcebackport = codeHunkBackport, 
                             #                     astdiffsHistory = astdiffshistory, 
@@ -258,14 +264,14 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                         slicedPRs.append(slicesfromCSLICER)
 
                 except Exception as e:
-                    print("Problem in pulls")
+                    print("Problem in pulls ", pull_id_original, pull_id_backport)
                     if slicesfromCSLICER:
                         slicedPRs.append(slicesfromCSLICER)                    
                     print(e)
                     continue
         
 
-    with open(projectName+"InconICFDiffBackSlic", 'w') as f:   
+    with open(projectName+"InconICFDiffBackSlicSample", 'w') as f:   
         print("Total Labeled Backporting PRs", len(data_read), file=f)
         print("Total Sliced Required", numberofSlicingRequired, file=f)
         print("Total Number of Hunk Differences", numberofDifferences, file=f)
@@ -349,9 +355,9 @@ ansibleDefault_branch = 'devel'
 # RailsDefault_branch = 'main'
 # KibanaDefault_branch = 'main'
 # cpythonDefault_branch = 'main'
-mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRs.csv', 
+mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRsSample.csv', 
 ansibleDefault_branch,
 ansibleDictOfActiveBranches,
 'ansible',
 'ansible',
-'data_cmp_incmpWithTest/Incmp_BackSlice_Ansible_backport_keywordsPRs.csv')
+'data_cmp_incmpWithTest/Incmp_BackSliceSample_Ansible_backport_keywordsPRs.csv')

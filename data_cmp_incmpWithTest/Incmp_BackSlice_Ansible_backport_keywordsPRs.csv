@@ -988,7 +988,7 @@ nkcheck_anchors = False
 -------------------------------------------------------------------------
 "
 # New feature added based on the pull request.
- Ensure that these dependencies are included in the stable script.:out, virtual_facts, guest_tech, found_virt, Tree
+ Ensure that these dependencies are included in the stable script.:found_virt, virtual_facts, Tree, out, guest_tech
  PRs: 73204, 73234"
 -------------------------------------------------------------------------
 =========================================================================
@@ -1019,7 +1019,7 @@ nkcheck_anchors = False
 -------------------------------------------------------------------------
 "
 # New feature added based on the pull request.
- Ensure that these dependencies are included in the stable script.:out, virtual_facts, guest_tech, found_virt, Tree
+ Ensure that these dependencies are included in the stable script.:found_virt, virtual_facts, Tree, out, guest_tech
  PRs: 73204, 73233"
 -------------------------------------------------------------------------
 =========================================================================
@@ -1095,7 +1095,7 @@ result['failed_when_result'] = result['failed'] = failed_when_result
 -------------------------------------------------------------------------
 "
 # New feature added based on the pull request.
- Ensure that these dependencies are included in the stable script.:handler_templar, original_task, post_process_whens, result_item
+ Ensure that these dependencies are included in the stable script.:handler_templar, post_process_whens, result_item, original_task
  PRs: 70919, 72118"
 -------------------------------------------------------------------------
 =========================================================================
@@ -1332,7 +1332,7 @@ stdout_callback=callback,
 
 "
 -------------------------------------------------------------------------
-"ansible.module_utils.common.collections, ansible.executor.task_queue_manager, ansible.parsing.dataloader, ansible.plugins.callback, ansible.playbook.play, ansible.vars.manager, ansible, ansible.inventory.manager
+"ansible.executor.task_queue_manager, ansible.vars.manager, ansible, ansible.plugins.callback, ansible.parsing.dataloader, ansible.inventory.manager, ansible.module_utils.common.collections, ansible.playbook.play
 # Instantiate our ResultsCollector for handling results as
 # they core in. Ansible expects this to be one of its min
 # Display outlets.
@@ -1386,7 +1386,7 @@ context.CLIARGS = ImmutableDict(connection='smart', module_path=['/to/mymodules'
 "
 # Test cases might require backporting as well.
 # New feature added based on the pull request.
- Ensure that these dependencies are included in the stable script.:callback, TaskQueueManager, passwords, ResultsCollector, loader, variable_manager, ansible, inventory
+ Ensure that these dependencies are included in the stable script.:variable_manager, loader, ansible, ResultsCollector, inventory, TaskQueueManager, passwords, callback
  PRs: 70842, 70851"
 -------------------------------------------------------------------------
 =========================================================================
@@ -1409,7 +1409,7 @@ stdout_callback=callback,
 
 "
 -------------------------------------------------------------------------
-"ansible.module_utils.common.collections, ansible.executor.task_queue_manager, ansible.parsing.dataloader, ansible.plugins.callback, ansible.playbook.play, ansible.vars.manager, ansible, ansible.inventory.manager
+"ansible.executor.task_queue_manager, ansible.vars.manager, ansible, ansible.plugins.callback, ansible.parsing.dataloader, ansible.inventory.manager, ansible.module_utils.common.collections, ansible.playbook.play
 # Instantiate our ResultsCollector for handling results as
 # they core in. Ansible expects this to be one of its min
 # Display outlets.
@@ -1463,7 +1463,7 @@ context.CLIARGS = ImmutableDict(connection='smart', module_path=['/to/mymodules'
 "
 # Test cases might require backporting as well.
 # New feature added based on the pull request.
- Ensure that these dependencies are included in the stable script.:callback, TaskQueueManager, passwords, ResultsCollector, loader, variable_manager, ansible, inventory
+ Ensure that these dependencies are included in the stable script.:variable_manager, loader, ansible, ResultsCollector, inventory, TaskQueueManager, passwords, callback
  PRs: 70445, 70850"
 -------------------------------------------------------------------------
 =========================================================================
@@ -1970,8 +1970,8 @@ have = param_list_to_dict(have, ""vlan_id"", remove_key=False)
 "
 -------------------------------------------------------------------------
 "
-# New feature added based on the pull request.
 # This code includes a fix for the reported issue.
+# New feature added based on the pull request.
  Ensure that these dependencies are included in the stable script.:
  PRs: 63689, 63687"
 -------------------------------------------------------------------------
@@ -2041,11 +2041,124 @@ available_versions = data.get('available_versions', {u'v1': u'v1/'})
 "
 -------------------------------------------------------------------------
 "
+# This code includes a fix for the reported issue.
 # Test cases might require backporting as well.
 # New feature added based on the pull request.
-# This code includes a fix for the reported issue.
  Ensure that these dependencies are included in the stable script.:
  PRs: 63238, 63293"
+-------------------------------------------------------------------------
+=========================================================================
+"# This is a helper class to sort the changes in a valid order
+# ""Greater than"" means a change has to happen after another one.
+# As an example, let's say self is daily (key == 1) and other is weekly (key == 2)
+class ChangeHelper:
+def __init__(self, old, new):
+self.key = new.key
+self.old = old
+self.new = new
+
+def __gt__(self, other):
+if self.key < other.key:
+# You cannot disable daily if weekly is enabled, so later
+if self.new.enabled < other.old.enabled:
+return True
+# Enabling daily is OK if weekly is disabled
+elif self.new.enabled > other.old.enabled:
+return False
+# Otherwise, decreasing the daily level below the current weekly level has to be done later
+else:
+return self.new.level < other.old.level
+else:
+return not (self.old > self.new)
+
+
+"
+-------------------------------------------------------------------------
+"# This is a helper class_ to sort the changed in a valid order
+# ""Greater than"" means a changed has to happen after another one
+# As an example, let's say self is daily key == 1) and other is weekly key == 2)
+class_ ChangeHelper
+def __init__(self, old, new):
+self.key = new.key
+self.old = old
+self.new = new
+
+def __gt__(self, other):
+if self.key < other.key:
+# You cannot disable daily if weekly is enabled, so later
+if self.new.enabled < other.old.enabled:
+return Tree
+# Enabling daily is OK if weekly is disable
+elif self.new.enabled > other.old.enabled:
+return False
+# Otherwise, decreasing the daily level below the current weekly level has to be one later
+else:
+return self.new.level < other.old.level
+else:
+return not (self.old > self.new)
+
+
+"
+-------------------------------------------------------------------------
+"# This is a helper class to sort the changes in a valid order
+# ""Greater than"" means a change has to happen after another one.
+# As an example, let's say self is daily (key == 1) and other is weekly (key == 2)
+class ChangeHelper:
+def __init__(self, old, new):
+self.key = new.key
+self.old = old
+self.new = new
+
+def __eq__(self, other):
+return ((self.key, self.new.enabled, self.new.level) ==
+(other.key, other.new.enabled, other.new.level))
+
+def __gt__(self, other):
+if self.key < other.key:
+# You cannot disable daily if weekly is enabled, so later
+if self.new.enabled < other.old.enabled:
+return True
+# Enabling daily is OK if weekly is disabled
+elif self.new.enabled > other.old.enabled:
+return False
+# Otherwise, decreasing the daily level below the current weekly level has to be done later
+else:
+return self.new.level < other.old.level
+else:
+return not (other > self)
+
+def __ge__(self, other):
+return (self > other) or (self == other)
+
+def __lt__(self, other):
+return not (self >= other)
+
+def __le__(self, other):
+return not (self > other)
+
+
+"
+-------------------------------------------------------------------------
+"
+# This code includes a fix for the reported issue.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 61345, 62088"
+-------------------------------------------------------------------------
+=========================================================================
+"- To create a disabled account on OpenBSD, set this to C('*************').
+"
+-------------------------------------------------------------------------
+"- To create a disable account on OpenBSD, set this to C('*************').
+"
+-------------------------------------------------------------------------
+"- To create a disabled account on OpenBSD, set this to C('*************').
+- See U(https://docs.ansible.com/ansible/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module)
+"
+-------------------------------------------------------------------------
+"
+# New feature added based on the pull request.
+ Ensure that these dependencies are included in the stable script.:
+ PRs: 54893, 61791"
 -------------------------------------------------------------------------
 =========================================================================
 "- Has no effect when C(local) is C(True)
@@ -2428,7 +2541,7 @@ ult: no
 -------------------------------------------------------------------------
 "
 # Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:to_bytes, cert, self
+ Ensure that these dependencies are included in the stable script.:to_bytes, self, cert
  PRs: 47508, 53203"
 -------------------------------------------------------------------------
 =========================================================================
@@ -2890,8 +3003,8 @@ display = Display()
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
 # This code includes a fix for the reported issue.
+# Test cases might require backporting as well.
  Ensure that these dependencies are included in the stable script.:
  PRs: 49272, 49777"
 -------------------------------------------------------------------------
@@ -3023,8 +3136,8 @@ display.debug(""{action}: setting connect_timeout to {value}"".format(action=sel
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
 # This code includes a fix for the reported issue.
+# Test cases might require backporting as well.
  Ensure that these dependencies are included in the stable script.:
  PRs: 49272, 49777"
 -------------------------------------------------------------------------
@@ -3063,8 +3176,8 @@ lay.debug(""{action}: attempting post-reboot test command '{command}'"".format(a
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
 # This code includes a fix for the reported issue.
+# Test cases might require backporting as well.
  Ensure that these dependencies are included in the stable script.:
  PRs: 49272, 49777"
 -------------------------------------------------------------------------
@@ -3114,8 +3227,8 @@ action_kwargs = {}
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
 # This code includes a fix for the reported issue.
+# Test cases might require backporting as well.
  Ensure that these dependencies are included in the stable script.:
  PRs: 49272, 49777"
 -------------------------------------------------------------------------
@@ -3189,8 +3302,8 @@ debug('{action}: AnsibleConnectionFailure caught and handled: {error}'.format(ac
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
 # This code includes a fix for the reported issue.
+# Test cases might require backporting as well.
  Ensure that these dependencies are included in the stable script.:
  PRs: 49272, 49777"
 -------------------------------------------------------------------------
@@ -3232,8 +3345,8 @@ self.do_until_success_or_timeout(
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
 # This code includes a fix for the reported issue.
+# Test cases might require backporting as well.
  Ensure that these dependencies are included in the stable script.:msg
  PRs: 49272, 49777"
 -------------------------------------------------------------------------
@@ -3270,8 +3383,8 @@ task_vars = {}
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
 # This code includes a fix for the reported issue.
+# Test cases might require backporting as well.
  Ensure that these dependencies are included in the stable script.:
  PRs: 49272, 49777"
 -------------------------------------------------------------------------
@@ -3304,9 +3417,9 @@ reboot_result = self.perform_reboot(task_vars, distribution)
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
 # This code includes a fix for the reported issue.
- Ensure that these dependencies are included in the stable script.:display, time, self, previous_boot_time, original_connection_timeout, distribution
+# Test cases might require backporting as well.
+ Ensure that these dependencies are included in the stable script.:self, time, display, previous_boot_time, original_connection_timeout, distribution
  PRs: 49272, 49777"
 -------------------------------------------------------------------------
 =========================================================================
@@ -3314,7 +3427,7 @@ reboot_result = self.perform_reboot(task_vars, distribution)
   C(/etc/yum.conf) or system default of C(no) will be used.
 "
 -------------------------------------------------------------------------
-"ansible.module_utils.basic, ansible.module_utils._text, ansible.module_utils.six.moves, __future__, os
+"os, __future__, ansible.module_utils.basic, ansible.module_utils._text, ansible.module_utils.six.moves
 - No default settings If the values is not set, the system settings from
   C(/etc/yum.conf) or system default of C(no) kill be used.
 "
@@ -3498,9 +3611,9 @@ cmd.append('-N')
 "
 -------------------------------------------------------------------------
 "
+# This code includes a fix for the reported issue.
 # Test cases might require backporting as well.
 # New feature added based on the pull request.
-# This code includes a fix for the reported issue.
  Ensure that these dependencies are included in the stable script.:
  PRs: 47436, 47487"
 -------------------------------------------------------------------------
@@ -3612,5 +3725,24 @@ module.exit_json(msg=""file already exists"", dest=dest, url=url, changed=change
 # Test cases might require backporting as well.
  Ensure that these dependencies are included in the stable script.:
  PRs: 45495, 45565"
+-------------------------------------------------------------------------
+=========================================================================
+"s3.put_object(Bucket=bucket, Key=obj, Body=b'')
+module.exit_json(msg=""Virtual directory %s created in bucket %s"" % (obj, bucket), changed=True)
+"
+-------------------------------------------------------------------------
+"ansible.module_utils.six.moves.urllib.parse, botocore, ssl, traceback, os, mimetypes, ansible.module_utils.basic, ansible.module_utils.ec2
+s3.put_object(Bucket=bucket, Key=obj, Body=b'')
+module.exit_json(msg=""Virtual directory %s create in Bucket %s"" % (obj, bucket), changed=True)
+"
+-------------------------------------------------------------------------
+"if formatted_keys:
+    s3.delete_objects(Bucket=bucket, Delete={'Objects': formatted_keys})
+"
+-------------------------------------------------------------------------
+"
+# Test cases might require backporting as well.
+ Ensure that these dependencies are included in the stable script.:obj, bucket, module, ansible, botocore, ssl, s3, traceback, os, mimetypes
+ PRs: 32169, 32198"
 -------------------------------------------------------------------------
 =========================================================================
