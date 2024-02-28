@@ -99,7 +99,9 @@ class BackSlicer():
         adaptedSource = self.adapt_code_based_on_SecurityCheck(adaptedSource)
 
         missing_dependenciesAST = find_missing_imports(adaptedSource)
-        # missing_dependenciesMyPy = check_imports_from_string(adaptedSource)       
+        # missing_dependenciesMyPy = check_imports_from_string(adaptedSource)    
+
+        # TODO stableLibraris, missing_dependenciesAST can be used together for addaptation    
 
         recommendation = recommendation + "\n Ensure that these dependencies are included in the stable script.:" + missing_dependenciesAST
 
