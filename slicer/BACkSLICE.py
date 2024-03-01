@@ -102,34 +102,30 @@ class BackSlicer():
         missing_dependenciesAST = missing_dependenciesAST.split(", ")
         # missing_dependenciesMyPy = check_imports_from_string(adaptedSource)    
 
-        if self.stableLibraris and len(missing_dependenciesAST) > 1:
-            for library_name, library_info in self.stableLibraris.items():
-                if library_info:
-                # Replace information about method names
-                    if library_info['function_names']:
-                        for method_name in library_info['function_names']:
-                            if method_name in missing_dependenciesAST:
-                                recommendation += f"\nEnsure that these methods are included in the stable script - {method_name}"
-                            else: 
-                                recommendation += f"\You may discard these methods - {method_name}"
+        recommendation_to_add = "\nEnsure statements related to these methods are included in the stable script - "
+        recommendation_to_remove = "\nEnsure statements related to these methods are excluded in the stable script - "
 
-                        for method_call in library_info['function_calls']:
-                            if method_call in missing_dependenciesAST:
-                                recommendation += f"\nEnsure that these calls are included in the stable script - {method_call}"
-                            else: 
-                                recommendation += f"\You may discard these calls - {method_call}" 
+        if self.stableLibraris and missing_dependenciesAST:
+            added_methods = set()  
 
-                        for class_method_call in library_info['class_method_calls']:
-                            if class_method_call in missing_dependenciesAST:
-                                recommendation += f"\nEnsure that these class method are included in the stable script - {class_method_call}"
-                            else: 
-                                recommendation += f"\You may discard these class method - {class_method_call}" 
+            for method_name in missing_dependenciesAST:
+                found = False
+                for library_name, library_info in self.stableLibraris.items():
+                    if library_info:
+                        for name in library_info['function_names'] + library_info['function_calls'] + library_info['class_method_calls'] + library_info['libraries']:
+                            if method_name in name:
+                                recommendation_to_add += f"\n{method_name}"  
+                                added_methods.add(method_name)
+                                found = True
+                                break
+                    if found:
+                        break
 
-                        for library in library_info['libraries']:
-                            if library in missing_dependenciesAST:
-                                recommendation += f"\nEnsure that these libraries are included in the stable script - {library}"
-                            else: 
-                                recommendation += f"\You may discard these libraries - {library}"                                                                                                    
+            for method_name in missing_dependenciesAST:
+                if method_name not in added_methods:
+                    recommendation_to_remove += f"\n{method_name}"
+
+        recommendation = recommendation_to_add + "\n" + recommendation_to_remove                                                                                                               
 
         return adaptedSource, recommendation
 
