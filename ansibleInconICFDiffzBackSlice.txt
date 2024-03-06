@@ -1,26 +1,26 @@
 Total Labeled Backporting PRs 753
-Total Sliced Required 1571
-Total Number of Hunk Differences 81
-Total Hunks Have Test and Code 75
-Total Succesfully Sliced 81
-Average BLEU Score: 0.3969929500946909
-Average METEOR Score: 0.6232376148728767
-Average CodeBLEU Score: 0.6471402463520658
-Average ROUGE-L Score: 0.0
-Average CHRF Score: 4.817640734313355
-Cohen's Kappa between BLEU and Meteor: 0.6567796610169492
+Total Sliced Required 1564
+Total Number of Hunk Differences 96
+Total Hunks Have Test and Code 76
+Total Succesfully Sliced 96
+Average BLEU Score: 0.3843573189581808
+Average METEOR Score: 0.6609225292949519
+Average CodeBLEU Score: 0.7369395602107214
+Average ROUGE-L Score: 0.7046350740820521
+Average CHRF Score: 5.948737553069263
+Cohen's Kappa between BLEU and Meteor: 0.6632653061224489
 Confusion Matrix BLEU vs Meteor:
-[[50 10]
- [ 2 19]]
-Cohen's Kappa between BLEU and CodeBLEU: 0.7911602209944751
+[[70 10]
+ [ 1 15]]
+Cohen's Kappa between BLEU and CodeBLEU: 0.75
 Confusion Matrix BLEU vs CodeBLEU:
-[[54  6]
- [ 1 20]]
-Cohen's Kappa between BLEU and ROUGE-L: 0.0
+[[72  8]
+ [ 0 16]]
+Cohen's Kappa between BLEU and ROUGE-L: 0.7244897959183674
 Confusion Matrix BLEU vs ROUGE-L:
-[[60  0]
- [21  0]]
-Cohen's Kappa between BLEU and CHRF: 0.06493506493506485
+[[71  9]
+ [ 0 16]]
+Cohen's Kappa between BLEU and CHRF: 0.05102040816326525
 Confusion Matrix BLEU vs CHRF:
-[[15 45]
- [ 3 18]]
+[[20 60]
+ [ 2 14]]

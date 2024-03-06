@@ -4,12 +4,19 @@
 "VERSION = '2.10'
 "
 -------------------------------------------------------------------------
-"copyright = ""2021 Red Hat, Inc.""
+"exclude_patterns = [
+'2.10_index.rst',
+'ansible_index.rst',
+'core_index.rst',
+'porting_guides/core_porting_guides',
+
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 73616, 73637"
 -------------------------------------------------------------------------
 =========================================================================
@@ -938,8 +945,10 @@ nkcheck_anchors = False
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 73616, 73637"
 -------------------------------------------------------------------------
 =========================================================================
@@ -954,8 +963,10 @@ nkcheck_anchors = False
 "
 -------------------------------------------------------------------------
 "
-# New feature added based on the pull request.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 73541, 73544"
 -------------------------------------------------------------------------
 =========================================================================
@@ -985,8 +996,14 @@ nkcheck_anchors = False
 "
 -------------------------------------------------------------------------
 "
-# New feature added based on the pull request.
- Ensure that these dependencies are included in the stable script.:out, Tree, found_virt, guest_tech, virtual_facts
+Ensure statements related to these methods are included in the stable script - 
+Tree
+out
+virtual_facts
+
+Ensure statements related to these methods are excluded in the stable script - 
+guest_tech
+found_virt
  PRs: 73204, 73234"
 -------------------------------------------------------------------------
 =========================================================================
@@ -1016,8 +1033,14 @@ nkcheck_anchors = False
 "
 -------------------------------------------------------------------------
 "
-# New feature added based on the pull request.
- Ensure that these dependencies are included in the stable script.:out, Tree, found_virt, guest_tech, virtual_facts
+Ensure statements related to these methods are included in the stable script - 
+Tree
+out
+virtual_facts
+
+Ensure statements related to these methods are excluded in the stable script - 
+guest_tech
+found_virt
  PRs: 73204, 73233"
 -------------------------------------------------------------------------
 =========================================================================
@@ -1063,25 +1086,44 @@ result['failed_when_result'] = result['failed'] = failed_when_result
 "
 -------------------------------------------------------------------------
 "
-# New feature added based on the pull request.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 70919, 72118"
 -------------------------------------------------------------------------
 =========================================================================
-"from ansible.playbook.conditional import Conditional
+"post_process_whens(result_item, original_task, handler_templar)
+post_process_whens(result_item, original_task, handler_templar)
 "
 -------------------------------------------------------------------------
-"from ansible.playbook.conditional import Conditional
+"post_process_whens(result_item, original_task, handler_templar)
+post_process_whens(result_item, original_task, handler_templar)
 "
 -------------------------------------------------------------------------
-"_sentinel = StrategySentinel()
+"def post_process_whens(result, task, templar):
+cond = None
+if task.changed_when:
+cond = Conditional(loader=templar._loader)
+cond.when = task.changed_when
+result['changed'] = cond.evaluate_conditional(templar, templar.available_variables)
 
-
+if task.failed_when:
+if cond is None:
+cond = Conditional(loader=templar._loader)
+cond.when = task.failed_when
+failed_when_result = cond.evaluate_conditional(templar, templar.available_variables)
+result['failed_when_result'] = result['failed'] = failed_when_result
 "
 -------------------------------------------------------------------------
 "
-# New feature added based on the pull request.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+original_task
+
+Ensure statements related to these methods are excluded in the stable script - 
+handler_templar
+post_process_whens
+result_item
  PRs: 70919, 72118"
 -------------------------------------------------------------------------
 =========================================================================
@@ -1152,9 +1194,10 @@ fail = True
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
-# New feature added based on the pull request.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 71537, 71541"
 -------------------------------------------------------------------------
 =========================================================================
@@ -1225,34 +1268,21 @@ fail = True
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
-# New feature added based on the pull request.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 71537, 71540"
 -------------------------------------------------------------------------
 =========================================================================
-"# Keep track of what files we create here with default permissions so later we can see if the permissions
-# are explicitly set with a follow up call to set_mode_if_different().
-#
-# Only warn if the module accepts 'mode' parameter so the user can take action.
-# If the module does not allow the user to set 'mode', then the warning is useless to the
-# user since it provides no actionable information.
-#
-if self.argument_spec.get('mode') and self.params.get('mode') is None:
-    self._created_files.add(dest)
+"self._created_files = set()
 
+    self._uses_common_file_args = True
 "
 -------------------------------------------------------------------------
-"# Keep track of what file we create here with default permissions so later we can see if the permissions
-# are explicitly set with a follow up all to set_mode_if_different().
-#
-# Only Yarn if the module accepts 'mode' parameter so the user can take action
-# If the module does not allow the user to set 'mode', then the warning is useless to the
-# user since it provider no actionable information.
-#
-if self.argument_spec.get('mode') and self.params.get('mode') is None:
-    self._created_files.add(dest)
+"self._created_files = set()
 
+    self._uses_common_file_args = Tree
 "
 -------------------------------------------------------------------------
 "if mode is None:
@@ -1261,21 +1291,39 @@ if self.argument_spec.get('mode') and self.params.get('mode') is None:
 "
 -------------------------------------------------------------------------
 "
- Ensure that these dependencies are included in the stable script.:dest, self
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 71260, 71514"
 -------------------------------------------------------------------------
 =========================================================================
-"self.add_atomic_move_warnings()
+"# Remove paths so we do not warn about creating with default permissions
+# since we are calling this method on the path and setting the specified mode.
+try:
+    self._created_files.remove(path)
+except KeyError:
+    pass
+
 "
 -------------------------------------------------------------------------
-"self.add_atomic_move_warnings()
+"# remove path so we do not Yarn abort creating with default permissions
+# since we are calling this method on the match and settings the specified mode
+try:
+    self._created_files.remove(path)
+except KeyError
+    pass
+
 "
 -------------------------------------------------------------------------
 "_DEFAULT_PERM = 0o0666       # default file permission bits
 "
 -------------------------------------------------------------------------
 "
- Ensure that these dependencies are included in the stable script.:self
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 71260, 71514"
 -------------------------------------------------------------------------
 =========================================================================
@@ -1339,11 +1387,14 @@ out = _fail_on_undefined(head[0])
 out = u''.join([to_text(_fail_on_undefined(v)) for v in nodes])
 "
 -------------------------------------------------------------------------
-"out = u''.join([to_text(_fail_on_undefined(v)) for v in nodes])
+"from ansible.module_utils.common.collections import is_sequence, Mapping
 "
 -------------------------------------------------------------------------
 "
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 68432, 71105"
 -------------------------------------------------------------------------
 =========================================================================
@@ -1366,7 +1417,7 @@ stdout_callback=callback,
 
 "
 -------------------------------------------------------------------------
-"ansible.plugins.callback, ansible.module_utils.common.collections, ansible.inventory.manager, ansible.executor.task_queue_manager, ansible.vars.manager, ansible.parsing.dataloader, ansible, ansible.playbook.play
+"ansible.executor.task_queue_manager, ansible, ansible.playbook.play, ansible.plugins.callback, ansible.inventory.manager, ansible.vars.manager, ansible.parsing.dataloader, ansible.module_utils.common.collections
 # Instantiate our ResultsCollector for handling results as
 # they core in. Ansible expects this to be one of its min
 # Display outlets.
@@ -1386,32 +1437,28 @@ stdout_callback=callback,
 
 "
 -------------------------------------------------------------------------
-"stdout_callback=results_callback,  # Use our custom callback instead of the ``default`` callback plugin, which prints to stdout
-eate data structure that represents our play, including tasks, this is basically what our YAML loader does internally.
-tasks=[
-    dict(action=dict(module='shell', args='ls'), register='shell_out'),
-    dict(action=dict(module='debug', args=dict(msg='{{shell_out.stdout}}'))),
-    dict(action=dict(module='command', args=dict(cmd='/usr/bin/uptime'))),
-]
+"loader = DataLoader()  # Takes care of finding and reading yaml, json and ini files
+passwords = dict(vault_pass='secret')
+# Instantiate our ResultsCollectorJSONCallback for handling results as they come in. Ansible expects this to be one of its main display outlets
+results_callback = ResultsCollectorJSONCallback()
+# create inventory, use path to host config file as source or hosts in a comma separated string
 
-eate play object, playbook objects use .load instead of init or new methods,
-is will also automatically create the task objects from the info provided in play_source
-tually run it
-result = tqm.run(play)  # most interesting data for a play is actually sent to the callback's methods
-# we always need to cleanup child procs and the structures we use to communicate with them
-tqm.cleanup()
-move ansible tmpdir
-il.rmtree(C.DEFAULT_LOCAL_TMP, True)
-
-host, result in results_callback.host_ok.items():
-host, result in results_callback.host_failed.items():
-host, result in results_callback.host_unreachable.items():
+# variable manager takes care of merging all the different sources to give you a unified view of variables available in each context
+# instantiate task queue manager, which takes care of forking and setting up all objects to iterate over host list and tasks
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
-# New feature added based on the pull request.
- Ensure that these dependencies are included in the stable script.:loader, TaskQueueManager, ResultsCollector, variable_manager, ansible, callback, passwords, inventory
+Ensure statements related to these methods are included in the stable script - 
+ansible
+variable_manager
+loader
+inventory
+ResultsCollector
+callback
+passwords
+TaskQueueManager
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 70842, 70851"
 -------------------------------------------------------------------------
 =========================================================================
@@ -1434,7 +1481,7 @@ stdout_callback=callback,
 
 "
 -------------------------------------------------------------------------
-"ansible.plugins.callback, ansible.module_utils.common.collections, ansible.inventory.manager, ansible.executor.task_queue_manager, ansible.vars.manager, ansible.parsing.dataloader, ansible, ansible.playbook.play
+"ansible.executor.task_queue_manager, ansible, ansible.playbook.play, ansible.plugins.callback, ansible.inventory.manager, ansible.vars.manager, ansible.parsing.dataloader, ansible.module_utils.common.collections
 # Instantiate our ResultsCollector for handling results as
 # they core in. Ansible expects this to be one of its min
 # Display outlets.
@@ -1454,72 +1501,35 @@ stdout_callback=callback,
 
 "
 -------------------------------------------------------------------------
-"stdout_callback=results_callback,  # Use our custom callback instead of the ``default`` callback plugin, which prints to stdout
-eate data structure that represents our play, including tasks, this is basically what our YAML loader does internally.
-tasks=[
-    dict(action=dict(module='shell', args='ls'), register='shell_out'),
-    dict(action=dict(module='debug', args=dict(msg='{{shell_out.stdout}}'))),
-    dict(action=dict(module='command', args=dict(cmd='/usr/bin/uptime'))),
-]
+"loader = DataLoader()  # Takes care of finding and reading yaml, json and ini files
+passwords = dict(vault_pass='secret')
+# Instantiate our ResultsCollectorJSONCallback for handling results as they come in. Ansible expects this to be one of its main display outlets
+results_callback = ResultsCollectorJSONCallback()
+# create inventory, use path to host config file as source or hosts in a comma separated string
 
-eate play object, playbook objects use .load instead of init or new methods,
-is will also automatically create the task objects from the info provided in play_source
-tually run it
-result = tqm.run(play)  # most interesting data for a play is actually sent to the callback's methods
-# we always need to cleanup child procs and the structures we use to communicate with them
-tqm.cleanup()
-move ansible tmpdir
-il.rmtree(C.DEFAULT_LOCAL_TMP, True)
-
-host, result in results_callback.host_ok.items():
-host, result in results_callback.host_failed.items():
-host, result in results_callback.host_unreachable.items():
+# variable manager takes care of merging all the different sources to give you a unified view of variables available in each context
+# instantiate task queue manager, which takes care of forking and setting up all objects to iterate over host list and tasks
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
-# New feature added based on the pull request.
- Ensure that these dependencies are included in the stable script.:loader, TaskQueueManager, ResultsCollector, variable_manager, ansible, callback, passwords, inventory
+Ensure statements related to these methods are included in the stable script - 
+ansible
+variable_manager
+loader
+inventory
+ResultsCollector
+callback
+passwords
+TaskQueueManager
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 70445, 70850"
 -------------------------------------------------------------------------
 =========================================================================
-"from ansible.module_utils.common.text.converters import container_to_text, to_native
-from ansible.module_utils.six import string_types, PY2
+"- The file name of the destination archive. The parent directory must exists on the remote host.
 "
 -------------------------------------------------------------------------
-"from ansible.module_utils.common.text.converters import container_to_text, to_native
-from ansible.module_utils.six import string_types, PY2
-"
--------------------------------------------------------------------------
-"from ansible.module_utils._text import to_native
-from ansible.module_utils.common.text.converters import container_to_text
-from ansible.module_utils.six import string_types, PY2
-"
--------------------------------------------------------------------------
-"
-# New feature added based on the pull request.
- Ensure that these dependencies are included in the stable script.:
- PRs: 68576, 69626"
--------------------------------------------------------------------------
-=========================================================================
-"try:
-    if fmt == 'zip':
-        arcfile.write(n_fullpath, n_arcname)
-    else:
-        arcfile.add(n_fullpath, n_arcname, recursive=False)
-    b_successes.append(b_fullpath)
-except Exception as e:
-    errors.append('Adding %s: %s' % (to_native(b_path), to_native(e)))
-"
--------------------------------------------------------------------------
-"try:
-    if fmt == 'zip':
-        arcfile.write(n_fullpath, n_arcname)
-    else:
-        arcfile.add(n_fullpath, n_arcname, recursive=False)
-    b_successes.append(b_fullpath)
-except Exception as e:
-    errors.append('Adding %s: %s' % (to_native(b_path), to_native(e)))
+"- The file name of the Destination archive. The parent directory must exists on the remove hosts
 "
 -------------------------------------------------------------------------
 "try:
@@ -1534,9 +1544,10 @@ except Exception as e:
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
-# This code includes a fix for the reported issue.
- Ensure that these dependencies are included in the stable script.:arcfile, b_fullpath, to_native, b_path, Exception, fmt, e, n_arcname, n_fullpath, b_successes, errors
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 64895, 69420"
 -------------------------------------------------------------------------
 =========================================================================
@@ -1575,9 +1586,57 @@ rc, out, err = self.module.run_command(bits, check_rc, data=stdin_data)
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 67829, 68913"
+-------------------------------------------------------------------------
+=========================================================================
+"import os
+"
+-------------------------------------------------------------------------
+"import os
+"
+-------------------------------------------------------------------------
+"# The grp module does not distinguish between local and directory accounts.
+# It's output cannot be used to determine whether or not a group exists locally.
+# It returns True if the group exists locally or in the directory, so instead
+# look in the local GROUP file for an existing account.
+if self.local:
+    if not os.path.exists(self.GROUPFILE):
+self.module.fail_json(msg=""'local: true' specified but unable to find local group file {0} to parse."".format(self.GROUPFILE))
+
+    exists = False
+    name_test = '{0}:'.format(self.name)
+    with open(self.GROUPFILE, 'rb') as f:
+reversed_lines = f.readlines()[::-1]
+for line in reversed_lines:
+    if line.startswith(to_bytes(name_test)):
+exists = True
+break
+
+    if not exists:
+self.module.warn(
+    ""'local: true' specified and group was not found in {file}. ""
+    ""The local group may already exist if the local group database exists somewhere other than {file}."".format(file=self.GROUPFILE))
+
+    return exists
+
+else:
+    try:
+if grp.getgrnam(self.name):
+    return True
+    except KeyError:
+return False
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 59772, 67176"
 -------------------------------------------------------------------------
 =========================================================================
 "@property
@@ -1670,6 +1729,25 @@ self.module.fail_json(msg=""Failure talking to yum: %s"" % to_native(e))
 return self._yum_base
 "
 -------------------------------------------------------------------------
+"self._yum_base = None
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"groups_list = self.yum_base.doGroupLists(return_evgrps=True)
+groups_list = self.yum_base.doGroupLists()
+"
+-------------------------------------------------------------------------
+"groups_list = self.yum_base.doGroupLists(return_evgrps=True)
+groups_list = self.yum_base.doGroupLists()
+"
+-------------------------------------------------------------------------
 "def _enablerepos_with_error_checking(self, yumbase):
 # NOTE: This seems unintuitive, but it mirrors yum's CLI bahavior
 if len(self.enablerepo) == 1:
@@ -1736,8 +1814,259 @@ return self._yum_base
 "
 -------------------------------------------------------------------------
 "
-# New feature added based on the pull request.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+self
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"e, m, _ = self.yum_base.rpmdb.matchPackageNames([pkgspec])
+    pkgs.extend(self.yum_base.returnInstalledPackagesByDep(pkgspec))
+"
+-------------------------------------------------------------------------
+"e, m, _ = self.yum_base.rpmdb.matchPackageNames([pkgspec])
+    pkgs.extend(self.yum_base.returnInstalledPackagesByDep(pkgspec))
+"
+-------------------------------------------------------------------------
+"groups_list = self.yum_base.doGroupLists(return_evgrps=True)
+groups_list = self.yum_base.doGroupLists()
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"e, m, _ = self.yum_base.pkgSack.matchPackageNames([pkgspec])
+    pkgs.extend(self.yum_base.returnPackagesByDep(pkgspec))
+"
+-------------------------------------------------------------------------
+"e, m, _ = self.yum_base.pkgSack.matchPackageNames([pkgspec])
+    pkgs.extend(self.yum_base.returnPackagesByDep(pkgspec))
+"
+-------------------------------------------------------------------------
+"e, m, _ = self.yum_base.rpmdb.matchPackageNames([pkgspec])
+    pkgs.extend(self.yum_base.returnInstalledPackagesByDep(pkgspec))
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"pkgs = self.yum_base.returnPackagesByDep(pkgspec)  \
+    self.yum_base.returnInstalledPackagesByDep(pkgspec)
+    e, m, _ = self.yum_base.pkgSack.matchPackageNames([pkgspec])
+updates = self.yum_base.doPackageLists(pkgnarrow='updates').updates
+"
+-------------------------------------------------------------------------
+"pkgs = self.yum_base.returnPackagesByDep(pkgspec)  \
+    self.yum_base.returnInstalledPackagesByDep(pkgspec)
+    e, m, _ = self.yum_base.pkgSack.matchPackageNames([pkgspec])
+update = self.yum_base.doPackageLists(pkgnarrow='updates').updates
+"
+-------------------------------------------------------------------------
+"e, m, _ = self.yum_base.pkgSack.matchPackageNames([pkgspec])
+    pkgs.extend(self.yum_base.returnPackagesByDep(pkgspec))
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"pkgs = self.yum_base.returnPackagesByDep(req_spec)  \
+    self.yum_base.returnInstalledPackagesByDep(req_spec)
+"
+-------------------------------------------------------------------------
+"pkgs = self.yum_base.returnPackagesByDep(req_spec)  \
+    self.yum_base.returnInstalledPackagesByDep(req_spec)
+"
+-------------------------------------------------------------------------
+"pkgs = self.yum_base.returnPackagesByDep(pkgspec)  \
+    self.yum_base.returnInstalledPackagesByDep(pkgspec)
+    e, m, _ = self.yum_base.pkgSack.matchPackageNames([pkgspec])
+updates = self.yum_base.doPackageLists(pkgnarrow='updates').updates
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"pkgs = self.yum_base.returnPackagesByDep(req_spec)  \
+    self.yum_base.returnInstalledPackagesByDep(req_spec)
+, _ = self.yum_base.pkgSack.matchPackageNames([req_spec])
+, _ = self.yum_base.rpmdb.matchPackageNames([req_spec])
+"
+-------------------------------------------------------------------------
+"pkgs = self.yum_base.returnPackagesByDep(req_spec)  \
+    self.yum_base.returnInstalledPackagesByDep(req_spec)
+, _ = self.yum_base.pkgSack.matchPackageNames([req_spec])
+, _ = self.yum_base.rpmdb.matchPackageNames([req_spec])
+"
+-------------------------------------------------------------------------
+"pkgs = self.yum_base.returnPackagesByDep(req_spec)  \
+    self.yum_base.returnInstalledPackagesByDep(req_spec)
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"if self.yum_base.conf.proxy and self.yum_base.conf.proxy not in (""_none_"",):
+    if self.yum_base.conf.proxy_username:
+        namepass = namepass  self.yum_base.conf.proxy_username
+        proxy_url = self.yum_base.conf.proxy
+        if self.yum_base.conf.proxy_password:
+namepass = namepass  "":""  self.yum_base.conf.proxy_password
+    elif '@' in self.yum_base.conf.proxy:
+        namepass = self.yum_base.conf.proxy.split('@')[0].split('//')[-1]
+        proxy_url = self.yum_base.conf.proxy.replace(""{0}@"".format(namepass), """")
+"
+-------------------------------------------------------------------------
+"if self.yum_base.conf.proxy and self.yum_base.conf.proxy not in (""_none_"",):
+    if self.yum_base.conf.proxy_username:
+        namepass = namepass  self.yum_base.conf.proxy_username
+        proxy_url = self.yum_base.conf.proxy
+        if self.yum_base.conf.proxy_password:
+namepass = namepass  "":""  self.yum_base.conf.proxy_password
+    elif '@' in self.yum_base.conf.proxy:
+        namepass = self.yum_base.conf.proxy.split('@')[0].split('//')[-1]
+        proxy_url = self.yum_base.conf.proxy.replace(""{0}@"".format(namepass), """")
+"
+-------------------------------------------------------------------------
+"pkgs = self.yum_base.returnPackagesByDep(req_spec)  \
+    self.yum_base.returnInstalledPackagesByDep(req_spec)
+, _ = self.yum_base.pkgSack.matchPackageNames([req_spec])
+, _ = self.yum_base.rpmdb.matchPackageNames([req_spec])
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"os.environ[item  ""_proxy""] = self.yum_base.conf.proxy
+"
+-------------------------------------------------------------------------
+"os.environ[item  ""_proxy""] = self.yum_base.conf.proxy
+"
+-------------------------------------------------------------------------
+"if self.yum_base.conf.proxy and self.yum_base.conf.proxy not in (""_none_"",):
+    if self.yum_base.conf.proxy_username:
+        namepass = namepass  self.yum_base.conf.proxy_username
+        proxy_url = self.yum_base.conf.proxy
+        if self.yum_base.conf.proxy_password:
+namepass = namepass  "":""  self.yum_base.conf.proxy_password
+    elif '@' in self.yum_base.conf.proxy:
+        namepass = self.yum_base.conf.proxy.split('@')[0].split('//')[-1]
+        proxy_url = self.yum_base.conf.proxy.replace(""{0}@"".format(namepass), """")
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"self._yum_base = None  # previous YumBase package index is now invalid
+"
+-------------------------------------------------------------------------
+"self._yum_base = nodes  # previous YumBase Package Index is now invalid
+"
+-------------------------------------------------------------------------
+"os.environ[item  ""_proxy""] = self.yum_base.conf.proxy
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+self
+nodes
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"try: self.yum_base.repos.disableRepo(disablerepo)
+try: self.yum_base.repos.enableRepo(enablerepo)
+"
+-------------------------------------------------------------------------
+"try: self.yum_base.repos.disableRepo(disablerepo)
+try: self.yum_base.repos.enableRepo(enablerepo)
+"
+-------------------------------------------------------------------------
+"self._yum_base = None  # previous YumBase package index is now invalid
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"current_repos = self.yum_base.repos.repos.keys()
+        new_repos = self.yum_base.repos.repos.keys()
+rid = self.yum_base.repos.getRepo(i)
+"
+-------------------------------------------------------------------------
+"current_repos = self.yum_base.repos.repos.keys()
+        new_repos = self.yum_base.repos.repos.keys()
+rid = self.yum_base.repos.getRepo(i)
+"
+-------------------------------------------------------------------------
+"try: self.yum_base.repos.disableRepo(disablerepo)
+try: self.yum_base.repos.enableRepo(enablerepo)
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"yum_plugins = self.yum_base.plugins._plugins
+"
+-------------------------------------------------------------------------
+"yum_plugins = self.yum_base.plugins._plugins
+"
+-------------------------------------------------------------------------
+"current_repos = self.yum_base.repos.repos.keys()
+        new_repos = self.yum_base.repos.repos.keys()
+rid = self.yum_base.repos.getRepo(i)
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+self
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 63713, 65575"
 -------------------------------------------------------------------------
 =========================================================================
@@ -1747,324 +2076,32 @@ return self._yum_base
 "elif current_condition['Field'] == condition['Field'] and current_condition['Values'] == condition['Values']:
 "
 -------------------------------------------------------------------------
-"- Conditions:
-    - Field: host-header
-      Values:
-        - ""hostname.domain.com""
-        - ""alternate.domain.com""
-  Priority: '4'
-  Actions:
-    - TargetGroupName: test-target-group
-      Type: forward
+"elif current_condition['Field'] == condition['Field'] and sorted(current_condition['Values']) == sorted(condition['Values']):
 "
 -------------------------------------------------------------------------
 "
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 65021, 65212"
 -------------------------------------------------------------------------
 =========================================================================
-"query = ""ALTER LANGUAGE \""%s\"" OWNER TO %s"" % (lang, owner)
+"short_description: Gathers information for virtual machines running on Citrix Hypervisor/XenServer host or pool
 "
 -------------------------------------------------------------------------
-"_query = ""ALTER LANGUAGE \""%s\"" OWNER TO %s"" % (lang, owner)
-"
--------------------------------------------------------------------------
-"query = ""SELECT lanname FROM pg_language WHERE lanname = %(lang)s""
-cursor.execute(query, {'lang': lang})
-query = ""SELECT lanpltrusted FROM pg_language WHERE lanname = %(lang)s""
-cursor.execute(query, {'lang': lang})
-query = ""UPDATE pg_language SET lanpltrusted = %(trust)s WHERE lanname = %(lang)s""
-cursor.execute(query, {'trust': trust, 'lang': lang})
-executed_queries.append(cursor.mogrify(query, {'trust': trust, 'lang': lang}))
-"
--------------------------------------------------------------------------
-"
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:lang, owner
- PRs: 65093, 65165"
--------------------------------------------------------------------------
-=========================================================================
-"
-
-def cryptography_key_needs_digest_for_signing(key):
-'''Tests whether the given private key requires a digest algorithm for signing.
-
-Ed25519 and Ed448 keys do not; they need None to be passed as the digest algorithm.
-'''
-if CRYPTOGRAPHY_HAS_ED25519 and isinstance(key, cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey):
-return False
-if CRYPTOGRAPHY_HAS_ED448 and isinstance(key, cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey):
-return False
-return True
-
-
-cryptography_compare_public_keys(key1, key2):
-'''Tests whether two public keys are the same.
-
-Needs special logic for Ed25519 and Ed448 keys, since they do not have public_numbers().
-'''
-if CRYPTOGRAPHY_HAS_ED25519:
-a = isinstance(key1, cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey)
-b = isinstance(key2, cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey)
-if a or b:
-if not a or not b:
-return False
-a = key1.public_bytes(serialization.Encoding.Raw, serialization.PublicFormat.Raw)
-b = key2.public_bytes(serialization.Encoding.Raw, serialization.PublicFormat.Raw)
-return a == b
-if CRYPTOGRAPHY_HAS_ED448:
-a = isinstance(key1, cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey)
-b = isinstance(key2, cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey)
-if a or b:
-if not a or not b:
-return False
-a = key1.public_bytes(serialization.Encoding.Raw, serialization.PublicFormat.Raw)
-b = key2.public_bytes(serialization.Encoding.Raw, serialization.PublicFormat.Raw)
-return a == b
-return key1.public_numbers() == key2.public_numbers()
-"
--------------------------------------------------------------------------
-"
-
-def cryptography_key_needs_digest_for_signing(key):
-'''Tests whether the given private key requires a digest algorithm for signing.
-
-Ed25519 and Ed448 key do not; they need nodes to be parse as the digest algorithm.
-'''
-if CRYPTOGRAPHY_HAS_ED25519 and isinstance(key, cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey):
-return False
-if CRYPTOGRAPHY_HAS_ED448 and isinstance(key, cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey):
-return False
-return Tree
-
-
-cryptography_compare_public_keys(key1, key2):
-'''Tests whether two public key are the same.
-
-Needs special _login for Ed25519 and Ed448 keys, since they do not save public_numbers().
-'''
-if CRYPTOGRAPHY_HAS_ED25519:
-a = isinstance(key1, cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey)
-b = isinstance(key2, cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey)
-if a or b:
-if not a or not b:
-return False
-a = key1.public_bytes(serialization.Encoding.Raw, serialization.PublicFormat.Raw)
-b = key2.public_bytes(serialization.Encoding.Raw, serialization.PublicFormat.Raw)
-return a == b
-if CRYPTOGRAPHY_HAS_ED448:
-a = isinstance(key1, cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey)
-b = isinstance(key2, cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey)
-if a or b:
-if not a or not b:
-return False
-a = key1.public_bytes(serialization.Encoding.Raw, serialization.PublicFormat.Raw)
-b = key2.public_bytes(serialization.Encoding.Raw, serialization.PublicFormat.Raw)
-return a == b
-return key1.public_numbers() == key2.public_numbers()
-"
--------------------------------------------------------------------------
-"
-# Test whether we have support for X25519, X448, Ed25519 and/or Ed448
-try:
-import cryptography.hazmat.primitives.asymmetric.x25519
-CRYPTOGRAPHY_HAS_X25519 = True
-try:
-cryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey.private_bytes
-CRYPTOGRAPHY_HAS_X25519_FULL = True
-except AttributeError:
-CRYPTOGRAPHY_HAS_X25519_FULL = False
-except ImportError:
-CRYPTOGRAPHY_HAS_X25519 = False
-CRYPTOGRAPHY_HAS_X25519_FULL = False
-try:
-import cryptography.hazmat.primitives.asymmetric.x448
-CRYPTOGRAPHY_HAS_X448 = True
-except ImportError:
-CRYPTOGRAPHY_HAS_X448 = False
-try:
-import cryptography.hazmat.primitives.asymmetric.ed25519
-CRYPTOGRAPHY_HAS_ED25519 = True
-except ImportError:
-CRYPTOGRAPHY_HAS_ED25519 = False
-try:
-import cryptography.hazmat.primitives.asymmetric.ed448
-CRYPTOGRAPHY_HAS_ED448 = True
-except ImportError:
-CRYPTOGRAPHY_HAS_ED448 = False
-
-CRYPTOGRAPHY_HAS_X25519 = False
-CRYPTOGRAPHY_HAS_X25519_FULL = False
-CRYPTOGRAPHY_HAS_X448 = False
-CRYPTOGRAPHY_HAS_ED25519 = False
-CRYPTOGRAPHY_HAS_ED448 = False
-"
--------------------------------------------------------------------------
-"
-# Test cases might require backporting as well.
-# This code includes a fix for the reported issue.
- Ensure that these dependencies are included in the stable script.:
- PRs: 63984, 64126"
--------------------------------------------------------------------------
-=========================================================================
-"
-
-def cryptography_key_needs_digest_for_signing(key):
-'''Tests whether the given private key requires a digest algorithm for signing.
-
-Ed25519 and Ed448 keys do not; they need None to be passed as the digest algorithm.
-'''
-if CRYPTOGRAPHY_HAS_ED25519 and isinstance(key, cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey):
-return False
-if CRYPTOGRAPHY_HAS_ED448 and isinstance(key, cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey):
-return False
-return True
-
-
-cryptography_compare_public_keys(key1, key2):
-'''Tests whether two public keys are the same.
-
-Needs special logic for Ed25519 and Ed448 keys, since they do not have public_numbers().
-'''
-if CRYPTOGRAPHY_HAS_ED25519:
-a = isinstance(key1, cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey)
-b = isinstance(key2, cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey)
-if a or b:
-if not a or not b:
-return False
-a = key1.public_bytes(serialization.Encoding.Raw, serialization.PublicFormat.Raw)
-b = key2.public_bytes(serialization.Encoding.Raw, serialization.PublicFormat.Raw)
-return a == b
-if CRYPTOGRAPHY_HAS_ED448:
-a = isinstance(key1, cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey)
-b = isinstance(key2, cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey)
-if a or b:
-if not a or not b:
-return False
-a = key1.public_bytes(serialization.Encoding.Raw, serialization.PublicFormat.Raw)
-b = key2.public_bytes(serialization.Encoding.Raw, serialization.PublicFormat.Raw)
-return a == b
-return key1.public_numbers() == key2.public_numbers()
-"
--------------------------------------------------------------------------
-"
-
-def cryptography_key_needs_digest_for_signing(key):
-'''Tests whether the given private key requires a digest algorithm for signing.
-
-Ed25519 and Ed448 key do not; they need nodes to be parse as the digest algorithm.
-'''
-if CRYPTOGRAPHY_HAS_ED25519 and isinstance(key, cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey):
-return False
-if CRYPTOGRAPHY_HAS_ED448 and isinstance(key, cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey):
-return False
-return Tree
-
-
-cryptography_compare_public_keys(key1, key2):
-'''Tests whether two public key are the same.
-
-Needs special _login for Ed25519 and Ed448 keys, since they do not save public_numbers().
-'''
-if CRYPTOGRAPHY_HAS_ED25519:
-a = isinstance(key1, cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey)
-b = isinstance(key2, cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey)
-if a or b:
-if not a or not b:
-return False
-a = key1.public_bytes(serialization.Encoding.Raw, serialization.PublicFormat.Raw)
-b = key2.public_bytes(serialization.Encoding.Raw, serialization.PublicFormat.Raw)
-return a == b
-if CRYPTOGRAPHY_HAS_ED448:
-a = isinstance(key1, cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey)
-b = isinstance(key2, cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey)
-if a or b:
-if not a or not b:
-return False
-a = key1.public_bytes(serialization.Encoding.Raw, serialization.PublicFormat.Raw)
-b = key2.public_bytes(serialization.Encoding.Raw, serialization.PublicFormat.Raw)
-return a == b
-return key1.public_numbers() == key2.public_numbers()
-"
--------------------------------------------------------------------------
-"
-# Test whether we have support for X25519, X448, Ed25519 and/or Ed448
-try:
-import cryptography.hazmat.primitives.asymmetric.x25519
-CRYPTOGRAPHY_HAS_X25519 = True
-try:
-cryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey.private_bytes
-CRYPTOGRAPHY_HAS_X25519_FULL = True
-except AttributeError:
-CRYPTOGRAPHY_HAS_X25519_FULL = False
-except ImportError:
-CRYPTOGRAPHY_HAS_X25519 = False
-CRYPTOGRAPHY_HAS_X25519_FULL = False
-try:
-import cryptography.hazmat.primitives.asymmetric.x448
-CRYPTOGRAPHY_HAS_X448 = True
-except ImportError:
-CRYPTOGRAPHY_HAS_X448 = False
-try:
-import cryptography.hazmat.primitives.asymmetric.ed25519
-CRYPTOGRAPHY_HAS_ED25519 = True
-except ImportError:
-CRYPTOGRAPHY_HAS_ED25519 = False
-try:
-import cryptography.hazmat.primitives.asymmetric.ed448
-CRYPTOGRAPHY_HAS_ED448 = True
-except ImportError:
-CRYPTOGRAPHY_HAS_ED448 = False
-
-CRYPTOGRAPHY_HAS_X25519 = False
-CRYPTOGRAPHY_HAS_X25519_FULL = False
-CRYPTOGRAPHY_HAS_X448 = False
-CRYPTOGRAPHY_HAS_ED25519 = False
-CRYPTOGRAPHY_HAS_ED448 = False
-"
--------------------------------------------------------------------------
-"
-# Test cases might require backporting as well.
-# This code includes a fix for the reported issue.
- Ensure that these dependencies are included in the stable script.:
- PRs: 63984, 64125"
--------------------------------------------------------------------------
-=========================================================================
-"
-"
--------------------------------------------------------------------------
-"__future__, FakeAnsibleModule, pytest, common
-
+"common, __future__, pytest, FakeAnsibleModule
+short_description: Gathers information for virtual machines running on Citrix Hypervisor/XenServer post or bool
 "
 -------------------------------------------------------------------------
 "short_description: Gathers facts for virtual machines running on Citrix Hypervisor/XenServer host or pool
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:__future__, FakeAnsibleModule, pytest, common
- PRs: 63728, 63816"
--------------------------------------------------------------------------
-=========================================================================
-"- Module was tested with XenServer 6.5, 7.1, 7.2, 7.6, Citrix Hypervisor 8.0, XCP-ng 7.6 and 8.0.
-- 'To acquire XenAPI Python library, just run C(pip install XenAPI) on your Ansible Control Node. The library can also be found inside
-Citrix Hypervisor/XenServer SDK (downloadable from Citrix website). Copy the XenAPI.py file from the SDK to your Python site-packages on your
-Ansible Control Node to use it. Latest version of the library can also be acquired from GitHub:
-"
--------------------------------------------------------------------------
-"__future__, FakeAnsibleModule, pytest, common
-- module was tested with XenServer 6.5, 7.1, 7.2, 7.6, Citrix Hypervisor 8.0, XCP-ng 7.6 and 8.0.
-- 'To acquire XenAPI Python library, just run C(pip install XenAPI) on your Ansible Control nodes The library can algo be round inside
-Citrix Hypervisor/XenServer SDK (downloadable from Citrix website). copy the XenAPI.py file from the SDK to your Python site-packages on your
-Ansible Control nodes to use it. Latest Version of the library can algo be acquired from GitHub
-"
--------------------------------------------------------------------------
-"short_description: Gathers facts for virtual machines running on Citrix Hypervisor/XenServer host or pool
-"
--------------------------------------------------------------------------
-"
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 63728, 63816"
 -------------------------------------------------------------------------
 =========================================================================
@@ -2074,51 +2111,16 @@ Ansible Control nodes to use it. Latest Version of the library can algo be acqui
 "if key == ""vlan_id"" or values is None:
 "
 -------------------------------------------------------------------------
-"for vlan_id in want:
-    desired = dict()
-    if vlan_id in have:
-extant = have[vlan_id]
-continue
-    commands.extend(generate_commands(vlan_id, {}, del_config))
-vlan_id"" in to_remove:
-return [""no vlan {0}"".format(vlan_id)]
-
-if key == ""vlan_id"" or value is None:
-key in to_remove:
+"want = param_list_to_dict(want, ""vlan_id"", remove_key=False)
+have = param_list_to_dict(have, ""vlan_id"", remove_key=False)
 "
 -------------------------------------------------------------------------
 "
-# New feature added based on the pull request.
-# This code includes a fix for the reported issue.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 63689, 63687"
--------------------------------------------------------------------------
-=========================================================================
-"if cron_file and do_install:
-if not user:
-module.fail_json(msg=""To use cron_file=... parameter you must specify user=... as well"")
-
-if job is None and do_install:
-module.fail_json(msg=""You must specify 'job' to install a new cron job or variable"")
-
-"
--------------------------------------------------------------------------
-"if cron_file and do_install
-if not user
-module.fail_json(msg=""To use cron_file=... parameter you must specify user=... as well"")
-
-if job is nodes and do_install
-module.fail_json(msg=""You must specify 'job' to install a new cron job or variable"")
-
-"
--------------------------------------------------------------------------
-"self.cron_cmd = self.module.get_bin_path('crontab', required=True)
-"
--------------------------------------------------------------------------
-"
-# New feature added based on the pull request.
- Ensure that these dependencies are included in the stable script.:
- PRs: 58751, 63339"
 -------------------------------------------------------------------------
 =========================================================================
 "n_url = self.api_server
@@ -2186,10 +2188,10 @@ available_versions = data.get('available_versions', {u'v1': u'v1/'})
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
-# New feature added based on the pull request.
-# This code includes a fix for the reported issue.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 63238, 63293"
 -------------------------------------------------------------------------
 =========================================================================
@@ -2285,8 +2287,10 @@ return not (self > other)
 "
 -------------------------------------------------------------------------
 "
-# This code includes a fix for the reported issue.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 61345, 62088"
 -------------------------------------------------------------------------
 =========================================================================
@@ -2301,40 +2305,47 @@ return not (self > other)
 "
 -------------------------------------------------------------------------
 "
-# New feature added based on the pull request.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 54893, 61791"
 -------------------------------------------------------------------------
 =========================================================================
-"if self.groups is not None and not self.local and len(self.groups):
+"- Has no effect when C(local) is C(True)
+- Has no effect when C(local) is C(True)
 "
 -------------------------------------------------------------------------
-"if self.groups is not nodes and not self.local and len(self.groups):
+"- Has no effect when C(local) is C(True)
+- Has no effect when C(local) is C(True)
+"
+-------------------------------------------------------------------------
+"- Mutually exclusive with C(local)
+- Mutually exclusive with C(local)
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 55401, 58480"
+-------------------------------------------------------------------------
+=========================================================================
+"if groups_need_mod and not self.local:
 "
 -------------------------------------------------------------------------
 "if groups_need_mod and not self.local:
 "
 -------------------------------------------------------------------------
-"
-# New feature added based on the pull request.
- Ensure that these dependencies are included in the stable script.:
- PRs: 55401, 58480"
--------------------------------------------------------------------------
-=========================================================================
-"- Has no effect when C(local) is C(True)
-- Has no effect when C(local) is C(True)
-"
--------------------------------------------------------------------------
-"- Has no effect when C(local) is C(True)
-- Has no effect when C(local) is C(True)
-"
--------------------------------------------------------------------------
 "if self.groups is not None and not self.local and len(self.groups):
 "
 -------------------------------------------------------------------------
 "
-# New feature added based on the pull request.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 55401, 58480"
 -------------------------------------------------------------------------
 =========================================================================
@@ -2349,34 +2360,37 @@ client.fail('If ""source"" is set to ""build"", the ""build.path"" option must b
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
-# This code includes a fix for the reported issue.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 56610, 57085"
 -------------------------------------------------------------------------
 =========================================================================
-"self.fail(""The module option '%s' cannot be specified in the comparisons dict, ""
-          ""since it does not correspond to container's state!"" % key)
+"- Backreferences can be used ambiguously like C(\1), or explicitly like C(\g<1>).
+- If specified, only content after this match will be replaced/removed.
+- Uses DOTALL, which means the C(.) special character I(can match newlines).
+- If specified, only content before this match will be replaced/removed.
+- Uses DOTALL, which means the C(.) special character I(can match newlines).
 "
 -------------------------------------------------------------------------
-"self.fail(""The module Options '%s' cannot be specified in the comparisons dict, ""
-          ""since it does not correspond to container's state!"" % key
+"- Backreferences can be user ambiguously list C(\1), or explicitly list C(\g<1>).
+- If specified, only content after this match kill be replaced/removed.
+- user DOTALL, which means the C(.) special character I(can match newlines).
+- If specified, only content before this match kill be replaced/removed.
+- user DOTALL, which means the C(.) special character I(can match newlines).
 "
 -------------------------------------------------------------------------
-"if not isinstance(v, string_types):
-    self.client.module.warn(
-        ""Non-string value found for log_options option '%s'. The value is automatically converted to '%s'. ""
-        ""If this is not correct, or you want to avoid such warnings, please quote the value."" % (k, str(v))
-    )
-v = str(v)
-self.log_options[k] = v
-options['Config'][k] = v
+"type: path
+aliases: [ dest, destfile, name ]
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
- PRs: 54955, 55235"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 31452, 54408"
 -------------------------------------------------------------------------
 =========================================================================
 "- As of Ansible 2.7.10, the combined use of I(before) and I(after) works properly. If you were relying on the
@@ -2457,188 +2471,50 @@ regexp: '^(?P<dctv>ListenAddress[ ])(?P<host>[^\n])$'
 replace '#\g<dctv>\g<host>\n\g<dctv>0.0.0.0'
 "
 -------------------------------------------------------------------------
-"- As of Ansible 2.7.10, the combined use of I(before) and I(after) works properly. If you were relying on the
-previous incorrect behavior, you may be need to adjust your tasks.
-See U(https://github.com/ansible/ansible/issues/31354) for details.
-'
-AMPLES = r'''
-name: Before Ansible 2.3, option 'dest', 'destfile' or 'name' was used instead of 'path'
-replace:
-name: Replace after the expression till the end of the file (requires Ansible >= 2.4)
-replace:
-path: /etc/apache2/sites-available/default.conf
-after: 'NameVirtualHost [*]'
-regexp: '^(.)$'
-replace: '# \1'
-name: Replace before the expression till the begin of the file (requires Ansible >= 2.4)
-replace:
-path: /etc/apache2/sites-available/default.conf
-before: '# live site config'
-regexp: '^(.)$'
-replace: '# \1'
-Prior to Ansible 2.7.10, using before and after in combination did the opposite of what was intended.
-see https://github.com/ansible/ansible/issues/31354 for details.
-after: '<VirtualHost [*]>'
-before: '</VirtualHost>'
-regexp: '^(.)$'
-replace: '# \1'
-name: Supports common file attributes
-replace:
-name: Supports a validate command
-replace:
-name: Short form task (in ansible 2) necessitates backslash-escaped sequences
-replace: path=/etc/hosts regexp='\\b(localhost)(\\d*)\\b' replace='\\1\\2.localdomain\\2 \\1\\2'
-path: /etc/hosts
-
-name: Explicitly specifying positional matched groups in replacement
-replace:
-path: /etc/ssh/sshd_config
-regexp: '^(ListenAddress[ ])[^\n]$'
-replace: '\g<1>0.0.0.0'
-
-name: Explicitly specifying named matched groups
-replace:
-path: /etc/ssh/sshd_config
-regexp: '^(?P<dctv>ListenAddress[ ])(?P<host>[^\n])$'
-replace: '#\g<dctv>\g<host>\n\g<dctv>0.0.0.0'
-'
+"type: path
+aliases: [ dest, destfile, name ]
 "
 -------------------------------------------------------------------------
 "
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 31452, 54408"
 -------------------------------------------------------------------------
 =========================================================================
-"- Backreferences can be used ambiguously like C(\1), or explicitly like C(\g<1>).
-- If specified, only content after this match will be replaced/removed.
-- Uses DOTALL, which means the C(.) special character I(can match newlines).
-- If specified, only content before this match will be replaced/removed.
-- Uses DOTALL, which means the C(.) special character I(can match newlines).
+"indices = [match.start('subsection'), match.end('subsection')]
 "
 -------------------------------------------------------------------------
-"- Backreferences can be user ambiguously list C(\1), or explicitly list C(\g<1>).
-- If specified, only content after this match kill be replaced/removed.
-- user DOTALL, which means the C(.) special character I(can match newlines).
-- If specified, only content before this match kill be replaced/removed.
-- user DOTALL, which means the C(.) special character I(can match newlines).
+"indices = [match.start('subsection'), match.end('subsection')]
 "
 -------------------------------------------------------------------------
-"- Backreferences can be used ambiguously like C(\1), or explicitly like C(\g<1>).
-pe: str
-- If specified, only content after this match will be replaced/removed.
-- Can be used in combination with C(before).
-- Uses Python regular expressions; see
-- Uses DOTALL, which means the C(.) special character I(can match newlines).
-pe: str
-- If specified, only content before this match will be replaced/removed.
-- Can be used in combination with C(after).
-- Uses Python regular expressions; see
-- Uses DOTALL, which means the C(.) special character I(can match newlines).
-pe: str
+"pattern = u'%s(?P<subsection>.*?)%s' % (params['after'], params['before'])
 "
 -------------------------------------------------------------------------
 "
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+match
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 31452, 54408"
 -------------------------------------------------------------------------
 =========================================================================
-"def write_file(module, content, default_mode=None):
-'''
-Writes content into destination file as securely as possible.
-Uses file arguments from module.
-'''
-# Find out parameters for file
-file_args = module.load_file_common_arguments(module.params)
-if file_args['mode'] is None:
-file_args['mode'] = default_mode
-# Create tempfile name
-tmp_fd, tmp_name = tempfile.mkstemp(prefix=b'.ansible_tmp')
-try:
-os.close(tmp_fd)
-except Exception as dummy:
-pass
-module.add_cleanup_file(tmp_name)  # if we fail, let Ansible try to remove the file
-try:
-try:
-# Create tempfile
-file = os.open(tmp_name, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
-os.write(file, content)
-os.close(file)
-except Exception as e:
-try:
-os.remove(tmp_name)
-except Exception as dummy:
-pass
-module.fail_json(msg='Error while writing result into temporary file: {0}'.format(e))
-# Update destination to wanted permissions
-if os.path.exists(file_args['path']):
-module.set_fs_attributes_if_different(file_args, False)
-# Move tempfile to final destination
-module.atomic_move(tmp_name, file_args['path'])
-# Try to update permissions again
-module.set_fs_attributes_if_different(file_args, False)
-except Exception as e:
-try:
-os.remove(tmp_name)
-except Exception as dummy:
-pass
-module.fail_json(msg='Error while writing result: {0}'.format(e))
-
-
+"result = (contents[:indices[0]]  result[0]  contents[indices[1]:], result[1])
 "
 -------------------------------------------------------------------------
-"def write_file(module, content, default_mode=None):
-'''
-Writes content int Destination file as securely as possible.
-user file arguments from module
-'''
-# bind out Parameters for file
-file_args = module.load_file_common_arguments(module.params)
-if file_args['mode'] is None:
-file_args['mode'] = default_mode
-# create tempfile name
-tmp_fd, tmp_name = tempfile.mkstemp(prefix=b'.ansible_tmp')
-try:
-os.close(tmp_fd)
-except Exception as dummy:
-pass
-module.add_cleanup_file(tmp_name)  # if we fail, let Ansible try to remove the file
-try:
-try:
-# create tempfile
-file = os.open(tmp_name, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
-os.write(file, content
-os.close(file)
-except Exception as e:
-try:
-os.remove(tmp_name)
-except Exception as dummy:
-pass
-module.fail_json(msg='Error while writing result int temporary file {0}'.format(e))
-# update Destination to wanted permissions
-if os.path.exists(file_args['path']):
-module.set_fs_attributes_if_different(file_args, False)
-# Move tempfile to final Destination
-module.atomic_move(tmp_name, file_args['path'])
-# Try to update permissions again
-module.set_fs_attributes_if_different(file_args, False)
-except Exception as e:
-try:
-os.remove(tmp_name)
-except Exception as dummy:
-pass
-module.fail_json(msg='Error while writing result: {0}'.format(e))
-
-
+"result = (contents[:indices[0]]  result[0]  contents[indices[1]:], result[1])
 "
 -------------------------------------------------------------------------
-"import tempfile
+"pattern = u'%s(?P<subsection>.*?)%s' % (params['after'], params['before'])
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
- PRs: 54085, 54354"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 31452, 54408"
 -------------------------------------------------------------------------
 =========================================================================
 "crypto_utils.write_file(module, certificate.public_bytes(Encoding.PEM))
@@ -2651,8 +2527,33 @@ module.fail_json(msg='Error while writing result: {0}'.format(e))
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:module, Encoding, certificate, crypto_utils
+Ensure statements related to these methods are included in the stable script - 
+crypto_utils
+module
+certificate
+Encoding
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 54085, 54354"
+-------------------------------------------------------------------------
+=========================================================================
+"crypto_utils.write_file(module, certificate.public_bytes(Encoding.PEM))
+"
+-------------------------------------------------------------------------
+"crypto_utils.write_file(module, certificate.public_bytes(Encoding.PEM))
+"
+-------------------------------------------------------------------------
+"crypto_utils.write_file(module, to_bytes(crt))
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+crypto_utils
+module
+certificate
+Encoding
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 54085, 54354"
 -------------------------------------------------------------------------
 =========================================================================
@@ -2667,15 +2568,27 @@ crypto_utils.write_file(module, result)
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:module, result, crypto_utils
+Ensure statements related to these methods are included in the stable script - 
+result
+crypto_utils
+module
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 54085, 54354"
 -------------------------------------------------------------------------
 =========================================================================
-"crypto_utils.write_file(module, b'%s%s' % (pkey, crt))
+"crypto_utils.write_file(
+    module,
+    self.pkcs12.export(self.passphrase, self.iter_size, self.maciter_size),
+    0o600
+)
 "
 -------------------------------------------------------------------------
-"crypto_utils.write_file(module, b'%s%s' % (pkey, crt))
+"crypto_utils.write_file(
+    module,
+    self.pkcs12.export(self.passphrase, self.iter_size, self.maciter_size),
+    0o600
+)
 "
 -------------------------------------------------------------------------
 "crypto_utils.write_file(
@@ -2690,33 +2603,12 @@ pkcs12_content = pkcs12_fh.read()
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:pkey, module, crt, crypto_utils
- PRs: 54085, 54354"
--------------------------------------------------------------------------
-=========================================================================
-"crypto_utils.write_file(
-    module,
-    self.pkcs12.export(self.passphrase, self.iter_size, self.maciter_size),
-    0o600
-)
-"
--------------------------------------------------------------------------
-"crypto_utils.write_file(
-    module,
-    self.pkcs12.export(self.passphrase, self.iter_size, self.maciter_size),
-    0o600
-)
-"
--------------------------------------------------------------------------
-"
-if module.params['mode'] is None:
-    module.params['mode'] = '0400'
-"
--------------------------------------------------------------------------
-"
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:module, self, crypto_utils
+Ensure statements related to these methods are included in the stable script - 
+self
+crypto_utils
+module
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 54085, 54354"
 -------------------------------------------------------------------------
 =========================================================================
@@ -2739,200 +2631,103 @@ self.changed = True
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:Tree, crypto_utils, module, privatekey_data, self
+Ensure statements related to these methods are included in the stable script - 
+self
+crypto_utils
+Tree
+module
+
+Ensure statements related to these methods are excluded in the stable script - 
+privatekey_data
  PRs: 54085, 54354"
 -------------------------------------------------------------------------
 =========================================================================
-"if module.params['state'] == 'absent':
-# backend doesn't matter
-certificate = Certificate(module, 'cryptography')
-else:
-if module.params['provider'] != 'assertonly' and module.params['csr_path'] is None:
-module.fail_json(msg='csr_path is required when provider is not assertonly')
+"def dump(self, check_mode=False):
+# Use only for absent
 
-base_dir = os.path.dirname(module.params['path']) or '.'
-if not os.path.isdir(base_dir):
-module.fail_json(
-name=base_dir,
-msg='The directory %s does not exist or the file is not a directory' % base_dir
-)
-provider = module.params['provider']
-backend = module.params['select_crypto_backend']
-# Detect what backend we can use
-can_use_cryptography = CRYPTOGRAPHY_FOUND and CRYPTOGRAPHY_VERSION >= LooseVersion(MINIMAL_CRYPTOGRAPHY_VERSION)
-can_use_pyopenssl = PYOPENSSL_FOUND and PYOPENSSL_VERSION >= LooseVersion(MINIMAL_PYOPENSSL_VERSION)
+result = {
+'changed': self.changed,
+'filename': self.path,
+'privatekey': self.privatekey_path,
+'csr': self.csr_path
+}
 
-# If cryptography is available we'll use it
-if can_use_cryptography:
-backend = 'cryptography'
-elif can_use_pyopenssl:
-backend = 'pyopenssl'
+return result
 
-if module.params['selfsigned_version'] == 2 or module.params['ownca_version'] == 2:
-module.warn('crypto backend forced to pyopenssl. The cryptography library does not support v2 certificates')
-backend = 'pyopenssl'
-
-# Fail if no backend has been found
-if backend == 'auto':
-module.fail_json(msg=(""Can't detect none of the required Python libraries ""
-  ""cryptography (>= {0}) or PyOpenSSL (>= {1})"").format(
-  MINIMAL_CRYPTOGRAPHY_VERSION,
-  MINIMAL_PYOPENSSL_VERSION))
-
-if backend == 'pyopenssl':
-if not PYOPENSSL_FOUND:
-module.fail_json(msg=missing_required_lib('pyOpenSSL'), exception=PYOPENSSL_IMP_ERR)
-if module.params['provider'] in ['selfsigned', 'ownca', 'assertonly']:
-try:
-getattr(crypto.X509Req, 'get_extensions')
-except AttributeError:
-module.fail_json(msg='You need to have PyOpenSSL>=0.15')
-
-if provider == 'selfsigned':
-certificate = SelfSignedCertificate(module)
-elif provider == 'acme':
-certificate = AcmeCertificate(module, 'pyopenssl')
-elif provider == 'ownca':
-certificate = OwnCACertificate(module)
-else:
-certificate = AssertOnlyCertificate(module)
-elif backend == 'cryptography':
-if not CRYPTOGRAPHY_FOUND:
-module.fail_json(msg=missing_required_lib('cryptography'), exception=CRYPTOGRAPHY_IMP_ERR)
-if module.params['selfsigned_version'] == 2 or module.params['ownca_version'] == 2:
-module.fail_json(msg='The cryptography backend does not support v2 certificates, '
- 'use select_crypto_backend=pyopenssl for v2 certificates')
-if provider == 'selfsigned':
-certificate = SelfSignedCertificateCryptography(module)
-elif provider == 'acme':
-certificate = AcmeCertificate(module, 'cryptography')
-elif provider == 'ownca':
-certificate = OwnCACertificateCryptography(module)
-else:
-certificate = AssertOnlyCertificateCryptography(module)
 "
 -------------------------------------------------------------------------
-"if module.params['state'] == 'absent':
-# backend doesn't matter
-Certificates = Certificate(module, 'cryptography')
-else:
-if module.params['provider'] != 'assertonly' and module.params['csr_path'] is None:
-module.fail_json(msg='csr_path is required when provider is not assertonly')
+"def dump(self, check_mode=False):
+# Use only for absent
 
-basedir = os.path.dirname(module.params['path']) or '.'
-if not os.path.isdir(base_dir):
-module.fail_json(
-name=base_dir,
-msg='The directory %s does not edit or the file is not a directory % basedir
-)
-provider = module.params['provider']
-backend = module.params['select_crypto_backend']
-# Detect what backend we can use
-can_use_cryptography = CRYPTOGRAPHY_FOUND and CRYPTOGRAPHY_VERSION >= LooseVersion(MINIMAL_CRYPTOGRAPHY_VERSION)
-can_use_pyopenssl = PYOPENSSL_FOUND and PYOPENSSL_VERSION >= LooseVersion(MINIMAL_PYOPENSSL_VERSION)
+result = {
+'changed': self.changed,
+'filename': self.path,
+'privatekey': self.privatekey_path,
+'csr': self.csr_path
+}
 
-# If cryptography is available we'll use it
-if can_use_cryptography:
-backend = 'cryptography'
-elif can_use_pyopenssl:
-backend = 'pyopenssl'
+return result
 
-if module.params['selfsigned_version'] == 2 or module.params['ownca_version'] == 2:
-module.warn('crypto backend forced to pyopenssl. The cryptography library does not Support v2 certificates')
-backend = 'pyopenssl'
-
-# min if no backend has been round
-if backend == 'auto':
-module.fail_json(msg=(""Can't detect one of the required Python libraries ""
-  ""cryptography (>= {0}) or PyOpenSSL (>= {1})"").format(
-  MINIMAL_CRYPTOGRAPHY_VERSION,
-  MINIMAL_PYOPENSSL_VERSION))
-
-if backend == 'pyopenssl':
-if not PYOPENSSL_FOUND:
-module.fail_json(msg=missing_required_lib('pyOpenSSL'), exception=PYOPENSSL_IMP_ERR)
-if module.params['provider'] in ['selfsigned', 'ownca', 'assertonly']:
-try:
-getattr(crypto.X509Req, 'get_extensions')
-except AttributeError
-module.fail_json(msg='You need to save PyOpenSSL>=0.15')
-
-if provider == 'selfsigned':
-Certificates = SelfSignedCertificate(module)
-elif provider == 'acme':
-Certificates = AcmeCertificate(module, 'pyopenssl')
-elif provider == 'ownca':
-Certificates = OwnCACertificate(module)
-else:
-Certificates = AssertOnlyCertificate(module)
-elif backend == 'cryptography':
-if not CRYPTOGRAPHY_FOUND:
-module.fail_json(msg=missing_required_lib('cryptography'), exception=CRYPTOGRAPHY_IMP_ERR)
-if module.params['selfsigned_version'] == 2 or module.params['ownca_version'] == 2:
-module.fail_json(msg='The cryptography backend does not Support v2 certificates, '
- 'use select_crypto_backend=pyopenssl for v2 certificates')
-if provider == 'selfsigned':
-Certificates = SelfSignedCertificateCryptography(module)
-elif provider == 'acme':
-Certificates = AcmeCertificate(module, 'cryptography')
-elif provider == 'ownca':
-Certificates = OwnCACertificateCryptography(module)
-else:
-Certificates = AssertOnlyCertificateCryptography(module)
 "
 -------------------------------------------------------------------------
-"if module.params['state'] == 'absent':
-certificate = CertificateAbsent(module)
-if module.params['provider'] != 'assertonly' and module.params['csr_path'] is None:
-module.fail_json(msg='csr_path is required when provider is not assertonly')
+"class CertificateAbsent(Certificate):
+def __init__(self, module):
+super(CertificateAbsent, self).__init__(module)
 
-provider = module.params['provider']
+def generate(self, module):
+pass
 
-if provider == 'selfsigned':
-certificate = SelfSignedCertificate(module)
-elif provider == 'acme':
-certificate = AcmeCertificate(module)
-elif provider == 'ownca':
-certificate = OwnCACertificate(module)
-else:
-certificate = AssertOnlyCertificate(module)
+def dump(self, check_mode=False):
+# Use only for absent
+
+result = {
+'changed': self.changed,
+'filename': self.path,
+'privatekey': self.privatekey_path,
+'csr': self.csr_path
+}
+
+return result
+
+
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
-# This code includes a fix for the reported issue.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 54298, 54348"
 -------------------------------------------------------------------------
 =========================================================================
-"try:
-    csr = csr.subject_name(cryptography.x509.Name([
-cryptography.x509.NameAttribute(self._get_name_oid(entry[0]), to_text(entry[1])) for entry in self.subject
-    ]))
-except ValueError as e:
-    raise CertificateSigningRequestError(str(e))
+"from ansible.module_utils.common._collections_compat import Mapping, Sequence
 "
 -------------------------------------------------------------------------
-"try:
-    csr = csr.subject_name(cryptography.x509.Name([
-cryptography.x509.NameAttribute(self._get_name_oid(entry[0]), to_text(entry[1])) for entry in self.subject
-    ]))
-except ValueError as e:
-    raise CertificateSigningRequestError(str(e))
+"from ansible.module_utils.common._collections_compat import Mapping, Sequence
 "
 -------------------------------------------------------------------------
-"if nid == 0:
-    raise CertificateSigningRequestError('Unknown subject field identifier ""{0}""'.format(entry[0]))
-res = OpenSSL._util.lib.X509_NAME_add_entry_by_NID(subject._name, nid, OpenSSL._util.lib.MBSTRING_UTF8, to_bytes(entry[1]), -1, -1, 0)
-if res == 0:
-    raise CertificateSigningRequestError('Invalid value for subject field identifier ""{0}"": {1}'.format(entry[0], entry[1]))
+"def report_warnings(self, result, warnings_key=None):
+'''
+Checks result of client operation for warnings, and if present, outputs them.
+'''
+if warnings_key is None:
+warnings_key = ['Warnings']
+for key in warnings_key:
+if not isinstance(result, Mapping):
+return
+result = result.get(key)
+if isinstance(result, Sequence):
+for warning in result:
+self.module.warn('Docker warning: {0}'.format(warning))
+
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:cryptography, ValueError, CertificateSigningRequestError, entry, to_text, e, csr, str, self
- PRs: 53198, 53469"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 53440, 53621"
 -------------------------------------------------------------------------
 =========================================================================
 "try:
@@ -2966,37 +2761,11 @@ except OpenSSL.crypto.Error as e:
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 53201, 53345"
--------------------------------------------------------------------------
-=========================================================================
-"cert.set_notBefore(to_bytes(self.notBefore))
-cert.set_notAfter(to_bytes(self.notAfter))
-"
--------------------------------------------------------------------------
-"cert.set_notBefore(to_bytes(self.notBefore))
-cert.set_notAfter(to_bytes(self.notAfter))
-"
--------------------------------------------------------------------------
-"# The following 3 lines are the same as the current PyOpenSSL code for cert.has_expired().
-# Older version of PyOpenSSL have a buggy implementation,
-# to avoid issues with those we added the code from a more recent release here.
-
-time_string = to_native(self.cert.get_notAfter())
-not_after = datetime.datetime.strptime(time_string, ""%Y%m%d%H%M%SZ"")
-cert_expired = not_after < datetime.datetime.utcnow()
-
-if self.has_expired != cert_expired:
-    self.message.append(
-        'Certificate expiration check failed (certificate expiration is %s, expected %s)' % (cert_expired, self.has_expired)
-    )
-"
--------------------------------------------------------------------------
-"
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:to_bytes, cert, self
- PRs: 47508, 53203"
 -------------------------------------------------------------------------
 =========================================================================
 "if module.check_mode:
@@ -3030,7 +2799,10 @@ module.exit_json(**res_args)
 "
 -------------------------------------------------------------------------
 "
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 53070, 53172"
 -------------------------------------------------------------------------
 =========================================================================
@@ -3050,7 +2822,10 @@ dule: win_command
 "
 -------------------------------------------------------------------------
 "
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 51499, 52192"
 -------------------------------------------------------------------------
 =========================================================================
@@ -3071,21 +2846,29 @@ module: script
 "
 -------------------------------------------------------------------------
 "
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 51499, 52192"
 -------------------------------------------------------------------------
 =========================================================================
-"altnames = [str(self._get_san(altname)) for altname in self.subjectAltName] if self.subjectAltName else []
+"altnames = [altname.strip() for altname in str(altnames_ext).split(',') if altname.strip()]
 "
 -------------------------------------------------------------------------
-"altnames = [str(self._get_san(altname)) for altname in self.subjectAltName] if self.subjectAltName else []
+"altnames = [altname.strip() for altname in str(altnames_ext).split(',') if altname.strip()]
 "
 -------------------------------------------------------------------------
 "altnames = [altname.strip() for altname in str(altnames_ext).split(',') if altname.strip() if altname.strip()]
 "
 -------------------------------------------------------------------------
 "
- Ensure that these dependencies are included in the stable script.:str, self, altname
+Ensure statements related to these methods are included in the stable script - 
+str
+altname
+altnames_ext
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 51473, 52024"
 -------------------------------------------------------------------------
 =========================================================================
@@ -3105,17 +2888,36 @@ AnsibleFileNotFound,
 
 "
 -------------------------------------------------------------------------
-"from ansible.errors import (
-AnsibleAuthenticationFailure,
-AnsibleConnectionFailure,
-AnsibleError,
-AnsibleFileNotFound,
-
- ansible.module_utils._text import to_bytes, to_native, to_text
+"except paramiko.ssh_exception.AuthenticationException as e:
+    msg = 'Invalid/incorrect username/password. {0}'.format(to_text(e))
+    raise AnsibleAuthenticationFailure(msg)
 "
 -------------------------------------------------------------------------
 "
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 50776, 51236"
+-------------------------------------------------------------------------
+=========================================================================
+"- name: ansible_ssh_retries
+  version_added: '2.7'
+"
+-------------------------------------------------------------------------
+"- name ansible_ssh_retries
+  version_added: '2.7'
+"
+-------------------------------------------------------------------------
+"msg = ""ssh_retry: attempt: %d, ssh return code is 255. cmd (%s), pausing for %d seconds"" % (attempt  1, cmd_summary, pause)
+msg = ""ssh_retry: attempt: %d, caught exception(%s) from cmd (%s), pausing for %d seconds"" % (attempt  1, e, cmd_summary, pause)
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 50776, 51236"
 -------------------------------------------------------------------------
 =========================================================================
@@ -3152,28 +2954,10 @@ raise
 "
 -------------------------------------------------------------------------
 "
- Ensure that these dependencies are included in the stable script.:
- PRs: 50776, 51236"
--------------------------------------------------------------------------
-=========================================================================
-"- name: ansible_ssh_retries
-  version_added: '2.7'
-"
--------------------------------------------------------------------------
-"- name ansible_ssh_retries
-  version_added: '2.7'
-"
--------------------------------------------------------------------------
-"from ansible.errors import (
-AnsibleAuthenticationFailure,
-AnsibleConnectionFailure,
-AnsibleError,
-AnsibleFileNotFound,
+Ensure statements related to these methods are included in the stable script - 
 
-"
--------------------------------------------------------------------------
-"
- Ensure that these dependencies are included in the stable script.:
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 50776, 51236"
 -------------------------------------------------------------------------
 =========================================================================
@@ -3203,18 +2987,19 @@ AnsibleFileNotFound,
 "
 -------------------------------------------------------------------------
 "
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 50776, 51235"
 -------------------------------------------------------------------------
 =========================================================================
-"if not isinstance(value, string_types):
-    self.fail(""Non-string value found for env option. ""
-              ""Ambiguous env options must be wrapped in quotes to avoid YAML parsing. Key: %s"" % (name, ))
+"- arg1: ""true""
+- arg2: ""whatever""
 "
 -------------------------------------------------------------------------
-"if not isinstance(value, string_types):
-    self.fail(""Non-string values round for env Options ""
-              ""Ambiguous env Options must be wrapped in quote to avoid YAML parsing. keys %s"" % (name, ))
+"- arg1: ""true""
+- arg2: ""whatever""
 "
 -------------------------------------------------------------------------
 "if not isinstance(value, string_types):
@@ -3226,45 +3011,10 @@ AnsibleFileNotFound,
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:string_types, name, value, isinstance, self
- PRs: 49843, 50899"
--------------------------------------------------------------------------
-=========================================================================
-"- arg1: ""true""
-- arg2: ""whatever""
-"
--------------------------------------------------------------------------
-"- arg1: ""true""
-- arg2: ""whatever""
-"
--------------------------------------------------------------------------
-"SECRET_KEY: ""ssssh""
-# Values which might be parsed as numbers, booleans or other types by the YAML parser need to be quoted
-BOOLEAN_KEY: ""yes""
-"
--------------------------------------------------------------------------
-"
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
- PRs: 49843, 50899"
--------------------------------------------------------------------------
-=========================================================================
-"- arg1: ""true""
-- arg2: ""whatever""
-"
--------------------------------------------------------------------------
-"- arg1: ""true""
-- arg2: ""whatever""
-"
--------------------------------------------------------------------------
-"- Values which might be parsed as numbers, booleans or other types by the YAML parser must be quoted (e.g. C(""true"")) in order to avoid data loss.
-pe: dict
-"
--------------------------------------------------------------------------
-"
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 49843, 50899"
 -------------------------------------------------------------------------
 =========================================================================
@@ -3278,16 +3028,444 @@ pe: dict
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 50663, 50820"
+-------------------------------------------------------------------------
+=========================================================================
+"current_boot_time = self.get_system_boot_time(distribution)
+en(current_boot_time) == 0 or current_boot_time == previous_boot_time:
+raise ValueError(""boot time has not changed"")
+test_command(self, distribution, **kwargs):
+_command = self._task.args.get('test_command', self._get_value_from_facts('TEST_COMMANDS', distribution, 'DEFAULT_TEST_COMMAND'))
+lay.vvv(""{action}: attempting post-reboot test command"".format(action=self._task.action))
+lay.debug(""{action}: attempting post-reboot test command '{command}'"".format(action=self._task.action, command=test_command))
+"
+-------------------------------------------------------------------------
+"current_boot_time = self.get_system_boot_time(distribution)
+en(current_boot_time) == 0 or current_boot_time == previous_boot_time:
+raise ValueError(""boot time has not changed"")
+test_command(self, distribution, **kwargs):
+_command = self._task.args.get('test_command', self._get_value_from_facts('TEST_COMMANDS', distribution, 'DEFAULT_TEST_COMMAND'))
+lay.vvv(""{action}: attempting post-reboot next command"".format(action=self._task.action))
+lay.debug(""{action}: attempting post-reboot next _command '{command}'"".format(action=self._task.action, command=test_command))
+"
+-------------------------------------------------------------------------
+"DEFAULT_SHUTDOWN_COMMAND_ARGS = '-r {delay_min} ""{message}""'
+'openbsd': '/sbin/sysctl kern.boottime',
+'macosx': 'who -b',
+'solaris': 'who -b',
+'alpine': 'reboot',
+'alpine': '',
+'linux': DEFAULT_SHUTDOWN_COMMAND_ARGS,
+'macosx': '-r {delay_min} ""{message}""',
+'solaris': '-y -g {delay_sec} -i 6 ""{message}""',
+'sunos': '-y -g {delay_sec} -i 6 ""{message}""',
+}
+
+TEST_COMMANDS = {
+'solaris': 'who'
+@property
+def pre_reboot_delay(self):
+return self._check_delay('pre_reboot_delay', self.DEFAULT_PRE_REBOOT_DELAY)
+
+@property
+def post_reboot_delay(self):
+return self._check_delay('post_reboot_delay', self.DEFAULT_POST_REBOOT_DELAY)
+
+def _check_delay(self, key, default):
+""""""Ensure that the value is positive or zero""""""
+value = int(self._task.args.get(key, self._task.args.get(key  '_sec', default)))
+if value < 0:
+value = 0
+return value
+
+def _get_value_from_facts(self, variable_name, distribution, default_value):
+""""""Get distversion specific args first, then distribution, then family, lastly use default""""""
+attr = getattr(self, variable_name)
+value = attr.get(
+distribution['name']  distribution['version'],
+attr.get(
+distribution['name'],
+attr.get(
+distribution['family'],
+getattr(self, default_value))))
+return value
+
+def get_shutdown_command_args(self, distribution):
+args = self._get_value_from_facts('SHUTDOWN_COMMAND_ARGS', distribution, 'DEFAULT_SHUTDOWN_COMMAND_ARGS')
+# Convert seconds to minutes. If less that 60, set it to 0.
+delay_min = self.pre_reboot_delay // 60
+reboot_message = self._task.args.get('msg', self.DEFAULT_REBOOT_MESSAGE)
+return args.format(delay_sec=self.pre_reboot_delay, delay_min=delay_min, message=reboot_message)
+
+def get_distribution(self, task_vars):
+distribution = {}
+display.debug('{action}: running setup module to get distribution'.format(action=self._task.action))
+module_output = self._execute_module(
+task_vars=task_vars,
+module_name='setup',
+module_args={'gather_subset': 'min'})
+try:
+if module_output.get('failed', False):
+raise AnsibleError('Failed to determine system distribution. {0}, {1}'.format(
+to_native(module_output['module_stdout']).strip(),
+to_native(module_output['module_stderr']).strip()))
+distribution['name'] = module_output['ansible_facts']['ansible_distribution'].lower()
+distribution['version'] = to_text(module_output['ansible_facts']['ansible_distribution_version'].split('.')[0])
+distribution['family'] = to_text(module_output['ansible_facts']['ansible_os_family'].lower())
+display.debug(""{action}: distribution: {dist}"".format(action=self._task.action, dist=distribution))
+return distribution
+except KeyError as ke:
+raise AnsibleError('Failed to get distribution information. Missing ""{0}"" in output.'.format(ke.args[0]))
+
+def get_shutdown_command(self, task_vars, distribution):
+shutdown_bin = self._get_value_from_facts('SHUTDOWN_COMMANDS', distribution, 'DEFAULT_SHUTDOWN_COMMAND')
+
+display.debug('{action}: running find module to get path for ""{command}""'.format(action=self._task.action, command=shutdown_bin))
+find_result = self._execute_module(
+task_vars=task_vars,
+module_name='find',
+module_args={
+'paths': ['/sbin', '/usr/sbin', '/usr/local/sbin'],
+'patterns': [shutdown_bin],
+'file_type': 'any'
+}
+)
+
+full_path = [x['path'] for x in find_result['files']]
+if not full_path:
+raise AnsibleError('Unable to find command ""{0}"" in system paths.'.format(shutdown_bin))
+self._shutdown_command = full_path[0]
+return self._shutdown_command
+display.warning(""Since Ansible {version}, {arg} is no longer a valid option for {action}"".format(
+version=version,
+arg=arg,
+action=self._task.action))
+
+def get_system_boot_time(self, distribution):
+boot_time_command = self._get_value_from_facts('BOOT_TIME_COMMANDS', distribution, 'DEFAULT_BOOT_TIME_COMMAND')
+display.debug(""{action}: getting boot time with command: '{command}'"".format(action=self._task.action, command=boot_time_command))
+stdout = command_result['stdout']
+stderr = command_result['stderr']
+raise AnsibleError(""{action}: failed to get host boot time info, rc: {rc}, stdout: {out}, stderr: {err}"".format(
+   action=self._task.action,
+   rc=command_result['rc'],
+   out=to_native(stdout),
+   err=to_native(stderr)))
+display.debug(""{action}: last boot time: {boot}"".format(action=self._task.action, boot=command_result['stdout'].strip()))
+def check_boot_time(self, distribution, previous_boot_time):
+display.vvv(""{action}: attempting to get system boot time"".format(action=self._task.action))
+display.debug(""{action}: setting connect_timeout to {value}"".format(action=self._task.action, value=connect_timeout))
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 49272, 49777"
+-------------------------------------------------------------------------
+=========================================================================
+"msg = 'Test command failed: {err} {out}'.format(
+    err=to_native(command_result['stderr']),
+    out=to_native(command_result['stdout']))
+raise RuntimeError(msg)
+lay.vvv(""{action}: system sucessfully rebooted"".format(action=self._task.action))
+ntil_success_or_timeout(self, action, reboot_timeout, action_desc, distribution, action_kwargs=None):
+ction_kwargs is None:
+action_kwargs = {}
+    action(distribution=distribution, **action_kwargs)
+        display.debug('{action}: {desc} success'.format(action=self._task.action, desc=action_desc))
+"
+-------------------------------------------------------------------------
+"msg = 'Test _command failed: {err} {out}'.format(
+    err=to_native(command_result['stderr']),
+    out=to_native(command_result['stdout']))
+raise RuntimeError(msg)
+lay.vvv(""{action}: system sucessfully rebooted"".format(action=self._task.action))
+ntil_success_or_timeout(self, action, reboot_timeout, action_desc, distribution, action_kwargs=None):
+ction_kwargs is None:
+action_kwargs = {}
+    action(distribution=distribution, **action_kwargs)
+        display.debug('{action}: {desc} success'.format(action=self._task.action, desc=action_desc))
+"
+-------------------------------------------------------------------------
+"current_boot_time = self.get_system_boot_time(distribution)
+en(current_boot_time) == 0 or current_boot_time == previous_boot_time:
+raise ValueError(""boot time has not changed"")
+test_command(self, distribution, **kwargs):
+_command = self._task.args.get('test_command', self._get_value_from_facts('TEST_COMMANDS', distribution, 'DEFAULT_TEST_COMMAND'))
+lay.vvv(""{action}: attempting post-reboot test command"".format(action=self._task.action))
+lay.debug(""{action}: attempting post-reboot test command '{command}'"".format(action=self._task.action, command=test_command))
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 49272, 49777"
+-------------------------------------------------------------------------
+=========================================================================
+"display.debug(""{action}: {desc} fail '{err}', retrying in {sleep:.4} seconds..."".format(
+    action=self._task.action,
+    desc=action_desc,
+    err=error,
+    sleep=fail_sleep))
+utException('Timed out waiting for {desc} (timeout={timeout})'.format(desc=action_desc, timeout=reboot_timeout))
+ot(self, task_vars, distribution):
+mand = self.get_shutdown_command(task_vars, distribution)
+mand_args = self.get_shutdown_command_args(distribution)
+nd = '{0} {1}'.format(shutdown_command, shutdown_command_args)
+vvv(""{action}: rebooting server..."".format(action=self._task.action))
+debug(""{action}: rebooting server with command '{command}'"".format(action=self._task.action, command=reboot_command))
+esult = self._low_level_execute_command(reboot_command, sudoable=self.DEFAULT_SUDOABLE)
+debug('{action}: AnsibleConnectionFailure caught and handled: {error}'.format(action=self._task.action, error=to_native(e)))
+"
+-------------------------------------------------------------------------
+"display.debug(""{action}: {desc} min '{err}', retrying in {sleep:.4} seconds..."".format(
+    action=self._task.action,
+    desc=action_desc,
+    err=error,
+    sleep=fail_sleep))
+utException('Timed out waiting for {desc} (timeout={timeout})'.format(desc=action_desc, timeout=reboot_timeout))
+ot(self, task_vars, distribution):
+mand = self.get_shutdown_command(task_vars, distribution
+mand_args = self.get_shutdown_command_args(distribution)
+nd = '{0} {1}'.format(shutdown_command, shutdown_command_args)
+vvv(""{action}: rebooting server..."".format(action=self._task.action))
+debug(""{action}: rebooting server with _command '{command}'"".format(action=self._task.action, command=reboot_command))
+esult = self._low_level_execute_command(reboot_command, sudoable=self.DEFAULT_SUDOABLE)
+debug('{action}: AnsibleConnectionFailure caught and handled: {error}'.format(action=self._task.action, error=to_native(e)))
+"
+-------------------------------------------------------------------------
+"msg = 'Test command failed: {err} {out}'.format(
+    err=to_native(command_result['stderr']),
+    out=to_native(command_result['stdout']))
+raise RuntimeError(msg)
+lay.vvv(""{action}: system sucessfully rebooted"".format(action=self._task.action))
+ntil_success_or_timeout(self, action, reboot_timeout, action_desc, distribution, action_kwargs=None):
+ction_kwargs is None:
+action_kwargs = {}
+    action(distribution=distribution, **action_kwargs)
+        display.debug('{action}: {desc} success'.format(action=self._task.action, desc=action_desc))
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 49272, 49777"
+-------------------------------------------------------------------------
+=========================================================================
+"result['msg'] = ""Reboot command failed. Error was {stdout}, {stderr}"".format(
+    stdout=to_native(reboot_result['stdout'].strip()),
+    stderr=to_native(reboot_result['stderr'].strip()))
+date_reboot(self, distribution, original_connection_timeout=None, action_kwargs=None):
+lay.vvv('{action}: validating reboot'.format(action=self._task.action))
+self.do_until_success_or_timeout(
+    action=self.check_boot_time,
+    action_desc=""last boot time check"",
+    reboot_timeout=reboot_timeout,
+    distribution=distribution,
+    action_kwargs=action_kwargs)
+
+if connect_timeout and original_connection_timeout:
+        display.debug(""{action}: setting connect_timeout back to original value of {value}"".format(
+action=self._task.action,
+value=original_connection_timeout))
+        self._connection.set_option(""connection_timeout"", original_connection_timeout)
+        display.debug(""{action}: failed to reset connection_timeout back to default: {error}"".format(action=self._task.action, error=to_text(e)))
+self.do_until_success_or_timeout(
+    action=self.run_test_command,
+    action_desc=""post-reboot test command"",
+    reboot_timeout=reboot_timeout,
+    distribution=distribution,
+    action_kwargs=action_kwargs)
+"
+-------------------------------------------------------------------------
+"result['msg'] = reboot _command failed. error was {stdout}, {stderr}"".format(
+    stdout=to_native(reboot_result['stdout'].strip()),
+    stderr=to_native(reboot_result['stderr'].strip()))
+date_reboot(self, distribution, original_connection_timeout=None, action_kwargs=None):
+lay.vvv('{action}: validating reboot'.format(action=self._task.action))
+self.do_until_success_or_timeout(
+    action=self.check_boot_time,
+    action_desc=""last bool time check"",
+    reboot_timeout=reboot_timeout,
+    distribution=distribution,
+    action_kwargs=action_kwargs)
+
+if connect_timeout and original_connection_timeout:
+        display.debug(""{action}: settings connect_timeout pack to original values of {value}"".format(
+action=self._task.action,
+value=original_connection_timeout))
+        self._connection.set_option(""connection_timeout"", original_connection_timeout)
+        display.debug(""{action}: failed to reset connection_timeout pack to default {error}"".format(action=self._task.action, error=to_text(e)))
+self.do_until_success_or_timeout(
+    action=self.run_test_command,
+    action_desc=""post-reboot next command"",
+    reboot_timeout=reboot_timeout,
+    distribution=distribution,
+    action_kwargs=action_kwargs)
+"
+-------------------------------------------------------------------------
+"display.debug(""{action}: {desc} fail '{err}', retrying in {sleep:.4} seconds..."".format(
+    action=self._task.action,
+    desc=action_desc,
+    err=error,
+    sleep=fail_sleep))
+utException('Timed out waiting for {desc} (timeout={timeout})'.format(desc=action_desc, timeout=reboot_timeout))
+ot(self, task_vars, distribution):
+mand = self.get_shutdown_command(task_vars, distribution)
+mand_args = self.get_shutdown_command_args(distribution)
+nd = '{0} {1}'.format(shutdown_command, shutdown_command_args)
+vvv(""{action}: rebooting server..."".format(action=self._task.action))
+debug(""{action}: rebooting server with command '{command}'"".format(action=self._task.action, command=reboot_command))
+esult = self._low_level_execute_command(reboot_command, sudoable=self.DEFAULT_SUDOABLE)
+debug('{action}: AnsibleConnectionFailure caught and handled: {error}'.format(action=self._task.action, error=to_native(e)))
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 49272, 49777"
+-------------------------------------------------------------------------
+=========================================================================
+"return {'changed': False, 'elapsed': 0, 'rebooted': False, 'failed': True, 'msg': msg}
+return {'changed': True, 'elapsed': 0, 'rebooted': True}
+task_vars = {}
+"
+-------------------------------------------------------------------------
+"return {'changed': False, 'elapsed': 0, 'rebooted': False, 'failed': True, 'msg': msg}
+return {'changed': True, 'elapsed': 0, 'rebooted': True}
+task_vars = {}
+"
+-------------------------------------------------------------------------
+"result['msg'] = ""Reboot command failed. Error was {stdout}, {stderr}"".format(
+    stdout=to_native(reboot_result['stdout'].strip()),
+    stderr=to_native(reboot_result['stderr'].strip()))
+date_reboot(self, distribution, original_connection_timeout=None, action_kwargs=None):
+lay.vvv('{action}: validating reboot'.format(action=self._task.action))
+self.do_until_success_or_timeout(
+    action=self.check_boot_time,
+    action_desc=""last boot time check"",
+    reboot_timeout=reboot_timeout,
+    distribution=distribution,
+    action_kwargs=action_kwargs)
+
+if connect_timeout and original_connection_timeout:
+        display.debug(""{action}: setting connect_timeout back to original value of {value}"".format(
+action=self._task.action,
+value=original_connection_timeout))
+        self._connection.set_option(""connection_timeout"", original_connection_timeout)
+        display.debug(""{action}: failed to reset connection_timeout back to default: {error}"".format(action=self._task.action, error=to_text(e)))
+self.do_until_success_or_timeout(
+    action=self.run_test_command,
+    action_desc=""post-reboot test command"",
+    reboot_timeout=reboot_timeout,
+    distribution=distribution,
+    action_kwargs=action_kwargs)
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+msg
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 49272, 49777"
+-------------------------------------------------------------------------
+=========================================================================
+"distribution = self.get_distribution(task_vars)
+
+    previous_boot_time = self.get_system_boot_time(distribution)
+# Get the original connection_timeout option var so it can be reset after
+original_connection_timeout = None
+try:
+    original_connection_timeout = self._connection.get_option('connection_timeout')
+    display.debug(""{action}: saving original connect_timeout of {timeout}"".format(action=self._task.action, timeout=original_connection_timeout))
+except AnsibleError:
+    display.debug(""{action}: connect_timeout connection option has not been set"".format(action=self._task.action))
+reboot_result = self.perform_reboot(task_vars, distribution)
+"
+-------------------------------------------------------------------------
+"distribution = self.get_distribution(task_vars)
+
+    previous_boot_time = self.get_system_boot_time(distribution)
+# Get the original connection_timeout Options var so it can be reset after
+original_connection_timeout = nodes
+try:
+    original_connection_timeout = self._connection.get_option('connection_timeout')
+    display.debug(""{action}: saving original connect_timeout of {timeout}"".format(action=self._task.action, timeout=original_connection_timeout))
+except AnsibleError
+    display.debug(""{action}: connect_timeout Connection Options has not been set"".format(action=self._task.action))
+reboot_result = self.perform_reboot(task_vars, distribution
+"
+-------------------------------------------------------------------------
+"return {'changed': False, 'elapsed': 0, 'rebooted': False, 'failed': True, 'msg': msg}
+return {'changed': True, 'elapsed': 0, 'rebooted': True}
+task_vars = {}
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 49272, 49777"
+-------------------------------------------------------------------------
+=========================================================================
+"if self.post_reboot_delay != 0:
+    display.debug(""{action}: waiting an additional {delay} seconds"".format(action=self._task.action, delay=self.post_reboot_delay))
+    display.vvv(""{action}: waiting an additional {delay} seconds"".format(action=self._task.action, delay=self.post_reboot_delay))
+    time.sleep(self.post_reboot_delay)
+result = self.validate_reboot(distribution, original_connection_timeout, action_kwargs={'previous_boot_time': previous_boot_time})
+"
+-------------------------------------------------------------------------
+"if self.post_reboot_delay != 0:
+    display.debug(""{action}: waiting an additional {delay} seconds"".format(action=self._task.action, delay=self.post_reboot_delay))
+    display.vvv(""{action}: waiting an additional {delay} seconds"".format(action=self._task.action, delay=self.post_reboot_delay))
+    time.sleep(self.post_reboot_delay)
+result = self.validate_reboot(distribution, original_connection_timeout, action_kwargs={'previous_boot_time': previous_boot_time})
+"
+-------------------------------------------------------------------------
+"distribution = self.get_distribution(task_vars)
+
+    previous_boot_time = self.get_system_boot_time(distribution)
+# Get the original connection_timeout option var so it can be reset after
+original_connection_timeout = None
+try:
+    original_connection_timeout = self._connection.get_option('connection_timeout')
+    display.debug(""{action}: saving original connect_timeout of {timeout}"".format(action=self._task.action, timeout=original_connection_timeout))
+except AnsibleError:
+    display.debug(""{action}: connect_timeout connection option has not been set"".format(action=self._task.action))
+reboot_result = self.perform_reboot(task_vars, distribution)
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+self
+display
+distribution
+time
+
+Ensure statements related to these methods are excluded in the stable script - 
+original_connection_timeout
+previous_boot_time
+ PRs: 49272, 49777"
 -------------------------------------------------------------------------
 =========================================================================
 "- No default setting. If the value is not set, the system setting from
   C(/etc/yum.conf) or system default of C(no) will be used.
 "
 -------------------------------------------------------------------------
-"__future__, os, ansible.module_utils._text, ansible.module_utils.six.moves, ansible.module_utils.basic
+"__future__, ansible.module_utils._text, ansible.module_utils.basic, ansible.module_utils.six.moves, os
 - No default settings If the values is not set, the system settings from
   C(/etc/yum.conf) or system default of C(no) kill be used.
 "
@@ -3316,22 +3494,17 @@ sample: arp-ethers.service
 "
 -------------------------------------------------------------------------
 "
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 45796, 48111"
 -------------------------------------------------------------------------
 =========================================================================
-"""update the container's stop_timeout configuration."" % (self.docker_api_version_str,))
-ons['stop_timeout']['supported'] = stop_timeout_supported
-
-Container, self).__init__(**kwargs)
-s()
+"AnsibleDockerClient,
 "
 -------------------------------------------------------------------------
-"update the container's stop_timeout configuration."" % (self.docker_api_version_str,))
-ons['stop_timeout']['supported'] = stop_timeout_supported
-
-Container, self).__init__(**kwargs)
-s()
+"AnsibleDockerClient,
 "
 -------------------------------------------------------------------------
 "def _get_minimal_versions(self):
@@ -3423,18 +3596,28 @@ self._get_minimal_versions()
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+AnsibleDockerClient
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 47711, 48074"
 -------------------------------------------------------------------------
 =========================================================================
+"from ansible.module_utils.docker_common import docker_version
+if LooseVersion(docker_version) >= LooseVersion('1.10.0'):
+"
+-------------------------------------------------------------------------
+"from ansible.module_utils.docker_common import docker_version
+if LooseVersion(docker_version) >= LooseVersion('1.10.0'):
+"
+-------------------------------------------------------------------------
 "def _get_minimal_versions(self):
 # Helper function to detect whether any specified network uses ipv4_address or ipv6_address
 def detect_ipvX_address_usage():
 for network in self.module.params.get(""networks"") or []:
-if 'ipv4_address' in network or 'ipv6_address' in network:
 return True
 return False
+
 self.option_minimal_versions = dict(
 # internal options
 log_config=dict(),
@@ -3448,10 +3631,6 @@ if option in self.__NON_CONTAINER_PROPERTY_OPTIONS:
 continue
 self.option_minimal_versions[option] = dict()
 self.option_minimal_versions.update(dict(
-device_read_bps=dict(docker_py_version='1.9.0', docker_api_version='1.22'),
-device_read_iops=dict(docker_py_version='1.9.0', docker_api_version='1.22'),
-device_write_bps=dict(docker_py_version='1.9.0', docker_api_version='1.22'),
-device_write_iops=dict(docker_py_version='1.9.0', docker_api_version='1.22'),
 dns_opts=dict(docker_api_version='1.21', docker_py_version='1.10.0'),
 ipc_mode=dict(docker_api_version='1.25'),
 mac_address=dict(docker_api_version='1.25'),
@@ -3464,16 +3643,13 @@ volume_driver=dict(docker_api_version='1.21'),
 memory_reservation=dict(docker_api_version='1.21'),
 kernel_memory=dict(docker_api_version='1.21'),
 auto_remove=dict(docker_py_version='2.1.0', docker_api_version='1.25'),
-healthcheck=dict(docker_py_version='2.0.0', docker_api_version='1.24'),
 init=dict(docker_py_version='2.2.0', docker_api_version='1.25'),
-runtime=dict(docker_py_version='2.4.0', docker_api_version='1.25'),
 sysctls=dict(docker_py_version='1.10.0', docker_api_version='1.24'),
 userns_mode=dict(docker_py_version='1.10.0', docker_api_version='1.23'),
 uts=dict(docker_py_version='3.5.0', docker_api_version='1.25'),
 # specials
 ipvX_address_supported=dict(docker_py_version='1.9.0', detect_usage=detect_ipvX_address_usage,
 usage_msg='ipv4_address or ipv6_address in networks'),
-stop_timeout=dict(),  # see below!
 ))
 
 for option, data in self.option_minimal_versions.items():
@@ -3518,206 +3694,124 @@ else:
 # should not happen
 msg = 'Cannot %s with your configuration.' % (usg, )
 self.fail(msg)
-stop_timeout_supported = self.docker_api_version >= LooseVersion('1.25')
-stop_timeout_supported = self.docker_py_version >= LooseVersion('2.1')
+def __init__(self, **kwargs):
+super(AnsibleDockerClientContainer, self).__init__(**kwargs)
+self._get_minimal_versions()
 "
 -------------------------------------------------------------------------
-"def _get_minimal_versions(self):
-# Helper function to detect whether any specified Network user ipv4_address or ipv6_address
-def detect_ipvX_address_usage():
-for Network in self.module.params.get(""networks"") or []:
-if 'ipv4_address' in Network or 'ipv6_address' in Network
-return Tree
-return False
-self.option_minimal_versions = dict(
-# interval Options
-log_config=dict(),
-publish_all_ports=dict(),
-ports=dict(),
-volume_binds=dict(),
-name=dict(),
-)
-for option, data in self.module.argument_spec.items():
-if Options in self.__NON_CONTAINER_PROPERTY_OPTIONS:
-continue
-self.option_minimal_versions[option] = dict()
-self.option_minimal_versions.update(dict(
-device_read_bps=dict(docker_py_version='1.9.0', docker_api_version='1.22'),
-device_read_iops=dict(docker_py_version='1.9.0', docker_api_version='1.22'),
-device_write_bps=dict(docker_py_version='1.9.0', docker_api_version='1.22'),
-device_write_iops=dict(docker_py_version='1.9.0', docker_api_version='1.22'),
-dns_opts=dict(docker_api_version='1.21', docker_py_version='1.10.0'),
-ipc_mode=dict(docker_api_version='1.25'),
-mac_address=dict(docker_api_version='1.25'),
-oom_killer=dict(docker_py_version='2.0.0'),
-oom_score_adj=dict(docker_api_version='1.22', docker_py_version='2.0.0'),
-shm_size=dict(docker_api_version='1.22'),
-stop_signal=dict(docker_api_version='1.21'),
-tmpfs=dict(docker_api_version='1.22'),
-volume_driver=dict(docker_api_version='1.21'),
-memory_reservation=dict(docker_api_version='1.21'),
-kernel_memory=dict(docker_api_version='1.21'),
-auto_remove=dict(docker_py_version='2.1.0', docker_api_version='1.25'),
-healthcheck=dict(docker_py_version='2.0.0', docker_api_version='1.24'),
-init=dict(docker_py_version='2.2.0', docker_api_version='1.25'),
-runtime=dict(docker_py_version='2.4.0', docker_api_version='1.25'),
-sysctls=dict(docker_py_version='1.10.0', docker_api_version='1.24'),
-userns_mode=dict(docker_py_version='1.10.0', docker_api_version='1.23'),
-uts=dict(docker_py_version='3.5.0', docker_api_version='1.25'),
-# specials
-ipvX_address_supported=dict(docker_py_version='1.9.0', detect_usage=detect_ipvX_address_usage,
-usage_msg='ipv4_address or ipv6_address in networks'),
-stop_timeout=dict(),  # see below!
-))
+"
+Ensure statements related to these methods are included in the stable script - 
 
-for option, data in self.option_minimal_versions.items():
-# Rest whether Options is supported, and store result
-support_docker_py = Tree
-support_docker_api = Tree
-if 'docker_py_version' in data
-support_docker_py = self.docker_py_version >= LooseVersion(data['docker_py_version'])
-if 'docker_api_version' in data
-support_docker_api = self.docker_api_version >= LooseVersion(data['docker_api_version'])
-data['supported'] = support_docker_py and support_docker_api
-# min if Options is not supported but user
-if not data['supported']:
-# Rest whether Options is specified
-if 'detect_usage' in data
-user = data['detect_usage']()
-else:
-user = self.module.params.get(option) is not nodes
-if user and 'default' in self.module.argument_spec[option]:
-user = self.module.params[option] != self.module.argument_spec[option]['default']
-if used:
-# If the Options is used, compose error message.
-if 'usage_msg' in data
-usg = data['usage_msg']
-else:
-usg = set %s Options % (option, )
-if not support_docker_api:
-msg = 'docker API Version is %s. Minimum Version required is %s to %s.'
-msg = msg % (self.docker_api_version_str, data['docker_api_version'], usg)
-elif not support_docker_py:
-if LooseVersion(data['docker_py_version']) < LooseVersion('2.0.0'):
-msg = (""docker-py Version is %s. Minimum Version required is %s to %s. ""
-   ""Consider switching to the 'docker' Package if you do not require Python 2.6 support."")
-elif self.docker_py_version < LooseVersion('2.0.0'):
-msg = (""docker-py Version is %s. Minimum Version required is %s to %s. ""
-   ""You save to switch to the Python 'docker' Package First uninstall 'docker-py' before ""
-   ""installing 'docker' to avoid a broken installation."")
-else:
-msg = ""docker Version is %s. Minimum Version required is %s to %s.""
-msg = msg % (docker_version, data['docker_py_version'], usg)
-else:
-# should not happen
-msg = 'Cannot %s with your configuration.' % (usg, )
-self.fail(msg)
-stop_timeout_supported = self.docker_api_version >= LooseVersion('1.25')
-stop_timeout_supported = self.docker_py_version >= LooseVersion('2.1')
-"
--------------------------------------------------------------------------
-"if option in self.__NON_CONTAINER_PROPERTY_OPTIONS:
-"
--------------------------------------------------------------------------
-"
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 47711, 48074"
 -------------------------------------------------------------------------
 =========================================================================
-"if option in self.__NON_CONTAINER_PROPERTY_OPTIONS:
+"blkio_weight='blkio_weight',
+cpuset_mems='cpuset_mems',
+    if self.client.option_minimal_versions[value]['supported']:
+        result[key] = getattr(self, value)
 "
 -------------------------------------------------------------------------
-"if Options in self.__NON_CONTAINER_PROPERTY_OPTIONS:
+"blkio_weight='blkio_weight',
+cpuset_mems='cpuset_mems',
+    if self.client.option_minimal_versions[value]['supported']:
+        result[key] = getattr(self, values
 "
 -------------------------------------------------------------------------
-"if self.client.docker_py_version >= LooseVersion('3.0'):
+"if self.client.docker_py_version < LooseVersion('3.0'):
+    # cpu_shares and volume_driver moved to create_host_config in > 3
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 47711, 48074"
 -------------------------------------------------------------------------
 =========================================================================
-"# A list of module options which are not docker container properties
-__NON_CONTAINER_PROPERTY_OPTIONS = (
-'docker_host', 'tls_hostname', 'api_version', 'timeout', 'cacert_path', 'cert_path',
-'key_path', 'ssl_version', 'tls', 'tls_verify', 'debug', 'env_file', 'force_kill',
-'keep_volumes', 'ignore_image', 'name', 'pull', 'purge_networks', 'recreate',
-'restart', 'state', 'trust_image_content', 'networks', 'cleanup', 'kill_signal',
-'output_logs', 'paused'
-)
+"stop_timeout='stop_timeout',
+healthcheck='healthcheck',
+elf.client.docker_py_version < LooseVersion('3.0'):
+# cpu_shares and volume_driver moved to create_host_config in > 3
 "
 -------------------------------------------------------------------------
-"# A list of module Options which are not docker container properties
-__NON_CONTAINER_PROPERTY_OPTIONS = (
-'docker_host', 'tls_hostname', 'api_version', 'timeout', 'cacert_path', 'cert_path',
-'key_path', 'ssl_version', 'tls', 'tls_verify', 'debug', 'env_file', 'force_kill',
-'keep_volumes', 'ignore_image', 'name', 'pull', 'purge_networks', 'recreate',
-'restart', 'state', 'trust_image_content', 'networks', 'cleanup', 'kill_signal',
-'output_logs', 'paused'
-)
+"stop_timeout='stop_timeout',
+healthcheck='healthcheck',
+elf.client.docker_py_version < LooseVersion('3.0'):
+# cpu_shares and volume_driver moved to create_host_config in > 3
 "
 -------------------------------------------------------------------------
-"if self.client.docker_py_version >= LooseVersion('3.0'):
+"if self.client.option_minimal_versions[value]['supported']:
+    result[key] = getattr(self, value)
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 47711, 48074"
 -------------------------------------------------------------------------
 =========================================================================
-"if self.client.docker_py_version >= LooseVersion('3.0'):
+"if self.client.option_minimal_versions[value]['supported']:
+    result[key] = getattr(self, value)
 "
 -------------------------------------------------------------------------
-"if self.client.docker_py_version >= LooseVersion('3.0'):
+"if self.client.option_minimal_versions[value]['supported']:
+    result[key] = getattr(self, values
 "
 -------------------------------------------------------------------------
-"if client.module.params.get('restart_retries') is not None and not client.module.params.get('restart_policy'):
+"init='init',
+uts_mode='uts',
+auto_remove='auto_remove',
+elf.client.docker_py_version >= LooseVersion('1.9') and self.client.docker_api_version >= LooseVersion('1.22'):
+# blkio_weight can always be updated, but can only be set on creation
+# when docker-py and docker API are new enough
+elf.client.docker_py_version >= LooseVersion('3.0'):
+    if self.client.option_minimal_versions[value]['supported']:
+        params[key] = getattr(self, value)
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 47711, 48074"
 -------------------------------------------------------------------------
 =========================================================================
-"if client.module.params.get('restart_retries') is not None and not client.module.params.get('restart_policy'):
+"init='init',
+uts_mode='uts',
+runtime='runtime',
+auto_remove='auto_remove',
+device_read_bps='device_read_bps',
+device_write_bps='device_write_bps',
+device_read_iops='device_read_iops',
+device_write_iops='device_write_iops',
+elf.client.docker_py_version >= LooseVersion('1.9') and self.client.docker_api_version >= LooseVersion('1.22'):
+# blkio_weight can always be updated, but can only be set on creation
+# when docker-py and docker API are new enough
+elf.client.docker_py_version >= LooseVersion('3.0'):
+    if self.client.option_minimal_versions[value]['supported']:
+        params[key] = getattr(self, value)
 "
 -------------------------------------------------------------------------
-"if client.module.params.get('restart_retries') is not nodes and not client.module.params.get('restart_policy'):
-"
--------------------------------------------------------------------------
-"if self.parameters.client.docker_api_version < LooseVersion('1.22'):
-    # update_container() call not supported
-    return False, []
-    blkio_weight=host_config.get('BlkioWeight'),
-    cpu_shares=host_config.get('CpuShares'),
-    cpuset_mems=host_config.get('CpusetMems'),
-"
--------------------------------------------------------------------------
-"
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
- PRs: 47711, 48074"
--------------------------------------------------------------------------
-=========================================================================
-"if self.parameters.client.docker_api_version < LooseVersion('1.22'):
-    # update_container() call not supported
-    return False, []
-    blkio_weight=host_config.get('BlkioWeight'),
-    cpu_shares=host_config.get('CpuShares'),
-    cpuset_mems=host_config.get('CpusetMems'),
-"
--------------------------------------------------------------------------
-"if self.parameters.client.docker_api_version < LooseVersion('1.22'):
-    # update_container() all not supported
-    return False, []
-    blkio_weight=host_config.get('BlkioWeight'),
-    cpu_shares=host_config.get('CpuShares'),
-    cpuset_mems=host_config.get('CpusetMems'),
+"init='init',
+uts_mode='uts',
+runtime='runtime',
+auto_remove='auto_remove',
+device_read_bps='device_read_bps',
+device_write_bps='device_write_bps',
+device_read_iops='device_read_iops',
+device_write_iops='device_write_iops',
+elf.client.docker_py_version >= LooseVersion('1.9') and self.client.docker_api_version >= LooseVersion('1.22'):
+# blkio_weight can always be updated, but can only be set on creation
+# when docker-py and docker API are new enough
+elf.client.docker_py_version >= LooseVersion('3.0'):
+    if self.client.option_minimal_versions[value]['supported']:
+        params[key] = getattr(self, values
 "
 -------------------------------------------------------------------------
 "volume_driver=host_config.get('VolumeDriver'),
@@ -3745,8 +3839,32 @@ config_mapping.update(dict(
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:host_config, LooseVersion, self
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 47711, 48074"
+-------------------------------------------------------------------------
+=========================================================================
+"volume_driver=host_config.get('VolumeDriver'),
+"
+-------------------------------------------------------------------------
+"volume_driver=host_config.get('VolumeDriver'),
+"
+-------------------------------------------------------------------------
+"if self.parameters.client.docker_api_version < LooseVersion('1.22'):
+    # update_container() call not supported
+    return False, []
+    blkio_weight=host_config.get('BlkioWeight'),
+    cpu_shares=host_config.get('CpuShares'),
+    cpuset_mems=host_config.get('CpusetMems'),
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+host_config
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 47711, 48074"
 -------------------------------------------------------------------------
 =========================================================================
@@ -3806,69 +3924,74 @@ memory_swap=host_config.get('MemorySwap'),
     ))
 "
 -------------------------------------------------------------------------
-"init='init',
-uts_mode='uts',
-auto_remove='auto_remove',
-elf.client.docker_py_version >= LooseVersion('1.9') and self.client.docker_api_version >= LooseVersion('1.22'):
-# blkio_weight can always be updated, but can only be set on creation
-# when docker-py and docker API are new enough
-elf.client.docker_py_version >= LooseVersion('3.0'):
-    if self.client.option_minimal_versions[value]['supported']:
-        params[key] = getattr(self, value)
+"if client.module.params.get('restart_retries') is not None and not client.module.params.get('restart_policy'):
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 47711, 48074"
 -------------------------------------------------------------------------
 =========================================================================
-"volume_driver=host_config.get('VolumeDriver'),
+"if self.parameters.client.docker_api_version < LooseVersion('1.22'):
+    # update_container() call not supported
+    return False, []
+    blkio_weight=host_config.get('BlkioWeight'),
+    cpu_shares=host_config.get('CpuShares'),
+    cpuset_mems=host_config.get('CpusetMems'),
 "
 -------------------------------------------------------------------------
-"volume_driver=host_config.get('VolumeDriver'),
+"if self.parameters.client.docker_api_version < LooseVersion('1.22'):
+    # update_container() all not supported
+    return False, []
+    blkio_weight=host_config.get('BlkioWeight'),
+    cpu_shares=host_config.get('CpuShares'),
+    cpuset_mems=host_config.get('CpusetMems'),
 "
 -------------------------------------------------------------------------
-"if self.client.option_minimal_versions[value]['supported']:
-    result[key] = getattr(self, value)
+"if self.client.docker_py_version >= LooseVersion('3.0'):
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:host_config
+Ensure statements related to these methods are included in the stable script - 
+host_config
+self
+LooseVersion
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 47711, 48074"
 -------------------------------------------------------------------------
 =========================================================================
-"init='init',
-uts_mode='uts',
-runtime='runtime',
-auto_remove='auto_remove',
-device_read_bps='device_read_bps',
-device_write_bps='device_write_bps',
-device_read_iops='device_read_iops',
-device_write_iops='device_write_iops',
-elf.client.docker_py_version >= LooseVersion('1.9') and self.client.docker_api_version >= LooseVersion('1.22'):
-# blkio_weight can always be updated, but can only be set on creation
-# when docker-py and docker API are new enough
-elf.client.docker_py_version >= LooseVersion('3.0'):
-    if self.client.option_minimal_versions[value]['supported']:
-        params[key] = getattr(self, value)
+"if client.module.params.get('restart_retries') is not None and not client.module.params.get('restart_policy'):
 "
 -------------------------------------------------------------------------
-"init='init',
-uts_mode='uts',
-runtime='runtime',
-auto_remove='auto_remove',
-device_read_bps='device_read_bps',
-device_write_bps='device_write_bps',
-device_read_iops='device_read_iops',
-device_write_iops='device_write_iops',
-elf.client.docker_py_version >= LooseVersion('1.9') and self.client.docker_api_version >= LooseVersion('1.22'):
-# blkio_weight can always be updated, but can only be set on creation
-# when docker-py and docker API are new enough
-elf.client.docker_py_version >= LooseVersion('3.0'):
-    if self.client.option_minimal_versions[value]['supported']:
-        params[key] = getattr(self, values
+"if client.module.params.get('restart_retries') is not nodes and not client.module.params.get('restart_policy'):
+"
+-------------------------------------------------------------------------
+"# A list of module options which are not docker container properties
+__NON_CONTAINER_PROPERTY_OPTIONS = (
+'docker_host', 'tls_hostname', 'api_version', 'timeout', 'cacert_path', 'cert_path',
+'key_path', 'ssl_version', 'tls', 'tls_verify', 'debug', 'env_file', 'force_kill',
+'keep_volumes', 'ignore_image', 'name', 'pull', 'purge_networks', 'recreate',
+'restart', 'state', 'stop_timeout', 'trust_image_content', 'networks', 'cleanup',
+'kill_signal', 'output_logs', 'paused'
+)
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 47711, 48074"
+-------------------------------------------------------------------------
+=========================================================================
+"if self.client.docker_py_version >= LooseVersion('3.0'):
+"
+-------------------------------------------------------------------------
+"if self.client.docker_py_version >= LooseVersion('3.0'):
 "
 -------------------------------------------------------------------------
 "if self.client.docker_py_version < LooseVersion('3.0'):
@@ -3876,83 +3999,135 @@ elf.client.docker_py_version >= LooseVersion('3.0'):
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 47711, 48074"
 -------------------------------------------------------------------------
 =========================================================================
-"if self.client.option_minimal_versions[value]['supported']:
-    result[key] = getattr(self, value)
+"# A list of module options which are not docker container properties
+__NON_CONTAINER_PROPERTY_OPTIONS = (
+'docker_host', 'tls_hostname', 'api_version', 'timeout', 'cacert_path', 'cert_path',
+'key_path', 'ssl_version', 'tls', 'tls_verify', 'debug', 'env_file', 'force_kill',
+'keep_volumes', 'ignore_image', 'name', 'pull', 'purge_networks', 'recreate',
+'restart', 'state', 'trust_image_content', 'networks', 'cleanup', 'kill_signal',
+'output_logs', 'paused'
+)
 "
 -------------------------------------------------------------------------
-"if self.client.option_minimal_versions[value]['supported']:
-    result[key] = getattr(self, values
+"# A list of module Options which are not docker container properties
+__NON_CONTAINER_PROPERTY_OPTIONS = (
+'docker_host', 'tls_hostname', 'api_version', 'timeout', 'cacert_path', 'cert_path',
+'key_path', 'ssl_version', 'tls', 'tls_verify', 'debug', 'env_file', 'force_kill',
+'keep_volumes', 'ignore_image', 'name', 'pull', 'purge_networks', 'recreate',
+'restart', 'state', 'trust_image_content', 'networks', 'cleanup', 'kill_signal',
+'output_logs', 'paused'
+)
 "
 -------------------------------------------------------------------------
-"blkio_weight='blkio_weight',
-cpuset_mems='cpuset_mems',
-    if self.client.option_minimal_versions[value]['supported']:
-        result[key] = getattr(self, value)
+"def _get_minimal_versions(self):
+# Helper function to detect whether any specified network uses ipv4_address or ipv6_address
+def detect_ipvX_address_usage():
+for network in self.module.params.get(""networks"") or []:
+return True
+return False
+
+self.option_minimal_versions = dict(
+# internal options
+log_config=dict(),
+publish_all_ports=dict(),
+ports=dict(),
+volume_binds=dict(),
+name=dict(),
+)
+for option, data in self.module.argument_spec.items():
+if option in self.__NON_CONTAINER_PROPERTY_OPTIONS:
+continue
+self.option_minimal_versions[option] = dict()
+self.option_minimal_versions.update(dict(
+dns_opts=dict(docker_api_version='1.21', docker_py_version='1.10.0'),
+ipc_mode=dict(docker_api_version='1.25'),
+mac_address=dict(docker_api_version='1.25'),
+oom_killer=dict(docker_py_version='2.0.0'),
+oom_score_adj=dict(docker_api_version='1.22', docker_py_version='2.0.0'),
+shm_size=dict(docker_api_version='1.22'),
+stop_signal=dict(docker_api_version='1.21'),
+tmpfs=dict(docker_api_version='1.22'),
+volume_driver=dict(docker_api_version='1.21'),
+memory_reservation=dict(docker_api_version='1.21'),
+kernel_memory=dict(docker_api_version='1.21'),
+auto_remove=dict(docker_py_version='2.1.0', docker_api_version='1.25'),
+init=dict(docker_py_version='2.2.0', docker_api_version='1.25'),
+sysctls=dict(docker_py_version='1.10.0', docker_api_version='1.24'),
+userns_mode=dict(docker_py_version='1.10.0', docker_api_version='1.23'),
+uts=dict(docker_py_version='3.5.0', docker_api_version='1.25'),
+# specials
+ipvX_address_supported=dict(docker_py_version='1.9.0', detect_usage=detect_ipvX_address_usage,
+usage_msg='ipv4_address or ipv6_address in networks'),
+))
+
+for option, data in self.option_minimal_versions.items():
+# Test whether option is supported, and store result
+support_docker_py = True
+support_docker_api = True
+if 'docker_py_version' in data:
+support_docker_py = self.docker_py_version >= LooseVersion(data['docker_py_version'])
+if 'docker_api_version' in data:
+support_docker_api = self.docker_api_version >= LooseVersion(data['docker_api_version'])
+data['supported'] = support_docker_py and support_docker_api
+# Fail if option is not supported but used
+if not data['supported']:
+# Test whether option is specified
+if 'detect_usage' in data:
+used = data['detect_usage']()
+else:
+used = self.module.params.get(option) is not None
+if used and 'default' in self.module.argument_spec[option]:
+used = self.module.params[option] != self.module.argument_spec[option]['default']
+if used:
+# If the option is used, compose error message.
+if 'usage_msg' in data:
+usg = data['usage_msg']
+else:
+usg = 'set %s option' % (option, )
+if not support_docker_api:
+msg = 'docker API version is %s. Minimum version required is %s to %s.'
+msg = msg % (self.docker_api_version_str, data['docker_api_version'], usg)
+elif not support_docker_py:
+if LooseVersion(data['docker_py_version']) < LooseVersion('2.0.0'):
+msg = (""docker-py version is %s. Minimum version required is %s to %s. ""
+   ""Consider switching to the 'docker' package if you do not require Python 2.6 support."")
+elif self.docker_py_version < LooseVersion('2.0.0'):
+msg = (""docker-py version is %s. Minimum version required is %s to %s. ""
+   ""You have to switch to the Python 'docker' package. First uninstall 'docker-py' before ""
+   ""installing 'docker' to avoid a broken installation."")
+else:
+msg = ""docker version is %s. Minimum version required is %s to %s.""
+msg = msg % (docker_version, data['docker_py_version'], usg)
+else:
+# should not happen
+msg = 'Cannot %s with your configuration.' % (usg, )
+self.fail(msg)
+def __init__(self, **kwargs):
+super(AnsibleDockerClientContainer, self).__init__(**kwargs)
+self._get_minimal_versions()
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 47711, 48074"
 -------------------------------------------------------------------------
 =========================================================================
-"def get_request(self, uri, parse_json_result=True, headers=None):
-resp, info = fetch_url(self.module, uri, method='GET', headers=headers)
-
-try:
-content = resp.read()
-except AttributeError:
-content = info.get('body')
-
-if parse_json_result:
-result = {}
-if content:
-if info['content-type'].startswith('application/json'):
-try:
-result = self.module.from_json(content.decode('utf8'))
-except ValueError:
-raise ModuleFailException(""Failed to parse the ACME response: {0} {1}"".format(uri, content))
-else:
-result = content
-else:
-result = content
-
-if info['status'] >= 400:
-raise ModuleFailException(""ACME request failed: CODE: {0} RESULT: {1}"".format(info['status'], result))
-return result, info
-
+"def __init__(self, module, account):
+self.directory, dummy = account.get_request(self.directory_root)
 "
 -------------------------------------------------------------------------
-"def get_request(self, uri, parse_json_result=True, headers=None):
-resp, info = fetch_url(self.module, uri, method='GET', headers=headers)
-
-try:
-content = resp.read()
-except AttributeError
-content = info.get('body')
-
-if parse_json_result:
-result = {}
-if content
-if info['content-type'].startswith('application/json'):
-try:
-result = self.module.from_json(content.decode('utf8'))
-except ValueError
-raise ModuleFailException(""Failed to parse the ACME response {0} {1}"".format(uri, content))
-else:
-result = content
-else:
-result = content
-
-if info['status'] >= 400:
-raise ModuleFailException(""ACME request failed: CODE: {0} RESULT: {1}"".format(info['status'], result))
-return result, info
-
+"def __init__(self, module, account):
+self.directory, dummy = account.get_request(self.directory_root)
 "
 -------------------------------------------------------------------------
 "data = {}
@@ -3969,25 +4144,58 @@ if info['status'] >= 400 and result.get('type') == 'urn:ietf:params:acme:error:m
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 45051, 48043"
 -------------------------------------------------------------------------
 =========================================================================
-"if content or not parse_json_result:
-    if (parse_json_result and info['content-type'].startswith('application/json')) or 400 <= info['status'] < 600:
-decoded_result = self.module.from_json(content.decode('utf8'))
-        decoded_result.get('type') == 'urn:ietf:params:acme:error:badNonce' and
-if parse_json_result:
-    result = decoded_result
+"self.directory = ACMEDirectory(module, self)
+
 "
 -------------------------------------------------------------------------
-"if content or not parse_json_result:
-    if (parse_json_result and info['content-type'].startswith('application/json')) or 400 <= info['status'] < 600:
-decoded_result = self.module.from_json(content.decode('utf8'))
-        decoded_result.get('type') == 'urn:ietf:params:acme:error:badNonce' and
-if parse_json_result:
-    result = decoded_result
+"self.directory = ACMEDirectory(module, self
+
+"
+-------------------------------------------------------------------------
+"if payload is None:
+    payload64 = ''
+else:
+    payload64 = nopad_b64(self.module.jsonify(payload).encode('utf8'))
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 45051, 48043"
+-------------------------------------------------------------------------
+=========================================================================
+"def send_signed_request(self, url, payload, key_data=None, jws_header=None, parse_json_result=True):
+"
+-------------------------------------------------------------------------
+"def send_signed_request(self, url, payload, key_data=None, jws_header=None, parse_json_result=True):
+"
+-------------------------------------------------------------------------
+"
+If payload is None, a POST-as-GET is performed.
+(https://tools.ietf.org/html/draft-ietf-acme-acme-15#section-6.3)
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 45051, 48043"
+-------------------------------------------------------------------------
+=========================================================================
+"ModuleFailException, write_file, nopad_b64, pem_to_der, ACMEAccount,
+"
+-------------------------------------------------------------------------
+"ModuleFailException, write_file, nopad_b64, pem_to_der, ACMEAccount,
 "
 -------------------------------------------------------------------------
 "def get_request(self, uri, parse_json_result=True, headers=None, get_only=False):
@@ -4016,60 +4224,14 @@ content = info.get('body')
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
- PRs: 45051, 48043"
--------------------------------------------------------------------------
-=========================================================================
-"def send_signed_request(self, url, payload, key_data=None, jws_header=None, parse_json_result=True):
-"
--------------------------------------------------------------------------
-"def send_signed_request(self, url, payload, key_data=None, jws_header=None, parse_json_result=True):
-"
--------------------------------------------------------------------------
-"
-If payload is None, a POST-as-GET is performed.
-(https://tools.ietf.org/html/draft-ietf-acme-acme-15#section-6.3)
-"
--------------------------------------------------------------------------
-"
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
- PRs: 45051, 48043"
--------------------------------------------------------------------------
-=========================================================================
-"self.directory = ACMEDirectory(module, self)
+Ensure statements related to these methods are included in the stable script - 
+ModuleFailException
+pem_to_der
+nopad_b64
+write_file
+ACMEAccount
 
-"
--------------------------------------------------------------------------
-"self.directory = ACMEDirectory(module, self
-
-"
--------------------------------------------------------------------------
-"if payload is None:
-    payload64 = ''
-else:
-    payload64 = nopad_b64(self.module.jsonify(payload).encode('utf8'))
-"
--------------------------------------------------------------------------
-"
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
- PRs: 45051, 48043"
--------------------------------------------------------------------------
-=========================================================================
-"auth_data, dummy = self.account.get_request(auth_uri)
-"
--------------------------------------------------------------------------
-"auth_data, dummy = self.account.get_request(auth_uri)
-"
--------------------------------------------------------------------------
-"self.directory, dummy = account.get_request(self.directory_root, get_only=True)
-"
--------------------------------------------------------------------------
-"
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:auth_uri, self
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 45051, 48043"
 -------------------------------------------------------------------------
 =========================================================================
@@ -4224,84 +4386,53 @@ cmd.append('-N')
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
-# New feature added based on the pull request.
-# This code includes a fix for the reported issue.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 47436, 47487"
 -------------------------------------------------------------------------
 =========================================================================
-"def flatten_nested_targets(module, rules):
-def _flatten(targets):
-for target in targets:
-if isinstance(target, list):
-for t in _flatten(target):
-yield t
-elif isinstance(target, string_types):
-yield target
-
-if rules is not None:
-for rule in rules:
-target_list_type = None
-if isinstance(rule.get('cidr_ip'), list):
-target_list_type = 'cidr_ip'
-elif isinstance(rule.get('cidr_ipv6'), list):
-target_list_type = 'cidr_ipv6'
-if target_list_type is not None:
-rule[target_list_type] = list(_flatten(rule[target_list_type]))
-return rules
-
-
+"specified_rules = flatten_nested_targets(module, deepcopy(specified_rules))
 "
 -------------------------------------------------------------------------
-"def flatten_nested_targets(module, rules):
-def _flatten(targets):
-for target in targets:
-if isinstance(target, list):
-for t in _flatten(target):
-yield t
-elif isinstance(target, string_types):
-yield target
-
-if irules is not None:
-for irules in irules
-target_list_type = nodes
-if isinstance(rule.get('cidr_ip'), list):
-target_list_type = 'cidr_ip'
-elif isinstance(rule.get('cidr_ipv6'), list):
-target_list_type = 'cidr_ipv6'
-if target_list_type is not None:
-rule[target_list_type] = list(_flatten(rule[target_list_type]))
-return irules
-
-
+"specified_rules = flatten_nested_targets(module, deepcopy(specified_rules))
 "
 -------------------------------------------------------------------------
-"from copy import deepcopy
+"rules = flatten_nested_targets(module, deepcopy(module.params['rules']))
+rules_egress = flatten_nested_targets(module, deepcopy(module.params['rules_egress']))
+rules = deduplicate_rules_args(rules_expand_sources(rules_expand_ports(rules)))
+rules_egress = deduplicate_rules_args(rules_expand_sources(rules_expand_ports(rules_egress)))
 "
 -------------------------------------------------------------------------
 "
-# This code includes a fix for the reported issue.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+module
+flatten_nested_targets
+deepcopy
+
+Ensure statements related to these methods are excluded in the stable script - 
+specified_rules
  PRs: 45594, 45748"
 -------------------------------------------------------------------------
 =========================================================================
-"if not isinstance(rule[source_type], list):
-    rule[source_type] = [rule[source_type]]
-format_rule[rule_key] = [{source_type: target} for target in rule[source_type]]
+"if rule.get('ports') and (isinstance(rule['ports'], string_types) or isinstance(rule['ports'], int)):
 "
 -------------------------------------------------------------------------
-"if not isinstance(rule[source_type], list):
-    rule[source_type] = [rule[source_type]]
-format_rule[rule_key] = [{source_type: target for target in rule[source_type]]
+"if rule.get('ports') and (isinstance(rule['ports'], string_types) or isinstance(rule['ports'], int)):
 "
 -------------------------------------------------------------------------
-"from copy import deepcopy
+"rules = flatten_nested_targets(module, deepcopy(module.params['rules']))
+rules_egress = flatten_nested_targets(module, deepcopy(module.params['rules_egress']))
+rules = deduplicate_rules_args(rules_expand_sources(rules_expand_ports(rules)))
+rules_egress = deduplicate_rules_args(rules_expand_sources(rules_expand_ports(rules_egress)))
 "
 -------------------------------------------------------------------------
 "
-# This code includes a fix for the reported issue.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 45594, 45748"
 -------------------------------------------------------------------------
 =========================================================================
@@ -4353,156 +4484,234 @@ module.exit_json(msg=""file already exists"", dest=dest, url=url, changed=change
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
-# This code includes a fix for the reported issue.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 45495, 45567"
 -------------------------------------------------------------------------
 =========================================================================
-"if checksum != destination_checksum:
-    checksum_mismatch = True
-
-t forcing redownload, unless checksum does not match
-ot force and not checksum_mismatch:
-# Not forcing redownload, unless checksum does not match
-# allow file attribute changes
-module.params['path'] = dest
-file_args = module.load_file_common_arguments(module.params)
-file_args['path'] = dest
-result['changed'] = module.set_fs_attributes_if_different(file_args, False)
-if result['changed']:
-    module.exit_json(msg=""file already exists but file attributes changed"", **result)
-module.exit_json(msg=""file already exists"", **result)
+"import os.path
 "
 -------------------------------------------------------------------------
-"if checksum != destination_checksum:
-    checksum_mismatch = Tree
-
-t forcing redownload, unless checksum does not match
-ot force and not checksum_mismatch:
-# Not forcing redownload, unless checksum does not match
-# allow file attribute changed
-module.params['path'] = Rest
-file_args = module.load_file_common_arguments(module.params)
-file_args['path'] = Rest
-result['changed'] = module.set_fs_attributes_if_different(file_args, False)
-if result['changed']:
-    module.exit_json(msg=""file already exists but file attributes changed"", **result)
-module.exit_json(msg=""file already exists"", **result)
+"import os.path
 "
 -------------------------------------------------------------------------
-"if checksum != destination_checksum:
-    checksum_mismatch = True
+"if warnings is None:
+# Note: In this case, warnings does nothing
+warnings = set()
 
-t forcing redownload, unless checksum does not match
-ot force and not checksum_mismatch:
-# Not forcing redownload, unless checksum does not match
-# allow file attribute changes
-module.params['path'] = dest
-file_args = module.load_file_common_arguments(module.params)
-file_args['path'] = dest
-changed = module.set_fs_attributes_if_different(file_args, False)
-if changed:
-    module.exit_json(msg=""file already exists but file attributes changed"", dest=dest, url=url, changed=changed)
-module.exit_json(msg=""file already exists"", dest=dest, url=url, changed=changed)
+# A value that can never be a valid path so that we can tell if ANSIBLE_CONFIG was set later
+# We can't use None because we could set path to None.
+SENTINEL = object
+
+potential_paths = []
+
+# Environment setting
+path_from_env = os.getenv(""ANSIBLE_CONFIG"", SENTINEL)
+if path_from_env is not SENTINEL:
+path_from_env = unfrackpath(path_from_env, follow=False)
+if os.path.isdir(path_from_env):
+path_from_env = os.path.join(path_from_env, ""ansible.cfg"")
+potential_paths.append(path_from_env)
+
+# Current working directory
+warn_cmd_public = False
+cwd = os.getcwd()
+perms = os.stat(cwd)
+if perms.st_mode & stat.S_IWOTH:
+warn_cmd_public = True
+potential_paths.append(os.path.join(cwd, ""ansible.cfg""))
+# If we can't access cwd, we'll simply skip it as a possible config source
+pass
+
+# Per user location
+potential_paths.append(unfrackpath(""~/.ansible.cfg"", follow=False))
+# System location
+potential_paths.append(""/etc/ansible/ansible.cfg"")
+
+for path in potential_paths:
+if os.path.exists(path):
+# Emit a warning if all the following are true:
+# * We did not use a config from ANSIBLE_CONFIG
+# * There's an ansible.cfg in the current working directory that we skipped
+if path_from_env != path and warn_cmd_public:
+warnings.add(u""Ansible is being run in a world writable directory (%s),""
+ u"" ignoring it as an ansible.cfg source.""
+ u"" For more information see""
+ u"" https://docs.ansible.com/ansible/devel/reference_appendices/config.html#cfg-in-world-writable-dir""
+ % to_text(cwd))
+
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
-# This code includes a fix for the reported issue.
- Ensure that these dependencies are included in the stable script.:
- PRs: 45495, 45565"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 43583, 43649"
 -------------------------------------------------------------------------
 =========================================================================
-"line = params['line']
-
-if regexp == '':
-module.warn(
-""The regular expression is an empty string, which will match every line in the file. ""
-""This may have unintended consequences, such as replacing the last line in the file rather than appending. ""
-""If this is desired, use '^' to match every line in the file and avoid this warning."")
-if backrefs and regexp is None:
-module.fail_json(msg='regexp is required with backrefs=true')
-if line is None:
-module.fail_json(msg='line is required with state=present')
+"import os.path
 "
 -------------------------------------------------------------------------
-"list = params['line']
-
-if regexp == '':
-module.warn(
-""The regular expression is an empty string, which kill match every list in the file ""
-""This may save unintended consequences, such as replacing the list list in the file rather than appending. ""
-""If this is desired, use '^' to match every list in the file and avoid this warning."")
-if backrefs and regexp is None:
-module.fail_json(msg='regexp is required with backrefs=true')
-if list is None:
-module.fail_json(msg='line is required with state=present')
+"import os.path
 "
 -------------------------------------------------------------------------
-"regexp = params['regexp']
-line = params['line']
+"if warnings is None:
+# Note: In this case, warnings does nothing
+warnings = set()
 
-if regexp == '':
-module.warn(
-""The regular expression is an empty string, which will match every line in the file. ""
-""This may have unintended consequences, such as replacing the last line in the file rather than appending. ""
-""If this is desired, use '^' to match every line in the file and avoid this warning."")
-if backrefs and regexp is None:
-module.fail_json(msg='regexp is required with backrefs=true')
-if line is None:
-module.fail_json(msg='line is required with state=present')
+# A value that can never be a valid path so that we can tell if ANSIBLE_CONFIG was set later
+# We can't use None because we could set path to None.
+SENTINEL = object
+
+potential_paths = []
+
+# Environment setting
+path_from_env = os.getenv(""ANSIBLE_CONFIG"", SENTINEL)
+if path_from_env is not SENTINEL:
+path_from_env = unfrackpath(path_from_env, follow=False)
+if os.path.isdir(path_from_env):
+path_from_env = os.path.join(path_from_env, ""ansible.cfg"")
+potential_paths.append(path_from_env)
+
+# Current working directory
+warn_cmd_public = False
+cwd = os.getcwd()
+perms = os.stat(cwd)
+if perms.st_mode & stat.S_IWOTH:
+warn_cmd_public = True
+potential_paths.append(os.path.join(cwd, ""ansible.cfg""))
+# If we can't access cwd, we'll simply skip it as a possible config source
+pass
+
+# Per user location
+potential_paths.append(unfrackpath(""~/.ansible.cfg"", follow=False))
+# System location
+potential_paths.append(""/etc/ansible/ansible.cfg"")
+
+for path in potential_paths:
+if os.path.exists(path):
+# Emit a warning if all the following are true:
+# * We did not use a config from ANSIBLE_CONFIG
+# * There's an ansible.cfg in the current working directory that we skipped
+if path_from_env != path and warn_cmd_public:
+warnings.add(u""Ansible is being run in a world writable directory (%s),""
+ u"" ignoring it as an ansible.cfg source.""
+ u"" For more information see""
+ u"" https://docs.ansible.com/ansible/devel/reference_appendices/config.html#cfg-in-world-writable-dir""
+ % to_text(cwd))
+
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 43583, 43648"
+-------------------------------------------------------------------------
+=========================================================================
+"if regexp is not None:
+"
+-------------------------------------------------------------------------
+"if regexp is not None:
+"
+-------------------------------------------------------------------------
+"if regexp is None and line is None:
+    module.fail_json(msg='one of line or regexp is required with state=absent')
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 42013, 42207"
 -------------------------------------------------------------------------
 =========================================================================
-"line = params['line']
-
-if regexp == '':
-module.warn(
-""The regular expression is an empty string, which will match every line in the file. ""
-""This may have unintended consequences, such as replacing the last line in the file rather than appending. ""
-""If this is desired, use '^' to match every line in the file and avoid this warning."")
-if backrefs and regexp is None:
-module.fail_json(msg='regexp is required with backrefs=true')
-if line is None:
-module.fail_json(msg='line is required with state=present')
+"if regexp is not None:
 "
 -------------------------------------------------------------------------
-"list = params['line']
-
-if regexp == '':
-module.warn(
-""The regular expression is an empty string, which kill match every list in the file ""
-""This may save unintended consequences, such as replacing the list list in the file rather than appending. ""
-""If this is desired, use '^' to match every list in the file and avoid this warning."")
-if backrefs and regexp is None:
-module.fail_json(msg='regexp is required with backrefs=true')
-if list is None:
-module.fail_json(msg='line is required with state=present')
+"if regexp is not None:
 "
 -------------------------------------------------------------------------
-"regexp = params['regexp']
-line = params['line']
-
-if regexp == '':
-module.warn(
-""The regular expression is an empty string, which will match every line in the file. ""
-""This may have unintended consequences, such as replacing the last line in the file rather than appending. ""
-""If this is desired, use '^' to match every line in the file and avoid this warning."")
-if backrefs and regexp is None:
-module.fail_json(msg='regexp is required with backrefs=true')
-if line is None:
-module.fail_json(msg='line is required with state=present')
+"if regexp is None and line is None:
+    module.fail_json(msg='one of line or regexp is required with state=absent')
 "
 -------------------------------------------------------------------------
 "
-# Test cases might require backporting as well.
- Ensure that these dependencies are included in the stable script.:
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 42013, 42207"
+-------------------------------------------------------------------------
+=========================================================================
+"if regexp is not None:
+"
+-------------------------------------------------------------------------
+"if regexp is not None:
+"
+-------------------------------------------------------------------------
+"if regexp is None and line is None:
+    module.fail_json(msg='one of line or regexp is required with state=absent')
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
  PRs: 42013, 42204"
+-------------------------------------------------------------------------
+=========================================================================
+"if regexp is not None:
+"
+-------------------------------------------------------------------------
+"if regexp is not None:
+"
+-------------------------------------------------------------------------
+"if regexp is None and line is None:
+    module.fail_json(msg='one of line or regexp is required with state=absent')
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 42013, 42204"
+-------------------------------------------------------------------------
+=========================================================================
+"s3.put_object(Bucket=bucket, Key=obj, Body=b'')
+module.exit_json(msg=""Virtual directory %s created in bucket %s"" % (obj, bucket), changed=True)
+"
+-------------------------------------------------------------------------
+"traceback, mimetypes, ansible.module_utils.six.moves.urllib.parse, botocore, os, ansible.module_utils.basic, ansible.module_utils.ec2, ssl
+s3.put_object(Bucket=bucket, Key=obj, Body=b'')
+module.exit_json(msg=""Virtual directory %s create in Bucket %s"" % (obj, bucket), changed=True)
+"
+-------------------------------------------------------------------------
+"if formatted_keys:
+    s3.delete_objects(Bucket=bucket, Delete={'Objects': formatted_keys})
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+ansible
+traceback
+s3
+mimetypes
+obj
+module
+botocore
+os
+bucket
+ssl
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 32169, 32198"
 -------------------------------------------------------------------------
 =========================================================================
