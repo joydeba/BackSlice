@@ -151,10 +151,10 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                     for indexH in range(1, min_hunks_count):
                                         commits_hunkline_backport_context = commits_diffs_backport_contextHunks[indexH].split("\n")
                                         similarity_score = difflib.SequenceMatcher(None, commits_hunkline_original_context[0], commits_hunkline_backport_context[0]).ratio()
-                                        if similarity_score > 0.60 or indexH == min_hunks_count - 1:
+                                        if similarity_score > 0.60:
                                             break
                                         else:
-                                            continue
+                                            commits_hunkline_backport_context = commits_diffs_backport_contextHunks[indexHunks0].split("\n")
 
                                 hunkStartLnNo = commits_hunkline_original_context[0].split(" ")[0][1:].split(",")
                                 hunkEndlnNo = commits_hunkline_original_context[0].split(" ")[1][1:].split(",")
