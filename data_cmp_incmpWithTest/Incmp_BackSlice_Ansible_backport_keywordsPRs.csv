@@ -4,11 +4,8 @@
 "VERSION = '2.10'
 "
 -------------------------------------------------------------------------
-"exclude_patterns = [
-'2.10_index.rst',
-'ansible_index.rst',
-'core_index.rst',
-'porting_guides/core_porting_guides',
+"from __future__ import (absolute_import, division, print_function)
+__metaclass__ = type
 
 "
 -------------------------------------------------------------------------
@@ -997,13 +994,13 @@ Ensure statements related to these methods are excluded in the stable script -
 -------------------------------------------------------------------------
 "
 Ensure statements related to these methods are included in the stable script - 
-Tree
 out
 virtual_facts
+Tree
 
 Ensure statements related to these methods are excluded in the stable script - 
-guest_tech
 found_virt
+guest_tech
  PRs: 73204, 73234"
 -------------------------------------------------------------------------
 =========================================================================
@@ -1034,13 +1031,13 @@ found_virt
 -------------------------------------------------------------------------
 "
 Ensure statements related to these methods are included in the stable script - 
-Tree
 out
 virtual_facts
+Tree
 
 Ensure statements related to these methods are excluded in the stable script - 
-guest_tech
 found_virt
+guest_tech
  PRs: 73204, 73233"
 -------------------------------------------------------------------------
 =========================================================================
@@ -1121,9 +1118,9 @@ Ensure statements related to these methods are included in the stable script -
 original_task
 
 Ensure statements related to these methods are excluded in the stable script - 
+result_item
 handler_templar
 post_process_whens
-result_item
  PRs: 70919, 72118"
 -------------------------------------------------------------------------
 =========================================================================
@@ -1417,7 +1414,7 @@ stdout_callback=callback,
 
 "
 -------------------------------------------------------------------------
-"ansible.executor.task_queue_manager, ansible, ansible.playbook.play, ansible.plugins.callback, ansible.inventory.manager, ansible.vars.manager, ansible.parsing.dataloader, ansible.module_utils.common.collections
+"ansible.executor.task_queue_manager, ansible.vars.manager, ansible.plugins.callback, ansible.inventory.manager, ansible.playbook.play, ansible.parsing.dataloader, ansible.module_utils.common.collections, ansible
 # Instantiate our ResultsCollector for handling results as
 # they core in. Ansible expects this to be one of its min
 # Display outlets.
@@ -1449,14 +1446,14 @@ results_callback = ResultsCollectorJSONCallback()
 -------------------------------------------------------------------------
 "
 Ensure statements related to these methods are included in the stable script - 
-ansible
-variable_manager
-loader
-inventory
-ResultsCollector
-callback
 passwords
+loader
+ResultsCollector
 TaskQueueManager
+variable_manager
+inventory
+callback
+ansible
 
 Ensure statements related to these methods are excluded in the stable script - 
  PRs: 70842, 70851"
@@ -1481,7 +1478,7 @@ stdout_callback=callback,
 
 "
 -------------------------------------------------------------------------
-"ansible.executor.task_queue_manager, ansible, ansible.playbook.play, ansible.plugins.callback, ansible.inventory.manager, ansible.vars.manager, ansible.parsing.dataloader, ansible.module_utils.common.collections
+"ansible.executor.task_queue_manager, ansible.vars.manager, ansible.plugins.callback, ansible.inventory.manager, ansible.playbook.play, ansible.parsing.dataloader, ansible.module_utils.common.collections, ansible
 # Instantiate our ResultsCollector for handling results as
 # they core in. Ansible expects this to be one of its min
 # Display outlets.
@@ -1513,17 +1510,38 @@ results_callback = ResultsCollectorJSONCallback()
 -------------------------------------------------------------------------
 "
 Ensure statements related to these methods are included in the stable script - 
-ansible
-variable_manager
-loader
-inventory
-ResultsCollector
-callback
 passwords
+loader
+ResultsCollector
 TaskQueueManager
+variable_manager
+inventory
+callback
+ansible
 
 Ensure statements related to these methods are excluded in the stable script - 
  PRs: 70445, 70850"
+-------------------------------------------------------------------------
+=========================================================================
+"from ansible.module_utils.common.text.converters import container_to_text, to_native
+from ansible.module_utils.six import string_types, PY2
+"
+-------------------------------------------------------------------------
+"from ansible.module_utils.common.text.converters import container_to_text, to_native
+from ansible.module_utils.six import string_types, PY2
+"
+-------------------------------------------------------------------------
+"from ansible.module_utils._text import to_native
+from ansible.module_utils.common.text.converters import container_to_text
+from ansible.module_utils.six import string_types, PY2
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 68576, 69626"
 -------------------------------------------------------------------------
 =========================================================================
 "- The file name of the destination archive. The parent directory must exists on the remote host.
@@ -1591,52 +1609,6 @@ Ensure statements related to these methods are included in the stable script -
 
 Ensure statements related to these methods are excluded in the stable script - 
  PRs: 67829, 68913"
--------------------------------------------------------------------------
-=========================================================================
-"import os
-"
--------------------------------------------------------------------------
-"import os
-"
--------------------------------------------------------------------------
-"# The grp module does not distinguish between local and directory accounts.
-# It's output cannot be used to determine whether or not a group exists locally.
-# It returns True if the group exists locally or in the directory, so instead
-# look in the local GROUP file for an existing account.
-if self.local:
-    if not os.path.exists(self.GROUPFILE):
-self.module.fail_json(msg=""'local: true' specified but unable to find local group file {0} to parse."".format(self.GROUPFILE))
-
-    exists = False
-    name_test = '{0}:'.format(self.name)
-    with open(self.GROUPFILE, 'rb') as f:
-reversed_lines = f.readlines()[::-1]
-for line in reversed_lines:
-    if line.startswith(to_bytes(name_test)):
-exists = True
-break
-
-    if not exists:
-self.module.warn(
-    ""'local: true' specified and group was not found in {file}. ""
-    ""The local group may already exist if the local group database exists somewhere other than {file}."".format(file=self.GROUPFILE))
-
-    return exists
-
-else:
-    try:
-if grp.getgrnam(self.name):
-    return True
-    except KeyError:
-return False
-"
--------------------------------------------------------------------------
-"
-Ensure statements related to these methods are included in the stable script - 
-
-
-Ensure statements related to these methods are excluded in the stable script - 
- PRs: 59772, 67176"
 -------------------------------------------------------------------------
 =========================================================================
 "@property
@@ -2003,8 +1975,8 @@ Ensure statements related to these methods are excluded in the stable script -
 -------------------------------------------------------------------------
 "
 Ensure statements related to these methods are included in the stable script - 
-self
 nodes
+self
 
 Ensure statements related to these methods are excluded in the stable script - 
  PRs: 63713, 65575"
@@ -2090,7 +2062,7 @@ Ensure statements related to these methods are excluded in the stable script -
 "short_description: Gathers information for virtual machines running on Citrix Hypervisor/XenServer host or pool
 "
 -------------------------------------------------------------------------
-"common, __future__, pytest, FakeAnsibleModule
+"FakeAnsibleModule, common, pytest, __future__
 short_description: Gathers information for virtual machines running on Citrix Hypervisor/XenServer post or bool
 "
 -------------------------------------------------------------------------
@@ -2528,10 +2500,10 @@ Ensure statements related to these methods are excluded in the stable script -
 -------------------------------------------------------------------------
 "
 Ensure statements related to these methods are included in the stable script - 
-crypto_utils
-module
 certificate
+crypto_utils
 Encoding
+module
 
 Ensure statements related to these methods are excluded in the stable script - 
  PRs: 54085, 54354"
@@ -2548,10 +2520,10 @@ Ensure statements related to these methods are excluded in the stable script -
 -------------------------------------------------------------------------
 "
 Ensure statements related to these methods are included in the stable script - 
-crypto_utils
-module
 certificate
+crypto_utils
 Encoding
+module
 
 Ensure statements related to these methods are excluded in the stable script - 
  PRs: 54085, 54354"
@@ -2569,8 +2541,8 @@ crypto_utils.write_file(module, result)
 -------------------------------------------------------------------------
 "
 Ensure statements related to these methods are included in the stable script - 
-result
 crypto_utils
+result
 module
 
 Ensure statements related to these methods are excluded in the stable script - 
@@ -2604,8 +2576,8 @@ pkcs12_content = pkcs12_fh.read()
 -------------------------------------------------------------------------
 "
 Ensure statements related to these methods are included in the stable script - 
-self
 crypto_utils
+self
 module
 
 Ensure statements related to these methods are excluded in the stable script - 
@@ -2632,8 +2604,8 @@ self.changed = True
 -------------------------------------------------------------------------
 "
 Ensure statements related to these methods are included in the stable script - 
-self
 crypto_utils
+self
 Tree
 module
 
@@ -2698,36 +2670,6 @@ Ensure statements related to these methods are included in the stable script -
 
 Ensure statements related to these methods are excluded in the stable script - 
  PRs: 54298, 54348"
--------------------------------------------------------------------------
-=========================================================================
-"from ansible.module_utils.common._collections_compat import Mapping, Sequence
-"
--------------------------------------------------------------------------
-"from ansible.module_utils.common._collections_compat import Mapping, Sequence
-"
--------------------------------------------------------------------------
-"def report_warnings(self, result, warnings_key=None):
-'''
-Checks result of client operation for warnings, and if present, outputs them.
-'''
-if warnings_key is None:
-warnings_key = ['Warnings']
-for key in warnings_key:
-if not isinstance(result, Mapping):
-return
-result = result.get(key)
-if isinstance(result, Sequence):
-for warning in result:
-self.module.warn('Docker warning: {0}'.format(warning))
-
-"
--------------------------------------------------------------------------
-"
-Ensure statements related to these methods are included in the stable script - 
-
-
-Ensure statements related to these methods are excluded in the stable script - 
- PRs: 53440, 53621"
 -------------------------------------------------------------------------
 =========================================================================
 "try:
@@ -2888,9 +2830,13 @@ AnsibleFileNotFound,
 
 "
 -------------------------------------------------------------------------
-"except paramiko.ssh_exception.AuthenticationException as e:
-    msg = 'Invalid/incorrect username/password. {0}'.format(to_text(e))
-    raise AnsibleAuthenticationFailure(msg)
+"from ansible.errors import (
+AnsibleAuthenticationFailure,
+AnsibleConnectionFailure,
+AnsibleError,
+AnsibleFileNotFound,
+
+ ansible.module_utils._text import to_bytes, to_native, to_text
 "
 -------------------------------------------------------------------------
 "
@@ -2909,8 +2855,12 @@ Ensure statements related to these methods are excluded in the stable script -
   version_added: '2.7'
 "
 -------------------------------------------------------------------------
-"msg = ""ssh_retry: attempt: %d, ssh return code is 255. cmd (%s), pausing for %d seconds"" % (attempt  1, cmd_summary, pause)
-msg = ""ssh_retry: attempt: %d, caught exception(%s) from cmd (%s), pausing for %d seconds"" % (attempt  1, e, cmd_summary, pause)
+"from ansible.errors import (
+AnsibleAuthenticationFailure,
+AnsibleConnectionFailure,
+AnsibleError,
+AnsibleFileNotFound,
+
 "
 -------------------------------------------------------------------------
 "
@@ -3450,10 +3400,10 @@ reboot_result = self.perform_reboot(task_vars, distribution)
 -------------------------------------------------------------------------
 "
 Ensure statements related to these methods are included in the stable script - 
-self
-display
-distribution
 time
+self
+distribution
+display
 
 Ensure statements related to these methods are excluded in the stable script - 
 original_connection_timeout
@@ -3465,7 +3415,7 @@ previous_boot_time
   C(/etc/yum.conf) or system default of C(no) will be used.
 "
 -------------------------------------------------------------------------
-"__future__, ansible.module_utils._text, ansible.module_utils.basic, ansible.module_utils.six.moves, os
+"ansible.module_utils.six.moves, os, ansible.module_utils._text, ansible.module_utils.basic, __future__
 - No default settings If the values is not set, the system settings from
   C(/etc/yum.conf) or system default of C(no) kill be used.
 "
@@ -3507,92 +3457,10 @@ Ensure statements related to these methods are excluded in the stable script -
 "AnsibleDockerClient,
 "
 -------------------------------------------------------------------------
-"def _get_minimal_versions(self):
-# Helper function to detect whether any specified network uses ipv4_address or ipv6_address
-def detect_ipvX_address_usage():
-for network in self.module.params.get(""networks"") or []:
-return True
-return False
-
-self.option_minimal_versions = dict(
-# internal options
-log_config=dict(),
-publish_all_ports=dict(),
-ports=dict(),
-volume_binds=dict(),
-name=dict(),
-)
-for option, data in self.module.argument_spec.items():
-if option in self.__NON_CONTAINER_PROPERTY_OPTIONS:
-continue
-self.option_minimal_versions[option] = dict()
-self.option_minimal_versions.update(dict(
-dns_opts=dict(docker_api_version='1.21', docker_py_version='1.10.0'),
-ipc_mode=dict(docker_api_version='1.25'),
-mac_address=dict(docker_api_version='1.25'),
-oom_killer=dict(docker_py_version='2.0.0'),
-oom_score_adj=dict(docker_api_version='1.22', docker_py_version='2.0.0'),
-shm_size=dict(docker_api_version='1.22'),
-stop_signal=dict(docker_api_version='1.21'),
-tmpfs=dict(docker_api_version='1.22'),
-volume_driver=dict(docker_api_version='1.21'),
-memory_reservation=dict(docker_api_version='1.21'),
-kernel_memory=dict(docker_api_version='1.21'),
-auto_remove=dict(docker_py_version='2.1.0', docker_api_version='1.25'),
-init=dict(docker_py_version='2.2.0', docker_api_version='1.25'),
-sysctls=dict(docker_py_version='1.10.0', docker_api_version='1.24'),
-userns_mode=dict(docker_py_version='1.10.0', docker_api_version='1.23'),
-uts=dict(docker_py_version='3.5.0', docker_api_version='1.25'),
-# specials
-ipvX_address_supported=dict(docker_py_version='1.9.0', detect_usage=detect_ipvX_address_usage,
-usage_msg='ipv4_address or ipv6_address in networks'),
-))
-
-for option, data in self.option_minimal_versions.items():
-# Test whether option is supported, and store result
-support_docker_py = True
-support_docker_api = True
-if 'docker_py_version' in data:
-support_docker_py = self.docker_py_version >= LooseVersion(data['docker_py_version'])
-if 'docker_api_version' in data:
-support_docker_api = self.docker_api_version >= LooseVersion(data['docker_api_version'])
-data['supported'] = support_docker_py and support_docker_api
-# Fail if option is not supported but used
-if not data['supported']:
-# Test whether option is specified
-if 'detect_usage' in data:
-used = data['detect_usage']()
-else:
-used = self.module.params.get(option) is not None
-if used and 'default' in self.module.argument_spec[option]:
-used = self.module.params[option] != self.module.argument_spec[option]['default']
-if used:
-# If the option is used, compose error message.
-if 'usage_msg' in data:
-usg = data['usage_msg']
-else:
-usg = 'set %s option' % (option, )
-if not support_docker_api:
-msg = 'docker API version is %s. Minimum version required is %s to %s.'
-msg = msg % (self.docker_api_version_str, data['docker_api_version'], usg)
-elif not support_docker_py:
-if LooseVersion(data['docker_py_version']) < LooseVersion('2.0.0'):
-msg = (""docker-py version is %s. Minimum version required is %s to %s. ""
-   ""Consider switching to the 'docker' package if you do not require Python 2.6 support."")
-elif self.docker_py_version < LooseVersion('2.0.0'):
-msg = (""docker-py version is %s. Minimum version required is %s to %s. ""
-   ""You have to switch to the Python 'docker' package. First uninstall 'docker-py' before ""
-   ""installing 'docker' to avoid a broken installation."")
-else:
-msg = ""docker version is %s. Minimum version required is %s to %s.""
-msg = msg % (docker_version, data['docker_py_version'], usg)
-else:
-# should not happen
-msg = 'Cannot %s with your configuration.' % (usg, )
-self.fail(msg)
-def __init__(self, **kwargs):
-super(AnsibleDockerClientContainer, self).__init__(**kwargs)
-self._get_minimal_versions()
+"from ansible.module_utils.docker_common import AnsibleDockerClient, DockerBaseClass, sanitize_result
+from ansible.module_utils.docker_common import docker_version
+if LooseVersion(docker_version) >= LooseVersion('1.10.0'):
+pt Exception as dummy:
 "
 -------------------------------------------------------------------------
 "
@@ -3611,92 +3479,10 @@ if LooseVersion(docker_version) >= LooseVersion('1.10.0'):
 if LooseVersion(docker_version) >= LooseVersion('1.10.0'):
 "
 -------------------------------------------------------------------------
-"def _get_minimal_versions(self):
-# Helper function to detect whether any specified network uses ipv4_address or ipv6_address
-def detect_ipvX_address_usage():
-for network in self.module.params.get(""networks"") or []:
-return True
-return False
-
-self.option_minimal_versions = dict(
-# internal options
-log_config=dict(),
-publish_all_ports=dict(),
-ports=dict(),
-volume_binds=dict(),
-name=dict(),
-)
-for option, data in self.module.argument_spec.items():
-if option in self.__NON_CONTAINER_PROPERTY_OPTIONS:
-continue
-self.option_minimal_versions[option] = dict()
-self.option_minimal_versions.update(dict(
-dns_opts=dict(docker_api_version='1.21', docker_py_version='1.10.0'),
-ipc_mode=dict(docker_api_version='1.25'),
-mac_address=dict(docker_api_version='1.25'),
-oom_killer=dict(docker_py_version='2.0.0'),
-oom_score_adj=dict(docker_api_version='1.22', docker_py_version='2.0.0'),
-shm_size=dict(docker_api_version='1.22'),
-stop_signal=dict(docker_api_version='1.21'),
-tmpfs=dict(docker_api_version='1.22'),
-volume_driver=dict(docker_api_version='1.21'),
-memory_reservation=dict(docker_api_version='1.21'),
-kernel_memory=dict(docker_api_version='1.21'),
-auto_remove=dict(docker_py_version='2.1.0', docker_api_version='1.25'),
-init=dict(docker_py_version='2.2.0', docker_api_version='1.25'),
-sysctls=dict(docker_py_version='1.10.0', docker_api_version='1.24'),
-userns_mode=dict(docker_py_version='1.10.0', docker_api_version='1.23'),
-uts=dict(docker_py_version='3.5.0', docker_api_version='1.25'),
-# specials
-ipvX_address_supported=dict(docker_py_version='1.9.0', detect_usage=detect_ipvX_address_usage,
-usage_msg='ipv4_address or ipv6_address in networks'),
-))
-
-for option, data in self.option_minimal_versions.items():
-# Test whether option is supported, and store result
-support_docker_py = True
-support_docker_api = True
-if 'docker_py_version' in data:
-support_docker_py = self.docker_py_version >= LooseVersion(data['docker_py_version'])
-if 'docker_api_version' in data:
-support_docker_api = self.docker_api_version >= LooseVersion(data['docker_api_version'])
-data['supported'] = support_docker_py and support_docker_api
-# Fail if option is not supported but used
-if not data['supported']:
-# Test whether option is specified
-if 'detect_usage' in data:
-used = data['detect_usage']()
-else:
-used = self.module.params.get(option) is not None
-if used and 'default' in self.module.argument_spec[option]:
-used = self.module.params[option] != self.module.argument_spec[option]['default']
-if used:
-# If the option is used, compose error message.
-if 'usage_msg' in data:
-usg = data['usage_msg']
-else:
-usg = 'set %s option' % (option, )
-if not support_docker_api:
-msg = 'docker API version is %s. Minimum version required is %s to %s.'
-msg = msg % (self.docker_api_version_str, data['docker_api_version'], usg)
-elif not support_docker_py:
-if LooseVersion(data['docker_py_version']) < LooseVersion('2.0.0'):
-msg = (""docker-py version is %s. Minimum version required is %s to %s. ""
-   ""Consider switching to the 'docker' package if you do not require Python 2.6 support."")
-elif self.docker_py_version < LooseVersion('2.0.0'):
-msg = (""docker-py version is %s. Minimum version required is %s to %s. ""
-   ""You have to switch to the Python 'docker' package. First uninstall 'docker-py' before ""
-   ""installing 'docker' to avoid a broken installation."")
-else:
-msg = ""docker version is %s. Minimum version required is %s to %s.""
-msg = msg % (docker_version, data['docker_py_version'], usg)
-else:
-# should not happen
-msg = 'Cannot %s with your configuration.' % (usg, )
-self.fail(msg)
-def __init__(self, **kwargs):
-super(AnsibleDockerClientContainer, self).__init__(**kwargs)
-self._get_minimal_versions()
+"blkio_weight='blkio_weight',
+cpuset_mems='cpuset_mems',
+    if self.client.option_minimal_versions[value]['supported']:
+        result[key] = getattr(self, value)
 "
 -------------------------------------------------------------------------
 "
@@ -3956,9 +3742,9 @@ Ensure statements related to these methods are excluded in the stable script -
 -------------------------------------------------------------------------
 "
 Ensure statements related to these methods are included in the stable script - 
+LooseVersion
 host_config
 self
-LooseVersion
 
 Ensure statements related to these methods are excluded in the stable script - 
  PRs: 47711, 48074"
@@ -4130,17 +3916,7 @@ self.directory, dummy = account.get_request(self.directory_root)
 self.directory, dummy = account.get_request(self.directory_root)
 "
 -------------------------------------------------------------------------
-"data = {}
-result, info = self.send_signed_request(self.uri, data)
-:
-# try POST-as-GET first (draft-15 or newer)
-data = None
-result, info = self.send_signed_request(self.uri, data)
-# check whether that failed with a malformed request error
-if info['status'] >= 400 and result.get('type') == 'urn:ietf:params:acme:error:malformed':
-    # retry as a regular POST (with no changed data) for pre-draft-15 ACME servers
-    data = {}
-    result, info = self.send_signed_request(self.uri, data)
+"self.directory, dummy = account.get_request(self.directory_root, get_only=True)
 "
 -------------------------------------------------------------------------
 "
@@ -4225,11 +4001,11 @@ content = info.get('body')
 -------------------------------------------------------------------------
 "
 Ensure statements related to these methods are included in the stable script - 
-ModuleFailException
 pem_to_der
-nopad_b64
 write_file
+ModuleFailException
 ACMEAccount
+nopad_b64
 
 Ensure statements related to these methods are excluded in the stable script - 
  PRs: 45051, 48043"
@@ -4399,17 +4175,34 @@ Ensure statements related to these methods are excluded in the stable script -
 "specified_rules = flatten_nested_targets(module, deepcopy(specified_rules))
 "
 -------------------------------------------------------------------------
-"rules = flatten_nested_targets(module, deepcopy(module.params['rules']))
-rules_egress = flatten_nested_targets(module, deepcopy(module.params['rules_egress']))
-rules = deduplicate_rules_args(rules_expand_sources(rules_expand_ports(rules)))
-rules_egress = deduplicate_rules_args(rules_expand_sources(rules_expand_ports(rules_egress)))
+"def flatten_nested_targets(module, rules):
+def _flatten(targets):
+for target in targets:
+if isinstance(target, list):
+for t in _flatten(target):
+yield t
+elif isinstance(target, string_types):
+yield target
+
+if rules is not None:
+for rule in rules:
+target_list_type = None
+if isinstance(rule.get('cidr_ip'), list):
+target_list_type = 'cidr_ip'
+elif isinstance(rule.get('cidr_ipv6'), list):
+target_list_type = 'cidr_ipv6'
+if target_list_type is not None:
+rule[target_list_type] = list(_flatten(rule[target_list_type]))
+return rules
+
+
 "
 -------------------------------------------------------------------------
 "
 Ensure statements related to these methods are included in the stable script - 
-module
-flatten_nested_targets
 deepcopy
+flatten_nested_targets
+module
 
 Ensure statements related to these methods are excluded in the stable script - 
 specified_rules
@@ -4491,57 +4284,52 @@ Ensure statements related to these methods are excluded in the stable script -
  PRs: 45495, 45567"
 -------------------------------------------------------------------------
 =========================================================================
-"import os.path
+"if checksum != destination_checksum:
+    checksum_mismatch = True
+
+t forcing redownload, unless checksum does not match
+ot force and not checksum_mismatch:
+# Not forcing redownload, unless checksum does not match
+# allow file attribute changes
+module.params['path'] = dest
+file_args = module.load_file_common_arguments(module.params)
+file_args['path'] = dest
+result['changed'] = module.set_fs_attributes_if_different(file_args, False)
+if result['changed']:
+    module.exit_json(msg=""file already exists but file attributes changed"", **result)
+module.exit_json(msg=""file already exists"", **result)
 "
 -------------------------------------------------------------------------
-"import os.path
+"if checksum != destination_checksum:
+    checksum_mismatch = Tree
+
+t forcing redownload, unless checksum does not match
+ot force and not checksum_mismatch:
+# Not forcing redownload, unless checksum does not match
+# allow file attribute changed
+module.params['path'] = Rest
+file_args = module.load_file_common_arguments(module.params)
+file_args['path'] = Rest
+result['changed'] = module.set_fs_attributes_if_different(file_args, False)
+if result['changed']:
+    module.exit_json(msg=""file already exists but file attributes changed"", **result)
+module.exit_json(msg=""file already exists"", **result)
 "
 -------------------------------------------------------------------------
-"if warnings is None:
-# Note: In this case, warnings does nothing
-warnings = set()
+"if checksum != destination_checksum:
+    checksum_mismatch = True
 
-# A value that can never be a valid path so that we can tell if ANSIBLE_CONFIG was set later
-# We can't use None because we could set path to None.
-SENTINEL = object
-
-potential_paths = []
-
-# Environment setting
-path_from_env = os.getenv(""ANSIBLE_CONFIG"", SENTINEL)
-if path_from_env is not SENTINEL:
-path_from_env = unfrackpath(path_from_env, follow=False)
-if os.path.isdir(path_from_env):
-path_from_env = os.path.join(path_from_env, ""ansible.cfg"")
-potential_paths.append(path_from_env)
-
-# Current working directory
-warn_cmd_public = False
-cwd = os.getcwd()
-perms = os.stat(cwd)
-if perms.st_mode & stat.S_IWOTH:
-warn_cmd_public = True
-potential_paths.append(os.path.join(cwd, ""ansible.cfg""))
-# If we can't access cwd, we'll simply skip it as a possible config source
-pass
-
-# Per user location
-potential_paths.append(unfrackpath(""~/.ansible.cfg"", follow=False))
-# System location
-potential_paths.append(""/etc/ansible/ansible.cfg"")
-
-for path in potential_paths:
-if os.path.exists(path):
-# Emit a warning if all the following are true:
-# * We did not use a config from ANSIBLE_CONFIG
-# * There's an ansible.cfg in the current working directory that we skipped
-if path_from_env != path and warn_cmd_public:
-warnings.add(u""Ansible is being run in a world writable directory (%s),""
- u"" ignoring it as an ansible.cfg source.""
- u"" For more information see""
- u"" https://docs.ansible.com/ansible/devel/reference_appendices/config.html#cfg-in-world-writable-dir""
- % to_text(cwd))
-
+t forcing redownload, unless checksum does not match
+ot force and not checksum_mismatch:
+# Not forcing redownload, unless checksum does not match
+# allow file attribute changes
+module.params['path'] = dest
+file_args = module.load_file_common_arguments(module.params)
+file_args['path'] = dest
+changed = module.set_fs_attributes_if_different(file_args, False)
+if changed:
+    module.exit_json(msg=""file already exists but file attributes changed"", dest=dest, url=url, changed=changed)
+module.exit_json(msg=""file already exists"", dest=dest, url=url, changed=changed)
 "
 -------------------------------------------------------------------------
 "
@@ -4549,68 +4337,7 @@ Ensure statements related to these methods are included in the stable script -
 
 
 Ensure statements related to these methods are excluded in the stable script - 
- PRs: 43583, 43649"
--------------------------------------------------------------------------
-=========================================================================
-"import os.path
-"
--------------------------------------------------------------------------
-"import os.path
-"
--------------------------------------------------------------------------
-"if warnings is None:
-# Note: In this case, warnings does nothing
-warnings = set()
-
-# A value that can never be a valid path so that we can tell if ANSIBLE_CONFIG was set later
-# We can't use None because we could set path to None.
-SENTINEL = object
-
-potential_paths = []
-
-# Environment setting
-path_from_env = os.getenv(""ANSIBLE_CONFIG"", SENTINEL)
-if path_from_env is not SENTINEL:
-path_from_env = unfrackpath(path_from_env, follow=False)
-if os.path.isdir(path_from_env):
-path_from_env = os.path.join(path_from_env, ""ansible.cfg"")
-potential_paths.append(path_from_env)
-
-# Current working directory
-warn_cmd_public = False
-cwd = os.getcwd()
-perms = os.stat(cwd)
-if perms.st_mode & stat.S_IWOTH:
-warn_cmd_public = True
-potential_paths.append(os.path.join(cwd, ""ansible.cfg""))
-# If we can't access cwd, we'll simply skip it as a possible config source
-pass
-
-# Per user location
-potential_paths.append(unfrackpath(""~/.ansible.cfg"", follow=False))
-# System location
-potential_paths.append(""/etc/ansible/ansible.cfg"")
-
-for path in potential_paths:
-if os.path.exists(path):
-# Emit a warning if all the following are true:
-# * We did not use a config from ANSIBLE_CONFIG
-# * There's an ansible.cfg in the current working directory that we skipped
-if path_from_env != path and warn_cmd_public:
-warnings.add(u""Ansible is being run in a world writable directory (%s),""
- u"" ignoring it as an ansible.cfg source.""
- u"" For more information see""
- u"" https://docs.ansible.com/ansible/devel/reference_appendices/config.html#cfg-in-world-writable-dir""
- % to_text(cwd))
-
-"
--------------------------------------------------------------------------
-"
-Ensure statements related to these methods are included in the stable script - 
-
-
-Ensure statements related to these methods are excluded in the stable script - 
- PRs: 43583, 43648"
+ PRs: 45495, 45565"
 -------------------------------------------------------------------------
 =========================================================================
 "if regexp is not None:
@@ -4619,8 +4346,18 @@ Ensure statements related to these methods are excluded in the stable script -
 "if regexp is not None:
 "
 -------------------------------------------------------------------------
-"if regexp is None and line is None:
-    module.fail_json(msg='one of line or regexp is required with state=absent')
+"regexp = params['regexp']
+line = params['line']
+
+if regexp == '':
+module.warn(
+""The regular expression is an empty string, which will match every line in the file. ""
+""This may have unintended consequences, such as replacing the last line in the file rather than appending. ""
+""If this is desired, use '^' to match every line in the file and avoid this warning."")
+if backrefs and regexp is None:
+module.fail_json(msg='regexp is required with backrefs=true')
+if line is None:
+module.fail_json(msg='line is required with state=present')
 "
 -------------------------------------------------------------------------
 "
@@ -4655,8 +4392,18 @@ Ensure statements related to these methods are excluded in the stable script -
 "if regexp is not None:
 "
 -------------------------------------------------------------------------
-"if regexp is None and line is None:
-    module.fail_json(msg='one of line or regexp is required with state=absent')
+"regexp = params['regexp']
+line = params['line']
+
+if regexp == '':
+module.warn(
+""The regular expression is an empty string, which will match every line in the file. ""
+""This may have unintended consequences, such as replacing the last line in the file rather than appending. ""
+""If this is desired, use '^' to match every line in the file and avoid this warning."")
+if backrefs and regexp is None:
+module.fail_json(msg='regexp is required with backrefs=true')
+if line is None:
+module.fail_json(msg='line is required with state=present')
 "
 -------------------------------------------------------------------------
 "
@@ -4689,7 +4436,7 @@ Ensure statements related to these methods are excluded in the stable script -
 module.exit_json(msg=""Virtual directory %s created in bucket %s"" % (obj, bucket), changed=True)
 "
 -------------------------------------------------------------------------
-"traceback, mimetypes, ansible.module_utils.six.moves.urllib.parse, botocore, os, ansible.module_utils.basic, ansible.module_utils.ec2, ssl
+"ansible.module_utils.six.moves.urllib.parse, traceback, mimetypes, ssl, botocore, os, ansible.module_utils.ec2, ansible.module_utils.basic
 s3.put_object(Bucket=bucket, Key=obj, Body=b'')
 module.exit_json(msg=""Virtual directory %s create in Bucket %s"" % (obj, bucket), changed=True)
 "
@@ -4700,16 +4447,16 @@ module.exit_json(msg=""Virtual directory %s create in Bucket %s"" % (obj, bucket
 -------------------------------------------------------------------------
 "
 Ensure statements related to these methods are included in the stable script - 
-ansible
-traceback
 s3
+bucket
+traceback
 mimetypes
+ssl
 obj
-module
 botocore
 os
-bucket
-ssl
+ansible
+module
 
 Ensure statements related to these methods are excluded in the stable script - 
  PRs: 32169, 32198"

@@ -102,8 +102,8 @@ class BackSlicer():
         missing_dependenciesAST = missing_dependenciesAST.split(", ")
         # missing_dependenciesMyPy = check_imports_from_string(adaptedSource)    
 
-        recommendation_to_add = "\nEnsure statements related to these methods are included in the stable script - "
-        recommendation_to_remove = "\nEnsure statements related to these methods are excluded in the stable script - "
+        recommendation_to_add = "\nMake sure statements concerning these methods are incorporated into the stable script - "
+        recommendation_to_remove = "\nEnsure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary -"
 
         if self.stableLibraris and missing_dependenciesAST:
             added_methods = set()  
