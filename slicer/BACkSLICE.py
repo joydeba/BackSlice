@@ -188,8 +188,9 @@ class BackSlicer():
             updated_words_and_spaces = []
 
             for item in words_and_spaces:
-                if len(item) > 3 and Levenshtein.distance(item, old_value) < 2 and item[-1] != "(" and item[-1] != ",":
-                    updated_words_and_spaces.append(new_value)
+                lev_dis = Levenshtein.distance(item, old_value)
+                if len(old_value) > 4 and lev_dis > 0 and lev_dis < 2 and item[-1] != "(" and item[-1] != "," and item[-1] != ":":
+                    updated_words_and_spaces.append(old_value)
                 else:
                     updated_words_and_spaces.append(item)
 

@@ -220,7 +220,9 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                         if filepathBackport == file_path[2:]:    
                                             previousBackportfullFileTarget = fullFilecontentBackport  
 
+                                backport_fullFileTarget = None
                                 if backport_filesContents:
+                                    
                                     for itemBcontent in backport_filesContents:
                                         temp_itemBcontent = itemBcontent.copy()
                                         filepathBackport, fullFilecontentBackport = temp_itemBcontent.popitem()
