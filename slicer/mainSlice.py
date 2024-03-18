@@ -205,7 +205,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                 # file_path = filepath.split(" ")[1] 
                                 # fullFileTarget = repo.get_contents(file_path[2:], ref=targetStableBranch).decoded_content.decode("utf-8")
 
-                                file_path = filepath.split(" ")[2]
+                                file_path = filepathBackport.split(" ")[2]
                                 # if original_filesContents:
                                 #     for itemFcontent in original_filesContents:
                                 #         temp_itemFcontent = itemFcontent.copy()
@@ -222,7 +222,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
 
                                 backport_fullFileTarget = None
                                 if backport_filesContents:
-                                    
+
                                     for itemBcontent in backport_filesContents:
                                         temp_itemBcontent = itemBcontent.copy()
                                         filepathBackport, fullFilecontentBackport = temp_itemBcontent.popitem()
