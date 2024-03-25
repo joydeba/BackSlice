@@ -80,12 +80,14 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                         except Exception as e:
                             print("Error occurred in retrieving previous backport files:", e)
                             previous_backport_filesContents = []
+                            continue
 
                         try:
                             backport_filesContents.append({fileB.filename: repo.get_contents(fileB.filename, ref=pullBackport.head.sha).decoded_content.decode('utf-8')})
                         except Exception as e:
                             print("Error occurred in retrieving backport files:", e)
                             backport_filesContents = []
+                            continue
 
                             
 
@@ -204,8 +206,11 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                 # repo_url = host + repository.strip() 
                                 # file_path = filepath.split(" ")[1] 
                                 # fullFileTarget = repo.get_contents(file_path[2:], ref=targetStableBranch).decoded_content.decode("utf-8")
-
-                                file_path = filepathBackport.split(" ")[2]
+                                            
+                                try:
+                                    file_path = filepathBackport.split(" ")[2]
+                                except: 
+                                    file_path = filepathBackport.split(" ")[0]    
                                 # if original_filesContents:
                                 #     for itemFcontent in original_filesContents:
                                 #         temp_itemFcontent = itemFcontent.copy()
