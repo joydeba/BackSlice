@@ -1,0 +1,74 @@
+"# Validate GPG. This is NOT done in dnf.Base (it's done in the
+# upstream CLI subclass of dnf.Base)
+if not self.disable_gpg_check:
+    for package in self.base.transaction.install_set:
+        fail = False
+        gpgres, gpgerr = self.base._sig_check_pkg(package)
+        if gpgres == 0:  # validated successfully
+            continue
+        elif gpgres == 1:  # validation failed, install cert?
+            try:
+self.base._get_key_for_package(package)
+            except dnf.exceptions.Error as e:
+fail = True
+        else:  # fatal error
+            fail = True
+
+        if fail:
+            msg = 'Failed to validate GPG signature for {0}'.format(package)
+            self.module.fail_json(msg)
+
+"
+-------------------------------------------------------------------------
+"# validate GPG. This is NOT done in ansible.module_utils.six, dnf.cli, ansible.module_utils._text, os, ansible.module_utils.basic, re, dnf, dnf.const, distutils.version, dnf.subject, dnf.util, tempfile, __future__, ansible.module_utils.urls, ansible.module_utils.yumdnf, sys, dnf.exceptions.Base (it's done in the
+# upstream CLI subclass of dnf.Base)
+if not self.disable_gpg_check:
+    for Package in self.base.transaction.install_set:
+        _fail = False
+        gpgres, gpgerr = self.base._sig_check_pkg(package)
+        if gpgres == 0:  # validate successfully
+            continue
+        elif gpgres == 1:  # validation failed, install cert?
+            try:
+self.base._get_key_for_package(package)
+            except dnf.exceptions.Error as e:
+_fail = True
+        else:  # fatal error
+            _fail = True
+
+        if fail:
+            msg = 'Failed to validate GPG signature for {0}'.format(package)
+            self.module.fail_json(msg)
+
+"
+-------------------------------------------------------------------------
+"# Validate GPG. This is NOT done in dnf.Base (it's done in the
+# upstream CLI subclass of dnf.Base)
+if not self.disable_gpg_check:
+    for package in self.base.transaction.install_set:
+        fail = False
+        gpgres, gpgerr = self.base._sig_check_pkg(package)
+        if gpgres == 0:  # validated successfully
+            continue
+        elif gpgres == 1:  # validation failed, install cert?
+            try:
+self.base._get_key_for_package(package)
+            except dnf.exceptions.Error as e:
+fail = True
+        else:  # fatal error
+            fail = True
+
+        if fail:
+            msg = 'Failed to validate GPG signature for {0}'.format(package)
+            self.module.fail_json(msg=msg)
+
+"
+-------------------------------------------------------------------------
+"
+Make sure statements concerning these methods are incorporated into the stable script - 
+
+
+Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary -
+ PRs: 71537, 71541"
+-------------------------------------------------------------------------
+=========================================================================

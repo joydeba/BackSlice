@@ -99,7 +99,7 @@ class BackSlicer():
         adaptedSource = self.adapt_code_based_on_SecurityCheck(adaptedSource)
 
         if self.targetfile:
-            adaptedSource, method_info = adapt_and_extract_method_info(adaptedSource, self.targetfile)
+            adaptedSource, method_info = self.adapt_and_extract_method_info(adaptedSource, self.targetfile)
 
         missing_dependenciesAST = find_missing_imports(adaptedSource)
         missing_dependenciesAST = missing_dependenciesAST.split(", ")
@@ -133,48 +133,48 @@ class BackSlicer():
         return adaptedSource, recommendation
 
 
-def adapt_and_extract_method_info(adapted_source, targetfile):
-    """
-    Adapt method calls in the source code to include parameters based on the presence of targetfile
-    and extract method names and parameters from Python source code.
+    def adapt_and_extract_method_info(self, adapted_source, targetfile):
+        """
+        Adapt method calls in the source code to include parameters based on the presence of targetfile
+        and extract method names and parameters from Python source code.
 
-    Args:
-        adapted_source (str): The source code to be adapted.
-        targetfile (str): The name of the parameter to be included.
+        Args:
+            adapted_source (str): The source code to be adapted.
+            targetfile (str): The name of the parameter to be included.
 
-    Returns:
-        tuple: A tuple containing the adapted source code and a dictionary with method information.
-    """
-    method_info = {}
-    adapted_source_result = adapted_source
+        Returns:
+            tuple: A tuple containing the adapted source code and a dictionary with method information.
+        """
+        method_info = {}
+        adapted_source_result = adapted_source
 
-    # Regular expression pattern to match method definitions
-    method_pattern = r"def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\((.*?)\):"
+        # Regular expression pattern to match method definitions
+        method_pattern = r"def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\((.*?)\):"
 
-    # Find all method definitions in the adapted source code
-    matches = re.findall(method_pattern, adapted_source, re.MULTILINE | re.DOTALL)
+        # Find all method definitions in the adapted source code
+        matches = re.findall(method_pattern, adapted_source, re.MULTILINE | re.DOTALL)
 
-    # Iterate over matches and extract method names and parameters
-    for match in matches:
-        method_name = match[0]
-        parameters = match[1].split(',') if match[1] else []
-        parameters = [param.strip() for param in parameters]
-        method_info[method_name] = parameters
+        # Iterate over matches and extract method names and parameters
+        for match in matches:
+            method_name = match[0]
+            parameters = match[1].split(',') if match[1] else []
+            parameters = [param.strip() for param in parameters]
+            method_info[method_name] = parameters
 
-    # If targetfile is present, adapt method calls to include parameters
-    if targetfile in adapted_source:
-        # Construct method call pattern
-        method_call_pattern = re.compile(rf"{method_name}\((.*?)\)")
+        # If targetfile is present, adapt method calls to include parameters
+        if targetfile in adapted_source:
+            # Construct method call pattern
+            method_call_pattern = re.compile(rf"{method_name}\((.*?)\)")
 
-        # Check if method call exists and if there are parameters to include
-        if method_call_pattern.search(adapted_source):
-            # Construct parameter assignments
-            parameters = ", ".join([f"{param}={param}" for param in method_info[method_name]])
+            # Check if method call exists and if there are parameters to include
+            if method_call_pattern.search(adapted_source):
+                # Construct parameter assignments
+                parameters = ", ".join([f"{param}={param}" for param in method_info[method_name]])
 
-            # Replace method call with method call including parameters
-            adapted_source_result = method_call_pattern.sub(f"{method_name}({parameters})", adapted_source)
+                # Replace method call with method call including parameters
+                adapted_source_result = method_call_pattern.sub(f"{method_name}({parameters})", adapted_source)
 
-    return adapted_source_result, method_info
+        return adapted_source_result, method_info
 
 
     def adapt_code_based_on_metadata(self, source, keywords):

@@ -1,27 +1,30 @@
-def permute(nums):
-    def backtrack(start):
-        if start == len(nums):
-            result.append(nums.copy())
-            return
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
-        for i in range(start, len(nums)):
-            # Swap elements to generate permutations
-            nums[start], nums[i] = nums[i], nums[start]
-            # Recursively generate permutations for the rest of the array
-            backtrack(start + 1)
-            # Backtrack: undo the swap for the next iteration
-            nums[start], nums[i] = nums[i], nums[start]
 
-    result = []
-    backtrack(0)
-    return result
+def kthSmallest(root, k: int) -> int:
+    stack = []
+    while True:
+        while root:
+            stack.append(root)
+            root = root.left
+        root = stack.pop()
+        k -= 1
+        if k == 0:
+            return root.val
+        root = root.right       
 
 # Example usage:
-nums1 = [1, 2, 3]
-print(permute(nums1))
 
-nums2 = [0, 1]
-print(permute(nums2))
+root2 = TreeNode(5)
+root2.left = TreeNode(3)
+root2.right = TreeNode(6)
+root2.left.left = TreeNode(2)
+root2.left.right = TreeNode(4)
+root2.left.left.left = TreeNode(1)
 
-nums3 = [1]
-print(permute(nums3))
+k2 = 4
+print(kthSmallest(root2, k2))  # Output: 3            
