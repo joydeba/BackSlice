@@ -38,27 +38,38 @@ class BackSlicer():
         Returns:
             str: The adapted source code, close to sourcebackport.
         """
+
         adaptedSource = self.sourceOriginal  # Initialize with the original source
 
         if self.dependencies:
             # Convert dependencies list to a set for efficient matching
             existing_dependencies = set(self.dependencies)
-            # Iterate over lines in the adaptedSource to check for existing dependencies
+            # Initialize a list to hold new import lines
+            new_imports = []
+
+            # Iterate over lines in the adaptedSource to check for existing imports
             source_lines = adaptedSource.split('\n')
-            for i, line in enumerate(source_lines):
-                for dep in existing_dependencies:
-                    if dep in line:
-                        # If any existing dependency is found, replace it with the new dependencies
-                        source_lines[i] = line.replace(dep, ', '.join(existing_dependencies))
-                        break
+            for line in source_lines:
+                if line.startswith('import ') or line.startswith('from '):
+                    # Extracting existing imports and removing them from the set of dependencies
+                    existing_imports = [dep.split('.')[-1] for dep in existing_dependencies if dep.split('.')[-1] in line]
+                    existing_dependencies.difference_update(existing_imports)
                 else:
-                    continue
-                break
-            else:
-                # If no existing dependency is found, add new dependencies at the top
-                source_lines.insert(0, ', '.join(self.dependencies))
+                    # Break the loop if the line is not an import statement
+                    break
+
+            # Add new dependencies as import lines
+            for dep in self.dependencies:
+                if dep.split('.')[-1] in existing_dependencies:
+                    # If any existing dependency is found, add it to new_imports
+                    new_imports.append(f"import {dep}")
+                    existing_dependencies.remove(dep.split('.')[-1])
+
+            # Join existing import lines and new import lines
+            new_source = '\n'.join(new_imports + source_lines)
+
             # Update adaptedSource with modified lines
-            adaptedSource = '\n'.join(source_lines)
+            adaptedSource = new_source
 
 
         if self.astdiffsHistory and self.functionalSet and self.compilationSet:

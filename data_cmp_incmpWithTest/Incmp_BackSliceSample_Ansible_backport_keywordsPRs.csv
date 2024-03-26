@@ -20,7 +20,13 @@ fail = True
 
 "
 -------------------------------------------------------------------------
-"# validate GPG. This is NOT done in ansible.module_utils.six, dnf.cli, ansible.module_utils._text, os, ansible.module_utils.basic, re, dnf, dnf.const, distutils.version, dnf.subject, dnf.util, tempfile, __future__, ansible.module_utils.urls, ansible.module_utils.yumdnf, sys, dnf.exceptions.Base (it's done in the
+"import sys
+import os
+import re
+import __future__
+import tempfile
+import dnf
+# validate GPG. This is NOT done in dnf.Base (it's done in the
 # upstream CLI subclass of dnf.Base)
 if not self.disable_gpg_check:
     for Package in self.base.transaction.install_set:
