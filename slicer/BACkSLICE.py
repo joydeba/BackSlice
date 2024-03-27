@@ -144,46 +144,48 @@ class BackSlicer():
         return adaptedSource, recommendation
 
 
+
     def adapt_and_extract_method_info(self, adapted_source, targetfile):
         """
-        Adapt method calls in the source code to include parameters based on the presence of targetfile
-        and extract method names and parameters from Python source code.
+        Adapt method calls in the adapted_source code to include parameters based on the presence of targetfile.
 
         Args:
             adapted_source (str): The source code to be adapted.
-            targetfile (str): The name of the parameter to be included.
+            targetfile (str): Full target file from where parameter to be included in adapted_source.
 
         Returns:
-            tuple: A tuple containing the adapted source code and a dictionary with method information.
+            str: A string containing the adapted source code.
         """
         method_info = {}
         adapted_source_result = adapted_source
 
-        # Regular expression pattern to match method definitions
-        method_pattern = r"def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\((.*?)\):"
+        # Regular expression pattern to match method calls
+        method_pattern = r"((?:\w+\.)+\w+)\((.*?)\)"
 
-        # Find all method definitions in the adapted source code
-        matches = re.findall(method_pattern, adapted_source, re.MULTILINE | re.DOTALL)
+        # Find all method definitions in the targetfile
+        matches = re.findall(method_pattern, targetfile, re.MULTILINE | re.DOTALL)
 
         # Iterate over matches and extract method names and parameters
         for match in matches:
-            method_name = match[0]
+            method_name = match[0]  # Define method_name within the loop
             parameters = match[1].split(',') if match[1] else []
-            parameters = [param.strip() for param in parameters]
+            parameters = [param.split('=')[0].strip() for param in parameters]  # Extract only variable names
             method_info[method_name] = parameters
 
         # If targetfile is present, adapt method calls to include parameters
-        if targetfile:
-            # Construct method call pattern
-            method_call_pattern = re.compile(rf"{method_name}\((.*?)\)")
+        if adapted_source_result:
+            # Iterate over method names extracted earlier
+            for method_name in method_info.keys():
+                # Construct method call pattern for each method
+                method_call_pattern = re.compile(rf"\b{re.escape(method_name)}\((.*?)\)")
+                
+                # Check if method call exists and if there are parameters to include
+                if method_call_pattern.search(adapted_source_result):
+                    # Construct parameter assignments
+                    parameters = ", ".join([f"{param}={param}" for param in method_info[method_name]])
 
-            # Check if method call exists and if there are parameters to include
-            if method_call_pattern.search(adapted_source):
-                # Construct parameter assignments
-                parameters = ", ".join([f"{param}={param}" for param in method_info[method_name]])
-
-                # Replace method call with method call including parameters
-                adapted_source_result = method_call_pattern.sub(f"{method_name}({parameters})", adapted_source)
+                    # Replace method call with method call including parameters
+                    adapted_source_result = method_call_pattern.sub(f"{method_name}({parameters})", adapted_source_result)
 
         return adapted_source_result, method_info
 
