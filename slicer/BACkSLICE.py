@@ -66,10 +66,10 @@ class BackSlicer():
                     existing_dependencies.remove(dep.split('.')[-1])
 
             # Join existing import lines and new import lines
-            new_source = '\n'.join(new_imports + source_lines)
+            new_source_import = ', '.join(new_imports)
 
             # Update adaptedSource with modified lines
-            adaptedSource = new_source
+            # adaptedSource = new_source_import
 
 
         if self.astdiffsHistory and self.functionalSet and self.compilationSet:
@@ -117,7 +117,7 @@ class BackSlicer():
         # missing_dependenciesMyPy = check_imports_from_string(adaptedSource)    
 
         recommendation_to_add = "\nMake sure statements concerning these methods are incorporated into the stable script - "
-        recommendation_to_remove = "\nEnsure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary -"
+        recommendation_to_remove = "\nEnsure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - "
 
         if self.stableLibraris and missing_dependenciesAST:
             added_methods = set()  
@@ -128,7 +128,7 @@ class BackSlicer():
                     if library_info:
                         for name in library_info['function_names'] + library_info['function_calls'] + library_info['class_method_calls'] + library_info['libraries']:
                             if method_name in name:
-                                recommendation_to_add += f"\n{method_name}"  
+                                recommendation_to_add += f",{method_name}"  
                                 added_methods.add(method_name)
                                 found = True
                                 break
@@ -137,9 +137,9 @@ class BackSlicer():
 
             for method_name in missing_dependenciesAST:
                 if method_name not in added_methods:
-                    recommendation_to_remove += f"\n{method_name}"
-
-        recommendation = recommendation_to_add + "\n" + recommendation_to_remove                                                                                                               
+                    recommendation_to_remove += f",{method_name}"
+        new_source_import = "\nMake sure these dependencies are incorporated into the stable script - " + new_source_import
+        recommendation = new_source_import + recommendation_to_add + recommendation_to_remove                                                                                                               
 
         return adaptedSource, recommendation
 
@@ -173,7 +173,7 @@ class BackSlicer():
             method_info[method_name] = parameters
 
         # If targetfile is present, adapt method calls to include parameters
-        if targetfile in adapted_source:
+        if targetfile:
             # Construct method call pattern
             method_call_pattern = re.compile(rf"{method_name}\((.*?)\)")
 

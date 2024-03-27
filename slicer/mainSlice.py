@@ -290,7 +290,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                                 targetfile = previousBackportfullFileTarget)                        
                             context_index = context_index +1                    
                             slicebyCslicer, recommendation = cslicer.analyzeProgram()
-                            recommendation = recommendation + "\n PRs: "+ pull_id_original  + ", "  + pull_id_backport
+                            recommendation = recommendation + "\nPRs: "+ pull_id_original  + ", "  + pull_id_backport
                             if slicebyCslicer:
                                 numberOfSuccesfulSlicing = numberOfSuccesfulSlicing + 1                
                                 slicesfromCSLICER.append((codeHunk ,slicebyCslicer, codeHunkBackport, recommendation))                                 
