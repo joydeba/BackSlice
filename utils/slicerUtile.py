@@ -11,7 +11,6 @@ import json
 import mypy.api
 import io
 
-
 def remove_comments_docstrings_fromString(fsring):
     '''
     Strips comments and docstrings from a python file.
@@ -25,6 +24,7 @@ def remove_comments_docstrings_fromString(fsring):
                 stripped_code = stripped_code + line + '\n'
 
     return stripped_code
+
 
 def has_test_files(files):
     test_patterns = [
@@ -40,7 +40,7 @@ def has_test_files(files):
                 return True
     return False
 
-# Todo - Cslicer may have different history
+
 def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = None, endDate = None, repoName=None, projectName = None):
     asts = []  # List to store parsed ASTs for each commit
     g, backup_keys, no_bused_key, accesskey = initialize_G()
@@ -98,15 +98,6 @@ def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = 
 
     return diff_results
 
-# # Example usage
-# source_commits = ["commit1.py", "commit2.py", "commit3.py"]
-# ast_diffs = get_ast_diffs(source_commits)
-
-# for commit_a, commit_b, diff in ast_diffs:
-#     print(f"Differences between {commit_a} and {commit_b}:")
-#     for line in diff:
-#         print(line)
-#     print()
 
 def get_hunk_context(file_content, hunk_start, hunk_end, context_lines=3):
     file_content = file_content.split("@@ ")[1]
@@ -121,20 +112,6 @@ def get_hunk_context(file_content, hunk_start, hunk_end, context_lines=3):
 
     return '\n'.join(context)
 
-# # Example usage
-# file_content = """
-# def foo():
-#     print("Hello")
-    
-# def bar():
-#     print("World")
-# """
-
-# hunk_start = 2
-# hunk_end = 4
-
-# context = get_hunk_context(file_content, hunk_start, hunk_end)
-# print(context)
 
 def get_changeset_dependencies(source_code):
     if source_code is None:
@@ -159,15 +136,6 @@ def get_changeset_dependencies(source_code):
     
     return list(dependencies)
 
-# # Example usage:
-# source_code = """
-# import os
-# from math import sqrt
-# import numpy as np
-# from datetime import datetime
-# """
-# dependencies = get_changeset_dependencies(source_code)
-# print(dependencies)
 
 def get_changesets_and_metadata(pull_request, sourceO):
     """
@@ -223,30 +191,6 @@ def get_changesets_and_metadata(pull_request, sourceO):
             comment_block.append(stripped_line)
 
     return title, body, tags, comments
-
-# # Example usage
-# pull_request_data = {
-#     'title': 'Add new feature',
-#     'body': 'This pull request adds a new feature to the project.',
-#     'tags': ['feature', 'enhancement'],
-# }
-
-# source_code = """
-# # This is a single-line comment.
-# def add(a, b):
-#     """
-#     This is a multi-line comment.
-#     It explains the function purpose and usage.
-#     """
-#     return a + b
-# """
-
-# title, body, tags, comments = get_commentDoc_and_metadata(pull_request_data, source_code)
-
-# print("Title:", title)
-# print("Body:", body)
-# print("Tags:", tags)
-# print("Comments:", comments)
 
 
 def find_source_code_entity(source_code_toTest, test_case_line):
@@ -358,18 +302,6 @@ def get_functional_set(sourceCode, testCases):
 
     return functional_set
 
-# # Example usage
-# source_code = "class MathUtils:\n    def add(self, a, b):\n        return a + b\n\ndef square(x):\n    return x * x\n\nresult = MathUtils().add(3, 5)\nsquared_result = square(result)"
-
-# test_cases = [
-#     ['result = MathUtils().add(3, 5)'],
-#     ['squared_result = square(result)']
-# ]
-
-# functional_set = get_functional_set(source_code, test_cases[0])
-# print(functional_set)
-
-
 
 def get_compilation_set(sourceCode, functional_set):
     '''
@@ -410,44 +342,7 @@ def get_compilation_set(sourceCode, functional_set):
 
     return referenced_entities
 
-# # Example usage
-# source_code = '''
-# def add(a, b):
-#     return a + b
 
-# def subtract(a, b):
-#     return a - b
-
-# def multiply(a, b):
-#     return a * b
-
-# def divide(a, b):
-#     return a / b
-# '''
-
-# functional_entities = ['add', 'multiply']
-
-# compilation_set = get_compilation_set(source_code, functional_entities)
-# print(compilation_set)
-
-# def adapttoSCM(self, sourceB = None):
-#     '''
-#     - Mapped back to the original commits/reverting unwanted changes
-#     - Hunk dependencies
-#     '''
-#     dependencies = get_hunk_sets()
-    
-
-# def get_origin(fun_set=None, com_set= None):
-#     commits = []
-#     return commits
-
-# def get_hunk_sets(commit=None):
-#     dependencies = []
-#     # Gether context 
-#     return dependencies
-
-#  Todo- check for the getting all 
 def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_file="StableCacheLibrary.txt"):
     # return {} # Todo remove it 
     # Check if a cache file exists and load information from it if available.
@@ -539,83 +434,6 @@ def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_f
         print(f"Failed to fetch repository contents: {response.status_code}")
         return None
 
-
-# def get_stable_version_libraries(owner, repo, branch, github_token=None):
-#     '''
-#     This function uses the GitHub API to retrieve the contents of the repository's branch, searches for Python files (.py extension), and parses the code using the ast module. It identifies import and from ... import statements to extract library usage, function definitions, and function calls.
-
-#     Replace github_username, repository_name, and your_github_personal_access_token with appropriate values. Also, remember to handle pagination if the repository has a large number of files.
-
-#     Keep in mind that this approach has limitations and may not catch all forms of function calls or more complex code patterns. You might need to enhance this function or use additional parsing techniques if your repository's codebase is intricate.
-#     '''
-#     base_url = f"https://api.github.com/repos/{owner}/{repo}/contents"
-#     headers = {}
-
-#     if github_token:
-#         headers['Authorization'] = f"Bearer {github_token}"
-
-#     response = requests.get(f"{base_url}?ref={branch}", headers=headers)
-
-#     library_info = {}
-
-#     if response.status_code == 200:
-#         contents = response.json()
-
-#         for item in contents:
-#             if item['type'] == 'file' and item['name'].endswith('.py'):
-#                 file_url = item['download_url']
-#                 file_content = requests.get(file_url, headers=headers).text
-
-#                 try:
-#                     tree = ast.parse(file_content)
-#                 except Exception:
-#                     print(f"Error parsing {item['name']}. Skipping.")
-#                     continue
-
-#                 libraries = []
-#                 function_names = []
-#                 function_calls = []
-
-#                 for node in ast.walk(tree):
-#                     if isinstance(node, ast.Import):
-#                         for alias in node.names:
-#                             libraries.append(alias.name)
-#                     elif isinstance(node, ast.ImportFrom):
-#                         for alias in node.names:
-#                             if node.module:
-#                                 libraries.append(f"{node.module}.{alias.name}")
-#                     elif isinstance(node, ast.FunctionDef):
-#                         function_names.append(node.name)
-#                     elif isinstance(node, ast.Call):
-#                         if isinstance(node.func, ast.Name):
-#                             function_calls.append(node.func.id)
-
-#                 library_info[item['name']] = {
-#                     'libraries': list(set(libraries)),
-#                     'function_names': list(set(function_names)),
-#                     'function_calls': list(set(function_calls))
-#                 }
-
-#         return library_info
-
-#     else:
-#         print(f"Failed to fetch repository contents: {response.status_code}")
-#         return None
-
-# # Example usage
-# owner = "github_username"
-# repo = "repository_name"
-# branch = "main"
-# github_token = "your_github_personal_access_token"
-
-# library_info = get_stable_version_libraries(owner, repo, branch, github_token)
-# print(library_info)
-
-# def check_imports_from_string(file_content: str) -> None:
-#     file_like_object = io.StringIO(file_content)
-#     result = mypy.api.run(["-c", file_content, "--show-error-codes"])
-#     # print(result[0])
-#     return result[0]
 
 def find_missing_imports(code: str) -> list:
 

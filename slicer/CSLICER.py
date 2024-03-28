@@ -1,5 +1,4 @@
 
-
 class Cslicer():
     def __init__(self, sourceOriginal= None, sourcebackport = None, astdiffsHistory = None, context = None, dependencies = None, metadata = None, functionalSet = None, compilationSet= None, stableLibraris = None, targetfile = None):
         self.sourceOriginal = sourceOriginal
@@ -12,8 +11,6 @@ class Cslicer():
         self.compilationSet= compilationSet
         self.stableLibraris = stableLibraris
         self.targetfile = targetfile
-
-
 
     def analyzeProgram(self):
 
@@ -57,7 +54,6 @@ class Cslicer():
 
         # Add the adaptedSource in the middle of the context for further adaptation
         # adaptedSource = self.context.replace('{{INSERT_HERE}}', adaptedSource)
-        
         return adaptedSource, ""
 
 

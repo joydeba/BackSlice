@@ -98,7 +98,6 @@ class BackSlicer():
                         for method_call in lib_info['function_calls']:
                                 adaptedSource = self.replace_semantically_related(adaptedSource, method_call, method_call)
 
-
         # Extract keywords from pull request metadata
         keywords = self.extract_keywords_from_metadata()
 
@@ -142,8 +141,6 @@ class BackSlicer():
         recommendation = new_source_import + recommendation_to_add + recommendation_to_remove                                                                                                               
 
         return adaptedSource, recommendation
-
-
 
     def adapt_and_extract_method_info(self, adapted_source, targetfile):
         """
@@ -189,7 +186,6 @@ class BackSlicer():
 
         return adapted_source_result, method_info
 
-
     def adapt_code_based_on_metadata(self, source, keywords):
         """
         Adapt the source code based on pull request metadata.
@@ -222,7 +218,6 @@ class BackSlicer():
             #     source += '\n# Code modification related to the keyword.'
 
         return source, recommendation
-
 
     def replace_semantically_related(self, source, old_value, new_value):
         """
@@ -347,8 +342,7 @@ class BackSlicer():
 
         adapted_source = source.replace(vulnerable_code, safe_alternative)
         return adapted_source
-       
-        
+             
     def get_security_issuesBandit(self, source_code):
         try:
             # Write the source code to a temporary file
@@ -384,7 +378,6 @@ class BackSlicer():
                 subprocess.run(['rm', 'temp_file.py'])
             except Exception as cleanup_error:
                 print(f"Error cleaning up temporary file: {cleanup_error}")
-
 
     def get_security_issuesPyre(self, source_code):
         # Does not work properly for me : works with directory and so many dependencies
@@ -428,7 +421,6 @@ class BackSlicer():
                 subprocess.run(['rm', '-r', temp_dir])
             except Exception as cleanup_error:
                 print(f"Error cleaning up temporary directory: {cleanup_error}")
-
 
     def get_security_issuesSafty(self, source_code):
         try:

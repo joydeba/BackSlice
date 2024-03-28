@@ -18,7 +18,6 @@ from github import Github
 from sklearn.metrics import confusion_matrix, cohen_kappa_score
 import numpy as np
 
-
 def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranches = {}, repoName="repoName", projectName = 'projectName', output1="outputCSLICER.csv"):
     """ 
     This function slices for changesets by CSLICER.
@@ -39,8 +38,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
         branches = gLocal.branch()
         with open("ghKeysconfig", "r") as fpkey:
             ghkey = fpkey.read().rstrip() # Todo - We may need the secondary keys too 
-        
-                             
+                                     
         sliced_prs_commits = []        
         for idx, line in enumerate(data_read):
             backport_slices = ""               
@@ -55,7 +53,6 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     repository = user_name.strip() + "/" + repo_name.strip()
                 
                     print("Working on repo", repo_name)                       
-
 
                     pull_id_original = line[1].replace("https://github.com/"+repository.strip()+"/pull/", "").split("/")[0].strip()
                     pull_id_backport = line[0].replace("https://github.com/"+repository.strip()+"/pull/", "").split("/")[0].strip()
@@ -89,10 +86,6 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                             backport_filesContents = []
                             continue
 
-                            
-
-
-
                     pull_commitsSubmitted = ast.literal_eval(gLocal.execute(["gh", "pr", "view", pull_id_original, "--json", "commits"]))['commits']
                     pull_original = gLocal.execute(["gh", "pr", "view", pull_id_original])
                     pull_backport = gLocal.execute(["gh", "pr", "view", pull_id_backport])
@@ -111,7 +104,6 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     # else:
                     #         creationStableBranch = gLocal.execute(["git", "log", "--reverse", "--pretty=format:'%h %ad %s'", "--date=iso", targetStableBranch]).split('\n')[1]
                     #         # git log --reverse  <branch-name> | tail -1
-
 
                     original_mergeCommits = ast.literal_eval(pull_commitOriginal)['mergeCommit']["oid"] if "null" not in pull_commitOriginal else None        
                     backport_mergeCommits = ast.literal_eval(pull_commitBackports)['mergeCommit']["oid"] if "null" not in pull_commitBackports else None  
@@ -198,7 +190,6 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                             commits_hunkTest_backportLines = commits_hunkTest_backportLines + c_lineB.replace(c_lineB[:leadingSpacesBackport], "") + "\n"
                                         else:
                                             commits_hunk_backportLines = commits_hunk_backportLines + c_lineB.replace(c_lineB[:leadingSpacesBackport], "") + "\n"
-
 
                                 # If you need to know the current full file on the target stable version.  
                                 # host = "https://github.com/"
@@ -306,7 +297,6 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     print(e)
                     continue
         
-
     with open("slicerOutput/"+projectName+"InconICFDiffzBackSliceCPython.txt", 'w') as f:   
         print("Total Labeled Backporting PRs", len(data_read), file=f)
         print("Total Sliced Required", numberofSlicingRequired, file=f)
@@ -324,9 +314,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
             print(f"Average CodeBLEU Score: {average_code_bleu}", file=f)       
             print(f"Average ROUGE-L Score: {average_rouge_l_score}", file=f)
             print(f"Average CHRF Score: {average_chrf_score}", file=f)            
-
             threshold = 0.5
-
             binary_bleu = np.array([1 if score >= threshold else 0 for score in bleu_scores])
             binary_meteor = np.array([1 if score >= threshold else 0 for score in meteor_scores])
             binary_code_bleu = np.array([1 if score >= threshold else 0 for score in code_bleu_scores])
@@ -373,8 +361,6 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
             writer.writerow([pair[3]])
             writer.writerow(["-------------------------------------------------------------------------"])
             writer.writerow(["========================================================================="])
-
-    
 
 # # Updated on 11th April 2023
 # ansibleDictOfActiveBranches = {'devel':{}, 'stable-2.9':{}, 'stable-2.12':{}, 'stable-2.14':{}, 'stable-2.13':{}, 'stable-2.15':{}}
