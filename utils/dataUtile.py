@@ -106,13 +106,13 @@ def checking_compatibility_and_incompability_withTests_among_PRs(prlist = 'prlis
                     compatible_listwithTest.append(line)
 
                            
-    with open(output1, "w") as fp:
-        writer = csv.writer(fp, delimiter=",")
-        writer.writerows(incompatible_listwithTest)
+    # with open(output1, "w") as fp:
+    #     writer = csv.writer(fp, delimiter=",")
+    #     writer.writerows(incompatible_listwithTest)
 
-    with open(output2, "w") as fp:
-        writer = csv.writer(fp, delimiter=",")
-        writer.writerows(compatible_listwithTest)    
+    # with open(output2, "w") as fp:
+    #     writer = csv.writer(fp, delimiter=",")
+    #     writer.writerows(compatible_listwithTest)    
 
     with open(output3, "w") as fp:
         writer = csv.writer(fp, delimiter=",")
@@ -127,7 +127,7 @@ def checking_compatibility_and_incompability_withTests_among_PRs(prlist = 'prlis
     print("Avearge chnaged_parcent:", chnaged_parcent/no_of_referenced_found)
 
 
-checking_compatibility_and_incompability_withTests_among_PRs('projectWise_data_from_github/Bitcoin_backport_keywordsPRs.csv', 
-'data_cmp_incmpWithTest/Incmp_Bitcoin_backport_keywordsPRs.csv', 
-'data_cmp_incmpWithTest/Cmp_Bitcoin_backport_keywordsPRs.csv',
-'data_cmp_incmpWithTest/Manual_incmp_Bitcoin_backport_keywordsPRs.csv')
+checking_compatibility_and_incompability_withTests_among_PRs('projectWise_data_from_github/Cmssw_backport_keywordsPRs.csv', 
+'data_cmp_incmpWithTest/Incmp_Cmssw_backport_keywordsPRs.csv', 
+'data_cmp_incmpWithTest/Cmp_Cmssw_backport_keywordsPRs.csv',
+'data_cmp_incmpWithTest/Manual_incmp_Cmssw_backport_keywordsPRs.csv')
