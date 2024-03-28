@@ -392,7 +392,6 @@ ansibleDefault_branch = 'devel'
 # KibanaDefault_branch = 'main'
 # cpythonDefault_branch = 'main'
 mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRs.csv', 
-mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRs.csv', 
 ansibleDefault_branch,
 ansibleDictOfActiveBranches,
 'ansible',
