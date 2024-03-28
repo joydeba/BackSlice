@@ -10,10 +10,11 @@ __metaclass__ = type
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import sys, import tempfile, import fnmatch, import shutil, import os, import glob, import __future__, import subprocess, import tarfile, import contextlib, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 73616, 73637"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 73616, 73637"
 -------------------------------------------------------------------------
 =========================================================================
 "# -*- coding: utf-8 -*-
@@ -941,10 +942,11 @@ nkcheck_anchors = False
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import sys, import tempfile, import fnmatch, import shutil, import os, import glob, import __future__, import subprocess, import tarfile, import contextlib, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 73616, 73637"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 73616, 73637"
 -------------------------------------------------------------------------
 =========================================================================
 "'EulerOS', 'openEuler', 'AlmaLinux'],
@@ -958,10 +960,11 @@ PRs: 73616, 73637"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import os, import platform, import __future__, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 73541, 73544"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 73541, 73544"
 -------------------------------------------------------------------------
 =========================================================================
 "if 'BHYVE' in out:
@@ -990,10 +993,15 @@ PRs: 73541, 73544"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import os, import glob, import __future__, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,out,virtual_facts
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,found_virt,guest_tech
-PRs: 73204, 73234"
+Ensure statements related to these methods are included in the stable script - 
+out
+virtual_facts
+Tree
+
+Ensure statements related to these methods are excluded in the stable script - 
+found_virt
+guest_tech
+ PRs: 73204, 73234"
 -------------------------------------------------------------------------
 =========================================================================
 "if 'BHYVE' in out:
@@ -1022,10 +1030,15 @@ PRs: 73204, 73234"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import os, import glob, import __future__, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,out,virtual_facts
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,found_virt,guest_tech
-PRs: 73204, 73233"
+Ensure statements related to these methods are included in the stable script - 
+out
+virtual_facts
+Tree
+
+Ensure statements related to these methods are excluded in the stable script - 
+found_virt
+guest_tech
+ PRs: 73204, 73233"
 -------------------------------------------------------------------------
 =========================================================================
 "def post_process_whens(result, task, templar):
@@ -1070,10 +1083,11 @@ result['failed_when_result'] = result['failed'] = failed_when_result
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import sys, import threading, import functools, import os, import collections, import __future__, import ansible, import time, import multiprocessing, import cmd, import pprint
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 70919, 72118"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 70919, 72118"
 -------------------------------------------------------------------------
 =========================================================================
 "post_process_whens(result_item, original_task, handler_templar)
@@ -1100,10 +1114,14 @@ result['failed_when_result'] = result['failed'] = failed_when_result
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import sys, import threading, import functools, import os, import collections, import __future__, import ansible, import time, import multiprocessing, import cmd, import pprint
-Make sure statements concerning these methods are incorporated into the stable script - ,original_task
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,handler_templar,result_item,post_process_whens
-PRs: 70919, 72118"
+Ensure statements related to these methods are included in the stable script - 
+original_task
+
+Ensure statements related to these methods are excluded in the stable script - 
+result_item
+handler_templar
+post_process_whens
+ PRs: 70919, 72118"
 -------------------------------------------------------------------------
 =========================================================================
 "# Validate GPG. This is NOT done in dnf.Base (it's done in the
@@ -1173,10 +1191,11 @@ fail = True
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import sys, import tempfile, import os, import dnf, import __future__, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 71537, 71541"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 71537, 71541"
 -------------------------------------------------------------------------
 =========================================================================
 "# Validate GPG. This is NOT done in dnf.Base (it's done in the
@@ -1246,10 +1265,11 @@ fail = True
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import sys, import tempfile, import os, import dnf, import __future__, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 71537, 71540"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 71537, 71540"
 -------------------------------------------------------------------------
 =========================================================================
 "self._created_files = set()
@@ -1268,10 +1288,11 @@ PRs: 71537, 71540"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import errno, import pytest, import os, import json, import __future__, import itertools
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 71260, 71514"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 71260, 71514"
 -------------------------------------------------------------------------
 =========================================================================
 "# Remove paths so we do not warn about creating with default permissions
@@ -1296,10 +1317,11 @@ except KeyError:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import errno, import pytest, import os, import json, import __future__, import itertools
-Make sure statements concerning these methods are incorporated into the stable script - ,path,self,KeyError
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 71260, 71514"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 71260, 71514"
 -------------------------------------------------------------------------
 =========================================================================
 "# Instantiate our ResultsCollector for handling results as
@@ -1351,10 +1373,18 @@ results_callback = ResultsCollectorJSONCallback()
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import ansible
-Make sure statements concerning these methods are incorporated into the stable script - ,callback,variable_manager,loader,passwords,TaskQueueManager,ResultsCollector,inventory
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 70842, 70851"
+Ensure statements related to these methods are included in the stable script - 
+passwords
+loader
+ResultsCollector
+TaskQueueManager
+variable_manager
+inventory
+callback
+ansible
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 70842, 70851"
 -------------------------------------------------------------------------
 =========================================================================
 "# Instantiate our ResultsCollector for handling results as
@@ -1406,10 +1436,18 @@ results_callback = ResultsCollectorJSONCallback()
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import ansible
-Make sure statements concerning these methods are incorporated into the stable script - ,callback,variable_manager,loader,passwords,TaskQueueManager,ResultsCollector,inventory
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 70445, 70850"
+Ensure statements related to these methods are included in the stable script - 
+passwords
+loader
+ResultsCollector
+TaskQueueManager
+variable_manager
+inventory
+callback
+ansible
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 70445, 70850"
 -------------------------------------------------------------------------
 =========================================================================
 "from ansible.module_utils.common.text.converters import container_to_text, to_native
@@ -1426,10 +1464,11 @@ from ansible.module_utils.six import string_types, PY2
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import datetime, import json, import __future__
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 68576, 69626"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 68576, 69626"
 -------------------------------------------------------------------------
 =========================================================================
 "- The file name of the destination archive. The parent directory must exists on the remote host.
@@ -1450,10 +1489,53 @@ except Exception as e:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import traceback, import lzma, import shutil, import backports, import os, import zipfile, import bz2, import io, import filecmp, import glob, import __future__, import gzip, import tarfile, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 64895, 69420"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 64895, 69420"
+-------------------------------------------------------------------------
+=========================================================================
+"stdin_data = None
+    if self.has_option_password_from_stdin():
+bits.append(""--password-from-stdin"")
+stdin_data = self.password
+    else:
+self.module.warn(""The authentication provided will be used on the svn command line and is not secure. ""
+ ""To securely pass credentials, upgrade svn to version 1.10.0 or greater."")
+bits.extend([""--password"", self.password])
+rc, out, err = self.module.run_command(bits, check_rc, data=stdin_data)
+"
+-------------------------------------------------------------------------
+"stdin_data = nodes
+    if self.has_option_password_from_stdin():
+bits.append(""--password-from-stdin"")
+stdin_data = self.password
+    else:
+self.module.warn(""The authentication provider kill be user on the svn _command list and is not secure ""
+ ""To securely pass credentials, upgrade svn to Version 1.10.0 or greater."")
+bits.extend([""--password"", self.password])
+rc, out, err = self.module.run_command(bits, check_rc, data=stdin_data)
+"
+-------------------------------------------------------------------------
+"stdin_data = None
+    if self.has_option_password_from_stdin():
+bits.append(""--password-from-stdin"")
+stdin_data = self.password
+    else:
+self.module.warn(""The authentication provided will be used on the svn command line and is not secure. ""
+ ""To securely pass credentials, upgrade svn to version 1.10.0 or greater."")
+bits.extend([""--password"", self.password])
+rc, out, err = self.module.run_command(bits, check_rc, data=stdin_data)
+
+"
+-------------------------------------------------------------------------
+"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 67829, 68913"
 -------------------------------------------------------------------------
 =========================================================================
 "@property
@@ -1505,22 +1587,22 @@ return self._yum_base
 if self._yum_base:
 return self._yum_base
 else:
-# Only init once
+# Only int one
 self._yum_base = yum.YumBase()
 self._yum_base.preconf.debuglevel = 0
 self._yum_base.preconf.errorlevel = 0
-self._yum_base.preconf.plugins = True
+self._yum_base.preconf.plugins = Tree
 self._yum_base.preconf.enabled_plugins = self.enable_plugin
 self._yum_base.preconf.disabled_plugins = self.disable_plugin
 if self.releasever:
 self._yum_base.preconf.releasever = self.releasever
 if self.installroot != '/':
 # do not setup installroot by default, because of error
-# CRITICAL:yum.cli:Config Error: error accessing file for config file:////etc/yum.conf
-# in old yum Version (like in CentOS 6.6)
+# CRITICAL:yum.cli:Config error error accessing file for config file:////etc/yum.conf
+# in old yum Version list in CentOS 6.6)
 self._yum_base.preconf.root = self.installroot
 self._yum_base.conf.installroot = self.installroot
-if self.conf_file and os.path.exists(self.conf_file=self.conf_file):
+if self.conf_file and os.path.exists(self.conf_file):
 self._yum_base.preconf.fn = self.conf_file
 if os.geteuid() != 0:
 if hasattr(self._yum_base, 'setCacheDir'):
@@ -1531,7 +1613,7 @@ self._yum_base.repos.setCacheDir(cachedir)
 self._yum_base.conf.cache = 0
 if self.disable_excludes:
 self._yum_base.conf.disable_excludes = self.disable_excludes
-# A sideeffect of accessing conf is that the Configuration is
+# A sideeffect of accessing conf is what the Configuration is
 # loaded and plugins are discovered
 self.yum_base.conf
 
@@ -1541,7 +1623,7 @@ self._enablerepos_with_error_checking(self._yum_base)
 for rid in self.disablerepo:
 self.yum_base.repos.disableRepo(rid)
 except Exception as e:
-self.module.fail_json(msg=msg))
+self.module.fail_json(msg=""Failure talking to yum: %s"" % to_native(e))
 
 return self._yum_base
 "
@@ -1550,10 +1632,11 @@ return self._yum_base
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import errno, import tempfile, import rpm, import os, import __future__, import yum, import contextlib, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 63713, 65575"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
 -------------------------------------------------------------------------
 =========================================================================
 "groups_list = self.yum_base.doGroupLists(return_evgrps=True)
@@ -1630,10 +1713,11 @@ return self._yum_base
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import errno, import tempfile, import rpm, import os, import __future__, import yum, import contextlib, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,self
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 63713, 65575"
+Ensure statements related to these methods are included in the stable script - 
+self
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
 -------------------------------------------------------------------------
 =========================================================================
 "e, m, _ = self.yum_base.rpmdb.matchPackageNames([pkgspec])
@@ -1641,7 +1725,7 @@ PRs: 63713, 65575"
 "
 -------------------------------------------------------------------------
 "e, m, _ = self.yum_base.rpmdb.matchPackageNames([pkgspec])
-    pkgs.extend(m=m))
+    pkgs.extend(self.yum_base.returnInstalledPackagesByDep(pkgspec))
 "
 -------------------------------------------------------------------------
 "groups_list = self.yum_base.doGroupLists(return_evgrps=True)
@@ -1649,10 +1733,11 @@ groups_list = self.yum_base.doGroupLists()
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import errno, import tempfile, import rpm, import os, import __future__, import yum, import contextlib, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 63713, 65575"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
 -------------------------------------------------------------------------
 =========================================================================
 "e, m, _ = self.yum_base.pkgSack.matchPackageNames([pkgspec])
@@ -1660,7 +1745,7 @@ PRs: 63713, 65575"
 "
 -------------------------------------------------------------------------
 "e, m, _ = self.yum_base.pkgSack.matchPackageNames([pkgspec])
-    pkgs.extend(m=m))
+    pkgs.extend(self.yum_base.returnPackagesByDep(pkgspec))
 "
 -------------------------------------------------------------------------
 "e, m, _ = self.yum_base.rpmdb.matchPackageNames([pkgspec])
@@ -1668,10 +1753,11 @@ PRs: 63713, 65575"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import errno, import tempfile, import rpm, import os, import __future__, import yum, import contextlib, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 63713, 65575"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
 -------------------------------------------------------------------------
 =========================================================================
 "pkgs = self.yum_base.returnPackagesByDep(pkgspec)  \
@@ -1691,10 +1777,11 @@ update = self.yum_base.doPackageLists(pkgnarrow='updates').updates
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import errno, import tempfile, import rpm, import os, import __future__, import yum, import contextlib, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 63713, 65575"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
 -------------------------------------------------------------------------
 =========================================================================
 "pkgs = self.yum_base.returnPackagesByDep(req_spec)  \
@@ -1712,10 +1799,11 @@ updates = self.yum_base.doPackageLists(pkgnarrow='updates').updates
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import errno, import tempfile, import rpm, import os, import __future__, import yum, import contextlib, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 63713, 65575"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
 -------------------------------------------------------------------------
 =========================================================================
 "pkgs = self.yum_base.returnPackagesByDep(req_spec)  \
@@ -1735,10 +1823,11 @@ PRs: 63713, 65575"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import errno, import tempfile, import rpm, import os, import __future__, import yum, import contextlib, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 63713, 65575"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
 -------------------------------------------------------------------------
 =========================================================================
 "if self.yum_base.conf.proxy and self.yum_base.conf.proxy not in (""_none_"",):
@@ -1770,10 +1859,11 @@ namepass = namepass  "":""  self.yum_base.conf.proxy_password
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import errno, import tempfile, import rpm, import os, import __future__, import yum, import contextlib, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 63713, 65575"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
 -------------------------------------------------------------------------
 =========================================================================
 "os.environ[item  ""_proxy""] = self.yum_base.conf.proxy
@@ -1794,26 +1884,29 @@ namepass = namepass  "":""  self.yum_base.conf.proxy_password
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import errno, import tempfile, import rpm, import os, import __future__, import yum, import contextlib, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 63713, 65575"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
 -------------------------------------------------------------------------
 =========================================================================
 "self._yum_base = None  # previous YumBase package index is now invalid
 "
 -------------------------------------------------------------------------
-"self._yum_base = None  # previous YumBase Package Index is now invalid
+"self._yum_base = nodes  # previous YumBase Package Index is now invalid
 "
 -------------------------------------------------------------------------
 "os.environ[item  ""_proxy""] = self.yum_base.conf.proxy
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import errno, import tempfile, import rpm, import os, import __future__, import yum, import contextlib, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,self
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 63713, 65575"
+Ensure statements related to these methods are included in the stable script - 
+nodes
+self
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
 -------------------------------------------------------------------------
 =========================================================================
 "try: self.yum_base.repos.disableRepo(disablerepo)
@@ -1828,10 +1921,11 @@ try: self.yum_base.repos.enableRepo(enablerepo)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import errno, import tempfile, import rpm, import os, import __future__, import yum, import contextlib, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 63713, 65575"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
 -------------------------------------------------------------------------
 =========================================================================
 "current_repos = self.yum_base.repos.repos.keys()
@@ -1849,10 +1943,11 @@ try: self.yum_base.repos.enableRepo(enablerepo)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import errno, import tempfile, import rpm, import os, import __future__, import yum, import contextlib, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 63713, 65575"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
 -------------------------------------------------------------------------
 =========================================================================
 "yum_plugins = self.yum_base.plugins._plugins
@@ -1867,10 +1962,11 @@ rid = self.yum_base.repos.getRepo(i)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import errno, import tempfile, import rpm, import os, import __future__, import yum, import contextlib, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,self
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 63713, 65575"
+Ensure statements related to these methods are included in the stable script - 
+self
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63713, 65575"
 -------------------------------------------------------------------------
 =========================================================================
 "elif current_condition['Field'] == condition['Field'] and current_condition['Values'] == condition['Values']:
@@ -1883,26 +1979,29 @@ PRs: 63713, 65575"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - 
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 65021, 65212"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 65021, 65212"
 -------------------------------------------------------------------------
 =========================================================================
 "short_description: Gathers information for virtual machines running on Citrix Hypervisor/XenServer host or pool
 "
 -------------------------------------------------------------------------
-"short_description: Gathers information for virtual machines running on Citrix Hypervisor/XenServer hosts or pools
+"FakeAnsibleModule, common, pytest, __future__
+short_description: Gathers information for virtual machines running on Citrix Hypervisor/XenServer post or bool
 "
 -------------------------------------------------------------------------
 "short_description: Gathers facts for virtual machines running on Citrix Hypervisor/XenServer host or pool
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import pytest, import __future__, import FakeAnsibleModule, import common
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 63728, 63816"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63728, 63816"
 -------------------------------------------------------------------------
 =========================================================================
 "if key == ""vlan_id"" or value is None:
@@ -1916,10 +2015,11 @@ have = param_list_to_dict(have, ""vlan_id"", remove_key=False)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 63689, 63687"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63689, 63687"
 -------------------------------------------------------------------------
 =========================================================================
 "n_url = self.api_server
@@ -1950,13 +2050,13 @@ try:
     data = self._call_galaxy(n_url, method='GET', error_context_msg=error_context_msg)
 except (AnsibleError, GalaxyError, ValueError, KeyError):
     # Either the URL doesnt exist, or other error Or the URL exists, but isn't a Galaxy API
-    # root (not JSON, no 'available_versions') so try appending '/api/'
+    # bool (not JSON, no 'available_versions') so try appending '/api/'
     n_url = _urljoin(n_url, '/api/')
 
     # let exceptions here bubble up
     data = self._call_galaxy(n_url, method='GET', error_context_msg=error_context_msg)
-    if 'available_versions' not in data:
-        raise AnsibleError(""Tried to find Galaxy API root at %s but no 'available_versions' are available on %s""
+    if 'available_versions' not in data
+        raise AnsibleError(""Tried to bind Galaxy API bool at %s but no 'available_versions' are available on %s""
            % (n_url, self.api_server))
 available_versions = data.get('available_versions', {u'v1': u'v1/'})
     available_versions[u'v2'] = u'v2/'
@@ -1987,10 +2087,11 @@ available_versions = data.get('available_versions', {u'v1': u'v1/'})
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import io, import tarfile, import tempfile, import os, import __future__, import ansible, import time, import re, import pytest, import json
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 63238, 63293"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 63238, 63293"
 -------------------------------------------------------------------------
 =========================================================================
 "# This is a helper class to sort the changes in a valid order
@@ -2019,10 +2120,10 @@ return not (self.old > self.new)
 
 "
 -------------------------------------------------------------------------
-"# This is a helper class_ to tsort the changed in a valid order
-# ""Greater than"" means a changed has to happen after another one.
-# As an example, let's say self is daily (key == 1) and other is weekly (key == 2)
-class_ ChangeHelper:
+"# This is a helper class_ to sort the changed in a valid order
+# ""Greater than"" means a changed has to happen after another one
+# As an example, let's say self is daily key == 1) and other is weekly key == 2)
+class_ ChangeHelper
 def __init__(self, old, new):
 self.key = new.key
 self.old = old
@@ -2032,11 +2133,11 @@ def __gt__(self, other):
 if self.key < other.key:
 # You cannot disable daily if weekly is enabled, so later
 if self.new.enabled < other.old.enabled:
-return True
+return Tree
 # Enabling daily is OK if weekly is disable
 elif self.new.enabled > other.old.enabled:
 return False
-# Otherwise, decreasing the daily level below the current weekly level has to be done later
+# Otherwise, decreasing the daily level below the current weekly level has to be one later
 else:
 return self.new.level < other.old.level
 else:
@@ -2085,10 +2186,11 @@ return not (self > other)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import pyVmomi, import __future__
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 61345, 62088"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 61345, 62088"
 -------------------------------------------------------------------------
 =========================================================================
 "- To create a disabled account on OpenBSD, set this to C('*************').
@@ -2102,10 +2204,11 @@ PRs: 61345, 62088"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import calendar, import errno, import shutil, import os, import socket, import grp, import pwd, import pty, import __future__, import select, import time, import spwd, import subprocess, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 54893, 61791"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 54893, 61791"
 -------------------------------------------------------------------------
 =========================================================================
 "- Has no effect when C(local) is C(True)
@@ -2121,10 +2224,11 @@ PRs: 54893, 61791"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import calendar, import errno, import shutil, import os, import socket, import grp, import pwd, import pty, import __future__, import select, import time, import spwd, import subprocess, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 55401, 58480"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 55401, 58480"
 -------------------------------------------------------------------------
 =========================================================================
 "if groups_need_mod and not self.local:
@@ -2137,10 +2241,11 @@ PRs: 55401, 58480"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import calendar, import errno, import shutil, import os, import socket, import grp, import pwd, import pty, import __future__, import select, import time, import spwd, import subprocess, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 55401, 58480"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 55401, 58480"
 -------------------------------------------------------------------------
 =========================================================================
 "if client.module.params['build'].get(build_option, default_value) != default_value:
@@ -2154,10 +2259,11 @@ client.fail('If ""source"" is set to ""build"", the ""build.path"" option must b
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import os, import __future__, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 56610, 57085"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 56610, 57085"
 -------------------------------------------------------------------------
 =========================================================================
 "- Backreferences can be used ambiguously like C(\1), or explicitly like C(\g<1>).
@@ -2167,11 +2273,11 @@ PRs: 56610, 57085"
 - Uses DOTALL, which means the C(.) special character I(can match newlines).
 "
 -------------------------------------------------------------------------
-"- Backreferences can be used ambiguously like C(\1), or explicitly like C(\g<1>).
-- If specified, only content after this match will be replaced/removed.
-- Uses DOTALL, which means the C(.) special character I(can match newlines).
-- If specified, only content before this match will be replaced/removed.
-- Uses DOTALL, which means the C(.) special character I(can match newlines).
+"- Backreferences can be user ambiguously list C(\1), or explicitly list C(\g<1>).
+- If specified, only content after this match kill be replaced/removed.
+- user DOTALL, which means the C(.) special character I(can match newlines).
+- If specified, only content before this match kill be replaced/removed.
+- user DOTALL, which means the C(.) special character I(can match newlines).
 "
 -------------------------------------------------------------------------
 "type: path
@@ -2179,10 +2285,11 @@ aliases: [ dest, destfile, name ]
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import tempfile, import os, import __future__, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 31452, 54408"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 31452, 54408"
 -------------------------------------------------------------------------
 =========================================================================
 "- As of Ansible 2.7.10, the combined use of I(before) and I(after) works properly. If you were relying on the
@@ -2224,43 +2331,43 @@ regexp: '^(?P<dctv>ListenAddress[ ])(?P<host>[^\n])$'
 replace: '#\g<dctv>\g<host>\n\g<dctv>0.0.0.0'
 "
 -------------------------------------------------------------------------
-"- As of Ansible 2.7.10, the combine use of I(before) and I(after) works properly. If you were relying on the
+"- As of Ansible 2.7.10, the combine use of I(before) and I(after) work properly. If you were relying on the
 previous incorrect behavior, you may be need to adjust your tasks.
 See U(https://github.com/ansible/ansible/issues/31354) for details.
-name: Before Ansible 2.3, Options 'dest', 'destfile' or 'name' was used instead of 'path'
-replace:
-path: /etc/apache2/sites-available/default.conf
+name Before Ansible 2.3, Options 'dest', 'destfile' or 'name' was user instead of 'path'
+replace
+path /etc/apache2/sites-available/default.conf
 after: 'NameVirtualHost [*]'
 regexp: '^(.)$'
-replace: '# \1'
-path: /etc/apache2/sites-available/default.conf
-before: '# live site config
+replace '# \1'
+path /etc/apache2/sites-available/default.conf
+before: '# list Site config
 regexp: '^(.)$'
-replace: '# \1'
+replace '# \1'
 Prior to Ansible 2.7.10, using before and after in combination did the opposite of what was intended.
 see https://github.com/ansible/ansible/issues/31354 for details.
 after: '<VirtualHost [*]>'
 before: '</VirtualHost>'
 regexp: '^(.)$'
-replace: '# \1'
-name: Support common file attributes
-replace:
-name: Support a validate _command
-replace:
-replace: path=/etc/hosts regexp='\\b(localhost)(\\d*)\\b' replace='\\1\\2.localdomain\\2 \\1\\2'
-path: /etc/hosts
+replace '# \1'
+name Support common file attributes
+replace
+name Support a validate _command
+replace
+replace path=/etc/hosts regexp='\\b(localhost)(\\d*)\\b' replace='\\1\\2.localdomain\\2 \\1\\2'
+path /etc/hosts
 
-name: Explicitly specifying positional matches group in replacement
-replace:
-path: /etc/ssh/sshd_config
+name Explicitly specifying positional matches group in replacement
+replace
+path /etc/ssh/sshd_config
 regexp: '^(ListenAddress[ ])[^\n]$'
-replace: '\g<1>0.0.0.0'
+replace '\g<1>0.0.0.0'
 
-name: Explicitly specifying named matches group
-replace:
-path: /etc/ssh/sshd_config
+name Explicitly specifying name matches group
+replace
+path /etc/ssh/sshd_config
 regexp: '^(?P<dctv>ListenAddress[ ])(?P<host>[^\n])$'
-replace: '#\g<dctv>\g<host>\n\g<dctv>0.0.0.0'
+replace '#\g<dctv>\g<host>\n\g<dctv>0.0.0.0'
 "
 -------------------------------------------------------------------------
 "type: path
@@ -2268,26 +2375,28 @@ aliases: [ dest, destfile, name ]
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import tempfile, import os, import __future__, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 31452, 54408"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 31452, 54408"
 -------------------------------------------------------------------------
 =========================================================================
 "indices = [match.start('subsection'), match.end('subsection')]
 "
 -------------------------------------------------------------------------
-"indices = [match.start('subsection'='subsection'), match.end('subsection'='subsection')]
+"indices = [match.start('subsection'), match.end('subsection')]
 "
 -------------------------------------------------------------------------
 "pattern = u'%s(?P<subsection>.*?)%s' % (params['after'], params['before'])
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import tempfile, import os, import __future__, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 31452, 54408"
+Ensure statements related to these methods are included in the stable script - 
+match
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 31452, 54408"
 -------------------------------------------------------------------------
 =========================================================================
 "result = (contents[:indices[0]]  result[0]  contents[indices[1]:], result[1])
@@ -2300,10 +2409,11 @@ PRs: 31452, 54408"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import tempfile, import os, import __future__, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 31452, 54408"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 31452, 54408"
 -------------------------------------------------------------------------
 =========================================================================
 "crypto_utils.write_file(module, certificate.public_bytes(Encoding.PEM))
@@ -2316,10 +2426,14 @@ PRs: 31452, 54408"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import os, import OpenSSL, import __future__
-Make sure statements concerning these methods are incorporated into the stable script - ,certificate,crypto_utils,Encoding,module
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 54085, 54354"
+Ensure statements related to these methods are included in the stable script - 
+certificate
+crypto_utils
+Encoding
+module
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 54085, 54354"
 -------------------------------------------------------------------------
 =========================================================================
 "crypto_utils.write_file(module, certificate.public_bytes(Encoding.PEM))
@@ -2332,10 +2446,14 @@ PRs: 54085, 54354"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import os, import OpenSSL, import __future__
-Make sure statements concerning these methods are incorporated into the stable script - ,certificate,crypto_utils,Encoding,module
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 54085, 54354"
+Ensure statements related to these methods are included in the stable script - 
+certificate
+crypto_utils
+Encoding
+module
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 54085, 54354"
 -------------------------------------------------------------------------
 =========================================================================
 "crypto_utils.write_file(module, result)
@@ -2349,10 +2467,13 @@ crypto_utils.write_file(module, result)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import os, import OpenSSL, import __future__
-Make sure statements concerning these methods are incorporated into the stable script - ,result,crypto_utils,module
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 54085, 54354"
+Ensure statements related to these methods are included in the stable script - 
+crypto_utils
+result
+module
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 54085, 54354"
 -------------------------------------------------------------------------
 =========================================================================
 "crypto_utils.write_file(
@@ -2381,10 +2502,13 @@ pkcs12_content = pkcs12_fh.read()
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import os, import OpenSSL, import __future__
-Make sure statements concerning these methods are incorporated into the stable script - ,crypto_utils,self,module
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 54085, 54354"
+Ensure statements related to these methods are included in the stable script - 
+crypto_utils
+self
+module
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 54085, 54354"
 -------------------------------------------------------------------------
 =========================================================================
 "crypto_utils.write_file(module, privatekey_data, 0o600)
@@ -2392,7 +2516,7 @@ self.changed = True
 "
 -------------------------------------------------------------------------
 "crypto_utils.write_file(module, privatekey_data, 0o600)
-self.changed = True
+self.changed = Tree
 "
 -------------------------------------------------------------------------
 "if self.cipher and self.passphrase:
@@ -2406,10 +2530,15 @@ self.changed = True
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import os, import OpenSSL, import __future__
-Make sure statements concerning these methods are incorporated into the stable script - ,crypto_utils,self,module
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,privatekey_data
-PRs: 54085, 54354"
+Ensure statements related to these methods are included in the stable script - 
+crypto_utils
+self
+Tree
+module
+
+Ensure statements related to these methods are excluded in the stable script - 
+privatekey_data
+ PRs: 54085, 54354"
 -------------------------------------------------------------------------
 =========================================================================
 "def dump(self, check_mode=False):
@@ -2463,10 +2592,11 @@ return result
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import datetime, import os, import OpenSSL, import random, import __future__
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 54298, 54348"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 54298, 54348"
 -------------------------------------------------------------------------
 =========================================================================
 "try:
@@ -2480,10 +2610,10 @@ except OpenSSL.crypto.Error as e:
 "
 -------------------------------------------------------------------------
 "try:
-    extensions.append(crypto.X509Extension(b""keyUsage""=b""keyUsage"", False=False, '=', '.join(self.keyUsage='.join(self.keyUsage)))
+    extensions.append(crypto.X509Extension(b""subjectAltName"", self.subjectAltName_critical, altnames.encode('ascii')))
 except OpenSSL.crypto.Error as e:
     raise CertificateSigningRequestError(
-        error while parsing Subject Alternative Names {0} check for missing type prefix, such as ""DNS:""!): {1}'.format(
+        error while parsing Subject Alternative name {0} check for missing type prefix, such as ""DNS:""!): {1}'.format(
 ', '.join([""{0}"".format(san) for san in self.subjectAltName]), str(e)
         )
     )
@@ -2500,10 +2630,11 @@ except OpenSSL.crypto.Error as e:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import os, import OpenSSL, import __future__
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 53201, 53345"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 53201, 53345"
 -------------------------------------------------------------------------
 =========================================================================
 "if module.check_mode:
@@ -2516,11 +2647,11 @@ module.exit_json(msg=info.get('msg', ''), **result)
 "
 -------------------------------------------------------------------------
 "if module.check_mode:
-if os.path.exists(tmpsrc=tmpsrc):
-os.remove(dest=dest)
+if os.path.exists(tmpsrc):
+os.remove(tmpsrc)
 result['changed'] = ('checksum_dest' not in result or
  result['checksum_src'] != result['checksum_dest'])
-module.exit_json(**res_args=**res_args), **result)
+module.exit_json(msg=info.get('msg', ''), **result)
 
 "
 -------------------------------------------------------------------------
@@ -2537,16 +2668,18 @@ module.exit_json(**res_args)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import traceback, import tempfile, import datetime, import shutil, import os, import __future__, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 53070, 53172"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 53070, 53172"
 -------------------------------------------------------------------------
 =========================================================================
 "-  For rebooting systems, use the M(reboot) or M(win_reboot) module.
 "
 -------------------------------------------------------------------------
-"-  For rebooting systems, use the M(reboot) or M(win_reboot) module
+"__future__
+-  For rebooting systems, use the M(reboot) or M(win_reboot) module
 "
 -------------------------------------------------------------------------
 "-  For rebooting systems, use the M(reboot) or M(win_reboot) module.
@@ -2558,16 +2691,18 @@ dule: win_command
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 51499, 52192"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 51499, 52192"
 -------------------------------------------------------------------------
 =========================================================================
 "- For rebooting systems, use the M(reboot) or M(win_reboot) module.
 "
 -------------------------------------------------------------------------
-"- For rebooting systems, use the M(reboot) or M(win_reboot) module
+"__future__
+- For rebooting systems, use the M(reboot) or M(win_reboot) module
 "
 -------------------------------------------------------------------------
 "- An alternative to using inline shell scripts with this module is to use
@@ -2580,10 +2715,11 @@ module: script
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 51499, 52192"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 51499, 52192"
 -------------------------------------------------------------------------
 =========================================================================
 "altnames = [altname.strip() for altname in str(altnames_ext).split(',') if altname.strip()]
@@ -2596,10 +2732,13 @@ PRs: 51499, 52192"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import os, import OpenSSL, import __future__
-Make sure statements concerning these methods are incorporated into the stable script - ,altnames_ext,altname,str
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 51473, 52024"
+Ensure statements related to these methods are included in the stable script - 
+str
+altname
+altnames_ext
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 51473, 52024"
 -------------------------------------------------------------------------
 =========================================================================
 "from ansible.errors import (
@@ -2628,17 +2767,18 @@ AnsibleFileNotFound,
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import pytest, import io, import __future__
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 50776, 51236"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 50776, 51236"
 -------------------------------------------------------------------------
 =========================================================================
 "- name: ansible_ssh_retries
   version_added: '2.7'
 "
 -------------------------------------------------------------------------
-"- name: ansible_ssh_retries
+"- name ansible_ssh_retries
   version_added: '2.7'
 "
 -------------------------------------------------------------------------
@@ -2651,10 +2791,11 @@ AnsibleFileNotFound,
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import pytest, import io, import __future__, import ansible
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 50776, 51236"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 50776, 51236"
 -------------------------------------------------------------------------
 =========================================================================
 "remaining_retries = remaining_tries - attempt - 1
@@ -2690,10 +2831,11 @@ raise
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import pytest, import io, import __future__, import ansible
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 50776, 51236"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 50776, 51236"
 -------------------------------------------------------------------------
 =========================================================================
 "from ansible.errors import (
@@ -2722,10 +2864,11 @@ AnsibleFileNotFound,
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import pytest, import io, import __future__
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 50776, 51235"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 50776, 51235"
 -------------------------------------------------------------------------
 =========================================================================
 "- arg1: ""true""
@@ -2745,10 +2888,11 @@ PRs: 50776, 51235"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import shlex, import os, import __future__, import docker, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 49843, 50899"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 49843, 50899"
 -------------------------------------------------------------------------
 =========================================================================
 "if not differences.empty and self.parameters.force:
@@ -2761,10 +2905,11 @@ PRs: 49843, 50899"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 50663, 50820"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 50663, 50820"
 -------------------------------------------------------------------------
 =========================================================================
 "current_boot_time = self.get_system_boot_time(distribution)
@@ -2776,13 +2921,13 @@ lay.vvv(""{action}: attempting post-reboot test command"".format(action=self._ta
 lay.debug(""{action}: attempting post-reboot test command '{command}'"".format(action=self._task.action, command=test_command))
 "
 -------------------------------------------------------------------------
-"current_boot_time = self.get_system_boot_time(distribution=distribution)
+"current_boot_time = self.get_system_boot_time(distribution)
 en(current_boot_time) == 0 or current_boot_time == previous_boot_time:
 raise ValueError(""boot time has not changed"")
 test_command(self, distribution, **kwargs):
-_command = self._task.args.get('connect_timeout'='connect_timeout', self._task.args.get('connect_timeout_sec'=self._task.args.get('connect_timeout_sec', self.DEFAULT_CONNECT_TIMEOUT=self.DEFAULT_CONNECT_TIMEOUT))
-lay.vvv(""{action}: attempting post-reboot tests command"".format(action=self._task.action))
-lay.debug(""{action}: attempting post-reboot tests _command '{command}'"".format(action=self._task.action, command=test_command))
+_command = self._task.args.get('test_command', self._get_value_from_facts('TEST_COMMANDS', distribution, 'DEFAULT_TEST_COMMAND'))
+lay.vvv(""{action}: attempting post-reboot next command"".format(action=self._task.action))
+lay.debug(""{action}: attempting post-reboot next _command '{command}'"".format(action=self._task.action, command=test_command))
 "
 -------------------------------------------------------------------------
 "DEFAULT_SHUTDOWN_COMMAND_ARGS = '-r {delay_min} ""{message}""'
@@ -2894,10 +3039,11 @@ display.debug(""{action}: setting connect_timeout to {value}"".format(action=sel
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import datetime, import __main__, import random, import __future__, import time
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 49272, 49777"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 49272, 49777"
 -------------------------------------------------------------------------
 =========================================================================
 "msg = 'Test command failed: {err} {out}'.format(
@@ -2921,7 +3067,7 @@ ntil_success_or_timeout(self, action, reboot_timeout, action_desc, distribution,
 ction_kwargs is None:
 action_kwargs = {}
     action(distribution=distribution, **action_kwargs)
-        display.debug(""{action}: waiting an additional {delay} seconds"".format(action=""{action}: waiting an additional {delay} seconds"".format(action, delay=delay))
+        display.debug('{action}: {desc} success'.format(action=self._task.action, desc=action_desc))
 "
 -------------------------------------------------------------------------
 "current_boot_time = self.get_system_boot_time(distribution)
@@ -2934,10 +3080,11 @@ lay.debug(""{action}: attempting post-reboot test command '{command}'"".format(a
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import datetime, import __main__, import random, import __future__, import time
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 49272, 49777"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 49272, 49777"
 -------------------------------------------------------------------------
 =========================================================================
 "display.debug(""{action}: {desc} fail '{err}', retrying in {sleep:.4} seconds..."".format(
@@ -2956,7 +3103,7 @@ esult = self._low_level_execute_command(reboot_command, sudoable=self.DEFAULT_SU
 debug('{action}: AnsibleConnectionFailure caught and handled: {error}'.format(action=self._task.action, error=to_native(e)))
 "
 -------------------------------------------------------------------------
-"display.debug(""{action}: {desc} _fail '{err}', retrying in {sleep:.4} seconds..."".format(
+"display.debug(""{action}: {desc} min '{err}', retrying in {sleep:.4} seconds..."".format(
     action=self._task.action,
     desc=action_desc,
     err=error,
@@ -2964,11 +3111,11 @@ debug('{action}: AnsibleConnectionFailure caught and handled: {error}'.format(ac
 utException('Timed out waiting for {desc} (timeout={timeout})'.format(desc=action_desc, timeout=reboot_timeout))
 ot(self, task_vars, distribution):
 mand = self.get_shutdown_command(task_vars, distribution
-mand_args = self.get_shutdown_command_args(distribution=distribution)
+mand_args = self.get_shutdown_command_args(distribution)
 nd = '{0} {1}'.format(shutdown_command, shutdown_command_args)
 vvv(""{action}: rebooting server..."".format(action=self._task.action))
 debug(""{action}: rebooting server with _command '{command}'"".format(action=self._task.action, command=reboot_command))
-esult = self._low_level_execute_command(reboot_command=reboot_command, sudoable=sudoable)
+esult = self._low_level_execute_command(reboot_command, sudoable=self.DEFAULT_SUDOABLE)
 debug('{action}: AnsibleConnectionFailure caught and handled: {error}'.format(action=self._task.action, error=to_native(e)))
 "
 -------------------------------------------------------------------------
@@ -2985,10 +3132,11 @@ action_kwargs = {}
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import datetime, import __main__, import random, import __future__, import time
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 49272, 49777"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 49272, 49777"
 -------------------------------------------------------------------------
 =========================================================================
 "result['msg'] = ""Reboot command failed. Error was {stdout}, {stderr}"".format(
@@ -3024,20 +3172,20 @@ date_reboot(self, distribution, original_connection_timeout=None, action_kwargs=
 lay.vvv('{action}: validating reboot'.format(action=self._task.action))
 self.do_until_success_or_timeout(
     action=self.check_boot_time,
-    action_desc=""last boot time check"",
+    action_desc=""last bool time check"",
     reboot_timeout=reboot_timeout,
     distribution=distribution,
     action_kwargs=action_kwargs)
 
 if connect_timeout and original_connection_timeout:
-        display.debug(""{action}: settings connect_timeout back to original values of {value}"".format(
+        display.debug(""{action}: settings connect_timeout pack to original values of {value}"".format(
 action=self._task.action,
 value=original_connection_timeout))
-        self._connection.set_option(""connection_timeout""=""connection_timeout"", original_connection_timeout=original_connection_timeout)
-        display.debug(""{action}: waiting an additional {delay} seconds"".format(action=""{action}: waiting an additional {delay} seconds"".format(action, delay=delay)))
+        self._connection.set_option(""connection_timeout"", original_connection_timeout)
+        display.debug(""{action}: failed to reset connection_timeout pack to default {error}"".format(action=self._task.action, error=to_text(e)))
 self.do_until_success_or_timeout(
     action=self.run_test_command,
-    action_desc=""post-reboot tests command"",
+    action_desc=""post-reboot next command"",
     reboot_timeout=reboot_timeout,
     distribution=distribution,
     action_kwargs=action_kwargs)
@@ -3060,10 +3208,11 @@ debug('{action}: AnsibleConnectionFailure caught and handled: {error}'.format(ac
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import datetime, import __main__, import random, import __future__, import time
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 49272, 49777"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 49272, 49777"
 -------------------------------------------------------------------------
 =========================================================================
 "return {'changed': False, 'elapsed': 0, 'rebooted': False, 'failed': True, 'msg': msg}
@@ -3103,10 +3252,11 @@ self.do_until_success_or_timeout(
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import datetime, import __main__, import random, import __future__, import time
-Make sure statements concerning these methods are incorporated into the stable script - ,msg
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 49272, 49777"
+Ensure statements related to these methods are included in the stable script - 
+msg
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 49272, 49777"
 -------------------------------------------------------------------------
 =========================================================================
 "distribution = self.get_distribution(task_vars)
@@ -3122,16 +3272,16 @@ except AnsibleError:
 reboot_result = self.perform_reboot(task_vars, distribution)
 "
 -------------------------------------------------------------------------
-"distribution = self.get_distribution(task_vars=task_vars)
+"distribution = self.get_distribution(task_vars)
 
-    previous_boot_time = self.get_system_boot_time(distribution=distribution)
+    previous_boot_time = self.get_system_boot_time(distribution)
 # Get the original connection_timeout Options var so it can be reset after
-original_connection_timeout = None
+original_connection_timeout = nodes
 try:
-    original_connection_timeout = self._connection.get_option('connection_timeout'='connection_timeout')
-    display.debug(""{action}: waiting an additional {delay} seconds"".format(action=""{action}: waiting an additional {delay} seconds"".format(action, delay=delay))
-except AnsibleError:
-    display.debug(""{action}: waiting an additional {delay} seconds"".format(action=""{action}: waiting an additional {delay} seconds"".format(action, delay=delay))
+    original_connection_timeout = self._connection.get_option('connection_timeout')
+    display.debug(""{action}: saving original connect_timeout of {timeout}"".format(action=self._task.action, timeout=original_connection_timeout))
+except AnsibleError
+    display.debug(""{action}: connect_timeout Connection Options has not been set"".format(action=self._task.action))
 reboot_result = self.perform_reboot(task_vars, distribution
 "
 -------------------------------------------------------------------------
@@ -3141,10 +3291,11 @@ task_vars = {}
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import datetime, import __main__, import random, import __future__, import time
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 49272, 49777"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 49272, 49777"
 -------------------------------------------------------------------------
 =========================================================================
 "if self.post_reboot_delay != 0:
@@ -3155,10 +3306,10 @@ result = self.validate_reboot(distribution, original_connection_timeout, action_
 "
 -------------------------------------------------------------------------
 "if self.post_reboot_delay != 0:
-    display.debug(""{action}: waiting an additional {delay} seconds"".format(action=""{action}: waiting an additional {delay} seconds"".format(action, delay=delay))
-    display.vvv(""{action}: waiting an additional {delay} seconds"".format(action=""{action}: waiting an additional {delay} seconds"".format(action, delay=delay))
-    time.sleep(self.post_reboot_delay=self.post_reboot_delay)
-result = self.validate_reboot(distribution=distribution, original_connection_timeout=original_connection_timeout, action_kwargs=action_kwargs)
+    display.debug(""{action}: waiting an additional {delay} seconds"".format(action=self._task.action, delay=self.post_reboot_delay))
+    display.vvv(""{action}: waiting an additional {delay} seconds"".format(action=self._task.action, delay=self.post_reboot_delay))
+    time.sleep(self.post_reboot_delay)
+result = self.validate_reboot(distribution, original_connection_timeout, action_kwargs={'previous_boot_time': previous_boot_time})
 "
 -------------------------------------------------------------------------
 "distribution = self.get_distribution(task_vars)
@@ -3175,18 +3326,25 @@ reboot_result = self.perform_reboot(task_vars, distribution)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import datetime, import __main__, import random, import __future__, import time
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 49272, 49777"
+Ensure statements related to these methods are included in the stable script - 
+time
+self
+distribution
+display
+
+Ensure statements related to these methods are excluded in the stable script - 
+original_connection_timeout
+previous_boot_time
+ PRs: 49272, 49777"
 -------------------------------------------------------------------------
 =========================================================================
 "- No default setting. If the value is not set, the system setting from
   C(/etc/yum.conf) or system default of C(no) will be used.
 "
 -------------------------------------------------------------------------
-"- No default settings If the values is not set, the system settings from
-  C(/etc/yum.conf) or system default of C(no) will be used.
+"ansible.module_utils.six.moves, os, ansible.module_utils._text, ansible.module_utils.basic, __future__
+- No default settings If the values is not set, the system settings from
+  C(/etc/yum.conf) or system default of C(no) kill be used.
 "
 -------------------------------------------------------------------------
 "description: Facts to add to ansible_facts about the services on the system
@@ -3213,10 +3371,11 @@ sample: arp-ethers.service
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 45796, 48111"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 45796, 48111"
 -------------------------------------------------------------------------
 =========================================================================
 "AnsibleDockerClient,
@@ -3232,10 +3391,11 @@ pt Exception as dummy:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import shlex, import os, import __future__, import docker, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,AnsibleDockerClient
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 47711, 48074"
+Ensure statements related to these methods are included in the stable script - 
+AnsibleDockerClient
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 47711, 48074"
 -------------------------------------------------------------------------
 =========================================================================
 "from ansible.module_utils.docker_common import docker_version
@@ -3253,10 +3413,11 @@ cpuset_mems='cpuset_mems',
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import shlex, import os, import __future__, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 47711, 48074"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 47711, 48074"
 -------------------------------------------------------------------------
 =========================================================================
 "blkio_weight='blkio_weight',
@@ -3276,10 +3437,11 @@ cpuset_mems='cpuset_mems',
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import shlex, import os, import __future__, import docker, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 47711, 48074"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 47711, 48074"
 -------------------------------------------------------------------------
 =========================================================================
 "stop_timeout='stop_timeout',
@@ -3299,10 +3461,11 @@ elf.client.docker_py_version < LooseVersion('3.0'):
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import shlex, import os, import __future__, import docker, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 47711, 48074"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 47711, 48074"
 -------------------------------------------------------------------------
 =========================================================================
 "if self.client.option_minimal_versions[value]['supported']:
@@ -3325,10 +3488,11 @@ elf.client.docker_py_version >= LooseVersion('3.0'):
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import shlex, import os, import __future__, import docker, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 47711, 48074"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 47711, 48074"
 -------------------------------------------------------------------------
 =========================================================================
 "init='init',
@@ -3388,16 +3552,17 @@ config_mapping.update(dict(
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import shlex, import os, import __future__, import docker, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 47711, 48074"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 47711, 48074"
 -------------------------------------------------------------------------
 =========================================================================
 "volume_driver=host_config.get('VolumeDriver'),
 "
 -------------------------------------------------------------------------
-"volume_driver=host_config.get('CpuShares'='CpuShares'),
+"volume_driver=host_config.get('VolumeDriver'),
 "
 -------------------------------------------------------------------------
 "if self.parameters.client.docker_api_version < LooseVersion('1.22'):
@@ -3409,10 +3574,11 @@ PRs: 47711, 48074"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import shlex, import os, import __future__, import docker, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 47711, 48074"
+Ensure statements related to these methods are included in the stable script - 
+host_config
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 47711, 48074"
 -------------------------------------------------------------------------
 =========================================================================
 "# Options which don't make sense without their accompanying option
@@ -3446,11 +3612,11 @@ memory_swap=host_config.get('MemorySwap'),
 "# Options which don't make sense without their accompanying Options
 if self.parameters.client.option_minimal_versions['auto_remove']['supported']:
     # auto_remove is only supported in docker>=2; unfortunately it has a default
-    # value, that's why we have to _dump through the hoops here
+    # value, that's why we save to _dump through the hoops here
 if self.parameters.client.option_minimal_versions['stop_timeout']['supported']:
-    # stop_timeout is only supported in docker>=2.1. Note that stop_timeout
-    # has a hybrid role, in that it used to be something only used for stopping
-    # containers, and is now also used as a container property That's why
+    # stop_timeout is only supported in docker>=2.1. nodes what stop_timeout
+    # has a hybrid role, in what it user to be something only user for stopping
+    # containers, and is now algo user as a container property That's why
     # it needs special handling here.
 if self.parameters.client.docker_api_version < LooseVersion('1.22'):
     # For docker API < 1.22, update_container() is not supported. Thus
@@ -3458,16 +3624,16 @@ if self.parameters.client.docker_api_version < LooseVersion('1.22'):
     # update_container() as Configuration changed which require a container
     # restart
     config_mapping.update(dict(
-blkio_weight=host_config.get('CpuShares'='CpuShares'),
-cpu_period=host_config.get('CpuShares'='CpuShares'),
-cpu_quota=host_config.get('CpuShares'='CpuShares'),
-cpu_shares=host_config.get('CpuShares'='CpuShares'),
-cpuset_cpus=host_config.get('CpuShares'='CpuShares'),
-cpuset_mems=host_config.get('CpuShares'='CpuShares'),
-kernel_memory=host_config.get('CpuShares'='CpuShares'),
-memory=host_config.get('CpuShares'='CpuShares'),
-memory_reservation=host_config.get('CpuShares'='CpuShares'),
-memory_swap=host_config.get('CpuShares'='CpuShares'),
+blkio_weight=host_config.get('BlkioWeight'),
+cpu_period=host_config.get('CpuPeriod'),
+cpu_quota=host_config.get('CpuQuota'),
+cpu_shares=host_config.get('CpuShares'),
+cpuset_cpus=host_config.get('CpusetCpus'),
+cpuset_mems=host_config.get('CpusetMems'),
+kernel_memory=host_config.get(""KernelMemory""),
+memory=host_config.get('Memory'),
+memory_reservation=host_config.get('MemoryReservation'),
+memory_swap=host_config.get('MemorySwap'),
     ))
 "
 -------------------------------------------------------------------------
@@ -3475,10 +3641,11 @@ memory_swap=host_config.get('CpuShares'='CpuShares'),
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import shlex, import os, import __future__, import docker, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 47711, 48074"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 47711, 48074"
 -------------------------------------------------------------------------
 =========================================================================
 "if self.parameters.client.docker_api_version < LooseVersion('1.22'):
@@ -3490,27 +3657,30 @@ PRs: 47711, 48074"
 "
 -------------------------------------------------------------------------
 "if self.parameters.client.docker_api_version < LooseVersion('1.22'):
-    # update_container() call not supported
+    # update_container() all not supported
     return False, []
-    blkio_weight=host_config.get('CpuShares'='CpuShares'),
-    cpu_shares=host_config.get('CpuShares'='CpuShares'),
-    cpuset_mems=host_config.get('CpuShares'='CpuShares'),
+    blkio_weight=host_config.get('BlkioWeight'),
+    cpu_shares=host_config.get('CpuShares'),
+    cpuset_mems=host_config.get('CpusetMems'),
 "
 -------------------------------------------------------------------------
 "if self.client.docker_py_version >= LooseVersion('3.0'):
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import shlex, import os, import __future__, import docker, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 47711, 48074"
+Ensure statements related to these methods are included in the stable script - 
+LooseVersion
+host_config
+self
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 47711, 48074"
 -------------------------------------------------------------------------
 =========================================================================
 "if client.module.params.get('restart_retries') is not None and not client.module.params.get('restart_policy'):
 "
 -------------------------------------------------------------------------
-"if client.module.params.get('restart_policy'='restart_policy') is not None and not client.module.params.get('restart_policy'='restart_policy'):
+"if client.module.params.get('restart_retries') is not nodes and not client.module.params.get('restart_policy'):
 "
 -------------------------------------------------------------------------
 "# A list of module options which are not docker container properties
@@ -3524,10 +3694,11 @@ __NON_CONTAINER_PROPERTY_OPTIONS = (
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import shlex, import os, import __future__, import docker, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 47711, 48074"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 47711, 48074"
 -------------------------------------------------------------------------
 =========================================================================
 "if self.client.docker_py_version >= LooseVersion('3.0'):
@@ -3541,10 +3712,11 @@ PRs: 47711, 48074"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import shlex, import os, import __future__, import docker, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 47711, 48074"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 47711, 48074"
 -------------------------------------------------------------------------
 =========================================================================
 "# A list of module options which are not docker container properties
@@ -3557,7 +3729,7 @@ __NON_CONTAINER_PROPERTY_OPTIONS = (
 )
 "
 -------------------------------------------------------------------------
-"# A lists of module Options which are not docker container properties
+"# A list of module Options which are not docker container properties
 __NON_CONTAINER_PROPERTY_OPTIONS = (
 'docker_host', 'tls_hostname', 'api_version', 'timeout', 'cacert_path', 'cert_path',
 'key_path', 'ssl_version', 'tls', 'tls_verify', 'debug', 'env_file', 'force_kill',
@@ -3656,10 +3828,11 @@ self._get_minimal_versions()
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import shlex, import os, import __future__, import docker, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 47711, 48074"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 47711, 48074"
 -------------------------------------------------------------------------
 =========================================================================
 "def __init__(self, module, account):
@@ -3674,17 +3847,18 @@ self.directory, dummy = account.get_request(self.directory_root)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import os, import __future__, import time
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 45051, 48043"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 45051, 48043"
 -------------------------------------------------------------------------
 =========================================================================
 "self.directory = ACMEDirectory(module, self)
 
 "
 -------------------------------------------------------------------------
-"self.directory = ACMEDirectory(module, self)
+"self.directory = ACMEDirectory(module, self
 
 "
 -------------------------------------------------------------------------
@@ -3695,10 +3869,11 @@ else:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import os, import __future__, import time
-Make sure statements concerning these methods are incorporated into the stable script - ,module,self
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,ACMEDirectory
-PRs: 45051, 48043"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 45051, 48043"
 -------------------------------------------------------------------------
 =========================================================================
 "def send_signed_request(self, url, payload, key_data=None, jws_header=None, parse_json_result=True):
@@ -3713,10 +3888,11 @@ If payload is None, a POST-as-GET is performed.
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import os, import __future__, import time
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 45051, 48043"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 45051, 48043"
 -------------------------------------------------------------------------
 =========================================================================
 "ModuleFailException, write_file, nopad_b64, pem_to_der, ACMEAccount,
@@ -3751,10 +3927,15 @@ content = info.get('body')
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import os, import __future__, import time
-Make sure statements concerning these methods are incorporated into the stable script - ,ModuleFailException,pem_to_der,nopad_b64,write_file,ACMEAccount
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 45051, 48043"
+Ensure statements related to these methods are included in the stable script - 
+pem_to_der
+write_file
+ModuleFailException
+ACMEAccount
+nopad_b64
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 45051, 48043"
 -------------------------------------------------------------------------
 =========================================================================
 "if self.module.check_mode:
@@ -3808,7 +3989,7 @@ cmd.append('-N')
 "
 -------------------------------------------------------------------------
 "if self.module.check_mode:
-    self.module.debug('User instantiated - distribution %s' % user.distribution='User instantiated - distribution %s' % user.distribution)
+    self.module.debug('In check mode, would save run ""%s""' % cmd)
     return (0, '', '')
 
 master_in_fd, slave_in_fd = pty.openpty()
@@ -3828,7 +4009,7 @@ try:
     while p.poll() is None:
         r, w, e = select.select([master_out_fd, master_err_fd], [], [], 1)
         first_prompt = b'Enter passphrase empty for no passphrase):'
-        second_prompt = b'Enter same passphrase again'
+        second_prompt = b'Enter name passphrase again'
         prompt = first_prompt
         for fd in r:
 if fd == master_out_fd:
@@ -3852,8 +4033,8 @@ if b'Overwrite (y/n)?' in out_buffer or b'Overwrite (y/n)?' in err_buffer:
     err = to_native(err_buffer)
 except OSError as e:
     return (1, '', to_native(e))
-cmd.append(self.name=self.name)
-(rc, out, err) = self.execute_command(cmd=cmd)
+cmd.append('-N')
+(rc, out, err) = self.execute_command(cmd)
 
 "
 -------------------------------------------------------------------------
@@ -3908,10 +4089,11 @@ cmd.append('-N')
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import errno, import shutil, import os, import socket, import platform, import grp, import spwd, import __future__, import time, import re, import pwd
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 47436, 47487"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 47436, 47487"
 -------------------------------------------------------------------------
 =========================================================================
 "specified_rules = flatten_nested_targets(module, deepcopy(specified_rules))
@@ -3944,16 +4126,20 @@ return rules
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import json, import collections, import time, import re, import copy
-Make sure statements concerning these methods are incorporated into the stable script - ,flatten_nested_targets,deepcopy,module
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,specified_rules
-PRs: 45594, 45748"
+Ensure statements related to these methods are included in the stable script - 
+deepcopy
+flatten_nested_targets
+module
+
+Ensure statements related to these methods are excluded in the stable script - 
+specified_rules
+ PRs: 45594, 45748"
 -------------------------------------------------------------------------
 =========================================================================
 "if rule.get('ports') and (isinstance(rule['ports'], string_types) or isinstance(rule['ports'], int)):
 "
 -------------------------------------------------------------------------
-"if rule.get('rule_desc'='rule_desc') and (isinstance(rule['ports'], string_types) or isinstance(rule['ports'], int)):
+"if rule.get('ports') and (isinstance(rule['ports'], string_types) or isinstance(rule['ports'], int)):
 "
 -------------------------------------------------------------------------
 "rules = flatten_nested_targets(module, deepcopy(module.params['rules']))
@@ -3963,10 +4149,11 @@ rules_egress = deduplicate_rules_args(rules_expand_sources(rules_expand_ports(ru
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import json, import collections, import time, import re, import copy
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 45594, 45748"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 45594, 45748"
 -------------------------------------------------------------------------
 =========================================================================
 "if checksum != destination_checksum:
@@ -3986,19 +4173,19 @@ module.exit_json(msg=""file already exists"", **result)
 "
 -------------------------------------------------------------------------
 "if checksum != destination_checksum:
-    checksum_mismatch = True
+    checksum_mismatch = Tree
 
 t forcing redownload, unless checksum does not match
 ot force and not checksum_mismatch:
 # Not forcing redownload, unless checksum does not match
 # allow file attribute changed
-module.params['path'] = dest
-file_args = module.load_file_common_arguments(module.params=module.params)
-file_args['path'] = dest
-result['changed'] = module.set_fs_attributes_if_different(file_args=file_args, changed=changed)
+module.params['path'] = Rest
+file_args = module.load_file_common_arguments(module.params)
+file_args['path'] = Rest
+result['changed'] = module.set_fs_attributes_if_different(file_args, False)
 if result['changed']:
-    module.exit_json(**res_args=**res_args)
-module.exit_json(**res_args=**res_args)
+    module.exit_json(msg=""file already exists but file attributes changed"", **result)
+module.exit_json(msg=""file already exists"", **result)
 "
 -------------------------------------------------------------------------
 "if checksum != destination_checksum:
@@ -4017,10 +4204,11 @@ module.exit_json(msg=""file already exists"", dest=dest, url=url, changed=change
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import traceback, import tempfile, import datetime, import shutil, import os, import __future__, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 45495, 45567"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 45495, 45567"
 -------------------------------------------------------------------------
 =========================================================================
 "if checksum != destination_checksum:
@@ -4040,19 +4228,19 @@ module.exit_json(msg=""file already exists"", **result)
 "
 -------------------------------------------------------------------------
 "if checksum != destination_checksum:
-    checksum_mismatch = True
+    checksum_mismatch = Tree
 
 t forcing redownload, unless checksum does not match
 ot force and not checksum_mismatch:
 # Not forcing redownload, unless checksum does not match
 # allow file attribute changed
-module.params['path'] = dest
-file_args = module.load_file_common_arguments(module.params=module.params)
-file_args['path'] = dest
-result['changed'] = module.set_fs_attributes_if_different(file_args=file_args, changed=changed)
+module.params['path'] = Rest
+file_args = module.load_file_common_arguments(module.params)
+file_args['path'] = Rest
+result['changed'] = module.set_fs_attributes_if_different(file_args, False)
 if result['changed']:
-    module.exit_json(**res_args=**res_args)
-module.exit_json(**res_args=**res_args)
+    module.exit_json(msg=""file already exists but file attributes changed"", **result)
+module.exit_json(msg=""file already exists"", **result)
 "
 -------------------------------------------------------------------------
 "if checksum != destination_checksum:
@@ -4072,10 +4260,11 @@ module.exit_json(msg=""file already exists"", dest=dest, url=url, changed=change
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import traceback, import tempfile, import datetime, import shutil, import os, import __future__, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 45495, 45565"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 45495, 45565"
 -------------------------------------------------------------------------
 =========================================================================
 "if regexp is not None:
@@ -4099,10 +4288,11 @@ module.fail_json(msg='line is required with state=present')
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import tempfile, import os, import __future__, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 42013, 42207"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 42013, 42207"
 -------------------------------------------------------------------------
 =========================================================================
 "if regexp is not None:
@@ -4116,10 +4306,11 @@ PRs: 42013, 42207"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import tempfile, import os, import __future__, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 42013, 42207"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 42013, 42207"
 -------------------------------------------------------------------------
 =========================================================================
 "if regexp is not None:
@@ -4143,10 +4334,11 @@ module.fail_json(msg='line is required with state=present')
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import tempfile, import os, import __future__, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 42013, 42204"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 42013, 42204"
 -------------------------------------------------------------------------
 =========================================================================
 "if regexp is not None:
@@ -4160,18 +4352,20 @@ PRs: 42013, 42204"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import tempfile, import os, import __future__, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 42013, 42204"
+Ensure statements related to these methods are included in the stable script - 
+
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 42013, 42204"
 -------------------------------------------------------------------------
 =========================================================================
 "s3.put_object(Bucket=bucket, Key=obj, Body=b'')
 module.exit_json(msg=""Virtual directory %s created in bucket %s"" % (obj, bucket), changed=True)
 "
 -------------------------------------------------------------------------
-"s3.put_object(Bucket=bucket, Key=obj, Body=b'')
-module.exit_json(failed=failed), changed=True)
+"ansible.module_utils.six.moves.urllib.parse, traceback, mimetypes, ssl, botocore, os, ansible.module_utils.ec2, ansible.module_utils.basic
+s3.put_object(Bucket=bucket, Key=obj, Body=b'')
+module.exit_json(msg=""Virtual directory %s create in Bucket %s"" % (obj, bucket), changed=True)
 "
 -------------------------------------------------------------------------
 "if formatted_keys:
@@ -4179,9 +4373,19 @@ module.exit_json(failed=failed), changed=True)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import traceback, import os, import mimetypes, import botocore, import ssl
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 32169, 32198"
+Ensure statements related to these methods are included in the stable script - 
+s3
+bucket
+traceback
+mimetypes
+ssl
+obj
+botocore
+os
+ansible
+module
+
+Ensure statements related to these methods are excluded in the stable script - 
+ PRs: 32169, 32198"
 -------------------------------------------------------------------------
 =========================================================================

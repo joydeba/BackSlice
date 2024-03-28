@@ -1,57 +1,944 @@
-"exclude_patterns = [
-'2.10_index.rst',
-'ansible_index.rst',
-'core_index.rst',
-'porting_guides/core_porting_guides',
+"VERSION = '2.10'
+"
+-------------------------------------------------------------------------
+"VERSION = '2.10'
+"
+-------------------------------------------------------------------------
+"from __future__ import (absolute_import, division, print_function)
+__metaclass__ = type
 
 "
 -------------------------------------------------------------------------
-"exclude_patterns = [
+"
+PRs: 73616, 73637"
+-------------------------------------------------------------------------
+=========================================================================
+"# -*- coding: utf-8 -*-
+#
+# documentation build configuration file, created by
+# sphinx-quickstart on Sat Sep 27 13:23:22 2008-2009.
+#
+# This file is execfile()d with the current directory set to its
+# containing dir.
+#
+# The contents of this file are pickled, so don't put values in the namespace
+# that aren't pickleable (module imports are okay, they're removed
+# automatically).
+#
+# All configuration values have a default value; values that are commented out
+# serve to show the default value.
+
+from __future__ import (absolute_import, division, print_function)
+__metaclass__ = type
+
+import sys
+import os
+
+# pip install sphinx_rtd_theme
+# import sphinx_rtd_theme
+# html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+
+# If your extensions are in another directory, add it here. If the directory
+# is relative to the documentation root, use os.path.abspath to make it
+# absolute, like shown here.
+# sys.path.append(os.path.abspath('some/directory'))
+#
+sys.path.insert(0, os.path.join('ansible', 'lib'))
+sys.path.append(os.path.abspath(os.path.join('..', '_extensions')))
+
+# We want sphinx to document the ansible modules contained in this repository,
+# not those that may happen to be installed in the version
+# of Python used to run sphinx.  When sphinx loads in order to document,
+# the repository version needs to be the one that is loaded:
+sys.path.insert(0, os.path.abspath(os.path.join('..', '..', '..', 'lib')))
+
+VERSION = 'devel'
+AUTHOR = 'Ansible, Inc'
+
+
+# General configuration
+# ---------------------
+
+# Add any Sphinx extension module names here, as strings.
+# They can be extensions
+# coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
+# TEST: 'sphinxcontrib.fulltoc'
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx', 'pygments_lexer', 'notfound.extension']
+
+# Later on, add 'sphinx.ext.viewcode' to the list if you want to have
+# colorized code generated too for references.
+
+
+# Add any paths that contain templates here, relative to this directory.
+templates_path = ['.templates']
+
+# The suffix of source filenames.
+source_suffix = '.rst'
+
+# The master toctree document.
+master_doc = 'index'
+
+# General substitutions.
+project = 'Ansible'
+copyright = ""2021 Red Hat, Inc.""
+
+# The default replacements for |version| and |release|, also used in various
+# other places throughout the built documents.
+#
+# The short X.Y version.
+version = VERSION
+# The full version, including alpha/beta/rc tags.
+release = VERSION
+
+# There are two options for replacing |today|: either, you set today to some
+# non-false value, then it is used:
+# today = ''
+# Else, today_fmt is used as the format for a strftime call.
+today_fmt = '%B %d, %Y'
+
+# List of documents that shouldn't be included in the build.
+# unused_docs = []
+
+# List of directories, relative to source directories, that shouldn't be
+# searched for source files.
+# exclude_dirs = []
+
+# A list of glob-style patterns that should be excluded when looking
+# for source files.
+exclude_patterns = [
 '2.10_index.rst',
 'ansible_index.rst',
 'core_index.rst',
-'porting_guides/core_porting_guides',
+'porting_guides/core_porting_guides.rst',
+'porting_guides/porting_guide_base_2.10.rst',
+'porting_guides/porting_guide_core_2.11.rst',
+'roadmap/index.rst',
+'roadmap/ansible_base_roadmap_index.rst',
+'roadmap/ROADMAP_2_10.rst',
+'roadmap/ROADMAP_2_11.rst'
 
+
+e reST default role (used for this markup: `text`) to use for all
+cuments.
+fault_role = None
+
+ true, '()' will be appended to :func: etc. cross-reference text.
+d_function_parentheses = True
+
+ true, the current module name will be prepended to all description
+it titles (such as .. function::).
+d_module_names = True
+
+ true, sectionauthor and moduleauthor directives will be shown in the
+tput. They are ignored by default.
+ow_authors = False
+
+e name of the Pygments (syntax highlighting) style to use.
+ents_style = 'sphinx'
+
+light_language = 'YAMLJinja'
+
+bstitutions, variables, entities, & shortcuts for text which do not need to link to anything.
+r titles which should be a link, use the intersphinx anchors set at the index, chapter, and section levels, such as  qi_start_:
+r| is useful for formatting fields inside of tables
+| is a nonbreaking space; similarly useful inside of tables
+epilog = """"""
+br| raw:: html
+
+br>
+_| unicode:: 0xA0
+:trim:
+
+
+
+tions for HTML output
+---------------------
+
+_theme_path = ['../_themes']
+_theme = 'sphinx_rtd_theme'
+_short_title = 'Ansible Documentation'
+_show_sphinx = False
+
+_theme_options = {
+'canonical_url': ""https://docs.ansible.com/ansible/latest/"",
+'vcs_pageview_mode': 'edit'
+
+
+_context = {
+'display_github': 'True',
+'github_user': 'ansible',
+'github_repo': 'ansible',
+'github_version': 'devel/docs/docsite/rst/',
+'github_module_version': 'devel/lib/ansible/modules/',
+'github_root_dir': 'devel/lib/ansible',
+'github_cli_version': 'devel/lib/ansible/cli/',
+'current_version': version,
+'latest_version': '2.10',
+# list specifically out of order to make latest work
+'available_versions': ('latest', '2.9', '2.9_ja', '2.8', 'devel'),
+'css_files': ('_static/ansible.css',  # overrides to the standard theme
+  ),
+
+
+e style sheet to use for HTML and HTML Help pages. A file of that name
+st exist either in Sphinx' static/ path, or in one of the custom paths
+ven in html_static_path.
+ml_style = 'solar.css'
+
+e name for this set of Sphinx documents.  If None, it defaults to
+project> v<release> documentation"".
+_title = 'Ansible Documentation'
+
+shorter title for the navigation bar.  Default is the same as html_title.
+ml_short_title = None
+
+e name of an image file (within the static path) to place at the top of
+e sidebar.
+ml_logo =
+
+e name of an image file (within the static path) to use as favicon of the
+cs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
+xels large.
+ml_favicon = 'favicon.ico'
+
+d any paths that contain custom static files (such as style sheets) here,
+lative to this directory. They are copied after the builtin static files,
+ a file named ""default.css"" will overwrite the builtin ""default.css"".
+_static_path = ['../_static']
+
+ not '', a 'Last updated on:' timestamp is inserted at every page bottom,
+ing the given strftime format.
+_last_updated_fmt = '%b %d, %Y'
+
+ true, SmartyPants will be used to convert quotes and dashes to
+pographically correct entities.
+ml_use_smartypants = True
+
+stom sidebar templates, maps document names to template names.
+ml_sidebars = {}
+
+ditional templates that should be rendered to pages, maps page names to
+mplate names.
+ml_additional_pages = {}
+
+ false, no module index is generated.
+ml_use_modindex = True
+
+ false, no index is generated.
+ml_use_index = True
+
+ true, the index is split into individual pages for each letter.
+ml_split_index = False
+
+ true, the reST sources are included in the HTML build as _sources/<name>.
+_copy_source = False
+
+ true, an OpenSearch description file will be output, and all pages will
+ntain a <link> tag referring to it.  The value of this option must be the
+se URL from which the finished HTML is served.
+ml_use_opensearch = 'https://docs.ansible.com/ansible/latest'
+
+ nonempty, this is the file name suffix for HTML files (e.g. "".xhtml"").
+ml_file_suffix = ''
+
+tput file base name for HTML help builder.
+help_basename = 'Poseidodoc'
+
+nfiguration for sphinx-notfound-pages
+th no 'notfound_template' and no 'notfound_context' set,
+e extension builds 404.rst into a location-agnostic 404 page
+
+fault is `en` - using this for the sub-site:
+ound_default_language = ""ansible""
+fault is `latest`:
+tting explicitly - docsite serves up /ansible/latest/404.html
+ keep this set to `latest` even on the `devel` branch
+en no maintenance is needed when we branch a new stable_x.x
+ound_default_version = ""latest""
+kes default setting explicit:
+ound_no_urls_prefix = False
+
+tions for LaTeX output
+----------------------
+
+e paper size ('letter' or 'a4').
+tex_paper_size = 'letter'
+
+e font size ('10pt', '11pt' or '12pt').
+tex_font_size = '10pt'
+
+ouping the document tree into LaTeX files. List of tuples
+ource start file, target name, title, author, document class
+owto/manual]).
+x_documents = [
+('index', 'ansible.tex', 'Ansible 2.2 Documentation', AUTHOR, 'manual'),
+
+
+e name of an image file (relative to this directory) to place at the top of
+e title page.
+tex_logo = None
+
+r ""manual"" documents, if this is true, then toplevel headings are parts,
+t chapters.
+tex_use_parts = False
+
+ditional stuff for the LaTeX preamble.
+tex_preamble = ''
+
+cuments to append as an appendix to all manuals.
+tex_appendices = []
+
+ false, no module index is generated.
+tex_use_modindex = True
+
+class_content = 'both'
+
+te:  Our strategy for intersphinx mappings is to have the upstream build location as the
+nonical source and then cached copies of the mapping stored locally in case someone is building
+en disconnected from the internet.  We then have a script to update the cached copies.
+
+cause of that, each entry in this mapping should have this format:
+name: ('http://UPSTREAM_URL', (None, 'path/to/local/cache.inv'))
+
+e update script depends on this format so deviating from this (for instance, adding a third
+cation for the mappning to live) will confuse it.
+rsphinx_mapping = {'python': ('https://docs.python.org/2/', (None, '../python2.inv')),
+   'python3': ('https://docs.python.org/3/', (None, '../python3.inv')),
+   'jinja2': ('http://jinja.palletsprojects.com/', (None, '../jinja2.inv')),
+   'ansible_2_10': ('https://docs.ansible.com/ansible/2.10/', (None, '../ansible_2_10.inv')),
+   'ansible_2_9': ('https://docs.ansible.com/ansible/2.9/', (None, '../ansible_2_9.inv')),
+   'ansible_2_8': ('https://docs.ansible.com/ansible/2.8/', (None, '../ansible_2_8.inv')),
+   'ansible_2_7': ('https://docs.ansible.com/ansible/2.7/', (None, '../ansible_2_7.inv')),
+   'ansible_2_6': ('https://docs.ansible.com/ansible/2.6/', (None, '../ansible_2_6.inv')),
+   'ansible_2_5': ('https://docs.ansible.com/ansible/2.5/', (None, '../ansible_2_5.inv')),
+   }
+
+nckchecker settings
+check_ignore = [
+r'http://irc\.freenode\.net',
+
+check_workers = 25
+nkcheck_anchors = False
 "
 -------------------------------------------------------------------------
-"'latest_version': '3',
+"# -*- coding: utf-8 -*-
+#
+# documentation build configuration file, created by
+# sphinx-quickstart on Sat Sep 27 13:23:22 2008-2009.
+#
+# This file is execfile()d with the current directory set to its
+# containing dir.
+#
+# The contents of this file are pickled, so don't put values in the namespace
+# that aren't pickleable (module imports are okay, they're removed
+# automatically).
+#
+# All configuration values have a default value; values that are commented out
+# serve to show the default value.
+
+from __future__ import (absolute_import, division, print_function)
+__metaclass__ = type
+
+import sys
+import os
+
+# pip install sphinx_rtd_theme
+# import sphinx_rtd_theme
+# html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+
+# If your extensions are in another directory, add it here. If the directory
+# is relative to the documentation root, use os.path.abspath to make it
+# absolute, like shown here.
+# sys.path.append(os.path.abspath('some/directory'))
+#
+sys.path.insert(0, os.path.join('ansible', 'lib'))
+sys.path.append(os.path.abspath(os.path.join('..', '_extensions')))
+
+# We want sphinx to document the ansible modules contained in this repository,
+# not those that may happen to be installed in the version
+# of Python used to run sphinx.  When sphinx loads in order to document,
+# the repository version needs to be the one that is loaded:
+sys.path.insert(0, os.path.abspath(os.path.join('..', '..', '..', 'lib')))
+
+VERSION = 'devel'
+AUTHOR = 'Ansible, Inc'
+
+
+# General configuration
+# ---------------------
+
+# Add any Sphinx extension module names here, as strings.
+# They can be extensions
+# coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
+# TEST: 'sphinxcontrib.fulltoc'
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx', 'pygments_lexer', 'notfound.extension']
+
+# Later on, add 'sphinx.ext.viewcode' to the list if you want to have
+# colorized code generated too for references.
+
+
+# Add any paths that contain templates here, relative to this directory.
+templates_path = ['.templates']
+
+# The suffix of source filenames.
+source_suffix = '.rst'
+
+# The master toctree document.
+master_doc = 'index'
+
+# General substitutions.
+project = 'Ansible'
+copyright = ""2021 Red Hat, Inc.""
+
+# The default replacements for |version| and |release|, also used in various
+# other places throughout the built documents.
+#
+# The short X.Y version.
+version = VERSION
+# The full version, including alpha/beta/rc tags.
+release = VERSION
+
+# There are two options for replacing |today|: either, you set today to some
+# non-false value, then it is used:
+# today = ''
+# Else, today_fmt is used as the format for a strftime call.
+today_fmt = '%B %d, %Y'
+
+# List of documents that shouldn't be included in the build.
+# unused_docs = []
+
+# List of directories, relative to source directories, that shouldn't be
+# searched for source files.
+# exclude_dirs = []
+
+# A list of glob-style patterns that should be excluded when looking
+# for source files.
+exclude_patterns = [
+'2.10_index.rst',
+'ansible_index.rst',
+'core_index.rst',
+'porting_guides/core_porting_guides.rst',
+'porting_guides/porting_guide_base_2.10.rst',
+'porting_guides/porting_guide_core_2.11.rst',
+'roadmap/index.rst',
+'roadmap/ansible_base_roadmap_index.rst',
+'roadmap/ROADMAP_2_10.rst',
+'roadmap/ROADMAP_2_11.rst'
+
+
+e reST default role (used for this markup: `text`) to use for all
+cuments.
+fault_role = None
+
+ true, '()' will be appended to :func: etc. cross-reference text.
+d_function_parentheses = True
+
+ true, the current module name will be prepended to all description
+it titles (such as .. function::).
+d_module_names = True
+
+ true, sectionauthor and moduleauthor directives will be shown in the
+tput. They are ignored by default.
+ow_authors = False
+
+e name of the Pygments (syntax highlighting) style to use.
+ents_style = 'sphinx'
+
+light_language = 'YAMLJinja'
+
+bstitutions, variables, entities, & shortcuts for text which do not need to link to anything.
+r titles which should be a link, use the intersphinx anchors set at the index, chapter, and section levels, such as  qi_start_:
+r| is useful for formatting fields inside of tables
+| is a nonbreaking space; similarly useful inside of tables
+epilog = """"""
+br| raw:: html
+
+br>
+_| unicode:: 0xA0
+:trim:
+
+
+
+tions for HTML output
+---------------------
+
+_theme_path = ['../_themes']
+_theme = 'sphinx_rtd_theme'
+_short_title = 'Ansible Documentation'
+_show_sphinx = False
+
+_theme_options = {
+'canonical_url': ""https://docs.ansible.com/ansible/latest/"",
+'vcs_pageview_mode': 'edit'
+
+
+_context = {
+'display_github': 'True',
+'github_user': 'ansible',
+'github_repo': 'ansible',
+'github_version': 'devel/docs/docsite/rst/',
+'github_module_version': 'devel/lib/ansible/modules/',
+'github_root_dir': 'devel/lib/ansible',
+'github_cli_version': 'devel/lib/ansible/cli/',
+'current_version': version,
+'latest_version': '2.10',
+# list specifically out of order to make latest work
+'available_versions': ('latest', '2.9', '2.9_ja', '2.8', 'devel'),
+'css_files': ('_static/ansible.css',  # overrides to the standard theme
+  ),
+
+
+e style sheet to use for HTML and HTML Help pages. A file of that name
+st exist either in Sphinx' static/ path, or in one of the custom paths
+ven in html_static_path.
+ml_style = 'solar.css'
+
+e name for this set of Sphinx documents.  If None, it defaults to
+project> v<release> documentation"".
+_title = 'Ansible Documentation'
+
+shorter title for the navigation bar.  Default is the same as html_title.
+ml_short_title = None
+
+e name of an image file (within the static path) to place at the top of
+e sidebar.
+ml_logo =
+
+e name of an image file (within the static path) to use as favicon of the
+cs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
+xels large.
+ml_favicon = 'favicon.ico'
+
+d any paths that contain custom static files (such as style sheets) here,
+lative to this directory. They are copied after the builtin static files,
+ a file named ""default.css"" will overwrite the builtin ""default.css"".
+_static_path = ['../_static']
+
+ not '', a 'Last updated on:' timestamp is inserted at every page bottom,
+ing the given strftime format.
+_last_updated_fmt = '%b %d, %Y'
+
+ true, SmartyPants will be used to convert quotes and dashes to
+pographically correct entities.
+ml_use_smartypants = True
+
+stom sidebar templates, maps document names to template names.
+ml_sidebars = {}
+
+ditional templates that should be rendered to pages, maps page names to
+mplate names.
+ml_additional_pages = {}
+
+ false, no module index is generated.
+ml_use_modindex = True
+
+ false, no index is generated.
+ml_use_index = True
+
+ true, the index is split into individual pages for each letter.
+ml_split_index = False
+
+ true, the reST sources are included in the HTML build as _sources/<name>.
+_copy_source = False
+
+ true, an OpenSearch description file will be output, and all pages will
+ntain a <link> tag referring to it.  The value of this option must be the
+se URL from which the finished HTML is served.
+ml_use_opensearch = 'https://docs.ansible.com/ansible/latest'
+
+ nonempty, this is the file name suffix for HTML files (e.g. "".xhtml"").
+ml_file_suffix = ''
+
+tput file base name for HTML help builder.
+help_basename = 'Poseidodoc'
+
+nfiguration for sphinx-notfound-pages
+th no 'notfound_template' and no 'notfound_context' set,
+e extension builds 404.rst into a location-agnostic 404 page
+
+fault is `en` - using this for the sub-site:
+ound_default_language = ""ansible""
+fault is `latest`:
+tting explicitly - docsite serves up /ansible/latest/404.html
+ keep this set to `latest` even on the `devel` branch
+en no maintenance is needed when we branch a new stable_x.x
+ound_default_version = ""latest""
+kes default setting explicit:
+ound_no_urls_prefix = False
+
+tions for LaTeX output
+----------------------
+
+e paper size ('letter' or 'a4').
+tex_paper_size = 'letter'
+
+e font size ('10pt', '11pt' or '12pt').
+tex_font_size = '10pt'
+
+ouping the document tree into LaTeX files. List of tuples
+ource start file, target name, title, author, document class
+owto/manual]).
+x_documents = [
+('index', 'ansible.tex', 'Ansible 2.2 Documentation', AUTHOR, 'manual'),
+
+
+e name of an image file (relative to this directory) to place at the top of
+e title page.
+tex_logo = None
+
+r ""manual"" documents, if this is true, then toplevel headings are parts,
+t chapters.
+tex_use_parts = False
+
+ditional stuff for the LaTeX preamble.
+tex_preamble = ''
+
+cuments to append as an appendix to all manuals.
+tex_appendices = []
+
+ false, no module index is generated.
+tex_use_modindex = True
+
+class_content = 'both'
+
+te:  Our strategy for intersphinx mappings is to have the upstream build location as the
+nonical source and then cached copies of the mapping stored locally in case someone is building
+en disconnected from the internet.  We then have a script to update the cached copies.
+
+cause of that, each entry in this mapping should have this format:
+name: ('http://UPSTREAM_URL', (None, 'path/to/local/cache.inv'))
+
+e update script depends on this format so deviating from this (for instance, adding a third
+cation for the mappning to live) will confuse it.
+rsphinx_mapping = {'python': ('https://docs.python.org/2/', (None, '../python2.inv')),
+   'python3': ('https://docs.python.org/3/', (None, '../python3.inv')),
+   'jinja2': ('http://jinja.palletsprojects.com/', (None, '../jinja2.inv')),
+   'ansible_2_10': ('https://docs.ansible.com/ansible/2.10/', (None, '../ansible_2_10.inv')),
+   'ansible_2_9': ('https://docs.ansible.com/ansible/2.9/', (None, '../ansible_2_9.inv')),
+   'ansible_2_8': ('https://docs.ansible.com/ansible/2.8/', (None, '../ansible_2_8.inv')),
+   'ansible_2_7': ('https://docs.ansible.com/ansible/2.7/', (None, '../ansible_2_7.inv')),
+   'ansible_2_6': ('https://docs.ansible.com/ansible/2.6/', (None, '../ansible_2_6.inv')),
+   'ansible_2_5': ('https://docs.ansible.com/ansible/2.5/', (None, '../ansible_2_5.inv')),
+   }
+
+nckchecker settings
+check_ignore = [
+r'http://irc\.freenode\.net',
+
+check_workers = 25
+nkcheck_anchors = False
+"
+-------------------------------------------------------------------------
+"# -*- coding: utf-8 -*-
+#
+# documentation build configuration file, created by
+# sphinx-quickstart on Sat Sep 27 13:23:22 2008-2009.
+#
+# This file is execfile()d with the current directory set to its
+# containing dir.
+#
+# The contents of this file are pickled, so don't put values in the namespace
+# that aren't pickleable (module imports are okay, they're removed
+# automatically).
+#
+# All configuration values have a default value; values that are commented out
+# serve to show the default value.
+
+from __future__ import (absolute_import, division, print_function)
+__metaclass__ = type
+
+import sys
+import os
+
+# pip install sphinx_rtd_theme
+# import sphinx_rtd_theme
+# html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+
+# If your extensions are in another directory, add it here. If the directory
+# is relative to the documentation root, use os.path.abspath to make it
+# absolute, like shown here.
+# sys.path.append(os.path.abspath('some/directory'))
+#
+sys.path.insert(0, os.path.join('ansible', 'lib'))
+sys.path.append(os.path.abspath(os.path.join('..', '_extensions')))
+
+# We want sphinx to document the ansible modules contained in this repository,
+# not those that may happen to be installed in the version
+# of Python used to run sphinx.  When sphinx loads in order to document,
+# the repository version needs to be the one that is loaded:
+sys.path.insert(0, os.path.abspath(os.path.join('..', '..', '..', 'lib')))
+
+VERSION = '3'
+AUTHOR = 'Ansible, Inc'
+
+
+# General configuration
+# ---------------------
+
+# Add any Sphinx extension module names here, as strings.
+# They can be extensions
+# coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
+# TEST: 'sphinxcontrib.fulltoc'
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx', 'pygments_lexer', 'notfound.extension']
+
+# Later on, add 'sphinx.ext.viewcode' to the list if you want to have
+# colorized code generated too for references.
+
+
+# Add any paths that contain templates here, relative to this directory.
+templates_path = ['.templates']
+
+# The suffix of source filenames.
+source_suffix = '.rst'
+
+# The master toctree document.
+master_doc = 'index'
+
+# General substitutions.
+project = 'Ansible'
+copyright = ""2021 Red Hat, Inc.""
+
+# The default replacements for |version| and |release|, also used in various
+# other places throughout the built documents.
+#
+# The short X.Y version.
+version = VERSION
+# The full version, including alpha/beta/rc tags.
+release = VERSION
+
+# There are two options for replacing |today|: either, you set today to some
+# non-false value, then it is used:
+# today = ''
+# Else, today_fmt is used as the format for a strftime call.
+today_fmt = '%B %d, %Y'
+
+# List of documents that shouldn't be included in the build.
+# unused_docs = []
+
+# List of directories, relative to source directories, that shouldn't be
+# searched for source files.
+# exclude_dirs = []
+
+# A list of glob-style patterns that should be excluded when looking
+# for source files.
+exclude_patterns = [
+'2.10_index.rst',
+'ansible_index.rst',
+'core_index.rst',
+'porting_guides/core_porting_guides.rst',
+'porting_guides/porting_guide_base_2.10.rst',
+'porting_guides/porting_guide_core_2.11.rst',
+'roadmap/index.rst',
+'roadmap/ansible_base_roadmap_index.rst',
+'roadmap/ROADMAP_2_10.rst',
+'roadmap/ROADMAP_2_11.rst'
+
+
+e reST default role (used for this markup: `text`) to use for all
+cuments.
+fault_role = None
+
+ true, '()' will be appended to :func: etc. cross-reference text.
+d_function_parentheses = True
+
+ true, the current module name will be prepended to all description
+it titles (such as .. function::).
+d_module_names = True
+
+ true, sectionauthor and moduleauthor directives will be shown in the
+tput. They are ignored by default.
+ow_authors = False
+
+e name of the Pygments (syntax highlighting) style to use.
+ents_style = 'sphinx'
+
+light_language = 'YAMLJinja'
+
+bstitutions, variables, entities, & shortcuts for text which do not need to link to anything.
+r titles which should be a link, use the intersphinx anchors set at the index, chapter, and section levels, such as  qi_start_:
+r| is useful for formatting fields inside of tables
+| is a nonbreaking space; similarly useful inside of tables
+epilog = """"""
+br| raw:: html
+
+br>
+_| unicode:: 0xA0
+:trim:
+
+
+
+tions for HTML output
+---------------------
+
+_theme_path = ['../_themes']
+_theme = 'sphinx_rtd_theme'
+_short_title = 'Ansible Documentation'
+_show_sphinx = False
+
+_theme_options = {
+'canonical_url': ""https://docs.ansible.com/ansible/latest/"",
+'vcs_pageview_mode': 'edit'
+
+
+_context = {
+'display_github': 'True',
+'github_user': 'ansible',
+'github_repo': 'ansible',
+'github_version': 'devel/docs/docsite/rst/',
+'github_module_version': 'devel/lib/ansible/modules/',
+'github_root_dir': 'devel/lib/ansible',
+'github_cli_version': 'devel/lib/ansible/cli/',
+'current_version': version,
+'latest_version': '3',
+# list specifically out of order to make latest work
 'available_versions': ('latest', '2.10', '2.9', '2.9_ja', '2.8', 'devel'),
-"
--------------------------------------------------------------------------
-"
- PRs: 73616, 73637"
--------------------------------------------------------------------------
-=========================================================================
-"copyright = ""2021 Red Hat, Inc.""
-"
--------------------------------------------------------------------------
-"copyright = ""2021 Red Hat, Inc.""
+'css_files': ('_static/ansible.css',  # overrides to the standard theme
+  ),
 
-- Assign(targets=[Name(id='copyright', ctx=Store())], value=Constant(value='2021 Red Hat, Inc.'))"
--------------------------------------------------------------------------
-"exclude_patterns = [
-'2.10_index.rst',
-'ansible_index.rst',
-'core_index.rst',
-'porting_guides/core_porting_guides',
 
+e style sheet to use for HTML and HTML Help pages. A file of that name
+st exist either in Sphinx' static/ path, or in one of the custom paths
+ven in html_static_path.
+ml_style = 'solar.css'
+
+e name for this set of Sphinx documents.  If None, it defaults to
+project> v<release> documentation"".
+_title = 'Ansible Documentation'
+
+shorter title for the navigation bar.  Default is the same as html_title.
+ml_short_title = None
+
+e name of an image file (within the static path) to place at the top of
+e sidebar.
+ml_logo =
+
+e name of an image file (within the static path) to use as favicon of the
+cs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
+xels large.
+ml_favicon = 'favicon.ico'
+
+d any paths that contain custom static files (such as style sheets) here,
+lative to this directory. They are copied after the builtin static files,
+ a file named ""default.css"" will overwrite the builtin ""default.css"".
+_static_path = ['../_static']
+
+ not '', a 'Last updated on:' timestamp is inserted at every page bottom,
+ing the given strftime format.
+_last_updated_fmt = '%b %d, %Y'
+
+ true, SmartyPants will be used to convert quotes and dashes to
+pographically correct entities.
+ml_use_smartypants = True
+
+stom sidebar templates, maps document names to template names.
+ml_sidebars = {}
+
+ditional templates that should be rendered to pages, maps page names to
+mplate names.
+ml_additional_pages = {}
+
+ false, no module index is generated.
+ml_use_modindex = True
+
+ false, no index is generated.
+ml_use_index = True
+
+ true, the index is split into individual pages for each letter.
+ml_split_index = False
+
+ true, the reST sources are included in the HTML build as _sources/<name>.
+_copy_source = False
+
+ true, an OpenSearch description file will be output, and all pages will
+ntain a <link> tag referring to it.  The value of this option must be the
+se URL from which the finished HTML is served.
+ml_use_opensearch = 'https://docs.ansible.com/ansible/latest'
+
+ nonempty, this is the file name suffix for HTML files (e.g. "".xhtml"").
+ml_file_suffix = ''
+
+tput file base name for HTML help builder.
+help_basename = 'Poseidodoc'
+
+nfiguration for sphinx-notfound-pages
+th no 'notfound_template' and no 'notfound_context' set,
+e extension builds 404.rst into a location-agnostic 404 page
+
+fault is `en` - using this for the sub-site:
+ound_default_language = ""ansible""
+fault is `latest`:
+tting explicitly - docsite serves up /ansible/latest/404.html
+ keep this set to `latest` even on the `devel` branch
+en no maintenance is needed when we branch a new stable_x.x
+ound_default_version = ""latest""
+kes default setting explicit:
+ound_no_urls_prefix = False
+
+tions for LaTeX output
+----------------------
+
+e paper size ('letter' or 'a4').
+tex_paper_size = 'letter'
+
+e font size ('10pt', '11pt' or '12pt').
+tex_font_size = '10pt'
+
+ouping the document tree into LaTeX files. List of tuples
+ource start file, target name, title, author, document class
+owto/manual]).
+x_documents = [
+('index', 'ansible.tex', 'Ansible 2.2 Documentation', AUTHOR, 'manual'),
+
+
+e name of an image file (relative to this directory) to place at the top of
+e title page.
+tex_logo = None
+
+r ""manual"" documents, if this is true, then toplevel headings are parts,
+t chapters.
+tex_use_parts = False
+
+ditional stuff for the LaTeX preamble.
+tex_preamble = ''
+
+cuments to append as an appendix to all manuals.
+tex_appendices = []
+
+ false, no module index is generated.
+tex_use_modindex = True
+
+class_content = 'both'
+
+te:  Our strategy for intersphinx mappings is to have the upstream build location as the
+nonical source and then cached copies of the mapping stored locally in case someone is building
+en disconnected from the internet.  We then have a script to update the cached copies.
+
+cause of that, each entry in this mapping should have this format:
+name: ('http://UPSTREAM_URL', (None, 'path/to/local/cache.inv'))
+
+e update script depends on this format so deviating from this (for instance, adding a third
+cation for the mappning to live) will confuse it.
+rsphinx_mapping = {'python': ('https://docs.python.org/2/', (None, '../python2.inv')),
+   'python3': ('https://docs.python.org/3/', (None, '../python3.inv')),
+   'jinja2': ('http://jinja.palletsprojects.com/', (None, '../jinja2.inv')),
+   'ansible_2_10': ('https://docs.ansible.com/ansible/2.10/', (None, '../ansible_2_10.inv')),
+   'ansible_2_9': ('https://docs.ansible.com/ansible/2.9/', (None, '../ansible_2_9.inv')),
+   'ansible_2_8': ('https://docs.ansible.com/ansible/2.8/', (None, '../ansible_2_8.inv')),
+   'ansible_2_7': ('https://docs.ansible.com/ansible/2.7/', (None, '../ansible_2_7.inv')),
+   'ansible_2_6': ('https://docs.ansible.com/ansible/2.6/', (None, '../ansible_2_6.inv')),
+   'ansible_2_5': ('https://docs.ansible.com/ansible/2.5/', (None, '../ansible_2_5.inv')),
+   }
+
+nckchecker settings
+check_ignore = [
+r'http://irc\.freenode\.net',
+
+check_workers = 25
+nkcheck_anchors = False
 "
 -------------------------------------------------------------------------
 "
- PRs: 73616, 73637"
--------------------------------------------------------------------------
-=========================================================================
-"VERSION = '2.10'
-"
--------------------------------------------------------------------------
-"VERSION = '2.10'
-"
--------------------------------------------------------------------------
-"copyright = ""2021 Red Hat, Inc.""
-"
--------------------------------------------------------------------------
-"
- PRs: 73616, 73637"
+PRs: 73616, 73637"
 -------------------------------------------------------------------------
 =========================================================================
 "'EulerOS', 'openEuler', 'AlmaLinux'],
@@ -65,7 +952,7 @@
 "
 -------------------------------------------------------------------------
 "
- PRs: 73541, 73544"
+PRs: 73541, 73544"
 -------------------------------------------------------------------------
 =========================================================================
 "if 'BHYVE' in out:
@@ -94,7 +981,7 @@
 "
 -------------------------------------------------------------------------
 "
- PRs: 73204, 73234"
+PRs: 73204, 73234"
 -------------------------------------------------------------------------
 =========================================================================
 "if 'BHYVE' in out:
@@ -123,7 +1010,7 @@
 "
 -------------------------------------------------------------------------
 "
- PRs: 73204, 73233"
+PRs: 73204, 73233"
 -------------------------------------------------------------------------
 =========================================================================
 "def post_process_whens(result, task, templar):
@@ -160,31 +1047,6 @@ failed_when_result = cond.evaluate_conditional(templar, templar.available_variab
 result['failed_when_result'] = result['failed'] = failed_when_result
 
 
-"
--------------------------------------------------------------------------
-"def post_process_whens(result, task, templar):
-cond = None
-if task.changed_when:
-cond = Conditional(loader=templar._loader)
-cond.when = task.changed_when
-result['changed'] = cond.evaluate_conditional(templar, templar.available_variables)
-
-if task.failed_when:
-if cond is None:
-cond = Conditional(loader=templar._loader)
-cond.when = task.failed_when
-failed_when_result = cond.evaluate_conditional(templar, templar.available_variables)
-result['failed_when_result'] = result['failed'] = failed_when_result
-"
--------------------------------------------------------------------------
-"
- PRs: 70919, 72118"
--------------------------------------------------------------------------
-=========================================================================
-"from ansible.playbook.conditional import Conditional
-"
--------------------------------------------------------------------------
-"from ansible.playbook.conditional import Conditional
 "
 -------------------------------------------------------------------------
 "_sentinel = StrategySentinel()
@@ -193,7 +1055,34 @@ result['failed_when_result'] = result['failed'] = failed_when_result
 "
 -------------------------------------------------------------------------
 "
- PRs: 70919, 72118"
+PRs: 70919, 72118"
+-------------------------------------------------------------------------
+=========================================================================
+"post_process_whens(result_item, original_task, handler_templar)
+post_process_whens(result_item, original_task, handler_templar)
+"
+-------------------------------------------------------------------------
+"post_process_whens(result_item, original_task, handler_templar)
+post_process_whens(result_item, original_task, handler_templar)
+"
+-------------------------------------------------------------------------
+"def post_process_whens(result, task, templar):
+cond = None
+if task.changed_when:
+cond = Conditional(loader=templar._loader)
+cond.when = task.changed_when
+result['changed'] = cond.evaluate_conditional(templar, templar.available_variables)
+
+if task.failed_when:
+if cond is None:
+cond = Conditional(loader=templar._loader)
+cond.when = task.failed_when
+failed_when_result = cond.evaluate_conditional(templar, templar.available_variables)
+result['failed_when_result'] = result['failed'] = failed_when_result
+"
+-------------------------------------------------------------------------
+"
+PRs: 70919, 72118"
 -------------------------------------------------------------------------
 =========================================================================
 "# Validate GPG. This is NOT done in dnf.Base (it's done in the
@@ -263,7 +1152,7 @@ fail = True
 "
 -------------------------------------------------------------------------
 "
- PRs: 71537, 71541"
+PRs: 71537, 71541"
 -------------------------------------------------------------------------
 =========================================================================
 "# Validate GPG. This is NOT done in dnf.Base (it's done in the
@@ -333,31 +1222,17 @@ fail = True
 "
 -------------------------------------------------------------------------
 "
- PRs: 71537, 71540"
+PRs: 71537, 71540"
 -------------------------------------------------------------------------
 =========================================================================
-"# Keep track of what files we create here with default permissions so later we can see if the permissions
-# are explicitly set with a follow up call to set_mode_if_different().
-#
-# Only warn if the module accepts 'mode' parameter so the user can take action.
-# If the module does not allow the user to set 'mode', then the warning is useless to the
-# user since it provides no actionable information.
-#
-if self.argument_spec.get('mode') and self.params.get('mode') is None:
-    self._created_files.add(dest)
+"self._created_files = set()
 
+    self._uses_common_file_args = True
 "
 -------------------------------------------------------------------------
-"# Keep track of what files we create here with default permissions so later we can see if the permissions
-# are explicitly set with a follow up call to set_mode_if_different().
-#
-# Only warn if the module accepts 'mode' parameter so the user can take action.
-# If the module does not allow the user to set 'mode', then the warning is useless to the
-# user since it provides no actionable information.
-#
-if self.argument_spec.get('mode') and self.params.get('mode') is None:
-    self._created_files.add(dest)
+"self._created_files = set()
 
+    self._uses_common_file_args = True
 "
 -------------------------------------------------------------------------
 "if mode is None:
@@ -366,20 +1241,32 @@ if self.argument_spec.get('mode') and self.params.get('mode') is None:
 "
 -------------------------------------------------------------------------
 "
- PRs: 71260, 71514"
+PRs: 71260, 71514"
 -------------------------------------------------------------------------
 =========================================================================
-"self.add_atomic_move_warnings()
+"# Remove paths so we do not warn about creating with default permissions
+# since we are calling this method on the path and setting the specified mode.
+try:
+    self._created_files.remove(path)
+except KeyError:
+    pass
+
 "
 -------------------------------------------------------------------------
-"self.add_atomic_move_warnings()
+"# Remove paths so we do not warn about creating with default permissions
+# since we are calling this method on the path and setting the specified mode.
+try:
+    self._created_files.remove(path)
+except KeyError:
+    pass
+
 "
 -------------------------------------------------------------------------
 "_DEFAULT_PERM = 0o0666       # default file permission bits
 "
 -------------------------------------------------------------------------
 "
- PRs: 71260, 71514"
+PRs: 71260, 71514"
 -------------------------------------------------------------------------
 =========================================================================
 "from ansible.module_utils.common.collections import is_sequence, Mapping
@@ -442,75 +1329,11 @@ out = _fail_on_undefined(head[0])
 out = u''.join([to_text(_fail_on_undefined(v)) for v in nodes])
 "
 -------------------------------------------------------------------------
-"out = u''.join([to_text(_fail_on_undefined(v)) for v in nodes])
+"from ansible.module_utils.common.collections import is_sequence, Mapping
 "
 -------------------------------------------------------------------------
 "
- PRs: 68432, 71105"
--------------------------------------------------------------------------
-=========================================================================
-"# Instantiate our ResultsCollector for handling results as
-# they come in. Ansible expects this to be one of its main
-# display outlets.
-callback = ResultsCollector()
-
-# Instantiate task queue manager, which takes care of forking
-# and setting up all objects to iterate over host list and tasks.
-# IMPORTANT: This also adds library dirs paths to the module loader
-# IMPORTANT: and so it must be initialized before calling `Play.load()`.
-tqm = TaskQueueManager(
-inventory=inventory,
-variable_manager=variable_manager,
-loader=loader,
-passwords=passwords,
-stdout_callback=callback,
-)
-
-"
--------------------------------------------------------------------------
-"# Instantiate our ResultsCollector for handling results as
-# they come in. Ansible expects this to be one of its main
-# display outlets.
-callback = ResultsCollector()
-
-# Instantiate task queue manager, which takes care of forking
-# and setting up all objects to iterate over host list and tasks.
-# IMPORTANT: This also adds library dirs paths to the module loader
-# IMPORTANT: and so it must be initialized before calling `Play.load()`.
-tqm = TaskQueueManager(
-inventory=inventory,
-variable_manager=variable_manager,
-loader=loader,
-passwords=passwords,
-stdout_callback=callback,
-)
-
-"
--------------------------------------------------------------------------
-"stdout_callback=results_callback,  # Use our custom callback instead of the ``default`` callback plugin, which prints to stdout
-eate data structure that represents our play, including tasks, this is basically what our YAML loader does internally.
-tasks=[
-    dict(action=dict(module='shell', args='ls'), register='shell_out'),
-    dict(action=dict(module='debug', args=dict(msg='{{shell_out.stdout}}'))),
-    dict(action=dict(module='command', args=dict(cmd='/usr/bin/uptime'))),
-]
-
-eate play object, playbook objects use .load instead of init or new methods,
-is will also automatically create the task objects from the info provided in play_source
-tually run it
-result = tqm.run(play)  # most interesting data for a play is actually sent to the callback's methods
-# we always need to cleanup child procs and the structures we use to communicate with them
-tqm.cleanup()
-move ansible tmpdir
-il.rmtree(C.DEFAULT_LOCAL_TMP, True)
-
-host, result in results_callback.host_ok.items():
-host, result in results_callback.host_failed.items():
-host, result in results_callback.host_unreachable.items():
-"
--------------------------------------------------------------------------
-"
- PRs: 70842, 70851"
+PRs: 68432, 71105"
 -------------------------------------------------------------------------
 =========================================================================
 "# Instantiate our ResultsCollector for handling results as
@@ -551,30 +1374,70 @@ stdout_callback=callback,
 
 "
 -------------------------------------------------------------------------
-"stdout_callback=results_callback,  # Use our custom callback instead of the ``default`` callback plugin, which prints to stdout
-eate data structure that represents our play, including tasks, this is basically what our YAML loader does internally.
-tasks=[
-    dict(action=dict(module='shell', args='ls'), register='shell_out'),
-    dict(action=dict(module='debug', args=dict(msg='{{shell_out.stdout}}'))),
-    dict(action=dict(module='command', args=dict(cmd='/usr/bin/uptime'))),
-]
+"loader = DataLoader()  # Takes care of finding and reading yaml, json and ini files
+passwords = dict(vault_pass='secret')
+# Instantiate our ResultsCollectorJSONCallback for handling results as they come in. Ansible expects this to be one of its main display outlets
+results_callback = ResultsCollectorJSONCallback()
+# create inventory, use path to host config file as source or hosts in a comma separated string
 
-eate play object, playbook objects use .load instead of init or new methods,
-is will also automatically create the task objects from the info provided in play_source
-tually run it
-result = tqm.run(play)  # most interesting data for a play is actually sent to the callback's methods
-# we always need to cleanup child procs and the structures we use to communicate with them
-tqm.cleanup()
-move ansible tmpdir
-il.rmtree(C.DEFAULT_LOCAL_TMP, True)
-
-host, result in results_callback.host_ok.items():
-host, result in results_callback.host_failed.items():
-host, result in results_callback.host_unreachable.items():
+# variable manager takes care of merging all the different sources to give you a unified view of variables available in each context
+# instantiate task queue manager, which takes care of forking and setting up all objects to iterate over host list and tasks
 "
 -------------------------------------------------------------------------
 "
- PRs: 70445, 70850"
+PRs: 70842, 70851"
+-------------------------------------------------------------------------
+=========================================================================
+"# Instantiate our ResultsCollector for handling results as
+# they come in. Ansible expects this to be one of its main
+# display outlets.
+callback = ResultsCollector()
+
+# Instantiate task queue manager, which takes care of forking
+# and setting up all objects to iterate over host list and tasks.
+# IMPORTANT: This also adds library dirs paths to the module loader
+# IMPORTANT: and so it must be initialized before calling `Play.load()`.
+tqm = TaskQueueManager(
+inventory=inventory,
+variable_manager=variable_manager,
+loader=loader,
+passwords=passwords,
+stdout_callback=callback,
+)
+
+"
+-------------------------------------------------------------------------
+"# Instantiate our ResultsCollector for handling results as
+# they come in. Ansible expects this to be one of its main
+# display outlets.
+callback = ResultsCollector()
+
+# Instantiate task queue manager, which takes care of forking
+# and setting up all objects to iterate over host list and tasks.
+# IMPORTANT: This also adds library dirs paths to the module loader
+# IMPORTANT: and so it must be initialized before calling `Play.load()`.
+tqm = TaskQueueManager(
+inventory=inventory,
+variable_manager=variable_manager,
+loader=loader,
+passwords=passwords,
+stdout_callback=callback,
+)
+
+"
+-------------------------------------------------------------------------
+"loader = DataLoader()  # Takes care of finding and reading yaml, json and ini files
+passwords = dict(vault_pass='secret')
+# Instantiate our ResultsCollectorJSONCallback for handling results as they come in. Ansible expects this to be one of its main display outlets
+results_callback = ResultsCollectorJSONCallback()
+# create inventory, use path to host config file as source or hosts in a comma separated string
+
+# variable manager takes care of merging all the different sources to give you a unified view of variables available in each context
+# instantiate task queue manager, which takes care of forking and setting up all objects to iterate over host list and tasks
+"
+-------------------------------------------------------------------------
+"
+PRs: 70445, 70850"
 -------------------------------------------------------------------------
 =========================================================================
 "from ansible.module_utils.common.text.converters import container_to_text, to_native
@@ -591,27 +1454,13 @@ from ansible.module_utils.six import string_types, PY2
 "
 -------------------------------------------------------------------------
 "
- PRs: 68576, 69626"
+PRs: 68576, 69626"
 -------------------------------------------------------------------------
 =========================================================================
-"try:
-    if fmt == 'zip':
-        arcfile.write(n_fullpath, n_arcname)
-    else:
-        arcfile.add(n_fullpath, n_arcname, recursive=False)
-    b_successes.append(b_fullpath)
-except Exception as e:
-    errors.append('Adding %s: %s' % (to_native(b_path), to_native(e)))
+"- The file name of the destination archive. The parent directory must exists on the remote host.
 "
 -------------------------------------------------------------------------
-"try:
-    if fmt == 'zip':
-        arcfile.write(n_fullpath, n_arcname)
-    else:
-        arcfile.add(n_fullpath, n_arcname, recursive=False)
-    b_successes.append(b_fullpath)
-except Exception as e:
-    errors.append('Adding %s: %s' % (to_native(b_path), to_native(e)))
+"- The file name of the destination archive. The parent directory must exists on the remote host.
 "
 -------------------------------------------------------------------------
 "try:
@@ -626,7 +1475,7 @@ except Exception as e:
 "
 -------------------------------------------------------------------------
 "
- PRs: 64895, 69420"
+PRs: 64895, 69420"
 -------------------------------------------------------------------------
 =========================================================================
 "stdin_data = None
@@ -664,7 +1513,7 @@ rc, out, err = self.module.run_command(bits, check_rc, data=stdin_data)
 "
 -------------------------------------------------------------------------
 "
- PRs: 67829, 68913"
+PRs: 67829, 68913"
 -------------------------------------------------------------------------
 =========================================================================
 "@property
@@ -755,6 +1604,21 @@ except Exception as e:
 self.module.fail_json(msg=""Failure talking to yum: %s"" % to_native(e))
 
 return self._yum_base
+"
+-------------------------------------------------------------------------
+"self._yum_base = None
+"
+-------------------------------------------------------------------------
+"
+PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"groups_list = self.yum_base.doGroupLists(return_evgrps=True)
+groups_list = self.yum_base.doGroupLists()
+"
+-------------------------------------------------------------------------
+"groups_list = self.yum_base.doGroupLists(return_evgrps=True)
+groups_list = self.yum_base.doGroupLists()
 "
 -------------------------------------------------------------------------
 "def _enablerepos_with_error_checking(self, yumbase):
@@ -823,7 +1687,211 @@ return self._yum_base
 "
 -------------------------------------------------------------------------
 "
- PRs: 63713, 65575"
+PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"e, m, _ = self.yum_base.rpmdb.matchPackageNames([pkgspec])
+    pkgs.extend(self.yum_base.returnInstalledPackagesByDep(pkgspec))
+"
+-------------------------------------------------------------------------
+"e, m, _ = self.yum_base.rpmdb.matchPackageNames([pkgspec])
+    pkgs.extend(self.yum_base.returnInstalledPackagesByDep(pkgspec))
+"
+-------------------------------------------------------------------------
+"groups_list = self.yum_base.doGroupLists(return_evgrps=True)
+groups_list = self.yum_base.doGroupLists()
+"
+-------------------------------------------------------------------------
+"
+PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"e, m, _ = self.yum_base.pkgSack.matchPackageNames([pkgspec])
+    pkgs.extend(self.yum_base.returnPackagesByDep(pkgspec))
+"
+-------------------------------------------------------------------------
+"e, m, _ = self.yum_base.pkgSack.matchPackageNames([pkgspec])
+    pkgs.extend(self.yum_base.returnPackagesByDep(pkgspec))
+"
+-------------------------------------------------------------------------
+"e, m, _ = self.yum_base.rpmdb.matchPackageNames([pkgspec])
+    pkgs.extend(self.yum_base.returnInstalledPackagesByDep(pkgspec))
+"
+-------------------------------------------------------------------------
+"
+PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"pkgs = self.yum_base.returnPackagesByDep(pkgspec)  \
+    self.yum_base.returnInstalledPackagesByDep(pkgspec)
+    e, m, _ = self.yum_base.pkgSack.matchPackageNames([pkgspec])
+updates = self.yum_base.doPackageLists(pkgnarrow='updates').updates
+"
+-------------------------------------------------------------------------
+"pkgs = self.yum_base.returnPackagesByDep(pkgspec)  \
+    self.yum_base.returnInstalledPackagesByDep(pkgspec)
+    e, m, _ = self.yum_base.pkgSack.matchPackageNames([pkgspec])
+updates = self.yum_base.doPackageLists(pkgnarrow='updates').updates
+"
+-------------------------------------------------------------------------
+"e, m, _ = self.yum_base.pkgSack.matchPackageNames([pkgspec])
+    pkgs.extend(self.yum_base.returnPackagesByDep(pkgspec))
+"
+-------------------------------------------------------------------------
+"
+PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"pkgs = self.yum_base.returnPackagesByDep(req_spec)  \
+    self.yum_base.returnInstalledPackagesByDep(req_spec)
+"
+-------------------------------------------------------------------------
+"pkgs = self.yum_base.returnPackagesByDep(req_spec)  \
+    self.yum_base.returnInstalledPackagesByDep(req_spec)
+"
+-------------------------------------------------------------------------
+"pkgs = self.yum_base.returnPackagesByDep(pkgspec)  \
+    self.yum_base.returnInstalledPackagesByDep(pkgspec)
+    e, m, _ = self.yum_base.pkgSack.matchPackageNames([pkgspec])
+updates = self.yum_base.doPackageLists(pkgnarrow='updates').updates
+"
+-------------------------------------------------------------------------
+"
+PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"pkgs = self.yum_base.returnPackagesByDep(req_spec)  \
+    self.yum_base.returnInstalledPackagesByDep(req_spec)
+, _ = self.yum_base.pkgSack.matchPackageNames([req_spec])
+, _ = self.yum_base.rpmdb.matchPackageNames([req_spec])
+"
+-------------------------------------------------------------------------
+"pkgs = self.yum_base.returnPackagesByDep(req_spec)  \
+    self.yum_base.returnInstalledPackagesByDep(req_spec)
+, _ = self.yum_base.pkgSack.matchPackageNames([req_spec])
+, _ = self.yum_base.rpmdb.matchPackageNames([req_spec])
+"
+-------------------------------------------------------------------------
+"pkgs = self.yum_base.returnPackagesByDep(req_spec)  \
+    self.yum_base.returnInstalledPackagesByDep(req_spec)
+"
+-------------------------------------------------------------------------
+"
+PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"if self.yum_base.conf.proxy and self.yum_base.conf.proxy not in (""_none_"",):
+    if self.yum_base.conf.proxy_username:
+        namepass = namepass  self.yum_base.conf.proxy_username
+        proxy_url = self.yum_base.conf.proxy
+        if self.yum_base.conf.proxy_password:
+namepass = namepass  "":""  self.yum_base.conf.proxy_password
+    elif '@' in self.yum_base.conf.proxy:
+        namepass = self.yum_base.conf.proxy.split('@')[0].split('//')[-1]
+        proxy_url = self.yum_base.conf.proxy.replace(""{0}@"".format(namepass), """")
+"
+-------------------------------------------------------------------------
+"if self.yum_base.conf.proxy and self.yum_base.conf.proxy not in (""_none_"",):
+    if self.yum_base.conf.proxy_username:
+        namepass = namepass  self.yum_base.conf.proxy_username
+        proxy_url = self.yum_base.conf.proxy
+        if self.yum_base.conf.proxy_password:
+namepass = namepass  "":""  self.yum_base.conf.proxy_password
+    elif '@' in self.yum_base.conf.proxy:
+        namepass = self.yum_base.conf.proxy.split('@')[0].split('//')[-1]
+        proxy_url = self.yum_base.conf.proxy.replace(""{0}@"".format(namepass), """")
+"
+-------------------------------------------------------------------------
+"pkgs = self.yum_base.returnPackagesByDep(req_spec)  \
+    self.yum_base.returnInstalledPackagesByDep(req_spec)
+, _ = self.yum_base.pkgSack.matchPackageNames([req_spec])
+, _ = self.yum_base.rpmdb.matchPackageNames([req_spec])
+"
+-------------------------------------------------------------------------
+"
+PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"os.environ[item  ""_proxy""] = self.yum_base.conf.proxy
+"
+-------------------------------------------------------------------------
+"os.environ[item  ""_proxy""] = self.yum_base.conf.proxy
+"
+-------------------------------------------------------------------------
+"if self.yum_base.conf.proxy and self.yum_base.conf.proxy not in (""_none_"",):
+    if self.yum_base.conf.proxy_username:
+        namepass = namepass  self.yum_base.conf.proxy_username
+        proxy_url = self.yum_base.conf.proxy
+        if self.yum_base.conf.proxy_password:
+namepass = namepass  "":""  self.yum_base.conf.proxy_password
+    elif '@' in self.yum_base.conf.proxy:
+        namepass = self.yum_base.conf.proxy.split('@')[0].split('//')[-1]
+        proxy_url = self.yum_base.conf.proxy.replace(""{0}@"".format(namepass), """")
+"
+-------------------------------------------------------------------------
+"
+PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"self._yum_base = None  # previous YumBase package index is now invalid
+"
+-------------------------------------------------------------------------
+"self._yum_base = None  # previous YumBase package index is now invalid
+"
+-------------------------------------------------------------------------
+"os.environ[item  ""_proxy""] = self.yum_base.conf.proxy
+"
+-------------------------------------------------------------------------
+"
+PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"try: self.yum_base.repos.disableRepo(disablerepo)
+try: self.yum_base.repos.enableRepo(enablerepo)
+"
+-------------------------------------------------------------------------
+"try: self.yum_base.repos.disableRepo(disablerepo)
+try: self.yum_base.repos.enableRepo(enablerepo)
+"
+-------------------------------------------------------------------------
+"self._yum_base = None  # previous YumBase package index is now invalid
+"
+-------------------------------------------------------------------------
+"
+PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"current_repos = self.yum_base.repos.repos.keys()
+        new_repos = self.yum_base.repos.repos.keys()
+rid = self.yum_base.repos.getRepo(i)
+"
+-------------------------------------------------------------------------
+"current_repos = self.yum_base.repos.repos.keys()
+        new_repos = self.yum_base.repos.repos.keys()
+rid = self.yum_base.repos.getRepo(i)
+"
+-------------------------------------------------------------------------
+"try: self.yum_base.repos.disableRepo(disablerepo)
+try: self.yum_base.repos.enableRepo(enablerepo)
+"
+-------------------------------------------------------------------------
+"
+PRs: 63713, 65575"
+-------------------------------------------------------------------------
+=========================================================================
+"yum_plugins = self.yum_base.plugins._plugins
+"
+-------------------------------------------------------------------------
+"yum_plugins = self.yum_base.plugins._plugins
+"
+-------------------------------------------------------------------------
+"current_repos = self.yum_base.repos.repos.keys()
+        new_repos = self.yum_base.repos.repos.keys()
+rid = self.yum_base.repos.getRepo(i)
+"
+-------------------------------------------------------------------------
+"
+PRs: 63713, 65575"
 -------------------------------------------------------------------------
 =========================================================================
 "elif current_condition['Field'] == condition['Field'] and current_condition['Values'] == condition['Values']:
@@ -832,73 +1900,24 @@ return self._yum_base
 "elif current_condition['Field'] == condition['Field'] and current_condition['Values'] == condition['Values']:
 "
 -------------------------------------------------------------------------
-"- Conditions:
-    - Field: host-header
-      Values:
-        - ""hostname.domain.com""
-        - ""alternate.domain.com""
-  Priority: '4'
-  Actions:
-    - TargetGroupName: test-target-group
-      Type: forward
+"elif current_condition['Field'] == condition['Field'] and sorted(current_condition['Values']) == sorted(condition['Values']):
 "
 -------------------------------------------------------------------------
 "
- PRs: 65021, 65212"
+PRs: 65021, 65212"
 -------------------------------------------------------------------------
 =========================================================================
-"query = ""ALTER LANGUAGE \""%s\"" OWNER TO %s"" % (lang, owner)
+"short_description: Gathers information for virtual machines running on Citrix Hypervisor/XenServer host or pool
 "
 -------------------------------------------------------------------------
-"query = ""ALTER LANGUAGE \""%s\"" OWNER TO %s"" % (lang, owner)
-"
--------------------------------------------------------------------------
-"query = ""SELECT lanname FROM pg_language WHERE lanname = %(lang)s""
-cursor.execute(query, {'lang': lang})
-query = ""SELECT lanpltrusted FROM pg_language WHERE lanname = %(lang)s""
-cursor.execute(query, {'lang': lang})
-query = ""UPDATE pg_language SET lanpltrusted = %(trust)s WHERE lanname = %(lang)s""
-cursor.execute(query, {'trust': trust, 'lang': lang})
-executed_queries.append(cursor.mogrify(query, {'trust': trust, 'lang': lang}))
-"
--------------------------------------------------------------------------
-"
- PRs: 65093, 65165"
--------------------------------------------------------------------------
-=========================================================================
-"
-"
--------------------------------------------------------------------------
-"
-"
--------------------------------------------------------------------------
-"- Module was tested with XenServer 6.5, 7.1, 7.2, 7.6, Citrix Hypervisor 8.0, XCP-ng 7.6 and 8.0.
-- 'To acquire XenAPI Python library, just run C(pip install XenAPI) on your Ansible Control Node. The library can also be found inside
-Citrix Hypervisor/XenServer SDK (downloadable from Citrix website). Copy the XenAPI.py file from the SDK to your Python site-packages on your
-Ansible Control Node to use it. Latest version of the library can also be acquired from GitHub:
-"
--------------------------------------------------------------------------
-"
- PRs: 63728, 63816"
--------------------------------------------------------------------------
-=========================================================================
-"- Module was tested with XenServer 6.5, 7.1, 7.2, 7.6, Citrix Hypervisor 8.0, XCP-ng 7.6 and 8.0.
-- 'To acquire XenAPI Python library, just run C(pip install XenAPI) on your Ansible Control Node. The library can also be found inside
-Citrix Hypervisor/XenServer SDK (downloadable from Citrix website). Copy the XenAPI.py file from the SDK to your Python site-packages on your
-Ansible Control Node to use it. Latest version of the library can also be acquired from GitHub:
-"
--------------------------------------------------------------------------
-"- Module was tested with XenServer 6.5, 7.1, 7.2, 7.6, Citrix Hypervisor 8.0, XCP-ng 7.6 and 8.0.
-- 'To acquire XenAPI Python library, just run C(pip install XenAPI) on your Ansible Control Node. The library can also be found inside
-Citrix Hypervisor/XenServer SDK (downloadable from Citrix website). Copy the XenAPI.py file from the SDK to your Python site-packages on your
-Ansible Control Node to use it. Latest version of the library can also be acquired from GitHub:
+"short_description: Gathers information for virtual machines running on Citrix Hypervisor/XenServer host or pool
 "
 -------------------------------------------------------------------------
 "short_description: Gathers facts for virtual machines running on Citrix Hypervisor/XenServer host or pool
 "
 -------------------------------------------------------------------------
 "
- PRs: 63728, 63816"
+PRs: 63728, 63816"
 -------------------------------------------------------------------------
 =========================================================================
 "if key == ""vlan_id"" or value is None:
@@ -907,2243 +1926,11 @@ Ansible Control Node to use it. Latest version of the library can also be acquir
 "if key == ""vlan_id"" or value is None:
 "
 -------------------------------------------------------------------------
-"for vlan_id in want:
-    desired = dict()
-    if vlan_id in have:
-extant = have[vlan_id]
-continue
-    commands.extend(generate_commands(vlan_id, {}, del_config))
-vlan_id"" in to_remove:
-return [""no vlan {0}"".format(vlan_id)]
-
-if key == ""vlan_id"" or value is None:
-key in to_remove:
+"want = param_list_to_dict(want, ""vlan_id"", remove_key=False)
+have = param_list_to_dict(have, ""vlan_id"", remove_key=False)
 "
 -------------------------------------------------------------------------
 "
- PRs: 63689, 63687"
--------------------------------------------------------------------------
-=========================================================================
-"if cron_file and do_install:
-if not user:
-module.fail_json(msg=""To use cron_file=... parameter you must specify user=... as well"")
-
-if job is None and do_install:
-module.fail_json(msg=""You must specify 'job' to install a new cron job or variable"")
-
-"
--------------------------------------------------------------------------
-"if cron_file and do_install:
-if not user:
-module.fail_json(msg=""To use cron_file=... parameter you must specify user=... as well"")
-
-if job is None and do_install:
-module.fail_json(msg=""You must specify 'job' to install a new cron job or variable"")
-
-"
--------------------------------------------------------------------------
-"self.cron_cmd = self.module.get_bin_path('crontab', required=True)
-"
--------------------------------------------------------------------------
-"
- PRs: 58751, 63339"
--------------------------------------------------------------------------
-=========================================================================
-"n_url = self.api_server
-if self.api_server == 'https://galaxy.ansible.com' or self.api_server == 'https://galaxy.ansible.com/':
-    n_url = 'https://galaxy.ansible.com/api/'
-
-try:
-    data = self._call_galaxy(n_url, method='GET', error_context_msg=error_context_msg)
-except (AnsibleError, GalaxyError, ValueError, KeyError):
-    # Either the URL doesnt exist, or other error. Or the URL exists, but isn't a galaxy API
-    # root (not JSON, no 'available_versions') so try appending '/api/'
-    n_url = _urljoin(n_url, '/api/')
-
-    # let exceptions here bubble up
-    data = self._call_galaxy(n_url, method='GET', error_context_msg=error_context_msg)
-    if 'available_versions' not in data:
-        raise AnsibleError(""Tried to find galaxy API root at %s but no 'available_versions' are available on %s""
-           % (n_url, self.api_server))
-available_versions = data.get('available_versions', {u'v1': u'v1/'})
-    available_versions[u'v2'] = u'v2/'
-"
--------------------------------------------------------------------------
-"n_url = self.api_server
-if self.api_server == 'https://galaxy.ansible.com' or self.api_server == 'https://galaxy.ansible.com/':
-    n_url = 'https://galaxy.ansible.com/api/'
-
-try:
-    data = self._call_galaxy(n_url, method='GET', error_context_msg=error_context_msg)
-except (AnsibleError, GalaxyError, ValueError, KeyError):
-    # Either the URL doesnt exist, or other error. Or the URL exists, but isn't a galaxy API
-    # root (not JSON, no 'available_versions') so try appending '/api/'
-    n_url = _urljoin(n_url, '/api/')
-
-    # let exceptions here bubble up
-    data = self._call_galaxy(n_url, method='GET', error_context_msg=error_context_msg)
-    if 'available_versions' not in data:
-        raise AnsibleError(""Tried to find galaxy API root at %s but no 'available_versions' are available on %s""
-           % (n_url, self.api_server))
-available_versions = data.get('available_versions', {u'v1': u'v1/'})
-    available_versions[u'v2'] = u'v2/'
-"
--------------------------------------------------------------------------
-"n_url = self.api_server
-if self.api_server == 'https://galaxy.ansible.com' or self.api_server == 'https://galaxy.ansible.com/':
-    n_url = 'https://galaxy.ansible.com/api/'
-
-try:
-    data = self._call_galaxy(n_url, method='GET', error_context_msg=error_context_msg)
-except (AnsibleError, GalaxyError, ValueError, KeyError):
-    # Either the URL doesnt exist, or other error. Or the URL exists, but isn't a galaxy API
-    # root (not JSON, no 'available_versions') so try appending '/api/'
-    n_url = _urljoin(n_url, '/api/')
-
-    # let exceptions here bubble up
-    data = self._call_galaxy(n_url, method='GET', error_context_msg=error_context_msg)
-    if 'available_versions' not in data:
-        raise AnsibleError(""Tried to find galaxy API root at %s but no 'available_versions' are available on %s""
-           % (n_url, self.api_server))
-
-    # Update api_server to point to the ""real"" API root, which in this case
-    # was the configured url  '/api/' appended.
-    self.api_server = n_url
-available_versions = data.get('available_versions', {u'v1': u'v1/'})
-    available_versions[u'v2'] = u'v2/'
-"
--------------------------------------------------------------------------
-"
- PRs: 63238, 63293"
--------------------------------------------------------------------------
-=========================================================================
-"# This is a helper class to sort the changes in a valid order
-# ""Greater than"" means a change has to happen after another one.
-# As an example, let's say self is daily (key == 1) and other is weekly (key == 2)
-class ChangeHelper:
-def __init__(self, old, new):
-self.key = new.key
-self.old = old
-self.new = new
-
-def __gt__(self, other):
-if self.key < other.key:
-# You cannot disable daily if weekly is enabled, so later
-if self.new.enabled < other.old.enabled:
-return True
-# Enabling daily is OK if weekly is disabled
-elif self.new.enabled > other.old.enabled:
-return False
-# Otherwise, decreasing the daily level below the current weekly level has to be done later
-else:
-return self.new.level < other.old.level
-else:
-return not (self.old > self.new)
-
-
-"
--------------------------------------------------------------------------
-"# This is a helper class to sort the changes in a valid order
-# ""Greater than"" means a change has to happen after another one.
-# As an example, let's say self is daily (key == 1) and other is weekly (key == 2)
-class ChangeHelper:
-def __init__(self, old, new):
-self.key = new.key
-self.old = old
-self.new = new
-
-def __gt__(self, other):
-if self.key < other.key:
-# You cannot disable daily if weekly is enabled, so later
-if self.new.enabled < other.old.enabled:
-return True
-# Enabling daily is OK if weekly is disabled
-elif self.new.enabled > other.old.enabled:
-return False
-# Otherwise, decreasing the daily level below the current weekly level has to be done later
-else:
-return self.new.level < other.old.level
-else:
-return not (self.old > self.new)
-
-
-"
--------------------------------------------------------------------------
-"# This is a helper class to sort the changes in a valid order
-# ""Greater than"" means a change has to happen after another one.
-# As an example, let's say self is daily (key == 1) and other is weekly (key == 2)
-class ChangeHelper:
-def __init__(self, old, new):
-self.key = new.key
-self.old = old
-self.new = new
-
-def __eq__(self, other):
-return ((self.key, self.new.enabled, self.new.level) ==
-(other.key, other.new.enabled, other.new.level))
-
-def __gt__(self, other):
-if self.key < other.key:
-# You cannot disable daily if weekly is enabled, so later
-if self.new.enabled < other.old.enabled:
-return True
-# Enabling daily is OK if weekly is disabled
-elif self.new.enabled > other.old.enabled:
-return False
-# Otherwise, decreasing the daily level below the current weekly level has to be done later
-else:
-return self.new.level < other.old.level
-else:
-return not (other > self)
-
-def __ge__(self, other):
-return (self > other) or (self == other)
-
-def __lt__(self, other):
-return not (self >= other)
-
-def __le__(self, other):
-return not (self > other)
-
-
-"
--------------------------------------------------------------------------
-"
- PRs: 61345, 62088"
--------------------------------------------------------------------------
-=========================================================================
-"- To create a disabled account on OpenBSD, set this to C('*************').
-"
--------------------------------------------------------------------------
-"- To create a disabled account on OpenBSD, set this to C('*************').
-"
--------------------------------------------------------------------------
-"- To create a disabled account on OpenBSD, set this to C('*************').
-- See U(https://docs.ansible.com/ansible/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module)
-"
--------------------------------------------------------------------------
-"
- PRs: 54893, 61791"
--------------------------------------------------------------------------
-=========================================================================
-"if groups_need_mod and not self.local:
-"
--------------------------------------------------------------------------
-"if groups_need_mod and not self.local:
-"
--------------------------------------------------------------------------
-"supports_check_mode=True,
-mutually_exclusive=[
-    ('local', 'groups'),
-    ('local', 'append')
-]
-"
--------------------------------------------------------------------------
-"
- PRs: 55401, 58480"
--------------------------------------------------------------------------
-=========================================================================
-"if self.groups is not None and not self.local and len(self.groups):
-"
--------------------------------------------------------------------------
-"if self.groups is not None and not self.local and len(self.groups):
-"
--------------------------------------------------------------------------
-"if groups_need_mod and not self.local:
-"
--------------------------------------------------------------------------
-"
- PRs: 55401, 58480"
--------------------------------------------------------------------------
-=========================================================================
-"- Has no effect when C(local) is C(True)
-- Has no effect when C(local) is C(True)
-"
--------------------------------------------------------------------------
-"- Has no effect when C(local) is C(True)
-- Has no effect when C(local) is C(True)
-"
--------------------------------------------------------------------------
-"if self.groups is not None and not self.local and len(self.groups):
-"
--------------------------------------------------------------------------
-"
- PRs: 55401, 58480"
--------------------------------------------------------------------------
-=========================================================================
-"if client.module.params['build'].get(build_option, default_value) != default_value:
-"
--------------------------------------------------------------------------
-"if client.module.params['build'].get(build_option, default_value) != default_value:
-"
--------------------------------------------------------------------------
-"if client.module.params['build'].get(build_option, default_value) != default_value:
-client.fail('If ""source"" is set to ""build"", the ""build.path"" option must be specified.')
-"
--------------------------------------------------------------------------
-"
- PRs: 56610, 57085"
--------------------------------------------------------------------------
-=========================================================================
-"self.fail(""The module option '%s' cannot be specified in the comparisons dict, ""
-          ""since it does not correspond to container's state!"" % key)
-"
--------------------------------------------------------------------------
-"self.fail(""The module option '%s' cannot be specified in the comparisons dict, ""
-          ""since it does not correspond to container's state!"" % key)
-"
--------------------------------------------------------------------------
-"if not isinstance(v, string_types):
-    self.client.module.warn(
-        ""Non-string value found for log_options option '%s'. The value is automatically converted to '%s'. ""
-        ""If this is not correct, or you want to avoid such warnings, please quote the value."" % (k, str(v))
-    )
-v = str(v)
-self.log_options[k] = v
-options['Config'][k] = v
-"
--------------------------------------------------------------------------
-"
- PRs: 54955, 55235"
--------------------------------------------------------------------------
-=========================================================================
-"- As of Ansible 2.7.10, the combined use of I(before) and I(after) works properly. If you were relying on the
-previous incorrect behavior, you may be need to adjust your tasks.
-See U(https://github.com/ansible/ansible/issues/31354) for details.
-name: Before Ansible 2.3, option 'dest', 'destfile' or 'name' was used instead of 'path'
-replace:
-path: /etc/apache2/sites-available/default.conf
-after: 'NameVirtualHost [*]'
-regexp: '^(.)$'
-replace: '# \1'
-path: /etc/apache2/sites-available/default.conf
-before: '# live site config'
-regexp: '^(.)$'
-replace: '# \1'
-Prior to Ansible 2.7.10, using before and after in combination did the opposite of what was intended.
-see https://github.com/ansible/ansible/issues/31354 for details.
-after: '<VirtualHost [*]>'
-before: '</VirtualHost>'
-regexp: '^(.)$'
-replace: '# \1'
-name: Supports common file attributes
-replace:
-name: Supports a validate command
-replace:
-replace: path=/etc/hosts regexp='\\b(localhost)(\\d*)\\b' replace='\\1\\2.localdomain\\2 \\1\\2'
-path: /etc/hosts
-
-name: Explicitly specifying positional matched groups in replacement
-replace:
-path: /etc/ssh/sshd_config
-regexp: '^(ListenAddress[ ])[^\n]$'
-replace: '\g<1>0.0.0.0'
-
-name: Explicitly specifying named matched groups
-replace:
-path: /etc/ssh/sshd_config
-regexp: '^(?P<dctv>ListenAddress[ ])(?P<host>[^\n])$'
-replace: '#\g<dctv>\g<host>\n\g<dctv>0.0.0.0'
-"
--------------------------------------------------------------------------
-"- As of Ansible 2.7.10, the combined use of I(before) and I(after) works properly. If you were relying on the
-previous incorrect behavior, you may be need to adjust your tasks.
-See U(https://github.com/ansible/ansible/issues/31354) for details.
-name: Before Ansible 2.3, option 'dest', 'destfile' or 'name' was used instead of 'path'
-replace:
-path: /etc/apache2/sites-available/default.conf
-after: 'NameVirtualHost [*]'
-regexp: '^(.)$'
-replace: '# \1'
-path: /etc/apache2/sites-available/default.conf
-before: '# live site config'
-regexp: '^(.)$'
-replace: '# \1'
-Prior to Ansible 2.7.10, using before and after in combination did the opposite of what was intended.
-see https://github.com/ansible/ansible/issues/31354 for details.
-after: '<VirtualHost [*]>'
-before: '</VirtualHost>'
-regexp: '^(.)$'
-replace: '# \1'
-name: Supports common file attributes
-replace:
-name: Supports a validate command
-replace:
-replace: path=/etc/hosts regexp='\\b(localhost)(\\d*)\\b' replace='\\1\\2.localdomain\\2 \\1\\2'
-path: /etc/hosts
-
-name: Explicitly specifying positional matched groups in replacement
-replace:
-path: /etc/ssh/sshd_config
-regexp: '^(ListenAddress[ ])[^\n]$'
-replace: '\g<1>0.0.0.0'
-
-name: Explicitly specifying named matched groups
-replace:
-path: /etc/ssh/sshd_config
-regexp: '^(?P<dctv>ListenAddress[ ])(?P<host>[^\n])$'
-replace: '#\g<dctv>\g<host>\n\g<dctv>0.0.0.0'
-"
--------------------------------------------------------------------------
-"- As of Ansible 2.7.10, the combined use of I(before) and I(after) works properly. If you were relying on the
-previous incorrect behavior, you may be need to adjust your tasks.
-See U(https://github.com/ansible/ansible/issues/31354) for details.
-'
-AMPLES = r'''
-name: Before Ansible 2.3, option 'dest', 'destfile' or 'name' was used instead of 'path'
-replace:
-name: Replace after the expression till the end of the file (requires Ansible >= 2.4)
-replace:
-path: /etc/apache2/sites-available/default.conf
-after: 'NameVirtualHost [*]'
-regexp: '^(.)$'
-replace: '# \1'
-name: Replace before the expression till the begin of the file (requires Ansible >= 2.4)
-replace:
-path: /etc/apache2/sites-available/default.conf
-before: '# live site config'
-regexp: '^(.)$'
-replace: '# \1'
-Prior to Ansible 2.7.10, using before and after in combination did the opposite of what was intended.
-see https://github.com/ansible/ansible/issues/31354 for details.
-after: '<VirtualHost [*]>'
-before: '</VirtualHost>'
-regexp: '^(.)$'
-replace: '# \1'
-name: Supports common file attributes
-replace:
-name: Supports a validate command
-replace:
-name: Short form task (in ansible 2) necessitates backslash-escaped sequences
-replace: path=/etc/hosts regexp='\\b(localhost)(\\d*)\\b' replace='\\1\\2.localdomain\\2 \\1\\2'
-path: /etc/hosts
-
-name: Explicitly specifying positional matched groups in replacement
-replace:
-path: /etc/ssh/sshd_config
-regexp: '^(ListenAddress[ ])[^\n]$'
-replace: '\g<1>0.0.0.0'
-
-name: Explicitly specifying named matched groups
-replace:
-path: /etc/ssh/sshd_config
-regexp: '^(?P<dctv>ListenAddress[ ])(?P<host>[^\n])$'
-replace: '#\g<dctv>\g<host>\n\g<dctv>0.0.0.0'
-'
-"
--------------------------------------------------------------------------
-"
- PRs: 31452, 54408"
--------------------------------------------------------------------------
-=========================================================================
-"- Backreferences can be used ambiguously like C(\1), or explicitly like C(\g<1>).
-- If specified, only content after this match will be replaced/removed.
-- Uses DOTALL, which means the C(.) special character I(can match newlines).
-- If specified, only content before this match will be replaced/removed.
-- Uses DOTALL, which means the C(.) special character I(can match newlines).
-"
--------------------------------------------------------------------------
-"- Backreferences can be used ambiguously like C(\1), or explicitly like C(\g<1>).
-- If specified, only content after this match will be replaced/removed.
-- Uses DOTALL, which means the C(.) special character I(can match newlines).
-- If specified, only content before this match will be replaced/removed.
-- Uses DOTALL, which means the C(.) special character I(can match newlines).
-"
--------------------------------------------------------------------------
-"- Backreferences can be used ambiguously like C(\1), or explicitly like C(\g<1>).
-pe: str
-- If specified, only content after this match will be replaced/removed.
-- Can be used in combination with C(before).
-- Uses Python regular expressions; see
-- Uses DOTALL, which means the C(.) special character I(can match newlines).
-pe: str
-- If specified, only content before this match will be replaced/removed.
-- Can be used in combination with C(after).
-- Uses Python regular expressions; see
-- Uses DOTALL, which means the C(.) special character I(can match newlines).
-pe: str
-"
--------------------------------------------------------------------------
-"
- PRs: 31452, 54408"
--------------------------------------------------------------------------
-=========================================================================
-"crypto_utils.write_file(module, certificate.public_bytes(Encoding.PEM))
-"
--------------------------------------------------------------------------
-"crypto_utils.write_file(module, certificate.public_bytes(Encoding.PEM))
-"
--------------------------------------------------------------------------
-"crypto_utils.write_file(module, crypto.dump_certificate(crypto.FILETYPE_PEM, self.cert))
-"
--------------------------------------------------------------------------
-"
- PRs: 54085, 54354"
--------------------------------------------------------------------------
-=========================================================================
-"crypto_utils.write_file(module, result)
-"
--------------------------------------------------------------------------
-"crypto_utils.write_file(module, result)
-"
--------------------------------------------------------------------------
-"result = crypto.dump_certificate_request(crypto.FILETYPE_PEM, self.request)
-crypto_utils.write_file(module, result)
-"
--------------------------------------------------------------------------
-"
- PRs: 54085, 54354"
--------------------------------------------------------------------------
-=========================================================================
-"crypto_utils.write_file(module, b'%s%s' % (pkey, crt))
-"
--------------------------------------------------------------------------
-"crypto_utils.write_file(module, b'%s%s' % (pkey, crt))
-"
--------------------------------------------------------------------------
-"crypto_utils.write_file(
-    module,
-    self.pkcs12.export(self.passphrase, self.iter_size, self.maciter_size),
-    0o600
-)
-    with open(self.src, 'rb') as pkcs12_fh:
-pkcs12_content = pkcs12_fh.read()
-    p12 = crypto.load_pkcs12(pkcs12_content,
-    crypto_utils.write_file(module, b'%s%s' % (pkey, crt))
-"
--------------------------------------------------------------------------
-"
- PRs: 54085, 54354"
--------------------------------------------------------------------------
-=========================================================================
-"crypto_utils.write_file(
-    module,
-    self.pkcs12.export(self.passphrase, self.iter_size, self.maciter_size),
-    0o600
-)
-"
--------------------------------------------------------------------------
-"crypto_utils.write_file(
-    module,
-    self.pkcs12.export(self.passphrase, self.iter_size, self.maciter_size),
-    0o600
-)
-"
--------------------------------------------------------------------------
-"
-if module.params['mode'] is None:
-    module.params['mode'] = '0400'
-"
--------------------------------------------------------------------------
-"
- PRs: 54085, 54354"
--------------------------------------------------------------------------
-=========================================================================
-"crypto_utils.write_file(module, privatekey_data, 0o600)
-self.changed = True
-"
--------------------------------------------------------------------------
-"crypto_utils.write_file(module, privatekey_data, 0o600)
-self.changed = True
-"
--------------------------------------------------------------------------
-"if self.cipher and self.passphrase:
-    privatekey_data = crypto.dump_privatekey(crypto.FILETYPE_PEM, self.privatekey,
-         self.cipher, to_bytes(self.passphrase))
-else:
-    privatekey_data = crypto.dump_privatekey(crypto.FILETYPE_PEM, self.privatekey)
-
-crypto_utils.write_file(module, privatekey_data, 0o600)
-self.changed = True
-"
--------------------------------------------------------------------------
-"
- PRs: 54085, 54354"
--------------------------------------------------------------------------
-=========================================================================
-"if module.params['state'] == 'absent':
-# backend doesn't matter
-certificate = Certificate(module, 'cryptography')
-else:
-if module.params['provider'] != 'assertonly' and module.params['csr_path'] is None:
-module.fail_json(msg='csr_path is required when provider is not assertonly')
-
-base_dir = os.path.dirname(module.params['path']) or '.'
-if not os.path.isdir(base_dir):
-module.fail_json(
-name=base_dir,
-msg='The directory %s does not exist or the file is not a directory' % base_dir
-)
-provider = module.params['provider']
-backend = module.params['select_crypto_backend']
-# Detect what backend we can use
-can_use_cryptography = CRYPTOGRAPHY_FOUND and CRYPTOGRAPHY_VERSION >= LooseVersion(MINIMAL_CRYPTOGRAPHY_VERSION)
-can_use_pyopenssl = PYOPENSSL_FOUND and PYOPENSSL_VERSION >= LooseVersion(MINIMAL_PYOPENSSL_VERSION)
-
-# If cryptography is available we'll use it
-if can_use_cryptography:
-backend = 'cryptography'
-elif can_use_pyopenssl:
-backend = 'pyopenssl'
-
-if module.params['selfsigned_version'] == 2 or module.params['ownca_version'] == 2:
-module.warn('crypto backend forced to pyopenssl. The cryptography library does not support v2 certificates')
-backend = 'pyopenssl'
-
-# Fail if no backend has been found
-if backend == 'auto':
-module.fail_json(msg=(""Can't detect none of the required Python libraries ""
-  ""cryptography (>= {0}) or PyOpenSSL (>= {1})"").format(
-  MINIMAL_CRYPTOGRAPHY_VERSION,
-  MINIMAL_PYOPENSSL_VERSION))
-
-if backend == 'pyopenssl':
-if not PYOPENSSL_FOUND:
-module.fail_json(msg=missing_required_lib('pyOpenSSL'), exception=PYOPENSSL_IMP_ERR)
-if module.params['provider'] in ['selfsigned', 'ownca', 'assertonly']:
-try:
-getattr(crypto.X509Req, 'get_extensions')
-except AttributeError:
-module.fail_json(msg='You need to have PyOpenSSL>=0.15')
-
-if provider == 'selfsigned':
-certificate = SelfSignedCertificate(module)
-elif provider == 'acme':
-certificate = AcmeCertificate(module, 'pyopenssl')
-elif provider == 'ownca':
-certificate = OwnCACertificate(module)
-else:
-certificate = AssertOnlyCertificate(module)
-elif backend == 'cryptography':
-if not CRYPTOGRAPHY_FOUND:
-module.fail_json(msg=missing_required_lib('cryptography'), exception=CRYPTOGRAPHY_IMP_ERR)
-if module.params['selfsigned_version'] == 2 or module.params['ownca_version'] == 2:
-module.fail_json(msg='The cryptography backend does not support v2 certificates, '
- 'use select_crypto_backend=pyopenssl for v2 certificates')
-if provider == 'selfsigned':
-certificate = SelfSignedCertificateCryptography(module)
-elif provider == 'acme':
-certificate = AcmeCertificate(module, 'cryptography')
-elif provider == 'ownca':
-certificate = OwnCACertificateCryptography(module)
-else:
-certificate = AssertOnlyCertificateCryptography(module)
-"
--------------------------------------------------------------------------
-"if module.params['state'] == 'absent':
-# backend doesn't matter
-certificate = Certificate(module, 'cryptography')
-else:
-if module.params['provider'] != 'assertonly' and module.params['csr_path'] is None:
-module.fail_json(msg='csr_path is required when provider is not assertonly')
-
-base_dir = os.path.dirname(module.params['path']) or '.'
-if not os.path.isdir(base_dir):
-module.fail_json(
-name=base_dir,
-msg='The directory %s does not exist or the file is not a directory' % base_dir
-)
-provider = module.params['provider']
-backend = module.params['select_crypto_backend']
-# Detect what backend we can use
-can_use_cryptography = CRYPTOGRAPHY_FOUND and CRYPTOGRAPHY_VERSION >= LooseVersion(MINIMAL_CRYPTOGRAPHY_VERSION)
-can_use_pyopenssl = PYOPENSSL_FOUND and PYOPENSSL_VERSION >= LooseVersion(MINIMAL_PYOPENSSL_VERSION)
-
-# If cryptography is available we'll use it
-if can_use_cryptography:
-backend = 'cryptography'
-elif can_use_pyopenssl:
-backend = 'pyopenssl'
-
-if module.params['selfsigned_version'] == 2 or module.params['ownca_version'] == 2:
-module.warn('crypto backend forced to pyopenssl. The cryptography library does not support v2 certificates')
-backend = 'pyopenssl'
-
-# Fail if no backend has been found
-if backend == 'auto':
-module.fail_json(msg=(""Can't detect none of the required Python libraries ""
-  ""cryptography (>= {0}) or PyOpenSSL (>= {1})"").format(
-  MINIMAL_CRYPTOGRAPHY_VERSION,
-  MINIMAL_PYOPENSSL_VERSION))
-
-if backend == 'pyopenssl':
-if not PYOPENSSL_FOUND:
-module.fail_json(msg=missing_required_lib('pyOpenSSL'), exception=PYOPENSSL_IMP_ERR)
-if module.params['provider'] in ['selfsigned', 'ownca', 'assertonly']:
-try:
-getattr(crypto.X509Req, 'get_extensions')
-except AttributeError:
-module.fail_json(msg='You need to have PyOpenSSL>=0.15')
-
-if provider == 'selfsigned':
-certificate = SelfSignedCertificate(module)
-elif provider == 'acme':
-certificate = AcmeCertificate(module, 'pyopenssl')
-elif provider == 'ownca':
-certificate = OwnCACertificate(module)
-else:
-certificate = AssertOnlyCertificate(module)
-elif backend == 'cryptography':
-if not CRYPTOGRAPHY_FOUND:
-module.fail_json(msg=missing_required_lib('cryptography'), exception=CRYPTOGRAPHY_IMP_ERR)
-if module.params['selfsigned_version'] == 2 or module.params['ownca_version'] == 2:
-module.fail_json(msg='The cryptography backend does not support v2 certificates, '
- 'use select_crypto_backend=pyopenssl for v2 certificates')
-if provider == 'selfsigned':
-certificate = SelfSignedCertificateCryptography(module)
-elif provider == 'acme':
-certificate = AcmeCertificate(module, 'cryptography')
-elif provider == 'ownca':
-certificate = OwnCACertificateCryptography(module)
-else:
-certificate = AssertOnlyCertificateCryptography(module)
-"
--------------------------------------------------------------------------
-"if module.params['state'] == 'absent':
-certificate = CertificateAbsent(module)
-if module.params['provider'] != 'assertonly' and module.params['csr_path'] is None:
-module.fail_json(msg='csr_path is required when provider is not assertonly')
-
-provider = module.params['provider']
-
-if provider == 'selfsigned':
-certificate = SelfSignedCertificate(module)
-elif provider == 'acme':
-certificate = AcmeCertificate(module)
-elif provider == 'ownca':
-certificate = OwnCACertificate(module)
-else:
-certificate = AssertOnlyCertificate(module)
-"
--------------------------------------------------------------------------
-"
- PRs: 54298, 54348"
--------------------------------------------------------------------------
-=========================================================================
-"try:
-    csr = csr.subject_name(cryptography.x509.Name([
-cryptography.x509.NameAttribute(self._get_name_oid(entry[0]), to_text(entry[1])) for entry in self.subject
-    ]))
-except ValueError as e:
-    raise CertificateSigningRequestError(str(e))
-"
--------------------------------------------------------------------------
-"try:
-    csr = csr.subject_name(cryptography.x509.Name([
-cryptography.x509.NameAttribute(self._get_name_oid(entry[0]), to_text(entry[1])) for entry in self.subject
-    ]))
-except ValueError as e:
-    raise CertificateSigningRequestError(str(e))
-"
--------------------------------------------------------------------------
-"if nid == 0:
-    raise CertificateSigningRequestError('Unknown subject field identifier ""{0}""'.format(entry[0]))
-res = OpenSSL._util.lib.X509_NAME_add_entry_by_NID(subject._name, nid, OpenSSL._util.lib.MBSTRING_UTF8, to_bytes(entry[1]), -1, -1, 0)
-if res == 0:
-    raise CertificateSigningRequestError('Invalid value for subject field identifier ""{0}"": {1}'.format(entry[0], entry[1]))
-"
--------------------------------------------------------------------------
-"
- PRs: 53198, 53469"
--------------------------------------------------------------------------
-=========================================================================
-"try:
-    extensions.append(crypto.X509Extension(b""subjectAltName"", self.subjectAltName_critical, altnames.encode('ascii')))
-except OpenSSL.crypto.Error as e:
-    raise CertificateSigningRequestError(
-        'Error while parsing Subject Alternative Names {0} (check for missing type prefix, such as ""DNS:""!): {1}'.format(
-', '.join([""{0}"".format(san) for san in self.subjectAltName]), str(e)
-        )
-    )
-"
--------------------------------------------------------------------------
-"try:
-    extensions.append(crypto.X509Extension(b""subjectAltName"", self.subjectAltName_critical, altnames.encode('ascii')))
-except OpenSSL.crypto.Error as e:
-    raise CertificateSigningRequestError(
-        'Error while parsing Subject Alternative Names {0} (check for missing type prefix, such as ""DNS:""!): {1}'.format(
-', '.join([""{0}"".format(san) for san in self.subjectAltName]), str(e)
-        )
-    )
-"
--------------------------------------------------------------------------
-"try:
-    extensions.append(crypto.X509Extension(b""subjectAltName"", self.subjectAltName_critical, altnames.encode('ascii')))
-except OpenSSL.crypto.Error as e:
-    raise CertificateSigningRequestError(
-        'Error while parsing Subject Alternative Names {0} (check for missing type prefix, such as ""DNS:""!): {1}'.format(
-            ', '.join([""{0}"".format(san) for san in self.subjectAltName]), str(e)
-        )
-    )
-"
--------------------------------------------------------------------------
-"
- PRs: 53201, 53345"
--------------------------------------------------------------------------
-=========================================================================
-"cert.set_notBefore(to_bytes(self.notBefore))
-cert.set_notAfter(to_bytes(self.notAfter))
-"
--------------------------------------------------------------------------
-"cert.set_notBefore(to_bytes(self.notBefore))
-cert.set_notAfter(to_bytes(self.notAfter))
-"
--------------------------------------------------------------------------
-"# The following 3 lines are the same as the current PyOpenSSL code for cert.has_expired().
-# Older version of PyOpenSSL have a buggy implementation,
-# to avoid issues with those we added the code from a more recent release here.
-
-time_string = to_native(self.cert.get_notAfter())
-not_after = datetime.datetime.strptime(time_string, ""%Y%m%d%H%M%SZ"")
-cert_expired = not_after < datetime.datetime.utcnow()
-
-if self.has_expired != cert_expired:
-    self.message.append(
-        'Certificate expiration check failed (certificate expiration is %s, expected %s)' % (cert_expired, self.has_expired)
-    )
-"
--------------------------------------------------------------------------
-"
- PRs: 47508, 53203"
--------------------------------------------------------------------------
-=========================================================================
-"if module.check_mode:
-if os.path.exists(tmpsrc):
-os.remove(tmpsrc)
-result['changed'] = ('checksum_dest' not in result or
- result['checksum_src'] != result['checksum_dest'])
-module.exit_json(msg=info.get('msg', ''), **result)
-
-"
--------------------------------------------------------------------------
-"if module.check_mode:
-if os.path.exists(tmpsrc):
-os.remove(tmpsrc)
-result['changed'] = ('checksum_dest' not in result or
- result['checksum_src'] != result['checksum_dest'])
-module.exit_json(msg=info.get('msg', ''), **result)
-
-"
--------------------------------------------------------------------------
-"if module.check_mode:
-if os.path.exists(tmpsrc):
-os.remove(tmpsrc)
-changed = (checksum_dest is None or
-   checksum_src != checksum_dest)
-res_args = dict(url=url, changed=changed, dest=dest, src=tmpsrc,
-checksum_dest=checksum_dest, checksum_src=checksum_src,
-msg=info.get('msg', ''))
-module.exit_json(**res_args)
-
-"
--------------------------------------------------------------------------
-"
- PRs: 53070, 53172"
--------------------------------------------------------------------------
-=========================================================================
-"-  For rebooting systems, use the M(reboot) or M(win_reboot) module.
-"
--------------------------------------------------------------------------
-"-  For rebooting systems, use the M(reboot) or M(win_reboot) module.
-"
--------------------------------------------------------------------------
-"-  For rebooting systems, use the M(reboot) or M(win_reboot) module.
-lso:
-dule: raw
-dule: script
-dule: shell
-dule: win_command
-"
--------------------------------------------------------------------------
-"
- PRs: 51499, 52192"
--------------------------------------------------------------------------
-=========================================================================
-"- For rebooting systems, use the M(reboot) or M(win_reboot) module.
-"
--------------------------------------------------------------------------
-"- For rebooting systems, use the M(reboot) or M(win_reboot) module.
-"
--------------------------------------------------------------------------
-"- An alternative to using inline shell scripts with this module is to use
-the M(script) module possibly together with the M(template) module.
-- For rebooting systems, use the M(reboot) or M(win_reboot) module.
-ealso:
-module: command
-module: raw
-module: script
-"
--------------------------------------------------------------------------
-"
- PRs: 51499, 52192"
--------------------------------------------------------------------------
-=========================================================================
-"altnames = [str(self._get_san(altname)) for altname in self.subjectAltName] if self.subjectAltName else []
-"
--------------------------------------------------------------------------
-"altnames = [str(self._get_san(altname)) for altname in self.subjectAltName] if self.subjectAltName else []
-"
--------------------------------------------------------------------------
-"altnames = [altname.strip() for altname in str(altnames_ext).split(',') if altname.strip() if altname.strip()]
-"
--------------------------------------------------------------------------
-"
- PRs: 51473, 52024"
--------------------------------------------------------------------------
-=========================================================================
-"from ansible.errors import (
-AnsibleAuthenticationFailure,
-AnsibleConnectionFailure,
-AnsibleError,
-AnsibleFileNotFound,
-
-"
--------------------------------------------------------------------------
-"from ansible.errors import (
-AnsibleAuthenticationFailure,
-AnsibleConnectionFailure,
-AnsibleError,
-AnsibleFileNotFound,
-
-"
--------------------------------------------------------------------------
-"from ansible.errors import (
-AnsibleAuthenticationFailure,
-AnsibleConnectionFailure,
-AnsibleError,
-AnsibleFileNotFound,
-
- ansible.module_utils._text import to_bytes, to_native, to_text
-"
--------------------------------------------------------------------------
-"
- PRs: 50776, 51236"
--------------------------------------------------------------------------
-=========================================================================
-"remaining_retries = remaining_tries - attempt - 1
-_handle_error(remaining_retries, cmd[0], return_tuple, self._play_context.no_log, self.host)
-= Invalid/incorrect password from sshpass
-pt AnsibleAuthenticationFailure as e:
-# Raising this exception, which is subclassed from AnsibleConnectionFailure, prevents further retries
-raise
-
-
-"
--------------------------------------------------------------------------
-"remaining_retries = remaining_tries - attempt - 1
-_handle_error(remaining_retries, cmd[0], return_tuple, self._play_context.no_log, self.host)
-= Invalid/incorrect password from sshpass
-pt AnsibleAuthenticationFailure as e:
-# Raising this exception, which is subclassed from AnsibleConnectionFailure, prevents further retries
-raise
-
-
-"
--------------------------------------------------------------------------
-"remaining_retries = remaining_tries - attempt - 1
-_handle_error(remaining_retries, cmd[0], return_tuple, self._play_context.no_log, self.host)
-
-break
-
-= Invalid/incorrect password from sshpass
-pt AnsibleAuthenticationFailure as e:
-# Raising this exception, which is subclassed from AnsibleConnectionFailure, prevents further retries
-raise
-
-"
--------------------------------------------------------------------------
-"
- PRs: 50776, 51236"
--------------------------------------------------------------------------
-=========================================================================
-"from ansible.errors import (
-AnsibleAuthenticationFailure,
-AnsibleConnectionFailure,
-AnsibleError,
-AnsibleFileNotFound,
-
-"
--------------------------------------------------------------------------
-"from ansible.errors import (
-AnsibleAuthenticationFailure,
-AnsibleConnectionFailure,
-AnsibleError,
-AnsibleFileNotFound,
-
-"
--------------------------------------------------------------------------
-"b_NOT_SSH_ERRORS = (b'Traceback (most recent call last):',  # Python-2.6 when there's an exception
-# while invoking a script via -m
-ns error 255
-
-
-"
--------------------------------------------------------------------------
-"
- PRs: 50776, 51236"
--------------------------------------------------------------------------
-=========================================================================
-"- name: ansible_ssh_retries
-  version_added: '2.7'
-"
--------------------------------------------------------------------------
-"- name: ansible_ssh_retries
-  version_added: '2.7'
-"
--------------------------------------------------------------------------
-"from ansible.errors import (
-AnsibleAuthenticationFailure,
-AnsibleConnectionFailure,
-AnsibleError,
-AnsibleFileNotFound,
-
-"
--------------------------------------------------------------------------
-"
- PRs: 50776, 51236"
--------------------------------------------------------------------------
-=========================================================================
-"from ansible.errors import (
-AnsibleAuthenticationFailure,
-AnsibleConnectionFailure,
-AnsibleError,
-AnsibleFileNotFound,
-
-"
--------------------------------------------------------------------------
-"from ansible.errors import (
-AnsibleAuthenticationFailure,
-AnsibleConnectionFailure,
-AnsibleError,
-AnsibleFileNotFound,
-
-"
--------------------------------------------------------------------------
-"from ansible.errors import (
-AnsibleAuthenticationFailure,
-AnsibleConnectionFailure,
-AnsibleError,
-AnsibleFileNotFound,
-
- ansible.module_utils._text import to_bytes, to_native, to_text
-"
--------------------------------------------------------------------------
-"
- PRs: 50776, 51235"
--------------------------------------------------------------------------
-=========================================================================
-"if not isinstance(value, string_types):
-    self.fail(""Non-string value found for env option. ""
-              ""Ambiguous env options must be wrapped in quotes to avoid YAML parsing. Key: %s"" % (name, ))
-"
--------------------------------------------------------------------------
-"if not isinstance(value, string_types):
-    self.fail(""Non-string value found for env option. ""
-              ""Ambiguous env options must be wrapped in quotes to avoid YAML parsing. Key: %s"" % (name, ))
-"
--------------------------------------------------------------------------
-"if not isinstance(value, string_types):
-    self.client.module.warn(
-        ""Non-string value found for env option. ""
-        ""Ambiguous env options should be wrapped in quotes to avoid YAML parsing. ""
-        ""This will become an error in Ansible 2.8. ""
-        ""Key: %s; value will be treated as: %s"" % (name, str(value)))
-"
--------------------------------------------------------------------------
-"
- PRs: 49843, 50899"
--------------------------------------------------------------------------
-=========================================================================
-"- arg1: ""true""
-- arg2: ""whatever""
-"
--------------------------------------------------------------------------
-"- arg1: ""true""
-- arg2: ""whatever""
-"
--------------------------------------------------------------------------
-"SECRET_KEY: ""ssssh""
-# Values which might be parsed as numbers, booleans or other types by the YAML parser need to be quoted
-BOOLEAN_KEY: ""yes""
-"
--------------------------------------------------------------------------
-"
- PRs: 49843, 50899"
--------------------------------------------------------------------------
-=========================================================================
-"- arg1: ""true""
-- arg2: ""whatever""
-"
--------------------------------------------------------------------------
-"- arg1: ""true""
-- arg2: ""whatever""
-"
--------------------------------------------------------------------------
-"- Values which might be parsed as numbers, booleans or other types by the YAML parser must be quoted (e.g. C(""true"")) in order to avoid data loss.
-pe: dict
-"
--------------------------------------------------------------------------
-"
- PRs: 49843, 50899"
--------------------------------------------------------------------------
-=========================================================================
-"if not differences.empty and self.parameters.force:
-"
--------------------------------------------------------------------------
-"if not differences.empty and self.parameters.force:
-"
--------------------------------------------------------------------------
-"if differences and self.parameters.force:
-"
--------------------------------------------------------------------------
-"
- PRs: 50663, 50820"
--------------------------------------------------------------------------
-=========================================================================
-"- No default setting. If the value is not set, the system setting from
-  C(/etc/yum.conf) or system default of C(no) will be used.
-"
--------------------------------------------------------------------------
-"- No default setting. If the value is not set, the system setting from
-  C(/etc/yum.conf) or system default of C(no) will be used.
-"
--------------------------------------------------------------------------
-"description: Facts to add to ansible_facts about the services on the system
-services:
-description: States of the services with service name as key.
-returned: always
-type: complex
-contains:
-source:
-description: Init system of the service. One of C(systemd), C(sysv), C(upstart).
-returned: always
-type: string
-sample: sysv
-state:
-description: State of the service. Either C(running) or C(stopped).
-returned: always
-type: string
-sample: running
-name:
-description: Name of the service.
-returned: always
-type: string
-sample: arp-ethers.service
-"
--------------------------------------------------------------------------
-"
- PRs: 45796, 48111"
--------------------------------------------------------------------------
-=========================================================================
-"""update the container's stop_timeout configuration."" % (self.docker_api_version_str,))
-ons['stop_timeout']['supported'] = stop_timeout_supported
-
-Container, self).__init__(**kwargs)
-s()
-"
--------------------------------------------------------------------------
-"""update the container's stop_timeout configuration."" % (self.docker_api_version_str,))
-ons['stop_timeout']['supported'] = stop_timeout_supported
-
-Container, self).__init__(**kwargs)
-s()
-"
--------------------------------------------------------------------------
-"def _get_minimal_versions(self):
-# Helper function to detect whether any specified network uses ipv4_address or ipv6_address
-def detect_ipvX_address_usage():
-for network in self.module.params.get(""networks"") or []:
-return True
-return False
-
-self.option_minimal_versions = dict(
-# internal options
-log_config=dict(),
-publish_all_ports=dict(),
-ports=dict(),
-volume_binds=dict(),
-name=dict(),
-)
-for option, data in self.module.argument_spec.items():
-if option in self.__NON_CONTAINER_PROPERTY_OPTIONS:
-continue
-self.option_minimal_versions[option] = dict()
-self.option_minimal_versions.update(dict(
-dns_opts=dict(docker_api_version='1.21', docker_py_version='1.10.0'),
-ipc_mode=dict(docker_api_version='1.25'),
-mac_address=dict(docker_api_version='1.25'),
-oom_killer=dict(docker_py_version='2.0.0'),
-oom_score_adj=dict(docker_api_version='1.22', docker_py_version='2.0.0'),
-shm_size=dict(docker_api_version='1.22'),
-stop_signal=dict(docker_api_version='1.21'),
-tmpfs=dict(docker_api_version='1.22'),
-volume_driver=dict(docker_api_version='1.21'),
-memory_reservation=dict(docker_api_version='1.21'),
-kernel_memory=dict(docker_api_version='1.21'),
-auto_remove=dict(docker_py_version='2.1.0', docker_api_version='1.25'),
-init=dict(docker_py_version='2.2.0', docker_api_version='1.25'),
-sysctls=dict(docker_py_version='1.10.0', docker_api_version='1.24'),
-userns_mode=dict(docker_py_version='1.10.0', docker_api_version='1.23'),
-uts=dict(docker_py_version='3.5.0', docker_api_version='1.25'),
-# specials
-ipvX_address_supported=dict(docker_py_version='1.9.0', detect_usage=detect_ipvX_address_usage,
-usage_msg='ipv4_address or ipv6_address in networks'),
-))
-
-for option, data in self.option_minimal_versions.items():
-# Test whether option is supported, and store result
-support_docker_py = True
-support_docker_api = True
-if 'docker_py_version' in data:
-support_docker_py = self.docker_py_version >= LooseVersion(data['docker_py_version'])
-if 'docker_api_version' in data:
-support_docker_api = self.docker_api_version >= LooseVersion(data['docker_api_version'])
-data['supported'] = support_docker_py and support_docker_api
-# Fail if option is not supported but used
-if not data['supported']:
-# Test whether option is specified
-if 'detect_usage' in data:
-used = data['detect_usage']()
-else:
-used = self.module.params.get(option) is not None
-if used and 'default' in self.module.argument_spec[option]:
-used = self.module.params[option] != self.module.argument_spec[option]['default']
-if used:
-# If the option is used, compose error message.
-if 'usage_msg' in data:
-usg = data['usage_msg']
-else:
-usg = 'set %s option' % (option, )
-if not support_docker_api:
-msg = 'docker API version is %s. Minimum version required is %s to %s.'
-msg = msg % (self.docker_api_version_str, data['docker_api_version'], usg)
-elif not support_docker_py:
-if LooseVersion(data['docker_py_version']) < LooseVersion('2.0.0'):
-msg = (""docker-py version is %s. Minimum version required is %s to %s. ""
-   ""Consider switching to the 'docker' package if you do not require Python 2.6 support."")
-elif self.docker_py_version < LooseVersion('2.0.0'):
-msg = (""docker-py version is %s. Minimum version required is %s to %s. ""
-   ""You have to switch to the Python 'docker' package. First uninstall 'docker-py' before ""
-   ""installing 'docker' to avoid a broken installation."")
-else:
-msg = ""docker version is %s. Minimum version required is %s to %s.""
-msg = msg % (docker_version, data['docker_py_version'], usg)
-else:
-# should not happen
-msg = 'Cannot %s with your configuration.' % (usg, )
-self.fail(msg)
-def __init__(self, **kwargs):
-super(AnsibleDockerClientContainer, self).__init__(**kwargs)
-self._get_minimal_versions()
-"
--------------------------------------------------------------------------
-"
- PRs: 47711, 48074"
--------------------------------------------------------------------------
-=========================================================================
-"def _get_minimal_versions(self):
-# Helper function to detect whether any specified network uses ipv4_address or ipv6_address
-def detect_ipvX_address_usage():
-for network in self.module.params.get(""networks"") or []:
-if 'ipv4_address' in network or 'ipv6_address' in network:
-return True
-return False
-self.option_minimal_versions = dict(
-# internal options
-log_config=dict(),
-publish_all_ports=dict(),
-ports=dict(),
-volume_binds=dict(),
-name=dict(),
-)
-for option, data in self.module.argument_spec.items():
-if option in self.__NON_CONTAINER_PROPERTY_OPTIONS:
-continue
-self.option_minimal_versions[option] = dict()
-self.option_minimal_versions.update(dict(
-device_read_bps=dict(docker_py_version='1.9.0', docker_api_version='1.22'),
-device_read_iops=dict(docker_py_version='1.9.0', docker_api_version='1.22'),
-device_write_bps=dict(docker_py_version='1.9.0', docker_api_version='1.22'),
-device_write_iops=dict(docker_py_version='1.9.0', docker_api_version='1.22'),
-dns_opts=dict(docker_api_version='1.21', docker_py_version='1.10.0'),
-ipc_mode=dict(docker_api_version='1.25'),
-mac_address=dict(docker_api_version='1.25'),
-oom_killer=dict(docker_py_version='2.0.0'),
-oom_score_adj=dict(docker_api_version='1.22', docker_py_version='2.0.0'),
-shm_size=dict(docker_api_version='1.22'),
-stop_signal=dict(docker_api_version='1.21'),
-tmpfs=dict(docker_api_version='1.22'),
-volume_driver=dict(docker_api_version='1.21'),
-memory_reservation=dict(docker_api_version='1.21'),
-kernel_memory=dict(docker_api_version='1.21'),
-auto_remove=dict(docker_py_version='2.1.0', docker_api_version='1.25'),
-healthcheck=dict(docker_py_version='2.0.0', docker_api_version='1.24'),
-init=dict(docker_py_version='2.2.0', docker_api_version='1.25'),
-runtime=dict(docker_py_version='2.4.0', docker_api_version='1.25'),
-sysctls=dict(docker_py_version='1.10.0', docker_api_version='1.24'),
-userns_mode=dict(docker_py_version='1.10.0', docker_api_version='1.23'),
-uts=dict(docker_py_version='3.5.0', docker_api_version='1.25'),
-# specials
-ipvX_address_supported=dict(docker_py_version='1.9.0', detect_usage=detect_ipvX_address_usage,
-usage_msg='ipv4_address or ipv6_address in networks'),
-stop_timeout=dict(),  # see below!
-))
-
-for option, data in self.option_minimal_versions.items():
-# Test whether option is supported, and store result
-support_docker_py = True
-support_docker_api = True
-if 'docker_py_version' in data:
-support_docker_py = self.docker_py_version >= LooseVersion(data['docker_py_version'])
-if 'docker_api_version' in data:
-support_docker_api = self.docker_api_version >= LooseVersion(data['docker_api_version'])
-data['supported'] = support_docker_py and support_docker_api
-# Fail if option is not supported but used
-if not data['supported']:
-# Test whether option is specified
-if 'detect_usage' in data:
-used = data['detect_usage']()
-else:
-used = self.module.params.get(option) is not None
-if used and 'default' in self.module.argument_spec[option]:
-used = self.module.params[option] != self.module.argument_spec[option]['default']
-if used:
-# If the option is used, compose error message.
-if 'usage_msg' in data:
-usg = data['usage_msg']
-else:
-usg = 'set %s option' % (option, )
-if not support_docker_api:
-msg = 'docker API version is %s. Minimum version required is %s to %s.'
-msg = msg % (self.docker_api_version_str, data['docker_api_version'], usg)
-elif not support_docker_py:
-if LooseVersion(data['docker_py_version']) < LooseVersion('2.0.0'):
-msg = (""docker-py version is %s. Minimum version required is %s to %s. ""
-   ""Consider switching to the 'docker' package if you do not require Python 2.6 support."")
-elif self.docker_py_version < LooseVersion('2.0.0'):
-msg = (""docker-py version is %s. Minimum version required is %s to %s. ""
-   ""You have to switch to the Python 'docker' package. First uninstall 'docker-py' before ""
-   ""installing 'docker' to avoid a broken installation."")
-else:
-msg = ""docker version is %s. Minimum version required is %s to %s.""
-msg = msg % (docker_version, data['docker_py_version'], usg)
-else:
-# should not happen
-msg = 'Cannot %s with your configuration.' % (usg, )
-self.fail(msg)
-stop_timeout_supported = self.docker_api_version >= LooseVersion('1.25')
-stop_timeout_supported = self.docker_py_version >= LooseVersion('2.1')
-"
--------------------------------------------------------------------------
-"def _get_minimal_versions(self):
-# Helper function to detect whether any specified network uses ipv4_address or ipv6_address
-def detect_ipvX_address_usage():
-for network in self.module.params.get(""networks"") or []:
-if 'ipv4_address' in network or 'ipv6_address' in network:
-return True
-return False
-self.option_minimal_versions = dict(
-# internal options
-log_config=dict(),
-publish_all_ports=dict(),
-ports=dict(),
-volume_binds=dict(),
-name=dict(),
-)
-for option, data in self.module.argument_spec.items():
-if option in self.__NON_CONTAINER_PROPERTY_OPTIONS:
-continue
-self.option_minimal_versions[option] = dict()
-self.option_minimal_versions.update(dict(
-device_read_bps=dict(docker_py_version='1.9.0', docker_api_version='1.22'),
-device_read_iops=dict(docker_py_version='1.9.0', docker_api_version='1.22'),
-device_write_bps=dict(docker_py_version='1.9.0', docker_api_version='1.22'),
-device_write_iops=dict(docker_py_version='1.9.0', docker_api_version='1.22'),
-dns_opts=dict(docker_api_version='1.21', docker_py_version='1.10.0'),
-ipc_mode=dict(docker_api_version='1.25'),
-mac_address=dict(docker_api_version='1.25'),
-oom_killer=dict(docker_py_version='2.0.0'),
-oom_score_adj=dict(docker_api_version='1.22', docker_py_version='2.0.0'),
-shm_size=dict(docker_api_version='1.22'),
-stop_signal=dict(docker_api_version='1.21'),
-tmpfs=dict(docker_api_version='1.22'),
-volume_driver=dict(docker_api_version='1.21'),
-memory_reservation=dict(docker_api_version='1.21'),
-kernel_memory=dict(docker_api_version='1.21'),
-auto_remove=dict(docker_py_version='2.1.0', docker_api_version='1.25'),
-healthcheck=dict(docker_py_version='2.0.0', docker_api_version='1.24'),
-init=dict(docker_py_version='2.2.0', docker_api_version='1.25'),
-runtime=dict(docker_py_version='2.4.0', docker_api_version='1.25'),
-sysctls=dict(docker_py_version='1.10.0', docker_api_version='1.24'),
-userns_mode=dict(docker_py_version='1.10.0', docker_api_version='1.23'),
-uts=dict(docker_py_version='3.5.0', docker_api_version='1.25'),
-# specials
-ipvX_address_supported=dict(docker_py_version='1.9.0', detect_usage=detect_ipvX_address_usage,
-usage_msg='ipv4_address or ipv6_address in networks'),
-stop_timeout=dict(),  # see below!
-))
-
-for option, data in self.option_minimal_versions.items():
-# Test whether option is supported, and store result
-support_docker_py = True
-support_docker_api = True
-if 'docker_py_version' in data:
-support_docker_py = self.docker_py_version >= LooseVersion(data['docker_py_version'])
-if 'docker_api_version' in data:
-support_docker_api = self.docker_api_version >= LooseVersion(data['docker_api_version'])
-data['supported'] = support_docker_py and support_docker_api
-# Fail if option is not supported but used
-if not data['supported']:
-# Test whether option is specified
-if 'detect_usage' in data:
-used = data['detect_usage']()
-else:
-used = self.module.params.get(option) is not None
-if used and 'default' in self.module.argument_spec[option]:
-used = self.module.params[option] != self.module.argument_spec[option]['default']
-if used:
-# If the option is used, compose error message.
-if 'usage_msg' in data:
-usg = data['usage_msg']
-else:
-usg = 'set %s option' % (option, )
-if not support_docker_api:
-msg = 'docker API version is %s. Minimum version required is %s to %s.'
-msg = msg % (self.docker_api_version_str, data['docker_api_version'], usg)
-elif not support_docker_py:
-if LooseVersion(data['docker_py_version']) < LooseVersion('2.0.0'):
-msg = (""docker-py version is %s. Minimum version required is %s to %s. ""
-   ""Consider switching to the 'docker' package if you do not require Python 2.6 support."")
-elif self.docker_py_version < LooseVersion('2.0.0'):
-msg = (""docker-py version is %s. Minimum version required is %s to %s. ""
-   ""You have to switch to the Python 'docker' package. First uninstall 'docker-py' before ""
-   ""installing 'docker' to avoid a broken installation."")
-else:
-msg = ""docker version is %s. Minimum version required is %s to %s.""
-msg = msg % (docker_version, data['docker_py_version'], usg)
-else:
-# should not happen
-msg = 'Cannot %s with your configuration.' % (usg, )
-self.fail(msg)
-stop_timeout_supported = self.docker_api_version >= LooseVersion('1.25')
-stop_timeout_supported = self.docker_py_version >= LooseVersion('2.1')
-"
--------------------------------------------------------------------------
-"if option in self.__NON_CONTAINER_PROPERTY_OPTIONS:
-"
--------------------------------------------------------------------------
-"
- PRs: 47711, 48074"
--------------------------------------------------------------------------
-=========================================================================
-"if option in self.__NON_CONTAINER_PROPERTY_OPTIONS:
-"
--------------------------------------------------------------------------
-"if option in self.__NON_CONTAINER_PROPERTY_OPTIONS:
-"
--------------------------------------------------------------------------
-"# A list of module options which are not docker container properties
-__NON_CONTAINER_PROPERTY_OPTIONS = (
-'docker_host', 'tls_hostname', 'api_version', 'timeout', 'cacert_path', 'cert_path',
-'key_path', 'ssl_version', 'tls', 'tls_verify', 'debug', 'env_file', 'force_kill',
-'keep_volumes', 'ignore_image', 'name', 'pull', 'purge_networks', 'recreate',
-'restart', 'state', 'stop_timeout', 'trust_image_content', 'networks', 'cleanup',
-'kill_signal', 'output_logs', 'paused'
-)
-"
--------------------------------------------------------------------------
-"
- PRs: 47711, 48074"
--------------------------------------------------------------------------
-=========================================================================
-"# A list of module options which are not docker container properties
-__NON_CONTAINER_PROPERTY_OPTIONS = (
-'docker_host', 'tls_hostname', 'api_version', 'timeout', 'cacert_path', 'cert_path',
-'key_path', 'ssl_version', 'tls', 'tls_verify', 'debug', 'env_file', 'force_kill',
-'keep_volumes', 'ignore_image', 'name', 'pull', 'purge_networks', 'recreate',
-'restart', 'state', 'trust_image_content', 'networks', 'cleanup', 'kill_signal',
-'output_logs', 'paused'
-)
-"
--------------------------------------------------------------------------
-"# A list of module options which are not docker container properties
-__NON_CONTAINER_PROPERTY_OPTIONS = (
-'docker_host', 'tls_hostname', 'api_version', 'timeout', 'cacert_path', 'cert_path',
-'key_path', 'ssl_version', 'tls', 'tls_verify', 'debug', 'env_file', 'force_kill',
-'keep_volumes', 'ignore_image', 'name', 'pull', 'purge_networks', 'recreate',
-'restart', 'state', 'trust_image_content', 'networks', 'cleanup', 'kill_signal',
-'output_logs', 'paused'
-)
-"
--------------------------------------------------------------------------
-"if self.client.docker_py_version >= LooseVersion('3.0'):
-"
--------------------------------------------------------------------------
-"
- PRs: 47711, 48074"
--------------------------------------------------------------------------
-=========================================================================
-"if self.client.docker_py_version >= LooseVersion('3.0'):
-"
--------------------------------------------------------------------------
-"if self.client.docker_py_version >= LooseVersion('3.0'):
-"
--------------------------------------------------------------------------
-"if client.module.params.get('restart_retries') is not None and not client.module.params.get('restart_policy'):
-"
--------------------------------------------------------------------------
-"
- PRs: 47711, 48074"
--------------------------------------------------------------------------
-=========================================================================
-"if client.module.params.get('restart_retries') is not None and not client.module.params.get('restart_policy'):
-"
--------------------------------------------------------------------------
-"if client.module.params.get('restart_retries') is not None and not client.module.params.get('restart_policy'):
-"
--------------------------------------------------------------------------
-"if self.parameters.client.docker_api_version < LooseVersion('1.22'):
-    # update_container() call not supported
-    return False, []
-    blkio_weight=host_config.get('BlkioWeight'),
-    cpu_shares=host_config.get('CpuShares'),
-    cpuset_mems=host_config.get('CpusetMems'),
-"
--------------------------------------------------------------------------
-"
- PRs: 47711, 48074"
--------------------------------------------------------------------------
-=========================================================================
-"if self.parameters.client.docker_api_version < LooseVersion('1.22'):
-    # update_container() call not supported
-    return False, []
-    blkio_weight=host_config.get('BlkioWeight'),
-    cpu_shares=host_config.get('CpuShares'),
-    cpuset_mems=host_config.get('CpusetMems'),
-"
--------------------------------------------------------------------------
-"if self.parameters.client.docker_api_version < LooseVersion('1.22'):
-    # update_container() call not supported
-    return False, []
-    blkio_weight=host_config.get('BlkioWeight'),
-    cpu_shares=host_config.get('CpuShares'),
-    cpuset_mems=host_config.get('CpusetMems'),
-"
--------------------------------------------------------------------------
-"volume_driver=host_config.get('VolumeDriver'),
-tions which don't make sense without their accompanying option
-elf.parameters.client.option_minimal_versions['auto_remove']['supported']:
-# auto_remove is only supported in docker>=2; unfortunately it has a default
-# value, that's why we have to jump through the hoops here
-elf.parameters.client.docker_api_version < LooseVersion('1.22'):
-# For docker API < 1.22, update_container() is not supported. Thus
-# we need to handle all limits which are usually handled by
-# update_container() as configuration changes which require a container
-# restart.
-config_mapping.update(dict(
-    blkio_weight=host_config.get('BlkioWeight'),
-    cpu_period=host_config.get('CpuPeriod'),
-    cpu_quota=host_config.get('CpuQuota'),
-    cpu_shares=host_config.get('CpuShares'),
-    cpuset_cpus=host_config.get('CpusetCpus'),
-    cpuset_mems=host_config.get('CpusetMems'),
-    kernel_memory=host_config.get(""KernelMemory""),
-    memory=host_config.get('Memory'),
-    memory_reservation=host_config.get('MemoryReservation'),
-    memory_swap=host_config.get('MemorySwap'),
-))
-"
--------------------------------------------------------------------------
-"
- PRs: 47711, 48074"
--------------------------------------------------------------------------
-=========================================================================
-"# Options which don't make sense without their accompanying option
-if self.parameters.client.option_minimal_versions['auto_remove']['supported']:
-    # auto_remove is only supported in docker>=2; unfortunately it has a default
-    # value, that's why we have to jump through the hoops here
-if self.parameters.client.option_minimal_versions['stop_timeout']['supported']:
-    # stop_timeout is only supported in docker>=2.1. Note that stop_timeout
-    # has a hybrid role, in that it used to be something only used for stopping
-    # containers, and is now also used as a container property. That's why
-    # it needs special handling here.
-if self.parameters.client.docker_api_version < LooseVersion('1.22'):
-    # For docker API < 1.22, update_container() is not supported. Thus
-    # we need to handle all limits which are usually handled by
-    # update_container() as configuration changes which require a container
-    # restart.
-    config_mapping.update(dict(
-blkio_weight=host_config.get('BlkioWeight'),
-cpu_period=host_config.get('CpuPeriod'),
-cpu_quota=host_config.get('CpuQuota'),
-cpu_shares=host_config.get('CpuShares'),
-cpuset_cpus=host_config.get('CpusetCpus'),
-cpuset_mems=host_config.get('CpusetMems'),
-kernel_memory=host_config.get(""KernelMemory""),
-memory=host_config.get('Memory'),
-memory_reservation=host_config.get('MemoryReservation'),
-memory_swap=host_config.get('MemorySwap'),
-    ))
-"
--------------------------------------------------------------------------
-"# Options which don't make sense without their accompanying option
-if self.parameters.client.option_minimal_versions['auto_remove']['supported']:
-    # auto_remove is only supported in docker>=2; unfortunately it has a default
-    # value, that's why we have to jump through the hoops here
-if self.parameters.client.option_minimal_versions['stop_timeout']['supported']:
-    # stop_timeout is only supported in docker>=2.1. Note that stop_timeout
-    # has a hybrid role, in that it used to be something only used for stopping
-    # containers, and is now also used as a container property. That's why
-    # it needs special handling here.
-if self.parameters.client.docker_api_version < LooseVersion('1.22'):
-    # For docker API < 1.22, update_container() is not supported. Thus
-    # we need to handle all limits which are usually handled by
-    # update_container() as configuration changes which require a container
-    # restart.
-    config_mapping.update(dict(
-blkio_weight=host_config.get('BlkioWeight'),
-cpu_period=host_config.get('CpuPeriod'),
-cpu_quota=host_config.get('CpuQuota'),
-cpu_shares=host_config.get('CpuShares'),
-cpuset_cpus=host_config.get('CpusetCpus'),
-cpuset_mems=host_config.get('CpusetMems'),
-kernel_memory=host_config.get(""KernelMemory""),
-memory=host_config.get('Memory'),
-memory_reservation=host_config.get('MemoryReservation'),
-memory_swap=host_config.get('MemorySwap'),
-    ))
-"
--------------------------------------------------------------------------
-"init='init',
-uts_mode='uts',
-auto_remove='auto_remove',
-elf.client.docker_py_version >= LooseVersion('1.9') and self.client.docker_api_version >= LooseVersion('1.22'):
-# blkio_weight can always be updated, but can only be set on creation
-# when docker-py and docker API are new enough
-elf.client.docker_py_version >= LooseVersion('3.0'):
-    if self.client.option_minimal_versions[value]['supported']:
-        params[key] = getattr(self, value)
-"
--------------------------------------------------------------------------
-"
- PRs: 47711, 48074"
--------------------------------------------------------------------------
-=========================================================================
-"volume_driver=host_config.get('VolumeDriver'),
-"
--------------------------------------------------------------------------
-"volume_driver=host_config.get('VolumeDriver'),
-"
--------------------------------------------------------------------------
-"if self.client.option_minimal_versions[value]['supported']:
-    result[key] = getattr(self, value)
-"
--------------------------------------------------------------------------
-"
- PRs: 47711, 48074"
--------------------------------------------------------------------------
-=========================================================================
-"init='init',
-uts_mode='uts',
-runtime='runtime',
-auto_remove='auto_remove',
-device_read_bps='device_read_bps',
-device_write_bps='device_write_bps',
-device_read_iops='device_read_iops',
-device_write_iops='device_write_iops',
-elf.client.docker_py_version >= LooseVersion('1.9') and self.client.docker_api_version >= LooseVersion('1.22'):
-# blkio_weight can always be updated, but can only be set on creation
-# when docker-py and docker API are new enough
-elf.client.docker_py_version >= LooseVersion('3.0'):
-    if self.client.option_minimal_versions[value]['supported']:
-        params[key] = getattr(self, value)
-"
--------------------------------------------------------------------------
-"init='init',
-uts_mode='uts',
-runtime='runtime',
-auto_remove='auto_remove',
-device_read_bps='device_read_bps',
-device_write_bps='device_write_bps',
-device_read_iops='device_read_iops',
-device_write_iops='device_write_iops',
-elf.client.docker_py_version >= LooseVersion('1.9') and self.client.docker_api_version >= LooseVersion('1.22'):
-# blkio_weight can always be updated, but can only be set on creation
-# when docker-py and docker API are new enough
-elf.client.docker_py_version >= LooseVersion('3.0'):
-    if self.client.option_minimal_versions[value]['supported']:
-        params[key] = getattr(self, value)
-"
--------------------------------------------------------------------------
-"if self.client.docker_py_version < LooseVersion('3.0'):
-    # cpu_shares and volume_driver moved to create_host_config in > 3
-"
--------------------------------------------------------------------------
-"
- PRs: 47711, 48074"
--------------------------------------------------------------------------
-=========================================================================
-"if self.client.option_minimal_versions[value]['supported']:
-    result[key] = getattr(self, value)
-"
--------------------------------------------------------------------------
-"if self.client.option_minimal_versions[value]['supported']:
-    result[key] = getattr(self, value)
-"
--------------------------------------------------------------------------
-"blkio_weight='blkio_weight',
-cpuset_mems='cpuset_mems',
-    if self.client.option_minimal_versions[value]['supported']:
-        result[key] = getattr(self, value)
-"
--------------------------------------------------------------------------
-"
- PRs: 47711, 48074"
--------------------------------------------------------------------------
-=========================================================================
-"stop_timeout='stop_timeout',
-healthcheck='healthcheck',
-elf.client.docker_py_version < LooseVersion('3.0'):
-# cpu_shares and volume_driver moved to create_host_config in > 3
-"
--------------------------------------------------------------------------
-"stop_timeout='stop_timeout',
-healthcheck='healthcheck',
-elf.client.docker_py_version < LooseVersion('3.0'):
-# cpu_shares and volume_driver moved to create_host_config in > 3
-"
--------------------------------------------------------------------------
-"from ansible.module_utils.docker_common import AnsibleDockerClient, DockerBaseClass, sanitize_result
-from ansible.module_utils.docker_common import docker_version
-if LooseVersion(docker_version) >= LooseVersion('1.10.0'):
-pt Exception as dummy:
-"
--------------------------------------------------------------------------
-"
- PRs: 47711, 48074"
--------------------------------------------------------------------------
-=========================================================================
-"def get_request(self, uri, parse_json_result=True, headers=None):
-resp, info = fetch_url(self.module, uri, method='GET', headers=headers)
-
-try:
-content = resp.read()
-except AttributeError:
-content = info.get('body')
-
-if parse_json_result:
-result = {}
-if content:
-if info['content-type'].startswith('application/json'):
-try:
-result = self.module.from_json(content.decode('utf8'))
-except ValueError:
-raise ModuleFailException(""Failed to parse the ACME response: {0} {1}"".format(uri, content))
-else:
-result = content
-else:
-result = content
-
-if info['status'] >= 400:
-raise ModuleFailException(""ACME request failed: CODE: {0} RESULT: {1}"".format(info['status'], result))
-return result, info
-
-"
--------------------------------------------------------------------------
-"def get_request(self, uri, parse_json_result=True, headers=None):
-resp, info = fetch_url(self.module, uri, method='GET', headers=headers)
-
-try:
-content = resp.read()
-except AttributeError:
-content = info.get('body')
-
-if parse_json_result:
-result = {}
-if content:
-if info['content-type'].startswith('application/json'):
-try:
-result = self.module.from_json(content.decode('utf8'))
-except ValueError:
-raise ModuleFailException(""Failed to parse the ACME response: {0} {1}"".format(uri, content))
-else:
-result = content
-else:
-result = content
-
-if info['status'] >= 400:
-raise ModuleFailException(""ACME request failed: CODE: {0} RESULT: {1}"".format(info['status'], result))
-return result, info
-
-"
--------------------------------------------------------------------------
-"data = {}
-result, info = self.send_signed_request(self.uri, data)
-:
-# try POST-as-GET first (draft-15 or newer)
-data = None
-result, info = self.send_signed_request(self.uri, data)
-# check whether that failed with a malformed request error
-if info['status'] >= 400 and result.get('type') == 'urn:ietf:params:acme:error:malformed':
-    # retry as a regular POST (with no changed data) for pre-draft-15 ACME servers
-    data = {}
-    result, info = self.send_signed_request(self.uri, data)
-"
--------------------------------------------------------------------------
-"
- PRs: 45051, 48043"
--------------------------------------------------------------------------
-=========================================================================
-"if content or not parse_json_result:
-    if (parse_json_result and info['content-type'].startswith('application/json')) or 400 <= info['status'] < 600:
-decoded_result = self.module.from_json(content.decode('utf8'))
-        decoded_result.get('type') == 'urn:ietf:params:acme:error:badNonce' and
-if parse_json_result:
-    result = decoded_result
-"
--------------------------------------------------------------------------
-"if content or not parse_json_result:
-    if (parse_json_result and info['content-type'].startswith('application/json')) or 400 <= info['status'] < 600:
-decoded_result = self.module.from_json(content.decode('utf8'))
-        decoded_result.get('type') == 'urn:ietf:params:acme:error:badNonce' and
-if parse_json_result:
-    result = decoded_result
-"
--------------------------------------------------------------------------
-"def get_request(self, uri, parse_json_result=True, headers=None, get_only=False):
-'''
-Perform a GET-like request. Will try POST-as-GET for ACMEv2, with fallback
-to GET if server replies with a status code of 405.
-'''
-if not get_only and self.version != 1:
-# Try POST-as-GET
-content, info = self.send_signed_request(uri, None, parse_json_result=False)
-if info['status'] == 405:
-# Instead, do unauthenticated GET
-get_only = True
-else:
-# Do unauthenticated GET
-get_only = True
-if get_only:
-# Perform unauthenticated GET
-resp, info = fetch_url(self.module, uri, method='GET', headers=headers)
-try:
-content = resp.read()
-except AttributeError:
-content = info.get('body')
-
-# Process result
-"
--------------------------------------------------------------------------
-"
- PRs: 45051, 48043"
--------------------------------------------------------------------------
-=========================================================================
-"def send_signed_request(self, url, payload, key_data=None, jws_header=None, parse_json_result=True):
-"
--------------------------------------------------------------------------
-"def send_signed_request(self, url, payload, key_data=None, jws_header=None, parse_json_result=True):
-"
--------------------------------------------------------------------------
-"
-If payload is None, a POST-as-GET is performed.
-(https://tools.ietf.org/html/draft-ietf-acme-acme-15#section-6.3)
-"
--------------------------------------------------------------------------
-"
- PRs: 45051, 48043"
--------------------------------------------------------------------------
-=========================================================================
-"self.directory = ACMEDirectory(module, self)
-
-"
--------------------------------------------------------------------------
-"self.directory = ACMEDirectory(module, self)
-
-"
--------------------------------------------------------------------------
-"if payload is None:
-    payload64 = ''
-else:
-    payload64 = nopad_b64(self.module.jsonify(payload).encode('utf8'))
-"
--------------------------------------------------------------------------
-"
- PRs: 45051, 48043"
--------------------------------------------------------------------------
-=========================================================================
-"auth_data, dummy = self.account.get_request(auth_uri)
-"
--------------------------------------------------------------------------
-"auth_data, dummy = self.account.get_request(auth_uri)
-"
--------------------------------------------------------------------------
-"self.directory, dummy = account.get_request(self.directory_root, get_only=True)
-"
--------------------------------------------------------------------------
-"
- PRs: 45051, 48043"
--------------------------------------------------------------------------
-=========================================================================
-"if self.module.check_mode:
-    self.module.debug('In check mode, would have run: ""%s""' % cmd)
-    return (0, '', '')
-
-master_in_fd, slave_in_fd = pty.openpty()
-master_out_fd, slave_out_fd = pty.openpty()
-master_err_fd, slave_err_fd = pty.openpty()
-env = os.environ.copy()
-env['LC_ALL'] = 'C'
-try:
-    p = subprocess.Popen([to_bytes(c) for c in cmd],
- stdin=slave_in_fd,
- stdout=slave_out_fd,
- stderr=slave_err_fd,
- preexec_fn=os.setsid,
- env=env)
-    out_buffer = b''
-    err_buffer = b''
-    while p.poll() is None:
-        r, w, e = select.select([master_out_fd, master_err_fd], [], [], 1)
-        first_prompt = b'Enter passphrase (empty for no passphrase):'
-        second_prompt = b'Enter same passphrase again'
-        prompt = first_prompt
-        for fd in r:
-if fd == master_out_fd:
-    chunk = os.read(master_out_fd, 10240)
-    out_buffer = chunk
-    if prompt in out_buffer:
-        os.write(master_in_fd, self.ssh_passphrase  b'\r')
-        prompt = second_prompt
-else:
-    chunk = os.read(master_err_fd, 10240)
-    err_buffer = chunk
-    if prompt in err_buffer:
-        os.write(master_in_fd, self.ssh_passphrase  b'\r')
-        prompt = second_prompt
-if b'Overwrite (y/n)?' in out_buffer or b'Overwrite (y/n)?' in err_buffer:
-    # This created between us checking for existence and now
-    return (None, 'Key already exists', '')
-
-    rc = p.returncode
-    out = to_native(out_buffer)
-    err = to_native(err_buffer)
-except OSError as e:
-    return (1, '', to_native(e))
-cmd.append('-N')
-(rc, out, err) = self.execute_command(cmd)
-
-"
--------------------------------------------------------------------------
-"if self.module.check_mode:
-    self.module.debug('In check mode, would have run: ""%s""' % cmd)
-    return (0, '', '')
-
-master_in_fd, slave_in_fd = pty.openpty()
-master_out_fd, slave_out_fd = pty.openpty()
-master_err_fd, slave_err_fd = pty.openpty()
-env = os.environ.copy()
-env['LC_ALL'] = 'C'
-try:
-    p = subprocess.Popen([to_bytes(c) for c in cmd],
- stdin=slave_in_fd,
- stdout=slave_out_fd,
- stderr=slave_err_fd,
- preexec_fn=os.setsid,
- env=env)
-    out_buffer = b''
-    err_buffer = b''
-    while p.poll() is None:
-        r, w, e = select.select([master_out_fd, master_err_fd], [], [], 1)
-        first_prompt = b'Enter passphrase (empty for no passphrase):'
-        second_prompt = b'Enter same passphrase again'
-        prompt = first_prompt
-        for fd in r:
-if fd == master_out_fd:
-    chunk = os.read(master_out_fd, 10240)
-    out_buffer = chunk
-    if prompt in out_buffer:
-        os.write(master_in_fd, self.ssh_passphrase  b'\r')
-        prompt = second_prompt
-else:
-    chunk = os.read(master_err_fd, 10240)
-    err_buffer = chunk
-    if prompt in err_buffer:
-        os.write(master_in_fd, self.ssh_passphrase  b'\r')
-        prompt = second_prompt
-if b'Overwrite (y/n)?' in out_buffer or b'Overwrite (y/n)?' in err_buffer:
-    # This created between us checking for existence and now
-    return (None, 'Key already exists', '')
-
-    rc = p.returncode
-    out = to_native(out_buffer)
-    err = to_native(err_buffer)
-except OSError as e:
-    return (1, '', to_native(e))
-cmd.append('-N')
-(rc, out, err) = self.execute_command(cmd)
-
-"
--------------------------------------------------------------------------
-"if self.module.check_mode:
-    self.module.debug('In check mode, would have run: ""%s""' % cmd)
-    return (0, '', '')
-
-master_in_fd, slave_in_fd = pty.openpty()
-master_out_fd, slave_out_fd = pty.openpty()
-master_err_fd, slave_err_fd = pty.openpty()
-env = os.environ.copy()
-env['LC_ALL'] = 'C'
-try:
-    p = subprocess.Popen([to_bytes(c) for c in cmd],
- stdin=slave_in_fd,
- stdout=slave_out_fd,
- stderr=slave_err_fd,
- preexec_fn=os.setsid,
- env=env)
-    out_buffer = b''
-    err_buffer = b''
-    while p.poll() is None:
-        r, w, e = select.select([master_out_fd, master_err_fd], [], [], 1)
-        first_prompt = b'Enter passphrase (empty for no passphrase):'
-        second_prompt = b'Enter same passphrase again'
-        prompt = first_prompt
-        for fd in r:
-if fd == master_out_fd:
-    chunk = os.read(master_out_fd, 10240)
-    out_buffer = chunk
-    if prompt in out_buffer:
-        os.write(master_in_fd, to_bytes(self.ssh_passphrase, errors='strict')  b'\r')
-        prompt = second_prompt
-else:
-    chunk = os.read(master_err_fd, 10240)
-    err_buffer = chunk
-    if prompt in err_buffer:
-        os.write(master_in_fd, to_bytes(self.ssh_passphrase, errors='strict')  b'\r')
-        prompt = second_prompt
-if b'Overwrite (y/n)?' in out_buffer or b'Overwrite (y/n)?' in err_buffer:
-    # The key was created between us checking for existence and now
-    return (None, 'Key already exists', '')
-
-    rc = p.returncode
-    out = to_native(out_buffer)
-    err = to_native(err_buffer)
-except OSError as e:
-    return (1, '', to_native(e))
-cmd.append('-N')
-(rc, out, err) = self.execute_command(cmd)
-
-"
--------------------------------------------------------------------------
-"
- PRs: 47436, 47487"
--------------------------------------------------------------------------
-=========================================================================
-"if not isinstance(rule[source_type], list):
-    rule[source_type] = [rule[source_type]]
-format_rule[rule_key] = [{source_type: target} for target in rule[source_type]]
-"
--------------------------------------------------------------------------
-"if not isinstance(rule[source_type], list):
-    rule[source_type] = [rule[source_type]]
-format_rule[rule_key] = [{source_type: target} for target in rule[source_type]]
-"
--------------------------------------------------------------------------
-"from copy import deepcopy
-"
--------------------------------------------------------------------------
-"
- PRs: 45594, 45748"
--------------------------------------------------------------------------
-=========================================================================
-"if checksum != destination_checksum:
-    checksum_mismatch = True
-
-t forcing redownload, unless checksum does not match
-ot force and not checksum_mismatch:
-# Not forcing redownload, unless checksum does not match
-# allow file attribute changes
-module.params['path'] = dest
-file_args = module.load_file_common_arguments(module.params)
-file_args['path'] = dest
-result['changed'] = module.set_fs_attributes_if_different(file_args, False)
-if result['changed']:
-    module.exit_json(msg=""file already exists but file attributes changed"", **result)
-module.exit_json(msg=""file already exists"", **result)
-"
--------------------------------------------------------------------------
-"if checksum != destination_checksum:
-    checksum_mismatch = True
-
-t forcing redownload, unless checksum does not match
-ot force and not checksum_mismatch:
-# Not forcing redownload, unless checksum does not match
-# allow file attribute changes
-module.params['path'] = dest
-file_args = module.load_file_common_arguments(module.params)
-file_args['path'] = dest
-result['changed'] = module.set_fs_attributes_if_different(file_args, False)
-if result['changed']:
-    module.exit_json(msg=""file already exists but file attributes changed"", **result)
-module.exit_json(msg=""file already exists"", **result)
-"
--------------------------------------------------------------------------
-"if checksum != destination_checksum:
-    checksum_mismatch = True
-
-t forcing redownload, unless checksum does not match
-ot force and not checksum_mismatch:
-# allow file attribute changes
-module.params['path'] = dest
-file_args = module.load_file_common_arguments(module.params)
-file_args['path'] = dest
-changed = module.set_fs_attributes_if_different(file_args, False)
-if changed:
-    module.exit_json(msg=""file already exists but file attributes changed"", dest=dest, url=url, changed=changed)
-module.exit_json(msg=""file already exists"", dest=dest, url=url, changed=changed)
-"
--------------------------------------------------------------------------
-"
- PRs: 45495, 45567"
--------------------------------------------------------------------------
-=========================================================================
-"if checksum != destination_checksum:
-    checksum_mismatch = True
-
-t forcing redownload, unless checksum does not match
-ot force and not checksum_mismatch:
-# Not forcing redownload, unless checksum does not match
-# allow file attribute changes
-module.params['path'] = dest
-file_args = module.load_file_common_arguments(module.params)
-file_args['path'] = dest
-result['changed'] = module.set_fs_attributes_if_different(file_args, False)
-if result['changed']:
-    module.exit_json(msg=""file already exists but file attributes changed"", **result)
-module.exit_json(msg=""file already exists"", **result)
-"
--------------------------------------------------------------------------
-"if checksum != destination_checksum:
-    checksum_mismatch = True
-
-t forcing redownload, unless checksum does not match
-ot force and not checksum_mismatch:
-# Not forcing redownload, unless checksum does not match
-# allow file attribute changes
-module.params['path'] = dest
-file_args = module.load_file_common_arguments(module.params)
-file_args['path'] = dest
-result['changed'] = module.set_fs_attributes_if_different(file_args, False)
-if result['changed']:
-    module.exit_json(msg=""file already exists but file attributes changed"", **result)
-module.exit_json(msg=""file already exists"", **result)
-"
--------------------------------------------------------------------------
-"if checksum != destination_checksum:
-    checksum_mismatch = True
-
-t forcing redownload, unless checksum does not match
-ot force and not checksum_mismatch:
-# Not forcing redownload, unless checksum does not match
-# allow file attribute changes
-module.params['path'] = dest
-file_args = module.load_file_common_arguments(module.params)
-file_args['path'] = dest
-changed = module.set_fs_attributes_if_different(file_args, False)
-if changed:
-    module.exit_json(msg=""file already exists but file attributes changed"", dest=dest, url=url, changed=changed)
-module.exit_json(msg=""file already exists"", dest=dest, url=url, changed=changed)
-"
--------------------------------------------------------------------------
-"
- PRs: 45495, 45565"
--------------------------------------------------------------------------
-=========================================================================
-"line = params['line']
-
-if regexp == '':
-module.warn(
-""The regular expression is an empty string, which will match every line in the file. ""
-""This may have unintended consequences, such as replacing the last line in the file rather than appending. ""
-""If this is desired, use '^' to match every line in the file and avoid this warning."")
-if backrefs and regexp is None:
-module.fail_json(msg='regexp is required with backrefs=true')
-if line is None:
-module.fail_json(msg='line is required with state=present')
-"
--------------------------------------------------------------------------
-"line = params['line']
-
-if regexp == '':
-module.warn(
-""The regular expression is an empty string, which will match every line in the file. ""
-""This may have unintended consequences, such as replacing the last line in the file rather than appending. ""
-""If this is desired, use '^' to match every line in the file and avoid this warning."")
-if backrefs and regexp is None:
-module.fail_json(msg='regexp is required with backrefs=true')
-if line is None:
-module.fail_json(msg='line is required with state=present')
-"
--------------------------------------------------------------------------
-"regexp = params['regexp']
-line = params['line']
-
-if regexp == '':
-module.warn(
-""The regular expression is an empty string, which will match every line in the file. ""
-""This may have unintended consequences, such as replacing the last line in the file rather than appending. ""
-""If this is desired, use '^' to match every line in the file and avoid this warning."")
-if backrefs and regexp is None:
-module.fail_json(msg='regexp is required with backrefs=true')
-if line is None:
-module.fail_json(msg='line is required with state=present')
-"
--------------------------------------------------------------------------
-"
- PRs: 42013, 42207"
--------------------------------------------------------------------------
-=========================================================================
-"line = params['line']
-
-if regexp == '':
-module.warn(
-""The regular expression is an empty string, which will match every line in the file. ""
-""This may have unintended consequences, such as replacing the last line in the file rather than appending. ""
-""If this is desired, use '^' to match every line in the file and avoid this warning."")
-if backrefs and regexp is None:
-module.fail_json(msg='regexp is required with backrefs=true')
-if line is None:
-module.fail_json(msg='line is required with state=present')
-"
--------------------------------------------------------------------------
-"line = params['line']
-
-if regexp == '':
-module.warn(
-""The regular expression is an empty string, which will match every line in the file. ""
-""This may have unintended consequences, such as replacing the last line in the file rather than appending. ""
-""If this is desired, use '^' to match every line in the file and avoid this warning."")
-if backrefs and regexp is None:
-module.fail_json(msg='regexp is required with backrefs=true')
-if line is None:
-module.fail_json(msg='line is required with state=present')
-"
--------------------------------------------------------------------------
-"regexp = params['regexp']
-line = params['line']
-
-if regexp == '':
-module.warn(
-""The regular expression is an empty string, which will match every line in the file. ""
-""This may have unintended consequences, such as replacing the last line in the file rather than appending. ""
-""If this is desired, use '^' to match every line in the file and avoid this warning."")
-if backrefs and regexp is None:
-module.fail_json(msg='regexp is required with backrefs=true')
-if line is None:
-module.fail_json(msg='line is required with state=present')
-"
--------------------------------------------------------------------------
-"
- PRs: 42013, 42204"
+PRs: 63689, 63687"
 -------------------------------------------------------------------------
 =========================================================================
