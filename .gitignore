@@ -169,6 +169,6 @@ keys_multiple.gconfig
 utils/meteor-1.5
 ansible
 bitcoin
-bootstrap
 cmssw
 cpython
+salt
