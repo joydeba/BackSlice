@@ -363,23 +363,25 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
             writer.writerow(["========================================================================="])
 
 # # Updated on 11th April 2023
-ansibleDictOfActiveBranches = {'devel':{}, 'stable-2.9':{}, 'stable-2.12':{}, 'stable-2.14':{}, 'stable-2.13':{}, 'stable-2.15':{}}
+# ansibleDictOfActiveBranches = {'devel':{}, 'stable-2.9':{}, 'stable-2.12':{}, 'stable-2.14':{}, 'stable-2.13':{}, 'stable-2.15':{}}
 # bitcoinDictOfActiveBranches = {'master':{}, '25.x':{}, '24.x':{}, '23.x':{}, '22.x':{}}
 # ElasticsearchDictOfActiveBranches = {'main':{}, '8.8':{}, '7.17':{}, '8.7':{}, '8.5':{}, '8.6':{}, '8.0':{}, '8.1':{}, '8.2':{}, '8.3':{},'8.4':{}, '6.5':{}}
 # JuliaDictOfActiveBranches = {'master':{}, 'release-1.9':{}, 'release-1.8':{}, 'release-1.6':{}}
 # RailsDictOfActiveBranches = {'main':{}, '7-0-stable':{}, '6-1-stable':{}, '6-0-stable':{}}
 # KibanaDictOfActiveBranches = {'main':{}, '8.8':{}, '8.7':{}, '8.6':{}, '8.5':{}, '8.4':{}, '7.17':{}, '8.2':{}, '8.3':{}}
 # cpythonDictOfActiveBranches = {'main':{}, '3.12':{}, '3.11':{}, '3.10':{}, '3.9':{}, '3.8':{}}
-ansibleDefault_branch = 'devel'
+# ansibleDefault_branch = 'devel'
 # bitcoinDefault_branch = 'master'
 # ElasticsearchDefault_branch = 'main'
 # JuliaDefault_branch = 'master'
 # RailsDefault_branch = 'main'
 # KibanaDefault_branch = 'main'
 # cpythonDefault_branch = 'main'
-mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRs.csv', 
-ansibleDefault_branch,
-ansibleDictOfActiveBranches,
-'ansible',
-'ansible',
-'slicerOutput/Incmp_BackSlice_Ansible_backport_keywordsPRs.csv')
+cmsswDefault_branch = 'master'
+cmsswDictOfActiveBranches = {'master':{}, 'CMSSW_14_1_DEVEL_X':{}, 'CMSSW_14_1_X':{}, 'CMSSW_14_0_X':{}, 'CMSSW_13_0_HeavyIon_X':{}, 'CMSSW_10_6_X':{}, 'CMSSW_13_2_X':{}, 'CMSSW_13_3_X':{}, 'CMSSW_12_4_X':{}, 'CMSSW_13_0_X':{}, 'CMSSW_12_6_X':{}, 'CMSSW_13_1_X':{}, 'CMSSW_14_0_DEVEL_X':{}}
+mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Cmssw_backport_keywordsPRs.csv', 
+cmsswDefault_branch,
+cmsswDictOfActiveBranches,
+'cms-sw',
+'cmssw',
+'slicerOutput/Incmp_BackSlice_Cmssw_backport_keywordsPRs.csv')
