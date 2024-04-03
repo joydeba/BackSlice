@@ -163,8 +163,8 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
 
                                 commits_hunk_originalLines = ""
                                 commits_hunk_backportLines = ""                            
-                                commits_hunkTest_originalLines = ""
-                                commits_hunkTest_backportLines = ""
+                                # commits_hunkTest_originalLines = ""
+                                # commits_hunkTest_backportLines = ""
                                 # commits_diffs_backportLines = ""
 
                                 # Todo check first hunk line 
@@ -231,8 +231,8 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                 if previousBackportfullFileTarget is None:
                                     previousBackportfullFileTarget = backport_fullFileTarget                                                                                                   
                                 
-                                if commits_hunkTest_originalLines:            
-                                    testhunks_original.append(commits_hunkTest_originalLines) 
+                                # if commits_hunkTest_originalLines:            
+                                #     testhunks_original.append(commits_hunkTest_originalLines) 
 
                                 if commits_hunk_originalLines:    
                                     codehunks_original.append(commits_hunk_originalLines)
@@ -398,7 +398,7 @@ saltDefault  = "maser" # Python 97.8% --------- X
 # 'cmssw',
 # 'slicerOutput/Incmp_BackSlice_Cmssw_backport_keywordsPRs.csv')
 
-mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Salt_backport_keywordsPRs.csv', 
+mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Salt_backport_keywordsPRsNoTestNeeded.csv', 
 saltDefault,
 saltDictOfActiveBranches,
 'saltstack',
