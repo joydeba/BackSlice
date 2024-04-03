@@ -125,15 +125,15 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     if len(commits_diffs_backport) == len(commits_diffs_original):
                         for indexO in range(1, len(commits_diffs_original)):
                             # Check the odd index for test cases [Todo]
-                            is_test_code = False
-                            is_test_codeB = False
+                            # is_test_code = False
+                            # is_test_codeB = False
                             if commits_diffs_original[indexO] is not None:
                                 filepath = commits_diffs_original[indexO].split("\n")[0]
                                 filepathBackport = commits_diffs_backport[indexO].split("\n")[0]                            
-                            if has_test_files([filepath]):
-                                is_test_code = True
-                            if has_test_files([filepathBackport]):
-                                is_test_codeB = True                                                    
+                            # if has_test_files([filepath]):
+                            #     is_test_code = True
+                            # if has_test_files([filepathBackport]):
+                            #     is_test_codeB = True                                                    
                             commits_diffs_original_contextHunks = commits_diffs_original[indexO].split("\n@@ ")
                             commits_diffs_backport_contextHunks = commits_diffs_backport[indexO].split("\n@@ ")
 
@@ -175,10 +175,12 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                         c_line = c_line.replace("+", "")
                                         if leadingSpacesOri == 0:
                                             leadingSpacesOri = len(c_line) - len(c_line.lstrip())
-                                        if is_test_code:
-                                            commits_hunkTest_originalLines = commits_hunkTest_originalLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n"
-                                        else:
-                                            commits_hunk_originalLines = commits_hunk_originalLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n"
+                                        # if is_test_code:
+                                        #     commits_hunkTest_originalLines = commits_hunkTest_originalLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n"
+                                        # else:
+                                        #     commits_hunk_originalLines = commits_hunk_originalLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n"
+
+                                        commits_hunk_originalLines = commits_hunk_originalLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n"
 
                                 leadingSpacesBackport = 0
                                 for c_lineB in commits_hunkline_backport_context:
@@ -186,9 +188,11 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                         c_lineB = c_lineB.replace("+", "")
                                         if leadingSpacesBackport == 0:
                                             leadingSpacesBackport = len(c_lineB) - len(c_lineB.lstrip())
-                                        if is_test_codeB:
-                                            commits_hunkTest_backportLines = commits_hunkTest_backportLines + c_lineB.replace(c_lineB[:leadingSpacesBackport], "") + "\n"
-                                        else:
+                                        # if is_test_codeB:
+                                        #     commits_hunkTest_backportLines = commits_hunkTest_backportLines + c_lineB.replace(c_lineB[:leadingSpacesBackport], "") + "\n"
+                                        # else:
+                                        #     commits_hunk_backportLines = commits_hunk_backportLines + c_lineB.replace(c_lineB[:leadingSpacesBackport], "") + "\n"
+
                                             commits_hunk_backportLines = commits_hunk_backportLines + c_lineB.replace(c_lineB[:leadingSpacesBackport], "") + "\n"
 
                                 # If you need to know the current full file on the target stable version.  
@@ -297,7 +301,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     print(e)
                     continue
         
-    with open("slicerOutput/"+projectName+"InconICFDiffzBackSlice.txt", 'w') as f:   
+    with open("slicerOutput/"+projectName+"InconICFDiffzBackSliceNoNeedTest.txt", 'w') as f:   
         print("Total Labeled Backporting PRs", len(data_read), file=f)
         print("Total Sliced Required", numberofSlicingRequired, file=f)
         print("Total Number of Hunk Differences", numberofDifferences, file=f)
@@ -399,4 +403,4 @@ saltDefault,
 saltDictOfActiveBranches,
 'saltstack',
 'salt',
-'slicerOutput/Incmp_BackSlice_Salt_backport_keywordsPRs.csv')
+'slicerOutput/Incmp_BackSlice_Salt_backport_keywordsPRsNoNeedTest.csv')

@@ -27,18 +27,19 @@ def remove_comments_docstrings_fromString(fsring):
 
 
 def has_test_files(files):
-    test_patterns = [
-        # r'^test.*\.py$',  
-        # r'^.*test\.py$',
-        r".*test.*" 
+    # test_patterns = [
+    #     # r'^test.*\.py$',  
+    #     # r'^.*test\.py$',
+    #     r".*test.*" 
         
-    ]
+    # ]
 
-    for file in files:
-        for pattern in test_patterns:
-            if re.match(pattern, file):
-                return True
-    return False
+    # for file in files:
+    #     for pattern in test_patterns:
+    #         if re.match(pattern, file):
+    #             return True
+    # return False
+    return True
 
 
 def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = None, endDate = None, repoName=None, projectName = None):
