@@ -18,7 +18,7 @@ from github import Github
 from sklearn.metrics import confusion_matrix, cohen_kappa_score
 import numpy as np
 
-def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranches = {}, repoName="repoName", projectName = 'projectName', output1="outputCSLICER.csv"):
+def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranches = {}, repoName="repoName", projectName = 'projectName', output1="outputCSLICER.csv", stableBranch = "mainCSLICER"):
     """ 
     This function slices for changesets by CSLICER.
     """
@@ -43,12 +43,12 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
         sliced_prs_commits = []        
         for idx, line in enumerate(data_read):
 
-            g, no_bused_key, load_object = changeG(g, accesskey, backup_keys, no_bused_key, load_object)        
+            # g, no_bused_key, load_object = changeG(g, accesskey, backup_keys, no_bused_key, load_object)        
         
-            if load_object:
-                repo = g.get_repo(repository)
-                print("New G loaded")
-                load_object = 0
+            # if load_object:
+            #     repo = g.get_repo(repository)
+            #     print("New G loaded")
+            #     load_object = 0
 
             backport_slices = ""               
             original_slices = "" 
@@ -300,7 +300,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                                 metadata = get_changesets_and_metadata(pull_request = pull_backport, sourceO = codeHunkBackport), 
                                                 functionalSet = functionalSetforHunk, 
                                                 compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
-                                                stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=ghkey, cache_file= projectName+"StableLibraryCsche"), 
+                                                stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = stableBranch, github_token=ghkey, cache_file= projectName+"StableLibraryCsche"), 
                                                 targetfile = previousBackportfullFileTarget)                        
                             context_index = context_index +1                    
                             slicebyCslicer, recommendation = cslicer.analyzeProgram()
@@ -389,16 +389,16 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
 # ansibleDictOfActiveBranches = {'devel':{}, 'stable-2.9':{}, 'stable-2.12':{}, 'stable-2.14':{}, 'stable-2.13':{}, 'stable-2.15':{}, 'stable-2.16':{}}
 # ansibleDictOfActiveBranches = {"stable-2.3": 2, "stable-2.4": 1, "stable-2.5": 2, "stable-2.6": 49, "stable-2.7": 458, "stable-2.8": 603, "stable-2.9": 706, "stable-2.10": 294, "stable-2.11": 0, "temporary-2.9.1-branch-releng-only": 27}
 # bitcoinDictOfActiveBranches = {'master':{}, '25.x':{}, '24.x':{}, '23.x':{}, '22.x':{}, '27.x':{}, '26.x':{}}
-bitcoinDictOfActiveBranches = { '0.19': {}, '0.20': {}, '0.21': {}, '0.18': {}, '0.17': {}, '0.16': {}, '0.15': {}, '0.14': {}, '0.13': {}, '0.12': {}, '0.11': {}, '0.10': {},'0.9.3': {}}
+# bitcoinDictOfActiveBranches = { '0.19': {}, '0.20': {}, '0.21': {}, '0.18': {}, '0.17': {}, '0.16': {}, '0.15': {}, '0.14': {}, '0.13': {}, '0.12': {}, '0.11': {}, '0.10': {},'0.9.3': {}}
 # ElasticsearchDictOfActiveBranches = {'main':{}, '8.8':{}, '7.17':{}, '8.7':{}, '8.5':{}, '8.6':{}, '8.0':{}, '8.1':{}, '8.2':{}, '8.3':{},'8.4':{}, '6.5':{}}
 # JuliaDictOfActiveBranches = {'master':{}, 'release-1.9':{}, 'release-1.8':{}, 'release-1.6':{}}
 # RailsDictOfActiveBranches = {'main':{}, '7-0-stable':{}, '6-1-stable':{}, '6-0-stable':{}}
 # KibanaDictOfActiveBranches = {'main':{}, '8.8':{}, '8.7':{}, '8.6':{}, '8.5':{}, '8.4':{}, '7.17':{}, '8.2':{}, '8.3':{}}
 # cpythonDictOfActiveBranches = {'main':{}, '3.12':{}, '3.11':{}, '3.10':{}, '3.9':{}, '3.8':{}, '3.0.x':{}}
 # cmsswDictOfActiveBranches = {'master':{}, 'CMSSW_14_1_DEVEL_X':{}, 'CMSSW_14_1_X':{}, 'CMSSW_14_0_X':{}, 'CMSSW_13_0_HeavyIon_X':{}, 'CMSSW_10_6_X':{}, 'CMSSW_13_2_X':{}, 'CMSSW_13_3_X':{}, 'CMSSW_12_4_X':{}, 'CMSSW_13_0_X':{}, 'CMSSW_12_6_X':{}, 'CMSSW_13_1_X':{}, 'CMSSW_14_0_DEVEL_X':{}, 'CMSSW_7_1_X':{}, 'CMSSW_12_5_X':{}}
-# saltDictOfActiveBranches = {'master':{}, '3006.x':{}, '3007.x':{}, '3005.x':{}, '2018.3':{}, '2019.2':{}, 'freeze':{} }
+saltDictOfActiveBranches = {'master':{}, '3006.x':{}, '3007.x':{}, '3005.x':{}, '2018.3':{}, '2019.2':{}, 'freeze':{} }
 # ansibleDefault_branch = 'devel' # Python 87.8% ---------
-bitcoinDefault_branch = 'master' # Python 20.1% ---------
+# bitcoinDefault_branch = 'master' # Python 20.1% ---------
 # ElasticsearchDefault_branch = 'main' # Python 0.0%
 # JuliaDefault_branch = 'master' # Python 0.0%
 # RailsDefault_branch = 'main' # Python 0.0%
@@ -411,7 +411,7 @@ bitcoinDefault_branch = 'master' # Python 20.1% ---------
 # nextcloudDefault = "maser" # Python 0.0%
 # nixpkgsDefault = "master" #  Python 1.2%
 # owncloudDefault  = "maser" # Python 0.0%
-# saltDefault  = "maser" # Python 97.8% --------- X
+saltDefault  = "maser" # Python 97.8% --------- X
 
 
 # mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Cmssw_backport_keywordsPRs.csv', 
@@ -421,9 +421,11 @@ bitcoinDefault_branch = 'master' # Python 20.1% ---------
 # 'cmssw',
 # 'slicerOutput/Incmp_BackSlice_Cmssw_backport_keywordsPRs.csv')
 
-mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Bitcoin_backport_keywordsPRsNoTestNeeded.csv', 
-bitcoinDefault_branch,
-bitcoinDictOfActiveBranches,
-'bitcoin',
-'bitcoin',
-'slicerOutput/Incmp_BackSlice_Bitcoin_backport_keywordsPRsNoNeedTest.csv')
+mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Salt_backport_keywordsPRsNoTestNeeded.csv', 
+saltDefault,
+saltDictOfActiveBranches,
+'saltstack',
+'salt',
+'slicerOutput/Incmp_BackSlice_Salt_backport_keywordsPRsNoNeedTest.csv',
+'3006.x'
+)
