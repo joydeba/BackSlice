@@ -183,3 +183,6 @@ from collections import deque
 
 # print(getMinNumMoves(blocks1))  # Output: 3
 # print(getMinNumMoves(blocks2))  # Output: 0
+
+
+

@@ -12,6 +12,7 @@ def wait(seconds):
     print("Done waiting - resume!")
 
 def changeG(g, accesskey, backup_keys, no_bused_key, load_object):
+    wait(3)
     print("Inside change G - remaining", str(g.get_rate_limit().core.remaining), "Used key -", str(no_bused_key))
     if g.get_rate_limit().core.remaining < 1000 and no_bused_key == (len(backup_keys) -1):
         reset_time = g.get_rate_limit().core.reset.replace(tzinfo=pytz.utc)

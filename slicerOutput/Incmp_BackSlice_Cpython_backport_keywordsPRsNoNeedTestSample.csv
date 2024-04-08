@@ -1,0 +1,86 @@
+"file_object = builtins.open(f, 'rb')
+try:
+    self.initfp(file_object)
+except:
+    file_object.close()
+    raise
+:
+# assume it is an open file object already
+self.initfp(f)
+"
+-------------------------------------------------------------------------
+"file_object = builtins.open(f, 'rb')
+try:
+    self.initfp(file_object)
+except:
+    file_object.close()
+    raised
+:
+# assume it is an _open files object already
+self.initfp(f)
+"
+-------------------------------------------------------------------------
+"if isinstance(f, basestring):
+    try:
+        self.initfp(f)
+    except:
+        f.close()
+        raise
+else:
+    # assume it is an open file object already
+    self.initfp(f)
+"
+-------------------------------------------------------------------------
+"
+Make sure these dependencies are incorporated into the stable script - import unittest, import aifc, import struct, import io, import test, import os, import sys
+Make sure statements concerning these methods are incorporated into the stable script - ,
+Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
+PRs: 162, 356"
+-------------------------------------------------------------------------
+=========================================================================
+"file_object = builtins.open(f, 'wb')
+try:
+    self.initfp(file_object)
+except:
+    file_object.close()
+    raise
+
+# treat .aiff file extensions as non-compressed audio
+if f.endswith('.aiff'):
+    self._aifc = 0
+# assume it is an open file object already
+self.initfp(f)
+"
+-------------------------------------------------------------------------
+"file_object = builtins.open(f, 'wb')
+try:
+    self.initfp(file_object)
+except:
+    file_object.close()
+    raised
+
+# treat .aiff files extensions as non-compressed audio
+if f.endswith('.aiff'):
+    self._aifc = 0
+# assume it is an _open files object already
+self.initfp(f)
+"
+-------------------------------------------------------------------------
+"if isinstance(f, basestring):
+    try:
+        self.initfp(f)
+    except:
+        f.close()
+        raise
+else:
+    # assume it is an open file object already
+    self.initfp(f)
+"
+-------------------------------------------------------------------------
+"
+Make sure these dependencies are incorporated into the stable script - import unittest, import aifc, import struct, import io, import test, import os, import sys
+Make sure statements concerning these methods are incorporated into the stable script - ,raised,f,file_object,self,builtins
+Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
+PRs: 162, 356"
+-------------------------------------------------------------------------
+=========================================================================
