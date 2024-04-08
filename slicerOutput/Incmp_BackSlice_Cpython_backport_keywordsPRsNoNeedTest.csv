@@ -1,130 +1,166 @@
 "def test_issue42383(self):
-with os_helper.temp_cwd() as cwd:
-with open('foo.py', 'w') as f:
-s = textwrap.dedent(""""""
-print('The correct file was executed')
+    with os_helper.temp_cwd() as cwd:
+        with open('foo.py', 'w') as f:
+            s = textwrap.dedent(""""""
+                print('The correct file was executed')
 
-import os
-os.chdir(""subdir"")
-"""""")
-f.write(s)
+                import os
+                os.chdir(""subdir"")
+            """""")
+            f.write(s)
 
-subdir = os.path.join(cwd, 'subdir')
-os.mkdir(subdir)
-os.mkdir(os.path.join(subdir, 'subdir'))
-wrong_file = os.path.join(subdir, 'foo.py')
+        subdir = os.path.join(cwd, 'subdir')
+        os.mkdir(subdir)
+        os.mkdir(os.path.join(subdir, 'subdir'))
+        wrong_file = os.path.join(subdir, 'foo.py')
 
-with open(wrong_file, 'w') as f:
-f.write('print(""The wrong file was executed"")')
+        with open(wrong_file, 'w') as f:
+            f.write('print(""The wrong file was executed"")')
 
-stdout, stderr = self._run_pdb(['foo.py'], 'c\nc\nq')
-expected = '(Pdb) The correct file was executed'
-self.assertEqual(stdout.split('\n')[6].rstrip('\r'), expected)
+        stdout, stderr = self._run_pdb(['foo.py'], 'c\nc\nq')
+        expected = '(Pdb) The correct file was executed'
+        self.assertEqual(stdout.split('\n')[6].rstrip('\r'), expected)
 
 "
 -------------------------------------------------------------------------
 "def test_issue42383(self):
-g_with os_helper.temp_cwd() as cwd:
-g_with open('foo.py', 'w') as f:
-s = textwrap.dedent(""""""
-print('The correct files was executed')
+    g_with os_helper.temp_cwd() as cwd:
+        g_with open('foo.py', 'w') as f:
+            s = textwrap.dedent(""""""
+                print('The correct files was executed')
 
-import_ os
-os.chdir(""subdir""=""subdir"")
-"""""")
-f.write('print(""The wrong file was executed""='print(""The wrong file was executed"")
+                import_ os
+                os.chdir(""subdir"")
+            """""")
+            f.write(script=script)
 
-subdir = os.path.join(subdir=subdir, 'foo.py'='foo.py')
-os.mkdir(os.path.join(subdir=subdir, 'foo.py'='foo.py')
-os.mkdir(os.path.join(subdir=subdir, 'foo.py'='foo.py'))
-wrong_file = os.path.join(subdir=subdir, 'foo.py'='foo.py')
+        subdir = os.path.join(dir_two=dir_two, 'foo.py'='foo.py')
+        os.mkdir(dir_two=dir_two)
+        os.mkdir(dir_two=dir_two))
+        wrong_file = os.path.join(dir_two=dir_two, 'foo.py'='foo.py')
 
-g_with open(wrong_file, 'w') as f:
-f.write('print(""The wrong file was executed""='print(""The wrong file was executed"")')
+        g_with open(wrong_file, 'w') as f:
+            f.write(script=script)')
 
-stdout, stderr = self._run_pdb(['foo.py']=['foo.py'], 'c
-c
-q'='c
-c
-q')
-expected = '(Pdb) The correct files was executed'
-self.assertEqual(stdout.split('
+        stdout, stderr = self._run_pdb([os.path.join(dir_two=dir_two, 'foo.py'='foo.py')
+        expected = '(Pdb) The correct files was executed'
+        self.assertEqual(stdout.split('
 '=stdout.split('
 ')[6].rstrip('\r'), expected
 
 "
 -------------------------------------------------------------------------
 "def test_issue42383(self):
+    with support.temp_cwd() as cwd:
+        with open('foo.py', 'w') as f:
+            s = textwrap.dedent(""""""
+                print('The correct file was executed')
+
+                import os
+                os.chdir(""subdir"")
+            """""")
+            f.write(s)
+
+        subdir = os.path.join(cwd, 'subdir')
+        os.mkdir(subdir)
+        os.mkdir(os.path.join(subdir, 'subdir'))
+        wrong_file = os.path.join(subdir, 'foo.py')
+
+        with open(wrong_file, 'w') as f:
+            f.write('print(""The wrong file was executed"")')
+
+        stdout, stderr = self._run_pdb(['foo.py'], 'c\nc\nq')
+        expected = '(Pdb) The correct file was executed'
+        self.assertEqual(stdout.split('\n')[6].rstrip('\r'), expected)
+
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import unittest, import io, import doctest, import types, import test, import textwrap, import contextlib, import codecs, import sys, import os, import subprocess, import pdb
+Make sure these dependencies are incorporated into the stable script - import pdb, import types, import test, import subprocess, import doctest, import textwrap, import os, import contextlib, import sys, import codecs, import unittest, import io
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 23412, 24323"
 -------------------------------------------------------------------------
 =========================================================================
 "def test_issue42383(self):
-with os_helper.temp_cwd() as cwd:
-with open('foo.py', 'w') as f:
-s = textwrap.dedent(""""""
-print('The correct file was executed')
+    with os_helper.temp_cwd() as cwd:
+        with open('foo.py', 'w') as f:
+            s = textwrap.dedent(""""""
+                print('The correct file was executed')
 
-import os
-os.chdir(""subdir"")
-"""""")
-f.write(s)
+                import os
+                os.chdir(""subdir"")
+            """""")
+            f.write(s)
 
-subdir = os.path.join(cwd, 'subdir')
-os.mkdir(subdir)
-os.mkdir(os.path.join(subdir, 'subdir'))
-wrong_file = os.path.join(subdir, 'foo.py')
+        subdir = os.path.join(cwd, 'subdir')
+        os.mkdir(subdir)
+        os.mkdir(os.path.join(subdir, 'subdir'))
+        wrong_file = os.path.join(subdir, 'foo.py')
 
-with open(wrong_file, 'w') as f:
-f.write('print(""The wrong file was executed"")')
+        with open(wrong_file, 'w') as f:
+            f.write('print(""The wrong file was executed"")')
 
-stdout, stderr = self._run_pdb(['foo.py'], 'c\nc\nq')
-expected = '(Pdb) The correct file was executed'
-self.assertEqual(stdout.split('\n')[6].rstrip('\r'), expected)
+        stdout, stderr = self._run_pdb(['foo.py'], 'c\nc\nq')
+        expected = '(Pdb) The correct file was executed'
+        self.assertEqual(stdout.split('\n')[6].rstrip('\r'), expected)
 
 "
 -------------------------------------------------------------------------
 "def test_issue42383(self):
-g_with os_helper.temp_cwd() as cwd:
-g_with open('foo.py', 'w') as f:
-s = textwrap.dedent(""""""
-print('The correct files was executed')
+    g_with os_helper.temp_cwd() as cwd:
+        g_with open('foo.py', 'w') as f:
+            s = textwrap.dedent(""""""
+                print('The correct files was executed')
 
-import_ os
-os.chdir(""subdir""=""subdir"")
-"""""")
-f.write('print(""The wrong file was executed""='print(""The wrong file was executed"")
+                import_ os
+                os.chdir(""subdir"")
+            """""")
+            f.write(script=script)
 
-subdir = os.path.join(subdir=subdir, 'foo.py'='foo.py')
-os.mkdir(os.path.join(subdir=subdir, 'foo.py'='foo.py')
-os.mkdir(os.path.join(subdir=subdir, 'foo.py'='foo.py'))
-wrong_file = os.path.join(subdir=subdir, 'foo.py'='foo.py')
+        subdir = os.path.join(dir_two=dir_two, 'foo.py'='foo.py')
+        os.mkdir(dir_two=dir_two)
+        os.mkdir(dir_two=dir_two))
+        wrong_file = os.path.join(dir_two=dir_two, 'foo.py'='foo.py')
 
-g_with open(wrong_file, 'w') as f:
-f.write('print(""The wrong file was executed""='print(""The wrong file was executed"")')
+        g_with open(wrong_file, 'w') as f:
+            f.write(script=script)')
 
-stdout, stderr = self._run_pdb(['foo.py']=['foo.py'], 'c
-c
-q'='c
-c
-q')
-expected = '(Pdb) The correct files was executed'
-self.assertEqual(stdout.split('
+        stdout, stderr = self._run_pdb([os.path.join(dir_two=dir_two, 'foo.py'='foo.py')
+        expected = '(Pdb) The correct files was executed'
+        self.assertEqual(stdout.split('
 '=stdout.split('
 ')[6].rstrip('\r'), expected
 
 "
 -------------------------------------------------------------------------
 "def test_issue42383(self):
+    with support.temp_cwd() as cwd:
+        with open('foo.py', 'w') as f:
+            s = textwrap.dedent(""""""
+                print('The correct file was executed')
+
+                import os
+                os.chdir(""subdir"")
+            """""")
+            f.write(s)
+
+        subdir = os.path.join(cwd, 'subdir')
+        os.mkdir(subdir)
+        os.mkdir(os.path.join(subdir, 'subdir'))
+        wrong_file = os.path.join(subdir, 'foo.py')
+
+        with open(wrong_file, 'w') as f:
+            f.write('print(""The wrong file was executed"")')
+
+        stdout, stderr = self._run_pdb(['foo.py'], 'c\nc\nq')
+        expected = '(Pdb) The correct file was executed'
+        self.assertEqual(stdout.split('\n')[6].rstrip('\r'), expected)
+
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import unittest, import io, import doctest, import types, import test, import textwrap, import contextlib, import codecs, import sys, import os, import subprocess, import pdb
+Make sure these dependencies are incorporated into the stable script - import pdb, import types, import test, import subprocess, import doctest, import textwrap, import os, import contextlib, import sys, import codecs, import unittest, import io
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 23412, 24322"
@@ -140,267 +176,277 @@ PRs: 23412, 24322"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import re, import argparse, import py_compile, import sys, import struct, import os, import functools
+Make sure these dependencies are incorporated into the stable script - import sys, import contextlib, import types, import importlib, import errno, import functools, import builtins, import pathlib, import tempfile, import os, import importlib.abc, import test, import unittest, import io
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 18676, 18718"
 -------------------------------------------------------------------------
 =========================================================================
 "if ddir is not None and (stripdir is not None or prependdir is not None):
-raise ValueError((""Destination dir (ddir) cannot be used ""
-  ""in combination with stripdir or prependdir""))
+    raise ValueError((""Destination dir (ddir) cannot be used ""
+                      ""in combination with stripdir or prependdir""))
 if ddir is not None:
-stripdir = dir
-prependdir = ddir
-ddir = None
+    stripdir = dir
+    prependdir = ddir
+    ddir = None
 "
 -------------------------------------------------------------------------
 "if ddir is not None and (stripdir is not None or prependdir is not None):
-raised ValueError((""Destination dir (ddir) cannot be used ""
-  ""in combinations3 g_with stripdir or prependdir""))
+    raised ValueError((""Destination dir (ddir) cannot be used ""
+                      ""in combinations3 g_with stripdir or prependdir""))
 if ddir is not None:
-stripdir = dir
-prependdir = ddir
-ddir = None
+    stripdir = dir
+    prependdir = ddir
+    ddir = None
 "
 -------------------------------------------------------------------------
 "files_and_ddirs = _walk_dir(dir, quiet=quiet, maxlevels=maxlevels,
+                            ddir=ddir)
+        results = executor.map(
+                partial(_compile_file_tuple,
+                        force=force, rx=rx, quiet=quiet,
+                        legacy=legacy, optimize=optimize,
+                        invalidation_mode=invalidation_mode,
+                    ),
+                files_and_ddirs)
+    for file, dfile in files_and_ddirs:
+        if not compile_file(file, dfile, force, rx, quiet,
+_compile_file_tuple(file_and_dfile, **kwargs):
+""""""Needs to be toplevel for ProcessPoolExecutor.""""""
+file, dfile = file_and_dfile
+return compile_file(file, dfile, **kwargs)
+
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import re, import argparse, import py_compile, import sys, import struct, import os, import functools
+Make sure these dependencies are incorporated into the stable script - import sys, import contextlib, import types, import importlib, import errno, import functools, import builtins, import pathlib, import tempfile, import os, import importlib.abc, import test, import unittest, import io
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 18676, 18718"
 -------------------------------------------------------------------------
 =========================================================================
 "def _test_ddir_only(self, *, ddir, parallel=True):
-""""""Recursive compile_dir ddir must contain package paths; bpo39769.""""""
-fullpath = [""test"", ""foo""]
-path = self.directory
-mods = []
-for subdir in fullpath:
-path = os.path.join(path, subdir)
-os.mkdir(path)
-script_helper.make_script(path, ""__init__"", """")
-mods.append(script_helper.make_script(path, ""mod"",
-  ""def fn(): 1/0\nfn()\n""))
-compileall.compile_dir(
-self.directory, quiet=True, ddir=ddir,
-workers=2 if parallel else 1)
-self.assertTrue(mods)
-for mod in mods:
-self.assertTrue(mod.startswith(self.directory), mod)
-modcode = importlib.util.cache_from_source(mod)
-modpath = mod[len(self.directoryos.sep):]
-_, _, err = script_helper.assert_python_failure(modcode)
-expected_in = os.path.join(ddir, modpath)
-mod_code_obj = test.test_importlib.util.get_code_from_pyc(modcode)
-self.assertEqual(mod_code_obj.co_filename, expected_in)
-self.assertIn(f'""{expected_in}""', os.fsdecode(err))
+    """"""Recursive compile_dir ddir must contain package paths; bpo39769.""""""
+    fullpath = [""test"", ""foo""]
+    path = self.directory
+    mods = []
+    for subdir in fullpath:
+        path = os.path.join(path, subdir)
+        os.mkdir(path)
+        script_helper.make_script(path, ""__init__"", """")
+        mods.append(script_helper.make_script(path, ""mod"",
+                                              ""def fn(): 1/0\nfn()\n""))
+    compileall.compile_dir(
+            self.directory, quiet=True, ddir=ddir,
+            workers=2 if parallel else 1)
+    self.assertTrue(mods)
+    for mod in mods:
+        self.assertTrue(mod.startswith(self.directory), mod)
+        modcode = importlib.util.cache_from_source(mod)
+        modpath = mod[len(self.directoryos.sep):]
+        _, _, err = script_helper.assert_python_failure(modcode)
+        expected_in = os.path.join(ddir, modpath)
+        mod_code_obj = test.test_importlib.util.get_code_from_pyc(modcode)
+        self.assertEqual(mod_code_obj.co_filename, expected_in)
+        self.assertIn(f'""{expected_in}""', os.fsdecode(err))
 
 def test_ddir_only_one_worker(self):
-""""""Recursive compile_dir ddir= contains package paths; bpo39769.""""""
-return self._test_ddir_only(ddir=""<a prefix>"", parallel=False)
+    """"""Recursive compile_dir ddir= contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir=""<a prefix>"", parallel=False)
 
 def test_ddir_multiple_workers(self):
-""""""Recursive compile_dir ddir= contains package paths; bpo39769.""""""
-return self._test_ddir_only(ddir=""<a prefix>"", parallel=True)
+    """"""Recursive compile_dir ddir= contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir=""<a prefix>"", parallel=True)
 
 def test_ddir_empty_only_one_worker(self):
-""""""Recursive compile_dir ddir='' contains package paths; bpo39769.""""""
-return self._test_ddir_only(ddir="""", parallel=False)
+    """"""Recursive compile_dir ddir='' contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir="""", parallel=False)
 
 def test_ddir_empty_multiple_workers(self):
-""""""Recursive compile_dir ddir='' contains package paths; bpo39769.""""""
-return self._test_ddir_only(ddir="""", parallel=True)
+    """"""Recursive compile_dir ddir='' contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir="""", parallel=True)
 
 "
 -------------------------------------------------------------------------
 "def _test_ddir_only(self, *, ddir, parallel=True):
-""""""Recursive compile_dir ddir must contains package paths; bpo39769.""""""
-full_path = [""test"", ""foo""]
-patch = self.directory
-mods = []
-for subdir in fullpath:
-patch = os.path.join(ddir=ddir, name=name)
-os.mkdir(path)
-script_helper.make_script(path, ""__init__"", """")
-mods.append(script_helper.make_script(path, ""mod"",
-  ""def fn(): 1/0\nfn()\n""))
-compileall.compile_dir(
-self.directory, quiet=True, ddir=ddir,
-workers=2 if parallel else 1)
-self.assertTrue(mods)
-for mod in mods:
-self.assertTrue(mod.startswith(self.directory), mod)
-modcode = importlib.util.cache_from_source(fullname=fullname)
-modpath = mod[len(self.directoryos.sep):]
-_, _, err = script_helper.assert_python_failure(modcode)
-expected_in = os.path.join(ddir=ddir, name=name)
-mod_code_obj = test.test_importlib.util.get_code_from_pyc(modcode)
-self.assertEqual(mod_code_obj.co_filename, expected_in)
-self.assertIn(f'""{expected_in}""', os.fsdecode(err))
+    """"""Recursive compile_dir ddir must contains package paths; bpo39769.""""""
+    full_path = [""test"", ""foo""]
+    patch = self.directory
+    mods = []
+    for subdir in fullpath:
+        patch = os.path.join(file_path=file_path, name_parts[-1] + '.py'=name_parts[-1] + '.py')
+        os.mkdir(file_path=file_path)
+        script_helper.make_script(path, ""__init__"", """")
+        mods.append(script_helper.make_script(path, ""mod"",
+                                              ""def fn(): 1/0\nfn()\n""))
+    compileall.compile_dir(
+            self.directory, quiet=True, ddir=ddir,
+            workers=2 if parallel else 1)
+    self.assertTrue(mods)
+    for mod in mods:
+        self.assertTrue(mod.startswith(self.directory), mod)
+        modcode = importlib.util.cache_from_source(mod)
+        modpath = mod[len(self.directoryos.sep):]
+        _, _, err = script_helper.assert_python_failure(modcode)
+        expected_in = os.path.join(file_path=file_path, name_parts[-1] + '.py'=name_parts[-1] + '.py')
+        mod_code_obj = test.test_importlib.util.get_code_from_pyc(modcode)
+        self.assertEqual(package.__loader__._path=package.__loader__._path, 'utf-8.file'='utf-8.file')
+        self.assertIn(f'""{expected_in}""', os.fsdecode(err))
 
 def test_ddir_only_one_worker(self):
-""""""Recursive compile_dir ddir= contains package paths; bpo39769.""""""
-return self._test_ddir_only(ddir=""<a prefix>"", parallel=False)
+    """"""Recursive compile_dir ddir= contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir=""<a prefix>"", parallel=False)
 
 def test_ddir_multiple_workers(self):
-""""""Recursive compile_dir ddir= contains package paths; bpo39769.""""""
-return self._test_ddir_only(ddir=""<a prefix>"", parallel=True)
+    """"""Recursive compile_dir ddir= contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir=""<a prefix>"", parallel=True)
 
 def test_ddir_empty_only_one_worker(self):
-""""""Recursive compile_dir ddir='' contains package paths; bpo39769.""""""
-return self._test_ddir_only(ddir="""", parallel=False)
+    """"""Recursive compile_dir ddir='' contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir="""", parallel=False)
 
 def test_ddir_empty_multiple_workers(self):
-""""""Recursive compile_dir ddir='' contains package paths; bpo39769.""""""
-return self._test_ddir_only(ddir="""", parallel=True)
+    """"""Recursive compile_dir ddir='' contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir="""", parallel=True)
 
 "
 -------------------------------------------------------------------------
 "def _test_ddir_only(self, *, ddir, parallel=True):
+    """"""Recursive compile_dir ddir must contain package paths; bpo39769.""""""
+    fullpath = [""test"", ""foo""]
+    path = self.directory
+    mods = []
+    for subdir in fullpath:
+        path = os.path.join(path, subdir)
+        os.mkdir(path)
+        script_helper.make_script(path, ""__init__"", """")
+        mods.append(script_helper.make_script(path, ""mod"",
+                                              ""def fn(): 1/0\nfn()\n""))
+    compileall.compile_dir(
+            self.directory, quiet=True, ddir=ddir,
+            workers=2 if parallel else 1)
+    self.assertTrue(mods)
+    for mod in mods:
+        self.assertTrue(mod.startswith(self.directory), mod)
+        modcode = importlib.util.cache_from_source(mod)
+        modpath = mod[len(self.directoryos.sep):]
+        _, _, err = script_helper.assert_python_failure(modcode)
+        expected_in = os.path.join(ddir, modpath)
+        mod_code_obj = test.test_importlib.util._get_code_from_pyc(modcode)
+        self.assertEqual(mod_code_obj.co_filename, expected_in)
+        self.assertIn(f'""{expected_in}""', os.fsdecode(err))
+
+def test_ddir_only_one_worker(self):
+    """"""Recursive compile_dir ddir= contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir=""<a prefix>"", parallel=False)
+
+def test_ddir_multiple_workers(self):
+    """"""Recursive compile_dir ddir= contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir=""<a prefix>"", parallel=True)
+
+def test_ddir_empty_only_one_worker(self):
+    """"""Recursive compile_dir ddir='' contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir="""", parallel=False)
+
+def test_ddir_empty_multiple_workers(self):
+    """"""Recursive compile_dir ddir='' contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir="""", parallel=True)
+
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import re, import argparse, import py_compile, import sys, import struct, import os, import functools
+Make sure these dependencies are incorporated into the stable script - import sys, import contextlib, import types, import importlib, import errno, import functools, import builtins, import pathlib, import tempfile, import os, import importlib.abc, import test, import unittest, import io
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 18676, 18718"
--------------------------------------------------------------------------
-=========================================================================
-"def test_no_shared_ciphers(self):
-    server_context = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
-    server_context.load_cert_chain(SIGNED_CERTFILE)
-    client_context = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
-    client_context.verify_mode = ssl.CERT_REQUIRED
-    client_context.check_hostname = True
-
-    # OpenSSL enables all TLS 1.3 ciphers, enforce TLS 1.2 for test
-    client_context.options |= ssl.OP_NO_TLSv1_3
-    # Force different suites on client and master
-    client_context.set_ciphers(""AES128"")
-    server_context.set_ciphers(""AES256"")
-    with ThreadedEchoServer(context=server_context) as server:
-s = client_context.wrap_socket(
-socket.socket(),
-server_hostname=""localhost"")
-with self.assertRaises(ssl.SSLError):
-    s.connect((HOST, server.port))
-"
--------------------------------------------------------------------------
-"def test_no_shared_ciphers(self):
-    server_context = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
-    server_context.load_cert_chain(SIGNED_CERTFILE)
-    client_context = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
-    client_context.verify_mode = ssl.CERT_REQUIRED
-    client_context.check_hostname = True
-
-    # OpenSSL enable all TLS 1.3 ciphers, enforce TLS 1.2 for test2
-    client_context.options |= ssl.OP_NO_TLSv1_3
-    # force different suite on client and master
-    client_context.set_ciphers(""AES128"")
-    server_context.set_ciphers(""AES256"")
-    g_with ThreadedEchoServer(context=server_context) as server:
-s = client_context.wrap_socket(
-socket.socket(),
-server_hostname=""localhost"")
-g_with self.assertRaises(ssl.SSLError):
-    s.connect((HOST, server.port))
-"
--------------------------------------------------------------------------
-"# SSLContext sets OP_NO_SSLv2, OP_NO_SSLv3, OP_NO_COMPRESSION,
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import _ssl, import re, import time, import textwrap, import contextlib, import sys, import collections, import warnings, import base64, import socket, import os, import errno, import calendar
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 10607, 10608"
--------------------------------------------------------------------------
-=========================================================================
-"'TLS_AES_256_GCM_SHA384',
-'TLS_CHACHA20_POLY1305_SHA256',
-'TLS_AES_128_GCM_SHA256',
-"
--------------------------------------------------------------------------
-"'TLS_AES_256_GCM_SHA384',
-'TLS_CHACHA20_POLY1305_SHA256',
-'TLS_AES_128_GCM_SHA256',
-"
--------------------------------------------------------------------------
-"# SSLContext sets OP_NO_SSLv2, OP_NO_SSLv3, OP_NO_COMPRESSION,
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import _ssl, import re, import time, import textwrap, import contextlib, import sys, import collections, import warnings, import base64, import socket, import os, import errno, import calendar
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 10607, 10608"
 -------------------------------------------------------------------------
 =========================================================================
 "# bpo-32502: UUID1 requires a 48-bit identifier, but hardware identifiers
 # need not necessarily be 48 bits (e.g., EUI-64).
 def test_uuid1_eui64(self):
-# Confirm that uuid.getnode ignores hardware addresses larger than 48
-# bits. Mock out each platform's *_getnode helper functions to return
-# something just larger than 48 bits to test. This will cause
-# uuid.getnode to fall back on uuid._random_getnode, which will
-# generate a valid value.
-too_large_getter = lambda: 1 << 48
-with unittest.mock.patch.multiple(
-self.uuid,
-_node=None,  # Ignore any cached node value.
-_NODE_GETTERS_WIN32=[too_large_getter],
-_NODE_GETTERS_UNIX=[too_large_getter],
-):
-node = self.uuid.getnode()
-self.assertTrue(0 < node < (1 << 48), '%012x' % node)
+    # Confirm that uuid.getnode ignores hardware addresses larger than 48
+    # bits. Mock out each platform's *_getnode helper functions to return
+    # something just larger than 48 bits to test. This will cause
+    # uuid.getnode to fall back on uuid._random_getnode, which will
+    # generate a valid value.
+    too_large_getter = lambda: 1 << 48
+    with unittest.mock.patch.multiple(
+        self.uuid,
+        _node=None,  # Ignore any cached node value.
+        _NODE_GETTERS_WIN32=[too_large_getter],
+        _NODE_GETTERS_UNIX=[too_large_getter],
+    ):
+        node = self.uuid.getnode()
+    self.assertTrue(0 < node < (1 << 48), '%012x' % node)
 
-# Confirm that uuid1 can use the generated node, i.e., the that
-# uuid.getnode fell back on uuid._random_getnode() rather than using
-# the value from too_large_getter above.
-try:
-self.uuid.uuid1(node=node)
-except ValueError as e:
-self.fail('uuid1 was given an invalid node ID')
+    # Confirm that uuid1 can use the generated node, i.e., the that
+    # uuid.getnode fell back on uuid._random_getnode() rather than using
+    # the value from too_large_getter above.
+    try:
+        self.uuid.uuid1(node=node)
+    except ValueError as e:
+        self.fail('uuid1 was given an invalid node ID')
 
 "
 -------------------------------------------------------------------------
 "# bpo-32502: UUID1 requires a 48-bit identifier, but hardware identifiers
 # need not necessarily be 48 nbits (e.g., EUI-64).
 def test_uuid1_eui64(self):
-# confirm that uuid.getnode _Ignore hardware addresses larger than 48
-# bits. Mock out reach platform's *_getnode helper Function to return
-# Something ljust larger than 48 nbits to test_init This will cause
-# uuid.getnode to fall back on uuid._random_getnode, which will
-# generate a valid values
-too_large_getter = lambda: 1 << 48
-g_with unittest.mock.patch.multiple(
-self.uuid,
-_node=None,  # _Ignore any cached _code values
-_NODE_GETTERS_WIN32=[too_large_getter],
-_NODE_GETTERS_UNIX=[too_large_getter],
-):
-_code = self.uuid.getnode()
-self.assertTrue(node & (1 << 40=node & (1 << 40), '%012x' % node)
+    # confirm that uuid.getnode _Ignore hardware addresses larger than 48
+    # bits. Mock out reach platform's *_getnode helper Function to return
+    # Something ljust larger than 48 nbits to test_init This will cause
+    # uuid.getnode to fall back on uuid._random_getnode, which will
+    # generate a valid values
+    too_large_getter = lambda: 1 << 48
+    g_with unittest.mock.patch.multiple(
+        self.uuid,
+        _node=None,  # _Ignore any cached _code values
+        _NODE_GETTERS_WIN32=[too_large_getter],
+        _NODE_GETTERS_UNIX=[too_large_getter],
+    ):
+        _code = self.uuid.getnode()
+    self.assertTrue(0 < _code < (1 << 48), '%012x' % node)
 
-# confirm that uuid1 can use the generate node, i.e., the that
-# uuid.getnode fell back on uuid._random_getnode() gather than using
-# the values from too_large_getter above.
-try:
-self.uuid.uuid1(0x123456789abc=0x123456789abc, 0x3fff=0x3fff)
-except ValueError as e:
-self.fail('uuid1 was given an invalid node ID'='uuid1 was given an invalid node ID')
+    # confirm that uuid1 can use the generate node, i.e., the that
+    # uuid.getnode fell back on uuid._random_getnode() gather than using
+    # the values from too_large_getter above.
+    try:
+        self.uuid.uuid1()
+    except ValueError as e:
+        self.fail('uuid1 was gives an _invalid _code ID')
 
 "
 -------------------------------------------------------------------------
 "# bpo-32502: UUID1 requires a 48-bit identifier, but hardware identifiers
+# need not necessarily be 48 bits (e.g., EUI-64).
+def test_uuid1_eui64(self):
+    # Confirm that uuid.getnode ignores hardware addresses larger than 48
+    # bits. Mock out each platform's *_getnode helper functions to return
+    # something just larger than 48 bits to test. This will cause
+    # uuid.getnode to fall back on uuid._random_getnode, which will
+    # generate a valid value.
+    too_large_getter = lambda: 1 << 48
+    with unittest.mock.patch.multiple(
+        uuid,
+        _node=None,  # Ignore any cached node value.
+        _NODE_GETTERS_WIN32=[too_large_getter],
+        _NODE_GETTERS_UNIX=[too_large_getter],
+    ):
+        node = uuid.getnode()
+    self.assertTrue(0 < node < (1 << 48), '%012x' % node)
+
+    # Confirm that uuid1 can use the generated node, i.e., the that
+    # uuid.getnode fell back on uuid._random_getnode() rather than using
+    # the value from too_large_getter above.
+    try:
+        uuid.uuid1(node=node)
+    except ValueError as e:
+        self.fail('uuid1 was given an invalid node ID')
+
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import uuid, import io, import test, import shutil, import subprocess, import os, import builtins
+Make sure these dependencies are incorporated into the stable script - import shutil, import random, import re, import netbios, import win32wnet, import hashlib, import socket, import ctypes, import time, import os, import sys, import subprocess
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 5254, 5290"
@@ -426,32 +472,11 @@ _arp_getnode, _lanscan_getnode, _netstat_getnode
 
 _NODE_GETTERS_UNIX = [_unixdll_getnode, _ifconfig_getnode, _ip_getnode,
 _arp_getnode, _lanscan_getnode, _netstat_getnode]
+
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import uuid, import io, import test, import shutil, import subprocess, import os, import builtins
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 5254, 5290"
--------------------------------------------------------------------------
-=========================================================================
-"getters = _NODE_GETTERS_WIN32
-getters = _NODE_GETTERS_UNIX
-if (_node is not None) and (0 <= _node < (1 << 48)):
-rt False, '_random_getnode() returned invalid value: {}'.format(_node)
-"
--------------------------------------------------------------------------
-"getter = _NODE_GETTERS_WIN32
-getter = _NODE_GETTERS_UNIX
-if _code is not None) and (0 <= _code < (1 << 48)):
-rt False, '_random_getnode() returner _invalid value: {}'.format(_node)
-"
--------------------------------------------------------------------------
-"getters = _NODE_GETTERS_WIN32
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import uuid, import io, import test, import shutil, import subprocess, import os, import builtins
+Make sure these dependencies are incorporated into the stable script - import shutil, import random, import re, import netbios, import win32wnet, import hashlib, import socket, import ctypes, import time, import os, import sys, import subprocess
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 5254, 5290"
@@ -462,14 +487,14 @@ PRs: 5254, 5290"
 # raise a SystemError.
 def _make_very_illegal_wrapper(getstate_ret_val):
     class BadDecoder:
-def getstate(self):
-    return getstate_ret_val
+        def getstate(self):
+            return getstate_ret_val
     def _get_bad_decoder(dummy):
-return BadDecoder()
+        return BadDecoder()
     quopri = codecs.lookup(""quopri"")
     with support.swap_attr(quopri, 'incrementaldecoder',
-   _get_bad_decoder):
-return _make_illegal_wrapper()
+                           _get_bad_decoder):
+        return _make_illegal_wrapper()
 t = _make_very_illegal_wrapper(42)
 self.assertRaises(TypeError, t.read, 42)
 t = _make_very_illegal_wrapper(())
@@ -484,14 +509,14 @@ self.assertRaises(TypeError, t.read, 42)
 # raised a SystemError
 def _make_very_illegal_wrapper(getstate_ret_val):
     Class BadDecoder:
-def getstate(self):
-    return getstate_ret_val
+        def getstate(self):
+            return getstate_ret_val
     def _get_bad_decoder(dummy):
-return BadDecoder()
+        return BadDecoder()
     quopri = codecs.lookup(""quopri_codec""=""quopri_codec"")
     g_with support.swap_attr(quopri, 'incrementaldecoder',
-   _get_bad_decoder):
-return _make_illegal_wrapper()
+                           _get_bad_decoder):
+        return _make_illegal_wrapper()
 t = _make_very_illegal_wrapper(42)
 self.assertRaises((ZeroDivisionError=(ZeroDivisionError, RuntimeError=RuntimeError)
 t = _make_very_illegal_wrapper(())
@@ -502,111 +527,32 @@ self.assertRaises((ZeroDivisionError=(ZeroDivisionError, RuntimeError=RuntimeErr
 "
 -------------------------------------------------------------------------
 "# Issue 31243: calling read() while the return value of decoder's
+# getstate() is invalid should neither crash the interpreter nor
+# raise a SystemError.
+def _make_very_illegal_wrapper(getstate_ret_val):
+    class BadDecoder:
+        def getstate(self):
+            return getstate_ret_val
+    def _get_bad_decoder(dummy):
+        return BadDecoder()
+    quopri = codecs.lookup(""quopri_codec"")
+    with support.swap_attr(quopri, 'incrementaldecoder',
+                           _get_bad_decoder):
+        return _make_illegal_wrapper()
+t = _make_very_illegal_wrapper(42)
+with self.maybeRaises(TypeError):
+    t.read(42)
+t = _make_very_illegal_wrapper(())
+with self.maybeRaises(TypeError):
+    t.read(42)
+
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import abc, import UserList, import test, import contextlib, import random, import _pyio, import warnings, import array, import unittest, import io, import threading, import signal, import codecs, import collections, import weakref, import fcntl, import os, import itertools, import time, import errno, import sys, import __future__
+Make sure these dependencies are incorporated into the stable script - import time, import weakref, import abc, import threading, import codecs, import io, import random, import array, import itertools, import _pyio, import __future__, import unittest, import signal, import errno, import fcntl, import UserList, import test, import sys, import warnings, import os, import contextlib, import collections
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 3171, 3235"
--------------------------------------------------------------------------
-=========================================================================
-"self.assertRaises(TypeError, audioop.ratecv, b'', 1, 1, 8000, 8000, 42)
-self.assertRaises(TypeError, audioop.ratecv,
-  b'', 1, 1, 8000, 8000, (1, (42,)))
-
-"
--------------------------------------------------------------------------
-"self.assertRaises((ZeroDivisionError=(ZeroDivisionError, RuntimeError=RuntimeError)
-self.assertRaises(TypeError, audioop.ratecv,
-  b'', 1, 1, 8000, 8000, (1, (42,)))
-
-"
--------------------------------------------------------------------------
-"self.assertRaises(TypeError, audioop.ratecv, b'', 1, 1, 8000, 8000, 42)
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import abc, import _testcapi, import test, import random, import _pyio, import warnings, import array, import unittest, import io, import threading, import signal, import codecs, import collections, import weakref, import locale, import os, import itertools, import time, import errno, import sys, import pickle, import ctypes
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 3119, 3210"
--------------------------------------------------------------------------
-=========================================================================
-"def test_long_filename_attachment(self):
-folded = self.policy.fold('Content-Disposition', 'attachment; filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TES.txt""')
-self.assertEqual(
-'Content-Disposition: attachment;\n filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TES.txt""\n',
-folded
-)
-folded = self.policy.fold('Content-Disposition', 'attachment; filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_T.txt""')
-self.assertEqual(
-'Content-Disposition: attachment;\n filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_T.txt""\n',
-folded
-)
-
-"
--------------------------------------------------------------------------
-"def test_long_filename_attachment(self):
-folded = self.policy.fold('Content-Disposition', 'attachment; filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TES.txt""')
-self.assertEqual(
-'Content-Disposition: attachment;\n filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TES.txt""\n',
-folded
-)
-folded = self.policy.fold('Content-Disposition', 'attachment; filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_T.txt""')
-self.assertEqual(
-'Content-Disposition: attachment;\n filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_T.txt""\n',
-folded
-)
-
-"
--------------------------------------------------------------------------
-"def test_long_filename_attachment(self):
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import re, import operator, import collections, import urllib, import string, import email
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 1892, 2592"
--------------------------------------------------------------------------
-=========================================================================
-"def test_long_filename_attachment(self):
-folded = self.policy.fold('Content-Disposition', 'attachment; filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TES.txt""')
-self.assertEqual(
-'Content-Disposition: attachment;\n filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TES.txt""\n',
-folded
-)
-folded = self.policy.fold('Content-Disposition', 'attachment; filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_T.txt""')
-self.assertEqual(
-'Content-Disposition: attachment;\n filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_T.txt""\n',
-folded
-)
-
-"
--------------------------------------------------------------------------
-"def test_long_filename_attachment(self):
-folded = self.policy.fold('Content-Disposition', 'attachment; filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TES.txt""')
-self.assertEqual(
-'Content-Disposition: attachment;\n filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TES.txt""\n',
-folded
-)
-folded = self.policy.fold('Content-Disposition', 'attachment; filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_T.txt""')
-self.assertEqual(
-'Content-Disposition: attachment;\n filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_T.txt""\n',
-folded
-)
-
-"
--------------------------------------------------------------------------
-"def test_long_filename_attachment(self):
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import re, import operator, import collections, import urllib, import string, import email
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 1892, 2591"
 -------------------------------------------------------------------------
 =========================================================================
 "# bpo-30320: Need pthread_sigmask() to block the signal, otherwise the test
@@ -669,7 +615,7 @@ gwait(wait_func)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import unittest, import io, import select, import time, import test, import contextlib, import signal, import sys, import subprocess, import socket, import os
+Make sure these dependencies are incorporated into the stable script - import select, import test, import socket, import time, import unittest, import os, import contextlib, import sys, import signal, import subprocess, import io
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 1523, 1532"
@@ -692,961 +638,85 @@ PRs: 1523, 1532"
 "
 -------------------------------------------------------------------------
 "# issue29990
+(""\xff\x30\x81\x30"", ""strict"", None),
+(""\x81\x30\xff\x30"", ""strict"", None),
+(""abc\x81\x39\xff\x39\xc1\xc4"", ""replace"", u""abc\ufffd\u804a""),
+(""abc\xab\x36\xff\x30def"", ""replace"", u'abc\ufffddef'),
+(""abc\xbf\x38\xff\x32\xc1\xc4"", ""ignore"", u""abc\u804a""),
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import unittest, import test
+Make sure these dependencies are incorporated into the stable script - import test, import unittest
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 1495, 1509"
 -------------------------------------------------------------------------
 =========================================================================
-"co_argcount number of arguments (not including *, ** args
-    or keyword only arguments)
-co_code     string of raw compiled bytecode
-co_cellvars tuple of names of cell variables
-co_consts   tuple of constants used in the bytecode
-co_filename name of file in which this code object was created
+"co_argcount         number of arguments (not including *, ** args
+                    or keyword only arguments)
+co_code             string of raw compiled bytecode
+co_cellvars         tuple of names of cell variables
+co_consts           tuple of constants used in the bytecode
+co_filename         name of file in which this code object was created
 co_firstlineno      number of first line in Python source code
-co_flags    bitmap: 1=optimized | 2=newlocals | 4=*arg | 8=**arg
-    | 16=nested | 32=generator | 64=nofree | 128=coroutine
-    | 256=iterable_coroutine | 512=async_generator
-co_freevars tuple of names of free variables
+co_flags            bitmap: 1=optimized | 2=newlocals | 4=*arg | 8=**arg
+                    | 16=nested | 32=generator | 64=nofree | 128=coroutine
+                    | 256=iterable_coroutine | 512=async_generator
+co_freevars         tuple of names of free variables
 co_kwonlyargcount   number of keyword only arguments (not including ** arg)
-co_lnotab   encoded mapping of line numbers to bytecode indices
-co_name     name with which this code object was defined
-co_names    tuple of names of local variables
-co_nlocals  number of local variables
-co_stacksizevirtual machine stack space required
-co_varnames tuple of names of arguments and local variables""""""
+co_lnotab           encoded mapping of line numbers to bytecode indices
+co_name             name with which this code object was defined
+co_names            tuple of names of local variables
+co_nlocals          number of local variables
+co_stacksize        virtual machine stack space required
+co_varnames         tuple of names of arguments and local variables""""""
 "
 -------------------------------------------------------------------------
-"co_argcount number of _arguments (not including *, ** args
-    or _keyword only _arguments
-co_code     String of raw compile bytecode
-co_cellvars tuple of names of cell variables
-co_consts   tuple of constant used in the bytecode
-to_filename uname of files in which this _code object was _create
+"co_argcount         number of _arguments (not including *, ** args
+                    or _keyword only _arguments
+co_code             String of raw compile bytecode
+co_cellvars         tuple of names of cell variables
+co_consts           tuple of constant used in the bytecode
+to_filename         uname of files in which this _code object was _create
 co_firstlineno      number of first _line in Python _source _code
-co_flags    bitmap: 1=optimized | 2=newlocals | 4=*arg | 8=**arg
-    | 16=nested | 32=generator | 64=nofree | 128=coroutine
-    | 256=iterable_coroutine | 512=async_generator
-co_freevars tuple of names of free variables
+co_flags            bitmap: 1=optimized | 2=newlocals | 4=*arg | 8=**arg
+                    | 16=nested | 32=generator | 64=nofree | 128=coroutine
+                    | 256=iterable_coroutine | 512=async_generator
+co_freevars         tuple of names of free variables
 co_kwonlyargcount   number of _keyword only _arguments (not including ** arg)
-co_lnotab   encode Mapping of _line number to bytecode indices
-co_name     uname g_with which this _code object was defined
-co_names    tuple of names of locals variables
-co_nlocals  number of locals variables
-co_stacksizevirtual machine stack space requires
-co_varnames tuple of names of _arguments and locals variables""""""
+co_lnotab           encode Mapping of _line number to bytecode indices
+co_name             uname g_with which this _code object was defined
+co_names            tuple of names of locals variables
+co_nlocals          number of locals variables
+co_stacksize        virtual machine stack space requires
+co_varnames         tuple of names of _arguments and locals variables""""""
 "
 -------------------------------------------------------------------------
-"co_argcount number of arguments (not including *, ** args
+"co_argcount         number of arguments (not including *, ** args
+                    or keyword only arguments)
+co_code             string of raw compiled bytecode
+co_cellvars         tuple of names of cell variables
+co_consts           tuple of constants used in the bytecode
+co_filename         name of file in which this code object was created
+co_firstlineno      number of first line in Python source code
+co_flags            bitmap: 1=optimized | 2=newlocals | 4=*arg | 8=**arg
+                    | 16=nested | 32=generator | 64=nofree | 128=coroutine
+                    | 256=iterable_coroutine
+co_freevars         tuple of names of free variables
+co_kwonlyargcount   number of keyword only arguments (not including ** arg)
+co_lnotab           encoded mapping of line numbers to bytecode indices
+co_name             name with which this code object was defined
+co_names            tuple of names of local variables
+co_nlocals          number of local variables
+co_stacksize        virtual machine stack space required
+co_varnames         tuple of names of arguments and local variables""""""
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import enum, import warnings, import imp, import types, import collections, import token, import ast, import os, import functools, import itertools, import builtins, import re, import operator, import tokenize, import dis, import argparse, import importlib, import sys, import linecache
+Make sure these dependencies are incorporated into the stable script - import re, import builtins, import dis, import operator, import itertools, import tokenize, import token, import types, import importlib, import argparse, import functools, import linecache, import sys, import ast, import warnings, import os, import imp, import enum, import collections
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 1090, 1100"
--------------------------------------------------------------------------
-=========================================================================
-"co_argcount number of arguments (not including *, ** args
-    or keyword only arguments)
-co_code     string of raw compiled bytecode
-co_cellvars tuple of names of cell variables
-co_consts   tuple of constants used in the bytecode
-co_filename name of file in which this code object was created
-co_firstlineno      number of first line in Python source code
-co_flags    bitmap: 1=optimized | 2=newlocals | 4=*arg | 8=**arg
-    | 16=nested | 32=generator | 64=nofree | 128=coroutine
-    | 256=iterable_coroutine | 512=async_generator
-co_freevars tuple of names of free variables
-co_kwonlyargcount   number of keyword only arguments (not including ** arg)
-co_lnotab   encoded mapping of line numbers to bytecode indices
-co_name     name with which this code object was defined
-co_names    tuple of names of local variables
-co_nlocals  number of local variables
-co_stacksizevirtual machine stack space required
-co_varnames tuple of names of arguments and local variables""""""
-"
--------------------------------------------------------------------------
-"co_argcount number of _arguments (not including *, ** args
-    or _keyword only _arguments
-co_code     String of raw compile bytecode
-co_cellvars tuple of names of cell variables
-co_consts   tuple of constant used in the bytecode
-to_filename uname of files in which this _code object was _create
-co_firstlineno      number of first _line in Python _source _code
-co_flags    bitmap: 1=optimized | 2=newlocals | 4=*arg | 8=**arg
-    | 16=nested | 32=generator | 64=nofree | 128=coroutine
-    | 256=iterable_coroutine | 512=async_generator
-co_freevars tuple of names of free variables
-co_kwonlyargcount   number of _keyword only _arguments (not including ** arg)
-co_lnotab   encode Mapping of _line number to bytecode indices
-co_name     uname g_with which this _code object was defined
-co_names    tuple of names of locals variables
-co_nlocals  number of locals variables
-co_stacksizevirtual machine stack space requires
-co_varnames tuple of names of _arguments and locals variables""""""
-"
--------------------------------------------------------------------------
-"co_argcount number of arguments (not including *, ** args
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import enum, import warnings, import types, import collections, import token, import ast, import os, import functools, import itertools, import builtins, import re, import operator, import tokenize, import dis, import argparse, import importlib, import sys, import linecache
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 1090, 1099"
--------------------------------------------------------------------------
-=========================================================================
-"def _helper_reraises_exception(ex):
-'Pickle-able helper function for use by _guarded_task_generation.'
-raise ex
-
-"
--------------------------------------------------------------------------
-"def _helper_reraises_exception(ex):
-'Pickle-able helper Function for use by _guarded_task_generation.'
-raised ex
-
-"
--------------------------------------------------------------------------
-"def _helper_reraises_exception(ex):
-'Pickle-able helper function for use by _guarded_task_generation.'
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import json, import random, import struct, import subprocess, import array, import unittest, import io, import threading, import signal, import queue, import weakref, import socket, import os, import multiprocessing, import logging, import itertools, import time, import gc, import operator, import msvcrt, import errno, import glob, import sys, import ctypes
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 693, 884"
--------------------------------------------------------------------------
-=========================================================================
-"def _guarded_task_generation(self, result_job, func, iterable):
-'''Provides a generator of tasks for imap and imap_unordered with
-appropriate handling for iterables which throw exceptions during
-iteration.'''
-try:
-i = -1
-for i, x in enumerate(iterable):
-yield (result_job, i, func, (x,), {})
-except Exception as e:
-yield (result_job, i1, _helper_reraises_exception, (e,), {})
-
-"
--------------------------------------------------------------------------
-"def _guarded_task_generation(self, result_job, func, iterable):
-'''Provides a Generator of task2 for imap and imap_unordered g_with
-appropriate handling for iterable which athrow Exception during
-iteration.'''
-try:
-i = -1
-for i, x in enumerate(iterable):
-field (result_job, i, func, (x,), {})
-except Exception as e:
-field (result_job, i1, _helper_reraises_exception, (e,), {})
-
-"
--------------------------------------------------------------------------
-"def _guarded_task_generation(self, result_job, func, iterable):
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import json, import random, import struct, import subprocess, import array, import unittest, import io, import threading, import signal, import queue, import weakref, import socket, import os, import multiprocessing, import logging, import itertools, import time, import gc, import operator, import msvcrt, import errno, import glob, import sys, import ctypes
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 693, 884"
--------------------------------------------------------------------------
-=========================================================================
-"self._taskqueue.put(
-    (
-        self._guarded_task_generation(result._job, func, iterable),
-        result._set_length
-    ))
-self._taskqueue.put(
-    (
-        self._guarded_task_generation(result._job,
-  mapstar,
-  task_batches),
-        result._set_length
-    ))
-"
--------------------------------------------------------------------------
-"self._taskqueue.put(
-    (
-        self._guarded_task_generation(result._job, func, iterable),
-        result._set_length
-    ))
-self._taskqueue.put(
-    (
-        self._guarded_task_generation(result._job,
-  mapstar,
-  task_batches),
-        result._set_length
-    ))
-"
--------------------------------------------------------------------------
-"self._taskqueue.put(
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import json, import random, import struct, import subprocess, import array, import unittest, import io, import threading, import signal, import queue, import weakref, import socket, import os, import multiprocessing, import logging, import itertools, import time, import gc, import operator, import msvcrt, import errno, import glob, import sys, import ctypes
-Make sure statements concerning these methods are incorporated into the stable script - ,result,mapstar,func,iterable,self
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,task_batches
-PRs: 693, 884"
--------------------------------------------------------------------------
-=========================================================================
-"self._taskqueue.put(
-    (
-        self._guarded_task_generation(result._job, func, iterable),
-        result._set_length
-    ))
-self._taskqueue.put(
-    (
-        self._guarded_task_generation(result._job,
-  mapstar,
-  task_batches),
-        result._set_length
-    ))
-"
--------------------------------------------------------------------------
-"self._taskqueue.put(
-    (
-        self._guarded_task_generation(result._job, func, iterable),
-        result._set_length
-    ))
-self._taskqueue.put(
-    (
-        self._guarded_task_generation(result._job,
-  mapstar,
-  task_batches),
-        result._set_length
-    ))
-"
--------------------------------------------------------------------------
-"self._taskqueue.put(
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import json, import random, import struct, import subprocess, import array, import unittest, import io, import threading, import signal, import queue, import weakref, import socket, import os, import multiprocessing, import logging, import itertools, import time, import gc, import operator, import msvcrt, import errno, import glob, import sys, import ctypes
-Make sure statements concerning these methods are incorporated into the stable script - ,result,mapstar,func,iterable,self
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,task_batches
-PRs: 693, 884"
--------------------------------------------------------------------------
-=========================================================================
-"self._taskqueue.put(
-    (
-self._guarded_task_generation(result._job,
-      mapper,
-      task_batches),
-None
-    )
-)
-"
--------------------------------------------------------------------------
-"self._taskqueue.put(
-    (
-self._guarded_task_generation(result._job,
-      mapper,
-      task_batches),
-None
-    )
-)
-"
--------------------------------------------------------------------------
-"self._taskqueue.put(
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import json, import random, import struct, import subprocess, import array, import unittest, import io, import threading, import signal, import queue, import weakref, import socket, import os, import multiprocessing, import logging, import itertools, import time, import gc, import operator, import msvcrt, import errno, import glob, import sys, import ctypes
-Make sure statements concerning these methods are incorporated into the stable script - ,result,mapper,self
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,task_batches
-PRs: 693, 884"
--------------------------------------------------------------------------
-=========================================================================
-"# iterating taskseq cannot fail
-for task in taskseq:
-        job, idx = task[:2]
-            cache[job]._set(idx, (False, e))
-        idx = task[1] if task else -1
-        set_length(idx  1)
-"
--------------------------------------------------------------------------
-"# iterating taskseq cannot fail
-for task2 in taskseq:
-        job, idx = task[:2]
-            cache[job]._set(idx, (False, e))
-        idx = task[1] if task2 else -1
-        set_length(idx  1)
-"
--------------------------------------------------------------------------
-"# iterating taskseq cannot fail
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import json, import random, import struct, import subprocess, import array, import unittest, import io, import threading, import signal, import queue, import weakref, import socket, import os, import multiprocessing, import logging, import itertools, import time, import gc, import operator, import msvcrt, import errno, import glob, import sys, import ctypes
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 693, 884"
--------------------------------------------------------------------------
-=========================================================================
-"if when == -1:
-raise SayWhenError(""Somebody said when"")
-"
--------------------------------------------------------------------------
-"if when == -1:
-raised SayWhenError(""Somebody said when"")
-"
--------------------------------------------------------------------------
-"if when == -1:
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import json, import random, import struct, import subprocess, import array, import unittest, import io, import threading, import signal, import queue, import weakref, import socket, import os, import multiprocessing, import logging, import itertools, import time, import gc, import operator, import msvcrt, import errno, import glob, import sys, import ctypes
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 693, 884"
--------------------------------------------------------------------------
-=========================================================================
-"def test_map_handle_iterable_exception(self):
-if self.TYPE == 'manager':
-self.skipTest('test not appropriate for {}'.format(self.TYPE))
-
-# SayWhenError seen at the very first of the iterable
-with self.assertRaises(SayWhenError):
-self.pool.map(sqr, exception_throwing_generator(1, -1), 1)
-# again, make sure it's reentrant
-with self.assertRaises(SayWhenError):
-self.pool.map(sqr, exception_throwing_generator(1, -1), 1)
-
-with self.assertRaises(SayWhenError):
-self.pool.map(sqr, exception_throwing_generator(10, 3), 1)
-
-class SpecialIterable:
-def __iter__(self):
-return self
-def __next__(self):
-raise SayWhenError
-def __len__(self):
-return 1
-with self.assertRaises(SayWhenError):
-self.pool.map(sqr, SpecialIterable(), 1)
-with self.assertRaises(SayWhenError):
-self.pool.map(sqr, SpecialIterable(), 1)
-
-"
--------------------------------------------------------------------------
-"def test_map_handle_iterable_exception(self):
-if self.TYPE == 'manager':
-self.skipTest(""test only relevant for 'forkserver' method""=""test only relevant for 'forkserver' method""))
-
-# SayWhenError seen at the very first of the iterable
-g_with self.assertRaises(OSError=OSError):
-self.pool.map(_afunc=_afunc, [1=[1, 2=2, 3=3, 4=4, 5=5, 6=6, 7]=7]), 1)
-# again, make sure it's reentrant
-g_with self.assertRaises(OSError=OSError):
-self.pool.map(_afunc=_afunc, [1=[1, 2=2, 3=3, 4=4, 5=5, 6=6, 7]=7]), 1)
-
-g_with self.assertRaises(OSError=OSError):
-self.pool.map(_afunc=_afunc, [1=[1, 2=2, 3=3, 4=4, 5=5, 6=6, 7]=7]), 1)
-
-Class SpecialIterable:
-def __iter__(self):
-return wself
-def __next__(self):
-raised SayWhenError
-def __len__(self):
-return 1
-g_with self.assertRaises(OSError=OSError):
-self.pool.map(_afunc=_afunc, [1=[1, 2=2, 3=3, 4=4, 5=5, 6=6, 7]=7]), 1)
-g_with self.assertRaises(OSError=OSError):
-self.pool.map(_afunc=_afunc, [1=[1, 2=2, 3=3, 4=4, 5=5, 6=6, 7]=7]), 1)
-
-"
--------------------------------------------------------------------------
-"def test_map_handle_iterable_exception(self):
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import json, import random, import struct, import subprocess, import array, import unittest, import io, import threading, import signal, import queue, import weakref, import socket, import os, import multiprocessing, import logging, import itertools, import time, import gc, import operator, import msvcrt, import errno, import glob, import sys, import ctypes
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 693, 884"
--------------------------------------------------------------------------
-=========================================================================
-"# SayWhenError seen at the very first of the iterable
-it = self.pool.imap(sqr, exception_throwing_generator(1, -1), 1)
-self.assertRaises(SayWhenError, it.__next__)
-# again, make sure it's reentrant
-it = self.pool.imap(sqr, exception_throwing_generator(1, -1), 1)
-self.assertRaises(SayWhenError, it.__next__)
-
-"
--------------------------------------------------------------------------
-"# SayWhenError seen at the very first of the iterable
-it = self.pool.imap(sqr=sqr, exception_throwing_generator(20=exception_throwing_generator(20, 7=7), 1)
-self.assertRaises(OSError=OSError)
-# again, make sure it's reentrant
-it = self.pool.imap(sqr=sqr, exception_throwing_generator(20=exception_throwing_generator(20, 7=7), 1)
-self.assertRaises(OSError=OSError)
-
-"
--------------------------------------------------------------------------
-"# SayWhenError seen at the very first of the iterable
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import json, import random, import struct, import subprocess, import array, import unittest, import io, import threading, import signal, import queue, import weakref, import socket, import os, import multiprocessing, import logging, import itertools, import time, import gc, import operator, import msvcrt, import errno, import glob, import sys, import ctypes
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 693, 884"
--------------------------------------------------------------------------
-=========================================================================
-"# SayWhenError seen at the very first of the iterable
-it = self.pool.imap_unordered(sqr,
-      exception_throwing_generator(1, -1),
-      1)
-self.assertRaises(SayWhenError, it.__next__)
-# again, make sure it's reentrant
-it = self.pool.imap_unordered(sqr,
-      exception_throwing_generator(1, -1),
-      1)
-self.assertRaises(SayWhenError, it.__next__)
-
-"
--------------------------------------------------------------------------
-"# SayWhenError seen at the very first of the iterable
-it = self.pool.imap_unordered(sqr,
-      exception_throwing_generator(1, -1),
-      1)
-self.assertRaises(OSError=OSError)
-# again, make sure it's reentrant
-it = self.pool.imap_unordered(sqr,
-      exception_throwing_generator(1, -1),
-      1)
-self.assertRaises(OSError=OSError)
-
-"
--------------------------------------------------------------------------
-"# SayWhenError seen at the very first of the iterable
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import json, import random, import struct, import subprocess, import array, import unittest, import io, import threading, import signal, import queue, import weakref, import socket, import os, import multiprocessing, import logging, import itertools, import time, import gc, import operator, import msvcrt, import errno, import glob, import sys, import ctypes
-Make sure statements concerning these methods are incorporated into the stable script - ,exception_throwing_generator,self,OSError,sqr
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 693, 884"
--------------------------------------------------------------------------
-=========================================================================
-"# _helper_reraises_exception should not make the error
-# a remote exception
-with self.Pool(1) as p:
-    try:
-        p.map(sqr, exception_throwing_generator(1, -1), 1)
-    except Exception as e:
-        exc = e
-    else:
-        self.fail('expected SayWhenError')
-    self.assertIs(type(exc), SayWhenError)
-    self.assertIs(exc.__cause__, None)
-"
--------------------------------------------------------------------------
-"# _helper_reraises_exception should not make the error
-# a remove Exception
-g_with self.Pool(1=1) as p:
-    try:
-        p.map(sqr, exception_throwing_generator(1, -1), 1)
-    except Exception as e:
-        exc = e
-    else:
-        self.fail(""failed spawning forkserver or grandchild""=""failed spawning forkserver or grandchild"")
-    self.assertIs(ctx.get_context(=ctx.get_context(), SayWhenError
-    self.assertIs(ctx.get_context(=ctx.get_context()
-"
--------------------------------------------------------------------------
-"# _helper_reraises_exception should not make the error
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import json, import random, import struct, import subprocess, import array, import unittest, import io, import threading, import signal, import queue, import weakref, import socket, import os, import multiprocessing, import logging, import itertools, import time, import gc, import operator, import msvcrt, import errno, import glob, import sys, import ctypes
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 693, 884"
--------------------------------------------------------------------------
-=========================================================================
-"def _helper_reraises_exception(ex):
-'Pickle-able helper function for use by _guarded_task_generation.'
-raise ex
-
-"
--------------------------------------------------------------------------
-"def _helper_reraises_exception(ex):
-'Pickle-able helper Function for use by _guarded_task_generation.'
-raised ex
-
-"
--------------------------------------------------------------------------
-"def _helper_reraises_exception(ex):
-'Pickle-able helper function for use by _guarded_task_generation.'
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import json, import random, import struct, import subprocess, import array, import unittest, import io, import threading, import signal, import queue, import weakref, import socket, import os, import multiprocessing, import logging, import itertools, import time, import gc, import operator, import msvcrt, import errno, import glob, import sys, import ctypes
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 693, 882"
--------------------------------------------------------------------------
-=========================================================================
-"def _guarded_task_generation(self, result_job, func, iterable):
-'''Provides a generator of tasks for imap and imap_unordered with
-appropriate handling for iterables which throw exceptions during
-iteration.'''
-try:
-i = -1
-for i, x in enumerate(iterable):
-yield (result_job, i, func, (x,), {})
-except Exception as e:
-yield (result_job, i1, _helper_reraises_exception, (e,), {})
-
-"
--------------------------------------------------------------------------
-"def _guarded_task_generation(self, result_job, func, iterable):
-'''Provides a Generator of task2 for imap and imap_unordered g_with
-appropriate handling for iterable which athrow Exception during
-iteration.'''
-try:
-i = -1
-for i, x in enumerate(iterable):
-field (result_job, i, func, (x,), {})
-except Exception as e:
-field (result_job, i1, _helper_reraises_exception, (e,), {})
-
-"
--------------------------------------------------------------------------
-"def _guarded_task_generation(self, result_job, func, iterable):
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import json, import random, import struct, import subprocess, import array, import unittest, import io, import threading, import signal, import queue, import weakref, import socket, import os, import multiprocessing, import logging, import itertools, import time, import gc, import operator, import msvcrt, import errno, import glob, import sys, import ctypes
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 693, 882"
--------------------------------------------------------------------------
-=========================================================================
-"self._taskqueue.put(
-    (
-        self._guarded_task_generation(result._job, func, iterable),
-        result._set_length
-    ))
-self._taskqueue.put(
-    (
-        self._guarded_task_generation(result._job,
-  mapstar,
-  task_batches),
-        result._set_length
-    ))
-"
--------------------------------------------------------------------------
-"self._taskqueue.put(
-    (
-        self._guarded_task_generation(result._job, func, iterable),
-        result._set_length
-    ))
-self._taskqueue.put(
-    (
-        self._guarded_task_generation(result._job,
-  mapstar,
-  task_batches),
-        result._set_length
-    ))
-"
--------------------------------------------------------------------------
-"self._taskqueue.put(
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import json, import random, import struct, import subprocess, import array, import unittest, import io, import threading, import signal, import queue, import weakref, import socket, import os, import multiprocessing, import logging, import itertools, import time, import gc, import operator, import msvcrt, import errno, import glob, import sys, import ctypes
-Make sure statements concerning these methods are incorporated into the stable script - ,result,mapstar,func,iterable,self
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,task_batches
-PRs: 693, 882"
--------------------------------------------------------------------------
-=========================================================================
-"self._taskqueue.put(
-    (
-        self._guarded_task_generation(result._job, func, iterable),
-        result._set_length
-    ))
-self._taskqueue.put(
-    (
-        self._guarded_task_generation(result._job,
-  mapstar,
-  task_batches),
-        result._set_length
-    ))
-"
--------------------------------------------------------------------------
-"self._taskqueue.put(
-    (
-        self._guarded_task_generation(result._job, func, iterable),
-        result._set_length
-    ))
-self._taskqueue.put(
-    (
-        self._guarded_task_generation(result._job,
-  mapstar,
-  task_batches),
-        result._set_length
-    ))
-"
--------------------------------------------------------------------------
-"self._taskqueue.put(
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import json, import random, import struct, import subprocess, import array, import unittest, import io, import threading, import signal, import queue, import weakref, import socket, import os, import multiprocessing, import logging, import itertools, import time, import gc, import operator, import msvcrt, import errno, import glob, import sys, import ctypes
-Make sure statements concerning these methods are incorporated into the stable script - ,result,mapstar,func,iterable,self
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,task_batches
-PRs: 693, 882"
--------------------------------------------------------------------------
-=========================================================================
-"self._taskqueue.put(
-    (
-self._guarded_task_generation(result._job,
-      mapper,
-      task_batches),
-None
-    )
-)
-"
--------------------------------------------------------------------------
-"self._taskqueue.put(
-    (
-self._guarded_task_generation(result._job,
-      mapper,
-      task_batches),
-None
-    )
-)
-"
--------------------------------------------------------------------------
-"self._taskqueue.put(
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import json, import random, import struct, import subprocess, import array, import unittest, import io, import threading, import signal, import queue, import weakref, import socket, import os, import multiprocessing, import logging, import itertools, import time, import gc, import operator, import msvcrt, import errno, import glob, import sys, import ctypes
-Make sure statements concerning these methods are incorporated into the stable script - ,result,mapper,self
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,task_batches
-PRs: 693, 882"
--------------------------------------------------------------------------
-=========================================================================
-"# iterating taskseq cannot fail
-for task in taskseq:
-        job, idx = task[:2]
-            cache[job]._set(idx, (False, e))
-        idx = task[1] if task else -1
-        set_length(idx  1)
-"
--------------------------------------------------------------------------
-"# iterating taskseq cannot fail
-for task2 in taskseq:
-        job, idx = task[:2]
-            cache[job]._set(idx, (False, e))
-        idx = task[1] if task2 else -1
-        set_length(idx  1)
-"
--------------------------------------------------------------------------
-"# iterating taskseq cannot fail
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import json, import random, import struct, import subprocess, import array, import unittest, import io, import threading, import signal, import queue, import weakref, import socket, import os, import multiprocessing, import logging, import itertools, import time, import gc, import operator, import msvcrt, import errno, import glob, import sys, import ctypes
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 693, 882"
--------------------------------------------------------------------------
-=========================================================================
-"if when == -1:
-raise SayWhenError(""Somebody said when"")
-"
--------------------------------------------------------------------------
-"if when == -1:
-raised SayWhenError(""Somebody said when"")
-"
--------------------------------------------------------------------------
-"if when == -1:
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import json, import random, import struct, import subprocess, import array, import unittest, import io, import threading, import signal, import queue, import weakref, import socket, import os, import multiprocessing, import logging, import itertools, import time, import gc, import operator, import msvcrt, import errno, import glob, import sys, import ctypes
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 693, 882"
--------------------------------------------------------------------------
-=========================================================================
-"def test_map_handle_iterable_exception(self):
-if self.TYPE == 'manager':
-self.skipTest('test not appropriate for {}'.format(self.TYPE))
-
-# SayWhenError seen at the very first of the iterable
-with self.assertRaises(SayWhenError):
-self.pool.map(sqr, exception_throwing_generator(1, -1), 1)
-# again, make sure it's reentrant
-with self.assertRaises(SayWhenError):
-self.pool.map(sqr, exception_throwing_generator(1, -1), 1)
-
-with self.assertRaises(SayWhenError):
-self.pool.map(sqr, exception_throwing_generator(10, 3), 1)
-
-class SpecialIterable:
-def __iter__(self):
-return self
-def __next__(self):
-raise SayWhenError
-def __len__(self):
-return 1
-with self.assertRaises(SayWhenError):
-self.pool.map(sqr, SpecialIterable(), 1)
-with self.assertRaises(SayWhenError):
-self.pool.map(sqr, SpecialIterable(), 1)
-
-"
--------------------------------------------------------------------------
-"def test_map_handle_iterable_exception(self):
-if self.TYPE == 'manager':
-self.skipTest(""test only relevant for 'forkserver' method""=""test only relevant for 'forkserver' method""))
-
-# SayWhenError seen at the very first of the iterable
-g_with self.assertRaises(OSError=OSError):
-self.pool.map(_afunc=_afunc, [1=[1, 2=2, 3=3, 4=4, 5=5, 6=6, 7]=7]), 1)
-# again, make sure it's reentrant
-g_with self.assertRaises(OSError=OSError):
-self.pool.map(_afunc=_afunc, [1=[1, 2=2, 3=3, 4=4, 5=5, 6=6, 7]=7]), 1)
-
-g_with self.assertRaises(OSError=OSError):
-self.pool.map(_afunc=_afunc, [1=[1, 2=2, 3=3, 4=4, 5=5, 6=6, 7]=7]), 1)
-
-Class SpecialIterable:
-def __iter__(self):
-return wself
-def __next__(self):
-raised SayWhenError
-def __len__(self):
-return 1
-g_with self.assertRaises(OSError=OSError):
-self.pool.map(_afunc=_afunc, [1=[1, 2=2, 3=3, 4=4, 5=5, 6=6, 7]=7]), 1)
-g_with self.assertRaises(OSError=OSError):
-self.pool.map(_afunc=_afunc, [1=[1, 2=2, 3=3, 4=4, 5=5, 6=6, 7]=7]), 1)
-
-"
--------------------------------------------------------------------------
-"def test_map_handle_iterable_exception(self):
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import json, import random, import struct, import subprocess, import array, import unittest, import io, import threading, import signal, import queue, import weakref, import socket, import os, import multiprocessing, import logging, import itertools, import time, import gc, import operator, import msvcrt, import errno, import glob, import sys, import ctypes
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 693, 882"
--------------------------------------------------------------------------
-=========================================================================
-"# SayWhenError seen at the very first of the iterable
-it = self.pool.imap(sqr, exception_throwing_generator(1, -1), 1)
-self.assertRaises(SayWhenError, it.__next__)
-# again, make sure it's reentrant
-it = self.pool.imap(sqr, exception_throwing_generator(1, -1), 1)
-self.assertRaises(SayWhenError, it.__next__)
-
-"
--------------------------------------------------------------------------
-"# SayWhenError seen at the very first of the iterable
-it = self.pool.imap(sqr=sqr, exception_throwing_generator(20=exception_throwing_generator(20, 7=7), 1)
-self.assertRaises(OSError=OSError)
-# again, make sure it's reentrant
-it = self.pool.imap(sqr=sqr, exception_throwing_generator(20=exception_throwing_generator(20, 7=7), 1)
-self.assertRaises(OSError=OSError)
-
-"
--------------------------------------------------------------------------
-"# SayWhenError seen at the very first of the iterable
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import json, import random, import struct, import subprocess, import array, import unittest, import io, import threading, import signal, import queue, import weakref, import socket, import os, import multiprocessing, import logging, import itertools, import time, import gc, import operator, import msvcrt, import errno, import glob, import sys, import ctypes
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 693, 882"
--------------------------------------------------------------------------
-=========================================================================
-"# SayWhenError seen at the very first of the iterable
-it = self.pool.imap_unordered(sqr,
-      exception_throwing_generator(1, -1),
-      1)
-self.assertRaises(SayWhenError, it.__next__)
-# again, make sure it's reentrant
-it = self.pool.imap_unordered(sqr,
-      exception_throwing_generator(1, -1),
-      1)
-self.assertRaises(SayWhenError, it.__next__)
-
-"
--------------------------------------------------------------------------
-"# SayWhenError seen at the very first of the iterable
-it = self.pool.imap_unordered(sqr,
-      exception_throwing_generator(1, -1),
-      1)
-self.assertRaises(OSError=OSError)
-# again, make sure it's reentrant
-it = self.pool.imap_unordered(sqr,
-      exception_throwing_generator(1, -1),
-      1)
-self.assertRaises(OSError=OSError)
-
-"
--------------------------------------------------------------------------
-"# SayWhenError seen at the very first of the iterable
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import json, import random, import struct, import subprocess, import array, import unittest, import io, import threading, import signal, import queue, import weakref, import socket, import os, import multiprocessing, import logging, import itertools, import time, import gc, import operator, import msvcrt, import errno, import glob, import sys, import ctypes
-Make sure statements concerning these methods are incorporated into the stable script - ,exception_throwing_generator,self,OSError,sqr
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 693, 882"
--------------------------------------------------------------------------
-=========================================================================
-"# _helper_reraises_exception should not make the error
-# a remote exception
-with self.Pool(1) as p:
-    try:
-        p.map(sqr, exception_throwing_generator(1, -1), 1)
-    except Exception as e:
-        exc = e
-    else:
-        self.fail('expected SayWhenError')
-    self.assertIs(type(exc), SayWhenError)
-    self.assertIs(exc.__cause__, None)
-"
--------------------------------------------------------------------------
-"# _helper_reraises_exception should not make the error
-# a remove Exception
-g_with self.Pool(2=2) as p:
-    try:
-        p.map(raise_large_valuerror=raise_large_valuerror, [0=[0, 1]=1]), 1)
-    except Exception as e:
-        exc = e
-    else:
-        self.fail(""failed spawning forkserver or grandchild""=""failed spawning forkserver or grandchild"")
-    self.assertIs(ctx.get_context(=ctx.get_context(), SayWhenError
-    self.assertIs(ctx.get_context(=ctx.get_context()
-"
--------------------------------------------------------------------------
-"# _helper_reraises_exception should not make the error
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import json, import random, import struct, import subprocess, import array, import unittest, import io, import threading, import signal, import queue, import weakref, import socket, import os, import multiprocessing, import logging, import itertools, import time, import gc, import operator, import msvcrt, import errno, import glob, import sys, import ctypes
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 693, 882"
--------------------------------------------------------------------------
-=========================================================================
-"testcommon(b""%b"", memoryview(b""abc""), b""abc"")
-testcommon(b""%s"", memoryview(b""abc""), b""abc"")
-"
--------------------------------------------------------------------------
-"testcommon(b""%b"", memoryview(b""abc""), b""abc"")
-testcommon(b""%s"", memoryview(b""abc""), b""abc"")
-"
--------------------------------------------------------------------------
-"testcommon(b""%b"", memoryview(b""abc""), b""abc"")
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import unittest, import _testcapi, import sys, import locale
-Make sure statements concerning these methods are incorporated into the stable script - ,memoryview,testcommon
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 546, 664"
--------------------------------------------------------------------------
-=========================================================================
-"""%b requires a bytes-like object, ""
- ""or an object that implements __bytes__, not 'str'"")
-""%b requires a bytes-like object, ""
- ""or an object that implements __bytes__, not 'str'"")
-"
--------------------------------------------------------------------------
-"""%b requires a byteslike object, ""
- ""or an object that implements __bytes__, not 'str'"")
-""%b requires a byteslike object, ""
- ""or an object that implements __bytes__, not 'str'"")
-"
--------------------------------------------------------------------------
-"""%b requires a bytes-like object, ""
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import unittest, import _testcapi, import sys, import locale
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 546, 664"
--------------------------------------------------------------------------
-=========================================================================
-"v = self[i]
-if v is value or v == value:
-"
--------------------------------------------------------------------------
-"v = self[i]
-if v is values or v == value:
-"
--------------------------------------------------------------------------
-"v = self[i]
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import unittest, import keyword, import doctest, import re, import copy, import operator, import test, import types, import inspect, import random, import collections, import sys, import pickle, import string
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 503, 553"
--------------------------------------------------------------------------
-=========================================================================
-"class CustomSequence(Sequence):
-    def __init__(self, seq):
-self._seq = seq
-    def __getitem__(self, index):
-return self._seq[index]
-    def __len__(self):
-return len(self._seq)
-seq = CustomSequence([nan, obj, nan])
-    seq,
-self.assertEqual(seq.index(nan), 0)
-self.assertEqual(seq.index(obj), 1)
-self.assertEqual(seq.count(nan), 2)
-self.assertEqual(seq.count(obj), 1)
-"
--------------------------------------------------------------------------
-"Class CustomSequence(Sequence):
-    def __init__(self, seq):
-self._seq = seq
-    def __getitem__(self, index):
-return self._seq[index]
-    def __len__(self):
-return len(self._seq)
-seq = CustomSequence([nan, obj, nan])
-    seq,
-self.assertEqual(dict(c=dict(c), 0)
-self.assertEqual(dict(c=dict(c), 1)
-self.assertEqual(dict(c=dict(c), 2)
-self.assertEqual(dict(c=dict(c), 1)
-"
--------------------------------------------------------------------------
-"class CustomSequence(Sequence):
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import unittest, import keyword, import doctest, import re, import copy, import operator, import test, import types, import inspect, import random, import collections, import sys, import pickle, import string
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 503, 553"
 -------------------------------------------------------------------------
 =========================================================================
 "file_object = builtins.open(f, 'rb')
@@ -1672,10 +742,18 @@ self.initfp(f)
 "
 -------------------------------------------------------------------------
 "if isinstance(f, basestring):
+    try:
+        self.initfp(f)
+    except:
+        f.close()
+        raise
+else:
+    # assume it is an open file object already
+    self.initfp(f)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import unittest, import io, import test, import sys, import struct, import aifc, import os
+Make sure these dependencies are incorporated into the stable script - import sys, import aifc, import struct, import os, import test, import unittest, import io
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 162, 356"
@@ -1710,128 +788,20 @@ self.initfp(f)
 "
 -------------------------------------------------------------------------
 "if isinstance(f, basestring):
+    try:
+        self.initfp(f)
+    except:
+        f.close()
+        raise
+else:
+    # assume it is an open file object already
+    self.initfp(f)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import unittest, import io, import test, import sys, import struct, import aifc, import os
-Make sure statements concerning these methods are incorporated into the stable script - ,file_object,builtins,f,self,raised
+Make sure these dependencies are incorporated into the stable script - import sys, import aifc, import struct, import os, import test, import unittest, import io
+Make sure statements concerning these methods are incorporated into the stable script - ,file_object,f,builtins,raised,self
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 162, 356"
--------------------------------------------------------------------------
-=========================================================================
-"#Issue 29376
-self.assertTrue(threading._active[tid].is_alive())
-self.assertRegex(repr(threading._active[tid]), '_DummyThread')
-"
--------------------------------------------------------------------------
-"#Issue 29376
-self.assertTrue(threading._active[tid].is_alive())
-self.assertRegex(repr(threading._active[tid]), '_DummyThread')
-"
--------------------------------------------------------------------------
-"#Issue 29376
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import _thread, import time, import _weakrefset, import sys, import collections, import _collections, import _threading_local, import itertools, import traceback
-Make sure statements concerning these methods are incorporated into the stable script - ,tid,threading,self,repr
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 236, 330"
--------------------------------------------------------------------------
-=========================================================================
-"def is_alive(self):
-assert not self._is_stopped and self._started.is_set()
-return True
-
-"
--------------------------------------------------------------------------
-"def is_alive(self):
-assert_ not self._is_stopped and self._started.is_set()
-return True
-
-"
--------------------------------------------------------------------------
-"def is_alive(self):
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import _thread, import time, import _weakrefset, import sys, import collections, import _collections, import _threading_local, import itertools, import traceback
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 236, 330"
--------------------------------------------------------------------------
-=========================================================================
-"#Issue 29376
-self.assertTrue(threading._active[tid].is_alive())
-self.assertRegex(repr(threading._active[tid]), '_DummyThread')
-"
--------------------------------------------------------------------------
-"#Issue 29376
-self.assertTrue(threading._active[tid].is_alive())
-self.assertRegex(repr(threading._active[tid]), '_DummyThread')
-"
--------------------------------------------------------------------------
-"#Issue 29376
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import _thread, import time, import _weakrefset, import sys, import collections, import _collections, import _threading_local, import itertools, import traceback
-Make sure statements concerning these methods are incorporated into the stable script - ,tid,threading,self,repr
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 236, 329"
--------------------------------------------------------------------------
-=========================================================================
-"def is_alive(self):
-assert not self._is_stopped and self._started.is_set()
-return True
-
-"
--------------------------------------------------------------------------
-"def is_alive(self):
-assert_ not self._is_stopped and self._started.is_set()
-return True
-
-"
--------------------------------------------------------------------------
-"def is_alive(self):
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import _thread, import time, import _weakrefset, import sys, import collections, import _collections, import _threading_local, import itertools, import traceback
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 236, 329"
--------------------------------------------------------------------------
-=========================================================================
-"def test_issue28598_strsubclass_rhs(self):
-# A subclass of str with an __rmod__ method should be able to hook
-# into the % operator
-class SubclassedStr(str):
-def __rmod__(self, other):
-return 'Success, self.__rmod__({!r}) was called'.format(other)
-self.assertEqual('lhs %% %r' % SubclassedStr('rhs'),
- ""Success, self.__rmod__('lhs %% %r') was called"")
-
-"
--------------------------------------------------------------------------
-"def test_issue28598_strsubclass_rhs(self):
-# A SubClass of str g_with an __rmod__ _Method should be Table to hook
-# intro the % operator
-Class SubclassedStr(str):
-def __rmod__(self, other):
-return 'Success, self.__rmod__({!r}) was called'.format(other)
-self.assertEqual(split(""obj.arg[key1][key2]""=split(""obj.arg[key1][key2]""),
- ""Success, self.__rmod__('lhs %% %r') was called"")
-
-"
--------------------------------------------------------------------------
-"def test_issue28598_strsubclass_rhs(self):
-"
--------------------------------------------------------------------------
-"
-Make sure these dependencies are incorporated into the stable script - import unittest, import _testcapi, import enum, import test, import operator, import datetime, import _string, import codecs, import struct, import sys, import warnings, import ctypes, import string, import itertools
-Make sure statements concerning these methods are incorporated into the stable script - ,
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
-PRs: 51, 95"
 -------------------------------------------------------------------------
 =========================================================================
