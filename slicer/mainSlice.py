@@ -320,7 +320,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     print(e)
                     continue
         
-    with open("slicerOutput/"+projectName+"InconICFDiffzBackSliceNoNeedTest.txt", 'w') as f:   
+    with open("slicerOutput/"+projectName+"InconICFDiffzBackSliceNoNeedTestSample.txt", 'w') as f:   
         print("Total Labeled Backporting PRs", len(data_read), file=f)
         print("Total Sliced Required", numberofSlicingRequired, file=f)
         print("Total Number of Hunk Differences", numberofDifferences, file=f)
@@ -421,11 +421,11 @@ ansibleDefault_branch = 'devel' # Python 87.8% ---------
 # 'cmssw',
 # 'slicerOutput/Incmp_BackSlice_Cmssw_backport_keywordsPRs.csv')
 
-mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRsNoTestNeeded.csv', 
+mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRsNoTestNeededSample.csv', 
 ansibleDefault_branch,
 ansibleDictOfActiveBranches,
 'ansible',
 'ansible',
-'slicerOutput/Incmp_BackSlice_Ansible_backport_keywordsPRsNoNeedTest.csv',
+'slicerOutput/Incmp_BackSlice_Ansible_backport_keywordsPRsNoNeedTestSample.csv',
 'stable-2.17'
 )
