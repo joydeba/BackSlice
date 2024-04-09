@@ -7,6 +7,7 @@ import nltk
 nltk.download('punkt')
 nltk.download('wordnet')
 from nltk.translate.bleu_score import sentence_bleu
+from nltk.translate.bleu_score import SmoothingFunction
 from rouge import Rouge
 import csv
 import sacrebleu
@@ -92,17 +93,53 @@ def calculate_average_code_bleu_score(paired_list):
 #     scores = rouge.get_scores(candidate, reference, avg=True)
 #     return scores['rouge-l']['f']
 
-def calculate_rouge_l_score(reference, candidate):
-    rouge = Rouge()
-    scores = rouge.get_scores(candidate, reference)
-    rouge_l_f_scores = [score['rouge-l']['f'] for score in scores]
-    if rouge_l_f_scores == []:
-        return 0
-    else:
-        avg_rouge_l_f_score = sum(rouge_l_f_scores) / len(rouge_l_f_scores)
-        return avg_rouge_l_f_score
+# def calculate_rouge_l_score(reference, candidate):
+#     rouge = Rouge()
+#     scores = rouge.get_scores(candidate, reference)
+#     rouge_l_f_scores = [score['rouge-l']['f'] for score in scores]
+#     if rouge_l_f_scores == []:
+#         return 0
+#     else:
+#         avg_rouge_l_f_score = sum(rouge_l_f_scores) / len(rouge_l_f_scores)
+#         return avg_rouge_l_f_score
 
-def calculate_average_rouge_l(paired_list):
+# def calculate_average_rouge_l(paired_list):
+#     total_rouge_l_score = 0
+#     total_s_count = 0
+#     all_rouge_l_scores = []
+
+#     for pull_request in paired_list:
+#         references, candidates, targets, recommendation = zip(*pull_request)
+#         for reference, candidate, target in zip(references, candidates, targets):
+#             rouge_l_score = calculate_rouge_l_score(target, candidate)
+#             total_rouge_l_score += rouge_l_score
+#             total_s_count += 1
+#             all_rouge_l_scores.append(rouge_l_score)
+
+#     average_rouge_l_score = total_rouge_l_score / total_s_count
+#     return average_rouge_l_score, all_rouge_l_scores
+
+def calculate_rouge_l_score(reference, candidate):
+    reference_tokens = nltk.word_tokenize(reference)
+    candidate_tokens = nltk.word_tokenize(candidate)
+    
+    # Compute Longest Common Subsequence
+    lcs = [[0] * (len(candidate_tokens) + 1) for _ in range(len(reference_tokens) + 1)]
+    for i in range(1, len(reference_tokens) + 1):
+        for j in range(1, len(candidate_tokens) + 1):
+            if reference_tokens[i - 1] == candidate_tokens[j - 1]:
+                lcs[i][j] = lcs[i - 1][j - 1] + 1
+            else:
+                lcs[i][j] = max(lcs[i - 1][j], lcs[i][j - 1])
+    
+    # Compute ROUGE-L precision, recall, and F1 score
+    precision = lcs[-1][-1] / len(candidate_tokens)
+    recall = lcs[-1][-1] / len(reference_tokens)
+    rouge_l_score = 2 * precision * recall / (precision + recall + 1e-12)  # to avoid division by zero
+    
+    return rouge_l_score
+
+def calculate_average_rouge_l_score(paired_list):
     total_rouge_l_score = 0
     total_s_count = 0
     all_rouge_l_scores = []

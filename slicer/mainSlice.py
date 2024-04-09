@@ -330,7 +330,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
             average_bleu_score, bleu_scores = calculate_average_bleu_score(slicedPRs)
             average_meteor_score, meteor_scores = calculate_average_meteor_score(slicedPRs)
             average_code_bleu, code_bleu_scores = calculate_average_code_bleu_score(slicedPRs)  
-            average_rouge_l_score, rouge_l_scores = calculate_average_rouge_l(slicedPRs)  
+            average_rouge_l_score, rouge_l_scores = calculate_average_rouge_l_score(slicedPRs)  
             average_chrf_score, chrf_scores = calculate_average_chrf_score(slicedPRs) 
             print(f"Average BLEU Score: {average_bleu_score}", file=f)
             print(f"Average METEOR Score: {average_meteor_score}", file=f) 
