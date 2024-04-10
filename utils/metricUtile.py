@@ -21,7 +21,7 @@ def calculate_bleu_score(reference, candidate):
 
 def calculate_average_bleu_score(paired_list):
     total_bleu_score = 0
-    total_s_count = 0
+    total_s_count = 1
     all_bleu_scores = []
 
     for pull_request in paired_list:
@@ -51,7 +51,7 @@ def calculate_meteor_score(reference, candidate):
 
 def calculate_average_meteor_score(paired_list):
     total_meteor_score = 0
-    total_s_count = 0
+    total_s_count = 1
     all_meteor_scores = []
 
     for pull_request in paired_list:
@@ -73,7 +73,7 @@ def calculate_code_bleu_score(reference, candidate):
 
 def calculate_average_code_bleu_score(paired_list):
     total_code_bleu_score = 0
-    total_s_count = 0
+    total_s_count = 1
     all_code_bleu_scores = []
 
     for pull_request in paired_list:
@@ -133,15 +133,22 @@ def calculate_rouge_l_score(reference, candidate):
                 lcs[i][j] = max(lcs[i - 1][j], lcs[i][j - 1])
     
     # Compute ROUGE-L precision, recall, and F1 score
-    precision = lcs[-1][-1] / len(candidate_tokens)
-    recall = lcs[-1][-1] / len(reference_tokens)
+    if len(candidate_tokens) == 0:
+        precision = lcs[-1][-1] 
+    else:
+        precision = lcs[-1][-1] / len(candidate_tokens)            
+    if len(reference_tokens) == 0:
+        recall = lcs[-1][-1]
+    else:
+        recall = lcs[-1][-1] / len(reference_tokens)
+
     rouge_l_score = 2 * precision * recall / (precision + recall + 1e-12)  # to avoid division by zero
     
     return rouge_l_score
 
 def calculate_average_rouge_l_score(paired_list):
     total_rouge_l_score = 0
-    total_s_count = 0
+    total_s_count = 1
     all_rouge_l_scores = []
 
     for pull_request in paired_list:
@@ -162,7 +169,7 @@ def calculate_chrf_score(reference, candidate):
 
 def calculate_average_chrf_score(paired_list):
     total_chrf_score = 0
-    total_s_count = 0
+    total_s_count = 1
     all_chrf_scores = []
 
     for pull_request in paired_list:
