@@ -164,8 +164,8 @@ def calculate_average_rouge_l_score(paired_list):
 
 
 def calculate_chrf_score(reference, candidate):
-    chrf_score = sacrebleu.corpus_chrf([reference], [candidate])
-    return chrf_score.score
+    chrf_score = sacrebleu.corpus_chrf(candidate, reference)
+    return chrf_score.score/100
 
 def calculate_average_chrf_score(paired_list):
     total_chrf_score = 0

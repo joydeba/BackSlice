@@ -347,6 +347,7 @@ def get_compilation_set(sourceCode, functional_set):
 def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_file="StableCacheLibrary.txt"):
     # return {} # Todo remove it 
     # Check if a cache file exists and load information from it if available.
+    file_count = 0
     if cache_file and os.path.exists(cache_file):
         with open(cache_file, 'r') as f:
             return json.load(f)
@@ -375,6 +376,7 @@ def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_f
 
     def process_file(file_url):
         print("Processing a file------------------------------------------------")
+        file_count = file_count = 1
         file_content = requests.get(file_url, headers=headers).text
 
         try:
@@ -420,6 +422,8 @@ def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_f
         contents = response.json()
 
         for item in contents:
+            if file_count > 50:
+                break
             if item['type'] == 'file' and item['name'].endswith('.py'):
                 file_info = process_file(item['download_url'])
                 library_info[item['name']] = file_info
