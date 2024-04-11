@@ -10,7 +10,7 @@ __metaclass__ = type
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shutil, import glob, import subprocess, import sys, import os, import fnmatch, import contextlib, import tempfile, import re, import tarfile
+Make sure these dependencies are incorporated into the stable script - import __future__, import sys, import contextlib, import shutil, import os, import subprocess, import fnmatch, import re, import tempfile, import tarfile, import glob
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 73616, 73637"
@@ -941,7 +941,7 @@ nkcheck_anchors = False
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shutil, import glob, import subprocess, import sys, import os, import fnmatch, import contextlib, import tempfile, import re, import tarfile
+Make sure these dependencies are incorporated into the stable script - import __future__, import sys, import contextlib, import shutil, import os, import subprocess, import fnmatch, import re, import tempfile, import tarfile, import glob
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 73616, 73637"
@@ -958,7 +958,7 @@ PRs: 73616, 73637"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import platform, import os, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import re, import platform
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 73541, 73544"
@@ -990,9 +990,9 @@ PRs: 73541, 73544"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import glob, import os, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,out,virtual_facts
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,found_virt,guest_tech
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import re, import glob
+Make sure statements concerning these methods are incorporated into the stable script - ,virtual_facts,out
+Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,guest_tech,found_virt
 PRs: 73204, 73234"
 -------------------------------------------------------------------------
 =========================================================================
@@ -1022,9 +1022,9 @@ PRs: 73204, 73234"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import glob, import os, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,out,virtual_facts
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,found_virt,guest_tech
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import re, import glob
+Make sure statements concerning these methods are incorporated into the stable script - ,virtual_facts,out
+Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,guest_tech,found_virt
 PRs: 73204, 73233"
 -------------------------------------------------------------------------
 =========================================================================
@@ -1038,7 +1038,7 @@ PRs: 73204, 73233"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import abc, import data, import os, import collections, import util, import re, import itertools
+Make sure these dependencies are incorporated into the stable script - import data, import __future__, import itertools, import collections, import os, import re, import abc, import util
 Make sure statements concerning these methods are incorporated into the stable script - ,to_text
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 72623, 72866"
@@ -1054,8 +1054,8 @@ PRs: 72623, 72866"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import abc, import data, import os, import collections, import util, import re, import itertools
-Make sure statements concerning these methods are incorporated into the stable script - ,modules,to_text,path,prefixes
+Make sure these dependencies are incorporated into the stable script - import data, import __future__, import itertools, import collections, import os, import re, import abc, import util
+Make sure statements concerning these methods are incorporated into the stable script - ,to_text,path,prefixes,modules
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,IntegrationTarget
 PRs: 72623, 72866"
 -------------------------------------------------------------------------
@@ -1071,7 +1071,7 @@ import time
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import tempfile, import __future__, import multiprocessing, import ansible, import os, import traceback
+Make sure these dependencies are incorporated into the stable script - import __future__, import tempfile, import traceback, import ansible, import os, import multiprocessing
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 72604, 72610"
@@ -1088,7 +1088,7 @@ import time
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import tempfile, import __future__, import ansible, import os, import traceback
+Make sure these dependencies are incorporated into the stable script - import __future__, import tempfile, import traceback, import ansible, import os
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 72604, 72609"
@@ -1139,7 +1139,7 @@ def format_plugin_doc(plugin, plugin_type, doc, plainexamples, returndocs, metad
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import textwrap, import datetime, import __future__, import yaml, import ansible, import json, import os, import traceback
+Make sure these dependencies are incorporated into the stable script - import __future__, import textwrap, import yaml, import traceback, import ansible, import datetime, import os, import json
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 72359, 72416"
@@ -1255,7 +1255,7 @@ return (rc, out, err)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import pwd, import __future__, import shutil, import pty, import calendar, import subprocess, import spwd, import errno, import os, import math, import time, import socket, import grp, import re, import select
+Make sure these dependencies are incorporated into the stable script - import pty, import __future__, import errno, import os, import select, import shutil, import subprocess, import grp, import time, import re, import spwd, import math, import pwd, import socket, import calendar
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 72088, 72340"
@@ -1286,7 +1286,7 @@ PRs: 72088, 72340"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import pwd, import __future__, import shutil, import pty, import calendar, import subprocess, import spwd, import errno, import os, import math, import time, import socket, import grp, import re, import select
+Make sure these dependencies are incorporated into the stable script - import pty, import __future__, import errno, import os, import select, import shutil, import subprocess, import grp, import time, import re, import spwd, import math, import pwd, import socket, import calendar
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 72088, 72340"
@@ -1334,7 +1334,7 @@ if task.failed_when:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import collections, import time, import pprint, import threading, import __future__, import functools, import multiprocessing, import cmd, import ansible, import sys, import os
+Make sure these dependencies are incorporated into the stable script - import threading, import sys, import __future__, import pprint, import cmd, import ansible, import collections, import os, import functools, import time, import multiprocessing
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 70919, 72118"
@@ -1364,9 +1364,9 @@ if task.failed_when:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import collections, import time, import pprint, import threading, import __future__, import functools, import multiprocessing, import cmd, import ansible, import sys, import os
+Make sure these dependencies are incorporated into the stable script - import threading, import sys, import __future__, import pprint, import cmd, import ansible, import collections, import os, import functools, import time, import multiprocessing
 Make sure statements concerning these methods are incorporated into the stable script - ,original_task
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,handler_templar,result_item,post_process_whens
+Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,result_item,post_process_whens,handler_templar
 PRs: 70919, 72118"
 -------------------------------------------------------------------------
 =========================================================================
@@ -1437,8 +1437,8 @@ if not self.disable_gpg_check:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import dnf, import sys, import os, import tempfile, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,self,msg,package,fail,dnf
+Make sure these dependencies are incorporated into the stable script - import dnf, import __future__, import sys, import os, import re, import tempfile
+Make sure statements concerning these methods are incorporated into the stable script - ,dnf,package,fail,self,msg
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,gpgres
 PRs: 71537, 71541"
 -------------------------------------------------------------------------
@@ -1510,8 +1510,8 @@ if not self.disable_gpg_check:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import dnf, import sys, import os, import tempfile, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,self,msg,package,fail,dnf
+Make sure these dependencies are incorporated into the stable script - import dnf, import __future__, import sys, import os, import re, import tempfile
+Make sure statements concerning these methods are incorporated into the stable script - ,dnf,package,fail,self,msg
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,gpgres
 PRs: 71537, 71540"
 -------------------------------------------------------------------------
@@ -1532,7 +1532,7 @@ PRs: 71537, 71540"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import errno, import os, import pytest, import json, import itertools
+Make sure these dependencies are incorporated into the stable script - import __future__, import itertools, import errno, import os, import pytest, import json
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 71260, 71514"
@@ -1560,8 +1560,8 @@ except KeyError:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import errno, import os, import pytest, import json, import itertools
-Make sure statements concerning these methods are incorporated into the stable script - ,KeyError,path,self
+Make sure these dependencies are incorporated into the stable script - import __future__, import itertools, import errno, import os, import pytest, import json
+Make sure statements concerning these methods are incorporated into the stable script - ,path,KeyError,self
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 71260, 71514"
 -------------------------------------------------------------------------
@@ -1576,7 +1576,7 @@ PRs: 71260, 71514"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import errno, import os, import pytest, import json, import itertools
+Make sure these dependencies are incorporated into the stable script - import __future__, import itertools, import errno, import os, import pytest, import json
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 71260, 71514"
@@ -1607,7 +1607,7 @@ PRs: 71260, 71514"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import glob, import os
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import glob
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 70530, 71380"
@@ -1630,7 +1630,7 @@ PRs: 70530, 71380"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import glob, import os
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import glob
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 70530, 71380"
@@ -1652,7 +1652,7 @@ PRs: 70530, 71380"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import glob, import os
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import glob
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 70530, 71380"
@@ -1674,7 +1674,7 @@ PRs: 70530, 71380"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import glob, import os
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import glob
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 70530, 71380"
@@ -1690,7 +1690,7 @@ PRs: 70530, 71380"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import glob, import os
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import glob
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 70530, 71380"
@@ -1760,7 +1760,7 @@ https://github.com/pallets/jinja/blob/master/src/jinja2/nativetypes.py
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import types, import __future__, import ast, import itertools
+Make sure these dependencies are incorporated into the stable script - import ast, import __future__, import itertools, import types
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 68432, 71105"
@@ -1816,7 +1816,7 @@ results_callback = ResultsCollectorJSONCallback()
 -------------------------------------------------------------------------
 "
 Make sure these dependencies are incorporated into the stable script - import ansible
-Make sure statements concerning these methods are incorporated into the stable script - ,inventory,passwords,callback,TaskQueueManager,variable_manager,loader,ResultsCollector
+Make sure statements concerning these methods are incorporated into the stable script - ,TaskQueueManager,inventory,ResultsCollector,callback,passwords,variable_manager,loader
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 70842, 70851"
 -------------------------------------------------------------------------
@@ -1871,7 +1871,7 @@ results_callback = ResultsCollectorJSONCallback()
 -------------------------------------------------------------------------
 "
 Make sure these dependencies are incorporated into the stable script - import ansible
-Make sure statements concerning these methods are incorporated into the stable script - ,inventory,passwords,callback,TaskQueueManager,variable_manager,loader,ResultsCollector
+Make sure statements concerning these methods are incorporated into the stable script - ,TaskQueueManager,inventory,ResultsCollector,callback,passwords,variable_manager,loader
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 70445, 70850"
 -------------------------------------------------------------------------
@@ -1985,7 +1985,7 @@ idate_install_ansible_base()
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import setuptools, import sys, import os, import collections, import warnings, import json, import re
+Make sure these dependencies are incorporated into the stable script - import warnings, import __future__, import sys, import collections, import os, import setuptools, import re, import json
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 70525, 70760"
@@ -2131,8 +2131,8 @@ __metaclass__ = type
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import json, import sys
-Make sure statements concerning these methods are incorporated into the stable script - ,fail_mode,sys,print
+Make sure these dependencies are incorporated into the stable script - import sys, import json
+Make sure statements concerning these methods are incorporated into the stable script - ,sys,fail_mode,print
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 70593, 70630"
 -------------------------------------------------------------------------
@@ -2151,7 +2151,7 @@ from ansible.module_utils.six import string_types, PY2
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import sys, import ast
+Make sure these dependencies are incorporated into the stable script - import ast, import __future__, import sys
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 68576, 69626"
@@ -2175,7 +2175,7 @@ except Exception as e:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shutil, import bz2, import lzma, import glob, import gzip, import backports, import io, import os, import zipfile, import traceback, import filecmp, import re, import tarfile
+Make sure these dependencies are incorporated into the stable script - import io, import __future__, import shutil, import os, import zipfile, import traceback, import re, import bz2, import gzip, import lzma, import tarfile, import backports, import glob, import filecmp
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 64895, 69420"
@@ -2216,7 +2216,7 @@ rc, out, err = self.module.run_command(bits, check_rc, data=stdin_data)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import os, import re
+Make sure these dependencies are incorporated into the stable script - import re, import os, import __future__
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 67829, 68913"
@@ -2250,7 +2250,7 @@ finally:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import traceback, import os, import base64, import json, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import traceback, import re, import json, import base64
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 67353, 67441"
@@ -2520,7 +2520,7 @@ elif backend == 'cryptography':
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import cryptography, import OpenSSL, import os, import traceback
+Make sure these dependencies are incorporated into the stable script - import cryptography, import __future__, import os, import traceback, import OpenSSL
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 67036, 67039"
@@ -2565,7 +2565,7 @@ PRs: 67036, 67039"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import string, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import re, import string
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 66995, 66999"
@@ -2602,7 +2602,7 @@ PRs: 66995, 66999"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import traceback, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import traceback, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,container,update_parameters,self
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,pretty_print
 PRs: 65854, 66118"
@@ -2619,8 +2619,8 @@ PRs: 65854, 66118"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import traceback, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,container,self
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import traceback, import docker, import re, import shlex
+Make sure statements concerning these methods are incorporated into the stable script - ,self,container
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 65854, 66118"
 -------------------------------------------------------------------------
@@ -2656,7 +2656,7 @@ PRs: 65854, 66118"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import traceback, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import traceback, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,container,update_parameters,self
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,pretty_print
 PRs: 65854, 66117"
@@ -2673,8 +2673,8 @@ PRs: 65854, 66117"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import traceback, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,container,self
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import traceback, import docker, import re, import shlex
+Make sure statements concerning these methods are incorporated into the stable script - ,self,container
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 65854, 66117"
 -------------------------------------------------------------------------
@@ -2773,7 +2773,7 @@ PRs: 65854, 66117"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import rpm, import yum, import errno, import os, import tempfile, import contextlib, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import errno, import os, import yum, import re, import tempfile, import rpm, import contextlib
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 63713, 65575"
@@ -2853,7 +2853,7 @@ groups_list = self.yum_base.doGroupLists()
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import rpm, import yum, import errno, import os, import tempfile, import contextlib, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import errno, import os, import yum, import re, import tempfile, import rpm, import contextlib
 Make sure statements concerning these methods are incorporated into the stable script - ,self
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 63713, 65575"
@@ -2872,7 +2872,7 @@ groups_list = self.yum_base.doGroupLists()
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import rpm, import yum, import errno, import os, import tempfile, import contextlib, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import errno, import os, import yum, import re, import tempfile, import rpm, import contextlib
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 63713, 65575"
@@ -2891,7 +2891,7 @@ PRs: 63713, 65575"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import rpm, import yum, import errno, import os, import tempfile, import contextlib, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import errno, import os, import yum, import re, import tempfile, import rpm, import contextlib
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 63713, 65575"
@@ -2914,7 +2914,7 @@ update = self.yum_base.doPackageLists(pkgnarrow='updates').updates
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import rpm, import yum, import errno, import os, import tempfile, import contextlib, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import errno, import os, import yum, import re, import tempfile, import rpm, import contextlib
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 63713, 65575"
@@ -2935,7 +2935,7 @@ updates = self.yum_base.doPackageLists(pkgnarrow='updates').updates
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import rpm, import yum, import errno, import os, import tempfile, import contextlib, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import errno, import os, import yum, import re, import tempfile, import rpm, import contextlib
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 63713, 65575"
@@ -2958,7 +2958,7 @@ PRs: 63713, 65575"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import rpm, import yum, import errno, import os, import tempfile, import contextlib, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import errno, import os, import yum, import re, import tempfile, import rpm, import contextlib
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 63713, 65575"
@@ -2993,7 +2993,7 @@ PRs: 63713, 65575"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import rpm, import yum, import errno, import os, import tempfile, import contextlib, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import errno, import os, import yum, import re, import tempfile, import rpm, import contextlib
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 63713, 65575"
@@ -3017,7 +3017,7 @@ PRs: 63713, 65575"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import rpm, import yum, import errno, import os, import tempfile, import contextlib, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import errno, import os, import yum, import re, import tempfile, import rpm, import contextlib
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 63713, 65575"
@@ -3033,7 +3033,7 @@ PRs: 63713, 65575"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import rpm, import yum, import errno, import os, import tempfile, import contextlib, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import errno, import os, import yum, import re, import tempfile, import rpm, import contextlib
 Make sure statements concerning these methods are incorporated into the stable script - ,self
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 63713, 65575"
@@ -3051,7 +3051,7 @@ try: self.yum_base.repos.enableRepo(enablerepo)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import rpm, import yum, import errno, import os, import tempfile, import contextlib, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import errno, import os, import yum, import re, import tempfile, import rpm, import contextlib
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 63713, 65575"
@@ -3072,7 +3072,7 @@ try: self.yum_base.repos.enableRepo(enablerepo)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import rpm, import yum, import errno, import os, import tempfile, import contextlib, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import errno, import os, import yum, import re, import tempfile, import rpm, import contextlib
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 63713, 65575"
@@ -3090,7 +3090,7 @@ PRs: 63713, 65575"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import rpm, import yum, import errno, import os, import tempfile, import contextlib, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import errno, import os, import yum, import re, import tempfile, import rpm, import contextlib
 Make sure statements concerning these methods are incorporated into the stable script - ,self
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 63713, 65575"
@@ -3236,7 +3236,7 @@ if importer_ssl_client_key is None and module.params['client_key'] is not None:
 -------------------------------------------------------------------------
 "
 Make sure these dependencies are incorporated into the stable script - import __future__, import os, import time, import json
-Make sure statements concerning these methods are incorporated into the stable script - ,module,importer_ssl_client_cert,importer_ssl_client_key
+Make sure statements concerning these methods are incorporated into the stable script - ,module,importer_ssl_client_key,importer_ssl_client_cert
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 59522, 65014"
 -------------------------------------------------------------------------
@@ -3257,7 +3257,7 @@ stdout=out, stderr=err)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import yaml, import time, import tempfile, import json, import jsondiff
+Make sure these dependencies are incorporated into the stable script - import jsondiff, import __future__, import yaml, import time, import tempfile, import json
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 63467, 64120"
@@ -3284,7 +3284,7 @@ stdout=out, stderr=err)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import yaml, import time, import tempfile, import json, import jsondiff
+Make sure these dependencies are incorporated into the stable script - import jsondiff, import __future__, import yaml, import time, import tempfile, import json
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 63467, 64120"
@@ -3319,7 +3319,7 @@ stdout=out, stderr=err)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import yaml, import time, import tempfile, import json, import jsondiff
+Make sure these dependencies are incorporated into the stable script - import jsondiff, import __future__, import yaml, import time, import tempfile, import json
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 63467, 64120"
@@ -3335,7 +3335,7 @@ PRs: 63467, 64120"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import common, import __future__, import FakeAnsibleModule, import pytest
+Make sure these dependencies are incorporated into the stable script - import common, import FakeAnsibleModule, import __future__, import pytest
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 63728, 63816"
@@ -3373,7 +3373,7 @@ PRs: 63689, 63687"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import abc, import cryptography, import OpenSSL, import os, import traceback
+Make sure these dependencies are incorporated into the stable script - import cryptography, import __future__, import os, import traceback, import OpenSSL, import abc
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 63432, 63675"
@@ -3394,7 +3394,7 @@ PRs: 63432, 63675"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import abc, import binascii, import cryptography, import OpenSSL, import os, import traceback
+Make sure these dependencies are incorporated into the stable script - import cryptography, import __future__, import os, import traceback, import OpenSSL, import binascii, import abc
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 63432, 63674"
@@ -3465,7 +3465,7 @@ available_versions = data.get('available_versions', {u'v1': u'v1/'})
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import io, import time, import re, import tempfile, import __future__, import ansible, import json, import os, import pytest, import tarfile
+Make sure these dependencies are incorporated into the stable script - import pytest, import __future__, import re, import tempfile, import io, import tarfile, import ansible, import os, import time, import json
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 63238, 63293"
@@ -3495,7 +3495,7 @@ return ""%s %s %s"" % (cron_cmd, user, shlex_quote(path))
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import pwd, import __future__, import pipes, import platform, import shlex, import sys, import os, import tempfile, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import sys, import os, import pipes, import re, import shlex, import tempfile, import pwd, import platform
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 59765, 62546"
@@ -3525,7 +3525,7 @@ return ""%s %s %s"" % (cron_cmd, user, shlex_quote(path))
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import pwd, import __future__, import pipes, import platform, import shlex, import sys, import os, import tempfile, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import sys, import os, import pipes, import re, import shlex, import tempfile, import pwd, import platform
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 59765, 62546"
@@ -3656,7 +3656,7 @@ PRs: 61345, 62088"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import pwd, import __future__, import shutil, import pty, import calendar, import subprocess, import spwd, import errno, import os, import time, import socket, import grp, import re, import select
+Make sure these dependencies are incorporated into the stable script - import pty, import __future__, import errno, import os, import select, import shutil, import subprocess, import grp, import time, import re, import spwd, import pwd, import socket, import calendar
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 54893, 61791"
@@ -3676,7 +3676,7 @@ PRs: 54893, 61791"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import os, import ssl, import botocore, import mimetypes
+Make sure these dependencies are incorporated into the stable script - import mimetypes, import os, import botocore, import ssl
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 61735, 61769"
@@ -3698,7 +3698,7 @@ PRs: 61735, 61769"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import os, import ssl, import botocore, import mimetypes
+Make sure these dependencies are incorporated into the stable script - import mimetypes, import os, import botocore, import ssl
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 61735, 61768"
@@ -3876,7 +3876,7 @@ PRs: 57588, 58544"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import pwd, import __future__, import shutil, import pty, import calendar, import subprocess, import spwd, import errno, import os, import time, import socket, import grp, import re, import select
+Make sure these dependencies are incorporated into the stable script - import pty, import __future__, import errno, import os, import select, import shutil, import subprocess, import grp, import time, import re, import spwd, import pwd, import socket, import calendar
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 55401, 58480"
@@ -3892,7 +3892,7 @@ PRs: 55401, 58480"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import pwd, import __future__, import shutil, import pty, import calendar, import subprocess, import spwd, import errno, import os, import time, import socket, import grp, import re, import select
+Make sure these dependencies are incorporated into the stable script - import pty, import __future__, import errno, import os, import select, import shutil, import subprocess, import grp, import time, import re, import spwd, import pwd, import socket, import calendar
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 55401, 58480"
@@ -4300,7 +4300,7 @@ def test_get_capabilities(self):
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import time, import json, import re, import itertools
+Make sure these dependencies are incorporated into the stable script - import __future__, import itertools, import time, import re, import json
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 58159, 58174"
@@ -4337,7 +4337,7 @@ PRs: 57570, 57632"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import hashlib, import locale, import os, import textwrap, import time, import base64, import datetime, import re
+Make sure these dependencies are incorporated into the stable script - import textwrap, import __future__, import hashlib, import datetime, import os, import time, import re, import base64, import locale
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 57557, 57568"
@@ -4372,7 +4372,7 @@ if to_text(out, errors='surrogate_then_replace').strip().endswith('#'):
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import collections, import json, import re, import itertools
+Make sure these dependencies are incorporated into the stable script - import __future__, import itertools, import collections, import re, import json
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 56389, 56401"
@@ -4389,7 +4389,7 @@ PRs: 56389, 56401"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import json, import re, import itertools
+Make sure these dependencies are incorporated into the stable script - import __future__, import itertools, import re, import json
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 56389, 56399"
@@ -4540,7 +4540,7 @@ display.debug(""done with docker.exec_command()"")
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import subprocess, import os, import re, import __main__
+Make sure these dependencies are incorporated into the stable script - import __main__, import __future__, import os, import subprocess, import re
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 55816, 56278"
@@ -4695,7 +4695,7 @@ display.debug(""done with docker.exec_command()"")
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import subprocess, import os, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import subprocess, import re
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 55816, 56277"
@@ -4728,7 +4728,7 @@ NCCLIENT_IMP_ERR = err
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import ncclient, import lxml, import json
+Make sure these dependencies are incorporated into the stable script - import lxml, import __future__, import json, import ncclient
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 55384, 55648"
@@ -4768,7 +4768,7 @@ return wrapped
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import ncclient, import lxml, import ansible, import json, import re
+Make sure these dependencies are incorporated into the stable script - import lxml, import __future__, import re, import json, import ansible, import ncclient
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 55384, 55648"
@@ -4800,7 +4800,7 @@ HAS_NCCLIENT = False
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import lxml, import json
+Make sure these dependencies are incorporated into the stable script - import lxml, import __future__, import json
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 55384, 55648"
@@ -4826,7 +4826,7 @@ HAS_NCCLIENT = False
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import lxml, import json
+Make sure these dependencies are incorporated into the stable script - import lxml, import __future__, import json
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 55384, 55648"
@@ -4847,7 +4847,7 @@ HAS_NCCLIENT = False
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import ncclient, import lxml, import ansible, import json, import re
+Make sure these dependencies are incorporated into the stable script - import lxml, import __future__, import re, import json, import ansible, import ncclient
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 55384, 55648"
@@ -4875,7 +4875,7 @@ HAS_NCCLIENT = False
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import lxml, import json
+Make sure these dependencies are incorporated into the stable script - import lxml, import __future__, import json
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 55384, 55648"
@@ -4897,7 +4897,7 @@ HAS_NCCLIENT = False
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import ncclient, import lxml, import ansible, import json, import re
+Make sure these dependencies are incorporated into the stable script - import lxml, import __future__, import re, import json, import ansible, import ncclient
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 55384, 55648"
@@ -4925,7 +4925,7 @@ HAS_NCCLIENT = False
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import lxml, import json
+Make sure these dependencies are incorporated into the stable script - import lxml, import __future__, import json
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 55384, 55648"
@@ -4947,7 +4947,7 @@ HAS_NCCLIENT = False
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import ncclient, import lxml, import ansible, import json, import re
+Make sure these dependencies are incorporated into the stable script - import lxml, import __future__, import re, import json, import ansible, import ncclient
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 55384, 55648"
@@ -5079,7 +5079,7 @@ elif state in ['present', 'powered_off', 'powered_on'] and not all((vm_extra_con
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import os, import pysphere, import ssl, import socket, import traceback, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import traceback, import re, import ssl, import socket, import pysphere
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 19716, 55285"
@@ -5099,7 +5099,7 @@ PRs: 19716, 55285"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import operator, import __future__, import re
+Make sure these dependencies are incorporated into the stable script - import re, import operator, import __future__
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 54799, 54987"
@@ -5124,7 +5124,7 @@ aliases: [ dest, destfile, name ]
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import os, import tempfile, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import re, import tempfile
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 31452, 54408"
@@ -5213,7 +5213,7 @@ aliases: [ dest, destfile, name ]
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import os, import tempfile, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import re, import tempfile
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 31452, 54408"
@@ -5229,7 +5229,7 @@ PRs: 31452, 54408"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import os, import tempfile, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import re, import tempfile
 Make sure statements concerning these methods are incorporated into the stable script - ,match
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 31452, 54408"
@@ -5245,7 +5245,7 @@ PRs: 31452, 54408"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import os, import tempfile, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import re, import tempfile
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 31452, 54408"
@@ -5261,8 +5261,8 @@ PRs: 31452, 54408"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import OpenSSL, import os
-Make sure statements concerning these methods are incorporated into the stable script - ,module,certificate,crypto_utils,Encoding
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import OpenSSL
+Make sure statements concerning these methods are incorporated into the stable script - ,module,certificate,Encoding,crypto_utils
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 54085, 54354"
 -------------------------------------------------------------------------
@@ -5277,8 +5277,8 @@ PRs: 54085, 54354"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import OpenSSL, import os
-Make sure statements concerning these methods are incorporated into the stable script - ,module,certificate,crypto_utils,Encoding
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import OpenSSL
+Make sure statements concerning these methods are incorporated into the stable script - ,module,certificate,Encoding,crypto_utils
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 54085, 54354"
 -------------------------------------------------------------------------
@@ -5294,7 +5294,7 @@ crypto_utils.write_file(module, result)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import OpenSSL, import os
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import OpenSSL
 Make sure statements concerning these methods are incorporated into the stable script - ,module,result,crypto_utils
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 54085, 54354"
@@ -5326,8 +5326,8 @@ PRs: 54085, 54354"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import OpenSSL, import os
-Make sure statements concerning these methods are incorporated into the stable script - ,module,crypto_utils,self
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import OpenSSL
+Make sure statements concerning these methods are incorporated into the stable script - ,self,module,crypto_utils
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 54085, 54354"
 -------------------------------------------------------------------------
@@ -5351,7 +5351,7 @@ self.changed = True
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import OpenSSL, import os
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import OpenSSL
 Make sure statements concerning these methods are incorporated into the stable script - ,module,crypto_utils,self
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,privatekey_data
 PRs: 54085, 54354"
@@ -5408,8 +5408,8 @@ def dump(self, check_mode=False):
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import random, import OpenSSL, import os, import datetime
-Make sure statements concerning these methods are incorporated into the stable script - ,result,self
+Make sure these dependencies are incorporated into the stable script - import __future__, import datetime, import os, import random, import OpenSSL
+Make sure statements concerning these methods are incorporated into the stable script - ,self,result
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 54298, 54348"
 -------------------------------------------------------------------------
@@ -5424,7 +5424,7 @@ PRs: 54298, 54348"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import hashlib, import OpenSSL, import os
+Make sure these dependencies are incorporated into the stable script - import __future__, import hashlib, import os, import OpenSSL
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 54192, 54248"
@@ -5446,7 +5446,7 @@ key = crypto_serialization.load_pem_private_key(
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import hashlib, import OpenSSL, import os
+Make sure these dependencies are incorporated into the stable script - import __future__, import hashlib, import os, import OpenSSL
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 54192, 54248"
@@ -5462,7 +5462,7 @@ PRs: 54192, 54248"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import hashlib, import OpenSSL, import os
+Make sure these dependencies are incorporated into the stable script - import __future__, import hashlib, import os, import OpenSSL
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 54192, 54247"
@@ -5484,7 +5484,7 @@ key = crypto_serialization.load_pem_private_key(
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import hashlib, import OpenSSL, import os
+Make sure these dependencies are incorporated into the stable script - import __future__, import hashlib, import os, import OpenSSL
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 54192, 54247"
@@ -5503,7 +5503,7 @@ rn ret.get('all_parameters')
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import collections, import requests, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import collections, import re, import requests
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 51034, 54101"
@@ -5520,7 +5520,7 @@ PRs: 51034, 54101"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import yaml, import rstcheck, import logging, import subprocess, import sys, import argparse, import os, import collections, import json, import argcomplete, import datetime, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import sys, import collections, import datetime, import os, import rstcheck, import subprocess, import yaml, import re, import argparse, import argcomplete, import json, import logging
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 53792, 53811"
@@ -5552,7 +5552,7 @@ elif isinstance(lines, string_types):
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import yaml, import rstcheck, import logging, import subprocess, import sys, import argparse, import os, import collections, import json, import argcomplete, import datetime, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import sys, import collections, import datetime, import os, import rstcheck, import subprocess, import yaml, import re, import argparse, import argcomplete, import json, import logging
 Make sure statements concerning these methods are incorporated into the stable script - 
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,plugins_data
 PRs: 53792, 53811"
@@ -5569,7 +5569,7 @@ PRs: 53792, 53811"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import yaml, import rstcheck, import logging, import subprocess, import sys, import argparse, import os, import collections, import json, import argcomplete, import datetime, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import sys, import collections, import datetime, import os, import rstcheck, import subprocess, import yaml, import re, import argparse, import argcomplete, import json, import logging
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 53792, 53810"
@@ -5601,7 +5601,7 @@ elif isinstance(lines, string_types):
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import yaml, import rstcheck, import logging, import subprocess, import sys, import argparse, import os, import collections, import json, import argcomplete, import datetime, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import sys, import collections, import datetime, import os, import rstcheck, import subprocess, import yaml, import re, import argparse, import argcomplete, import json, import logging
 Make sure statements concerning these methods are incorporated into the stable script - 
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,plugins_data
 PRs: 53792, 53810"
@@ -5617,7 +5617,7 @@ PRs: 53792, 53810"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import subprocess, import errno, import os, import json, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import errno, import os, import subprocess, import re, import json
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 51953, 53657"
@@ -5645,7 +5645,7 @@ if self.token:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import subprocess, import errno, import os, import json, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import errno, import os, import subprocess, import re, import json
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 51953, 53657"
@@ -5667,7 +5667,7 @@ if self.token:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import subprocess, import errno, import os, import json, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import errno, import os, import subprocess, import re, import json
 Make sure statements concerning these methods are incorporated into the stable script - ,document
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 51953, 53657"
@@ -5683,7 +5683,7 @@ PRs: 51953, 53657"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import json, import time
+Make sure these dependencies are incorporated into the stable script - import __future__, import time, import json
 Make sure statements concerning these methods are incorporated into the stable script - ,self
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 53503, 53557"
@@ -5700,8 +5700,8 @@ PRs: 53503, 53557"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import json, import time
-Make sure statements concerning these methods are incorporated into the stable script - ,node_id,force,self
+Make sure these dependencies are incorporated into the stable script - import __future__, import time, import json
+Make sure statements concerning these methods are incorporated into the stable script - ,self,force,node_id
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 53503, 53557"
 -------------------------------------------------------------------------
@@ -5947,7 +5947,7 @@ for scenario in scenarios:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import platform, import os, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import re, import platform
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 53298, 53541"
@@ -5965,7 +5965,7 @@ PRs: 53298, 53541"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import os, import MySQLdb, import pymysql
+Make sure these dependencies are incorporated into the stable script - import MySQLdb, import os, import pymysql
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 47809, 53519"
@@ -6004,7 +6004,7 @@ legate_to: localhost
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import os, import tower_cli
+Make sure these dependencies are incorporated into the stable script - import tower_cli, import __future__, import os
 Make sure statements concerning these methods are incorporated into the stable script - ,ssh
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 47224, 53411"
@@ -6092,7 +6092,7 @@ assert isinstance(am.params['arg'], integer_types)
 -------------------------------------------------------------------------
 "
 Make sure these dependencies are incorporated into the stable script - import __future__, import os, import pytest, import json
-Make sure statements concerning these methods are incorporated into the stable script - ,getattr,argspec,integer_types,builtins
+Make sure statements concerning these methods are incorporated into the stable script - ,integer_types,getattr,builtins,argspec
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 53289, 53329"
 -------------------------------------------------------------------------
@@ -6149,7 +6149,7 @@ PRs: 53289, 53329"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import random, import OpenSSL, import os, import datetime
+Make sure these dependencies are incorporated into the stable script - import __future__, import datetime, import os, import random, import OpenSSL
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 53208, 53283"
@@ -6166,7 +6166,7 @@ PRs: 53208, 53283"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import random, import OpenSSL, import os, import datetime
+Make sure these dependencies are incorporated into the stable script - import __future__, import datetime, import os, import random, import OpenSSL
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 53208, 53283"
@@ -6183,7 +6183,7 @@ PRs: 53208, 53283"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import random, import OpenSSL, import os, import datetime
+Make sure these dependencies are incorporated into the stable script - import __future__, import datetime, import os, import random, import OpenSSL
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 53208, 53283"
@@ -6199,7 +6199,7 @@ PRs: 53208, 53283"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import random, import OpenSSL, import os, import datetime
+Make sure these dependencies are incorporated into the stable script - import __future__, import datetime, import os, import random, import OpenSSL
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 53208, 53283"
@@ -6222,7 +6222,7 @@ PRs: 53208, 53283"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import random, import OpenSSL, import os, import datetime
+Make sure these dependencies are incorporated into the stable script - import __future__, import datetime, import os, import random, import OpenSSL
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 53208, 53283"
@@ -6259,7 +6259,7 @@ PRs: 53208, 53283"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shutil, import os, import tempfile, import traceback, import datetime, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import datetime, import shutil, import os, import traceback, import re, import tempfile
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 53070, 53172"
@@ -6275,7 +6275,7 @@ PRs: 53070, 53172"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import atexit, import collections, import time, import datetime, import re, import itertools, import shutil, import platform, import hashlib, import locale, import selinux, import tempfile, import __main__, import select, import types, import __future__, import pwd, import systemd, import shlex, import subprocess, import stat, import errno, import json, import md5, import syslog, import signal, import sys, import os, import sha, import traceback, import grp
+Make sure these dependencies are incorporated into the stable script - import itertools, import sys, import atexit, import pwd, import __future__, import syslog, import re, import shlex, import tempfile, import systemd, import platform, import md5, import stat, import locale, import __main__, import types, import shutil, import errno, import traceback, import subprocess, import grp, import selinux, import hashlib, import datetime, import collections, import os, import select, import time, import json, import signal, import sha
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 52994, 53135"
@@ -6604,7 +6604,7 @@ LC_CTYPE='C',
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import re
+Make sure these dependencies are incorporated into the stable script - import re, import __future__
 Make sure statements concerning these methods are incorporated into the stable script - ,locale
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 36811, 52836"
@@ -6620,7 +6620,7 @@ PRs: 36811, 52836"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import re
+Make sure these dependencies are incorporated into the stable script - import re, import __future__
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 36811, 52836"
@@ -6642,7 +6642,7 @@ PRs: 36811, 52836"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import re
+Make sure these dependencies are incorporated into the stable script - import re, import __future__
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 36811, 52836"
@@ -6659,8 +6659,8 @@ PRs: 36811, 52836"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,locale,size
+Make sure these dependencies are incorporated into the stable script - import re, import __future__
+Make sure statements concerning these methods are incorporated into the stable script - ,size,locale
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 36811, 52836"
 -------------------------------------------------------------------------
@@ -6681,7 +6681,7 @@ elif shrink and float(size) < this_lv['size']:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import re
+Make sure these dependencies are incorporated into the stable script - import re, import __future__
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 36811, 52836"
@@ -6745,8 +6745,8 @@ if params['direction'] not in ['in', 'out', None]:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import operator, import __future__, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,module,msg,params
+Make sure these dependencies are incorporated into the stable script - import re, import operator, import __future__
+Make sure statements concerning these methods are incorporated into the stable script - ,module,params,msg
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 50402, 52027"
 -------------------------------------------------------------------------
@@ -6761,8 +6761,8 @@ PRs: 50402, 52027"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import OpenSSL, import os
-Make sure statements concerning these methods are incorporated into the stable script - ,str,altnames_ext,altname
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import OpenSSL
+Make sure statements concerning these methods are incorporated into the stable script - ,altname,altnames_ext,str
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 51473, 52024"
 -------------------------------------------------------------------------
@@ -6783,7 +6783,7 @@ if ""REQUIRE SSL"" in res.group(7):
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import traceback, import string, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import traceback, import re, import string
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 40092, 51910"
@@ -6805,7 +6805,7 @@ if ""REQUIRE SSL"" in res.group(7):
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import traceback, import string, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import traceback, import re, import string
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 40092, 51909"
@@ -6837,7 +6837,7 @@ AnsibleFileNotFound,
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import io, import pytest
+Make sure these dependencies are incorporated into the stable script - import io, import __future__, import pytest
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 50776, 51236"
@@ -6860,7 +6860,7 @@ AnsibleFileNotFound,
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import io, import pytest, import ansible
+Make sure these dependencies are incorporated into the stable script - import io, import __future__, import pytest, import ansible
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 50776, 51236"
@@ -6899,7 +6899,7 @@ raise
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import io, import pytest, import ansible
+Make sure these dependencies are incorporated into the stable script - import io, import __future__, import pytest, import ansible
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 50776, 51236"
@@ -6931,7 +6931,7 @@ AnsibleFileNotFound,
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import io, import pytest
+Make sure these dependencies are incorporated into the stable script - import io, import __future__, import pytest
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 50776, 51235"
@@ -6954,7 +6954,7 @@ PRs: 50776, 51235"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 49843, 50899"
@@ -7052,7 +7052,7 @@ def __repr__(self):
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import subprocess, import errno, import os, import json, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import errno, import os, import subprocess, import re, import json
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 47213, 50160"
@@ -7202,7 +7202,7 @@ def check_boot_time(self, distribution, previous_boot_time):
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import datetime, import __main__
+Make sure these dependencies are incorporated into the stable script - import __main__, import __future__, import datetime
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 49272, 49777"
@@ -7242,7 +7242,7 @@ lay.debug(""{action}: attempting post-reboot test command '{command}'"".format(a
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import datetime, import __main__
+Make sure these dependencies are incorporated into the stable script - import __main__, import __future__, import datetime
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 49272, 49777"
@@ -7293,7 +7293,7 @@ action_kwargs = {}
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import datetime, import __main__
+Make sure these dependencies are incorporated into the stable script - import __main__, import __future__, import datetime
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 49272, 49777"
@@ -7368,7 +7368,7 @@ debug('{action}: AnsibleConnectionFailure caught and handled: {error}'.format(ac
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import datetime, import __main__
+Make sure these dependencies are incorporated into the stable script - import __main__, import __future__, import datetime
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 49272, 49777"
@@ -7411,7 +7411,7 @@ self.do_until_success_or_timeout(
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import datetime, import __main__
+Make sure these dependencies are incorporated into the stable script - import __main__, import __future__, import datetime
 Make sure statements concerning these methods are incorporated into the stable script - ,msg
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 49272, 49777"
@@ -7449,7 +7449,7 @@ task_vars = {}
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import datetime, import __main__
+Make sure these dependencies are incorporated into the stable script - import __main__, import __future__, import datetime
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 49272, 49777"
@@ -7483,7 +7483,7 @@ reboot_result = self.perform_reboot(task_vars, distribution)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import datetime, import __main__
+Make sure these dependencies are incorporated into the stable script - import __main__, import __future__, import datetime
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 49272, 49777"
@@ -7503,7 +7503,7 @@ if len(split_fields) == 3 and split_fields[0:2] == ['iam', 'security-credentials
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import time, import socket, import json, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import time, import re, import json, import socket
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 45534, 49428"
@@ -7523,7 +7523,7 @@ if len(split_fields) == 3 and split_fields[0:2] == ['iam', 'security-credentials
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import time, import socket, import json, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import time, import re, import json, import socket
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 45534, 49427"
@@ -7539,7 +7539,7 @@ PRs: 45534, 49427"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 49078, 49152"
@@ -7556,7 +7556,7 @@ PRs: 49078, 49152"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import hashlib, import locale, import os, import textwrap, import time, import base64, import datetime, import re
+Make sure these dependencies are incorporated into the stable script - import textwrap, import __future__, import hashlib, import datetime, import os, import time, import re, import base64, import locale
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 49031, 49082"
@@ -7573,7 +7573,7 @@ PRs: 49031, 49082"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import hashlib, import locale, import os, import textwrap, import time, import base64, import datetime, import re
+Make sure these dependencies are incorporated into the stable script - import textwrap, import __future__, import hashlib, import datetime, import os, import time, import re, import base64, import locale
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 49031, 49082"
@@ -7869,7 +7869,7 @@ devices_list.append(device_dict)
 -------------------------------------------------------------------------
 "
 Make sure these dependencies are incorporated into the stable script - import __future__, import time, import json
-Make sure statements concerning these methods are incorporated into the stable script - ,y,v,device_dict,dict,devices_list,x
+Make sure statements concerning these methods are incorporated into the stable script - ,x,y,v,device_dict,devices_list,dict
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 48491, 48895"
 -------------------------------------------------------------------------
@@ -7898,7 +7898,7 @@ if network.get('links'):
 -------------------------------------------------------------------------
 "
 Make sure these dependencies are incorporated into the stable script - import __future__, import time, import json
-Make sure statements concerning these methods are incorporated into the stable script - ,compare_generic,connected_networks,network,expected_links
+Make sure statements concerning these methods are incorporated into the stable script - ,expected_links,compare_generic,connected_networks,network
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 48491, 48895"
 -------------------------------------------------------------------------
@@ -8047,7 +8047,7 @@ PRs: 48491, 48895"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import os, import tempfile, import datetime, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import datetime, import os, import re, import tempfile
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 47695, 48307"
@@ -8103,7 +8103,7 @@ changed = 0
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import os, import tempfile, import datetime, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import datetime, import os, import re, import tempfile
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 47695, 48307"
@@ -8123,7 +8123,7 @@ return cls(rule_match.group('rule_type'), rule_match.group('control'), rule_matc
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import os, import tempfile, import datetime, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import datetime, import os, import re, import tempfile
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 47695, 48307"
@@ -8161,8 +8161,8 @@ if not module.check_mode and result['changed']:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import os, import tempfile, import datetime, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,module,changes,dict,fname,result
+Make sure these dependencies are incorporated into the stable script - import __future__, import datetime, import os, import re, import tempfile
+Make sure statements concerning these methods are incorporated into the stable script - ,dict,changes,fname,module,result
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 47695, 48307"
 -------------------------------------------------------------------------
@@ -8199,7 +8199,7 @@ PRs: 47695, 48307"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import re
+Make sure these dependencies are incorporated into the stable script - import re, import __future__
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 45796, 48111"
@@ -8218,7 +8218,7 @@ pt Exception as dummy:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,AnsibleDockerClient
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 47711, 48074"
@@ -8239,7 +8239,7 @@ cpuset_mems='cpuset_mems',
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 47711, 48074"
@@ -8262,7 +8262,7 @@ cpuset_mems='cpuset_mems',
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 47711, 48074"
@@ -8285,7 +8285,7 @@ elf.client.docker_py_version < LooseVersion('3.0'):
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 47711, 48074"
@@ -8311,7 +8311,7 @@ elf.client.docker_py_version >= LooseVersion('3.0'):
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 47711, 48074"
@@ -8374,7 +8374,7 @@ config_mapping.update(dict(
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 47711, 48074"
@@ -8395,7 +8395,7 @@ PRs: 47711, 48074"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 47711, 48074"
@@ -8461,7 +8461,7 @@ if self.parameters.client.docker_api_version < LooseVersion('1.22'):
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 47711, 48074"
@@ -8487,7 +8487,7 @@ PRs: 47711, 48074"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 47711, 48074"
@@ -8510,7 +8510,7 @@ __NON_CONTAINER_PROPERTY_OPTIONS = (
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 47711, 48074"
@@ -8527,7 +8527,7 @@ PRs: 47711, 48074"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 47711, 48074"
@@ -8642,7 +8642,7 @@ def __init__(self, **kwargs):
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 47711, 48074"
@@ -8661,7 +8661,7 @@ PRs: 47711, 48074"
 -------------------------------------------------------------------------
 "
 Make sure these dependencies are incorporated into the stable script - import __future__, import os, import time
-Make sure statements concerning these methods are incorporated into the stable script - ,account,self
+Make sure statements concerning these methods are incorporated into the stable script - ,self,account
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 45051, 48043"
 -------------------------------------------------------------------------
@@ -8682,7 +8682,7 @@ else:
 -------------------------------------------------------------------------
 "
 Make sure these dependencies are incorporated into the stable script - import __future__, import os, import time
-Make sure statements concerning these methods are incorporated into the stable script - ,module,self
+Make sure statements concerning these methods are incorporated into the stable script - ,self,module
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,ACMEDirectory
 PRs: 45051, 48043"
 -------------------------------------------------------------------------
@@ -8738,7 +8738,7 @@ PRs: 45051, 48043"
 -------------------------------------------------------------------------
 "
 Make sure these dependencies are incorporated into the stable script - import __future__, import os, import time
-Make sure statements concerning these methods are incorporated into the stable script - ,pem_to_der,ModuleFailException,ACMEAccount,write_file,nopad_b64
+Make sure statements concerning these methods are incorporated into the stable script - ,pem_to_der,nopad_b64,write_file,ACMEAccount,ModuleFailException
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 45051, 48043"
 -------------------------------------------------------------------------
@@ -8894,7 +8894,7 @@ cmd.append('-N')
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import pwd, import __future__, import shutil, import platform, import spwd, import errno, import os, import time, import socket, import grp, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import errno, import os, import shutil, import grp, import time, import spwd, import re, import pwd, import platform, import socket
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 47436, 47487"
@@ -8934,7 +8934,7 @@ PRs: 47436, 47487"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 47396, 47484"
@@ -8950,7 +8950,7 @@ PRs: 47396, 47484"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 47396, 47484"
@@ -8968,7 +8968,7 @@ PRs: 47396, 47484"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 47396, 47484"
@@ -9013,7 +9013,7 @@ if int(code) > 0:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import smtplib, import email, import os, import ssl, import traceback
+Make sure these dependencies are incorporated into the stable script - import email, import __future__, import os, import traceback, import smtplib, import ssl
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 37098, 47019"
@@ -9029,7 +9029,7 @@ PRs: 37098, 47019"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 46594, 46640"
@@ -9047,7 +9047,7 @@ publish_all_ports=host_config.get('CpuShares'='CpuShares'),
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 46594, 46640"
@@ -9138,7 +9138,7 @@ else:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 46322, 46576"
@@ -9174,7 +9174,7 @@ PRs: 46322, 46576"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import pwd, import __future__, import shutil, import platform, import spwd, import errno, import os, import time, import socket, import grp, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import errno, import os, import shutil, import grp, import time, import spwd, import re, import pwd, import platform, import socket
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 46455, 46512"
@@ -9192,7 +9192,7 @@ PRs: 46455, 46512"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import pwd, import __future__, import shutil, import platform, import spwd, import errno, import os, import time, import socket, import grp, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import errno, import os, import shutil, import grp, import time, import spwd, import re, import pwd, import platform, import socket
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 46455, 46512"
@@ -9230,7 +9230,7 @@ PRs: 46245, 46317"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import random, import time, import datetime, import __main__
+Make sure these dependencies are incorporated into the stable script - import __main__, import __future__, import datetime, import time, import random
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 46147, 46289"
@@ -9247,7 +9247,7 @@ PRs: 46147, 46289"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import time, import socket, import json, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import time, import re, import json, import socket
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 38664, 46077"
@@ -9264,7 +9264,7 @@ PRs: 38664, 46077"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import time, import socket, import json, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import time, import re, import json, import socket
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 38664, 46076"
@@ -9295,8 +9295,8 @@ if self.groups:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,str,g,self,client
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
+Make sure statements concerning these methods are incorporated into the stable script - ,self,client,g,str
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 45905, 46063"
 -------------------------------------------------------------------------
@@ -9313,7 +9313,7 @@ self.log('check differences %s %s vs %s (%s)' % (key, getattr(self.parameters, k
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 45905, 46063"
@@ -9352,7 +9352,7 @@ if self.parameters.client.HAS_CPUSET_MEMS_OPT:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 45905, 46063"
@@ -9408,7 +9408,7 @@ if self.parameters.client.HAS_CPUSET_MEMS_OPT:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 45905, 46063"
@@ -9468,7 +9468,7 @@ PRs: 45905, 46063"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 45905, 46063"
@@ -9577,8 +9577,8 @@ if self.groups:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,comp_aliases,alias,comparison,data,self,dict,type,option,Options,comparisons
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
+Make sure statements concerning these methods are incorporated into the stable script - ,data,comp_aliases,comparison,Options,self,alias,comparisons,dict,type,option
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,explicit_types
 PRs: 45905, 46063"
 -------------------------------------------------------------------------
@@ -9596,7 +9596,7 @@ volume_driver=dict(type='str'),
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,dict
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 45905, 46063"
@@ -9618,7 +9618,7 @@ PRs: 45905, 46063"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import collections, import time, import json, import re, import itertools
+Make sure these dependencies are incorporated into the stable script - import itertools, import collections, import time, import re, import json
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 45787, 45815"
@@ -9637,7 +9637,7 @@ stderr = u''
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import random, import time, import datetime, import __main__
+Make sure these dependencies are incorporated into the stable script - import __main__, import __future__, import datetime, import time, import random
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 45607, 45791"
@@ -9673,8 +9673,8 @@ return rules
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import collections, import time, import json, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,module,deepcopy,flatten_nested_targets
+Make sure these dependencies are incorporated into the stable script - import collections, import time, import re, import json
+Make sure statements concerning these methods are incorporated into the stable script - ,module,flatten_nested_targets,deepcopy
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,specified_rules
 PRs: 45594, 45748"
 -------------------------------------------------------------------------
@@ -9692,7 +9692,7 @@ rules_egress = deduplicate_rules_args(rules_expand_sources(rules_expand_ports(ru
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import collections, import time, import json, import re
+Make sure these dependencies are incorporated into the stable script - import collections, import time, import re, import json
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 45594, 45748"
@@ -9709,7 +9709,7 @@ type: boolean
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import __main__
+Make sure these dependencies are incorporated into the stable script - import __main__, import __future__
 Make sure statements concerning these methods are incorporated into the stable script - ,boolean
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 45736, 45738"
@@ -9763,7 +9763,7 @@ module.exit_json(msg=""file already exists"", dest=dest, url=url, changed=change
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shutil, import os, import tempfile, import traceback, import datetime, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import datetime, import shutil, import os, import traceback, import re, import tempfile
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 45495, 45567"
@@ -9818,7 +9818,7 @@ module.exit_json(msg=""file already exists"", dest=dest, url=url, changed=change
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shutil, import os, import tempfile, import traceback, import datetime, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import datetime, import shutil, import os, import traceback, import re, import tempfile
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 45495, 45565"
@@ -9848,7 +9848,7 @@ docker_container:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shlex, import os, import docker, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import docker, import re, import shlex
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 44535, 44565"
@@ -9866,7 +9866,7 @@ PRs: 44535, 44565"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import time, import json, import itertools
+Make sure these dependencies are incorporated into the stable script - import __future__, import itertools, import time, import json
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 43155, 43156"
@@ -9893,7 +9893,7 @@ if regexp == '':
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import os, import tempfile, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import re, import tempfile
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 42013, 42207"
@@ -9910,7 +9910,7 @@ PRs: 42013, 42207"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import os, import tempfile, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import re, import tempfile
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 42013, 42207"
@@ -9937,7 +9937,7 @@ if regexp == '':
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import os, import tempfile, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import re, import tempfile
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 42013, 42204"
@@ -9954,7 +9954,7 @@ PRs: 42013, 42204"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import os, import tempfile, import re
+Make sure these dependencies are incorporated into the stable script - import __future__, import os, import re, import tempfile
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 42013, 42204"
@@ -10000,7 +10000,7 @@ if err and not err.endswith('\n'):
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import subprocess, import os, import collections
+Make sure these dependencies are incorporated into the stable script - import __future__, import collections, import os, import subprocess
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 39019, 39430"
@@ -10029,7 +10029,7 @@ PRs: 39019, 39430"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shutil, import traceback, import hashlib, import locale, import binascii, import os, import textwrap, import datetime, import copy, import base64, import tempfile, import json, import time, import re
+Make sure these dependencies are incorporated into the stable script - import textwrap, import __future__, import hashlib, import datetime, import copy, import os, import shutil, import traceback, import time, import re, import tempfile, import json, import binascii, import base64, import locale
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 38135, 38160"
@@ -10050,7 +10050,7 @@ Also, consider the examples provided for this module.""
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shutil, import traceback, import hashlib, import locale, import binascii, import os, import textwrap, import datetime, import copy, import base64, import tempfile, import json, import time, import re
+Make sure these dependencies are incorporated into the stable script - import textwrap, import __future__, import hashlib, import datetime, import copy, import os, import shutil, import traceback, import time, import re, import tempfile, import json, import binascii, import base64, import locale
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 38135, 38160"
@@ -10068,8 +10068,8 @@ module.fail_json(msg=msg)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shutil, import traceback, import hashlib, import locale, import binascii, import os, import textwrap, import datetime, import copy, import base64, import tempfile, import json, import time, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,module,args,msg,self
+Make sure these dependencies are incorporated into the stable script - import textwrap, import __future__, import hashlib, import datetime, import copy, import os, import shutil, import traceback, import time, import re, import tempfile, import json, import binascii, import base64, import locale
+Make sure statements concerning these methods are incorporated into the stable script - ,self,module,args,msg
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 37165, 37190"
 -------------------------------------------------------------------------
@@ -10087,7 +10087,7 @@ resp, info = fetch_url(self.module, url, data=data, headers=headers, method='POS
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shutil, import traceback, import hashlib, import locale, import binascii, import os, import textwrap, import datetime, import copy, import base64, import tempfile, import json, import time, import re
+Make sure these dependencies are incorporated into the stable script - import textwrap, import __future__, import hashlib, import datetime, import copy, import os, import shutil, import traceback, import time, import re, import tempfile, import json, import binascii, import base64, import locale
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 37165, 37190"
@@ -10114,8 +10114,8 @@ if self.version == 1:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import shutil, import traceback, import hashlib, import locale, import binascii, import os, import textwrap, import datetime, import copy, import base64, import tempfile, import json, import time, import re
-Make sure statements concerning these methods are incorporated into the stable script - ,fetch_url,headers,data,self,url
+Make sure these dependencies are incorporated into the stable script - import textwrap, import __future__, import hashlib, import datetime, import copy, import os, import shutil, import traceback, import time, import re, import tempfile, import json, import binascii, import base64, import locale
+Make sure statements concerning these methods are incorporated into the stable script - ,data,fetch_url,headers,self,url
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 37165, 37190"
 -------------------------------------------------------------------------
@@ -10132,7 +10132,7 @@ new_blocks, handler_blocks = new_ir.get_block_list(
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import __future__, import __main__
+Make sure these dependencies are incorporated into the stable script - import __main__, import __future__
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 36470, 36526"
@@ -10148,8 +10148,8 @@ PRs: 36470, 36526"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import getpass, import fnmatch, import time, import datetime, import re, import platform, import glob, import selinux, import socket, import pwd, import shlex, import stat, import errno, import struct, import json, import simplejson, import signal, import sys, import os, import ssl
-Make sure statements concerning these methods are incorporated into the stable script - ,bytes_to_human,float,part
+Make sure these dependencies are incorporated into the stable script - import sys, import pwd, import shlex, import re, import getpass, import platform, import socket, import stat, import struct, import errno, import selinux, import simplejson, import ssl, import glob, import datetime, import os, import time, import fnmatch, import json, import signal
+Make sure statements concerning these methods are incorporated into the stable script - ,part,bytes_to_human,float
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 34475, 34645"
 -------------------------------------------------------------------------
@@ -10164,8 +10164,8 @@ PRs: 34475, 34645"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import getpass, import fnmatch, import time, import datetime, import re, import platform, import glob, import selinux, import socket, import pwd, import shlex, import stat, import errno, import struct, import json, import simplejson, import signal, import sys, import os, import ssl
-Make sure statements concerning these methods are incorporated into the stable script - ,bytes_to_human,float,d
+Make sure these dependencies are incorporated into the stable script - import sys, import pwd, import shlex, import re, import getpass, import platform, import socket, import stat, import struct, import errno, import selinux, import simplejson, import ssl, import glob, import datetime, import os, import time, import fnmatch, import json, import signal
+Make sure statements concerning these methods are incorporated into the stable script - ,d,bytes_to_human,float
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 34475, 34645"
 -------------------------------------------------------------------------
@@ -10184,7 +10184,7 @@ if moid in ['group-d1', 'ha-folder-root']:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import pyVim, import atexit, import os, import pyVmomi, import ssl, import time, import requests
+Make sure these dependencies are incorporated into the stable script - import pyVmomi, import os, import pyVim, import time, import atexit, import requests, import ssl
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 31133, 32671"
@@ -10203,7 +10203,7 @@ module.exit_json(failed=failed), changed=True)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import os, import ssl, import botocore, import traceback, import mimetypes
+Make sure these dependencies are incorporated into the stable script - import mimetypes, import os, import traceback, import botocore, import ssl
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 32169, 32198"
@@ -10258,7 +10258,7 @@ PRs: 30823, 30942"
 -------------------------------------------------------------------------
 "
 Make sure these dependencies are incorporated into the stable script - import __future__
-Make sure statements concerning these methods are incorporated into the stable script - ,module,self
+Make sure statements concerning these methods are incorporated into the stable script - ,self,module
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 30823, 30942"
 -------------------------------------------------------------------------
@@ -10273,7 +10273,7 @@ PRs: 30823, 30942"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import psycopg2, import re, import itertools
+Make sure these dependencies are incorporated into the stable script - import itertools, import psycopg2, import re
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 26539, 26541"
@@ -10299,7 +10299,7 @@ else:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import psycopg2, import re, import itertools
+Make sure these dependencies are incorporated into the stable script - import itertools, import psycopg2, import re
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 26539, 26541"
@@ -10315,7 +10315,7 @@ PRs: 26539, 26541"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import psycopg2, import re, import itertools
+Make sure these dependencies are incorporated into the stable script - import itertools, import psycopg2, import re
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 23862, 26539"
@@ -10342,7 +10342,7 @@ else:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import psycopg2, import re, import itertools
+Make sure these dependencies are incorporated into the stable script - import itertools, import psycopg2, import re
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 23862, 26539"
