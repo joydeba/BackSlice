@@ -8,8 +8,8 @@
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import io, import decimal
-Make sure statements concerning these methods are incorporated into the stable script - ,assert_raises_rpc_error,rawtx,self
+Make sure these dependencies are incorporated into the stable script - import decimal, import io
+Make sure statements concerning these methods are incorporated into the stable script - ,self,assert_raises_rpc_error,rawtx
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 16257, 16639"
 -------------------------------------------------------------------------
@@ -24,7 +24,7 @@ PRs: 16257, 16639"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import io, import decimal
+Make sure these dependencies are incorporated into the stable script - import decimal, import io
 Make sure statements concerning these methods are incorporated into the stable script - ,assert_greater_than
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 16257, 16639"
@@ -64,9 +64,9 @@ rbf_node.walletpassphrase(WALLET_PASSPHRASE, WALLET_PASSPHRASE_TIMEOUT)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import io, import decimal
-Make sure statements concerning these methods are incorporated into the stable script - ,txid,self,assert_greater_than,res,assert_raises_rpc_error
-Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,p2pkh_pos,p2wpkh_pos,p2sh_p2wpkh_pos
+Make sure these dependencies are incorporated into the stable script - import decimal, import io
+Make sure statements concerning these methods are incorporated into the stable script - ,txid,self,assert_greater_than,assert_raises_rpc_error,res
+Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - ,p2pkh_pos,p2sh_p2wpkh_pos,p2wpkh_pos
 PRs: 16257, 16639"
 -------------------------------------------------------------------------
 =========================================================================
@@ -80,8 +80,8 @@ PRs: 16257, 16639"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import json, import os, import decimal
-Make sure statements concerning these methods are incorporated into the stable script - ,MAX_BIP125_RBF_SEQUENCE,tx_in,assert_greater_than
+Make sure these dependencies are incorporated into the stable script - import os, import json, import decimal
+Make sure statements concerning these methods are incorporated into the stable script - ,assert_greater_than,tx_in,MAX_BIP125_RBF_SEQUENCE
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 15911, 16608"
 -------------------------------------------------------------------------
@@ -108,7 +108,7 @@ for tx_in in decoded_psbt[""tx""][""vin""]:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import json, import os, import decimal
+Make sure these dependencies are incorporated into the stable script - import os, import json, import decimal
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 15911, 16608"
@@ -138,7 +138,7 @@ time.sleep(1.1)
 -------------------------------------------------------------------------
 "
 Make sure these dependencies are incorporated into the stable script - import os, import shutil
-Make sure statements concerning these methods are incorporated into the stable script - ,w2,time
+Make sure statements concerning these methods are incorporated into the stable script - ,time,w2
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 14453, 14880"
 -------------------------------------------------------------------------
@@ -165,7 +165,7 @@ self.nodes[0].decodepsbt(double_processed_psbt[""psbt""])
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import json, import os
+Make sure these dependencies are incorporated into the stable script - import os, import json
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 14588, 14780"
@@ -210,7 +210,7 @@ yield TestInstance([[block2_dup, RejectResult(16, b'bad-txns-inputs-duplicate')]
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import copy, import time
+Make sure these dependencies are incorporated into the stable script - import time, import copy
 Make sure statements concerning these methods are incorporated into the stable script - ,block2_orig,self,node
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 14247, 14249"

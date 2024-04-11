@@ -76,7 +76,7 @@
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import pdb, import types, import test, import subprocess, import doctest, import textwrap, import os, import contextlib, import sys, import codecs, import unittest, import io
+Make sure these dependencies are incorporated into the stable script - import unittest, import sys, import codecs, import os, import contextlib, import subprocess, import types, import pdb, import io, import textwrap, import doctest, import test
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 23412, 24323"
@@ -160,7 +160,7 @@ PRs: 23412, 24323"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import pdb, import types, import test, import subprocess, import doctest, import textwrap, import os, import contextlib, import sys, import codecs, import unittest, import io
+Make sure these dependencies are incorporated into the stable script - import unittest, import sys, import codecs, import os, import contextlib, import subprocess, import types, import pdb, import io, import textwrap, import doctest, import test
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 23412, 24322"
@@ -176,7 +176,7 @@ PRs: 23412, 24322"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import sys, import contextlib, import types, import importlib, import errno, import functools, import builtins, import pathlib, import tempfile, import os, import importlib.abc, import test, import unittest, import io
+Make sure these dependencies are incorporated into the stable script - import test, import errno, import unittest, import sys, import importlib, import contextlib, import os, import tempfile, import builtins, import pathlib, import types, import importlib.abc, import io, import functools
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 18676, 18718"
@@ -219,7 +219,7 @@ return compile_file(file, dfile, **kwargs)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import sys, import contextlib, import types, import importlib, import errno, import functools, import builtins, import pathlib, import tempfile, import os, import importlib.abc, import test, import unittest, import io
+Make sure these dependencies are incorporated into the stable script - import test, import errno, import unittest, import sys, import importlib, import contextlib, import os, import tempfile, import builtins, import pathlib, import types, import importlib.abc, import io, import functools
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 18676, 18718"
@@ -355,7 +355,7 @@ def test_ddir_empty_multiple_workers(self):
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import sys, import contextlib, import types, import importlib, import errno, import functools, import builtins, import pathlib, import tempfile, import os, import importlib.abc, import test, import unittest, import io
+Make sure these dependencies are incorporated into the stable script - import test, import errno, import unittest, import sys, import importlib, import contextlib, import os, import tempfile, import builtins, import pathlib, import types, import importlib.abc, import io, import functools
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 18676, 18718"
@@ -446,7 +446,7 @@ def test_uuid1_eui64(self):
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import shutil, import random, import re, import netbios, import win32wnet, import hashlib, import socket, import ctypes, import time, import os, import sys, import subprocess
+Make sure these dependencies are incorporated into the stable script - import shutil, import netbios, import hashlib, import sys, import os, import ctypes, import random, import subprocess, import time, import re, import socket, import win32wnet
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 5254, 5290"
@@ -476,7 +476,7 @@ _arp_getnode, _lanscan_getnode, _netstat_getnode]
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import shutil, import random, import re, import netbios, import win32wnet, import hashlib, import socket, import ctypes, import time, import os, import sys, import subprocess
+Make sure these dependencies are incorporated into the stable script - import shutil, import netbios, import hashlib, import sys, import os, import ctypes, import random, import subprocess, import time, import re, import socket, import win32wnet
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 5254, 5290"
@@ -549,7 +549,7 @@ with self.maybeRaises(TypeError):
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import time, import weakref, import abc, import threading, import codecs, import io, import random, import array, import itertools, import _pyio, import __future__, import unittest, import signal, import errno, import fcntl, import UserList, import test, import sys, import warnings, import os, import contextlib, import collections
+Make sure these dependencies are incorporated into the stable script - import itertools, import errno, import weakref, import fcntl, import warnings, import random, import array, import abc, import test, import collections, import unittest, import sys, import codecs, import _pyio, import io, import signal, import os, import contextlib, import UserList, import time, import threading, import __future__
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 3171, 3235"
@@ -615,7 +615,7 @@ gwait(wait_func)
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import select, import test, import socket, import time, import unittest, import os, import contextlib, import sys, import signal, import subprocess, import io
+Make sure these dependencies are incorporated into the stable script - import select, import unittest, import signal, import sys, import os, import contextlib, import subprocess, import time, import io, import socket, import test
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 1523, 1532"
@@ -646,7 +646,7 @@ PRs: 1523, 1532"
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import test, import unittest
+Make sure these dependencies are incorporated into the stable script - import unittest, import test
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 1495, 1509"
@@ -713,7 +713,7 @@ co_varnames         tuple of names of arguments and local variables""""""
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import re, import builtins, import dis, import operator, import itertools, import tokenize, import token, import types, import importlib, import argparse, import functools, import linecache, import sys, import ast, import warnings, import os, import imp, import enum, import collections
+Make sure these dependencies are incorporated into the stable script - import itertools, import linecache, import operator, import re, import warnings, import argparse, import importlib, import functools, import imp, import collections, import sys, import ast, import enum, import token, import tokenize, import dis, import os, import builtins, import types
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 1090, 1100"
@@ -753,7 +753,7 @@ else:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import sys, import aifc, import struct, import os, import test, import unittest, import io
+Make sure these dependencies are incorporated into the stable script - import unittest, import sys, import aifc, import os, import struct, import io, import test
 Make sure statements concerning these methods are incorporated into the stable script - ,
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 162, 356"
@@ -799,8 +799,8 @@ else:
 "
 -------------------------------------------------------------------------
 "
-Make sure these dependencies are incorporated into the stable script - import sys, import aifc, import struct, import os, import test, import unittest, import io
-Make sure statements concerning these methods are incorporated into the stable script - ,file_object,f,builtins,raised,self
+Make sure these dependencies are incorporated into the stable script - import unittest, import sys, import aifc, import os, import struct, import io, import test
+Make sure statements concerning these methods are incorporated into the stable script - ,file_object,builtins,self,raised,f
 Ensure statements related to these methods are omitted from the stable script, or provide definitions for them if necessary - 
 PRs: 162, 356"
 -------------------------------------------------------------------------

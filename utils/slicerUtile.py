@@ -362,6 +362,7 @@ def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_f
     library_info = {}
 
     def process_directory(url, headers, library_info):
+        print("Processing a directory------------------------------------------------")
         dir_response = requests.get(url, headers=headers)
         if dir_response.status_code == 200:
             dir_contents = dir_response.json()
@@ -373,6 +374,7 @@ def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_f
                     process_directory(item['url'], headers, library_info)
 
     def process_file(file_url):
+        print("Processing a file------------------------------------------------")
         file_content = requests.get(file_url, headers=headers).text
 
         try:
@@ -405,7 +407,7 @@ def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_f
             elif isinstance(node, ast.Attribute):
                 if isinstance(node.value, ast.Name):
                     class_method_calls.append(f"{node.value.id}.{node.attr}")
-
+        print("Returning file info -----------------------------------------------")
         return {
             'libraries': list(set(libraries)),
             'function_names': list(set(function_names)),
@@ -428,7 +430,7 @@ def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_f
         if cache_file:
             with open(cache_file, 'w') as f:
                 json.dump(library_info, f)
-
+        print("Returning library info ---------------------------------")
         return library_info
 
     else:
