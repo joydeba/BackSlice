@@ -422,7 +422,7 @@ def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_f
         contents = response.json()
 
         for item in contents:
-            if file_count > 50:
+            if file_count >= 50:
                 break
             if item['type'] == 'file' and item['name'].endswith('.py'):
                 file_info = process_file(item['download_url'])
