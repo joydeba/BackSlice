@@ -369,17 +369,13 @@ def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_f
             dir_contents = dir_response.json()
             for item in dir_contents:
                 if item['type'] == 'file' and item['name'].endswith('.py'):
-                    file_info, file_count = process_file(item['download_url'])
-                    library_info[item['name']] = file_info
-                    if file_count >= 2:
-                        break                    
+                    file_info = process_file(item['download_url'])
+                    library_info[item['name']] = file_info                 
                 elif item['type'] == 'dir':
                     process_directory(item['url'], headers, library_info)
 
-    def process_file(file_url):
-        global file_count
-        print("Processing a file------------------------------------------------")
-        file_count = file_count + 1
+    def process_file(file_url):         
+        print("Processing a file------------------------------------------------")    
         file_content = requests.get(file_url, headers=headers).text
 
         try:
@@ -419,17 +415,17 @@ def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_f
             'function_calls': list(set(function_calls)),
             'class_names': list(set(class_names)),
             'class_method_calls': list(set(class_method_calls))
-        }, file_count
+        }
 
     if response.status_code == 200:
         contents = response.json()
-
         for item in contents:
-            if file_count >= 2:
+            if file_count>2:
                 break
             if item['type'] == 'file' and item['name'].endswith('.py'):
-                file_info, file_count = process_file(item['download_url'])
+                file_info = process_file(item['download_url'])
                 library_info[item['name']] = file_info
+                file_count = file_count + 1
             elif item['type'] == 'dir':
                 process_directory(item['url'], headers, library_info)
 
