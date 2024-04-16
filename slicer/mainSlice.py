@@ -14,6 +14,7 @@ PIPE = subprocess.PIPE
 import ast
 from CSLICER import Cslicer
 from BACkSLICE import BackSlicer
+from BACkTRANS import BackTransformer
 from github import Github
 from sklearn.metrics import confusion_matrix, cohen_kappa_score
 import numpy as np
@@ -292,7 +293,17 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                             #                     compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
                             #                     stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=ghkey, cache_file= projectName+"StableLibraryCsche"), 
                             #                     targetfile = previousBackportfullFileTarget)
-                            cslicer = BackSlicer(sourceOriginal = codeHunk,
+                            # cslicer = BackSlicer(sourceOriginal = codeHunk,
+                            #                     sourcebackport = codeHunkBackport, 
+                            #                     astdiffsHistory = astdiffshistory, 
+                            #                     context = get_hunk_context(file_content = codehunks_original_withContext[context_index], hunk_start = hunkStartLnNo, hunk_end = hunkEndlnNo, context_lines=3), 
+                            #                     dependencies = get_changeset_dependencies(previousBackportfullFileTarget), 
+                            #                     metadata = get_changesets_and_metadata(pull_request = pull_backport, sourceO = codeHunkBackport), 
+                            #                     functionalSet = functionalSetforHunk, 
+                            #                     compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
+                            #                     stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = stableBranch, github_token=ghkey, cache_file= projectName+"StableLibraryCsche"), 
+                            #                     targetfile = previousBackportfullFileTarget)   
+                            cslicer = BackTransformer(sourceOriginal = codeHunk,
                                                 sourcebackport = codeHunkBackport, 
                                                 astdiffsHistory = astdiffshistory, 
                                                 context = get_hunk_context(file_content = codehunks_original_withContext[context_index], hunk_start = hunkStartLnNo, hunk_end = hunkEndlnNo, context_lines=3), 
@@ -301,7 +312,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                                 functionalSet = functionalSetforHunk, 
                                                 compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
                                                 stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = stableBranch, github_token=ghkey, cache_file= projectName+"StableLibraryCsche"), 
-                                                targetfile = previousBackportfullFileTarget)                        
+                                                targetfile = previousBackportfullFileTarget)                                                    
                             context_index = context_index +1                    
                             slicebyCslicer, recommendation = cslicer.analyzeProgram()
                             recommendation = recommendation + "\nPRs: "+ pull_id_original  + ", "  + pull_id_backport
