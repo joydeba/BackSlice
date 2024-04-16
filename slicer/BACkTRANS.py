@@ -4,6 +4,7 @@
 
 
 # Use this - https://platform.openai.com/docs/guides/fine-tuning/analyzing-your-fine-tuned-model
+#  https://platform.openai.com/docs/guides/fine-tuning/upload-a-training-file
 
 
 from utils.slicerUtile import *
