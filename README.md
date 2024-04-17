@@ -39,6 +39,6 @@ BackSlice (BackportSlicer) - Provide semantic slices by analyzing changesets in 
 - pip install --upgrade openai
 - nano ~/.zshrc
     - export OPENAI_API_KEY='your-api-key-here'
-    - Ctrl+O and  Ctrl+X
+    - Ctrl+X
     - source ~/.zshrc
     - echo $OPENAI_API_KEY   
