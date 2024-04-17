@@ -33,3 +33,8 @@ BackSlice (BackportSlicer) - Provide semantic slices by analyzing changesets in 
 - brew install gh
 
 - [Optinal] Update config keys, install git with brew, clone subject repositories
+
+
+# For BackTrans 
+- pip install --upgrade openai
+

@@ -7,7 +7,7 @@
 #  https://platform.openai.com/docs/guides/fine-tuning/upload-a-training-file
 
 
-from utils.slicerUtile import *
+# from utils.slicerUtile import *
 class BackTransformer():
     def __init__(self, sourceOriginal= None, sourcebackport = None, astdiffsHistory = None, context = None, dependencies = None, metadata = None, functionalSet = None, compilationSet= None, stableLibraris = None, targetfile = None):
         self.sourceOriginal = sourceOriginal
@@ -28,4 +28,18 @@ class BackTransformer():
         Returns:
             str: The adapted source code, close to sourcebackport.
         """
-        pass                   
+        from openai import OpenAI
+        client = OpenAI()
+
+        completion = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are a poetic assistant, skilled in explaining complex programming concepts with creative flair."},
+            {"role": "user", "content": "Compose a poem that explains the concept of recursion in programming."}
+        ]
+        )
+
+        print(completion.choices[0].message)     
+
+bT = BackTransformer()
+bT.analyzeProgram()                  
