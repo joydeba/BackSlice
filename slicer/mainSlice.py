@@ -283,7 +283,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
 
                             functionalSetforHunk = get_functional_set(codeHunk, testCases = testhunks_original)
                             astdiffshistory = get_ast_diffs(source_commits = pull_commitsSubmitted, startCommit=None, endCommit=None, startDate = None, endDate = None, repoName=repoName, projectName =projectName) 
-                            # cslicer = Cslicer(sourceOriginal = codeHunk,
+                            # slicer = Cslicer(sourceOriginal = codeHunk,
                             #                     sourcebackport = codeHunkBackport, 
                             #                     astdiffsHistory = astdiffshistory, 
                             #                     context = get_hunk_context(file_content = codehunks_original_withContext[context_index], hunk_start = hunkStartLnNo, hunk_end = hunkEndlnNo, context_lines=3), 
@@ -293,7 +293,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                             #                     compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
                             #                     stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=ghkey, cache_file= projectName+"StableLibraryCsche"), 
                             #                     targetfile = previousBackportfullFileTarget)
-                            # cslicer = BackSlicer(sourceOriginal = codeHunk,
+                            # slicer = BackSlicer(sourceOriginal = codeHunk,
                             #                     sourcebackport = codeHunkBackport, 
                             #                     astdiffsHistory = astdiffshistory, 
                             #                     context = get_hunk_context(file_content = codehunks_original_withContext[context_index], hunk_start = hunkStartLnNo, hunk_end = hunkEndlnNo, context_lines=3), 
@@ -303,7 +303,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                             #                     compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
                             #                     stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = stableBranch, github_token=ghkey, cache_file= projectName+"StableLibraryCsche"), 
                             #                     targetfile = previousBackportfullFileTarget)   
-                            cslicer = BackTransformer(sourceOriginal = codeHunk,
+                            slicer = BackTransformer(sourceOriginal = codeHunk,
                                                 sourcebackport = codeHunkBackport, 
                                                 astdiffsHistory = astdiffshistory, 
                                                 context = get_hunk_context(file_content = codehunks_original_withContext[context_index], hunk_start = hunkStartLnNo, hunk_end = hunkEndlnNo, context_lines=3), 
@@ -313,8 +313,10 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                                 compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
                                                 stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = stableBranch, github_token=ghkey, cache_file= projectName+"StableLibraryCsche"), 
                                                 targetfile = previousBackportfullFileTarget)                                                    
-                            context_index = context_index +1                    
-                            slicebyCslicer, recommendation = cslicer.analyzeProgram()
+                            context_index = context_index +1 
+                            data = slicer.prepareFinetuneData()
+                            slicer.saveData(data, 'transInput/Backports.jsonl')                   
+                            slicebyCslicer, recommendation = slicer.analyzeProgram()
                             recommendation = recommendation + "\nPRs: "+ pull_id_original  + ", "  + pull_id_backport
                             if slicebyCslicer:
                                 numberOfSuccesfulSlicing = numberOfSuccesfulSlicing + 1                
@@ -331,7 +333,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     print(e)
                     continue
         
-    with open("slicerOutput/"+projectName+"InconICFDiffzBackSliceNoNeedTest.txt", 'w') as f:   
+    with open("slicerOutput/"+projectName+"InconICFDiffzBackTransNoNeedTest.txt", 'w') as f:   
         print("Total Labeled Backporting PRs", len(data_read), file=f)
         print("Total Sliced Required", numberofSlicingRequired, file=f)
         print("Total Number of Hunk Differences", numberofDifferences, file=f)
@@ -396,50 +398,10 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
             writer.writerow(["-------------------------------------------------------------------------"])
             writer.writerow(["========================================================================="])
 
-# # Updated on 11th April 2023
-# ansibleDictOfActiveBranches = {'devel':{}, 'stable-2.9':{}, 'stable-2.12':{}, 'stable-2.14':{}, 'stable-2.13':{}, 'stable-2.15':{}, 'stable-2.16':{}}
-# ansibleDictOfActiveBranches = {"stable-2.3": 2, "stable-2.4": 1, "stable-2.5": 2, "stable-2.6": 49, "stable-2.7": 458, "stable-2.8": 603, "stable-2.9": 706, "stable-2.10": 294, "stable-2.11": 0, "temporary-2.9.1-branch-releng-only": 27}
-# bitcoinDictOfActiveBranches = {'master':{}, '25.x':{}, '24.x':{}, '23.x':{}, '22.x':{}, '27.x':{}, '26.x':{}}
-# bitcoinDictOfActiveBranches = { '0.19': {}, '0.20': {}, '0.21': {}, '0.18': {}, '0.17': {}, '0.16': {}, '0.15': {}, '0.14': {}, '0.13': {}, '0.12': {}, '0.11': {}, '0.10': {},'0.9.3': {}}
-# ElasticsearchDictOfActiveBranches = {'main':{}, '8.8':{}, '7.17':{}, '8.7':{}, '8.5':{}, '8.6':{}, '8.0':{}, '8.1':{}, '8.2':{}, '8.3':{},'8.4':{}, '6.5':{}}
-# JuliaDictOfActiveBranches = {'master':{}, 'release-1.9':{}, 'release-1.8':{}, 'release-1.6':{}}
-# RailsDictOfActiveBranches = {'main':{}, '7-0-stable':{}, '6-1-stable':{}, '6-0-stable':{}}
-# KibanaDictOfActiveBranches = {'main':{}, '8.8':{}, '8.7':{}, '8.6':{}, '8.5':{}, '8.4':{}, '7.17':{}, '8.2':{}, '8.3':{}}
-# cpythonDictOfActiveBranches = {'main':{}, '3.12':{}, '3.11':{}, '3.10':{}, '3.9':{}, '3.8':{}, '3.0.x':{}}
-cmsswDictOfActiveBranches = {'master':{}, 'CMSSW_14_1_DEVEL_X':{}, 'CMSSW_14_1_X':{}, 'CMSSW_14_0_X':{}, 'CMSSW_13_0_HeavyIon_X':{}, 'CMSSW_10_6_X':{}, 'CMSSW_13_2_X':{}, 'CMSSW_13_3_X':{}, 'CMSSW_12_4_X':{}, 'CMSSW_13_0_X':{}, 'CMSSW_12_6_X':{}, 'CMSSW_13_1_X':{}, 'CMSSW_14_0_DEVEL_X':{}, 'CMSSW_7_1_X':{}, 'CMSSW_12_5_X':{}}
-# saltDictOfActiveBranches = {'master':{}, '3006.x':{}, '3007.x':{}, '3005.x':{}, '2018.3':{}, '2019.2':{}, 'freeze':{} }
-# ansibleDefault_branch = 'devel' # Python 87.8% ---------
-# bitcoinDefault_branch = 'master' # Python 20.1% ---------
-# ElasticsearchDefault_branch = 'main' # Python 0.0%
-# JuliaDefault_branch = 'master' # Python 0.0%
-# RailsDefault_branch = 'main' # Python 0.0%
-# KibanaDefault_branch = 'main' # Python 0.0%
-# cpythonDefault_branch = 'main' # Python 62.8% --------- X
-cmsswDefault_branch = 'master' # Python 28.6% ---------
-# bootstrapDefault_branch = "main" # Python 0.0%
-# electronDefault = "main" # Python 1.9%
-# magento2Default = "2.4-develop" # Python 0.0%
-# nextcloudDefault = "maser" # Python 0.0%
-# nixpkgsDefault = "master" #  Python 1.2%
-# owncloudDefault  = "maser" # Python 0.0%
-# saltDefault_branch  = "maser" # Python 97.8% --------- X
-
-
-
-mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_CMSSW_backport_keywordsPRsNoTestNeeded.csv', 
-cmsswDefault_branch,
-cmsswDictOfActiveBranches,
-'cms-sw',
-'cmssw',
-'slicerOutput/Incmp_BackSlice_CMSSW_backport_keywordsPRsNoNeedTest.csv',
-'CMSSW_14_1_X'
-)
-
-
 
 # # Updated on 11th April 2023
 # ansibleDictOfActiveBranches = {'devel':{}, 'stable-2.9':{}, 'stable-2.12':{}, 'stable-2.14':{}, 'stable-2.13':{}, 'stable-2.15':{}, 'stable-2.16':{}}
-# ansibleDictOfActiveBranches = {"stable-2.3": 2, "stable-2.4": 1, "stable-2.5": 2, "stable-2.6": 49, "stable-2.7": 458, "stable-2.8": 603, "stable-2.9": 706, "stable-2.10": 294, "stable-2.11": 0, "temporary-2.9.1-branch-releng-only": 27}
+ansibleDictOfActiveBranches = {"stable-2.3": 2, "stable-2.4": 1, "stable-2.5": 2, "stable-2.6": 49, "stable-2.7": 458, "stable-2.8": 603, "stable-2.9": 706, "stable-2.10": 294, "stable-2.11": 0, "temporary-2.9.1-branch-releng-only": 27}
 # bitcoinDictOfActiveBranches = {'master':{}, '25.x':{}, '24.x':{}, '23.x':{}, '22.x':{}, '27.x':{}, '26.x':{}}
 # bitcoinDictOfActiveBranches = { '0.19': {}, '0.20': {}, '0.21': {}, '0.18': {}, '0.17': {}, '0.16': {}, '0.15': {}, '0.14': {}, '0.13': {}, '0.12': {}, '0.11': {}, '0.10': {},'0.9.3': {}}
 # ElasticsearchDictOfActiveBranches = {'main':{}, '8.8':{}, '7.17':{}, '8.7':{}, '8.5':{}, '8.6':{}, '8.0':{}, '8.1':{}, '8.2':{}, '8.3':{},'8.4':{}, '6.5':{}}
@@ -448,8 +410,8 @@ cmsswDictOfActiveBranches,
 # KibanaDictOfActiveBranches = {'main':{}, '8.8':{}, '8.7':{}, '8.6':{}, '8.5':{}, '8.4':{}, '7.17':{}, '8.2':{}, '8.3':{}}
 # cpythonDictOfActiveBranches = {'main':{}, '3.12':{}, '3.11':{}, '3.10':{}, '3.9':{}, '3.8':{}, '3.0.x':{}}
 # cmsswDictOfActiveBranches = {'master':{}, 'CMSSW_14_1_DEVEL_X':{}, 'CMSSW_14_1_X':{}, 'CMSSW_14_0_X':{}, 'CMSSW_13_0_HeavyIon_X':{}, 'CMSSW_10_6_X':{}, 'CMSSW_13_2_X':{}, 'CMSSW_13_3_X':{}, 'CMSSW_12_4_X':{}, 'CMSSW_13_0_X':{}, 'CMSSW_12_6_X':{}, 'CMSSW_13_1_X':{}, 'CMSSW_14_0_DEVEL_X':{}, 'CMSSW_7_1_X':{}, 'CMSSW_12_5_X':{}}
-saltDictOfActiveBranches = {'master':{}, '3006.x':{}, '3007.x':{}, '3005.x':{}, '2018.3':{}, '2019.2':{}, 'freeze':{} }
-# ansibleDefault_branch = 'devel' # Python 87.8% ---------
+# saltDictOfActiveBranches = {'master':{}, '3006.x':{}, '3007.x':{}, '3005.x':{}, '2018.3':{}, '2019.2':{}, 'freeze':{} }
+ansibleDefault_branch = 'devel' # Python 87.8% ---------
 # bitcoinDefault_branch = 'master' # Python 20.1% ---------
 # ElasticsearchDefault_branch = 'main' # Python 0.0%
 # JuliaDefault_branch = 'master' # Python 0.0%
@@ -463,14 +425,14 @@ saltDictOfActiveBranches = {'master':{}, '3006.x':{}, '3007.x':{}, '3005.x':{}, 
 # nextcloudDefault = "maser" # Python 0.0%
 # nixpkgsDefault = "master" #  Python 1.2%
 # owncloudDefault  = "maser" # Python 0.0%
-saltDefault_branch  = "maser" # Python 97.8% --------- X
+# saltDefault_branch  = "maser" # Python 97.8% --------- X
 
 
-# mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Salt_backport_keywordsPRsNoTestNeeded.csv', 
-# saltDefault_branch,
-# saltDictOfActiveBranches,
-# 'saltstack',
-# 'salt',
-# 'slicerOutput/Incmp_BackSlice_Salt_backport_keywordsPRsNoNeedTest.csv',
-# '3006.x'
-# )
+mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRsNoTestNeeded.csv', 
+ansibleDefault_branch,
+ansibleDictOfActiveBranches,
+'ansible',
+'ansible',
+'slicerOutput/Incmp_BackTrans_Ansible_backport_keywordsPRsNoNeedTest.csv',
+'stable-2.14'
+)

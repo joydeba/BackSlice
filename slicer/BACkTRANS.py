@@ -27,32 +27,69 @@ class BackTransformer():
         """
         Prepare data for fine-tuning the transformer
         """
-        data = []
-        for i in range(len(self.sourceOriginal)):
-            adaptation_data = {
-                "tool": "Backporting",
-                "task": "Provides adapted semantic slices by analyzing changesets in backporting.",
-                "data-from": "original",
-                "script": self.sourceOriginal[i]
-            }
-
-            # Assuming all other attributes are single items
-            adaptation_data["context"] = self.context
-            adaptation_data["dependencies"] = self.dependencies
-            adaptation_data["metadata"] = self.metadata
-            adaptation_data["functionalSet"] = self.functionalSet
-            adaptation_data["compilationSet"] = self.compilationSet
-            adaptation_data["stableLibraris"] = self.stableLibraris
-            adaptation_data["targetfile"] = self.targetfile
-
-            data.append(adaptation_data)
-
+        data = {
+            "adaptation": [
+                {
+                    "tool": "Backporting",
+                    "task": "Provides adapted semantic slices by analyzing changesets in backporting."
+                },
+                {
+                    "data-from": "original",
+                    "script": self.sourceOriginal,
+                    "weight": 0
+                },
+                {
+                    "data-from": "backport",
+                    "script": self.sourcebackport,
+                    "weight": 1
+                },
+                {
+                    "data-from": "astdiffs-history",
+                    "script": self.astdiffsHistory,
+                    "weight": 0
+                },
+                {
+                    "data-from": "context",
+                    "script": self.context,
+                    "weight": 0
+                },
+                {
+                    "data-from": "dependencies",
+                    "script": self.dependencies,
+                    "weight": 0
+                },
+                {
+                    "data-from": "metadata",
+                    "script": self.metadata,
+                    "weight": 0
+                },
+                {
+                    "data-from": "functional-set",
+                    "script": self.functionalSet,
+                    "weight": 0
+                },
+                {
+                    "data-from": "compilation-set",
+                    "script": self.compilationSet,
+                    "weight": 0
+                },
+                {
+                    "data-from": "stable-libraries",
+                    "script": self.stableLibraris,
+                    "weight": 1
+                },
+                {
+                    "data-from": "target-file",
+                    "script": self.targetfile,
+                    "weight": 1
+                }
+            ]
+        }
         return data
 
     def saveData(self, data, filename):
         with open(filename, 'a') as f:
-            for item in data:
-                f.write(json.dumps(item) + '\n')
+                f.write(json.dumps(data) + '\n')
 
 
 
@@ -63,6 +100,8 @@ class BackTransformer():
         Returns:
             str: The adapted source code, close to sourcebackport.
         """
+        return self.sourcebackport, "Recom"
+
         client = OpenAI()
         # client.files.create(
         # file=open("transInput/Backports.jsonl", "rb"),
@@ -99,18 +138,18 @@ class BackTransformer():
 
 
 # Example usage:
-sourceOriginal = ["What's the capital of France?"]
-sourcebackport = "Backporting"
-astdiffsHistory = "Some history"
-context = "Some context"
-dependencies = "Some dependencies"
-metadata = "Some metadata"
-functionalSet = "Some functional set"
-compilationSet = "Some compilation set"
-stableLibraris = "Some stable libraries"
-targetfile = "Some target file"
+# sourceOriginal = "What's the capital of France?"
+# sourcebackport = "Backporting"
+# astdiffsHistory = "Some history"
+# context = "Some context"
+# dependencies = "Some dependencies"
+# metadata = "Some metadata"
+# functionalSet = "Some functional set"
+# compilationSet = "Some compilation set"
+# stableLibraris = "Some stable libraries"
+# targetfile = "Some target file"
 
 
-processor = BackTransformer(sourceOriginal, sourcebackport, astdiffsHistory, context, dependencies, metadata, functionalSet, compilationSet, stableLibraris, targetfile)
-data = processor.prepareFinetuneData()
-processor.saveData(data, 'finetune_data.json')
+# processor = BackTransformer(sourceOriginal, sourcebackport, astdiffsHistory, context, dependencies, metadata, functionalSet, compilationSet, stableLibraris, targetfile)
+# data = processor.prepareFinetuneData()
+# processor.saveData(data, 'transInput/Backports.jsonl')
