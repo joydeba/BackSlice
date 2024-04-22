@@ -299,9 +299,9 @@ def get_functional_set(sourceCode, testCases):
                 if entity:
                     functional_set.add(entity)
     except:
-        return functional_set                
+        return list(functional_set)                
 
-    return functional_set
+    return list(functional_set)
 
 
 def get_compilation_set(sourceCode, functional_set):
@@ -319,7 +319,7 @@ def get_compilation_set(sourceCode, functional_set):
     # Parse the source code into an abstract syntax tree (AST)
         tree = ast.parse(sourceCode)
     except:
-        return referenced_entities     
+        return list(referenced_entities)     
 
 
     # Helper function to recursively traverse the AST and find references
@@ -341,7 +341,7 @@ def get_compilation_set(sourceCode, functional_set):
                     if isinstance(target, ast.Name) and target.id == func_entity:
                         visit(node)                  
 
-    return referenced_entities
+    return list(referenced_entities)
 
 
 def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_file="StableCacheLibrary.txt"):
