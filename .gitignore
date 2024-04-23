@@ -173,5 +173,5 @@ cmssw
 cpython
 salt
 transInput/BackportsSample.jsonl
-transInput/Backports.jsonl
+transInput/*Backports.jsonl
 transInput/AnsibleBackports.jsonl
