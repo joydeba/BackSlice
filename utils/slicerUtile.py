@@ -420,14 +420,18 @@ def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_f
     if response.status_code == 200:
         contents = response.json()
         for item in contents:
-            if file_count>2:
-                break
-            if item['type'] == 'file' and item['name'].endswith('.py'):
-                file_info = process_file(item['download_url'])
-                library_info[item['name']] = file_info
-                file_count = file_count + 1
-            elif item['type'] == 'dir':
-                process_directory(item['url'], headers, library_info)
+            try:
+                if file_count>2:
+                    break
+                if item['type'] == 'file' and item['name'].endswith('.py'):
+                    file_info = process_file(item['download_url'])
+                    library_info[item['name']] = file_info
+                    file_count = file_count + 1
+                elif item['type'] == 'dir':
+                    process_directory(item['url'], headers, library_info)
+            except Exception as e:
+                print(e)
+                continue                
 
         # Save the retrieved information to the cache file.
         if cache_file:
