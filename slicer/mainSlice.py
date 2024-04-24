@@ -118,8 +118,11 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     original_mergeCommits = ast.literal_eval(pull_commitOriginal)['mergeCommit']["oid"] if "null" not in pull_commitOriginal else None        
                     backport_mergeCommits = ast.literal_eval(pull_commitBackports)['mergeCommit']["oid"] if "null" not in pull_commitBackports else None  
 
-                    commits_diffs_original = gLocal.execute(["git", "show", original_mergeCommits, ":*.py"]).split("\ndiff ") if original_mergeCommits else print("Merge commit missing")
-                    commits_diffs_backport = gLocal.execute(["git", "show", backport_mergeCommits, ":*.py"]).split("\ndiff ") if backport_mergeCommits else print("Merge commit missing")
+                    # commits_diffs_original = gLocal.execute(["git", "show", original_mergeCommits, ":*.py"]).split("\ndiff ") if original_mergeCommits else print("Merge commit missing")
+                    # commits_diffs_backport = gLocal.execute(["git", "show", backport_mergeCommits, ":*.py"]).split("\ndiff ") if backport_mergeCommits else print("Merge commit missing")
+
+                    commits_diffs_original = gLocal.execute(["git", "show", original_mergeCommits, ":*.cc", ":*.py", ":*.c"]).split("\ndiff ") if original_mergeCommits else print("Merge commit missing")
+                    commits_diffs_backport = gLocal.execute(["git", "show", backport_mergeCommits, ":*.cc", ":*.py", ":*.c"]).split("\ndiff ") if backport_mergeCommits else print("Merge commit missing")                    
 
                     # Todo
                     testhunks_original = []
@@ -427,7 +430,7 @@ cmsswDefault_branch = 'master' # Python 28.6% ---------
 # owncloudDefault  = "maser" # Python 0.0%
 # saltDefault_branch  = "maser" # Python 97.8% --------- X
 
-
+# file_regex = ":*.cpp", ":*.py", ":*.c"
 mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Cmssw_backport_keywordsPRsNoTestNeeded.csv', 
 cmsswDefault_branch,
 cmsswDictOfActiveBranches,
