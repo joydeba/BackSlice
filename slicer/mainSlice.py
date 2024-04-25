@@ -104,16 +104,16 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     targetStableBranch = ast.literal_eval(gLocal.execute(["gh", "pr", "view", pull_id_backport, "--json", "baseRefName"]))['baseRefName']
                     if pull_commitOriginal == '{"mergeCommit":null}' or pull_commitBackports == '{"mergeCommit":null}':
                         continue 
-                    # targetStableBranch = line[3].strip()
-                    # branch_exists = any(branch.strip() == targetStableBranch for branch in branches.split('\n'))
+                    targetStableBranch = line[3].strip()
+                    branch_exists = any(branch.strip() == targetStableBranch for branch in branches.split('\n'))
                     
-                    # creationStableBranch = None
-                    # if not branch_exists:
-                    #         gLocal.branch(targetStableBranch)
+                    creationStableBranch = None
+                    if not branch_exists:
+                            gLocal.branch(targetStableBranch)
 
-                    # else:
-                    #         creationStableBranch = gLocal.execute(["git", "log", "--reverse", "--pretty=format:'%h %ad %s'", "--date=iso", targetStableBranch]).split('\n')[1]
-                    #         # git log --reverse  <branch-name> | tail -1
+                    else:
+                            creationStableBranch = gLocal.execute(["git", "log", "--reverse", "--pretty=format:'%h %ad %s'", "--date=iso", targetStableBranch]).split('\n')[1]
+                            # git log --reverse  <branch-name> | tail -1
 
                     original_mergeCommits = ast.literal_eval(pull_commitOriginal)['mergeCommit']["oid"] if "null" not in pull_commitOriginal else None        
                     backport_mergeCommits = ast.literal_eval(pull_commitBackports)['mergeCommit']["oid"] if "null" not in pull_commitBackports else None  
@@ -122,7 +122,8 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     # commits_diffs_backport = gLocal.execute(["git", "show", backport_mergeCommits, ":*.py"]).split("\ndiff ") if backport_mergeCommits else print("Merge commit missing")
 
                     commits_diffs_original = gLocal.execute(["git", "show", original_mergeCommits, ":*.cc", ":*.py", ":*.c"]).split("\ndiff ") if original_mergeCommits else print("Merge commit missing")
-                    commits_diffs_backport = gLocal.execute(["git", "show", backport_mergeCommits, ":*.cc", ":*.py", ":*.c"]).split("\ndiff ") if backport_mergeCommits else print("Merge commit missing")                    
+                    commits_diffs_backport = gLocal.execute(["git", "show", backport_mergeCommits, ":*.cc", ":*.py", ":*.c"]).split("\ndiff ") if backport_mergeCommits else print("Merge commit missing") 
+                    # Todo - git show is not giving the diffs, probaly branch is not fetched.    
 
                     # Todo
                     testhunks_original = []
