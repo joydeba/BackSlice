@@ -1,3 +1,25 @@
+"disk_bus_map = {'virtio': 'vd', 'xen': 'xvd', 'fdc': 'fd', 'ide': 'hd'}
+    prefix = disk_bus_map.get(disk['model'], 'sd')
+    context['disks'][disk['name']]['target_dev'] = '{0}{1}'.format(prefix, string.ascii_lowercase[i])
+    if hypervisor in ['qemu', 'kvm', 'bhyve', 'xen']:
+"
+-------------------------------------------------------------------------
+"disk_bus_map = {'virtio': 'vd', 'xen': 'xvd', 'fdc': 'fd', 'ide': 'hd'}
+    prefix = disk_bus_map.get(disk['model'], 'sd')
+    context['disks'][disk['name']]['target_dev'] = '{0}{1}'.format(prefix, string.ascii_lowercase[i])
+    if hypervisor in ['qemu', 'kvm', 'xen']:
+"
+-------------------------------------------------------------------------
+"disk_bus_map = {'virtio': 'vd', 'xen': 'xvd', 'fdc': 'fd', 'ide': 'hd'}
+    prefix = disk_bus_map.get(disk['model'], 'sd')
+    context['disks'][disk['name']]['target_dev'] = '{0}{1}'.format(prefix, string.ascii_lowercase[i])
+    if hypervisor in ['qemu', 'kvm', 'xen']:
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 49510, 49540"
+-------------------------------------------------------------------------
+=========================================================================
 "output = salt.utils.stringutils.to_unicode(console['output_decoded'])
 "
 -------------------------------------------------------------------------
@@ -9,6 +31,23 @@
 -------------------------------------------------------------------------
 "Recom
 PRs: 48212, 49041"
+-------------------------------------------------------------------------
+=========================================================================
+"with patch('salt.pillar.compile_template') as compile_template, \
+        patch.object(salt.pillar.Pillar, '_Pillar__gather_avail',
+                     MagicMock(return_value={'base': ['blah', 'foo']})):
+"
+-------------------------------------------------------------------------
+"'pillar_roots': {},
+'file_roots': {},
+"
+-------------------------------------------------------------------------
+"'pillar_roots': {},
+'file_roots': {},
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 47161, 47162"
 -------------------------------------------------------------------------
 =========================================================================
 "
