@@ -422,8 +422,8 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
 # RailsDictOfActiveBranches = {'main':{}, '7-0-stable':{}, '6-1-stable':{}, '6-0-stable':{}}
 # KibanaDictOfActiveBranches = {'main':{}, '8.8':{}, '8.7':{}, '8.6':{}, '8.5':{}, '8.4':{}, '7.17':{}, '8.2':{}, '8.3':{}}
 # cpythonDictOfActiveBranches = {'main':{}, '3.12':{}, '3.11':{}, '3.10':{}, '3.9':{}, '3.8':{}, '3.0.x':{}}
-# cmsswDictOfActiveBranches = {'master':{}, 'CMSSW_14_1_DEVEL_X':{}, 'CMSSW_14_1_X':{}, 'CMSSW_14_0_X':{}, 'CMSSW_13_0_HeavyIon_X':{}, 'CMSSW_10_6_X':{}, 'CMSSW_13_2_X':{}, 'CMSSW_13_3_X':{}, 'CMSSW_12_4_X':{}, 'CMSSW_13_0_X':{}, 'CMSSW_12_6_X':{}, 'CMSSW_13_1_X':{}, 'CMSSW_14_0_DEVEL_X':{}, 'CMSSW_7_1_X':{}, 'CMSSW_12_5_X':{}}
-saltDictOfActiveBranches = {'master':{}, '3006.x':{}, '3007.x':{}, '3005.x':{}, '2018.3':{}, '2019.2':{}, 'freeze':{} }
+cmsswDictOfActiveBranches = {'master':{}, 'CMSSW_14_1_DEVEL_X':{}, 'CMSSW_14_1_X':{}, 'CMSSW_14_0_X':{}, 'CMSSW_13_0_HeavyIon_X':{}, 'CMSSW_10_6_X':{}, 'CMSSW_13_2_X':{}, 'CMSSW_13_3_X':{}, 'CMSSW_12_4_X':{}, 'CMSSW_13_0_X':{}, 'CMSSW_12_6_X':{}, 'CMSSW_13_1_X':{}, 'CMSSW_14_0_DEVEL_X':{}, 'CMSSW_7_1_X':{}, 'CMSSW_12_5_X':{}}
+# saltDictOfActiveBranches = {'master':{}, '3006.x':{}, '3007.x':{}, '3005.x':{}, '2018.3':{}, '2019.2':{}, 'freeze':{} }
 # ansibleDefault_branch = 'devel' # Python 87.8% ---------
 # bitcoinDefault_branch = 'master' # Python 20.1% ---------
 # ElasticsearchDefault_branch = 'main' # Python 0.0%
@@ -431,7 +431,7 @@ saltDictOfActiveBranches = {'master':{}, '3006.x':{}, '3007.x':{}, '3005.x':{}, 
 # RailsDefault_branch = 'main' # Python 0.0%
 # KibanaDefault_branch = 'main' # Python 0.0%
 # cpythonDefault_branch = 'main' # Python 62.8% --------- X
-# cmsswDefault_branch = 'master' # Python 28.6% ---------
+cmsswDefault_branch = 'master' # Python 28.6% ---------
 # bootstrapDefault_branch = "main" # Python 0.0%
 # electronDefault = "main" # Python 1.9%
 # magento2Default = "2.4-develop" # Python 0.0%
@@ -441,11 +441,11 @@ saltDictOfActiveBranches = {'master':{}, '3006.x':{}, '3007.x':{}, '3005.x':{}, 
 saltDefault_branch  = "maser" # Python 97.8% --------- X
 
 # file_regex = ":*.cpp", ":*.py", ":*.c"
-mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Salt_backport_keywordsPRsNoTestNeeded.csv', 
-saltDefault_branch,
-saltDictOfActiveBranches,
-'saltstack',
-'salt',
-'slicerOutput/Incmp_BackTrans_Salt_backport_keywordsPRsNoNeedTest.csv',
-'3007.x'
+mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_CMSSW_backport_keywordsPRsNoTestNeeded.csv', 
+cmsswDefault_branch,
+cmsswDictOfActiveBranches,
+'cms-sw',
+'cmssw',
+'slicerOutput/Incmp_BackTrans_Cmssw_backport_keywordsPRsNoNeedTest.csv',
+'CMSSW_14_0_X'
 )
