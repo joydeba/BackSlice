@@ -42,3 +42,4 @@ BackSlice (BackportSlicer) - Provide semantic slices by analyzing changesets in 
     - Ctrl+X
     - source ~/.zshrc
     - echo $OPENAI_API_KEY   
+- pip install tiktoken    
