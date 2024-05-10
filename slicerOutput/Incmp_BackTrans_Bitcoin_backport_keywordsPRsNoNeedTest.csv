@@ -1,0 +1,107 @@
+"assert_raises_rpc_error(-4, ""Fee exceeds maximum configured by -maxtxfee"", self.nodes[3].fundrawtransaction, rawtx, {""feeRate"": 1})
+"
+-------------------------------------------------------------------------
+"# previously this was silently capped at -maxtxfee
+"
+-------------------------------------------------------------------------
+"# previously this was silently capped at -maxtxfee
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 16257, 16639"
+-------------------------------------------------------------------------
+=========================================================================
+"assert_greater_than,
+"
+-------------------------------------------------------------------------
+"test_maxtxfee_fails(self, rbf_node, dest_address)
+"
+-------------------------------------------------------------------------
+"test_maxtxfee_fails(self, rbf_node, dest_address)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 16257, 16639"
+-------------------------------------------------------------------------
+=========================================================================
+"# feeRate of 0.1 BTC / KB produces a total fee slightly below -maxtxfee (~0.05280000):
+res = self.nodes[1].walletcreatefundedpsbt([{""txid"":txid,""vout"":p2wpkh_pos},{""txid"":txid,""vout"":p2sh_p2wpkh_pos},{""txid"":txid,""vout"":p2pkh_pos}], {self.nodes[1].getnewaddress():29.99}, 0, {""feeRate"": 0.1})
+assert_greater_than(res[""fee""], 0.05)
+assert_greater_than(0.06, res[""fee""])
+
+# feeRate of 10 BTC / KB produces a total fee well above -maxtxfee
+# previously this was silenty capped at -maxtxfee
+assert_raises_rpc_error(-4, ""Fee exceeds maximum configured by -maxtxfee"", self.nodes[1].walletcreatefundedpsbt, [{""txid"":txid,""vout"":p2wpkh_pos},{""txid"":txid,""vout"":p2sh_p2wpkh_pos},{""txid"":txid,""vout"":p2pkh_pos}], {self.nodes[1].getnewaddress():29.99}, 0, {""feeRate"": 10})
+
+"
+-------------------------------------------------------------------------
+"def test_maxtxfee_fails(test, rbf_node, dest_address):
+test.restart_node(1, ['-maxtxfee=0.00003']  test.extra_args[1])
+rbf_node.walletpassphrase(WALLET_PASSPHRASE, WALLET_PASSPHRASE_TIMEOUT)
+rbfid = spend_one_input(rbf_node, dest_address)
+assert_raises_rpc_error(-4, ""Specified or calculated fee 0.0000332 is too high (cannot be higher than maxTxFee 0.00003)"", rbf_node.bumpfee, rbfid)
+test.restart_node(1, test.extra_args[1])
+rbf_node.walletpassphrase(WALLET_PASSPHRASE, WALLET_PASSPHRASE_TIMEOUT)
+
+
+"
+-------------------------------------------------------------------------
+"def test_maxtxfee_fails(test, rbf_node, dest_address):
+test.restart_node(1, ['-maxtxfee=0.00003']  test.extra_args[1])
+rbf_node.walletpassphrase(WALLET_PASSPHRASE, WALLET_PASSPHRASE_TIMEOUT)
+rbfid = spend_one_input(rbf_node, dest_address)
+assert_raises_rpc_error(-4, ""Specified or calculated fee 0.0000332 is too high (cannot be higher than maxTxFee 0.00003)"", rbf_node.bumpfee, rbfid)
+test.restart_node(1, test.extra_args[1])
+rbf_node.walletpassphrase(WALLET_PASSPHRASE, WALLET_PASSPHRASE_TIMEOUT)
+
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 16257, 16639"
+-------------------------------------------------------------------------
+=========================================================================
+"# Check transactions for duplicate inputs
+self.log.info(""Test duplicate input block."")
+
+block2_orig.vtx[2].vin.append(block2_orig.vtx[2].vin[0])
+block2_orig.vtx[2].rehash()
+block2_orig.hashMerkleRoot = block2_orig.calc_merkle_root()
+block2_orig.rehash()
+block2_orig.solve()
+node.p2p.send_blocks_and_test([block2_orig], node, success=False, request_block=False, reject_reason='bad-txns-inputs-duplicate')
+
+"
+-------------------------------------------------------------------------
+"yield TestInstance([[block2, RejectResult(16, b'bad-txns-duplicate')]])
+
+# Check transactions for duplicate inputs
+self.log.info(""Test duplicate input block."")
+
+block2_dup = copy.deepcopy(block2_orig)
+block2_dup.vtx[2].vin.append(block2_dup.vtx[2].vin[0])
+block2_dup.vtx[2].rehash()
+block2_dup.hashMerkleRoot = block2_dup.calc_merkle_root()
+block2_dup.rehash()
+block2_dup.solve()
+yield TestInstance([[block2_dup, RejectResult(16, b'bad-txns-inputs-duplicate')], [block2_orig, True]])
+"
+-------------------------------------------------------------------------
+"yield TestInstance([[block2, RejectResult(16, b'bad-txns-duplicate')]])
+
+# Check transactions for duplicate inputs
+self.log.info(""Test duplicate input block."")
+
+block2_dup = copy.deepcopy(block2_orig)
+block2_dup.vtx[2].vin.append(block2_dup.vtx[2].vin[0])
+block2_dup.vtx[2].rehash()
+block2_dup.hashMerkleRoot = block2_dup.calc_merkle_root()
+block2_dup.rehash()
+block2_dup.solve()
+yield TestInstance([[block2_dup, RejectResult(16, b'bad-txns-inputs-duplicate')], [block2_orig, True]])
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 14247, 14249"
+-------------------------------------------------------------------------
+=========================================================================
