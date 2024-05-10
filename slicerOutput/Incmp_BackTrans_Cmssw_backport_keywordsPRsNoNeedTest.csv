@@ -3445,34 +3445,6 @@ Jet correction
 PRs: 30674, 31124"
 -------------------------------------------------------------------------
 =========================================================================
-"'phase1_2018_design'       :  '112X_upgrade2018_design_v2',
-'phase1_2018_realistic'    :  '112X_upgrade2018_realistic_v3',
-'phase1_2018_realistic_hi' :  '112X_upgrade2018_realistic_HI_v3',
-'phase1_2018_realistic_HEfail' :  '112X_upgrade2018_realistic_HEfail_v3',
-'phase1_2018_cosmics'      :  '112X_upgrade2018cosmics_realistic_deco_v3',
-'phase1_2018_cosmics_peak' :  '112X_upgrade2018cosmics_realistic_peak_v3',
-"
--------------------------------------------------------------------------
-"'phase1_2018_design'       :  '111X_upgrade2018_design_v2',
-'phase1_2018_realistic'    :  '111X_upgrade2018_realistic_v2',
-'phase1_2018_realistic_hi' :  '111X_upgrade2018_realistic_HI_v1',
-'phase1_2018_realistic_HEfail' :  '111X_upgrade2018_realistic_HEfail_v2',
-'phase1_2018_cosmics'      :   '111X_upgrade2018cosmics_realistic_deco_v2',
-'phase1_2018_cosmics_peak' :   '111X_upgrade2018cosmics_realistic_peak_v2',
-"
--------------------------------------------------------------------------
-"'phase1_2018_design'       :  '111X_upgrade2018_design_v2',
-'phase1_2018_realistic'    :  '111X_upgrade2018_realistic_v2',
-'phase1_2018_realistic_hi' :  '111X_upgrade2018_realistic_HI_v1',
-'phase1_2018_realistic_HEfail' :  '111X_upgrade2018_realistic_HEfail_v2',
-'phase1_2018_cosmics'      :   '111X_upgrade2018cosmics_realistic_deco_v2',
-'phase1_2018_cosmics_peak' :   '111X_upgrade2018cosmics_realistic_peak_v2',
-"
--------------------------------------------------------------------------
-"Recom
-PRs: 31050, 31119"
--------------------------------------------------------------------------
-=========================================================================
 "run2_miniAOD_devel.toModify(calibratedEgammaSettings,correctionFile = _correctionFile2017UL)
 "
 -------------------------------------------------------------------------
@@ -7654,43 +7626,6 @@ return process
 -------------------------------------------------------------------------
 "Recom
 PRs: 17807, 18218"
--------------------------------------------------------------------------
-=========================================================================
-"diMuonHistos.etaBin = cms.int32(70) #dimuonhistograms mass, bin   
-diMuonHistos.etaBBin = cms.int32(70)    
-diMuonHistos.etaEBin = cms.int32(70)    
-diMuonHistos.LowMassMin = cms.double(2.0)   
-diMuonHistos.LowMassMax = cms.double(14.0)    
-diMuonHistos.HighMassMin = cms.double(55.0)   
-diMuonHistos.HighMassMax = cms.double(125.0)
-"
--------------------------------------------------------------------------
-"diMuonHistos.etaBin = cms.int32(70) #dimuonhistograms mass, bin   
-diMuonHistos.etaBBin = cms.int32(70)    
-diMuonHistos.etaEBin = cms.int32(70)    
-diMuonHistos.etaBinLM = cms.int32(12)   
-diMuonHistos.etaBBinLM = cms.int32(12)    
-diMuonHistos.etaEBinLM = cms.int32(12)    
-diMuonHistos.LowMassMin = cms.double(2.0)   
-diMuonHistos.LowMassMax = cms.double(14.0)    
-diMuonHistos.HighMassMin = cms.double(55.0)   
-diMuonHistos.HighMassMax = cms.double(125.0)
-"
--------------------------------------------------------------------------
-"diMuonHistos.etaBin = cms.int32(70) #dimuonhistograms mass, bin   
-diMuonHistos.etaBBin = cms.int32(70)    
-diMuonHistos.etaEBin = cms.int32(70)    
-diMuonHistos.etaBinLM = cms.int32(12)   
-diMuonHistos.etaBBinLM = cms.int32(12)    
-diMuonHistos.etaEBinLM = cms.int32(12)    
-diMuonHistos.LowMassMin = cms.double(2.0)   
-diMuonHistos.LowMassMax = cms.double(14.0)    
-diMuonHistos.HighMassMin = cms.double(55.0)   
-diMuonHistos.HighMassMax = cms.double(125.0)
-"
--------------------------------------------------------------------------
-"Recom
-PRs: 16288, 16289"
 -------------------------------------------------------------------------
 =========================================================================
 "# for Run2 PPb workflows (NOTE: using HLT:@fake for the moment)
