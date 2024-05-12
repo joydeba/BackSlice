@@ -175,3 +175,4 @@ salt
 transInput/BackportsSample.jsonl
 transInput/*Backports.jsonl
 transInput/AnsibleBackports.jsonl
+transInput/CmsswSample.jsonl

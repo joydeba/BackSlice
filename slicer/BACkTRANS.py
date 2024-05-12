@@ -34,25 +34,43 @@ class BackTransformer():
 
         all_library_names = ""
         for dependency in self.dependencies:
-             all_library_names = all_library_names + dependency + ","
+             all_library_names = all_library_names + dependency + ", "
 
         metadata = ""
 
-        for data in self.metadata: 
-             metadata = metadata + data     
+        for data in self.metadata[:-1]: 
+             metadata = metadata + data + "\n"
+        for comment in self.metadata[-1]:
+             metadata = metadata + comment + "\n" 
+
 
         f_set = ""
         c_set = ""
 
         for functional in self.functionalSet:
-            f_set = f_set + functional
+            f_set = f_set + functional + ", "
         
         for compilation in self.compilationSet:
-            c_set = c_set + compilation
+            c_set = c_set + compilation + ", "
              
 
+        def get_nested_values(data):
+            nested_values = []
 
+            def extract_nested_values(obj):
+                if isinstance(obj, dict):
+                    for value in obj.values():
+                        extract_nested_values(value)
+                elif isinstance(obj, list):
+                    for item in obj:
+                        extract_nested_values(item)
+                else:
+                    nested_values.append(str(obj))
 
+            extract_nested_values(data)
+            return ', '.join(nested_values)
+
+        nested_values_string = get_nested_values(self.stableLibraris)
 
         data = {
             "adaptation": [
@@ -87,7 +105,7 @@ class BackTransformer():
                 },
                 {
                     "data-from": "metadata",
-                    "script": self.metadata,
+                    "script": metadata,
                     "weight": 0
                 },
                 {
@@ -102,7 +120,7 @@ class BackTransformer():
                 },
                 {
                     "data-from": "stable-libraries",
-                    "script": self.stableLibraris,
+                    "script": nested_values_string,
                     "weight": 1
                 },
                 {

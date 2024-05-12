@@ -21,8 +21,8 @@ def num_tokens_from_messages(messages, tokens_per_message=3, tokens_per_name=1):
 def num_assistant_tokens_from_messages(messages):
     num_tokens = 0
     for message in messages:
-        if message["role"] == "assistant":
-            num_tokens += len(encoding.encode(message["content"]))
+        if message["data-from"] == "backport" or message["data-from"] == "original":
+            num_tokens += len(encoding.encode(message["script"]))
     return num_tokens
 
 def print_distribution(values, name):
