@@ -27,11 +27,38 @@ class BackTransformer():
         """
         Prepare data for fine-tuning the transformer
         """
+        allast_snippets = ""
+        for ast_snippets in self.astdiffsHistory:
+            for ast_snippet in ast_snippets[2]:
+                allast_snippets = allast_snippets + ast_snippet + "\n"
+
+        all_library_names = ""
+        for dependency in self.dependencies:
+             all_library_names = all_library_names + dependency + ","
+
+        metadata = ""
+
+        for data in self.metadata: 
+             metadata = metadata + data     
+
+        f_set = ""
+        c_set = ""
+
+        for functional in self.functionalSet:
+            f_set = f_set + functional
+        
+        for compilation in self.compilationSet:
+            c_set = c_set + compilation
+             
+
+
+
+
         data = {
             "adaptation": [
                 {
-                    "tool": "Backporting",
-                    "task": "Provides adapted semantic slices by analyzing changesets in backporting."
+                    "data-from": "Backporting activities",
+                    "script": "Adapted semantic slices by analyzing changesets in backporting."
                 },
                 {
                     "data-from": "original",
@@ -45,7 +72,7 @@ class BackTransformer():
                 },
                 {
                     "data-from": "astdiffs-history",
-                    "script": self.astdiffsHistory,
+                    "script": allast_snippets,
                     "weight": 0
                 },
                 {
@@ -55,7 +82,7 @@ class BackTransformer():
                 },
                 {
                     "data-from": "dependencies",
-                    "script": self.dependencies,
+                    "script": all_library_names,
                     "weight": 0
                 },
                 {
@@ -65,12 +92,12 @@ class BackTransformer():
                 },
                 {
                     "data-from": "functional-set",
-                    "script": self.functionalSet,
+                    "script": f_set,
                     "weight": 0
                 },
                 {
                     "data-from": "compilation-set",
-                    "script": self.compilationSet,
+                    "script": c_set,
                     "weight": 0
                 },
                 {

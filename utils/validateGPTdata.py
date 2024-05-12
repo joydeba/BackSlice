@@ -12,8 +12,8 @@ def num_tokens_from_messages(messages, tokens_per_message=3, tokens_per_name=1):
     for message in messages:
         num_tokens += tokens_per_message
         for key, value in message.items():
-            num_tokens += len(encoding.encode(value))
-            if key == "name":
+            if key == "script":
+                num_tokens += len(encoding.encode(value))
                 num_tokens += tokens_per_name
     num_tokens += 3
     return num_tokens
@@ -37,7 +37,7 @@ def loadData(data_path):
 
     print("Num examples:", len(dataset))
     print("First example:")
-    for message in dataset[0]["messages"]:
+    for message in dataset[0]["adaptation"]:
         print(message)   
     return dataset     
 
@@ -88,10 +88,10 @@ def dataWarningstokenCounts(dataset):
     assistant_message_lens = []
 
     for ex in dataset:
-        messages = ex["messages"]
-        if not any(message["role"] == "system" for message in messages):
+        messages = ex["adaptation"]
+        if not any(message["data-from"] == "original" for message in messages):
             n_missing_system += 1
-        if not any(message["role"] == "user" for message in messages):
+        if not any(message["data-from"] == "backport" for message in messages):
             n_missing_user += 1
         n_messages.append(len(messages))
         convo_lens.append(num_tokens_from_messages(messages))
@@ -135,4 +135,4 @@ def mainGPTdataValidation(data_path):
     convo_lens = dataWarningstokenCounts(dataset)
     costEstimation(dataset, convo_lens)    
 
-mainGPTdataValidation("transInput/Backports.jsonl")    
+mainGPTdataValidation("transInput/ansibleBackports.jsonl")    
