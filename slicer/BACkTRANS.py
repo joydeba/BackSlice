@@ -156,63 +156,35 @@ class BackTransformer():
 
 
 
-    def analyzeProgram(self):
+    def analyzeProgram(self, fineTuning = False, fineTuningFile = "transInput/Backports.jsonl", ftTraining = False):
         """
         Adapt the sourceOriginal to a stable version based on various inputs.
 
         Returns:
             str: The adapted source code, close to sourcebackport.
         """
-        return self.sourcebackport, "Recom"
 
         client = OpenAI()
-        # client.files.create(
-        # file=open("transInput/Backports.jsonl", "rb"),
-        # purpose="fine-tune"
-        # )        
 
+        if fineTuning:
+            client.files.create(
+            file=open(fineTuningFile, "rb"),
+            purpose="fine-tune"
+            )        
 
-        client.fine_tuning.jobs.create(
-        training_file="file-RbPMFc923v9HCt0u3G1gHs4d", 
-        model="gpt-3.5-turbo"
+        if ftTraining:
+            client.fine_tuning.jobs.create(
+            training_file="file-RbPMFc923v9HCt0u3G1gHs4d", 
+            model="gpt-3.5-turbo"
+            )
+
+        completion = client.chat.completions.create(
+        model="ft:gpt-3.5-turbo:my-org:custom_suffix:id",
+        messages=[
+            {"data-from": "original", "script": self.sourceOriginal},
+            {"data-from": "backport", "script": self.sourcebackport}
+        ]
         )
-
-        # completion = client.chat.completions.create(
-        # model="ft:gpt-3.5-turbo:my-org:custom_suffix:id",
-        # messages=[
-        #     {"role": "system", "content": "You are a helpful assistant."},
-        #     {"role": "user", "content": "Hello!"}
-        # ]
-        # )
-        # print(completion.choices[0].message)        
-
-
-        # completion = client.chat.completions.create(
-        # model="babbage-002",
-        # messages=[
-        #     {"role": "system", "content": "You are a poetic assistant, skilled in explaining complex programming concepts with creative flair."},
-        #     {"role": "user", "content": "Compose a poem that explains the concept of recursion in programming."}
-        # ]
-        # )
-        # print(completion.choices[0].message)     
-
-# bT = BackTransformer()
-# bT.analyzeProgram()                  
-
-
-# Example usage:
-# sourceOriginal = "What's the capital of France?"
-# sourcebackport = "Backporting"
-# astdiffsHistory = "Some history"
-# context = "Some context"
-# dependencies = "Some dependencies"
-# metadata = "Some metadata"
-# functionalSet = "Some functional set"
-# compilationSet = "Some compilation set"
-# stableLibraris = "Some stable libraries"
-# targetfile = "Some target file"
-
-
-# processor = BackTransformer(sourceOriginal, sourcebackport, astdiffsHistory, context, dependencies, metadata, functionalSet, compilationSet, stableLibraris, targetfile)
-# data = processor.prepareFinetuneData()
-# processor.saveData(data, 'transInput/Backports.jsonl')
+        print(completion.choices[0].message)        
+   
+        return completion.choices[0].message, "Recom"
