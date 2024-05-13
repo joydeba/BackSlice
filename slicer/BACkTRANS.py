@@ -27,51 +27,109 @@ class BackTransformer():
         """
         Prepare data for fine-tuning the transformer
         """
-        allast_snippets = ""
-        for ast_snippets in self.astdiffsHistory:
-            for ast_snippet in ast_snippets[2]:
-                allast_snippets = allast_snippets + ast_snippet + "\n"
+        # allast_snippets = ""
+        # for ast_snippets in self.astdiffsHistory:
+        #     for ast_snippet in ast_snippets[2]:
+        #         allast_snippets = allast_snippets + ast_snippet + "\n"
 
-        all_library_names = ""
-        for dependency in self.dependencies:
-             all_library_names = all_library_names + dependency + ", "
+        # all_library_names = ""
+        # for dependency in self.dependencies:
+        #      all_library_names = all_library_names + dependency + ", "
 
-        metadata = ""
+        # metadata = ""
 
-        for data in self.metadata[:-1]: 
-             metadata = metadata + data + "\n"
-        for comment in self.metadata[-1]:
-             metadata = metadata + comment + "\n" 
+        # for data in self.metadata[:-1]: 
+        #      metadata = metadata + data + "\n"
+        # for comment in self.metadata[-1]:
+        #      metadata = metadata + comment + "\n" 
 
 
-        f_set = ""
-        c_set = ""
+        # f_set = ""
+        # c_set = ""
 
-        for functional in self.functionalSet:
-            f_set = f_set + functional + ", "
+        # for functional in self.functionalSet:
+        #     f_set = f_set + functional + ", "
         
-        for compilation in self.compilationSet:
-            c_set = c_set + compilation + ", "
+        # for compilation in self.compilationSet:
+        #     c_set = c_set + compilation + ", "
              
 
-        def get_nested_values(data):
-            nested_values = []
+        # def get_nested_values(data):
+        #     nested_values = []
 
-            def extract_nested_values(obj):
-                if isinstance(obj, dict):
-                    for value in obj.values():
-                        extract_nested_values(value)
-                elif isinstance(obj, list):
-                    for item in obj:
-                        extract_nested_values(item)
-                else:
-                    nested_values.append(str(obj))
+        #     def extract_nested_values(obj):
+        #         if isinstance(obj, dict):
+        #             for value in obj.values():
+        #                 extract_nested_values(value)
+        #         elif isinstance(obj, list):
+        #             for item in obj:
+        #                 extract_nested_values(item)
+        #         else:
+        #             nested_values.append(str(obj))
 
-            extract_nested_values(data)
-            return ', '.join(nested_values)
+        #     extract_nested_values(data)
+        #     return ', '.join(nested_values)
 
-        nested_values_string = get_nested_values(self.stableLibraris)
+        # nested_values_string = get_nested_values(self.stableLibraris)
 
+        # data = {
+        #     "adaptation": [
+        #         {
+        #             "data-from": "Backporting activities",
+        #             "script": "Adapted semantic slices by analyzing changesets in backporting."
+        #         },
+        #         {
+        #             "data-from": "original",
+        #             "script": self.sourceOriginal,
+        #             "weight": 0
+        #         },
+        #         {
+        #             "data-from": "backport",
+        #             "script": self.sourcebackport,
+        #             "weight": 1
+        #         },
+        #         {
+        #             "data-from": "astdiffs-history",
+        #             "script": allast_snippets,
+        #             "weight": 0
+        #         },
+        #         {
+        #             "data-from": "context",
+        #             "script": self.context,
+        #             "weight": 0
+        #         },
+        #         {
+        #             "data-from": "dependencies",
+        #             "script": all_library_names,
+        #             "weight": 0
+        #         },
+        #         {
+        #             "data-from": "metadata",
+        #             "script": metadata,
+        #             "weight": 0
+        #         },
+        #         {
+        #             "data-from": "functional-set",
+        #             "script": f_set,
+        #             "weight": 0
+        #         },
+        #         {
+        #             "data-from": "compilation-set",
+        #             "script": c_set,
+        #             "weight": 0
+        #         },
+        #         {
+        #             "data-from": "stable-libraries",
+        #             "script": nested_values_string,
+        #             "weight": 1
+        #         },
+        #         {
+        #             "data-from": "target-file",
+        #             "script": self.targetfile,
+        #             "weight": 1
+        #         }
+        #     ]
+        # }
         data = {
             "adaptation": [
                 {
@@ -87,49 +145,9 @@ class BackTransformer():
                     "data-from": "backport",
                     "script": self.sourcebackport,
                     "weight": 1
-                },
-                {
-                    "data-from": "astdiffs-history",
-                    "script": allast_snippets,
-                    "weight": 0
-                },
-                {
-                    "data-from": "context",
-                    "script": self.context,
-                    "weight": 0
-                },
-                {
-                    "data-from": "dependencies",
-                    "script": all_library_names,
-                    "weight": 0
-                },
-                {
-                    "data-from": "metadata",
-                    "script": metadata,
-                    "weight": 0
-                },
-                {
-                    "data-from": "functional-set",
-                    "script": f_set,
-                    "weight": 0
-                },
-                {
-                    "data-from": "compilation-set",
-                    "script": c_set,
-                    "weight": 0
-                },
-                {
-                    "data-from": "stable-libraries",
-                    "script": nested_values_string,
-                    "weight": 1
-                },
-                {
-                    "data-from": "target-file",
-                    "script": self.targetfile,
-                    "weight": 1
                 }
             ]
-        }
+        }        
         return data
 
     def saveData(self, data, filename):
