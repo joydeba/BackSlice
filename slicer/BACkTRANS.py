@@ -131,20 +131,18 @@ class BackTransformer():
         #     ]
         # }
         data = {
-            "adaptation": [
+            "messages": [
                 {
-                    "data-from": "Backporting activities",
-                    "script": "Adapted semantic slices by analyzing changesets in backporting."
+                    "role": "system",
+                    "content": "Adapt user's original code hunk for BackTrans tool by assistant to align with the stable version's specifications."
                 },
                 {
-                    "data-from": "original",
-                    "script": self.sourceOriginal,
-                    "weight": 0
+                    "role": "user",
+                    "content": self.sourceOriginal
                 },
                 {
-                    "data-from": "backport",
-                    "script": self.sourcebackport,
-                    "weight": 1
+                    "role": "assistant",
+                    "content": self.sourcebackport
                 }
             ]
         }        
@@ -156,14 +154,14 @@ class BackTransformer():
 
 
 
-    def analyzeProgram(self, fineTuning = False, fineTuningFile = "transInput/Backports.jsonl", ftTraining = False):
+    def analyzeProgram(self, fineTuning = False, fineTuningFile = "transInput/Backports.jsonl", ftTraining = False, prompt = False):
         """
         Adapt the sourceOriginal to a stable version based on various inputs.
 
         Returns:
             str: The adapted source code, close to sourcebackport.
         """
-
+        result = ""
         client = OpenAI()
 
         if fineTuning:
@@ -174,17 +172,18 @@ class BackTransformer():
 
         if ftTraining:
             client.fine_tuning.jobs.create(
-            training_file="file-RbPMFc923v9HCt0u3G1gHs4d", 
+            training_file="file-A6aKIn6JiXZ5hs2ZEjfLe928", 
             model="gpt-3.5-turbo"
             )
 
-        completion = client.chat.completions.create(
-        model="ft:gpt-3.5-turbo:my-org:custom_suffix:id",
-        messages=[
-            {"data-from": "original", "script": self.sourceOriginal},
-            {"data-from": "backport", "script": self.sourcebackport}
-        ]
-        )
-        print(completion.choices[0].message)        
+        if prompt:
+            completion = client.chat.completions.create(
+            model="ft:gpt-3.5-turbo-0125:personal::9OVfDgIZ" if ftTraining else "gpt-3.5-turbo",
+            messages=[
+                {"role": "user", "content": self.sourceOriginal},
+                {"role": "assistant", "content": self.sourcebackport}
+            ]
+            )
+            result = completion.choices[0].message        
    
-        return completion.choices[0].message, "Recom"
+        return result, "Recom"

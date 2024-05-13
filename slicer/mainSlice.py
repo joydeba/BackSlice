@@ -38,6 +38,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
         has_test_and_code = 0
         slicedPRs = []
         branches = gLocal.branch()
+        sample_count = 1
         with open("ghKeysconfig", "r") as fpkey:
             ghkey = fpkey.read().rstrip() # Todo - We may need the secondary keys too 
                                      
@@ -327,9 +328,15 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                                 stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = stableBranch, github_token=ghkey, cache_file= projectName+"StableLibraryCsche"), 
                                                 targetfile = previousBackportfullFileTarget)                                                    
                             context_index = context_index +1 
+
+                            file_path = 'transInput/' + projectName + 'Backports.jsonl'
+
+                            # if sample_count < 15:                            
                             data = slicer.prepareFinetuneData()
-                            slicer.saveData(data, 'transInput/'+projectName+'Backports.jsonl')                   
-                            slicebyCslicer, recommendation = slicer.analyzeProgram()
+                            slicer.saveData(data, 'transInput/'+projectName+'Backports.jsonl')
+                            # sample_count = sample_count + 1     
+
+                            slicebyCslicer, recommendation = slicer.analyzeProgram(fineTuning = False, fineTuningFile = file_path, ftTraining = False, prompt = False)
                             recommendation = recommendation + "\nPRs: "+ pull_id_original  + ", "  + pull_id_backport
                             if slicebyCslicer:
                                 numberOfSuccesfulSlicing = numberOfSuccesfulSlicing + 1                
