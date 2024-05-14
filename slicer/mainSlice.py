@@ -322,7 +322,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                                 astdiffsHistory = astdiffshistory, 
                                                 context = get_hunk_context(file_content = codehunks_original_withContext[context_index], hunk_start = hunkStartLnNo, hunk_end = hunkEndlnNo, context_lines=3), 
                                                 dependencies = get_changeset_dependencies(previousBackportfullFileTarget), 
-                                                metadata = get_changesets_and_metadata(pull_request = pull_backport, sourceO = codeHunkBackport), 
+                                                metadata = get_changesets_and_metadata(pull_request = pull_backport, sourceO = codeHunk), 
                                                 functionalSet = functionalSetforHunk, 
                                                 compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
                                                 stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = stableBranch, github_token=ghkey, cache_file= projectName+"StableLibraryCsche"), 
@@ -336,7 +336,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                             slicer.saveData(data, 'transInput/'+projectName+'Backports.jsonl')
                             # sample_count = sample_count + 1     
 
-                            slicebyCslicer, recommendation = slicer.analyzeProgram(fineTuning = False, fineTuningFile = file_path, ftTraining = False, prompt = False)
+                            slicebyCslicer, recommendation = slicer.analyzeProgram(fineTuning = False, fineTuningFile = file_path, ftTraining = False, prompt = True)
                             recommendation = recommendation + "\nPRs: "+ pull_id_original  + ", "  + pull_id_backport
                             if slicebyCslicer:
                                 numberOfSuccesfulSlicing = numberOfSuccesfulSlicing + 1                

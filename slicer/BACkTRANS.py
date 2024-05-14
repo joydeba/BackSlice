@@ -23,54 +23,67 @@ class BackTransformer():
         self.stableLibraris = stableLibraris
         self.targetfile = targetfile
 
+    def formatPromptData(self):
+        allast_snippets = ""
+        for ast_snippets in self.astdiffsHistory:
+            for ast_snippet in ast_snippets[2]:
+                allast_snippets = allast_snippets + ast_snippet + "\n"
+
+        all_library_names = ""
+        for dependency in self.dependencies:
+             all_library_names = all_library_names + dependency + ", "
+
+        metadata = ""
+
+        for data in self.metadata[:-1]: 
+             metadata = metadata + data + "\n"
+        for comment in self.metadata[-1]:
+             metadata = metadata + comment + "\n" 
+
+
+        f_set = ""
+        c_set = ""
+
+        for functional in self.functionalSet:
+            f_set = f_set + functional + ", "
+        
+        for compilation in self.compilationSet:
+            c_set = c_set + compilation + ", "
+             
+
+        def get_nested_values(data):
+            nested_values = []
+
+            def extract_nested_values(obj):
+                if isinstance(obj, dict):
+                    for value in obj.values():
+                        extract_nested_values(value)
+                elif isinstance(obj, list):
+                    for item in obj:
+                        extract_nested_values(item)
+                else:
+                    nested_values.append(str(obj))
+
+            extract_nested_values(data)
+            return ', '.join(nested_values)
+        nested_values_string = get_nested_values(self.stableLibraris)
+
+        return (
+            "All ASTs from commit history: " + allast_snippets + "\n" +
+            "Current context: " + self.context + "\n" +
+            "Required dependency: " + all_library_names + "\n" +
+            "Original metadata: " + metadata + "\n" +
+            "Functional set for the hunk: " + f_set + "\n" +
+            "Compilation set for the hunk: " + c_set + "\n" +
+            # "Library information from Stable: " + nested_values_string + "\n" +
+            "Target file: " + self.targetfile
+        )
+
+
     def prepareFinetuneData(self):
         """
         Prepare data for fine-tuning the transformer
         """
-        # allast_snippets = ""
-        # for ast_snippets in self.astdiffsHistory:
-        #     for ast_snippet in ast_snippets[2]:
-        #         allast_snippets = allast_snippets + ast_snippet + "\n"
-
-        # all_library_names = ""
-        # for dependency in self.dependencies:
-        #      all_library_names = all_library_names + dependency + ", "
-
-        # metadata = ""
-
-        # for data in self.metadata[:-1]: 
-        #      metadata = metadata + data + "\n"
-        # for comment in self.metadata[-1]:
-        #      metadata = metadata + comment + "\n" 
-
-
-        # f_set = ""
-        # c_set = ""
-
-        # for functional in self.functionalSet:
-        #     f_set = f_set + functional + ", "
-        
-        # for compilation in self.compilationSet:
-        #     c_set = c_set + compilation + ", "
-             
-
-        # def get_nested_values(data):
-        #     nested_values = []
-
-        #     def extract_nested_values(obj):
-        #         if isinstance(obj, dict):
-        #             for value in obj.values():
-        #                 extract_nested_values(value)
-        #         elif isinstance(obj, list):
-        #             for item in obj:
-        #                 extract_nested_values(item)
-        #         else:
-        #             nested_values.append(str(obj))
-
-        #     extract_nested_values(data)
-        #     return ', '.join(nested_values)
-
-        # nested_values_string = get_nested_values(self.stableLibraris)
 
         # data = {
         #     "adaptation": [
@@ -172,16 +185,18 @@ class BackTransformer():
 
         if ftTraining:
             client.fine_tuning.jobs.create(
-            training_file="file-A6aKIn6JiXZ5hs2ZEjfLe928", 
+            training_file="file-ItN6SgBPXzvlWbHmTEqdDfBA", 
             model="gpt-3.5-turbo"
             )
 
         if prompt:
+            promptData = self.formatPromptData()
             completion = client.chat.completions.create(
-            model="ft:gpt-3.5-turbo-0125:personal::9OVfDgIZ" if ftTraining else "gpt-3.5-turbo",
+            model="ft:gpt-3.5-turbo-0125:personal::9OZSElOU" if ftTraining else "gpt-3.5-turbo",
             messages=[
-                {"role": "user", "content": self.sourceOriginal},
-                {"role": "assistant", "content": self.sourcebackport}
+                {"role": "system", "content": "Adapt the given code snippet based on the information below - "+ promptData},
+                {"role": "user", "content": self.sourceOriginal}
+                
             ]
             )
             result = completion.choices[0].message        
