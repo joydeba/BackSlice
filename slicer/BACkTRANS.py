@@ -52,6 +52,9 @@ class BackTransformer():
              
 
         def get_nested_values(data):
+            if data is None:
+                return {}
+
             nested_values = {
                 'libraries': set(),
                 'function_names': set(),
@@ -60,21 +63,10 @@ class BackTransformer():
                 'class_method_calls': set()
             }
 
-            def extract_nested_values(obj):
-                if isinstance(obj, dict):
-                    for value in obj.values():
-                        extract_nested_values(value)
-                elif isinstance(obj, list):
-                    for item in obj:
-                        extract_nested_values(item)
-                else:
-                    for key in nested_values.keys():
-                        if key == 'libraries' and isinstance(obj, list):
-                            nested_values[key].update(obj)
-                        elif isinstance(obj, str):
-                            nested_values[key].add(obj)
-
-            extract_nested_values(data)
+            for script_data in data.values():
+                if isinstance(script_data, dict):
+                    for key, values in script_data.items():
+                        nested_values[key].update(values)
 
             nested_values_strings = {key: ', '.join(values) for key, values in nested_values.items()}
             return nested_values_strings
@@ -86,6 +78,7 @@ class BackTransformer():
         nested_values_function_calls = nested_values['function_calls']
         nested_values_class_names = nested_values['class_names']
         nested_values_class_method_calls = nested_values['class_method_calls']
+
 
         # def get_nested_values(data, keywords, min_chars=3):
         #     nested_values = []
@@ -112,18 +105,18 @@ class BackTransformer():
         # nested_values_string = get_nested_values(self.stableLibraris, self.sourceOriginal)        
 
         return (
-            "All ASTs from commit history: " + allast_snippets + "\n" +
-            "Current context: " + self.context + "\n" +
-            "Required dependency: " + all_library_names + "\n" +
-            "Original metadata: " + metadata + "\n" +
-            "Functional set for the hunk: " + f_set + "\n" +
-            "Compilation set for the hunk: " + c_set + "\n" +
-            "Library information from Stable: " + nested_values_libraries + "\n" +
-            "Function name information from Stable: " + nested_values_function_names + "\n" +
-            "Function call information from Stable: " + nested_values_function_calls + "\n" +
-            "Class name information from Stable: " + nested_values_class_names + "\n" + 
-            "Class method call information from Stable: " + nested_values_class_method_calls + "\n" +                                   
-            "Target file: " + self.targetfile
+            # "All ASTs from commit history: " + allast_snippets + "\n" +
+            # "Current context: " + self.context + "\n" +
+            # "Required dependency: " + all_library_names + "\n" +
+            # "Original metadata: " + metadata + "\n" +
+            # "Functional set for the hunk: " + f_set + "\n" +
+            # "Compilation set for the hunk: " + c_set + "\n" +
+            # "Library information from Stable: " + nested_values_libraries + "\n" +
+            # "Function name information from Stable: " + nested_values_function_names + "\n" +
+            # "Function call information from Stable: " + nested_values_function_calls + "\n" +
+            # "Class name information from Stable: " + nested_values_class_names + "\n" + 
+            "Class method call information from Stable: " + nested_values_class_method_calls + "\n" + ""                                  
+            # "Target file: " + self.targetfile
         )
 
 
