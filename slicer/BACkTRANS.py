@@ -52,7 +52,13 @@ class BackTransformer():
              
 
         def get_nested_values(data):
-            nested_values = []
+            nested_values = {
+                'libraries': set(),
+                'function_names': set(),
+                'function_calls': set(),
+                'class_names': set(),
+                'class_method_calls': set()
+            }
 
             def extract_nested_values(obj):
                 if isinstance(obj, dict):
@@ -62,11 +68,48 @@ class BackTransformer():
                     for item in obj:
                         extract_nested_values(item)
                 else:
-                    nested_values.append(str(obj))
+                    for key in nested_values.keys():
+                        if key == 'libraries' and isinstance(obj, list):
+                            nested_values[key].update(obj)
+                        elif isinstance(obj, str):
+                            nested_values[key].add(obj)
 
             extract_nested_values(data)
-            return ', '.join(nested_values)
-        nested_values_string = get_nested_values(self.stableLibraris)
+
+            nested_values_strings = {key: ', '.join(values) for key, values in nested_values.items()}
+            return nested_values_strings
+
+        nested_values = get_nested_values(self.stableLibraris)
+
+        nested_values_libraries = nested_values['libraries']
+        nested_values_function_names = nested_values['function_names']
+        nested_values_function_calls = nested_values['function_calls']
+        nested_values_class_names = nested_values['class_names']
+        nested_values_class_method_calls = nested_values['class_method_calls']
+
+        # def get_nested_values(data, keywords, min_chars=3):
+        #     nested_values = []
+
+        #     def count_matching_chars(str1, str2):
+        #         return sum(1 for char in str1 if char in str2)
+
+        #     def extract_nested_values(obj):
+        #         if isinstance(obj, dict):
+        #             for value in obj.values():
+        #                 extract_nested_values(value)
+        #         elif isinstance(obj, list):
+        #             for item in obj:
+        #                 extract_nested_values(item)
+        #         else:
+        #             for keyword in keywords:
+        #                 if count_matching_chars(str(keyword), str(obj)) >= min_chars:
+        #                     nested_values.append(str(obj))
+        #                     break
+
+        #     extract_nested_values(data)
+        #     return ', '.join(nested_values)
+
+        # nested_values_string = get_nested_values(self.stableLibraris, self.sourceOriginal)        
 
         return (
             "All ASTs from commit history: " + allast_snippets + "\n" +
@@ -75,7 +118,11 @@ class BackTransformer():
             "Original metadata: " + metadata + "\n" +
             "Functional set for the hunk: " + f_set + "\n" +
             "Compilation set for the hunk: " + c_set + "\n" +
-            # "Library information from Stable: " + nested_values_string + "\n" +
+            "Library information from Stable: " + nested_values_libraries + "\n" +
+            "Function name information from Stable: " + nested_values_function_names + "\n" +
+            "Function call information from Stable: " + nested_values_function_calls + "\n" +
+            "Class name information from Stable: " + nested_values_class_names + "\n" + 
+            "Class method call information from Stable: " + nested_values_class_method_calls + "\n" +                                   
             "Target file: " + self.targetfile
         )
 
