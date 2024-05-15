@@ -190,7 +190,7 @@ class BackTransformer():
             "messages": [
                 {
                     "role": "system",
-                    "content": "Adapt user's original code hunk for BackTrans tool by assistant to align with the stable version's specifications."
+                    "content": "You're BackTrans, an automated code propagation tool engineered to seamlessly adapt a user's original code snippet for compatibility with older, stable versions."
                 },
                 {
                     "role": "user",
@@ -243,4 +243,4 @@ class BackTransformer():
             )
             result = completion.choices[0].message        
    
-        return result, "Recom"
+        return result.content, "Recom"

@@ -337,7 +337,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                             slicer.saveData(data, 'transInput/'+projectName+'Backports.jsonl')
                             # sample_count = sample_count + 1     
 
-                            slicebyCslicer, recommendation = slicer.analyzeProgram(fineTuning = False, fineTuningFile = file_pathJsonl, ftTraining = False, prompt = True)
+                            slicebyCslicer, recommendation = slicer.analyzeProgram(fineTuning = True, fineTuningFile = file_pathJsonl, ftTraining = False, prompt = False)
                             recommendation = recommendation + "\nPRs: "+ pull_id_original  + ", "  + pull_id_backport
                             if slicebyCslicer:
                                 numberOfSuccesfulSlicing = numberOfSuccesfulSlicing + 1                
