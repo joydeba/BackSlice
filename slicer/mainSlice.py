@@ -253,7 +253,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                         temp_itemBcontent = itemBcontent.copy()
                                         filepathBackport, fullFilecontentBackport = temp_itemBcontent.popitem()
                                         if filepathBackport == file_path[2:]:
-                                            backport_fullFileTarget = fullFilecontentBackport    
+                                            backport_fullFileTarget = fullFilecontentBackport  
 
                                 if previousBackportfullFileTarget is None:
                                     previousBackportfullFileTarget = backport_fullFileTarget                                                                                                   
@@ -326,17 +326,18 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                                 functionalSet = functionalSetforHunk, 
                                                 compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
                                                 stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = stableBranch, github_token=ghkey, cache_file= projectName+"StableLibraryCsche"), 
-                                                targetfile = previousBackportfullFileTarget)                                                    
+                                                targetfile = previousBackportfullFileTarget,
+                                                tfileName=filepathBackport)                                                    
                             context_index = context_index +1 
 
-                            file_path = 'transInput/' + projectName + 'Backports.jsonl'
+                            file_pathJsonl = 'transInput/' + projectName + 'Backports.jsonl'
 
                             # if sample_count < 15:                            
                             data = slicer.prepareFinetuneData()
                             slicer.saveData(data, 'transInput/'+projectName+'Backports.jsonl')
                             # sample_count = sample_count + 1     
 
-                            slicebyCslicer, recommendation = slicer.analyzeProgram(fineTuning = False, fineTuningFile = file_path, ftTraining = False, prompt = True)
+                            slicebyCslicer, recommendation = slicer.analyzeProgram(fineTuning = False, fineTuningFile = file_pathJsonl, ftTraining = False, prompt = True)
                             recommendation = recommendation + "\nPRs: "+ pull_id_original  + ", "  + pull_id_backport
                             if slicebyCslicer:
                                 numberOfSuccesfulSlicing = numberOfSuccesfulSlicing + 1                
