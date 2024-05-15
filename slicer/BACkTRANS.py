@@ -238,8 +238,7 @@ class BackTransformer():
             model="ft:gpt-3.5-turbo-0125:personal::9OZSElOU" if ftTraining else "gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "Adapt the given code snippet based on the information below - "+ promptData},
-                # {"role": "user", "content": self.sourceOriginal}
-                
+                {"role": "user", "content": "Adapt this - " + self.sourceOriginal + "No need to provide extra information."}
             ]
             )
             result = completion.choices[0].message        
