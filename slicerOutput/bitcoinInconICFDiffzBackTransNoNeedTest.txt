@@ -1,5 +1,5 @@
 Total Labeled Backporting PRs 75
-Total Sliced Required 1
-Total Number of Hunk Differences 1
+Total Sliced Required 22
+Total Number of Hunk Differences 12
 Total Hunks Have Test and Code 0
 Total Succesfully Sliced 0
