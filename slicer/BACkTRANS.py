@@ -243,4 +243,5 @@ class BackTransformer():
             )
             result = completion.choices[0].message        
    
-        return result.content, "Recom"
+        # return result.content, "Recom"
+        return "", "Recom"    

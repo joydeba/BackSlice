@@ -110,7 +110,12 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     
                     creationStableBranch = None
                     if not branch_exists:
+                        try:
                             gLocal.branch(targetStableBranch)
+                        except Exception as e:               
+                            print(e)
+                            continue
+
 
                     else:
                             creationStableBranch = gLocal.execute(["git", "log", "--reverse", "--pretty=format:'%h %ad %s'", "--date=iso", targetStableBranch]).split('\n')[1]
