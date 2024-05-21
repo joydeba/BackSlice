@@ -37,7 +37,6 @@ def accessKeyloading(repoName,projectName):
 
 def get_file_and_file_content(pull_id_original, pull_id_backport, line, repo, gLocal):
     branches = gLocal.branch()               
-
     pull_commitsSubmitted = ast.literal_eval(gLocal.execute(["gh", "pr", "view", pull_id_original, "--json", "commits"]))['commits']
     # pull_original = gLocal.execute(["gh", "pr", "view", pull_id_original])
     pull_backport = gLocal.execute(["gh", "pr", "view", pull_id_backport])
@@ -56,14 +55,12 @@ def get_file_and_file_content(pull_id_original, pull_id_backport, line, repo, gL
         except Exception as e:               
             print(e)
             return None, None, None, None
-
     else:
         creationStableBranch = gLocal.execute(["git", "log", "--reverse", "--pretty=format:'%h %ad %s'", "--date=iso", targetStableBranch]).split('\n')[1]
         # git log --reverse  <branch-name> | tail -1
         
     # commitStartDate = commits_diffs_original[0].split("\n")[2].split("Date:   ")[1] if commits_diffs_original[0]!='' else print("Commit has no py files")
     # commitEndDate = creationStableBranch.split(" ")[1]        
-
 
     original_mergeCommits = ast.literal_eval(pull_commitOriginal)['mergeCommit']["oid"] if "null" not in pull_commitOriginal else None        
     backport_mergeCommits = ast.literal_eval(pull_commitBackports)['mergeCommit']["oid"] if "null" not in pull_commitBackports else None  
@@ -84,7 +81,6 @@ def get_file_and_file_content(pull_id_original, pull_id_backport, line, repo, gL
 
 
 def getsimilarHunks(commits_diffs_original_contextHunks, commits_diffs_backport_contextHunks, indexHunks0, min_hunks_count):
-
     commits_hunkline_original_context = commits_diffs_original_contextHunks.split("\n")
     commits_hunkline_backport_context = commits_diffs_backport_contextHunks.split("\n")
     similarity_score = difflib.SequenceMatcher(None, commits_hunkline_original_context[0], commits_hunkline_backport_context[0]).ratio()
@@ -141,8 +137,6 @@ def get_hunk_details(commits_diffs_original, commits_diffs_backport):
                     commits_hunk_originalLines = get_padded_addedLines(commits_hunkline_original_context)    
                     commits_hunk_backportLines = get_padded_addedLines(commits_hunkline_backport_context)                                  
 
-
-
                     if commits_hunk_originalLines:    
                         codehunks_original.append(commits_hunk_originalLines)
                         codehunks_original_withContext.append(commits_diffs_original_contextHunks[indexHunks0])
@@ -150,7 +144,6 @@ def get_hunk_details(commits_diffs_original, commits_diffs_backport):
                     if commits_hunk_backportLines:    
                         codehunks_backport.append(commits_hunk_backportLines)
                         codehunks_backport_withContext.append(commits_diffs_backport_contextHunks[indexHunks0])
-
 
     return  codehunks_original, codehunks_backport, testhunks_original, codehunks_original_withContext, filepathBackport
 
@@ -261,14 +254,12 @@ def saveChanges(output1, slicedPRs):
             writer.writerow(["-------------------------------------------------------------------------"])
             writer.writerow(["========================================================================="])
 
-
 def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranches = {}, repoName="repoName", projectName = 'projectName', output1="outputCSLICER.csv", stableBranch = "mainCSLICER"):
     """ 
     This function slices for changesets by CSLICER.
     """
     data_read = dataloading(prlist)
     gLocal, ghkey, repo = accessKeyloading(repoName, projectName)
-
 
     numberofSlicingRequired = 0
     numberOfSuccesfulSlicing = 0
@@ -277,31 +268,23 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
     slicedPRs = []
 
     for idx, line in enumerate(data_read):
-
         # g, no_bused_key, load_object = changeG(g, accesskey, backup_keys, no_bused_key, load_object) 
         # if load_object:
         #     repo = g.get_repo(repository)
         #     print("New G loaded")
         #     load_object = 0
-
         backport_slices = ""               
         original_slices = "" 
         slicesfromCSLICER = []
         fullFileTarget = None
-
-    
         try:
             repository = line[1].replace('https://github.com/', '')
             user_name, repo_name, pullN, pull_request_id, filesN = repository.split("/")
             repository = user_name.strip() + "/" + repo_name.strip()
-        
             print("Working on repo", repo_name)                       
 
             pull_id_original = line[1].replace("https://github.com/"+repository.strip()+"/pull/", "").split("/")[0].strip()
             pull_id_backport = line[0].replace("https://github.com/"+repository.strip()+"/pull/", "").split("/")[0].strip()
-
-
-
 
             commits_diffs_original, commits_diffs_backport, pull_commitsSubmitted, pull_backport = get_file_and_file_content(pull_id_original, pull_id_backport, line, repo, gLocal)
 
@@ -319,30 +302,9 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
             slicebyCslicer = None
             if codehunks_original and codehunks_backport:
                 context_index = 0 
-                for codeHunk, codeHunkBackport  in zip(codehunks_original, codehunks_backport): 
-                                                
+                for codeHunk, codeHunkBackport  in zip(codehunks_original, codehunks_backport):                    
                         functionalSetforHunk = get_functional_set(codeHunk, testCases = testhunks_original)
                         astdiffshistory = get_ast_diffs(source_commits = pull_commitsSubmitted, startCommit=None, endCommit=None, startDate = None, endDate = None, repoName=repoName, projectName =projectName) 
-                        # slicer = Cslicer(sourceOriginal = codeHunk,
-                        #                     sourcebackport = codeHunkBackport, 
-                        #                     astdiffsHistory = astdiffshistory, 
-                        #                     context = get_hunk_context(file_content = codehunks_original_withContext[context_index], hunk_start = hunkStartLnNo, hunk_end = hunkEndlnNo, context_lines=3), 
-                        #                     dependencies = get_changeset_dependencies(previousBackportfullFileTarget), 
-                        #                     metadata = get_changesets_and_metadata(pull_request = pull_backport, sourceO = codeHunkBackport), 
-                        #                     functionalSet = functionalSetforHunk, 
-                        #                     compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
-                        #                     stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = targetStableBranch, github_token=ghkey, cache_file= projectName+"StableLibraryCsche"), 
-                        #                     targetfile = previousBackportfullFileTarget)
-                        # slicer = BackSlicer(sourceOriginal = codeHunk,
-                        #                     sourcebackport = codeHunkBackport, 
-                        #                     astdiffsHistory = astdiffshistory, 
-                        #                     context = get_hunk_context(file_content = codehunks_original_withContext[context_index]), 
-                        #                     dependencies = get_changeset_dependencies(previousBackportfullFileTarget), 
-                        #                     metadata = get_changesets_and_metadata(pull_request = pull_backport, sourceO = codeHunkBackport), 
-                        #                     functionalSet = functionalSetforHunk, 
-                        #                     compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
-                        #                     stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = stableBranch, github_token=ghkey, cache_file= projectName+"StableLibraryCsche"), 
-                        #                     targetfile = previousBackportfullFileTarget)   
                         slicer = BackTransformer(sourceOriginal = codeHunk,
                                             sourcebackport = codeHunkBackport, 
                                             astdiffsHistory = astdiffshistory, 
@@ -379,10 +341,8 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                 slicedPRs.append(slicesfromCSLICER)                    
             print(e)
             continue
-    
     saveMetricResults(slicedPRs, projectName, data_read, numberofSlicingRequired, numberofDifferences, has_test_and_code, numberOfSuccesfulSlicing)
     saveChanges(output1, slicedPRs)
-
 
 # # Updated on 11th April 2023
 # ansibleDictOfActiveBranches = {'devel':{}, 'stable-2.9':{}, 'stable-2.12':{}, 'stable-2.14':{}, 'stable-2.13':{}, 'stable-2.15':{}, 'stable-2.16':{}}
