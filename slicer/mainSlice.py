@@ -113,7 +113,7 @@ def get_hunk_details(commits_diffs_original, commits_diffs_backport):
     codehunks_backport = []
     codehunks_original_withContext = []
     codehunks_backport_withContext = []  
-    filepathBackport = None  
+    filepathBackport = ""  
     if len(commits_diffs_backport) == len(commits_diffs_original):
         for indexO in range(1, len(commits_diffs_original)):
             if commits_diffs_original[indexO] is not None:
