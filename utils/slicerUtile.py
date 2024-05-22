@@ -100,7 +100,7 @@ def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = 
     return diff_results
 
 
-def get_hunk_context(file_content, hunk_start, hunk_end, context_lines=3):
+def get_hunk_context(file_content, hunk_start = None, hunk_end = None, context_lines=3):
     file_content = file_content.split("@@ ")[1]
     lines = file_content.split('\n')
     context = []
