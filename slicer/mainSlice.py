@@ -261,7 +261,7 @@ def saveChanges(output1, slicedPRs):
             writer.writerow(["-------------------------------------------------------------------------"])
             writer.writerow(["========================================================================="])
 
-def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranches = {}, repoName="repoName", projectName = 'projectName', output1="outputCSLICER.csv", stableBranch = "mainCSLICER"):
+def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranches = {}, repoName="repoName", projectName = 'projectName', output1="outputCSLICER.csv", stableBranch = "mainCSLICER", trainingFile = "", testingFile = ""):
     """ 
     This function slices for changesets by CSLICER.
     """
@@ -273,81 +273,83 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
     numberofDifferences = 0
     has_test_and_code = 0
     slicedPRs = []
+    if testingFile != "":
+        pass
+    else:
+        for idx, line in enumerate(data_read):
+            # g, no_bused_key, load_object = changeG(g, accesskey, backup_keys, no_bused_key, load_object) 
+            # if load_object:
+            #     repo = g.get_repo(repository)
+            #     print("New G loaded")
+            #     load_object = 0
+            backport_slices = ""               
+            original_slices = "" 
+            slicesfromCSLICER = []
+            fullFileTarget = None
+            try:
+                repository = line[1].replace('https://github.com/', '')
+                user_name, repo_name, pullN, pull_request_id, filesN = repository.split("/")
+                repository = user_name.strip() + "/" + repo_name.strip()
+                print("Working on repo", repo_name)                       
 
-    for idx, line in enumerate(data_read):
-        # g, no_bused_key, load_object = changeG(g, accesskey, backup_keys, no_bused_key, load_object) 
-        # if load_object:
-        #     repo = g.get_repo(repository)
-        #     print("New G loaded")
-        #     load_object = 0
-        backport_slices = ""               
-        original_slices = "" 
-        slicesfromCSLICER = []
-        fullFileTarget = None
-        try:
-            repository = line[1].replace('https://github.com/', '')
-            user_name, repo_name, pullN, pull_request_id, filesN = repository.split("/")
-            repository = user_name.strip() + "/" + repo_name.strip()
-            print("Working on repo", repo_name)                       
+                pull_id_original = line[1].replace("https://github.com/"+repository.strip()+"/pull/", "").split("/")[0].strip()
+                pull_id_backport = line[0].replace("https://github.com/"+repository.strip()+"/pull/", "").split("/")[0].strip()
 
-            pull_id_original = line[1].replace("https://github.com/"+repository.strip()+"/pull/", "").split("/")[0].strip()
-            pull_id_backport = line[0].replace("https://github.com/"+repository.strip()+"/pull/", "").split("/")[0].strip()
+                commits_diffs_original, commits_diffs_backport, pull_commitsSubmitted, pull_backport = get_file_and_file_content(pull_id_original, pull_id_backport, line, repo, gLocal)
 
-            commits_diffs_original, commits_diffs_backport, pull_commitsSubmitted, pull_backport = get_file_and_file_content(pull_id_original, pull_id_backport, line, repo, gLocal)
+                if commits_diffs_original is None or commits_diffs_backport is None or pull_commitsSubmitted is None or pull_backport is None:
+                    continue
+                codehunks_original, codehunks_backport, testhunks_original, codehunks_original_withContext, filepathBackport = get_hunk_details(commits_diffs_original, commits_diffs_backport)
 
-            if commits_diffs_original is None or commits_diffs_backport is None or pull_commitsSubmitted is None or pull_backport is None:
-             continue
-            codehunks_original, codehunks_backport, testhunks_original, codehunks_original_withContext, filepathBackport = get_hunk_details(commits_diffs_original, commits_diffs_backport)
+                filepathBackport, previousBackportfullFileTarget = get_targetfile(repo, pull_id_original, pull_id_backport, filepathBackport)
 
-            filepathBackport, previousBackportfullFileTarget = get_targetfile(repo, pull_id_original, pull_id_backport, filepathBackport)
+                numberofSlicingRequired = numberofSlicingRequired + 1
 
-            numberofSlicingRequired = numberofSlicingRequired + 1
+                if testhunks_original and codehunks_original and codehunks_backport:
+                    has_test_and_code = has_test_and_code + 1
 
-            if testhunks_original and codehunks_original and codehunks_backport:
-                has_test_and_code = has_test_and_code + 1
+                slicebyCslicer = None
+                if codehunks_original and codehunks_backport:
+                    context_index = 0 
+                    for codeHunk, codeHunkBackport  in zip(codehunks_original, codehunks_backport):                    
+                            functionalSetforHunk = get_functional_set(codeHunk, testCases = testhunks_original)
+                            astdiffshistory = get_ast_diffs(source_commits = pull_commitsSubmitted, startCommit=None, endCommit=None, startDate = None, endDate = None, repoName=repoName, projectName =projectName) 
+                            slicer = BackTransformer(sourceOriginal = codeHunk,
+                                                sourcebackport = codeHunkBackport, 
+                                                astdiffsHistory = astdiffshistory, 
+                                                context = get_hunk_context(file_content = codehunks_original_withContext[context_index]), 
+                                                dependencies = get_changeset_dependencies(previousBackportfullFileTarget), 
+                                                metadata = get_changesets_and_metadata(pull_request = pull_backport, sourceO = codeHunk), 
+                                                functionalSet = functionalSetforHunk, 
+                                                compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
+                                                stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = stableBranch, github_token=ghkey, cache_file= projectName+"StableLibraryCsche"), 
+                                                targetfile = previousBackportfullFileTarget,
+                                                tfileName=filepathBackport)                                                    
+                            context_index = context_index +1 
 
-            slicebyCslicer = None
-            if codehunks_original and codehunks_backport:
-                context_index = 0 
-                for codeHunk, codeHunkBackport  in zip(codehunks_original, codehunks_backport):                    
-                        functionalSetforHunk = get_functional_set(codeHunk, testCases = testhunks_original)
-                        astdiffshistory = get_ast_diffs(source_commits = pull_commitsSubmitted, startCommit=None, endCommit=None, startDate = None, endDate = None, repoName=repoName, projectName =projectName) 
-                        slicer = BackTransformer(sourceOriginal = codeHunk,
-                                            sourcebackport = codeHunkBackport, 
-                                            astdiffsHistory = astdiffshistory, 
-                                            context = get_hunk_context(file_content = codehunks_original_withContext[context_index]), 
-                                            dependencies = get_changeset_dependencies(previousBackportfullFileTarget), 
-                                            metadata = get_changesets_and_metadata(pull_request = pull_backport, sourceO = codeHunk), 
-                                            functionalSet = functionalSetforHunk, 
-                                            compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
-                                            stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = stableBranch, github_token=ghkey, cache_file= projectName+"StableLibraryCsche"), 
-                                            targetfile = previousBackportfullFileTarget,
-                                            tfileName=filepathBackport)                                                    
-                        context_index = context_index +1 
+                            # file_pathJsonl = 'transInput/' + projectName + 'Backports.jsonl'
 
-                        file_pathJsonl = 'transInput/' + projectName + 'Backports.jsonl'
+                            # if sample_count < 15:                            
+                            data = slicer.prepareFinetuneData()
+                            slicer.saveData(data, 'transInput/'+projectName+'BackportsRefactored.jsonl')
+                            # sample_count = sample_count + 1     
 
-                        # if sample_count < 15:                            
-                        data = slicer.prepareFinetuneData()
-                        slicer.saveData(data, 'transInput/'+projectName+'BackportsRefactored.jsonl')
-                        # sample_count = sample_count + 1     
+                            slicebyCslicer, recommendation = slicer.analyzeProgram(fineTuning = False, fineTuningFile = trainingFile, ftTraining = True, prompt = False)
+                            recommendation = recommendation + "\nPRs: "+ pull_id_original  + ", "  + pull_id_backport
+                            if slicebyCslicer:
+                                numberOfSuccesfulSlicing = numberOfSuccesfulSlicing + 1                
+                                slicesfromCSLICER.append((codeHunk ,slicebyCslicer, codeHunkBackport, recommendation))                                 
 
-                        slicebyCslicer, recommendation = slicer.analyzeProgram(fineTuning = True, fineTuningFile = file_pathJsonl, ftTraining = False, prompt = False)
-                        recommendation = recommendation + "\nPRs: "+ pull_id_original  + ", "  + pull_id_backport
-                        if slicebyCslicer:
-                            numberOfSuccesfulSlicing = numberOfSuccesfulSlicing + 1                
-                            slicesfromCSLICER.append((codeHunk ,slicebyCslicer, codeHunkBackport, recommendation))                                 
+                    print("Working on pulls ", pull_id_original, pull_id_backport)
+                    if slicesfromCSLICER:
+                        slicedPRs.append(slicesfromCSLICER)
 
-                print("Working on pulls ", pull_id_original, pull_id_backport)
+            except Exception as e:
+                print("Problem in pulls ", pull_id_original, pull_id_backport)
                 if slicesfromCSLICER:
-                    slicedPRs.append(slicesfromCSLICER)
-
-        except Exception as e:
-            print("Problem in pulls ", pull_id_original, pull_id_backport)
-            if slicesfromCSLICER:
-                slicedPRs.append(slicesfromCSLICER)                    
-            print(e)
-            continue
+                    slicedPRs.append(slicesfromCSLICER)                    
+                print(e)
+                continue
     saveMetricResults(slicedPRs, projectName, data_read, numberofSlicingRequired, numberofDifferences, has_test_and_code, numberOfSuccesfulSlicing)
     saveChanges(output1, slicedPRs)
 
@@ -386,5 +388,6 @@ saltDictOfActiveBranches,
 'saltstack',
 'salt',
 'slicerOutput/Incmp_BackTrans_Salt_backport_keywordsPRsNoNeedTest.csv',
-'Stable-V'
+trainingFile = 'transInput/TrainingSample.jsonl',
+testingFile =''
 )

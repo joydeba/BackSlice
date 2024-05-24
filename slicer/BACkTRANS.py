@@ -207,10 +207,9 @@ class BackTransformer():
     def saveData(self, data, filename):
         with open(filename, 'a') as f:
                 f.write(json.dumps(data) + '\n')
+             
 
-
-
-    def analyzeProgram(self, fineTuning = False, fineTuningFile = "transInput/Backports.jsonl", ftTraining = False, prompt = False):
+    def analyzeProgram(self, fineTuning = False, fineTuningFile = "transInput/Backports.jsonl", ftTraining = False, prompt = False, testingFile = ""):
         """
         Adapt the sourceOriginal to a stable version based on various inputs.
 
@@ -221,6 +220,7 @@ class BackTransformer():
         client = OpenAI()
 
         if fineTuning:
+            # self.deleteFiles()
             client.files.create(
             file=open(fineTuningFile, "rb"),
             purpose="fine-tune"
@@ -228,7 +228,7 @@ class BackTransformer():
 
         if ftTraining:
             client.fine_tuning.jobs.create(
-            training_file="file-ItN6SgBPXzvlWbHmTEqdDfBA", 
+            training_file="file-P44jFVRZVz7Y2dUvfvGXy2nP", 
             model="gpt-3.5-turbo"
             )
 

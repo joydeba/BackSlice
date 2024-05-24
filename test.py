@@ -186,3 +186,31 @@ from collections import deque
 
 
 
+
+
+# #  pip install openai==0.28
+# import openai
+# import os
+
+# # Set your OpenAI API key
+# openai.api_key = os.getenv("OPENAI_API_KEY")  # Or directly set it: openai.api_key = 'your-api-key'
+
+# # Function to list all files
+# def list_files():
+#     return openai.File.list()
+
+# # Function to delete a file by ID
+# def delete_file(file_id):
+#     return openai.File.delete(file_id)
+
+# # List all files
+# files = list_files()['data']
+
+# # Loop through the files and delete the JSONL files
+# for file in files:
+#     if file['filename'].endswith('.jsonl'):
+#         file_id = file['id']
+#         delete_file(file_id)
+#         print(f"Deleted file: {file['filename']} (ID: {file_id})")
+
+# print("All JSONL files have been deleted.")

@@ -12,7 +12,7 @@ def num_tokens_from_messages(messages, tokens_per_message=3, tokens_per_name=1):
     for message in messages:
         num_tokens += tokens_per_message
         for key, value in message.items():
-            if key == "script":
+            if key == "content":
                 num_tokens += len(encoding.encode(value))
                 num_tokens += tokens_per_name
     num_tokens += 3
@@ -21,8 +21,8 @@ def num_tokens_from_messages(messages, tokens_per_message=3, tokens_per_name=1):
 def num_assistant_tokens_from_messages(messages):
     num_tokens = 0
     for message in messages:
-        if message["data-from"] == "backport" or message["data-from"] == "original":
-            num_tokens += len(encoding.encode(message["script"]))
+        if message["role"] == "user" or message["role"] == "assistant":
+            num_tokens += len(encoding.encode(message["content"]))
     return num_tokens
 
 def print_distribution(values, name):
@@ -37,7 +37,7 @@ def loadData(data_path):
 
     print("Num examples:", len(dataset))
     print("First example:")
-    for message in dataset[0]["adaptation"]:
+    for message in dataset[0]["messages"]:
         print(message)   
     return dataset     
 
@@ -88,10 +88,10 @@ def dataWarningstokenCounts(dataset):
     assistant_message_lens = []
 
     for ex in dataset:
-        messages = ex["adaptation"]
-        if not any(message["data-from"] == "original" for message in messages):
+        messages = ex["messages"]
+        if not any(message["role"] == "user" for message in messages):
             n_missing_system += 1
-        if not any(message["data-from"] == "backport" for message in messages):
+        if not any(message["role"] == "assistant" for message in messages):
             n_missing_user += 1
         n_messages.append(len(messages))
         convo_lens.append(num_tokens_from_messages(messages))
@@ -135,4 +135,4 @@ def mainGPTdataValidation(data_path):
     convo_lens = dataWarningstokenCounts(dataset)
     costEstimation(dataset, convo_lens)    
 
-mainGPTdataValidation("transInput/ansibleBackports.jsonl")    
+mainGPTdataValidation("transInput/TrainingSample.jsonl")    
