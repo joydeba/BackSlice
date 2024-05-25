@@ -10,6 +10,7 @@
 from openai import OpenAI
 import json
 import os
+import re
 
 class BackTransformer():
     def __init__(self, sourceOriginal= None, sourcebackport = None, astdiffsHistory = None, context = None, dependencies = None, metadata = None, functionalSet = None, compilationSet= None, stableLibraris = None, targetfile = None, tfileName = None):
@@ -108,6 +109,15 @@ class BackTransformer():
 
         # nested_values_string = get_nested_values(self.stableLibraris, self.sourceOriginal)        
 
+        def extract_key_components(source_code):
+            identifier_pattern = re.compile(r'\b[A-Za-z_]\w*\b')
+            identifiers = identifier_pattern.findall(source_code)
+            unique_identifiers = set(identifiers)
+            key_components = ', '.join(unique_identifiers)
+            return key_components
+        
+        components = extract_key_components(self.targetfile)
+
         return (
             "All ASTs from commit history: " + allast_snippets + "\n" +
             "Current context: " + self.context + "\n" +
@@ -120,7 +130,7 @@ class BackTransformer():
             "Function call information from Stable: " + nested_values_function_calls + "\n" +
             "Class name information from Stable: " + nested_values_class_names + "\n" + 
             "Class method call information from Stable: " + nested_values_class_method_calls + "\n" +                                   
-            "Target file: " + self.targetfile
+            "Target file: " + components
         )
 
 
@@ -235,7 +245,7 @@ class BackTransformer():
         if prompt:
             promptData = self.formatPromptData()
             completion = client.chat.completions.create(
-            model="ft:gpt-3.5-turbo-0125:personal::9OZSElOU" if ftTraining else "gpt-3.5-turbo",
+            model="ft:gpt-3.5-turbo-0125:personal::9SXXjzCZ" if ftTraining else "gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "Adapt the given code snippet based on the information below - "+ promptData},
                 {"role": "user", "content": "Adapt this - " + self.sourceOriginal + "No need to provide extra information."}
@@ -243,5 +253,5 @@ class BackTransformer():
             )
             result = completion.choices[0].message        
    
-        # return result.content, "Recom"
-        return "", "Recom"    
+        return result.content, "Recom"
+        # return "", "Recom"    
