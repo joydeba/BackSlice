@@ -90,27 +90,29 @@ def getsimilarHunks(commits_diffs_original_contextHunks, commits_diffs_backport_
     commits_hunkline_original_context = commits_diffs_original_contextHunks.split("\n")
     commits_hunkline_backport_context = commits_diffs_backport_contextHunks.split("\n")
     similarity_score = difflib.SequenceMatcher(None, commits_hunkline_original_context[0], commits_hunkline_backport_context[0]).ratio()
-    if similarity_score > 0.60 or indexHunks0 == min_hunks_count - 1:
-        pass
-    else:
+    if similarity_score <= 0.60:
         for indexH in range(1, min_hunks_count):
             commits_hunkline_backport_context = commits_diffs_backport_contextHunks[indexH].split("\n")
             similarity_score = difflib.SequenceMatcher(None, commits_hunkline_original_context[0], commits_hunkline_backport_context[0]).ratio()
             if similarity_score > 0.60:
                 break
-            else:
-                commits_hunkline_backport_context = commits_diffs_backport_contextHunks[indexHunks0].split("\n")
+            if similarity_score <= 0.60 and indexH == min_hunks_count - 1:
+                return None, None                    
+    else:
+        commits_hunkline_backport_context = commits_diffs_backport_contextHunks[indexHunks0].split("\n")
+
     return  commits_hunkline_original_context, commits_hunkline_backport_context                  
 
 def get_padded_addedLines(commits_hunkline_context):
-    leadingSpaces = 0
+    leadingSpaces = -1
     commits_hunk_Lines = "" 
     for c_line in commits_hunkline_context:
         if c_line.startswith(("+")):
             c_line = c_line.replace("+", "")
-            if leadingSpaces == 0:
+            if leadingSpaces == -1:
                 leadingSpaces = len(c_line) - len(c_line.lstrip())
-            commits_hunk_Lines = commits_hunk_Lines + c_line[leadingSpaces:] + "\n"
+            if c_line[leadingSpaces:]:    
+                commits_hunk_Lines = commits_hunk_Lines + c_line[leadingSpaces:] + "\n"
     return commits_hunk_Lines           
 
 def get_hunk_details(commits_diffs_original, commits_diffs_backport):
@@ -141,16 +143,18 @@ def get_hunk_details(commits_diffs_original, commits_diffs_backport):
                     # hunkStartLnNo = commits_hunkline_original_context[0].split(" ")[0][1:].split(",")
                     # hunkEndlnNo = commits_hunkline_original_context[0].split(" ")[1][1:].split(",")
 
-                    commits_hunk_originalLines = get_padded_addedLines(commits_hunkline_original_context)    
-                    commits_hunk_backportLines = get_padded_addedLines(commits_hunkline_backport_context)                                  
+                    if commits_hunkline_original_context and commits_hunkline_backport_context:
 
-                    if commits_hunk_originalLines:    
-                        codehunks_original.append(commits_hunk_originalLines)
-                        codehunks_original_withContext.append(commits_diffs_original_contextHunks[indexHunks0])
+                        commits_hunk_originalLines = get_padded_addedLines(commits_hunkline_original_context)    
+                        commits_hunk_backportLines = get_padded_addedLines(commits_hunkline_backport_context)                                  
 
-                    if commits_hunk_backportLines:    
-                        codehunks_backport.append(commits_hunk_backportLines)
-                        codehunks_backport_withContext.append(commits_diffs_backport_contextHunks[indexHunks0])
+                        if commits_hunk_originalLines:    
+                            codehunks_original.append(commits_hunk_originalLines)
+                            codehunks_original_withContext.append(commits_diffs_original_contextHunks[indexHunks0])
+
+                        if commits_hunk_backportLines:    
+                            codehunks_backport.append(commits_hunk_backportLines)
+                            codehunks_backport_withContext.append(commits_diffs_backport_contextHunks[indexHunks0])
 
     return  codehunks_original, codehunks_backport, testhunks_original, codehunks_original_withContext, filepathBackport
 
@@ -196,7 +200,7 @@ def get_targetfile(repo, pull_id_original, pull_id_backport, filepathBackport):
     return filepathBackport, previousBackportfullFileTarget                                                                                                   
                                 
 def saveMetricResults(slicedPRs, projectName, data_read, numberofSlicingRequired, numberofDifferences, has_test_and_code, numberOfSuccesfulSlicing):
-    with open("slicerOutput/"+projectName+"InconICFDiffzBackTransNoNeedTest.txt", 'w') as f:   
+    with open("slicerOutput/"+projectName+"InconICFDiffzBackTransNoNeedTestSample.txt", 'w') as f:   
         print("Total Labeled Backporting PRs", len(data_read), file=f)
         print("Total Sliced Required", numberofSlicingRequired, file=f)
         print("Total Number of Hunk Differences", numberofDifferences, file=f)
@@ -306,6 +310,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                 has_test_and_code = has_test_and_code + 1
 
             slicebyCslicer = None
+
             if codehunks_original and codehunks_backport:
                 context_index = 0 
                 for codeHunk, codeHunkBackport  in zip(codehunks_original, codehunks_backport):                    
@@ -376,12 +381,12 @@ ansibleDefault_branch = 'devel' # Python 87.8% ---------
 # saltDefault_branch  = "maser" # Python 97.8% --------- X
 
 # file_regex = ":*.cpp", ":*.py", ":*.c"
-mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRsNoTestNeeded.csv', 
+mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRsNoTestNeededSample.csv', 
 ansibleDefault_branch,
 ansibleDictOfActiveBranches,
 'ansible',
 'ansible',
-'slicerOutput/Incmp_BackTrans_Ansible_backport_keywordsPRsNoNeedTest.csv',
+'slicerOutput/Incmp_BackTrans_Ansible_backport_keywordsPRsNoNeedTestSample.csv',
 trainingFile = 'transInput/TrainingSample.jsonl',
 testingFile =''
 )

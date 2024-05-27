@@ -245,13 +245,24 @@ class BackTransformer():
         if prompt:
             promptData = self.formatPromptData()
             completion = client.chat.completions.create(
-            model="ft:gpt-3.5-turbo-0125:personal::9SXXjzCZ" if ftTraining else "gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": "Adapt the given code snippet based on the information below - "+ promptData},
-                {"role": "user", "content": "Adapt this - " + self.sourceOriginal + "No need to provide extra information."}
-            ]
+                model="ft:gpt-3.5-turbo-0125:personal::9SXXjzCZ" if ftTraining else "gpt-3.5-turbo",
+                messages=[
+                    {"role": "system", "content": (
+                        "Adapt the given code snippet based on the information below. "
+                        "No python or language info or extra quotations. "
+                        "Don’t remove comments of original source. "
+                        "Work with the existing statements from the script, try to avoid extra lines if not necessary. "
+                        "Don’t add import statements until they are related to stable information. "
+                        "Make it more similar to the original, just adapting the necessary changes for stability. "
+                        "Hunk is okay, no need to provide complete code. "
+                        "Keep similar indentation of the original. "
+                        "Give source code, not ASTs. "
+                        + promptData
+                    )},
+                    {"role": "user", "content": "Adapt this - " + self.sourceOriginal}
+                ]
             )
-            result = completion.choices[0].message        
+            result = completion.choices[0].message     
    
         return result.content, "Recom"
         # return "", "Recom"    
