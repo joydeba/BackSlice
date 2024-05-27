@@ -1,0 +1,2168 @@
+"def test_issue42383(self):
+    with os_helper.temp_cwd() as cwd:
+        with open('foo.py', 'w') as f:
+            s = textwrap.dedent(""""""
+                print('The correct file was executed')
+
+                import os
+                os.chdir(""subdir"")
+            """""")
+            f.write(s)
+
+        subdir = os.path.join(cwd, 'subdir')
+        os.mkdir(subdir)
+        os.mkdir(os.path.join(subdir, 'subdir'))
+        wrong_file = os.path.join(subdir, 'foo.py')
+
+        with open(wrong_file, 'w') as f:
+            f.write('print(""The wrong file was executed"")')
+
+        stdout, stderr = self._run_pdb(['foo.py'], 'c\nc\nq')
+        expected = '(Pdb) The correct file was executed'
+        self.assertEqual(stdout.split('\n')[6].rstrip('\r'), expected)
+
+"
+-------------------------------------------------------------------------
+"def test_issue42383(self):
+    with os_helper.temp_cwd() as cwd:
+        with open('foo.py', 'w') as f:
+            s = textwrap.dedent(""""""
+                print('The correct file was executed')
+
+                import os
+                os.chdir(""subdir"")
+            """""")
+            f.write(s)
+
+        subdir = os.path.join(cwd, 'subdir')
+        os.mkdir(subdir)
+        os.mkdir(os.path.join(subdir, 'subdir'))
+        wrong_file = os.path.join(subdir, 'foo.py')
+
+        with open(wrong_file, 'w') as f:
+            f.write('print(""The wrong file was executed"")')
+
+        stdout, stderr = self._run_pdb(['foo.py'], 'c\nc\nq')
+        expected = '(Pdb) The correct file was executed'
+        self.assertEqual(stdout.split('\n')[6].rstrip('\r'), expected)"
+-------------------------------------------------------------------------
+"def test_issue42383(self):
+    with support.temp_cwd() as cwd:
+        with open('foo.py', 'w') as f:
+            s = textwrap.dedent(""""""
+                print('The correct file was executed')
+
+                import os
+                os.chdir(""subdir"")
+            """""")
+            f.write(s)
+
+        subdir = os.path.join(cwd, 'subdir')
+        os.mkdir(subdir)
+        os.mkdir(os.path.join(subdir, 'subdir'))
+        wrong_file = os.path.join(subdir, 'foo.py')
+
+        with open(wrong_file, 'w') as f:
+            f.write('print(""The wrong file was executed"")')
+
+        stdout, stderr = self._run_pdb(['foo.py'], 'c\nc\nq')
+        expected = '(Pdb) The correct file was executed'
+        self.assertEqual(stdout.split('\n')[6].rstrip('\r'), expected)
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 23412, 24323"
+-------------------------------------------------------------------------
+=========================================================================
+"def test_issue42383(self):
+    with os_helper.temp_cwd() as cwd:
+        with open('foo.py', 'w') as f:
+            s = textwrap.dedent(""""""
+                print('The correct file was executed')
+
+                import os
+                os.chdir(""subdir"")
+            """""")
+            f.write(s)
+
+        subdir = os.path.join(cwd, 'subdir')
+        os.mkdir(subdir)
+        os.mkdir(os.path.join(subdir, 'subdir'))
+        wrong_file = os.path.join(subdir, 'foo.py')
+
+        with open(wrong_file, 'w') as f:
+            f.write('print(""The wrong file was executed"")')
+
+        stdout, stderr = self._run_pdb(['foo.py'], 'c\nc\nq')
+        expected = '(Pdb) The correct file was executed'
+        self.assertEqual(stdout.split('\n')[6].rstrip('\r'), expected)
+
+"
+-------------------------------------------------------------------------
+"```python
+def test_issue42384_symlink(self):
+    with os_helper.temp_cwd() as cwd:
+        symlink_path = os.path.join(cwd, 'symlink')
+        os.symlink('subdir', symlink_path)
+
+        with open('foo.py', 'w') as f:
+            s = textwrap.dedent(""""""
+                print('The correct file was executed')
+
+                import os
+                os.chdir(""subdir"")
+            """""")
+            f.write(s)
+
+        subdir = os.path.join(cwd, 'subdir')
+        os.mkdir(subdir)
+        os.mkdir(os.path.join(subdir, 'subdir'))
+        wrong_file = os.path.join(subdir, 'foo.py')
+
+        with open(wrong_file, 'w') as f:
+            f.write('print(""The wrong file was executed"")')
+
+        stdout, stderr = self._run_pdb(['symlink'], 'c\nc\nq')
+        expected = '(Pdb) The correct file was executed'
+        self.assertEqual(stdout.split('\n')[2].rstrip('\r'), expected)
+```"
+-------------------------------------------------------------------------
+"def test_issue42383(self):
+    with support.temp_cwd() as cwd:
+        with open('foo.py', 'w') as f:
+            s = textwrap.dedent(""""""
+                print('The correct file was executed')
+
+                import os
+                os.chdir(""subdir"")
+            """""")
+            f.write(s)
+
+        subdir = os.path.join(cwd, 'subdir')
+        os.mkdir(subdir)
+        os.mkdir(os.path.join(subdir, 'subdir'))
+        wrong_file = os.path.join(subdir, 'foo.py')
+
+        with open(wrong_file, 'w') as f:
+            f.write('print(""The wrong file was executed"")')
+
+        stdout, stderr = self._run_pdb(['foo.py'], 'c\nc\nq')
+        expected = '(Pdb) The correct file was executed'
+        self.assertEqual(stdout.split('\n')[6].rstrip('\r'), expected)
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 23412, 24322"
+-------------------------------------------------------------------------
+=========================================================================
+"invalidation_mode=None, *, stripdir=None,
+"
+-------------------------------------------------------------------------
+"```python
+def compile_dir(dir, maxlevels=None, ddir=None, force=False,
+                 rx=None, quiet=0, legacy=False, optimize=-1, workers=1,
+                 prependdir=None, limit_sl_dest=None, invalidation_mode=None, *, stripdir=None):
+     """"""Byte-compile all modules in the given directory tree.
+```"
+-------------------------------------------------------------------------
+"yield fullname, ddir
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 18676, 18718"
+-------------------------------------------------------------------------
+=========================================================================
+"if ddir is not None and (stripdir is not None or prependdir is not None):
+    raise ValueError((""Destination dir (ddir) cannot be used ""
+                      ""in combination with stripdir or prependdir""))
+if ddir is not None:
+    stripdir = dir
+    prependdir = ddir
+    ddir = None
+"
+-------------------------------------------------------------------------
+"```python
+if ddir is not None and (stripdir is not None or prependdir is not None):
+    raise ValueError(""Destination dir (ddir) cannot be used in combination with stripdir or prependdir"")
+if ddir is not None:
+    stripdir = dir
+    prependdir = ddir
+    ddir = None
+```"
+-------------------------------------------------------------------------
+"files_and_ddirs = _walk_dir(dir, quiet=quiet, maxlevels=maxlevels,
+                            ddir=ddir)
+        results = executor.map(
+                partial(_compile_file_tuple,
+                        force=force, rx=rx, quiet=quiet,
+                        legacy=legacy, optimize=optimize,
+                        invalidation_mode=invalidation_mode,
+                    ),
+                files_and_ddirs)
+    for file, dfile in files_and_ddirs:
+        if not compile_file(file, dfile, force, rx, quiet,
+_compile_file_tuple(file_and_dfile, **kwargs):
+""""""Needs to be toplevel for ProcessPoolExecutor.""""""
+file, dfile = file_and_dfile
+return compile_file(file, dfile, **kwargs)
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 18676, 18718"
+-------------------------------------------------------------------------
+=========================================================================
+"def _test_ddir_only(self, *, ddir, parallel=True):
+    """"""Recursive compile_dir ddir must contain package paths; bpo39769.""""""
+    fullpath = [""test"", ""foo""]
+    path = self.directory
+    mods = []
+    for subdir in fullpath:
+        path = os.path.join(path, subdir)
+        os.mkdir(path)
+        script_helper.make_script(path, ""__init__"", """")
+        mods.append(script_helper.make_script(path, ""mod"",
+                                              ""def fn(): 1/0\nfn()\n""))
+    compileall.compile_dir(
+            self.directory, quiet=True, ddir=ddir,
+            workers=2 if parallel else 1)
+    self.assertTrue(mods)
+    for mod in mods:
+        self.assertTrue(mod.startswith(self.directory), mod)
+        modcode = importlib.util.cache_from_source(mod)
+        modpath = mod[len(self.directoryos.sep):]
+        _, _, err = script_helper.assert_python_failure(modcode)
+        expected_in = os.path.join(ddir, modpath)
+        mod_code_obj = test.test_importlib.util.get_code_from_pyc(modcode)
+        self.assertEqual(mod_code_obj.co_filename, expected_in)
+        self.assertIn(f'""{expected_in}""', os.fsdecode(err))
+
+def test_ddir_only_one_worker(self):
+    """"""Recursive compile_dir ddir= contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir=""<a prefix>"", parallel=False)
+
+def test_ddir_multiple_workers(self):
+    """"""Recursive compile_dir ddir= contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir=""<a prefix>"", parallel=True)
+
+def test_ddir_empty_only_one_worker(self):
+    """"""Recursive compile_dir ddir='' contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir="""", parallel=False)
+
+def test_ddir_empty_multiple_workers(self):
+    """"""Recursive compile_dir ddir='' contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir="""", parallel=True)
+
+"
+-------------------------------------------------------------------------
+"```python
+import os
+import importlib.util
+from test.support import script_helper
+from test import test_importlib
+
+class TestCompileDir:
+    def _test_ddir_only(self, *, ddir, parallel=True):
+        """"""Recursive compile_dir ddir must contain package paths; bpo39769.""""""
+        fullpath = [""test"", ""foo""]
+        path = self.directory
+        mods = []
+        for subdir in fullpath:
+            path = os.path.join(path, subdir)
+            os.mkdir(path)
+            script_helper.make_script(path, ""__init__"", """")
+            mods.append(script_helper.make_script(path, ""mod"", ""def fn(): 1/0\nfn()\n""))
+        compileall.compile_dir(self.directory, quiet=True, ddir=ddir, workers=2 if parallel else 1)
+        self.assertTrue(mods)
+        for mod in mods:
+            self.assertTrue(mod.startswith(self.directory), mod)
+            modcode = importlib.util.cache_from_source(mod)
+            modpath = mod[len(self.directory)+len(os.sep):]
+            _, _, err = script_helper.assert_python_failure(modcode)
+            expected_in = os.path.join(ddir, modpath)
+            mod_code_obj = test_importlib.util.get_code_from_pyc(modcode)
+            self.assertEqual(mod_code_obj.co_filename, expected_in)
+            self.assertIn(f'""{expected_in}""', os.fsdecode(err))
+
+    def test_ddir_only_one_worker(self):
+        """"""Recursive compile_dir ddir= contains package paths; bpo39769.""""""
+        return self._test_ddir_only(ddir=""<a prefix>"", parallel=False)
+
+    def test_ddir_multiple_workers(self):
+        """"""Recursive compile_dir ddir= contains package paths; bpo39769.""""""
+        return self._test_ddir_only(ddir=""<a prefix>"", parallel=True)
+
+    def test_ddir_empty_only_one_worker(self):
+        """"""Recursive compile_dir ddir='' contains package paths; bpo39769.""""""
+        return self._test_ddir_only(ddir="""", parallel=False)
+
+    def test_ddir_empty_multiple_workers(self):
+        """"""Recursive compile_dir ddir='' contains package paths; bpo39769.""""""
+        return self._test_ddir_only(ddir="""", parallel=True)
+```"
+-------------------------------------------------------------------------
+"def _test_ddir_only(self, *, ddir, parallel=True):
+    """"""Recursive compile_dir ddir must contain package paths; bpo39769.""""""
+    fullpath = [""test"", ""foo""]
+    path = self.directory
+    mods = []
+    for subdir in fullpath:
+        path = os.path.join(path, subdir)
+        os.mkdir(path)
+        script_helper.make_script(path, ""__init__"", """")
+        mods.append(script_helper.make_script(path, ""mod"",
+                                              ""def fn(): 1/0\nfn()\n""))
+    compileall.compile_dir(
+            self.directory, quiet=True, ddir=ddir,
+            workers=2 if parallel else 1)
+    self.assertTrue(mods)
+    for mod in mods:
+        self.assertTrue(mod.startswith(self.directory), mod)
+        modcode = importlib.util.cache_from_source(mod)
+        modpath = mod[len(self.directoryos.sep):]
+        _, _, err = script_helper.assert_python_failure(modcode)
+        expected_in = os.path.join(ddir, modpath)
+        mod_code_obj = test.test_importlib.util._get_code_from_pyc(modcode)
+        self.assertEqual(mod_code_obj.co_filename, expected_in)
+        self.assertIn(f'""{expected_in}""', os.fsdecode(err))
+
+def test_ddir_only_one_worker(self):
+    """"""Recursive compile_dir ddir= contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir=""<a prefix>"", parallel=False)
+
+def test_ddir_multiple_workers(self):
+    """"""Recursive compile_dir ddir= contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir=""<a prefix>"", parallel=True)
+
+def test_ddir_empty_only_one_worker(self):
+    """"""Recursive compile_dir ddir='' contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir="""", parallel=False)
+
+def test_ddir_empty_multiple_workers(self):
+    """"""Recursive compile_dir ddir='' contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir="""", parallel=True)
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 18676, 18718"
+-------------------------------------------------------------------------
+=========================================================================
+"# bpo-32502: UUID1 requires a 48-bit identifier, but hardware identifiers
+# need not necessarily be 48 bits (e.g., EUI-64).
+def test_uuid1_eui64(self):
+    # Confirm that uuid.getnode ignores hardware addresses larger than 48
+    # bits. Mock out each platform's *_getnode helper functions to return
+    # something just larger than 48 bits to test. This will cause
+    # uuid.getnode to fall back on uuid._random_getnode, which will
+    # generate a valid value.
+    too_large_getter = lambda: 1 << 48
+    with unittest.mock.patch.multiple(
+        self.uuid,
+        _node=None,  # Ignore any cached node value.
+        _NODE_GETTERS_WIN32=[too_large_getter],
+        _NODE_GETTERS_UNIX=[too_large_getter],
+    ):
+        node = self.uuid.getnode()
+    self.assertTrue(0 < node < (1 << 48), '%012x' % node)
+
+    # Confirm that uuid1 can use the generated node, i.e., the that
+    # uuid.getnode fell back on uuid._random_getnode() rather than using
+    # the value from too_large_getter above.
+    try:
+        self.uuid.uuid1(node=node)
+    except ValueError as e:
+        self.fail('uuid1 was given an invalid node ID')
+
+"
+-------------------------------------------------------------------------
+"```python
+# bpo-32502: UUID1 requires a 48-bit identifier, but hardware identifiers
+# need not necessarily be 48 bits (e.g., EUI-64).
+def test_uuid1_eui64(self):
+    # Confirm that uuid.getnode ignores hardware addresses larger than 48
+    # bits. Mock out each platform's *_getnode helper functions to return
+    # something just larger than 48 bits to test. This will cause
+    # uuid.getnode to fall back on uuid._random_getnode, which will
+    # generate a valid value.
+    too_large_getter = lambda: 1 << 48
+    with unittest.mock.patch.multiple(
+        self.uuid,
+        _node=None,  # Ignore any cached node value.
+        _NODE_GETTERS_WIN32=[too_large_getter],
+        _NODE_GETTERS_UNIX=[too_large_getter],
+    ):
+        node1 = self.uuid.getnode()
+    self.assertTrue(0 < node1 < (1 << 48), '%012x' % node1)
+
+    # Confirm that uuid1 can use the generated node, i.e., the that
+    # uuid.getnode fell back on uuid._random_getnode() rather than using
+    # the value from too_large_getter above.
+    try:
+        node2 = self.uuid.uuid1(node=node1)
+        self.assertEqual(node1, node2, '%012x != %012x' % (node1, node2))
+    except ValueError as e:
+        self.fail('uuid1 was given an invalid node ID')
+```"
+-------------------------------------------------------------------------
+"# bpo-32502: UUID1 requires a 48-bit identifier, but hardware identifiers
+# need not necessarily be 48 bits (e.g., EUI-64).
+def test_uuid1_eui64(self):
+    # Confirm that uuid.getnode ignores hardware addresses larger than 48
+    # bits. Mock out each platform's *_getnode helper functions to return
+    # something just larger than 48 bits to test. This will cause
+    # uuid.getnode to fall back on uuid._random_getnode, which will
+    # generate a valid value.
+    too_large_getter = lambda: 1 << 48
+    with unittest.mock.patch.multiple(
+        uuid,
+        _node=None,  # Ignore any cached node value.
+        _NODE_GETTERS_WIN32=[too_large_getter],
+        _NODE_GETTERS_UNIX=[too_large_getter],
+    ):
+        node = uuid.getnode()
+    self.assertTrue(0 < node < (1 << 48), '%012x' % node)
+
+    # Confirm that uuid1 can use the generated node, i.e., the that
+    # uuid.getnode fell back on uuid._random_getnode() rather than using
+    # the value from too_large_getter above.
+    try:
+        uuid.uuid1(node=node)
+    except ValueError as e:
+        self.fail('uuid1 was given an invalid node ID')
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 5254, 5290"
+-------------------------------------------------------------------------
+=========================================================================
+"_NODE_GETTERS_WIN32 = [_windll_getnode, _netbios_getnode, _ipconfig_getnode]
+
+_NODE_GETTERS_UNIX = [_unix_getnode, _ifconfig_getnode, _ip_getnode,
+_arp_getnode, _lanscan_getnode, _netstat_getnode]
+
+=None):
+"
+-------------------------------------------------------------------------
+"```python
+_NODE_GETTERS_WIN32 = [_windll_getnode, _netbios_getnode, _ipconfig_getnode] if sys.platform.startswith('win') else None
+
+_NODE_GETTERS_UNIX = [_unix_getnode, _ifconfig_getnode, _ip_getnode,
+_arp_getnode, _lanscan_getnode, _netstat_getnode] if sys.platform.startswith('linux') else None
+```"
+-------------------------------------------------------------------------
+"_NODE_GETTERS_WIN32 = [_windll_getnode, _netbios_getnode, _ipconfig_getnode]
+
+_NODE_GETTERS_UNIX = [_unixdll_getnode, _ifconfig_getnode, _ip_getnode,
+_arp_getnode, _lanscan_getnode, _netstat_getnode]
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 5254, 5290"
+-------------------------------------------------------------------------
+=========================================================================
+"getters = _NODE_GETTERS_WIN32
+getters = _NODE_GETTERS_UNIX
+if (_node is not None) and (0 <= _node < (1 << 48)):
+rt False, '_random_getnode() returned invalid value: {}'.format(_node)
+"
+-------------------------------------------------------------------------
+"```python
+getters = _NODE_GETTERS_WIN32
+getters = _NODE_GETTERS_UNIX
+
+if (_node is not None) and (0 <= _node < (1 << 48)):
+    return False, '_random_getnode() returned invalid value: {}'.format(_node)
+```"
+-------------------------------------------------------------------------
+"getters = _NODE_GETTERS_WIN32
+getters = _NODE_GETTERS_UNIX
+if (_node is not None) and (0 <= _node < (1 << 48)):
+rt False, '_random_getnode() returned invalid value: {}'.format(_node)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 5254, 5290"
+-------------------------------------------------------------------------
+=========================================================================
+"folded.stickyspace = str(ws)
+"
+-------------------------------------------------------------------------
+"```python
+folded.stickyspace = str(ws)
+```"
+-------------------------------------------------------------------------
+"folded.stickyspace = str(ws)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 1892, 2592"
+-------------------------------------------------------------------------
+=========================================================================
+"def test_long_filename_attachment(self):
+    folded = self.policy.fold('Content-Disposition', 'attachment; filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TES.txt""')
+    self.assertEqual(
+        'Content-Disposition: attachment;\n filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TES.txt""\n',
+        folded
+    )
+    folded = self.policy.fold('Content-Disposition', 'attachment; filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_T.txt""')
+    self.assertEqual(
+        'Content-Disposition: attachment;\n filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_T.txt""\n',
+        folded
+    )
+
+"
+-------------------------------------------------------------------------
+"```python
+def test_long_filename_attachment(self):
+    folded = self.policy.fold('Content-Disposition', 'attachment; filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TES.txt""')
+    self.assertEqual(
+        'Content-Disposition: attachment;\n filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TES.txt""\n',
+        folded
+    )
+    folded = self.policy.fold('Content-Disposition', 'attachment; filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_T.txt""')
+    self.assertEqual(
+        'Content-Disposition: attachment;\n filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_T.txt""\n',
+        folded
+    )
+```"
+-------------------------------------------------------------------------
+"def test_long_filename_attachment(self):
+    folded = self.policy.fold('Content-Disposition', 'attachment; filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TES.txt""')
+    self.assertEqual(
+        'Content-Disposition: attachment;\n filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TES.txt""\n',
+        folded
+    )
+    folded = self.policy.fold('Content-Disposition', 'attachment; filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_T.txt""')
+    self.assertEqual(
+        'Content-Disposition: attachment;\n filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_T.txt""\n',
+        folded
+    )
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 1892, 2592"
+-------------------------------------------------------------------------
+=========================================================================
+"folded.stickyspace = str(ws)
+"
+-------------------------------------------------------------------------
+folded.stickyspace = ws
+-------------------------------------------------------------------------
+"folded.stickyspace = str(ws)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 1892, 2591"
+-------------------------------------------------------------------------
+=========================================================================
+"def test_long_filename_attachment(self):
+    folded = self.policy.fold('Content-Disposition', 'attachment; filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TES.txt""')
+    self.assertEqual(
+        'Content-Disposition: attachment;\n filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TES.txt""\n',
+        folded
+    )
+    folded = self.policy.fold('Content-Disposition', 'attachment; filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_T.txt""')
+    self.assertEqual(
+        'Content-Disposition: attachment;\n filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_T.txt""\n',
+        folded
+    )
+
+"
+-------------------------------------------------------------------------
+"```python
+def test_long_filename_attachment(self):
+    folded = self.policy.fold('Content-Disposition', 'attachment; filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TES.txt""')
+    self.assertEqual(
+        'Content-Disposition: attachment;\n filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TES.txt""\n',
+        folded
+    )
+    folded = self.policy.fold('Content-Disposition', 'attachment; filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_T.txt""')
+    self.assertEqual(
+        'Content-Disposition: attachment;\n filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_T.txt""\n',
+        folded
+    )
+```"
+-------------------------------------------------------------------------
+"def test_long_filename_attachment(self):
+    folded = self.policy.fold('Content-Disposition', 'attachment; filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TES.txt""')
+    self.assertEqual(
+        'Content-Disposition: attachment;\n filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TES.txt""\n',
+        folded
+    )
+    folded = self.policy.fold('Content-Disposition', 'attachment; filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_T.txt""')
+    self.assertEqual(
+        'Content-Disposition: attachment;\n filename=""TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_T.txt""\n',
+        folded
+    )
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 1892, 2591"
+-------------------------------------------------------------------------
+=========================================================================
+"self.close()
+"
+-------------------------------------------------------------------------
+self.close()
+-------------------------------------------------------------------------
+"self.close()
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 1700, 1790"
+-------------------------------------------------------------------------
+=========================================================================
+"self.close()
+"
+-------------------------------------------------------------------------
+"```python
+self.close()
+```"
+-------------------------------------------------------------------------
+"self.close()
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 1700, 1789"
+-------------------------------------------------------------------------
+=========================================================================
+"# bpo-30320: Need pthread_sigmask() to block the signal, otherwise the test
+# is vulnerable to a race condition between the child and the parent processes.
+@unittest.skipUnless(hasattr(signal, 'pthread_sigmask'),
+'need signal.pthread_sigmask()')
+(self, wait_func):
+gnal.pthread_sigmask(signal.SIG_BLOCK, [signum])
+up(signal.pthread_sigmask, signal.SIG_UNBLOCK, [signum])
+
+ubprocess(code)
+(signum)
+.monotonic() - t0
+
+ual(proc.wait(), 0)
+ess(hasattr(signal, 'sigwaitinfo'),
+    'need signal.sigwaitinfo()')
+nfo(self):
+(signum):
+gwait(wait_func)
+
+ess(hasattr(signal, 'sigtimedwait'),
+    'need signal.sigwaitinfo()')
+wait(self):
+(signum):
+gtimedwait([signum], 120.0)
+
+gwait(wait_func)
+"
+-------------------------------------------------------------------------
+"@unittest.skipUnless(hasattr(signal, 'pthread_sigmask'),
+                     'need signal.pthread_sigmask()')
+class SignalEINTRTest(EINTRBaseTest):
+    """""" EINTR tests for the signal module. """"""
+
+    def test_sleep(self, wait_func):
+        signal.pthread_sigmask(signal.SIG_BLOCK, [self.signum])
+        self.addCleanup(signal.pthread_sigmask, signal.SIG_UNBLOCK, [self.signum])
+
+        with subprocess(code):
+            wait_func(self.signum)
+
+        t0 = time.monotonic()
+
+        self.assertEqual(proc.wait(), 0)
+
+    @unittest.skipUnless(hasattr(signal, 'sigwaitinfo'),
+                         'need signal.sigwaitinfo()')
+    def test_sigwaitinfo(self, wait_func):
+        wait_func(self.signum)
+
+    @unittest.skipUnless(hasattr(signal, 'sigtimedwait'),
+                         'need signal.sigtimedwait()')
+    def test_sigtimedwait(self, wait_func):
+        signal.sigtimedwait([self.signum], 120.0)
+
+        wait_func(wait_func)"
+-------------------------------------------------------------------------
+"import faulthandler
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 1523, 1532"
+-------------------------------------------------------------------------
+=========================================================================
+"flags = re.sub(r'-arch\s\w\s', ' ', flags, flags=re.ASCII)
+"
+-------------------------------------------------------------------------
+"```python
+flags = re.sub(r'-arch\s\w\s', ' ', flags, flags=re.ASCII)
+```"
+-------------------------------------------------------------------------
+"flags = re.sub(r'-arch\s\w\s', ' ', flags, flags=re.ASCII)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 1134, 1137"
+-------------------------------------------------------------------------
+=========================================================================
+"flags = re.sub(r'-arch\s\w\s', ' ', flags, flags=re.ASCII)
+"
+-------------------------------------------------------------------------
+"flags = re.sub(r'-arch\s\w\s', ' ', flags, flags=re.ASCII)"
+-------------------------------------------------------------------------
+"flags = re.sub(r'-arch\s\w\s', ' ', flags, flags=re.ASCII)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 1134, 1135"
+-------------------------------------------------------------------------
+=========================================================================
+"co_argcount         number of arguments (not including *, ** args
+                    or keyword only arguments)
+co_code             string of raw compiled bytecode
+co_cellvars         tuple of names of cell variables
+co_consts           tuple of constants used in the bytecode
+co_filename         name of file in which this code object was created
+co_firstlineno      number of first line in Python source code
+co_flags            bitmap: 1=optimized | 2=newlocals | 4=*arg | 8=**arg
+                    | 16=nested | 32=generator | 64=nofree | 128=coroutine
+                    | 256=iterable_coroutine | 512=async_generator
+co_freevars         tuple of names of free variables
+co_kwonlyargcount   number of keyword only arguments (not including ** arg)
+co_lnotab           encoded mapping of line numbers to bytecode indices
+co_name             name with which this code object was defined
+co_names            tuple of names of local variables
+co_nlocals          number of local variables
+co_stacksize        virtual machine stack space required
+co_varnames         tuple of names of arguments and local variables""""""
+"
+-------------------------------------------------------------------------
+"```python
+def iscode(object):
+    """"""Return true if the object is a code object.
+ 
+    Code objects provide these attributes:
+    return (
+        isinstance(object, types.CodeType)
+        and hasattr(object, ""co_argcount"")
+        and hasattr(object, ""co_code"")
+        and hasattr(object, ""co_cellvars"")
+        and hasattr(object, ""co_consts"")
+        and hasattr(object, ""co_filename"")
+        and hasattr(object, ""co_firstlineno"")
+        and hasattr(object, ""co_flags"")
+        and hasattr(object, ""co_freevars"")
+        and hasattr(object, ""co_kwonlyargcount"")
+        and hasattr(object, ""co_lnotab"")
+        and hasattr(object, ""co_name"")
+        and hasattr(object, ""co_names"")
+        and hasattr(object, ""co_nlocals"")
+        and hasattr(object, ""co_stacksize"")
+        and hasattr(object, ""co_varnames"")
+    )
+    """"""
+```"
+-------------------------------------------------------------------------
+"co_argcount         number of arguments (not including *, ** args
+                    or keyword only arguments)
+co_code             string of raw compiled bytecode
+co_cellvars         tuple of names of cell variables
+co_consts           tuple of constants used in the bytecode
+co_filename         name of file in which this code object was created
+co_firstlineno      number of first line in Python source code
+co_flags            bitmap: 1=optimized | 2=newlocals | 4=*arg | 8=**arg
+                    | 16=nested | 32=generator | 64=nofree | 128=coroutine
+                    | 256=iterable_coroutine
+co_freevars         tuple of names of free variables
+co_kwonlyargcount   number of keyword only arguments (not including ** arg)
+co_lnotab           encoded mapping of line numbers to bytecode indices
+co_name             name with which this code object was defined
+co_names            tuple of names of local variables
+co_nlocals          number of local variables
+co_stacksize        virtual machine stack space required
+co_varnames         tuple of names of arguments and local variables""""""
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 1090, 1100"
+-------------------------------------------------------------------------
+=========================================================================
+"co_argcount         number of arguments (not including *, ** args
+                    or keyword only arguments)
+co_code             string of raw compiled bytecode
+co_cellvars         tuple of names of cell variables
+co_consts           tuple of constants used in the bytecode
+co_filename         name of file in which this code object was created
+co_firstlineno      number of first line in Python source code
+co_flags            bitmap: 1=optimized | 2=newlocals | 4=*arg | 8=**arg
+                    | 16=nested | 32=generator | 64=nofree | 128=coroutine
+                    | 256=iterable_coroutine | 512=async_generator
+co_freevars         tuple of names of free variables
+co_kwonlyargcount   number of keyword only arguments (not including ** arg)
+co_lnotab           encoded mapping of line numbers to bytecode indices
+co_name             name with which this code object was defined
+co_names            tuple of names of local variables
+co_nlocals          number of local variables
+co_stacksize        virtual machine stack space required
+co_varnames         tuple of names of arguments and local variables""""""
+"
+-------------------------------------------------------------------------
+"```python
+def iscode(object):
+    """"""Return true if the object is a code object.
+
+    Code objects provide these attributes:
+    return isinstance(object, types.CodeType)
+
+def isbuiltin(object):
+    return isinstance(object, types.BuiltinFunctionType)
+```"
+-------------------------------------------------------------------------
+"co_argcount         number of arguments (not including *, ** args
+                    or keyword only arguments)
+co_code             string of raw compiled bytecode
+co_cellvars         tuple of names of cell variables
+co_consts           tuple of constants used in the bytecode
+co_filename         name of file in which this code object was created
+co_firstlineno      number of first line in Python source code
+co_flags            bitmap: 1=optimized | 2=newlocals | 4=*arg | 8=**arg
+                    | 16=nested | 32=generator | 64=nofree | 128=coroutine
+                    | 256=iterable_coroutine | 512=async_generator
+co_freevars         tuple of names of free variables
+co_kwonlyargcount   number of keyword only arguments (not including ** arg)
+co_lnotab           encoded mapping of line numbers to bytecode indices
+co_name             name with which this code object was defined
+co_names            tuple of names of local variables
+co_nlocals          number of local variables
+co_stacksize        virtual machine stack space required
+co_varnames         tuple of names of arguments and local variables""""""
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 1090, 1099"
+-------------------------------------------------------------------------
+=========================================================================
+"if wrap_exception and func is not _helper_reraises_exception:
+"
+-------------------------------------------------------------------------
+"```python
+def worker(inqueue, outqueue, initializer=None, initargs=(), maxtasks=None,
+         try:
+             result = (True, func(*args, **kwds))
+         except Exception as e:
+             if wrap_exception and func is not _helper_reraises_exception:
+                e = ExceptionWithTraceback(e, e.__traceback__)
+             result = (False, e)
+         try:
+```"
+-------------------------------------------------------------------------
+"if wrap_exception and func is not _helper_reraises_exception:
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 884"
+-------------------------------------------------------------------------
+=========================================================================
+"def _helper_reraises_exception(ex):
+'Pickle-able helper function for use by _guarded_task_generation.'
+raise ex
+
+"
+-------------------------------------------------------------------------
+"```
+def _helper_reraises_exception(ex):
+    'Pickle-able helper function for use by _guarded_task_generation.'
+    raise ex
+```"
+-------------------------------------------------------------------------
+"def _helper_reraises_exception(ex):
+'Pickle-able helper function for use by _guarded_task_generation.'
+raise ex
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 884"
+-------------------------------------------------------------------------
+=========================================================================
+"def _guarded_task_generation(self, result_job, func, iterable):
+    '''Provides a generator of tasks for imap and imap_unordered with
+    appropriate handling for iterables which throw exceptions during
+    iteration.'''
+    try:
+        i = -1
+        for i, x in enumerate(iterable):
+            yield (result_job, i, func, (x,), {})
+    except Exception as e:
+        yield (result_job, i1, _helper_reraises_exception, (e,), {})
+
+"
+-------------------------------------------------------------------------
+"```python
+def _guarded_task_generation(self, result_job, func, iterable):
+    '''Provides a generator of tasks for imap and imap_unordered with
+    appropriate handling for iterables which throw exceptions during
+    iteration.'''
+    try:
+        i = -1
+        for i, x in enumerate(iterable):
+            yield (result_job, i, func, (x,), {})
+    except Exception as e:
+        yield (result_job, i, _helper_reraises_exception, (e,), {})
+```"
+-------------------------------------------------------------------------
+"def _guarded_task_generation(self, result_job, func, iterable):
+    '''Provides a generator of tasks for imap and imap_unordered with
+    appropriate handling for iterables which throw exceptions during
+    iteration.'''
+    try:
+        i = -1
+        for i, x in enumerate(iterable):
+            yield (result_job, i, func, (x,), {})
+    except Exception as e:
+        yield (result_job, i1, _helper_reraises_exception, (e,), {})
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 884"
+-------------------------------------------------------------------------
+=========================================================================
+"self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job, func, iterable),
+        result._set_length
+    ))
+self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job,
+                                      mapstar,
+                                      task_batches),
+        result._set_length
+    ))
+"
+-------------------------------------------------------------------------
+"```python
+self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job, func, iterable),
+        result._set_length
+    ))
+
+self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job,
+                                      mapstar,
+                                      task_batches),
+        result._set_length
+    ))
+```"
+-------------------------------------------------------------------------
+"self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job, func, iterable),
+        result._set_length
+    ))
+self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job,
+                                      mapstar,
+                                      task_batches),
+        result._set_length
+    ))
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 884"
+-------------------------------------------------------------------------
+=========================================================================
+"self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job, func, iterable),
+        result._set_length
+    ))
+self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job,
+                                      mapstar,
+                                      task_batches),
+        result._set_length
+    ))
+"
+-------------------------------------------------------------------------
+"```python
+self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job, func, iterable),
+        result._set_length
+    )
+)
+self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job,
+                                      mapstar,
+                                      task_batches),
+        result._set_length
+    )
+)
+```"
+-------------------------------------------------------------------------
+"self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job, func, iterable),
+        result._set_length
+    ))
+self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job,
+                                      mapstar,
+                                      task_batches),
+        result._set_length
+    ))
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 884"
+-------------------------------------------------------------------------
+=========================================================================
+"self._taskqueue.put(([(result._job, 0, func, args, kwds)], None))
+"
+-------------------------------------------------------------------------
+"```python
+self._taskqueue.put(([(result._job, 0, func, args, kwds)], None))
+```"
+-------------------------------------------------------------------------
+"self._taskqueue.put(([(result._job, 0, func, args, kwds)], None))
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 884"
+-------------------------------------------------------------------------
+=========================================================================
+"self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job,
+                                      mapper,
+                                      task_batches),
+        None
+    )
+)
+"
+-------------------------------------------------------------------------
+"```python
+self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job, mapper, task_batches),
+        None
+    )
+)
+```"
+-------------------------------------------------------------------------
+"self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job,
+                                      mapper,
+                                      task_batches),
+        None
+    )
+)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 884"
+-------------------------------------------------------------------------
+=========================================================================
+"# iterating taskseq cannot fail
+for task in taskseq:
+        job, idx = task[:2]
+            cache[job]._set(idx, (False, e))
+        idx = task[1] if task else -1
+        set_length(idx  1)
+"
+-------------------------------------------------------------------------
+"```python
+# iterating taskseq cannot fail
+for task in taskseq:
+    job, idx = task[:2]
+    cache[job]._set(idx, (False, e))
+    idx = task[1] if task else -1
+    set_length(idx + 1)
+```"
+-------------------------------------------------------------------------
+"# iterating taskseq cannot fail
+for task in taskseq:
+        job, idx = task[:2]
+            cache[job]._set(idx, (False, e))
+        idx = task[1] if task else -1
+        set_length(idx  1)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 884"
+-------------------------------------------------------------------------
+=========================================================================
+"if when == -1:
+    raise SayWhenError(""Somebody said when"")
+"
+-------------------------------------------------------------------------
+"if when == -1:
+    raise SayWhenError(""Somebody said when"")"
+-------------------------------------------------------------------------
+"if when == -1:
+    raise SayWhenError(""Somebody said when"")
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 884"
+-------------------------------------------------------------------------
+=========================================================================
+"def test_map_handle_iterable_exception(self):
+    if self.TYPE == 'manager':
+        self.skipTest('test not appropriate for {}'.format(self.TYPE))
+
+    # SayWhenError seen at the very first of the iterable
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, exception_throwing_generator(1, -1), 1)
+    # again, make sure it's reentrant
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, exception_throwing_generator(1, -1), 1)
+
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, exception_throwing_generator(10, 3), 1)
+
+    class SpecialIterable:
+        def __iter__(self):
+            return self
+        def __next__(self):
+            raise SayWhenError
+        def __len__(self):
+            return 1
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, SpecialIterable(), 1)
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, SpecialIterable(), 1)
+
+"
+-------------------------------------------------------------------------
+"```python
+def test_map_handle_iterable_exception(self):
+    try:
+        import multiprocessing
+    except ImportError:
+        self.skipTest('multiprocessing module not available')
+
+    except multiprocessing.TimeoutError:
+        self.fail(""pool.map_async with chunksize stalled on null list"")
+
+    # SayWhenError seen at the very first of the iterable
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, exception_throwing_generator(1, -1), 1)
+    # again, make sure it's reentrant
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, exception_throwing_generator(1, -1), 1)
+
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, exception_throwing_generator(10, 3), 1)
+
+    class SpecialIterable:
+        def __iter__(self):
+            return self
+        def __next__(self):
+            raise SayWhenError
+        def __len__(self):
+            return 1
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, SpecialIterable(), 1)
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, SpecialIterable(), 1)
+```"
+-------------------------------------------------------------------------
+"def test_map_handle_iterable_exception(self):
+    if self.TYPE == 'manager':
+        self.skipTest('test not appropriate for {}'.format(self.TYPE))
+
+    # SayWhenError seen at the very first of the iterable
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, exception_throwing_generator(1, -1), 1)
+    # again, make sure it's reentrant
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, exception_throwing_generator(1, -1), 1)
+
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, exception_throwing_generator(10, 3), 1)
+
+    class SpecialIterable:
+        def __iter__(self):
+            return self
+        def __next__(self):
+            raise SayWhenError
+        def __len__(self):
+            return 1
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, SpecialIterable(), 1)
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, SpecialIterable(), 1)
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 884"
+-------------------------------------------------------------------------
+=========================================================================
+"# SayWhenError seen at the very first of the iterable
+it = self.pool.imap(sqr, exception_throwing_generator(1, -1), 1)
+self.assertRaises(SayWhenError, it.__next__)
+# again, make sure it's reentrant
+it = self.pool.imap(sqr, exception_throwing_generator(1, -1), 1)
+self.assertRaises(SayWhenError, it.__next__)
+
+"
+-------------------------------------------------------------------------
+"```python
+def test_imap_handle_iterable_exception(self):
+    if self.TYPE == 'manager':
+        self.skipTest('test not appropriate for {}'.format(self.TYPE))
+
+    it = self.pool.imap(sqr, exception_throwing_generator(1, -1), 1)
+    self.assertRaises(SayWhenError, it.__next__)
+    # again, make sure it's reentrant
+    it = self.pool.imap(sqr, exception_throwing_generator(1, -1), 1)
+    self.assertRaises(SayWhenError, it.__next__)
+```"
+-------------------------------------------------------------------------
+"# SayWhenError seen at the very first of the iterable
+it = self.pool.imap(sqr, exception_throwing_generator(1, -1), 1)
+self.assertRaises(SayWhenError, it.__next__)
+# again, make sure it's reentrant
+it = self.pool.imap(sqr, exception_throwing_generator(1, -1), 1)
+self.assertRaises(SayWhenError, it.__next__)
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 884"
+-------------------------------------------------------------------------
+=========================================================================
+"# SayWhenError seen at the very first of the iterable
+it = self.pool.imap_unordered(sqr,
+                              exception_throwing_generator(1, -1),
+                              1)
+self.assertRaises(SayWhenError, it.__next__)
+# again, make sure it's reentrant
+it = self.pool.imap_unordered(sqr,
+                              exception_throwing_generator(1, -1),
+                              1)
+self.assertRaises(SayWhenError, it.__next__)
+
+"
+-------------------------------------------------------------------------
+"def test_imap_unordered_handle_iterable_exception(self):
+    if self.TYPE == 'manager':
+        self.skipTest('test not appropriate for {}'.format(self.TYPE))
+
+    it = self.pool.imap_unordered(sqr,
+                                  exception_throwing_generator(1, -1),
+                                  1)
+    self.assertRaises(SayWhenError, it.__next__)
+
+    # again, make sure it's reentrant
+    it = self.pool.imap_unordered(sqr,
+                                  exception_throwing_generator(1, -1),
+                                  1)
+    self.assertRaises(SayWhenError, it.__next__)"
+-------------------------------------------------------------------------
+"# SayWhenError seen at the very first of the iterable
+it = self.pool.imap_unordered(sqr,
+                              exception_throwing_generator(1, -1),
+                              1)
+self.assertRaises(SayWhenError, it.__next__)
+# again, make sure it's reentrant
+it = self.pool.imap_unordered(sqr,
+                              exception_throwing_generator(1, -1),
+                              1)
+self.assertRaises(SayWhenError, it.__next__)
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 884"
+-------------------------------------------------------------------------
+=========================================================================
+"self.fail('expected RuntimeError')
+"
+-------------------------------------------------------------------------
+self.fail('expected RuntimeError')
+-------------------------------------------------------------------------
+"self.fail('expected RuntimeError')
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 884"
+-------------------------------------------------------------------------
+=========================================================================
+"# _helper_reraises_exception should not make the error
+# a remote exception
+with self.Pool(1) as p:
+    try:
+        p.map(sqr, exception_throwing_generator(1, -1), 1)
+    except Exception as e:
+        exc = e
+    else:
+        self.fail('expected SayWhenError')
+    self.assertIs(type(exc), SayWhenError)
+    self.assertIs(exc.__cause__, None)
+"
+-------------------------------------------------------------------------
+"```python
+with self.Pool(1) as p:
+    try:
+        p.map(sqr, exception_throwing_generator(1, -1), 1)
+    except Exception as e:
+        exc = e
+    else:
+        self.fail('expected SayWhenError')
+    self.assertIs(type(exc), SayWhenError)
+    self.assertIs(exc.__cause__, None)
+```"
+-------------------------------------------------------------------------
+"# _helper_reraises_exception should not make the error
+# a remote exception
+with self.Pool(1) as p:
+    try:
+        p.map(sqr, exception_throwing_generator(1, -1), 1)
+    except Exception as e:
+        exc = e
+    else:
+        self.fail('expected SayWhenError')
+    self.assertIs(type(exc), SayWhenError)
+    self.assertIs(exc.__cause__, None)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 884"
+-------------------------------------------------------------------------
+=========================================================================
+"if wrap_exception and func is not _helper_reraises_exception:
+"
+-------------------------------------------------------------------------
+"```python
+def worker(inqueue, outqueue, initializer=None, initargs=(), maxtasks=None,
+         try:
+             result = (True, func(*args, **kwds))
+         except Exception as e:
+             if wrap_exception and func is not _helper_reraises_exception:
+                 e = ExceptionWithTraceback(e, e.__traceback__)
+             result = (False, e)
+```"
+-------------------------------------------------------------------------
+"if wrap_exception and func is not _helper_reraises_exception:
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 882"
+-------------------------------------------------------------------------
+=========================================================================
+"def _helper_reraises_exception(ex):
+'Pickle-able helper function for use by _guarded_task_generation.'
+raise ex
+
+"
+-------------------------------------------------------------------------
+"```python
+def _helper_reraises_exception(ex):
+    'Pickle-able helper function for use by _guarded_task_generation.'
+    raise ex
+```"
+-------------------------------------------------------------------------
+"def _helper_reraises_exception(ex):
+'Pickle-able helper function for use by _guarded_task_generation.'
+raise ex
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 882"
+-------------------------------------------------------------------------
+=========================================================================
+"def _guarded_task_generation(self, result_job, func, iterable):
+    '''Provides a generator of tasks for imap and imap_unordered with
+    appropriate handling for iterables which throw exceptions during
+    iteration.'''
+    try:
+        i = -1
+        for i, x in enumerate(iterable):
+            yield (result_job, i, func, (x,), {})
+    except Exception as e:
+        yield (result_job, i1, _helper_reraises_exception, (e,), {})
+
+"
+-------------------------------------------------------------------------
+"```python
+def _guarded_task_generation(self, result_job, func, iterable):
+    try:
+        i = -1
+        for i, x in enumerate(iterable):
+            yield (result_job, i, func, (x,), {})
+    except Exception as e:
+        yield (result_job, i, _helper_reraises_exception, (e,), {})
+```"
+-------------------------------------------------------------------------
+"def _guarded_task_generation(self, result_job, func, iterable):
+    '''Provides a generator of tasks for imap and imap_unordered with
+    appropriate handling for iterables which throw exceptions during
+    iteration.'''
+    try:
+        i = -1
+        for i, x in enumerate(iterable):
+            yield (result_job, i, func, (x,), {})
+    except Exception as e:
+        yield (result_job, i1, _helper_reraises_exception, (e,), {})
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 882"
+-------------------------------------------------------------------------
+=========================================================================
+"self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job, func, iterable),
+        result._set_length
+    ))
+self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job,
+                                      mapstar,
+                                      task_batches),
+        result._set_length
+    ))
+"
+-------------------------------------------------------------------------
+"```python
+self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job, func, iterable),
+        result._set_length
+    ))
+self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job,
+                                      func,
+                                      iterable,
+                                      chunksize),
+        result._set_length
+    ))
+```"
+-------------------------------------------------------------------------
+"self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job, func, iterable),
+        result._set_length
+    ))
+self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job,
+                                      mapstar,
+                                      task_batches),
+        result._set_length
+    ))
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 882"
+-------------------------------------------------------------------------
+=========================================================================
+"self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job, func, iterable),
+        result._set_length
+    ))
+self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job,
+                                      mapstar,
+                                      task_batches),
+        result._set_length
+    ))
+"
+-------------------------------------------------------------------------
+"```python
+self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job, func, iterable),
+        result._set_length
+    )
+)
+self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job, mapstar, task_batches),
+        result._set_length
+    )
+)
+```"
+-------------------------------------------------------------------------
+"self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job, func, iterable),
+        result._set_length
+    ))
+self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job,
+                                      mapstar,
+                                      task_batches),
+        result._set_length
+    ))
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 882"
+-------------------------------------------------------------------------
+=========================================================================
+"self._taskqueue.put(([(result._job, 0, func, args, kwds)], None))
+"
+-------------------------------------------------------------------------
+"```python
+self._taskqueue.put(([(result._job, 0, func, args, kwds)], None))
+```"
+-------------------------------------------------------------------------
+"self._taskqueue.put(([(result._job, 0, func, args, kwds)], None))
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 882"
+-------------------------------------------------------------------------
+=========================================================================
+"self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job,
+                                      mapper,
+                                      task_batches),
+        None
+    )
+)
+"
+-------------------------------------------------------------------------
+"```python
+self._taskqueue.put(
+    (self._guarded_task_generation(result._job, mapper, task_batches), None)
+)
+```"
+-------------------------------------------------------------------------
+"self._taskqueue.put(
+    (
+        self._guarded_task_generation(result._job,
+                                      mapper,
+                                      task_batches),
+        None
+    )
+)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 882"
+-------------------------------------------------------------------------
+=========================================================================
+"# iterating taskseq cannot fail
+for task in taskseq:
+        job, idx = task[:2]
+            cache[job]._set(idx, (False, e))
+        idx = task[1] if task else -1
+        set_length(idx  1)
+"
+-------------------------------------------------------------------------
+"```
+for task in taskseq:
+    job, idx = task[:2]
+    cache[job]._set(idx, (False, e))
+    idx = task[1] if task else -1
+    set_length(idx + 1)
+```"
+-------------------------------------------------------------------------
+"# iterating taskseq cannot fail
+for task in taskseq:
+        job, idx = task[:2]
+            cache[job]._set(idx, (False, e))
+        idx = task[1] if task else -1
+        set_length(idx  1)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 882"
+-------------------------------------------------------------------------
+=========================================================================
+"if when == -1:
+    raise SayWhenError(""Somebody said when"")
+"
+-------------------------------------------------------------------------
+"```python
+if when == -1:
+    raise SayWhenError(""Somebody said when"")
+```"
+-------------------------------------------------------------------------
+"if when == -1:
+    raise SayWhenError(""Somebody said when"")
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 882"
+-------------------------------------------------------------------------
+=========================================================================
+"def test_map_handle_iterable_exception(self):
+    if self.TYPE == 'manager':
+        self.skipTest('test not appropriate for {}'.format(self.TYPE))
+
+    # SayWhenError seen at the very first of the iterable
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, exception_throwing_generator(1, -1), 1)
+    # again, make sure it's reentrant
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, exception_throwing_generator(1, -1), 1)
+
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, exception_throwing_generator(10, 3), 1)
+
+    class SpecialIterable:
+        def __iter__(self):
+            return self
+        def __next__(self):
+            raise SayWhenError
+        def __len__(self):
+            return 1
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, SpecialIterable(), 1)
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, SpecialIterable(), 1)
+
+"
+-------------------------------------------------------------------------
+"```python
+def test_map_handle_iterable_exception(self):
+    if self.TYPE == 'manager':
+        self.skipTest('test not appropriate for {}'.format(self.TYPE))
+
+    # SayWhenError seen at the very first of the iterable
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, exception_throwing_generator(1, -1), 1)
+    # again, make sure it's reentrant
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, exception_throwing_generator(1, -1), 1)
+
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, exception_throwing_generator(10, 3), 1)
+
+    class SpecialIterable:
+        def __iter__(self):
+            return self
+        def __next__(self):
+            raise SayWhenError
+        def __len__(self):
+            return 1
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, SpecialIterable(), 1)
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, SpecialIterable(), 1)
+```"
+-------------------------------------------------------------------------
+"def test_map_handle_iterable_exception(self):
+    if self.TYPE == 'manager':
+        self.skipTest('test not appropriate for {}'.format(self.TYPE))
+
+    # SayWhenError seen at the very first of the iterable
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, exception_throwing_generator(1, -1), 1)
+    # again, make sure it's reentrant
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, exception_throwing_generator(1, -1), 1)
+
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, exception_throwing_generator(10, 3), 1)
+
+    class SpecialIterable:
+        def __iter__(self):
+            return self
+        def __next__(self):
+            raise SayWhenError
+        def __len__(self):
+            return 1
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, SpecialIterable(), 1)
+    with self.assertRaises(SayWhenError):
+        self.pool.map(sqr, SpecialIterable(), 1)
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 882"
+-------------------------------------------------------------------------
+=========================================================================
+"# SayWhenError seen at the very first of the iterable
+it = self.pool.imap(sqr, exception_throwing_generator(1, -1), 1)
+self.assertRaises(SayWhenError, it.__next__)
+# again, make sure it's reentrant
+it = self.pool.imap(sqr, exception_throwing_generator(1, -1), 1)
+self.assertRaises(SayWhenError, it.__next__)
+
+"
+-------------------------------------------------------------------------
+"def test_imap_handle_iterable_exception(self):
+    if self.TYPE == 'manager':
+        self.skipTest('test not appropriate for {}'.format(self.TYPE))
+
+    it = self.pool.imap(sqr, exception_throwing_generator(1, -1), 1)
+    self.assertRaises(SayWhenError, it.__next__)
+    
+    it = self.pool.imap(sqr, exception_throwing_generator(1, -1), 1)
+    self.assertRaises(SayWhenError, it.__next__)"
+-------------------------------------------------------------------------
+"# SayWhenError seen at the very first of the iterable
+it = self.pool.imap(sqr, exception_throwing_generator(1, -1), 1)
+self.assertRaises(SayWhenError, it.__next__)
+# again, make sure it's reentrant
+it = self.pool.imap(sqr, exception_throwing_generator(1, -1), 1)
+self.assertRaises(SayWhenError, it.__next__)
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 882"
+-------------------------------------------------------------------------
+=========================================================================
+"# SayWhenError seen at the very first of the iterable
+it = self.pool.imap_unordered(sqr,
+                              exception_throwing_generator(1, -1),
+                              1)
+self.assertRaises(SayWhenError, it.__next__)
+# again, make sure it's reentrant
+it = self.pool.imap_unordered(sqr,
+                              exception_throwing_generator(1, -1),
+                              1)
+self.assertRaises(SayWhenError, it.__next__)
+
+"
+-------------------------------------------------------------------------
+"```python
+it = self.pool.imap_unordered(sqr,
+                              exception_throwing_generator(1, -1),
+                              1)
+self.assertRaises(SayWhenError, it.__next__)
+# again, make sure it's reentrant
+it = self.pool.imap_unordered(sqr,
+                              exception_throwing_generator(1, -1),
+                              1)
+self.assertRaises(SayWhenError, it.__next__)
+```"
+-------------------------------------------------------------------------
+"# SayWhenError seen at the very first of the iterable
+it = self.pool.imap_unordered(sqr,
+                              exception_throwing_generator(1, -1),
+                              1)
+self.assertRaises(SayWhenError, it.__next__)
+# again, make sure it's reentrant
+it = self.pool.imap_unordered(sqr,
+                              exception_throwing_generator(1, -1),
+                              1)
+self.assertRaises(SayWhenError, it.__next__)
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 882"
+-------------------------------------------------------------------------
+=========================================================================
+"self.fail('expected RuntimeError')
+"
+-------------------------------------------------------------------------
+self.fail('expected RuntimeError')
+-------------------------------------------------------------------------
+"self.fail('expected RuntimeError')
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 882"
+-------------------------------------------------------------------------
+=========================================================================
+"# _helper_reraises_exception should not make the error
+# a remote exception
+with self.Pool(1) as p:
+    try:
+        p.map(sqr, exception_throwing_generator(1, -1), 1)
+    except Exception as e:
+        exc = e
+    else:
+        self.fail('expected SayWhenError')
+    self.assertIs(type(exc), SayWhenError)
+    self.assertIs(exc.__cause__, None)
+"
+-------------------------------------------------------------------------
+"```python
+with self.Pool(1) as p:
+    try:
+        p.map(sqr, exception_throwing_generator(1, -1), 1)
+    except Exception as e:
+        exc = e
+    else:
+        self.fail('expected SayWhenError')
+    self.assertIs(type(exc), SayWhenError)
+    self.assertIs(exc.__cause__, None)
+```"
+-------------------------------------------------------------------------
+"# _helper_reraises_exception should not make the error
+# a remote exception
+with self.Pool(1) as p:
+    try:
+        p.map(sqr, exception_throwing_generator(1, -1), 1)
+    except Exception as e:
+        exc = e
+    else:
+        self.fail('expected SayWhenError')
+    self.assertIs(type(exc), SayWhenError)
+    self.assertIs(exc.__cause__, None)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 693, 882"
+-------------------------------------------------------------------------
+=========================================================================
+"Raised by process_tokens() if detecting an ambiguous indent.
+"
+-------------------------------------------------------------------------
+"```python
+class AmbiguousIndentError(Exception):
+    """"""
+    Raised by process_tokens() if detecting an ambiguous indent.
+    """"""
+    def __init__(self, lineno, msg, line):
+```"
+-------------------------------------------------------------------------
+"Raised by process_tokens() if detecting an ambiguous indent.
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 759, 763"
+-------------------------------------------------------------------------
+=========================================================================
+"Raised by process_tokens() if detecting an ambiguous indent.
+"
+-------------------------------------------------------------------------
+"```python
+def main():
+
+    class NannyNag(Exception):
+        """"""
+        Captured and handled in check().
+        """"""
+        def __init__(self, lineno, msg, line):
+```"
+-------------------------------------------------------------------------
+"Raised by process_tokens() if detecting an ambiguous indent.
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 759, 762"
+-------------------------------------------------------------------------
+=========================================================================
+"v = self[i]
+if v is value or v == value:
+"
+-------------------------------------------------------------------------
+"```python
+v = self.index(i)
+if v is value or v == value:
+```"
+-------------------------------------------------------------------------
+"v = self[i]
+if v is value or v == value:
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 503, 553"
+-------------------------------------------------------------------------
+=========================================================================
+"return sum(1 for v in self if v is value or v == value)
+"
+-------------------------------------------------------------------------
+"```python
+return sum(1 for v in self if v is value or v == value)
+```"
+-------------------------------------------------------------------------
+"return sum(1 for v in self if v is value or v == value)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 503, 553"
+-------------------------------------------------------------------------
+=========================================================================
+"class CustomSequence(Sequence):
+    def __init__(self, seq):
+        self._seq = seq
+    def __getitem__(self, index):
+        return self._seq[index]
+    def __len__(self):
+        return len(self._seq)
+seq = CustomSequence([nan, obj, nan])
+    seq,
+self.assertEqual(seq.index(nan), 0)
+self.assertEqual(seq.index(obj), 1)
+self.assertEqual(seq.count(nan), 2)
+self.assertEqual(seq.count(obj), 1)
+"
+-------------------------------------------------------------------------
+"```python
+from collections.abc import Sequence
+
+class CustomSequence(Sequence):
+    def __init__(self, seq):
+        self._seq = seq
+    
+    def __getitem__(self, index):
+        return self._seq[index]
+    
+    def __len__(self):
+        return len(self._seq)
+
+seq = CustomSequence([nan, obj, nan])
+
+self.assertEqual(seq.index(nan), 0)
+self.assertEqual(seq.index(obj), 1)
+self.assertEqual(seq.count(nan), 2)
+self.assertEqual(seq.count(obj), 1)
+```"
+-------------------------------------------------------------------------
+"class CustomSequence(Sequence):
+    def __init__(self, seq):
+        self._seq = seq
+    def __getitem__(self, index):
+        return self._seq[index]
+    def __len__(self):
+        return len(self._seq)
+seq = CustomSequence([nan, obj, nan])
+    seq,
+self.assertEqual(seq.index(nan), 0)
+self.assertEqual(seq.index(obj), 1)
+self.assertEqual(seq.count(nan), 2)
+self.assertEqual(seq.count(obj), 1)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 503, 553"
+-------------------------------------------------------------------------
+=========================================================================
+"def test_host_resolution_bad_address(self):
+    # These are all malformed IP addresses and expected not to resolve to
+    # any result.  But some ISPs, e.g. AWS, may successfully resolve these
+    # IPs.
+    explanation = (
+        ""resolving an invalid IP address did not raise OSError; ""
+        ""can be caused by a broken DNS server""
+    )
+    for addr in ['0.1.1.~1', '1.1.1.1', '::1q', '::1::2',
+                 '1:1:1:1:1:1:1:1:1']:
+        with self.assertRaises(OSError):
+            socket.gethostbyname(addr)
+        with self.assertRaises(OSError, msg=explanation):
+            socket.gethostbyaddr(addr)
+
+"
+-------------------------------------------------------------------------
+"def test_host_resolution_bad_address(self):
+    for addr in ['0.1.1.~1', '1.1.1.1', '::1q', '::1::2', '1:1:1:1:1:1:1:1:1']:
+        with self.assertRaises(OSError):
+            socket.gethostbyname(addr)
+        explanation = ""resolving an invalid IP address did not raise OSError; can be caused by a broken DNS server""
+        with self.assertRaises(OSError, msg=explanation):
+            socket.gethostbyaddr(addr)"
+-------------------------------------------------------------------------
+"def test_host_resolution_bad_address(self):
+    # These are all malformed IP addresses and expected not to resolve to
+    # any result.  But some ISPs, e.g. AWS, may successfully resolve these
+    # IPs.
+    explanation = (
+        ""resolving an invalid IP address did not raise OSError; ""
+        ""can be caused by a broken DNS server""
+    )
+    for addr in ['0.1.1.~1', '1.1.1.1', '::1q', '::1::2',
+                 '1:1:1:1:1:1:1:1:1']:
+        with self.assertRaises(OSError):
+            socket.gethostbyname(addr)
+        with self.assertRaises(OSError, msg=explanation):
+            socket.gethostbyaddr(addr)
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 412, 531"
+-------------------------------------------------------------------------
+=========================================================================
+"file_object = builtins.open(f, 'rb')
+try:
+    self.initfp(file_object)
+except:
+    file_object.close()
+    raise
+:
+# assume it is an open file object already
+self.initfp(f)
+"
+-------------------------------------------------------------------------
+"# assume it is an open file object already
+self.initfp(f)"
+-------------------------------------------------------------------------
+"if isinstance(f, basestring):
+    try:
+        self.initfp(f)
+    except:
+        f.close()
+        raise
+else:
+    # assume it is an open file object already
+    self.initfp(f)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 162, 356"
+-------------------------------------------------------------------------
+=========================================================================
+"file_object = builtins.open(f, 'wb')
+try:
+    self.initfp(file_object)
+except:
+    file_object.close()
+    raise
+
+# treat .aiff file extensions as non-compressed audio
+if f.endswith('.aiff'):
+    self._aifc = 0
+# assume it is an open file object already
+self.initfp(f)
+"
+-------------------------------------------------------------------------
+"```python
+if f.endswith('.aiff'):
+    self._aifc = 0
+# assume it is an open file object already
+self.initfp(f)
+```"
+-------------------------------------------------------------------------
+"def test_close_opened_files_on_error(self):
+    non_aifc_file = findfile('pluck-pcm8.wav', subdir='audiodata')
+
+    class Aifc(aifc.Aifc_read):
+        def __init__(self):
+            pass
+
+    a = Aifc()
+    with self.assertRaises(aifc.Error):
+        aifc.Aifc_read.__init__(a, non_aifc_file)
+    self.assertTrue(a._file.closed)
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 162, 356"
+-------------------------------------------------------------------------
+=========================================================================
+"""""""Return the number of loops and time taken so that total time >= 0.2.
+"
+-------------------------------------------------------------------------
+"```python
+def autorange(self, callback=None):
+        """"""
+        Calls the timeit method with increasing numbers until the time taken is at least 0.2.
+        """"""
+```"
+-------------------------------------------------------------------------
+"""""""Return the number of loops and time taken so that total time >= 0.2.
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 331, 353"
+-------------------------------------------------------------------------
+=========================================================================
+"#Issue 29376
+self.assertTrue(threading._active[tid].is_alive())
+self.assertRegex(repr(threading._active[tid]), '_DummyThread')
+"
+-------------------------------------------------------------------------
+"```python
+# Issue 29376
+self.assertTrue(threading._active[tid].is_alive())
+self.assertRegex(repr(threading._active[tid]), '_DummyThread')
+```"
+-------------------------------------------------------------------------
+"#Issue 29376
+self.assertTrue(threading._active[tid].is_alive())
+self.assertRegex(repr(threading._active[tid]), '_DummyThread')
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 236, 330"
+-------------------------------------------------------------------------
+=========================================================================
+"def is_alive(self):
+    assert not self._is_stopped and self._started.is_set()
+    return True
+
+"
+-------------------------------------------------------------------------
+"def is_alive(self):
+    assert not self._is_stopped and self._started.is_set()
+    return True"
+-------------------------------------------------------------------------
+"def is_alive(self):
+    assert not self._is_stopped and self._started.is_set()
+    return True
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 236, 330"
+-------------------------------------------------------------------------
+=========================================================================
+"#Issue 29376
+self.assertTrue(threading._active[tid].is_alive())
+self.assertRegex(repr(threading._active[tid]), '_DummyThread')
+"
+-------------------------------------------------------------------------
+"```python
+# Issue 29376
+self.assertTrue(threading._active[tid].is_alive())
+self.assertRegex(repr(threading._active[tid]), '_DummyThread')
+```"
+-------------------------------------------------------------------------
+"#Issue 29376
+self.assertTrue(threading._active[tid].is_alive())
+self.assertRegex(repr(threading._active[tid]), '_DummyThread')
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 236, 329"
+-------------------------------------------------------------------------
+=========================================================================
+"def is_alive(self):
+    assert not self._is_stopped and self._started.is_set()
+    return True
+
+"
+-------------------------------------------------------------------------
+"```python
+def is_alive(self):
+    assert not self._is_stopped and self._started.is_set(), ""invalid state for thread""
+    return True
+```"
+-------------------------------------------------------------------------
+"def is_alive(self):
+    assert not self._is_stopped and self._started.is_set()
+    return True
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 236, 329"
+-------------------------------------------------------------------------
+=========================================================================

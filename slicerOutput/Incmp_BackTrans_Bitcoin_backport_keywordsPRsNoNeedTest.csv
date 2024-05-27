@@ -1,0 +1,803 @@
+"self.test_upgradewallet_error(wallet, previous_version=60000, requested_version=40000,
+    msg=""Cannot downgrade wallet from version 60000 to version 40000. Wallet version unchanged."")
+"
+-------------------------------------------------------------------------
+"```python
+self.test_upgradewallet_error(wallet, previous_version=60000, requested_version=40000,
+    msg=""Cannot downgrade wallet from version 60000 to version 40000. Wallet version unchanged."")
+```"
+-------------------------------------------------------------------------
+"def test_upgradewallet_error(self, wallet, previous_version, requested_version, msg):
+    assert_equal(wallet.getwalletinfo()[""walletversion""], previous_version)
+    assert_equal(wallet.upgradewallet(requested_version),
+        {
+            ""wallet_name"": """",
+            ""previous_version"": previous_version,
+            ""current_version"": previous_version,
+            ""error"": msg,
+        }
+    )
+    assert_equal(wallet.getwalletinfo()[""walletversion""], previous_version)
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 20403, 20490"
+-------------------------------------------------------------------------
+=========================================================================
+"190100,  # oldest version with getmempoolinfo.loaded (used to avoid intermittent issues)
+"
+-------------------------------------------------------------------------
+"```python
+     def setup_network(self):
+         self.add_nodes(self.num_nodes, versions=[
+             190100,
+         ])
+         self.start_nodes()
+```"
+-------------------------------------------------------------------------
+"190100,  # oldest version with getmempoolinfo.loaded (used to avoid intermittent issues)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 20456, 20486"
+-------------------------------------------------------------------------
+=========================================================================
+"
+"
+-------------------------------------------------------------------------
+"```python
+
+import os
+from test_framework.test_framework import BitcoinTestFramework
+
+class MempoolCompatibilityTest(BitcoinTestFramework):
+    assert old_tx_hash in old_node.getrawmempool()
+    assert unbroadcasted_tx_hash in old_node.getrawmempool()
+
+if __name__ == ""__main__"":
+    MempoolCompatibilityTest().main()
+```"
+-------------------------------------------------------------------------
+"
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 20456, 20486"
+-------------------------------------------------------------------------
+=========================================================================
+"txid = self.nodes[2].sendmany(amounts={address: 10}, fee_rate=fee_rate_sat_vb)
+"
+-------------------------------------------------------------------------
+"txid = self.nodes[2].sendmany(amounts={address: 10}, fee_rate=explicit_fee_rate_btc_kvb)"
+-------------------------------------------------------------------------
+"txid = self.nodes[2].sendmany(amounts={address: 10}, fee_rate=fee_rate_sat_vb)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 20410, 20485"
+-------------------------------------------------------------------------
+=========================================================================
+"txid = self.nodes[2].sendtoaddress(address=address, amount=amount, fee_rate=fee_rate_sat_vb)
+"
+-------------------------------------------------------------------------
+"```python
+txid = self.nodes[2].sendtoaddress(address=address, amount=amount, fee_rate=2)
+```"
+-------------------------------------------------------------------------
+"txid = self.nodes[2].sendtoaddress(address=address, amount=amount, fee_rate=fee_rate_sat_vb)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 20410, 20485"
+-------------------------------------------------------------------------
+=========================================================================
+"res = self.test_send(from_wallet=w0, to_wallet=w1, amount=1, fee_rate=7, add_to_wallet=False)
+# ""unset"" and None are treated the same for estimate_mode
+res = self.test_send(from_wallet=w0, to_wallet=w1, amount=1, fee_rate=2, estimate_mode=""unset"", add_to_wallet=False)
+res = self.test_send(from_wallet=w0, to_wallet=w1, amount=1, arg_fee_rate=4.531, add_to_wallet=False)
+"
+-------------------------------------------------------------------------
+"res = self.test_send(from_wallet=w0, to_wallet=w1, amount=1, fee_rate=1, estimate_mode=""unset"", add_to_wallet=False)
+res = self.test_send(from_wallet=w0, to_wallet=w1, amount=1, arg_fee_rate=2, add_to_wallet=False)
+res = self.test_send(from_wallet=w0, to_wallet=w1, amount=1, arg_fee_rate=4.531, add_to_wallet=False)"
+-------------------------------------------------------------------------
+"res = self.test_send(from_wallet=w0, to_wallet=w1, amount=1, fee_rate=7, add_to_wallet=False)
+# ""unset"" and None are treated the same for estimate_mode
+res = self.test_send(from_wallet=w0, to_wallet=w1, amount=1, fee_rate=2, estimate_mode=""unset"", add_to_wallet=False)
+res = self.test_send(from_wallet=w0, to_wallet=w1, amount=1, arg_fee_rate=4.531, add_to_wallet=False)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 20410, 20485"
+-------------------------------------------------------------------------
+=========================================================================
+"assert_raises_rpc_error(-8, ""Both the RPC endpoint wallet and wallet_name parameter were provided (only one allowed)"", w1.unloadwallet, ""w2""),
+assert_raises_rpc_error(-8, ""Both the RPC endpoint wallet and wallet_name parameter were provided (only one allowed)"", w1.unloadwallet, ""w1""),
+"
+-------------------------------------------------------------------------
+"```
+assert_raises_rpc_error(-8, ""Both the RPC endpoint wallet and wallet_name parameter were provided (only one allowed)"", w1.unloadwallet, ""w2"")
+assert_raises_rpc_error(-8, ""Both the RPC endpoint wallet and wallet_name parameter were provided (only one allowed)"", w1.unloadwallet, ""w1"")
+```"
+-------------------------------------------------------------------------
+"assert_raises_rpc_error(-8, ""Both the RPC endpoint wallet and wallet_name parameter were provided (only one allowed)"", w1.unloadwallet, ""w2""),
+assert_raises_rpc_error(-8, ""Both the RPC endpoint wallet and wallet_name parameter were provided (only one allowed)"", w1.unloadwallet, ""w1""),
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 20462, 20475"
+-------------------------------------------------------------------------
+=========================================================================
+"# Transfer value of the largest 500 coins to pre-taproot node.
+
+unsp = self.nodes[1].listunspent()
+unsp = sorted(unsp, key=lambda i: i['amount'], reverse=True)
+unsp = unsp[:500]
+
+    } for i in unsp],
+    outputs={addr: sum(i['amount'] for i in unsp)}
+
+# Mine a block with the transaction
+"
+-------------------------------------------------------------------------
+"```python
+# Transfer value of the largest 500 coins to pre-taproot node
+unsp = self.nodes[1].listunspent()
+unsp = sorted(unsp, key=lambda i: i['amount'], reverse=True)
+unsp = unsp[:500]
+
+rawtx = self.nodes[1].createrawtransaction(
+    inputs=[{
+        'txid': i['txid'],
+        'vout': i['vout']
+    } for i in unsp],
+    outputs={addr: sum(i['amount'] for i in unsp)}
+)
+
+rawtx = self.nodes[1].signrawtransactionwithwallet(rawtx)['hex']
+block = create_block(tmpl=self.nodes[1].getblocktemplate(NORMAL_GBT_REQUEST_PARAMS), txlist=[rawtx])
+add_witness_commitment(block)
+block.rehash()
+``` 
+
+This code snippet transfers the value of the largest 500 coins to the pre-taproot node, creates a raw transaction with the inputs and outputs specified, signs the transaction, mines a block with the transaction included, adds a witness commitment, and updates the block hash."
+-------------------------------------------------------------------------
+"# Transfer value of the largest 500 coins to pre-taproot node.
+
+unsp = self.nodes[1].listunspent()
+unsp = sorted(unsp, key=lambda i: i['amount'], reverse=True)
+unsp = unsp[:500]
+
+    } for i in unsp],
+    outputs={addr: sum(i['amount'] for i in unsp)}
+
+# Mine a block with the transaction
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 20428, 20431"
+-------------------------------------------------------------------------
+=========================================================================
+"assert_raises_rpc_error(-4, ""Fee exceeds maximum configured by -maxtxfee"", self.nodes[3].fundrawtransaction, rawtx, {""feeRate"": 1})
+"
+-------------------------------------------------------------------------
+"```python
+assert_raises_rpc_error(-4, ""Fee exceeds maximum configured by -maxtxfee"", self.nodes[3].fundrawtransaction, rawtx, {""feeRate"": 1})
+```"
+-------------------------------------------------------------------------
+"# previously this was silently capped at -maxtxfee
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 16257, 16639"
+-------------------------------------------------------------------------
+=========================================================================
+"assert_greater_than,
+"
+-------------------------------------------------------------------------
+"```python
+from decimal import Decimal
+from test_framework.test_framework import BitcoinTestFramework
+from test_framework.util import (
+    assert_equal,
+    assert_raises_rpc_error,
+    connect_nodes_bi,
+    disconnect_nodes,
+    assert_greater_than
+)
+```"
+-------------------------------------------------------------------------
+"def test_maxtxfee_fails(test, rbf_node, dest_address):
+test.restart_node(1, ['-maxtxfee=0.00003']  test.extra_args[1])
+rbf_node.walletpassphrase(WALLET_PASSPHRASE, WALLET_PASSPHRASE_TIMEOUT)
+rbfid = spend_one_input(rbf_node, dest_address)
+assert_raises_rpc_error(-4, ""Specified or calculated fee 0.0000332 is too high (cannot be higher than maxTxFee 0.00003)"", rbf_node.bumpfee, rbfid)
+test.restart_node(1, test.extra_args[1])
+rbf_node.walletpassphrase(WALLET_PASSPHRASE, WALLET_PASSPHRASE_TIMEOUT)
+
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 16257, 16639"
+-------------------------------------------------------------------------
+=========================================================================
+"[""-walletrbf=0""],
+"
+-------------------------------------------------------------------------
+"[""-walletrbf=0""]"
+-------------------------------------------------------------------------
+"[""-walletrbf=0""],
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 15911, 16608"
+-------------------------------------------------------------------------
+=========================================================================
+"assert_greater_than(tx_in[""sequence""], MAX_BIP125_RBF_SEQUENCE)
+"
+-------------------------------------------------------------------------
+"```python
+assert tx_in[""sequence""] > MAX_BIP125_RBF_SEQUENCE
+```"
+-------------------------------------------------------------------------
+"assert_greater_than(tx_in[""sequence""], MAX_BIP125_RBF_SEQUENCE)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 15911, 16608"
+-------------------------------------------------------------------------
+=========================================================================
+"prevtx_err = dict(prevtxs[0])
+del prevtx_err[""redeemScript""]
+
+assert_raises_rpc_error(-8, ""Missing redeemScript/witnessScript"", node2.signrawtransactionwithkey, rawtx, self.priv[0:self.nsigs-1], [prevtx_err])
+
+"
+-------------------------------------------------------------------------
+"```python
+prevtx_err = dict(prevtxs[0])
+del prevtx_err[""redeemScript""]
+
+assert_raises_rpc_error(-8, ""Missing redeemScript/witnessScript"", node2.signrawtransactionwithkey, rawtx, self.priv[0:self.nsigs-1], [prevtx_err])
+```"
+-------------------------------------------------------------------------
+"prevtx_err = dict(prevtxs[0])
+del prevtx_err[""redeemScript""]
+
+assert_raises_rpc_error(-8, ""Missing redeemScript/witnessScript"", node2.signrawtransactionwithkey, rawtx, self.priv[0:self.nsigs-1], [prevtx_err])
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 16250, 16342"
+-------------------------------------------------------------------------
+=========================================================================
+"success=True,
+warnings=[""Some private keys are missing, outputs will be considered watchonly. If this is intentional, specify the watchonly flag.""])
+"
+-------------------------------------------------------------------------
+"success = True
+warnings = [""Some private keys are missing, outputs will be considered watchonly. If this is intentional, specify the watchonly flag.""]"
+-------------------------------------------------------------------------
+"success=True,
+warnings=[""Some private keys are missing, outputs will be considered watchonly. If this is intentional, specify the watchonly flag.""])
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 15749, 15803"
+-------------------------------------------------------------------------
+=========================================================================
+"import time
+"
+-------------------------------------------------------------------------
+"```python
+import time
+```"
+-------------------------------------------------------------------------
+"import time
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 14453, 14880"
+-------------------------------------------------------------------------
+=========================================================================
+"# Also ensure unload works during walletpassphrase timeout
+w2.encryptwallet('test')
+w2.walletpassphrase('test', 1)
+time.sleep(1.1)
+"
+-------------------------------------------------------------------------
+"```python
+# Also ensure unload works during walletpassphrase timeout
+w2.encryptwallet('test')
+w2.walletpassphrase('test', 1)
+time.sleep(1.1)
+```"
+-------------------------------------------------------------------------
+"# Also ensure unload works during walletpassphrase timeout
+wallets = node.listwallets()
+w2.encryptwallet('test')
+self.restart_node(0, ['-wallet={}'.format(wallet) for wallet in wallets])
+w1 = node.get_wallet_rpc(wallet_names[0])
+w2 = node.get_wallet_rpc(wallet_names[1])
+w2.walletpassphrase('test', 1)
+time.sleep(1.1)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 14453, 14880"
+-------------------------------------------------------------------------
+=========================================================================
+"# Make sure change address wallet does not have P2SH innerscript access to results in success
+# when attempting BnB coin selection
+self.nodes[0].walletcreatefundedpsbt([], [{self.nodes[2].getnewaddress():unspent[""amount""]1}], block_height2, {""changeAddress"":self.nodes[1].getnewaddress()}, False)
+
+"
+-------------------------------------------------------------------------
+"self.nodes[0].walletcreatefundedpsbt([], [{self.nodes[2].getnewaddress():unspent[""amount""] + 1}], 2, {""changeAddress"": self.nodes[1].getnewaddress()}, False)"
+-------------------------------------------------------------------------
+"# Make sure change address wallet does not have P2SH innerscript access to results in success
+# when attempting BnB coin selection
+self.nodes[0].walletcreatefundedpsbt([], [{self.nodes[2].getnewaddress():unspent[""amount""]1}], block_height2, {""changeAddress"":self.nodes[1].getnewaddress()}, False)
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 14380, 14851"
+-------------------------------------------------------------------------
+=========================================================================
+"# Regression test for 14473 (mishandling of already-signed witness transaction):
+psbtx_info = self.nodes[0].walletcreatefundedpsbt([{""txid"":unspent[""txid""], ""vout"":unspent[""vout""]}], [{self.nodes[2].getnewaddress():unspent[""amount""]1}])
+complete_psbt = self.nodes[0].walletprocesspsbt(psbtx_info[""psbt""])
+double_processed_psbt = self.nodes[0].walletprocesspsbt(complete_psbt[""psbt""])
+assert_equal(complete_psbt, double_processed_psbt)
+# We don't care about the decode result, but decoding must succeed.
+self.nodes[0].decodepsbt(double_processed_psbt[""psbt""])
+"
+-------------------------------------------------------------------------
+"```python
+# Regression test for 14473 (mishandling of already-signed witness transaction):
+psbtx_info = self.nodes[0].walletcreatefundedpsbt([{""txid"":unspent[""txid""], ""vout"":unspent[""vout""]}], [{self.nodes[2].getnewaddress():unspent[""amount""]1}])
+complete_psbt = self.nodes[0].walletprocesspsbt(psbtx_info[""psbt""])
+double_processed_psbt = self.nodes[0].walletprocesspsbt(complete_psbt[""psbt""])
+assert_equal(complete_psbt, double_processed_psbt)
+# We don't care about the decode result, but decoding must succeed.
+self.nodes[0].decodepsbt(double_processed_psbt[""psbt""])
+```"
+-------------------------------------------------------------------------
+"from test_framework.util import assert_equal, assert_raises_rpc_error, find_output, disconnect_nodes, connect_nodes_bi, sync_blocks
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 14588, 14780"
+-------------------------------------------------------------------------
+=========================================================================
+"# Check transactions for duplicate inputs
+self.log.info(""Test duplicate input block."")
+
+block2_orig.vtx[2].vin.append(block2_orig.vtx[2].vin[0])
+block2_orig.vtx[2].rehash()
+block2_orig.hashMerkleRoot = block2_orig.calc_merkle_root()
+block2_orig.rehash()
+block2_orig.solve()
+node.p2p.send_blocks_and_test([block2_orig], node, success=False, request_block=False, reject_reason='bad-txns-inputs-duplicate')
+
+"
+-------------------------------------------------------------------------
+"```python
+self.log.info(""Test duplicate input block."")
+
+block2_orig_copy = copy.deepcopy(block2_orig)
+block2_orig_copy.vtx[2].vin.append(block2_orig_copy.vtx[2].vin[0])
+block2_orig_copy.vtx[2].rehash()
+block2_orig_copy.hashMerkleRoot = block2_orig_copy.calc_merkle_root()
+block2_orig_copy.rehash()
+block2_orig_copy.solve()
+node.p2p.send_blocks_and_test([block2_orig_copy], node, success=False, request_block=False, reject_reason='bad-txns-inputs-duplicate')
+```"
+-------------------------------------------------------------------------
+"yield TestInstance([[block2, RejectResult(16, b'bad-txns-duplicate')]])
+
+# Check transactions for duplicate inputs
+self.log.info(""Test duplicate input block."")
+
+block2_dup = copy.deepcopy(block2_orig)
+block2_dup.vtx[2].vin.append(block2_dup.vtx[2].vin[0])
+block2_dup.vtx[2].rehash()
+block2_dup.hashMerkleRoot = block2_dup.calc_merkle_root()
+block2_dup.rehash()
+block2_dup.solve()
+yield TestInstance([[block2_dup, RejectResult(16, b'bad-txns-inputs-duplicate')], [block2_orig, True]])
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 14247, 14249"
+-------------------------------------------------------------------------
+=========================================================================
+"# Check transactions for duplicate inputs
+self.log.info(""Test duplicate input block."")
+
+block2_orig.vtx[2].vin.append(block2_orig.vtx[2].vin[0])
+block2_orig.vtx[2].rehash()
+block2_orig.hashMerkleRoot = block2_orig.calc_merkle_root()
+block2_orig.rehash()
+block2_orig.solve()
+node.p2p.send_blocks_and_test([block2_orig], node, success=False, request_block=False, reject_reason='bad-txns-inputs-duplicate')
+
+"
+-------------------------------------------------------------------------
+"```python
+self.log.info(""Test duplicate input block."")
+
+block3 = copy.deepcopy(block2)
+block3.vtx[0].vin.append(block3.vtx[0].vin[0])
+block3.rehash()
+block3.hashMerkleRoot = block3.calc_merkle_root()
+block3.rehash()
+block3.solve()
+node.p2p.send_blocks_and_test([block3], node, success=False, request_block=False, reject_reason='bad-txns-inputs-duplicate')
+```"
+-------------------------------------------------------------------------
+"# Check transactions for duplicate inputs
+self.log.info(""Test duplicate input block."")
+
+block2_orig.vtx[2].vin.append(block2_orig.vtx[2].vin[0])
+block2_orig.vtx[2].rehash()
+block2_orig.hashMerkleRoot = block2_orig.calc_merkle_root()
+block2_orig.rehash()
+block2_orig.solve()
+node.p2p.send_blocks_and_test([block2_orig], node, success=False, request_block=False, reject_reason=b'bad-txns-inputs-duplicate')
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 14247, 14248"
+-------------------------------------------------------------------------
+=========================================================================
+"from test_framework.script import CScript, OP_HASH160, OP_CHECKSIG, OP_0, hash160, OP_EQUAL, OP_DUP, OP_EQUALVERIFY, OP_1, OP_2, OP_CHECKMULTISIG, hash160, OP_TRUE
+from test_framework.mininode import ToHex, FromHex, COIN
+"
+-------------------------------------------------------------------------
+"```python
+from test_framework.script import CScript, OP_HASH160, OP_CHECKSIG, OP_0, OP_EQUAL, OP_DUP, OP_EQUALVERIFY, OP_1, OP_2, OP_CHECKMULTISIG
+from test_framework.mininode import ToHex, FromHex, COIN
+```"
+-------------------------------------------------------------------------
+"from test_framework.script import CScript, OP_HASH160, OP_CHECKSIG, OP_0, hash160, OP_EQUAL, OP_DUP, OP_EQUALVERIFY, OP_1, OP_2, OP_CHECKMULTISIG, OP_TRUE
+from test_framework.mininode import ToHex, FromHex, COIN
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 9955, 10006"
+-------------------------------------------------------------------------
+=========================================================================
+"self.nodes[0].generate(1) # Mine a block to clear the gbt cache
+
+# Create a 3-tx chain: tx1 (non-segwit input, paying to a segwit output) ->
+#                      tx2 (segwit input, paying to a non-segwit output) ->
+#                      tx3 (non-segwit input, paying to a non-segwit output).
+# tx1 is allowed to appear in the block, but no others.
+txid1 = send_to_witness(1, self.nodes[0], find_unspent(self.nodes[0], 50), self.pubkey[0], False, Decimal(""49.996""))
+hex_tx = self.nodes[0].gettransaction(txid)['hex']
+tx = FromHex(CTransaction(), hex_tx)
+assert(tx.wit.is_null()) # This should not be a segwit input
+assert(txid1 in self.nodes[0].getrawmempool())
+
+# Now create tx2, which will spend from txid1.
+tx = CTransaction()
+tx.vin.append(CTxIn(COutPoint(int(txid1, 16), 0), b''))
+tx.vout.append(CTxOut(int(49.99*COIN), CScript([OP_TRUE])))
+tx2_hex = self.nodes[0].signrawtransaction(ToHex(tx))['hex']
+txid2 = self.nodes[0].sendrawtransaction(tx2_hex)
+tx = FromHex(CTransaction(), tx2_hex)
+assert(not tx.wit.is_null())
+
+# Now create tx3, which will spend from txid2
+tx = CTransaction()
+tx.vin.append(CTxIn(COutPoint(int(txid2, 16), 0), b""""))
+tx.vout.append(CTxOut(int(49.95*COIN), CScript([OP_TRUE]))) # Huge fee
+tx.calc_sha256()
+txid3 = self.nodes[0].sendrawtransaction(ToHex(tx))
+assert(tx.wit.is_null())
+assert(txid3 in self.nodes[0].getrawmempool())
+
+# Now try calling getblocktemplate() without segwit support.
+template = self.nodes[0].getblocktemplate()
+
+# Check that tx1 is the only transaction of the 3 in the template.
+template_txids = [ t['txid'] for t in template['transactions'] ]
+assert(txid2 not in template_txids and txid3 not in template_txids)
+assert(txid1 in template_txids)
+
+# Check that running with segwit support results in all 3 being included.
+template = self.nodes[0].getblocktemplate({""rules"": [""segwit""]})
+template_txids = [ t['txid'] for t in template['transactions'] ]
+assert(txid1 in template_txids)
+assert(txid2 in template_txids)
+assert(txid3 in template_txids)
+
+# Mine a block to clear the gbt cache again.
+self.nodes[0].generate(1)
+"
+-------------------------------------------------------------------------
+"```python
+# Create a 3-tx chain: tx1 (non-segwit input, paying to a segwit output) ->
+#                      tx2 (segwit input, paying to a non-segwit output) ->
+#                      tx3 (non-segwit input, paying to a non-segwit output).
+# tx1 is allowed to appear in the block, but no others.
+txid1 = send_to_witness(1, self.nodes[0], find_unspent(self.nodes[0], 50), self.pubkey[0], False, Decimal(""49.996""))
+hex_tx = self.nodes[0].gettransaction(txid)['hex']
+tx = FromHex(CTransaction(), hex_tx)
+assert(tx.wit.is_null())  # This should not be a segwit input
+assert txid1 in self.nodes[0].getrawmempool()
+
+# Now create tx2, which will spend from txid1.
+tx = CTransaction()
+tx.vin.append(CTxIn(COutPoint(int(txid1, 16), 0), b''))
+tx.vout.append(CTxOut(int(49.99 * COIN), CScript([OP_TRUE])))
+tx2_hex = self.nodes[0].signrawtransaction(ToHex(tx))['hex']
+txid2 = self.nodes[0].sendrawtransaction(tx2_hex)
+tx = FromHex(CTransaction(), tx2_hex)
+assert not tx.wit.is_null()
+
+# Now create tx3, which will spend from txid2
+tx = CTransaction()
+tx.vin.append(CTxIn(COutPoint(int(txid2, 16), 0), b""""))
+tx.vout.append(CTxOut(int(49.95 * COIN), CScript([OP_TRUE])))  # Huge fee
+tx.calc_sha256()
+txid3 = self.nodes[0].sendrawtransaction(ToHex(tx))
+assert tx.wit.is_null()
+assert txid3 in self.nodes[0].getrawmempool()
+
+# Now try calling getblocktemplate() without segwit support.
+template = self.nodes[0].getblocktemplate()
+
+# Check that tx1 is the only transaction of the 3 in the template.
+template_txids = [t['txid'] for t in template['transactions']]
+assert txid2 not in template_txids and txid3 not in template_txids
+assert txid1 in template_txids
+
+# Check that running with segwit support results in all 3 being included.
+template = self.nodes[0].getblocktemplate({""rules"": [""segwit""]})
+template_txids = [t['txid'] for t in template['transactions']]
+assert txid1 in template_txids
+assert txid2 in template_txids
+assert txid3 in template_txids
+
+# Mine a block to clear the gbt cache again.
+self.nodes[0].generate(1)
+```"
+-------------------------------------------------------------------------
+"self.nodes[0].generate(1) # Mine a block to clear the gbt cache
+
+# Create a 3-tx chain: tx1 (non-segwit input, paying to a segwit output) ->
+#                      tx2 (segwit input, paying to a non-segwit output) ->
+#                      tx3 (non-segwit input, paying to a non-segwit output).
+# tx1 is allowed to appear in the block, but no others.
+txid1 = send_to_witness(1, self.nodes[0], find_unspent(self.nodes[0], 50), self.pubkey[0], False, Decimal(""49.996""))
+hex_tx = self.nodes[0].gettransaction(txid)['hex']
+tx = FromHex(CTransaction(), hex_tx)
+assert(tx.wit.is_null()) # This should not be a segwit input
+assert(txid1 in self.nodes[0].getrawmempool())
+
+# Now create tx2, which will spend from txid1.
+tx = CTransaction()
+tx.vin.append(CTxIn(COutPoint(int(txid1, 16), 0), b''))
+tx.vout.append(CTxOut(int(49.99*COIN), CScript([OP_TRUE])))
+tx2_hex = self.nodes[0].signrawtransaction(ToHex(tx))['hex']
+txid2 = self.nodes[0].sendrawtransaction(tx2_hex)
+tx = FromHex(CTransaction(), tx2_hex)
+assert(not tx.wit.is_null())
+
+# Now create tx3, which will spend from txid2
+tx = CTransaction()
+tx.vin.append(CTxIn(COutPoint(int(txid2, 16), 0), b""""))
+tx.vout.append(CTxOut(int(49.95*COIN), CScript([OP_TRUE]))) # Huge fee
+tx.calc_sha256()
+txid3 = self.nodes[0].sendrawtransaction(ToHex(tx))
+assert(tx.wit.is_null())
+assert(txid3 in self.nodes[0].getrawmempool())
+
+# Now try calling getblocktemplate() without segwit support.
+template = self.nodes[0].getblocktemplate()
+
+# Check that tx1 is the only transaction of the 3 in the template.
+template_txids = [ t['txid'] for t in template['transactions'] ]
+assert(txid2 not in template_txids and txid3 not in template_txids)
+assert(txid1 in template_txids)
+
+# Check that running with segwit support results in all 3 being included.
+template = self.nodes[0].getblocktemplate({""rules"": [""segwit""]})
+template_txids = [ t['txid'] for t in template['transactions'] ]
+assert(txid1 in template_txids)
+assert(txid2 in template_txids)
+assert(txid3 in template_txids)
+
+# Mine a block to clear the gbt cache again.
+self.nodes[0].generate(1)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 9955, 10006"
+-------------------------------------------------------------------------
+=========================================================================
+"def test_compactblock_reconstruction_multiple_peers(self, node, stalling_peer, delivery_peer):
+    assert(len(self.utxos))
+
+    def announce_cmpct_block(node, peer):
+        utxo = self.utxos.pop(0)
+        block = self.build_block_with_transactions(node, utxo, 5)
+
+        cmpct_block = HeaderAndShortIDs()
+        cmpct_block.initialize_from_block(block)
+        msg = msg_cmpctblock(cmpct_block.to_p2p())
+        peer.send_and_ping(msg)
+        with mininode_lock:
+            assert(peer.last_getblocktxn is not None)
+        return block, cmpct_block
+
+    block, cmpct_block = announce_cmpct_block(node, stalling_peer)
+
+    for tx in block.vtx[1:]:
+        delivery_peer.send_message(msg_tx(tx))
+    delivery_peer.sync_with_ping()
+    mempool = node.getrawmempool()
+    for tx in block.vtx[1:]:
+        assert(tx.hash in mempool)
+
+    delivery_peer.send_and_ping(msg_cmpctblock(cmpct_block.to_p2p()))
+    assert_equal(int(node.getbestblockhash(), 16), block.sha256)
+
+    self.utxos.append([block.vtx[-1].sha256, 0, block.vtx[-1].vout[0].nValue])
+
+    # Now test that delivering an invalid compact block won't break relay
+
+    block, cmpct_block = announce_cmpct_block(node, stalling_peer)
+    for tx in block.vtx[1:]:
+        delivery_peer.send_message(msg_tx(tx))
+    delivery_peer.sync_with_ping()
+
+    cmpct_block.prefilled_txn[0].tx.wit.vtxinwit = [ CTxInWitness() ]
+    cmpct_block.prefilled_txn[0].tx.wit.vtxinwit[0].scriptWitness.stack = [ser_uint256(0)]
+
+    cmpct_block.use_witness = True
+    delivery_peer.send_and_ping(msg_cmpctblock(cmpct_block.to_p2p()))
+    assert(int(node.getbestblockhash(), 16) != block.sha256)
+
+    msg = msg_blocktxn()
+    msg.block_transactions.blockhash = block.sha256
+    msg.block_transactions.transactions = block.vtx[1:]
+    stalling_peer.send_and_ping(msg)
+    assert_equal(int(node.getbestblockhash(), 16), block.sha256)
+"
+-------------------------------------------------------------------------
+"```python
+    def run_test(self):
+        # Setup the p2p connections and start up the network thread.
+        assert(len(self.utxos))
+
+        def announce_cmpct_block(node, peer):
+            utxo = self.utxos.pop(0)
+            block = self.build_block_with_transactions(node, utxo, 5)
+
+            cmpct_block = HeaderAndShortIDs()
+            cmpct_block.initialize_from_block(block)
+            msg = msg_cmpctblock(cmpct_block.to_p2p())
+            peer.send_and_ping(msg)
+            with mininode_lock:
+                assert(peer.last_getblocktxn is not None)
+            return block, cmpct_block
+
+        block, cmpct_block = announce_cmpct_block(self.node, self.stalling_peer)
+
+        for tx in block.vtx[1:]:
+            self.delivery_peer.send_message(msg_tx(tx))
+        self.delivery_peer.sync_with_ping()
+        mempool = self.node.getrawmempool()
+        for tx in block.vtx[1:]:
+            assert(tx.hash in mempool)
+
+        self.delivery_peer.send_and_ping(msg_cmpctblock(cmpct_block.to_p2p()))
+        assert_equal(int(self.node.getbestblockhash(), 16), block.sha256)
+
+        self.utxos.append([block.vtx[-1].sha256, 0, block.vtx[-1].vout[0].nValue])
+
+        # Now test that delivering an invalid compact block won't break relay
+
+        block, cmpct_block = announce_cmpct_block(self.node, self.stalling_peer)
+        for tx in block.vtx[1:]:
+            self.delivery_peer.send_message(msg_tx(tx))
+        self.delivery_peer.sync_with_ping()
+
+        cmpct_block.prefilled_txn[0].tx.wit.vtxinwit = [CTxInWitness()]
+        cmpct_block.prefilled_txn[0].tx.wit.vtxinwit[0].scriptWitness.stack = [ser_uint256(0)]
+
+        cmpct_block.use_witness = True
+        self.delivery_peer.send_and_ping(msg_cmpctblock(cmpct_block.to_p2p()))
+        assert(int(self.node.getbestblockhash(), 16) != block.sha256)
+
+        msg = msg_blocktxn()
+        msg.block_transactions.blockhash = block.sha256
+        msg.block_transactions.transactions = block.vtx[1:]
+        self.stalling_peer.send_and_ping(msg)
+        assert_equal(int(self.node.getbestblockhash(), 16), block.sha256)
+```"
+-------------------------------------------------------------------------
+"def test_compactblock_reconstruction_multiple_peers(self, node, stalling_peer, delivery_peer):
+    assert(len(self.utxos))
+
+    def announce_cmpct_block(node, peer):
+        utxo = self.utxos.pop(0)
+        block = self.build_block_with_transactions(node, utxo, 5)
+
+        cmpct_block = HeaderAndShortIDs()
+        cmpct_block.initialize_from_block(block)
+        msg = msg_cmpctblock(cmpct_block.to_p2p())
+        peer.send_and_ping(msg)
+        with mininode_lock:
+            assert(peer.last_getblocktxn is not None)
+        return block, cmpct_block
+
+    block, cmpct_block = announce_cmpct_block(node, stalling_peer)
+
+    for tx in block.vtx[1:]:
+        delivery_peer.send_message(msg_tx(tx))
+    delivery_peer.sync_with_ping()
+    mempool = node.getrawmempool()
+    for tx in block.vtx[1:]:
+        assert(tx.hash in mempool)
+
+    delivery_peer.send_and_ping(msg_cmpctblock(cmpct_block.to_p2p()))
+    assert_equal(int(node.getbestblockhash(), 16), block.sha256)
+
+    self.utxos.append([block.vtx[-1].sha256, 0, block.vtx[-1].vout[0].nValue])
+
+    # Now test that delivering an invalid compact block won't break relay
+
+    block, cmpct_block = announce_cmpct_block(node, stalling_peer)
+    for tx in block.vtx[1:]:
+        delivery_peer.send_message(msg_tx(tx))
+    delivery_peer.sync_with_ping()
+
+    cmpct_block.prefilled_txn[0].tx.wit.vtxinwit = [ CTxInWitness() ]
+    cmpct_block.prefilled_txn[0].tx.wit.vtxinwit[0].scriptWitness.stack = [ser_uint256(0)]
+
+    cmpct_block.use_witness = True
+    delivery_peer.send_and_ping(msg_cmpctblock(cmpct_block.to_p2p()))
+    assert(int(node.getbestblockhash(), 16) != block.sha256)
+
+    msg = msg_blocktxn()
+    msg.block_transactions.blockhash = block.sha256
+    msg.block_transactions.transactions = block.vtx[1:]
+    stalling_peer.send_and_ping(msg)
+    assert_equal(int(node.getbestblockhash(), 16), block.sha256)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 9352, 9357"
+-------------------------------------------------------------------------
+=========================================================================
+"print(""\tTesting reconstructing compact blocks from all peers..."")
+self.test_compactblock_reconstruction_multiple_peers(self.nodes[1], self.segwit_node, self.old_node)
+sync_blocks(self.nodes)
+
+"
+-------------------------------------------------------------------------
+"```python
+print(""\tTesting reconstructing compact blocks from all peers..."")
+self.test_compactblock_reconstruction_multiple_peers(self.nodes[1], self.segwit_node, self.old_node)
+sync_blocks(self.nodes)
+```"
+-------------------------------------------------------------------------
+"print(""\tTesting reconstructing compact blocks from all peers..."")
+self.test_compactblock_reconstruction_multiple_peers(self.nodes[1], self.segwit_node, self.old_node)
+sync_blocks(self.nodes)
+
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 9352, 9357"
+-------------------------------------------------------------------------
+=========================================================================
