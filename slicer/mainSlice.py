@@ -309,11 +309,13 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
             if testhunks_original and codehunks_original and codehunks_backport:
                 has_test_and_code = has_test_and_code + 1
 
-            slicebyCslicer = None
+
 
             if codehunks_original and codehunks_backport:
                 context_index = 0 
-                for codeHunk, codeHunkBackport  in zip(codehunks_original, codehunks_backport):                    
+                for codeHunk, codeHunkBackport  in zip(codehunks_original, codehunks_backport):
+                    slicebyCslicer = None
+                    try:                        
                         functionalSetforHunk = get_functional_set(codeHunk, testCases = testhunks_original)
                         astdiffshistory = get_ast_diffs(source_commits = pull_commitsSubmitted, startCommit=None, endCommit=None, startDate = None, endDate = None, repoName=repoName, projectName =projectName) 
                         slicer = BackTransformer(sourceOriginal = codeHunk,
@@ -327,8 +329,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                             stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = stableBranch, github_token=ghkey, cache_file= projectName+"StableLibraryCsche"), 
                                             targetfile = previousBackportfullFileTarget,
                                             tfileName=filepathBackport)                                                    
-                        context_index = context_index +1 
-
+                    
                          
                         # data = slicer.prepareFinetuneData()
                         # slicer.saveData(data, 'transInput/'+projectName+'BackportsRefactored.jsonl')   
@@ -338,15 +339,22 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                         if slicebyCslicer:
                             numberOfSuccesfulSlicing = numberOfSuccesfulSlicing + 1                
                             slicesfromCSLICER.append((codeHunk, slicebyCslicer, codeHunkBackport, recommendation))                                 
+                    except Exception as e:
+                        print("Problem in BackTrans ")                
+                        print(e)
+                        continue
+                    context_index = context_index +1     
 
-                print("Working on pulls ", pull_id_original, pull_id_backport)
-                if slicesfromCSLICER:
-                    slicedPRs.append(slicesfromCSLICER)
+            print("Working on pulls ", pull_id_original, pull_id_backport)
+            if slicesfromCSLICER:
+                slicedPRs.append(slicesfromCSLICER)
+                slicesfromCSLICER = []
 
         except Exception as e:
             print("Problem in pulls ", pull_id_original, pull_id_backport)
             if slicesfromCSLICER:
-                slicedPRs.append(slicesfromCSLICER)                    
+                slicedPRs.append(slicesfromCSLICER)
+                slicesfromCSLICER = []                    
             print(e)
             continue
     saveMetricResults(slicedPRs, projectName, data_read, numberofSlicingRequired, numberofDifferences, has_test_and_code, numberOfSuccesfulSlicing)
