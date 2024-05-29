@@ -42,7 +42,7 @@ def has_test_files(files):
     return True
 
 
-def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = None, endDate = None, repoName=None, projectName = None):
+def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = None, endDate = None, repoName=None, projectName = None, fileInfo = None):
     asts = []  # List to store parsed ASTs for each commit
     g, backup_keys, no_bused_key, accesskey = initialize_G()
     repo = g.get_repo(repoName+"/"+projectName)

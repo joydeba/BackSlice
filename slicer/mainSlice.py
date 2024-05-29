@@ -317,7 +317,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     slicebyCslicer = None
                     try:                        
                         functionalSetforHunk = get_functional_set(codeHunk, testCases = testhunks_original)
-                        astdiffshistory = get_ast_diffs(source_commits = pull_commitsSubmitted, startCommit=None, endCommit=None, startDate = None, endDate = None, repoName=repoName, projectName =projectName) 
+                        astdiffshistory = get_ast_diffs(source_commits = pull_commitsSubmitted, startCommit=None, endCommit=None, startDate = None, endDate = None, repoName=repoName, projectName =projectName, fileInfo = filepathBackport) 
                         slicer = BackTransformer(sourceOriginal = codeHunk,
                                             sourcebackport = codeHunkBackport, 
                                             astdiffsHistory = astdiffshistory, 
