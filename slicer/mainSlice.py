@@ -87,8 +87,8 @@ def get_file_and_file_content(pull_id_original, pull_id_backport, line, repo, gL
 
 
 def getsimilarHunks(commits_diffs_original_contextHunks, commits_diffs_backport_contextHunks, indexHunks0, min_hunks_count):
-    commits_hunkline_original_context = commits_diffs_original_contextHunks.split("\n")
-    commits_hunkline_backport_context = commits_diffs_backport_contextHunks.split("\n")
+    commits_hunkline_original_context = commits_diffs_original_contextHunks[indexHunks0].split("\n")
+    commits_hunkline_backport_context = commits_diffs_backport_contextHunks[indexHunks0].split("\n")
     similarity_score = difflib.SequenceMatcher(None, commits_hunkline_original_context[0], commits_hunkline_backport_context[0]).ratio()
     if similarity_score <= 0.60:
         for indexH in range(1, min_hunks_count):
@@ -138,7 +138,7 @@ def get_hunk_details(commits_diffs_original, commits_diffs_backport):
 
                 for indexHunks0 in range(1, min_hunks_count):                                                                          
 
-                    commits_hunkline_original_context, commits_hunkline_backport_context = getsimilarHunks(commits_diffs_original_contextHunks[indexHunks0], commits_diffs_backport_contextHunks[indexHunks0], indexHunks0, min_hunks_count)
+                    commits_hunkline_original_context, commits_hunkline_backport_context = getsimilarHunks(commits_diffs_original_contextHunks, commits_diffs_backport_contextHunks, indexHunks0, min_hunks_count)
 
                     # hunkStartLnNo = commits_hunkline_original_context[0].split(" ")[0][1:].split(",")
                     # hunkEndlnNo = commits_hunkline_original_context[0].split(" ")[1][1:].split(",")

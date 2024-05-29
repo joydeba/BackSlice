@@ -1,0 +1,84 @@
+"class AlmaLinuxHostname(Hostname):
+    platform = 'Linux'
+    distribution = 'Almalinux'
+    strategy_class = SystemdStrategy
+"
+-------------------------------------------------------------------------
+"class AlmaLinuxHostname(Hostname):
+    platform = 'Linux'
+    distribution = 'Almalinux'
+    strategy_class = SystemdStrategy"
+-------------------------------------------------------------------------
+"class AlmaLinuxHostname(Hostname):
+    platform = 'Linux'
+    distribution = 'Almalinux'
+    strategy_class = SystemdStrategy
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 73619, 73649"
+-------------------------------------------------------------------------
+=========================================================================
+"class AlmaLinuxHostname(Hostname):
+    platform = 'Linux'
+    distribution = 'Almalinux'
+    strategy_class = SystemdStrategy
+"
+-------------------------------------------------------------------------
+"class ArchARMHostname(Hostname):
+    platform = 'Linux'
+    distribution = 'ArchARM'
+    strategy_class = SystemdStrategy"
+-------------------------------------------------------------------------
+"class AlmaLinuxHostname(Hostname):
+    platform = 'Linux'
+    distribution = 'Almalinux'
+    strategy_class = SystemdStrategy
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 73619, 73648"
+-------------------------------------------------------------------------
+=========================================================================
+"copyright = ""2021 Red Hat, Inc.""
+"
+-------------------------------------------------------------------------
+"```python
+html_short_title = 'Ansible Core Documentation'
+```"
+-------------------------------------------------------------------------
+"copyright = ""2021 Red Hat, Inc.""
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 73616, 73637"
+-------------------------------------------------------------------------
+=========================================================================
+"exclude_patterns = [
+    '2.10_index.rst',
+    'ansible_index.rst',
+    'core_index.rst',
+    'porting_guides/core_porting_guides',
+]
+"
+-------------------------------------------------------------------------
+"exclude_patterns = [
+    'index.rst',
+    'galaxy',
+    'network',
+    'scenario_guides',
+    'ansible_index.rst',
+]"
+-------------------------------------------------------------------------
+"exclude_patterns = [
+    '2.10_index.rst',
+    'ansible_index.rst',
+    'core_index.rst',
+    'porting_guides/core_porting_guides',
+]
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 73616, 73637"
+-------------------------------------------------------------------------
+=========================================================================
