@@ -4,12 +4,10 @@
     strategy_class = SystemdStrategy
 "
 -------------------------------------------------------------------------
-"```python
-class AlmaLinuxHostname(Hostname):
+"class AlmaLinuxHostname(Hostname):
     platform = 'Linux'
     distribution = 'Almalinux'
-    strategy_class = SystemdStrategy
-```"
+    strategy_class = SystemdStrategy"
 -------------------------------------------------------------------------
 "class AlmaLinuxHostname(Hostname):
     platform = 'Linux'
@@ -27,9 +25,9 @@ PRs: 73619, 73649"
     strategy_class = SystemdStrategy
 "
 -------------------------------------------------------------------------
-"class AlmaLinuxHostname(Hostname):
+"class ArchARMHostname(Hostname):
     platform = 'Linux'
-    distribution = 'Almalinux'
+    distribution = 'Arch ARM'
     strategy_class = SystemdStrategy"
 -------------------------------------------------------------------------
 "class AlmaLinuxHostname(Hostname):
@@ -351,9 +349,10 @@ import os
 
 sys.path.insert(0, os.path.join('ansible', 'lib'))
 sys.path.append(os.path.abspath(os.path.join('..', '_extensions')))
-sys.path.insert(0, os.path.abspath(os.path.join('..', '..', '..', 'lib')))
+
 VERSION = 'devel'
 AUTHOR = 'Ansible, Inc'
+
 # General configuration
 # ---------------------
 # Add any Sphinx extension module names here, as strings.
@@ -372,6 +371,7 @@ master_doc = 'index'
 # General substitutions.
 project = 'Ansible'
 copyright = ""2021 Red Hat, Inc.""
+
 # The default replacements for |version| and |release|, also used in various
 # other places throughout the built documents.
 #
@@ -393,16 +393,14 @@ today_fmt = '%B %d, %Y'
 # for source files.
 exclude_patterns = [
     '2.10_index.rst',
-    'ansible_index.rst',
+    'index.rst',
     'core_index.rst',
-    'porting_guides/core_porting_guides.rst',
-    'porting_guides/porting_guide_base_2.10.rst',
-    'porting_guides/porting_guide_core_2.11.rst',
-    'roadmap/index.rst',
-    'roadmap/ansible_base_roadmap_index.rst',
-    'roadmap/ROADMAP_2_10.rst',
-    'roadmap/ROADMAP_2_11.rst'
+    'galaxy',
+    'network',
+    'scenario_guides',
+    'ansible_index.rst',
 ]
+
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
 # default_role = None
@@ -417,6 +415,7 @@ exclude_patterns = [
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
 highlight_language = 'YAMLJinja'
+
 # Substitutions, variables, entities, & shortcuts for text which do not need to link to anything.
 # For titles which should be a link, use the intersphinx anchors set at the index, chapter, and section levels, such as  qi_start_:
 # |br| is useful for formatting fields inside of tables
@@ -427,16 +426,18 @@ rst_epilog = """"""
 .. |_| unicode:: 0xA0
     :trim:
 """"""
+
 # Options for HTML output
 # -----------------------
 html_theme_path = ['../_themes']
 html_theme = 'sphinx_rtd_theme'
-html_short_title = 'Ansible Documentation'
+html_short_title = 'Ansible Core Documentation'
 html_show_sphinx = False
 html_theme_options = {
     'canonical_url': ""https://docs.ansible.com/ansible/latest/"",
     'vcs_pageview_mode': 'edit'
 }
+
 html_context = {
     'display_github': 'True',
     'github_user': 'ansible',
@@ -452,13 +453,14 @@ html_context = {
     'css_files': ('_static/ansible.css',  # overrides to the standard theme
                   ),
 }
+
 # The style sheet to use for HTML and HTML Help pages. A file of that name
 # must exist either in Sphinx' static/ path, or in one of the custom paths
 # given in html_static_path.
 # html_style = 'solar.css'
 # The name for this set of Sphinx documents.  If None, it defaults to
 # ""<project> v<release> documentation"".
-html_title = 'Ansible Documentation'
+html_title = 'Ansible Core Documentation'
 # A shorter title for the navigation bar.  Default is the same as html_title.
 # html_short_title = None
 # The name of an image file (within the static path) to place at the top of
@@ -499,6 +501,7 @@ html_copy_source = False
 # html_file_suffix = ''
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'Poseidodoc'
+
 # Configuration for sphinx-notfound-pages
 # with no 'notfound_template' and no 'notfound_context' set,
 # the extension builds 404.rst into a location-agnostic 404 page
@@ -512,6 +515,7 @@ notfound_default_language = ""ansible""
 notfound_default_version = ""latest""
 # makes default setting explicit:
 notfound_no_urls_prefix = False
+
 # Options for LaTeX output
 # ------------------------
 # The paper size ('letter' or 'a4').
@@ -537,6 +541,7 @@ latex_documents = [
 # If false, no module index is generated.
 # latex_use_modindex = True
 autoclass_content = 'both'
+
 # Note:  Our strategy for intersphinx mappings is to have the upstream build location as the
 # canonical source and then cached copies of the mapping stored locally in case someone is building
 # when disconnected from the internet.  We then have a script to update the cached copies.
@@ -1066,76 +1071,37 @@ linkcheck_workers = 25
 # linkcheck_anchors = False
 "
 -------------------------------------------------------------------------
-"# -*- coding: utf-8 -*-
-#
-# documentation build configuration file, created by
-# sphinx-quickstart on Sat Sep 27 13:23:22 2008-2009.
-#
-# This file is execfile()d with the current directory set to its
-# containing dir.
-#
-# The contents of this file are pickled, so don't put values in the namespace
-# that aren't pickleable (module imports are okay, they're removed
-# automatically).
-#
-# All configuration values have a default value; values that are commented out
-# serve to show the default value.
-from __future__ import (absolute_import, division, print_function)
-__metaclass__ = type
-import sys
-import os
-
-sys.path.insert(0, os.path.join('ansible', 'lib'))
-sys.path.append(os.path.abspath(os.path.join('..', '_extensions')))
-
-VERSION = 'devel'
-AUTHOR = 'Ansible, Inc'
-
-# General configuration
-# ---------------------
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx', 'pygments_lexer', 'notfound.extension']
-
-templates_path = ['.templates']
-
-source_suffix = '.rst'
-
+"```python
 master_doc = 'index'
-
-project = 'Ansible'
-copyright = ""2021 Red Hat, Inc.""
-
-version = VERSION
-release = VERSION
-
-today_fmt = '%B %d, %Y'
-
 exclude_patterns = [
     'galaxy',
     'network',
     'scenario_guides',
     'ansible_index.rst',
-    'index.rst',
+    '2.10_index.rst',
+    'core_index.rst',
+    'porting_guides/porting_guides.rst',
+    'porting_guides/porting_guide_2*',
+    'porting_guides/porting_guide_3*',
+    'roadmap/index.rst',
+    'roadmap/ansible_roadmap_index.rst',
+    'roadmap/old_roadmap_index.rst',
+    'roadmap/ROADMAP_2_5.rst',
+    'roadmap/ROADMAP_2_6.rst',
+    'roadmap/ROADMAP_2_7.rst',
+    'roadmap/ROADMAP_2_8.rst',
+    'roadmap/ROADMAP_2_9.rst',
+    'roadmap/COLLECTIONS*'
 ]
 
-pygments_style = 'sphinx'
-highlight_language = 'YAMLJinja'
-
-rst_epilog = """"""
-.. |br| raw:: html
-   <br>
-.. |_| unicode:: 0xA0
-    :trim:
-""""""
-
-# Options for HTML output
-# -----------------------
-html_theme_path = ['../_themes']
-html_theme = 'sphinx_rtd_theme'
 html_short_title = 'Ansible Core Documentation'
-html_show_sphinx = False
+
+copyright = '2021 Red Hat, Inc.'
+
+html_theme = 'sphinx_rtd_theme'
 
 html_theme_options = {
-    'canonical_url': ""https://docs.ansible.com/ansible/latest/"",
+    'canonical_url': 'https://docs.ansible.com/ansible/latest/',
     'vcs_pageview_mode': 'edit'
 }
 
@@ -1147,31 +1113,28 @@ html_context = {
     'github_module_version': 'devel/lib/ansible/modules/',
     'github_root_dir': 'devel/lib/ansible',
     'github_cli_version': 'devel/lib/ansible/cli/',
-    'current_version': version,
+    'current_version': 'devel',
     'latest_version': '2.10',
     'available_versions': ('devel'),
-    'css_files': ('_static/ansible.css'),
+    'css_files': ('_static/ansible.css',)
 }
 
-html_static_path = ['../_static']
-
-html_last_updated_fmt = '%b %d, %Y'
-
-html_copy_source = False
-
-htmlhelp_basename = 'Poseidodoc'
-
-notfound_default_language = ""ansible""
-
-notfound_default_version = ""latest""
-
+notfound_default_language = 'ansible'
+notfound_default_version = 'latest'
 notfound_no_urls_prefix = False
 
 latex_documents = [
-    ('index', 'ansible.tex', 'Ansible 2.2 Documentation', AUTHOR, 'manual'),
+    ('index', 'ansible.tex', 'Ansible 2.2 Documentation', 'Ansible, Inc', 'manual'),
 ]
 
 autoclass_content = 'both'
+
+rst_epilog = """"""
+.. |br| raw:: html
+   <br>
+.. |_| unicode:: 0xA0
+    :trim:
+""""""
 
 intersphinx_mapping = {
     'python': ('https://docs.python.org/2/', (None, '../python2.inv')),
@@ -1452,7 +1415,7 @@ PRs: 73616, 73637"
 "from ..errors import InvalidUserInput, MissingUserInput
 "
 -------------------------------------------------------------------------
-"+ ImportFrom(module='errors', names=[alias(name='InvalidUserInput'), alias(name='MissingUserInput')], level=2)"
+from .. import errors
 -------------------------------------------------------------------------
 "from ..errors import InvalidUserInput, MissingUserInput
 "
@@ -1511,10 +1474,11 @@ def find_latest_deps_file(build_data_working, ansible_version):
 "class NoSuchFile(Exception):
     """"""An expected file was not found.""""""
 
+#
+# Subcommand base
+#
 def find_latest_ansible_dir(build_data_working):
-    """"""
-    Find the most recent ansible major version.
-    """"""
+    """"""Find the most recent ansible major version.""""""
     # imports here so that they don't cause unnecessary deps for all of the plugins
     from packaging.version import InvalidVersion, Version
     ansible_directories = glob.glob(os.path.join(build_data_working, '[0-9.]*'))
@@ -1534,9 +1498,7 @@ def find_latest_ansible_dir(build_data_working):
     return latest
 
 def find_latest_deps_file(build_data_working, ansible_version):
-    """"""
-    Find the most recent ansible deps file for the given ansible major version.
-    """"""
+    """"""Find the most recent ansible deps file for the given ansible major version.""""""
     # imports here so that they don't cause unnecessary deps for all of the plugins
     from packaging.version import Version
     data_dir = os.path.join(build_data_working, ansible_version)
@@ -1619,12 +1581,14 @@ latest_filename = find_latest_deps_file(build_data_working, ansible_version)
 shutil.copyfile(latest_filename, modified_deps_file)
 "
 -------------------------------------------------------------------------
-"# Make a copy of the deps file so that we can set the ansible-core version we'll use
-latest_ansible_core_version = args.ansible_core_version
-if latest_ansible_core_version is None:
-    latest_ansible_core_version = find_latest_ansible_core_version(build_data_working)
-latest_filename_core = find_latest_deps_file(build_data_working, latest_ansible_core_version)
-shutil.copyfile(latest_filename_core, modified_deps_file)"
+"# Make a copy of the deps file so that we can set the ansible-base version we'll use
+# Verify that the ansible version and ansible-base branch version align
+ansible_build_data = os.path.join(tmp_dir, 'ansible-build-data')
+ansible_version = args.ansible_version
+if ansible_version is None:
+    ansible_version = get_latest_ansible_version(ansible_build_data)
+latest_deps_file = get_latest_deps_file(ansible_build_data, ansible_version)
+shutil.copyfile(latest_deps_file, modified_deps_file)"
 -------------------------------------------------------------------------
 "# If we want to validate that the ansible version and ansible-base branch version match,
 # this would be the place to do it.
@@ -1645,8 +1609,8 @@ PRs: 73616, 73637"
 # we tried that and changed it for some reason.
 "
 -------------------------------------------------------------------------
-"# I think we should make the actions a subcommand but need to check the git history to verify if
-# we attempted that earlier and modified it for a specific reason."
+"# Checking the git history to see if we previously attempted to make the actions a subparser.
+# This way we can ensure we are not repeating unsuccessful changes."
 -------------------------------------------------------------------------
 "# I think we should make the actions a subparser but need to look in git history and see if
 # we tried that and changed it for some reason.
@@ -1665,17 +1629,15 @@ if args.ansible_version and args.action != 'full':
     raise InvalidUserInput('--ansible-version is only for use with ""full"".')
 "
 -------------------------------------------------------------------------
-"parser.add_argument('--ansible-version', action='store',
+"```python
+parser.add_argument('--ansible-version', action='store',
                     dest='ansible_version', default=None,
                     help='The version of the ansible package to make documentation for.'
                     '  This only makes sense when used with full.')
-parser.add_argument('--action', action='store',
-                    dest='action', default=None,
-                    help='The action to take.') 
-
 # normalize and validate CLI args
 if args.ansible_version and args.action != 'full':
-    raise InvalidUserInput('--ansible-version is only for use with ""full"".')"
+    raise InvalidUserInput('--ansible-version is only for use with ""full"".')
+```"
 -------------------------------------------------------------------------
 "parser.add_argument('--ansible-version', action='store',
                     dest='ansible_version', default=None,
@@ -1693,7 +1655,7 @@ PRs: 73616, 73637"
 "cmd = ['make', 'core_singlehtmldocs']
 "
 -------------------------------------------------------------------------
-"cmd = ['make', 'singlehtml']"
+"cmd = ['make', 'singlehtmldocs']"
 -------------------------------------------------------------------------
 "cmd = ['make', 'core_singlehtmldocs']
 "
@@ -1707,10 +1669,8 @@ PRs: 73616, 73637"
 'docs/docsite/rst/index.rst',
 "
 -------------------------------------------------------------------------
-"# Generated as part of a build step
-'docs/docsite/rst/conf.py',
-'docs/docsite/rst/index.rst',
-'misc_generated_files/'"
+"        'docs/docsite/rst/conf.py',
+        'docs/docsite/rst/index.rst',"
 -------------------------------------------------------------------------
 "# Generated as part of a build step
 'docs/docsite/rst/conf.py',

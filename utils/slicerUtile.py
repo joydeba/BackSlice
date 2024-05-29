@@ -55,10 +55,10 @@ def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = 
 
             for file in source_commit.files:
                 if file.filename.endswith('.py'):
-                    source_hunks = file.patch.split("@@ ")
+                    source_hunks = file.patch.split("@@\n")
                     for indexhunk in range(1, len(source_hunks)):
                         # Todo problem here
-                        cleanhunk = source_hunks[indexhunk].split("@@\n")[1]
+                        cleanhunk = source_hunks[indexhunk].split("@@")[0]
                         cleanhunk = cleanhunk.split("\n")
                         leadingSpacesOri = 0
                         cleanhunkLines = ""
