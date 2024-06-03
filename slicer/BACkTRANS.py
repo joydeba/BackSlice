@@ -71,7 +71,10 @@ class BackTransformer():
             script_data = data.get(targetfileName)
             if isinstance(script_data, dict):
                 for key, values in script_data.items():
-                    nested_values[key].update(values)
+                    if key == 'class_method_calls':
+                        nested_values[key].update(list(values)[:100])  
+                    else:
+                        nested_values[key].update(values)
 
             nested_values_strings = {key: ', '.join(values) for key, values in nested_values.items()}
             return nested_values_strings
@@ -112,7 +115,7 @@ class BackTransformer():
         def extract_key_components(source_code):
             identifier_pattern = re.compile(r'\b[A-Za-z_]\w*\b')
             identifiers = identifier_pattern.findall(source_code)
-            unique_identifiers = set(identifiers)
+            unique_identifiers = list(dict.fromkeys(identifiers))[:100]  
             key_components = ', '.join(unique_identifiers)
             return key_components
         
