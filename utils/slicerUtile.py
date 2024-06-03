@@ -54,7 +54,7 @@ def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = 
             source_commit = repo.get_commit(commit['oid'])
 
             for file in source_commit.files:
-                if file.filename.endswith('.py'):
+                if os.path.basename(file.filename) in fileInfo and file.filename.endswith('.py'):
                     source_hunks = file.patch.split("@@\n")
                     for indexhunk in range(1, len(source_hunks)):
                         # Todo problem here
@@ -85,7 +85,7 @@ def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = 
         commit_b, ast_b = asts[i + 1]
 
         if ast_a is None or ast_b is None:
-            diff_results.append((commit_a, commit_b, ["Invalid AST"]))
+            # diff_results.append((commit_a, commit_b, ["Invalid AST"]))
             continue
 
         stmts_a = [node for node in ast.walk(ast_a) if isinstance(node, ast.stmt)]
