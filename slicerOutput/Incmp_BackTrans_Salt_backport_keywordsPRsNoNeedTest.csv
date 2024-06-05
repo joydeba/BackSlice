@@ -2,14 +2,9 @@
 target1.get('dev') == target2.get('dev')
 "
 -------------------------------------------------------------------------
-"```python
-def _disks_equal(disk1, disk2):
-     return source1 == source2 and \
-         target1 is not None and target2 is not None and \
-         target1.get('bus') == target2.get('bus') and \
-         disk1.get('device', 'disk') == disk2.get('device', 'disk') and \
-         target1.get('dev') == target2.get('dev')
-```"
+"def _nics_equal(nic1, nic2):
+    return nic1.get('device', 'nic') == nic2.get('device', 'nic') and \
+        nic1.get('dev') == nic2.get('dev')"
 -------------------------------------------------------------------------
 "disk1.get('device', 'disk') == disk2.get('device', 'disk') and \
 target1.get('dev') == target2.get('dev')
@@ -29,29 +24,8 @@ for disk in new:
                   if '{0}{1}'.format(prefix, string.ascii_lowercase[i]) not in targets][0]
     target_node.set('dev', new_target)
     targets.append(new_target)
-
 return _diff_lists(old, new, _disks_equal)
 "
--------------------------------------------------------------------------
-"```python
-import string
-
-def _diff_disk_lists(old, new):
-    # Fix the target device to avoid duplicates before diffing: this may lead
-    # to additional changes. Think of unchanged disk 'hda' and another disk listed
-    # before it becoming 'hda' too... the unchanged need to turn into 'hdb'.
-    targets = []
-    for disk in new:
-        target_node = disk.find('target')
-        target = target_node.get('dev')
-        prefix = [item for item in prefixes if target.startswith(item)][0]
-        new_target = next(('{0}{1}'.format(prefix, string.ascii_lowercase[i]) for i in range(len(new))
-                           if '{0}{1}'.format(prefix, string.ascii_lowercase[i]) not in targets))
-        target_node.set('dev', new_target)
-        targets.append(new_target)
-
-    return _diff_lists(old, new, _disks_equal)
-```"
 -------------------------------------------------------------------------
 "# Fix the target device to avoid duplicates before diffing: this may lead
 # to additional changes. Think of unchanged disk 'hda' and another disk listed
@@ -63,7 +37,18 @@ for disk in new:
                   if '{0}{1}'.format(prefix, string.ascii_lowercase[i]) not in targets][0]
     target_node.set('dev', new_target)
     targets.append(new_target)
-
+return _diff_disk_lists(old, new)"
+-------------------------------------------------------------------------
+"# Fix the target device to avoid duplicates before diffing: this may lead
+# to additional changes. Think of unchanged disk 'hda' and another disk listed
+# before it becoming 'hda' too... the unchanged need to turn into 'hdb'.
+targets = []
+for disk in new:
+    prefix = [item for item in prefixes if target.startswith(item)][0]
+    new_target = ['{0}{1}'.format(prefix, string.ascii_lowercase[i]) for i in range(len(new))
+                  if '{0}{1}'.format(prefix, string.ascii_lowercase[i]) not in targets][0]
+    target_node.set('dev', new_target)
+    targets.append(new_target)
 return _diff_lists(old, new, _disks_equal)
 "
 -------------------------------------------------------------------------
@@ -95,8 +80,9 @@ ertEqual([disk.find('source').get('file') if disk.find('source') is not None els
           None])
 "
 -------------------------------------------------------------------------
-"```python
-ertEqual([disk.find('target').get('bus') for disk in ret['new']], ['virtio', 'virtio', 'ide'])
+"```
+ertEqual([disk.find('target').get('bus') for disk in ret['new']],
+         ['virtio', 'virtio', 'virtio', None])
 ```"
 -------------------------------------------------------------------------
 "<target dev='vda' bus='virtio'/>
@@ -130,9 +116,7 @@ PRs: 50356, 50379"
 "<target dev='vdb' bus='virtio'/>
 "
 -------------------------------------------------------------------------
-"```xml
-<target dev='vdb' bus='virtio'/>
-```"
+<source file='/path/to/myvm_data.qcow2'/>
 -------------------------------------------------------------------------
 "<target dev='vdb' bus='virtio'/>
 "
@@ -148,10 +132,10 @@ PRs: 50356, 50379"
 "
 -------------------------------------------------------------------------
 "```python
-disk_bus_map = {'virtio': 'vd', 'xen': 'xvd', 'fdc': 'fd', 'ide': 'hd'}
-prefix = disk_bus_map.get(disk['model'], 'sd')
-context['disks'][disk['name']]['target_dev'] = '{0}{1}'.format(prefix, string.ascii_lowercase[i])
-if hypervisor in ['qemu', 'kvm', 'bhyve', 'xen']:
+    disk_bus_map = {'virtio': 'vd', 'xen': 'xvd', 'fdc': 'fd', 'ide': 'hd'}
+    prefix = disk_bus_map.get(disk['model'], 'sd')
+    context['disks'][disk['name']]['target_dev'] = '{0}{1}'.format(prefix, string.ascii_lowercase[i])
+    if hypervisor in ['qemu', 'kvm', 'bhyve', 'xen', 'esxi', 'vmware']:
 ```"
 -------------------------------------------------------------------------
 "disk_bus_map = {'virtio': 'vd', 'xen': 'xvd', 'fdc': 'fd', 'ide': 'hd'}
@@ -167,7 +151,7 @@ PRs: 49510, 49540"
 "from tests.unit.netapi.test_rest_tornado import SaltnadoTestCase
 "
 -------------------------------------------------------------------------
-"+ ImportFrom(module='tests.unit.netapi.test_rest_tornado', names=[alias(name='SaltnadoTestCase')], level=0)"
+from tests.unit.netapi.rest_tornado import SaltnadoTestCase
 -------------------------------------------------------------------------
 "from tests.unit.netapi.test_rest_tornado import SaltnadoTestCase
 "
@@ -179,9 +163,7 @@ PRs: 47337, 49091"
 "output = salt.utils.stringutils.to_unicode(console['output_decoded'])
 "
 -------------------------------------------------------------------------
-"```python
-output = salt.utils.stringutils.to_unicode(console['output_decoded'])
-```"
+output = salt.utils.stringutils.to_unicode(console['output_decoded']) if 'output_decoded' in console else ''
 -------------------------------------------------------------------------
 "output = salt.utils.to_unicode(console['output_decoded'])
 "
@@ -196,14 +178,9 @@ PRs: 48212, 49041"
      # on Debian 8 results in a True return code
 "
 -------------------------------------------------------------------------
-"```python
-elif tuple(self.run_function('grains.item', ['osrelease_info'])['osrelease_info']) == (14, 0o4) and not systemd:
-    # currently upstart does not have a mechanism to report if disabling a service fails if does not exist
-    self.assertTrue(self.run_function('service.disable', [srv_name]))
-    self.assertTrue(self.run_function('service.disable', [srv_name]))
-else:
-    try:
-```"
+"elif tuple(self.run_function('grains.item', ['osrelease_info'])['osrelease_info']) == (8, 0o4) and systemd: 
+    # currently disabling a service via systemd that does not exist
+    # on Debian 8 results in a True return code"
 -------------------------------------------------------------------------
 "elif self.run_function('grains.item', ['osfullname'])['osfullname'] == 'Debian' and \
      self.run_function('grains.item', ['osmajorrelease'])['osmajorrelease'] < 9 and systemd:
@@ -220,11 +197,10 @@ PRs: 48962, 48970"
                      MagicMock(return_value={'base': ['blah', 'foo']})):
 "
 -------------------------------------------------------------------------
-"```python
-with patch('salt.pillar.compile_template') as compile_template, \
+"with patch('salt.pillar.compile_template') as compile_template, \
         patch.object(salt.pillar.Pillar, '_Pillar__gather_avail',
                      MagicMock(return_value={'base': ['blah', 'foo']})):
-```"
+"
 -------------------------------------------------------------------------
 "'pillar_roots': {},
 'file_roots': {},
@@ -234,21 +210,20 @@ with patch('salt.pillar.compile_template') as compile_template, \
 PRs: 47161, 47162"
 -------------------------------------------------------------------------
 =========================================================================
-"
-def libvirt_error_handler(ctx, error):
+"def libvirt_error_handler(ctx, error):
 "
 -------------------------------------------------------------------------
-"```python
-def libvirt_error_handler(ctx, error):
+"def libvirt_error_handler(ctx, error):
     '''
     Redirect stderr prints from libvirt to salt logging.
     '''
-    # Set up logging
-    log = logging.getLogger(__name__)
-```"
+    try:
+        # Redirect libvirt errors to salt logging
+        salt.log.warning('Libvirt error: %s' % error)
+    except Exception as e:
+        salt.log.error('Error handling libvirt error: %s' % e)"
 -------------------------------------------------------------------------
-"
-def libvirt_error_handler(ctx, error):  # pylint: disable=unused-argument
+"def libvirt_error_handler(ctx, error):  # pylint: disable=unused-argument
 "
 -------------------------------------------------------------------------
 "Recom
@@ -256,18 +231,74 @@ PRs: 43684, 43700"
 -------------------------------------------------------------------------
 =========================================================================
 "libvirt.registerErrorHandler(f=libvirt_error_handler, ctx=None)
-
 "
 -------------------------------------------------------------------------
-"if HAS_LIBVIRT:
-    libvirt.registerErrorHandler(f=libvirt_error_handler, ctx=None)"
+"libvirt.registerErrorHandler(libvirtErrorHandler, None)"
 -------------------------------------------------------------------------
 "libvirt.registerErrorHandler(f=libvirt_error_handler, ctx=None)
-
 "
 -------------------------------------------------------------------------
 "Recom
 PRs: 43684, 43700"
+-------------------------------------------------------------------------
+=========================================================================
+"# Import python libs
+"
+-------------------------------------------------------------------------
+# Import python modules
+-------------------------------------------------------------------------
+"# -*- coding: utf-8 -*-
+'''
+    :copyright: Copyright 2017 by the SaltStack Team, see AUTHORS for more details.
+    :license: Apache 2.0, see LICENSE for more details.
+    salt.utils.versions
+    ~~~~~~~~~~~~~~~~~~~
+    Version parsing based on distutils.version which works under python 3
+    because on python 3 you can no longer compare strings against integers.
+'''
+# Import python libs
+from __future__ import absolute_import
+from distutils.version import StrictVersion as _StrictVersion
+from distutils.version import LooseVersion as _LooseVersion
+# Import 3rd-party libs
+from salt.ext import six
+class StrictVersion(_StrictVersion):
+    def parse(self, vstring):
+        _StrictVersion.parse(self, vstring)
+    def _cmp(self, other):
+        if isinstance(other, six.string_types):
+            other = StrictVersion(other)
+        return _StrictVersion._cmp(self, other)
+class LooseVersion(_LooseVersion):
+    def parse(self, vstring):
+        _LooseVersion.parse(self, vstring)
+        if six.PY3:
+            # Convert every part of the version to string in order to be able to compare
+            self._str_version = [
+                str(vp).zfill(8) if isinstance(vp, int) else vp for vp in self.version]
+    if six.PY3:
+        def _cmp(self, other):
+            if isinstance(other, six.string_types):
+                other = LooseVersion(other)
+            string_in_version = False
+            for part in self.version  other.version:
+                if not isinstance(part, int):
+                    string_in_version = True
+                    break
+            if string_in_version is False:
+                return _LooseVersion._cmp(self, other)
+            # If we reached this far, it means at least a part of the version contains a string
+            # In python 3, strings and integers are not comparable
+            if self._str_version == other._str_version:
+                return 0
+            if self._str_version < other._str_version:
+                return -1
+            if self._str_version > other._str_version:
+                return 1
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 42835, 42836"
 -------------------------------------------------------------------------
 =========================================================================
 "reg_pol_header = u'\u5250\u6765\x01\x00'
@@ -344,78 +375,76 @@ except Exception as e:
 "
 -------------------------------------------------------------------------
 "```python
-import os
-import re
-import struct
-import salt.utils.files
-from salt.exceptions import CommandExecutionError
-
-reg_pol_header = u'\u5250\u6765\x01\x00'
-
+reg_pol_header = _convert_to_unicode('\u5250\u6765\x01\x00')
 if not os.path.exists(policy_file_path):
     ret = __salt__['file.makedirs'](policy_file_path)
-
 with salt.utils.files.fopen(policy_file_path, 'wb') as pol_file:
     if not data_to_write.startswith(reg_pol_header):
         pol_file.write(reg_pol_header.encode('utf-16-le'))
-    pol_file.write(data_to_write.encode('utf-16-le')
-
+    pol_file.write(_convert_to_unicode(data_to_write).encode('utf-16-le'))
 try:
     gpt_ini_data = ''
     if os.path.exists(gpt_ini_path):
         with salt.utils.files.fopen(gpt_ini_path, 'rb') as gpt_file:
-            gpt_ini_data = gpt_file.read()
-
+            gpt_ini_data = _convert_to_unicode(gpt_file.read())
     if not _regexSearchRegPolData(r'\[General\]\r\n', gpt_ini_data):
         gpt_ini_data = '[General]\r\n' + gpt_ini_data
-
     if _regexSearchRegPolData(r'{0}='.format(re.escape(gpt_extension)), gpt_ini_data):
         # ensure the line contains the ADM guid
-        gpt_ext_loc = re.search(r'^{0}=.*\r\n'.format(re.escape(gpt_extension)), gpt_ini_data, re.IGNORECASE | re.MULTILINE)
+        gpt_ext_loc = re.search(r'^{0}=.*\r\n'.format(re.escape(gpt_extension)),
+                                gpt_ini_data,
+                                re.IGNORECASE | re.MULTILINE)
         gpt_ext_str = gpt_ini_data[gpt_ext_loc.start():gpt_ext_loc.end()]
-
-        if not _regexSearchRegPolData(r'{0}'.format(re.escape(gpt_extension_guid)), gpt_ext_str):
+        if not _regexSearchRegPolData(r'{0}'.format(re.escape(gpt_extension_guid)),
+                                      gpt_ext_str):
             gpt_ext_str = gpt_ext_str.split('=')
             gpt_ext_str[1] = gpt_extension_guid + gpt_ext_str[1]
             gpt_ext_str = '='.join(gpt_ext_str)
             gpt_ini_data = gpt_ini_data[0:gpt_ext_loc.start()] + gpt_ext_str + gpt_ini_data[gpt_ext_loc.end():]
-          
     else:
-        general_location = re.search(r'^\[General\]\r\n', gpt_ini_data, re.IGNORECASE | re.MULTILINE)
-        gpt_ini_data = ""{0}{1}={2}\r\n{3}"".format(gpt_ini_data[general_location.start():general_location.end()], gpt_extension, gpt_extension_guid, gpt_ini_data[general_location.end():])
-
+        general_location = re.search(r'^\[General\]\r\n',
+                                     gpt_ini_data,
+                                     re.IGNORECASE | re.MULTILINE)
+        gpt_ini_data = ""{0}{1}={2}\r\n{3}"".format(
+                gpt_ini_data[general_location.start():general_location.end()],
+                gpt_extension, gpt_extension_guid,
+                gpt_ini_data[general_location.end():])
+    # https://technet.microsoft.com/en-us/library/cc978247.aspx
     if _regexSearchRegPolData(r'Version=', gpt_ini_data):
-        version_loc = re.search(r'^Version=.*\r\n', gpt_ini_data, re.IGNORECASE | re.MULTILINE)
+        version_loc = re.search(r'^Version=.*\r\n',
+                                gpt_ini_data,
+                                re.IGNORECASE | re.MULTILINE)
         version_str = gpt_ini_data[version_loc.start():version_loc.end()]
         version_str = version_str.split('=')
         version_nums = struct.unpack('>2H', struct.pack('>I', int(version_str[1])))
-
         if gpt_extension.lower() == 'gPCMachineExtensionNames'.lower():
             version_nums = (version_nums[0], version_nums[1] + 1)
         elif gpt_extension.lower() == 'gPCUserExtensionNames'.lower():
             version_nums = (version_nums[0] + 1, version_nums[1])
-
         version_num = struct.unpack('>I', struct.pack('>2H', *version_nums))[0]
-        gpt_ini_data = ""{0}{1}={2}\r\n{3}"".format(gpt_ini_data[0:version_loc.start()], 'Version', version_num, gpt_ini_data[version_loc.end():])
-      
+        gpt_ini_data = ""{0}{1}={2}\r\n{3}"".format(
+                gpt_ini_data[0:version_loc.start()],
+                'Version', version_num,
+                gpt_ini_data[version_loc.end():])
     else:
-        general_location = re.search(r'^\[General\]\r\n', gpt_ini_data, re.IGNORECASE | re.MULTILINE)
-
+        general_location = re.search(r'^\[General\]\r\n',
+                                     gpt_ini_data,
+                                     re.IGNORECASE | re.MULTILINE)
         if gpt_extension.lower() == 'gPCMachineExtensionNames'.lower():
             version_nums = (0, 1)
         elif gpt_extension.lower() == 'gPCUserExtensionNames'.lower():
             version_nums = (1, 0)
-
-        gpt_ini_data = ""{0}{1}={2}\r\n{3}"".format(gpt_ini_data[general_location.start():general_location.end()], 'Version',
-                                                 int(""{0}{1}"".format(str(version_nums[0]).zfill(4), str(version_nums[1]).zfill(4)), 16),
-                                                 gpt_ini_data[general_location.end():])
-
+        gpt_ini_data = ""{0}{1}={2}\r\n{3}"".format(
+                gpt_ini_data[general_location.start():general_location.end()],
+                'Version',
+                int(""{0}{1}"".format(str(version_nums[0]).zfill(4), str(version_nums[1]).zfill(4)), 16),
+                gpt_ini_data[general_location.end():])
     if gpt_ini_data:
         with salt.utils.files.fopen(gpt_ini_path, 'wb') as gpt_file:
-            gpt_file.write(gpt_ini_data)
-
+            gpt_file.write(_convert_to_unicode(gpt_ini_data).encode('utf-16-le'))
 except Exception as e:
-    msg = 'An error occurred attempting to write to {0}, the exception was {1}'.format(gpt_ini_path, e)
+    msg = 'An error occurred attempting to write to {0}, the exception was {1}'.format(
+            gpt_ini_path, e)
     raise CommandExecutionError(msg)
 ```"
 -------------------------------------------------------------------------
@@ -499,11 +528,7 @@ PRs: 42744, 42795"
 "version_num = struct.unpack('>I', struct.pack('>2H', *version_nums))[0]
 "
 -------------------------------------------------------------------------
-"```python
-import struct
-
-version_num = struct.unpack('>I', struct.pack('>2H', *version_nums))[0]
-```"
+"version_num = salt.ext.six.moves.struct.unpack('>I', salt.ext.six.moves.struct.pack('>2H', *version_nums))[0]"
 -------------------------------------------------------------------------
 "version_num = struct.unpack('>I', struct.pack('>2H', *version_nums))[0]
 "
@@ -522,8 +547,17 @@ elif vtype == 'REG_QWORD':
 "
 -------------------------------------------------------------------------
 "```python
+vlist = list(ord(v) for v in value)
 if vtype == 'REG_DWORD' or vtype == 'REG_QWORD':
-    value = sum(v << (i * 16) for i, v in enumerate(struct.unpack('H' * (len(vlist) + 1), struct.pack('H' * len(vlist), *vlist)))
+    if value:
+        if vtype == 'REG_DWORD':
+            for v in struct.unpack('I', struct.pack('2H', *vlist)):
+                value = v
+        elif vtype == 'REG_QWORD':
+            for v in struct.unpack('Q', struct.pack('8B', *vlist)):
+                value = v
+    else:
+        value = 0
 ```"
 -------------------------------------------------------------------------
 "vlist = list(ord(v) for v in value)
@@ -543,13 +577,10 @@ PRs: 41301, 41303"
              'cp.get_file': self.mock_cp}
 "
 -------------------------------------------------------------------------
-"```python
-'__salt__': {
+"'__salt__': {
     'cp.get_template': self.mock_cp,
-    'cp.get_file': self.mock_cp,
-    'jnpr.junos.device.Device': self.mock_device,
-}
-```"
+    'cp.get_file': self.mock_cp
+}"
 -------------------------------------------------------------------------
 "'__salt__': {'cp.get_template': self.mock_cp,
              'cp.get_file': self.mock_cp}
@@ -559,30 +590,10 @@ PRs: 41301, 41303"
 PRs: 41247, 41282"
 -------------------------------------------------------------------------
 =========================================================================
-"'docker.client', 'docker.exec_driver', 'dockerng._pull_status',
-"
--------------------------------------------------------------------------
-"```python
-import docker
-from docker import exec_driver
-from dockerng import _pull_status
-```"
--------------------------------------------------------------------------
-"client_timeout = kwargs.pop('client_timeout')
-if client_timeout is not None:
-    # Passing a kwarg of timeout=None causes problems in docker-py, so
-    # only set this kwarg if the value is not None.
-    client_kwargs['timeout'] = client_timeout
-"
--------------------------------------------------------------------------
-"Recom
-PRs: 40481, 40562"
--------------------------------------------------------------------------
-=========================================================================
 "if not getattr(adml_search_result, 'text', '').strip() == policy_name:
 "
 -------------------------------------------------------------------------
-"if not getattr(adml_search_result, 'text', '').strip() == policy_name:"
+"if not hasattr(adml_search_result, 'text') or not adml_search_result.text.strip() == policy_name:"
 -------------------------------------------------------------------------
 "if not getattr(adml_search_result, 'text', '').strip() == policy_name:
 "
@@ -594,7 +605,7 @@ PRs: 40253, 40255"
 "from salttesting import skipIf
 "
 -------------------------------------------------------------------------
-from salttesting import skipIf
+from salttesting.case import skipIf
 -------------------------------------------------------------------------
 "from salttesting import skipIf
 "
@@ -606,9 +617,70 @@ PRs: 36194, 36424"
 "@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
 "
 -------------------------------------------------------------------------
-"```python
-@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
-``` "
+"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')"
+-------------------------------------------------------------------------
+"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 36194, 36424"
+-------------------------------------------------------------------------
+=========================================================================
+"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
+"
+-------------------------------------------------------------------------
+"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')"
+-------------------------------------------------------------------------
+"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 36194, 36424"
+-------------------------------------------------------------------------
+=========================================================================
+"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
+"
+-------------------------------------------------------------------------
+"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')"
+-------------------------------------------------------------------------
+"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 36194, 36424"
+-------------------------------------------------------------------------
+=========================================================================
+"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
+@destructiveTest
+"
+-------------------------------------------------------------------------
+"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
+@destructiveTest"
+-------------------------------------------------------------------------
+"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
+@destructiveTest
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 36194, 36424"
+-------------------------------------------------------------------------
+=========================================================================
+"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
+"
+-------------------------------------------------------------------------
+"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')"
+-------------------------------------------------------------------------
+"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 36194, 36424"
+-------------------------------------------------------------------------
+=========================================================================
+"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
+"
+-------------------------------------------------------------------------
+"@skipIf(False, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')"
 -------------------------------------------------------------------------
 "@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
 "
@@ -633,78 +705,6 @@ PRs: 36194, 36424"
 "
 -------------------------------------------------------------------------
 "@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')"
--------------------------------------------------------------------------
-"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
-"
--------------------------------------------------------------------------
-"Recom
-PRs: 36194, 36424"
--------------------------------------------------------------------------
-=========================================================================
-"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
-@destructiveTest
-"
--------------------------------------------------------------------------
-"```python
-@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
-@destructiveTest
-```"
--------------------------------------------------------------------------
-"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
-@destructiveTest
-"
--------------------------------------------------------------------------
-"Recom
-PRs: 36194, 36424"
--------------------------------------------------------------------------
-=========================================================================
-"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
-"
--------------------------------------------------------------------------
-"```python
-@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
-```"
--------------------------------------------------------------------------
-"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
-"
--------------------------------------------------------------------------
-"Recom
-PRs: 36194, 36424"
--------------------------------------------------------------------------
-=========================================================================
-"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
-"
--------------------------------------------------------------------------
-"@pytest.mark.skip(""Skip until we can figure out why modifying the system clock causes ZMQ errors"")
-    def test_zone_compare(self):"
--------------------------------------------------------------------------
-"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
-"
--------------------------------------------------------------------------
-"Recom
-PRs: 36194, 36424"
--------------------------------------------------------------------------
-=========================================================================
-"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
-"
--------------------------------------------------------------------------
-"```python
-@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
-```"
--------------------------------------------------------------------------
-"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
-"
--------------------------------------------------------------------------
-"Recom
-PRs: 36194, 36424"
--------------------------------------------------------------------------
-=========================================================================
-"@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
-"
--------------------------------------------------------------------------
-"```python
-@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
-```"
 -------------------------------------------------------------------------
 "@skipIf(True, 'Skip until we can figure out why modifying the system clock causes ZMQ errors')
 "
@@ -716,9 +716,7 @@ PRs: 36194, 36424"
 "if tuple(version) >= (3, 5, 7):
 "
 -------------------------------------------------------------------------
-"```python
-if tuple(version) >= (3, 5, 7):
-```"
+"if salt.utils.versions.Version.from_data(version) >= salt.utils.versions.Version.from_data((3, 5, 7)):"
 -------------------------------------------------------------------------
 "if tuple(version) >= (3, 5, 7):
 "
@@ -727,10 +725,12 @@ if tuple(version) >= (3, 5, 7):
 PRs: 33734, 34333"
 -------------------------------------------------------------------------
 =========================================================================
-"'master to continue to use this {2} remote.'
+"log.error(_INVALID_REPO.format(self.cachedir, self.url, self.role))
 "
 -------------------------------------------------------------------------
-'master to continue to use this {2} remote.'
+"```python
+log.error(f""Invalid repository: {self.cachedir}, {self.url}, {self.role}"")
+```"
 -------------------------------------------------------------------------
 "log.error(_INVALID_REPO.format(self.cachedir, self.url, self.role))
 "
@@ -742,9 +742,7 @@ PRs: 33244, 33245"
 "log.error(_INVALID_REPO.format(self.cachedir, self.url, self.role))
 "
 -------------------------------------------------------------------------
-"```python
-log.error(f""{self.cachedir}, {self.url}, {self.role}"")
-```"
+"log.error(""Invalid Repository: cachedir={}, url={}, role={}"".format(self.cachedir, self.url, self.role))"
 -------------------------------------------------------------------------
 "log.error(_INVALID_REPO.format(self.cachedir, self.url, self.role))
 "
@@ -776,8 +774,8 @@ ret['comment'] = ' '.join([ret['comment'], '- files are identical but force flag
 -------------------------------------------------------------------------
 "```python
 changed = True
-ret['comment'] = ' '.join([ret['comment'], '- files are identical but force flag is set'])
-```"
+ret['comment'] += ' - files are identical but force flag is set'
+```  "
 -------------------------------------------------------------------------
 "changed = True
 ret['comment'] = ' '.join([ret['comment'], '- files are identical but force flag is set'])
@@ -792,8 +790,11 @@ ret['comment'] = ' '.join([ret['comment'], '- files are identical but force flag
 "
 -------------------------------------------------------------------------
 "```python
-changed = True
-ret['comment'] = ' '.join([ret['comment'], '- files are identical but force flag is set'])
+changed = False
+comment_extension = '- files are identical but force flag is set'
+if force:
+    changed = True
+    ret['comment'] = ' '.join([ret['comment'], comment_extension])
 ```"
 -------------------------------------------------------------------------
 "changed = True
