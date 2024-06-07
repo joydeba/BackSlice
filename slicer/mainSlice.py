@@ -200,7 +200,7 @@ def get_targetfile(repo, pull_id_original, pull_id_backport, filepathBackport):
     return filepathBackport, previousBackportfullFileTarget                                                                                                   
                                 
 def saveMetricResults(slicedPRs, projectName, data_read, numberofSlicingRequired, numberofDifferences, has_test_and_code, numberOfSuccesfulSlicing):
-    with open("slicerOutput/"+projectName+"InconICFDiffzBackTransNoNeedTest.txt", 'w') as f:   
+    with open("slicerOutput/"+projectName+"InconICFDiffzBackTransNoNeedTestIllustration.txt", 'w') as f:   
         print("Total Labeled Backporting PRs", len(data_read), file=f)
         print("Total Sliced Required", numberofSlicingRequired, file=f)
         print("Total Number of Hunk Differences", numberofDifferences, file=f)
