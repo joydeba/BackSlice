@@ -18,7 +18,7 @@ import os
 from utils.slicerUtile import *
 
 class BackSlicer():
-    def __init__(self, sourceOriginal= None, sourcebackport = None, astdiffsHistory = None, context = None, dependencies = None, metadata = None, functionalSet = None, compilationSet= None, stableLibraris = None, targetfile = None):
+    def __init__(self, sourceOriginal= None, sourcebackport = None, astdiffsHistory = None, context = None, dependencies = None, metadata = None, functionalSet = None, compilationSet= None, stableLibraris = None, targetfile = None, tfileName = None):
         self.sourceOriginal = sourceOriginal
         self.sourcebackport = sourcebackport
         self.astdiffsHistory = astdiffsHistory
@@ -28,10 +28,11 @@ class BackSlicer():
         self.functionalSet = functionalSet
         self.compilationSet= compilationSet
         self.stableLibraris = stableLibraris
-        self.targetfile = targetfile             
+        self.targetfile = targetfile
+        self.tfileName = tfileName             
 
 
-    def analyzeProgram(self):
+    def analyzeProgram(self, fineTuning = False, fineTuningFile = "transInput/Backports.jsonl", ftTraining = False, prompt = False, testingFile = ""):
         """
         Adapt the sourceOriginal to a stable version based on various inputs.
 
