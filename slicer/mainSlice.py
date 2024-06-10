@@ -312,6 +312,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
 
 
             if codehunks_original and codehunks_backport:
+                numberofDifferences = numberofDifferences + 1
                 context_index = 0 
                 for codeHunk, codeHunkBackport  in zip(codehunks_original, codehunks_backport):
                     slicebyCslicer = None
