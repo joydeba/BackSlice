@@ -200,7 +200,7 @@ def get_targetfile(repo, pull_id_original, pull_id_backport, filepathBackport):
     return filepathBackport, previousBackportfullFileTarget                                                                                                   
                                 
 def saveMetricResults(slicedPRs, projectName, data_read, numberofSlicingRequired, numberofDifferences, has_test_and_code, numberOfSuccesfulSlicing):
-    with open("slicerOutput/"+projectName+"InconICFDiffzBackTransNoNeedTestIllustration.txt", 'w') as f:   
+    with open("slicerOutput/"+projectName+"InconICFDiffzBackTransNoNeedTestDiff.txt", 'w') as f:   
         print("Total Labeled Backporting PRs", len(data_read), file=f)
         print("Total Sliced Required", numberofSlicingRequired, file=f)
         print("Total Number of Hunk Differences", numberofDifferences, file=f)
@@ -310,16 +310,20 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                 has_test_and_code = has_test_and_code + 1
 
 
-
             if codehunks_original and codehunks_backport:
-                numberofDifferences = numberofDifferences + 1
                 context_index = 0 
                 for codeHunk, codeHunkBackport  in zip(codehunks_original, codehunks_backport):
+                    output_parcent = int(difflib.SequenceMatcher(None, codeHunk, codeHunkBackport).ratio()*100)
+                    diff_parcent = 100-output_parcent
+                    if diff_parcent == 0:
+                        continue
+                    else:
+                        numberofDifferences = numberofDifferences + 1
                     slicebyCslicer = None
                     try:                        
                         functionalSetforHunk = get_functional_set(codeHunk, testCases = testhunks_original)
                         astdiffshistory = get_ast_diffs(source_commits = pull_commitsSubmitted, startCommit=None, endCommit=None, startDate = None, endDate = None, repoName=repoName, projectName =projectName, fileInfo = filepathBackport) 
-                        slicer = BackSlicer(sourceOriginal = codeHunk,
+                        slicer = BackTransformer(sourceOriginal = codeHunk,
                                             sourcebackport = codeHunkBackport, 
                                             astdiffsHistory = astdiffshistory, 
                                             context = get_hunk_context(file_content = codehunks_original_withContext[context_index]), 
@@ -390,12 +394,13 @@ ansibleDefault_branch = 'devel' # Python 87.8% ---------
 # saltDefault_branch  = "maser" # Python 97.8% --------- X
 
 # file_regex = ":*.cpp", ":*.py", ":*.c"
-mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRsNoTestNeededIllustrations.csv', 
+
+mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRsNoTestNeeded.csv', 
 ansibleDefault_branch,
 ansibleDictOfActiveBranches,
 'ansible',
 'ansible',
-'slicerOutput/Incmp_BackTrans_Ansible_backport_keywordsPRsNoNeedTestIllustrations.csv',
+'slicerOutput/Incmp_BackTrans_Ansible_backport_keywordsPRsNoNeedTestSampleDiff.csv',
 trainingFile = 'transInput/TrainingSample.jsonl',
 testingFile =''
 )
