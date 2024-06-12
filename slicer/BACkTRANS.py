@@ -244,7 +244,7 @@ class BackTransformer():
             training_file="file-P44jFVRZVz7Y2dUvfvGXy2nP", 
             model="gpt-3.5-turbo"
             )
-
+        #  Todo- Remove statement that is not required in Stable Version
         if prompt:
             promptData = self.formatPromptData()
             completion = client.chat.completions.create(
@@ -252,11 +252,11 @@ class BackTransformer():
                 messages=[
                     {"role": "system", "content": (
                         "Adapt the given code snippet based on the information below. "
-                        "No python or language info or extra quotations. "
+                        "No language info or extra quotations. "
                         "Don’t remove comments of original source. "
-                        "Work with the existing statements from the script, try to avoid extra lines if not necessary. "
-                        "Don’t add import statements until they are related to stable information. "
-                        "Make it more similar to the original, just adapting the necessary changes for stability. "
+                        # "Work with the existing statements from the script, try to avoid extra lines if not necessary. "
+                        # "Don’t add import statements until they are related to stable information. "
+                        # "Make it more similar to the original, just adapting the necessary changes for stability. "
                         "Hunk is okay, no need to provide complete code. "
                         "Keep similar indentation of the original. "
                         "Give source code, not ASTs. "
