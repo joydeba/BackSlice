@@ -249,17 +249,29 @@ class BackTransformer():
             completion = client.chat.completions.create(
                 model="ft:gpt-3.5-turbo-0125:personal::9SXXjzCZ" if ftTraining else "gpt-3.5-turbo",
                 messages=[
-                    {"role": "system", "content": (
-                        "Adapt the given code snippet based on the information below. "
-                        "No language info or extra quotations. "
-                        "Remove statements that are not required in the stable version."
-                        "Don’t remove comments of original source. "
-                        "Hunk is okay, no need to provide complete code. "
-                        "Keep similar indentation of the original. "
-                        "Give source code, not ASTs. "
-                        + promptData
-                    )},
-                    {"role": "user", "content": "Adapt this - " + self.sourceOriginal}
+                    {
+                        "role": "system",
+                        "content": (
+                            "Adapt the given code snippet based on the information below:\n"
+                            "- No metadata from the model in the output.\n"
+                            "- If ASTs contain information about the STABLE version, include it in the adapted code.\n"
+                            "- Include required dependencies if they are available in the stable version.\n"
+                            "- If metadata mentions adding or removing statements for the stable version, make those changes in the adapted code.\n"
+                            "- Preserve information about Compilation and Functional sets in the adapted code.\n"
+                            "- Emphasize library information, function calls, function names, class names, and class method calls from the stable version.\n"
+                            "- Replace identifiers in the adapted code with those from the target file that are closely similar to the source code.\n"
+                            "- Remove statements that are not required in the stable version or the target file.\n"
+                            "- Do not remove comments from the original source.\n"
+                            "- Providing a code hunk is acceptable; there's no need to provide the complete code.\n"
+                            "- Maintain the original indentation.\n"
+                            "- Provide the source code, not ASTs.\n"
+                            + promptData
+                        )
+                    },
+                    {
+                        "role": "user",
+                        "content": "Adapt this - " + self.sourceOriginal
+                    }
                 ]
             )
             result = completion.choices[0].message     
