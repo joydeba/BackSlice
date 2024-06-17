@@ -120,6 +120,7 @@ class BackTransformer():
             return key_components
         
         components = extract_key_components(self.targetfile)
+        # Todo change the sources such as give the target context or def rather than file, check souce and backport inputs
 
         return (
             "All ASTs from commit history: " + allast_snippets + "\n" +
@@ -261,6 +262,7 @@ class BackTransformer():
                             "- Emphasize library information, function calls, function names, class names, and class method calls from the stable version.\n"
                             "- Replace identifiers in the adapted code with those from the target file that are closely similar to the source code.\n"
                             "- Remove statements that are not required in the stable version or the target file.\n"
+                            "- Remove statements that are already in the target file.\n"
                             "- Do not remove comments from the original source.\n"
                             "- Providing a code hunk is acceptable; there's no need to provide the complete code.\n"
                             "- Maintain the original indentation.\n"
