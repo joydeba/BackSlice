@@ -488,8 +488,10 @@ class MethodExtractor(ast.NodeVisitor):
         self.generic_visit(node)
     
     def contains_keywords(self, method_code):
-        return len(self.keywords.intersection(method_code.split())) / len(self.keywords) >= 0.5
-
+        matches = self.keywords.intersection(method_code.split())
+        threshold = len(self.keywords) // 2  
+        return len(matches) >= threshold
+    
     def extract_methods(self, file_content):
         self.targetfile = file_content
         self.tree = ast.parse(file_content)

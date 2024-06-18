@@ -11,6 +11,7 @@ from openai import OpenAI
 import json
 import os
 import re
+import keyword
 
 class BackTransformer():
     def __init__(self, sourceOriginal= None, sourcebackport = None, astdiffsHistory = None, context = None, dependencies = None, metadata = None, functionalSet = None, compilationSet= None, stableLibraris = None, targetfile = None, tfileName = None):
@@ -120,7 +121,9 @@ class BackTransformer():
             return key_components
         
         # components = extract_key_components(self.sourceOriginal)
-        extractor = MethodExtractor(self.sourceOriginal.split())
+        # keywords = set(self.sourceOriginal.split()) - set(keyword.kwlist)
+        keywords = {kw for kw in self.sourceOriginal.split() if kw not in keyword.kwlist and len(kw) > 7}
+        extractor = MethodExtractor(keywords)
         methods = extractor.extract_methods(self.targetfile)
 
     
@@ -258,8 +261,7 @@ class BackTransformer():
                         "role": "system",
                         "content": (
                             "Adapt the given code snippet based on the information below:\n"
-                            + promptData+
-                            "- No metadata from the model in the output.\n"
+                            + promptData+ "\n"
                             "- If ASTs contain information about the STABLE version, include it in the adapted code.\n"
                             "- Include required dependencies if they are available in the stable version.\n"
                             "- If metadata mentions adding or removing statements for the stable version, make those changes in the adapted code.\n"
@@ -283,5 +285,5 @@ class BackTransformer():
             )
             result = completion.choices[0].message     
    
-        return result.content, "Recom"
+        return result.content.replace('```python', '').replace('```', '').strip(), "Recom"
         # return "", "Recom"    

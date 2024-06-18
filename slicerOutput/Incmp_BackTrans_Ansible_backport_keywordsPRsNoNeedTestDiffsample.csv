@@ -3,11 +3,9 @@
     s3.get_waiter('bucket_exists').wait(Bucket=bucket)
 "
 -------------------------------------------------------------------------
-"```python
-    if permissions := module.params.get('permission') and not module.params.get('ignore_nonexistent_bucket'):
-        # Wait for the bucket to exist before setting ACLs
-        s3.get_waiter('bucket_exists').wait(Bucket=bucket)
-```"
+"if module.params.get('permission') and not ignore_nonexistent_bucket:
+    # Wait for the bucket to exist before setting ACLs
+    s3.get_waiter('bucket_exists').wait(Bucket=bucket)"
 -------------------------------------------------------------------------
 "if module.params.get('permission'):
 "
