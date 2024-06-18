@@ -11,6 +11,8 @@ import json
 import mypy.api
 import io
 
+
+
 def remove_comments_docstrings_fromString(fsring):
     '''
     Strips comments and docstrings from a python file.
@@ -472,3 +474,24 @@ def find_missing_imports(code: str) -> list:
         return ""    
 
     return ", ".join(missing_imports)
+
+
+class MethodExtractor(ast.NodeVisitor):
+    def __init__(self, keywords):
+        self.keywords = set(keywords)
+        self.methods = []
+
+    def visit_FunctionDef(self, node):
+        method_code = ast.get_source_segment(self.targetfile, node)
+        if self.contains_keywords(method_code):
+            self.methods.append(method_code)
+        self.generic_visit(node)
+    
+    def contains_keywords(self, method_code):
+        return len(self.keywords.intersection(method_code.split())) / len(self.keywords) >= 0.5
+
+    def extract_methods(self, file_content):
+        self.targetfile = file_content
+        self.tree = ast.parse(file_content)
+        self.visit(self.tree)
+        return self.methods

@@ -5,7 +5,7 @@
 # Use this - https://platform.openai.com/docs/guides/fine-tuning/analyzing-your-fine-tuned-model
 #  https://platform.openai.com/docs/guides/fine-tuning/upload-a-training-file
 
-# from utils.slicerUtile import *
+from utils.slicerUtile import *
 
 from openai import OpenAI
 import json
@@ -119,8 +119,12 @@ class BackTransformer():
             key_components = ', '.join(unique_identifiers)
             return key_components
         
-        components = extract_key_components(self.targetfile)
-        # Todo change the sources such as give the target context or def rather than file, check souce and backport inputs
+        # components = extract_key_components(self.sourceOriginal)
+        extractor = MethodExtractor(self.sourceOriginal.split())
+        methods = extractor.extract_methods(self.targetfile)
+
+    
+        # Todo change the sources such as give the target context or def rather than file, check source and backport inputs
 
         return (
             "All ASTs from commit history: " + allast_snippets + "\n" +
@@ -134,7 +138,7 @@ class BackTransformer():
             "Function call information from Stable: " + nested_values_function_calls + "\n" +
             "Class name information from Stable: " + nested_values_class_names + "\n" + 
             "Class method call information from Stable: " + nested_values_class_method_calls + "\n" +                                   
-            "Target file: " + components
+            "Target method: " + methods[0]
         )
 
 
@@ -254,20 +258,21 @@ class BackTransformer():
                         "role": "system",
                         "content": (
                             "Adapt the given code snippet based on the information below:\n"
+                            + promptData+
                             "- No metadata from the model in the output.\n"
                             "- If ASTs contain information about the STABLE version, include it in the adapted code.\n"
                             "- Include required dependencies if they are available in the stable version.\n"
                             "- If metadata mentions adding or removing statements for the stable version, make those changes in the adapted code.\n"
                             "- Preserve information about Compilation and Functional sets in the adapted code.\n"
                             "- Emphasize library information, function calls, function names, class names, and class method calls from the stable version.\n"
-                            "- Replace identifiers in the adapted code with those from the target file that are closely similar to the source code.\n"
-                            "- Remove statements that are not required in the stable version or the target file.\n"
-                            "- Remove statements that are already in the target file.\n"
+                            "- Replace identifiers in the adapted code with those from the Stable that are closely similar to the source code.\n"
+                            "- Remove statements that are not required in the stable version or the target method.\n"
+                            "- Remove statements that are already in the target method.\n"
                             "- Do not remove comments from the original source.\n"
                             "- Providing a code hunk is acceptable; there's no need to provide the complete code.\n"
                             "- Maintain the original indentation.\n"
                             "- Provide the source code, not ASTs.\n"
-                            + promptData
+                            
                         )
                     },
                     {
