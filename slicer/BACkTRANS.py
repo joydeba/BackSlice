@@ -14,11 +14,12 @@ import re
 import keyword
 
 class BackTransformer():
-    def __init__(self, sourceOriginal= None, sourcebackport = None, astdiffsHistory = None, context = None, dependencies = None, metadata = None, functionalSet = None, compilationSet= None, stableLibraris = None, targetfile = None, tfileName = None):
+    def __init__(self, sourceOriginal= None, sourcebackport = None, astdiffsHistory = None, context = None, method_name = None, dependencies = None, metadata = None, functionalSet = None, compilationSet= None, stableLibraris = None, targetfile = None, tfileName = None):
         self.sourceOriginal = sourceOriginal
         self.sourcebackport = sourcebackport
         self.astdiffsHistory = astdiffsHistory
         self.context = context
+        self.method_name = method_name
         self.dependencies = dependencies 
         self.metadata = metadata
         self.functionalSet = functionalSet
@@ -26,6 +27,7 @@ class BackTransformer():
         self.stableLibraris = stableLibraris
         self.targetfile = targetfile
         self.tfileName = tfileName
+
 
     def formatPromptData(self):
         targetfileName = os.path.basename(self.tfileName)
@@ -120,11 +122,7 @@ class BackTransformer():
             key_components = ', '.join(unique_identifiers)
             return key_components
         
-        # components = extract_key_components(self.sourceOriginal)
-        # keywords = set(self.sourceOriginal.split()) - set(keyword.kwlist)
-        keywords = {kw for kw in self.sourceOriginal.split() if kw not in keyword.kwlist and len(kw) > 7}
-        extractor = MethodExtractor(keywords)
-        methods = extractor.extract_methods(self.targetfile)
+        method = extract_method_definition(self.targetfile, self.method_name)
 
     
         # Todo change the sources such as give the target context or def rather than file, check source and backport inputs
@@ -141,7 +139,7 @@ class BackTransformer():
             "Function call information from Stable: " + nested_values_function_calls + "\n" +
             "Class name information from Stable: " + nested_values_class_names + "\n" + 
             "Class method call information from Stable: " + nested_values_class_method_calls + "\n" +                                   
-            "Target method: " + methods[0]
+            "Target method: " + method
         )
 
 
@@ -262,6 +260,7 @@ class BackTransformer():
                         "content": (
                             "Adapt the given code snippet based on the information below:\n"
                             + promptData+ "\n"
+                            "Please follow these instructions carefully for precise adaptation.\n"
                             "- If ASTs contain information about the STABLE version, include it in the adapted code.\n"
                             "- Include required dependencies if they are available in the stable version.\n"
                             "- If metadata mentions adding or removing statements for the stable version, make those changes in the adapted code.\n"

@@ -327,6 +327,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                             sourcebackport = codeHunkBackport, 
                                             astdiffsHistory = astdiffshistory, 
                                             context = get_hunk_context(file_content = codehunks_original_withContext[context_index]), 
+                                            method_name = get_method_name(codehunks_original_withContext[context_index]),
                                             dependencies = get_changeset_dependencies(previousBackportfullFileTarget), 
                                             metadata = get_changesets_and_metadata(pull_request = pull_backport, sourceO = codeHunk), 
                                             functionalSet = functionalSetforHunk, 

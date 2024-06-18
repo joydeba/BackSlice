@@ -10,7 +10,7 @@ import os
 import json
 import mypy.api
 import io
-
+import keyword
 
 
 def remove_comments_docstrings_fromString(fsring):
@@ -111,10 +111,23 @@ def get_hunk_context(file_content, hunk_start = None, hunk_end = None, context_l
         if lines[i].startswith('+') or lines[i].startswith('-'):    
             continue
         else:
-            context.append(lines[i])
+            context.append(lines[i])   
 
     return '\n'.join(context)
 
+def get_method_name(file_content):
+
+    start_index = file_content.find('def')
+    if start_index != -1:
+        file_content = file_content[start_index:]
+
+    pattern = r'^\s*def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\([^)]*\)\s*:'
+    match = re.search(pattern, file_content, re.MULTILINE)
+    if match:
+        method_name = match.group(1)
+    else:
+        method_name = None
+    return method_name  
 
 def get_changeset_dependencies(source_code):
     if source_code is None:
@@ -476,24 +489,14 @@ def find_missing_imports(code: str) -> list:
     return ", ".join(missing_imports)
 
 
-class MethodExtractor(ast.NodeVisitor):
-    def __init__(self, keywords):
-        self.keywords = set(keywords)
-        self.methods = []
 
-    def visit_FunctionDef(self, node):
-        method_code = ast.get_source_segment(self.targetfile, node)
-        if self.contains_keywords(method_code):
-            self.methods.append(method_code)
-        self.generic_visit(node)
-    
-    def contains_keywords(self, method_code):
-        matches = self.keywords.intersection(method_code.split())
-        threshold = len(self.keywords) // 2  
-        return len(matches) >= threshold
-    
-    def extract_methods(self, file_content):
-        self.targetfile = file_content
-        self.tree = ast.parse(file_content)
-        self.visit(self.tree)
-        return self.methods
+def extract_method_definition(file_content, method_name):
+    tree = ast.parse(file_content)
+    for node in ast.walk(tree):
+        if isinstance(node, ast.FunctionDef) and node.name == method_name:
+            start_lineno = node.lineno
+            end_lineno = node.body[-1].end_lineno
+            lines = file_content.splitlines()[start_lineno-1:end_lineno]
+            method_definition = '\n'.join(lines).strip()
+            return method_definition
+    return None
