@@ -497,4 +497,4 @@ def extract_method_definition(file_content, method_name):
             lines = file_content.splitlines()[start_lineno-1:end_lineno]
             method_definition = '\n'.join(lines).strip()
             return method_definition
-    return None
+    return ""
