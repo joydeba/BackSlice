@@ -59,7 +59,6 @@ def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = 
                 if os.path.basename(file.filename) in fileInfo and file.filename.endswith('.py'):
                     source_hunks = file.patch.split("@@\n")
                     for indexhunk in range(1, len(source_hunks)):
-                        # Todo problem here
                         cleanhunk = source_hunks[indexhunk].split("@@")[0]
                         cleanhunk = cleanhunk.split("\n")
                         leadingSpacesOri = 0
@@ -359,8 +358,7 @@ def get_compilation_set(sourceCode, functional_set):
     return list(referenced_entities)
 
 
-def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_file="StableCacheLibrary.txt"):
-    # return {} # Todo remove it 
+def get_stable_version_libraries(owner, repo, branch, github_token=None, cache_file="StableCacheLibrary.txt"): 
     # Check if a cache file exists and load information from it if available.
     file_count = 0
     if cache_file and os.path.exists(cache_file):

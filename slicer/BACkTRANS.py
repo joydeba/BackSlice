@@ -124,8 +124,6 @@ class BackTransformer():
         
         method = extract_method_definition(self.targetfile, self.method_name)
 
-    
-        # Todo change the sources such as give the target context or def rather than file, check source and backport inputs
 
         return (
             "All ASTs from commit history: " + allast_snippets + "\n" +
@@ -258,13 +256,13 @@ class BackTransformer():
                     {
                         "role": "system",
                         "content": (
-                            "Adapt the given code snippet based on the information below:\n"
+                            "Adapt the given code snippet based on the stable information below:\n"
                             + promptData+ "\n"
                             "Please follow these instructions carefully for precise adaptation.\n"
-                            "- If ASTs contain information about the STABLE version, include it in the adapted code.\n"
+                            "- If AST diffs contain information about the STABLE version, include it in the adapted code.\n"
                             "- Include required dependencies if they are available in the stable version.\n"
                             "- If metadata mentions adding or removing statements for the stable version, make those changes in the adapted code.\n"
-                            "- Preserve information about Compilation and Functional sets in the adapted code.\n"
+                            "- Preserve statements related to Compilation and Functional sets in the adapted code.\n"
                             "- Emphasize library information, function calls, function names, class names, and class method calls from the stable version.\n"
                             "- Replace identifiers in the adapted code with those from the Stable that are closely similar to the source code.\n"
                             "- Remove statements that are not required in the stable version or the target method.\n"
