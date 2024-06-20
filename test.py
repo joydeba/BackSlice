@@ -214,3 +214,16 @@ from collections import deque
 #         print(f"Deleted file: {file['filename']} (ID: {file_id})")
 
 # print("All JSONL files have been deleted.")
+
+
+
+# "stat1.st_mode = 0o0600
+# "
+# -------------------------------------------------------------------------
+# stat1.st_mode = 0o0600
+# -------------------------------------------------------------------------
+# "assert atomic_mocks['chmod'].call_args_list == [mocker.call(b'/path/to/src', basic.DEFAULT_PERM & ~18)]
+# "
+# -------------------------------------------------------------------------
+# "Recom
+# PRs: 71260, 71514"
