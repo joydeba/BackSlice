@@ -90,13 +90,13 @@ def getsimilarHunks(commits_diffs_original_contextHunks, commits_diffs_backport_
     commits_hunkline_original_context = commits_diffs_original_contextHunks[indexHunks0].split("\n")
     commits_hunkline_backport_context = commits_diffs_backport_contextHunks[indexHunks0].split("\n")
     similarity_score = difflib.SequenceMatcher(None, commits_hunkline_original_context[0], commits_hunkline_backport_context[0]).ratio()
-    if similarity_score <= 0.60:
+    if similarity_score <= 0.85:
         for indexH in range(1, min_hunks_count):
             commits_hunkline_backport_context = commits_diffs_backport_contextHunks[indexH].split("\n")
             similarity_score = difflib.SequenceMatcher(None, commits_hunkline_original_context[0], commits_hunkline_backport_context[0]).ratio()
-            if similarity_score > 0.60:
+            if similarity_score > 0.85:
                 break
-            if similarity_score <= 0.60 and indexH == min_hunks_count - 1:
+            if similarity_score <= 0.85 and indexH == min_hunks_count - 1:
                 return None, None                    
     else:
         commits_hunkline_backport_context = commits_diffs_backport_contextHunks[indexHunks0].split("\n")
