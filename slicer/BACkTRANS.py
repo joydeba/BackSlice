@@ -270,7 +270,6 @@ class BackTransformer():
                             "- Do not remove comments from the original source.\n"
                             "- Providing a code hunk is acceptable; there's no need to provide the complete code.\n"
                             "- Maintain the original indentation.\n"
-                            "- Provide the source code, not ASTs.\n"
                             
                         )
                     },
