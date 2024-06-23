@@ -3,10 +3,10 @@ Total Sliced Required 1
 Total Number of Hunk Differences 2
 Total Hunks Have Test and Code 0
 Total Succesfully Sliced 2
-Average BLEU Score: 0.25161567237562726
-Average METEOR Score: 0.5122595197715389
-Average CodeBLEU Score: 0.34606957017508194
-Average ROUGE-L Score: 0.3866489440257006
+Average BLEU Score: 0.248330204673438
+Average METEOR Score: 0.49505231321522
+Average CodeBLEU Score: 0.3459389892033704
+Average ROUGE-L Score: 0.3778405270939736
 Average CHRF Score: 0.6666666666666666
 Cohen's Kappa between BLEU and Meteor: 0.0
 Confusion Matrix BLEU vs Meteor:

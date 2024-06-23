@@ -115,18 +115,18 @@ def get_hunk_context(file_content, hunk_start = None, hunk_end = None, context_l
     return '\n'.join(context)
 
 def get_method_name(file_content):
-
     start_index = file_content.find('def')
     if start_index != -1:
         file_content = file_content[start_index:]
 
-    pattern = r'^\s*def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\([^)]*\)\s*:'
+    pattern = r'^\s*def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\([^)]*\)\s*'
     match = re.search(pattern, file_content, re.MULTILINE)
+    
     if match:
         method_name = match.group(1)
     else:
         method_name = None
-    return method_name  
+    return method_name
 
 def get_changeset_dependencies(source_code):
     if source_code is None:
