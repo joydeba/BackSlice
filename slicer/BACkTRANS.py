@@ -127,7 +127,7 @@ class BackTransformer():
 
         return (
             "All ASTs from commit history: " + allast_snippets + "\n" +
-            "Current context: " + self.context + "\n" +
+            # "Current context: " + self.context + "\n" +
             "Required dependency: " + all_library_names + "\n" +
             "Original metadata: " + metadata + "\n" +
             "Functional set for the hunk: " + f_set + "\n" +
@@ -258,15 +258,14 @@ class BackTransformer():
                         "content": (
                             "Adapt the given code snippet based on the stable information below:\n"
                             + promptData+ "\n"
-                            "Please follow these instructions carefully for precise adaptation.\n"
+                            "Also follow these instructions carefully for precise adaptation.\n"
                             "- If the AST differences include statements that can align the adapted hunk with the STABLE version, incorporate them into the adapted code.\n"
-                            "- Include necessary dependencies if they are new and not present in the stable version.\n"
+                            "- Include required dependencies if they are new and not present in the stable version.\n"
                             "- If metadata mentions adding or removing statements for the stable version, make those changes in the adapted code.\n"
                             "- Preserve statements related to Compilation and Functional sets in the adapted code.\n"
-                            "- Emphasize library information, function calls, function names, class names, and class method calls from the stable version.\n"
-                            "- Replace identifiers in the adapted code with those from the Stable that are closely similar to the source code.\n"
+                            "- Replace identifiers in the adapted code with those from library information, function calls, function names, class names, and class method calls of the stable version that are closely similar to the source code.\n"
                             "- Remove statements that are not required in the stable version or the target method.\n"
-                            "- Remove statements that are already in the target method.\n"
+                            "- Integrate the adapted code into the target method, adding or removing statements as needed to ensure proper functionality within the target method.\n"
                             "- Do not remove comments from the original source.\n"
                             "- Providing a code hunk is acceptable; there's no need to provide the complete code.\n"
                             "- Maintain the original indentation.\n"

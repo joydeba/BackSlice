@@ -1,7 +1,13 @@
 "if not no_password_changes and (password is not None or role_attr_flags != '' or expires is not None):
 "
 -------------------------------------------------------------------------
-if not no_password_changes and (password is not None or role_attr_flags != '' or expires is not None):
+"if not no_password_changes and (password is not None or role_attr_flags != '' or expires is not None):
+    # Select password and all flag-like columns in order to verify changes.
+    query_password_data = dict(password=password, expires=expires)
+    select = ""SELECT * FROM pg_authid where rolname=%(user)s""
+    cursor.execute(select, {""user"": user})
+    # Grab current role attributes.
+    current_role_attrs = cursor.fetchone()"
 -------------------------------------------------------------------------
 "if not no_password_changes and (password is not None or role_attr_flags != ''):
 "
@@ -19,11 +25,11 @@ else:
 "
 -------------------------------------------------------------------------
 "if expires is not None:
-    cursor.execute(""SELECT %(expires)s::timestamptz;"", {""expires"": expires})
-    expires_with_tz = cursor.fetchone()[0]
-    expires_changing = expires_with_tz != current_role_attrs.get('rolvaliduntil')
-else:
-    expires_changing = False"
+            cursor.execute(""SELECT %s::timestamptz;"", (expires,))
+            expires_with_tz = cursor.fetchone()[0]
+            expires_changing = expires_with_tz != current_role_attrs.get('rolvaliduntil')
+        else:
+            expires_changing = False"
 -------------------------------------------------------------------------
 "expires_changing = (expires is not None and expires == current_role_attrs['rolvaliduntil'])
 "
