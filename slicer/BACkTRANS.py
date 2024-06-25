@@ -82,6 +82,8 @@ class BackTransformer():
             nested_values_strings = {key: ', '.join(values) for key, values in nested_values.items()}
             return nested_values_strings
         
+
+        # We can try target file directly.
         nested_values = get_nested_values(self.stableLibraris, targetfileName)
 
         nested_values_libraries = nested_values.get('libraries', '')
@@ -90,6 +92,7 @@ class BackTransformer():
         nested_values_class_names = nested_values.get('class_names', '')
         nested_values_class_method_calls = nested_values.get('class_method_calls', '')
 
+     
 
         # def get_nested_values(data, keywords, min_chars=3):
         #     nested_values = []
