@@ -42,7 +42,10 @@ def get_file_and_file_content(pull_id_original, pull_id_backport, line, repo, gL
     pull_backport = gLocal.execute(["gh", "pr", "view", pull_id_backport])
     pull_commitOriginal = gLocal.execute(["gh", "pr", "view", pull_id_original, "--json", "mergeCommit"])
     pull_commitBackports = gLocal.execute(["gh", "pr", "view", pull_id_backport, "--json", "mergeCommit"])
+    baseOrigin = ast.literal_eval(gLocal.execute(["gh", "pr", "view", pull_id_original, "--json", "baseRefName"]))['baseRefName']
     targetStableBranch = ast.literal_eval(gLocal.execute(["gh", "pr", "view", pull_id_backport, "--json", "baseRefName"]))['baseRefName']
+    if baseOrigin == targetStableBranch:
+        return None, None, None, None
     if pull_commitOriginal == '{"mergeCommit":null}' or pull_commitBackports == '{"mergeCommit":null}':
         print("Skipping for  no-merge commit") 
         return None, None, None, None
@@ -396,7 +399,7 @@ ansibleDefault_branch = 'devel' # Python 87.8% ---------
 
 # file_regex = ":*.cpp", ":*.py", ":*.c"
 
-mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRsNoTestNeeded.csv', 
+mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRsNoTestNeededSample.csv', 
 ansibleDefault_branch,
 ansibleDictOfActiveBranches,
 'ansible',

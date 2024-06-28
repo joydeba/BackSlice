@@ -135,11 +135,12 @@ class BackTransformer():
             "Original metadata: " + metadata + "\n" +
             "Functional set for the hunk: " + f_set + "\n" +
             "Compilation set for the hunk: " + c_set + "\n" +
-            "Library information from Stable: " + nested_values_libraries + "\n" +
-            "Function name information from Stable: " + nested_values_function_names + "\n" +
-            "Function call information from Stable: " + nested_values_function_calls + "\n" +
-            "Class name information from Stable: " + nested_values_class_names + "\n" + 
-            "Class method call information from Stable: " + nested_values_class_method_calls + "\n" +                                   
+            # "Library information from Stable: " + nested_values_libraries + "\n" +
+            # "Function name information from Stable: " + nested_values_function_names + "\n" +
+            # "Function call information from Stable: " + nested_values_function_calls + "\n" +
+            # "Class name information from Stable: " + nested_values_class_names + "\n" + 
+            # "Class method call information from Stable: " + nested_values_class_method_calls + "\n" + 
+            "Target file: " + self.targetfile + "\n" +                                
             "Target method: " + method
         )
 
