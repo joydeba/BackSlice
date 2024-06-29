@@ -176,3 +176,7 @@ transInput/BackportsSample.jsonl
 transInput/*Backports.jsonl
 transInput/AnsibleBackports.jsonl
 transInput/CmsswSample.jsonl
+lib64
+pyvenv.cfg
+pyvenv.cfg
+pyvenv.cfg
