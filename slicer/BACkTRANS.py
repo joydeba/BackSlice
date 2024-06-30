@@ -12,6 +12,7 @@ import json
 import os
 import re
 import keyword
+import openai
 
 class BackTransformer():
     def __init__(self, sourceOriginal= None, sourcebackport = None, astdiffsHistory = None, context = None, method_name = None, dependencies = None, metadata = None, functionalSet = None, compilationSet= None, stableLibraris = None, targetfile = None, tfileName = None):

@@ -31,6 +31,7 @@ BackSlice (BackportSlicer) - Provide semantic slices by analyzing changesets in 
 - (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/joydeba/.zprofile
 - eval "$(/opt/homebrew/bin/brew shellenv)"   
 - brew install gh
+- sudo apt install gh [Ubuntu]
 
 - [Optinal] Update config keys, install git with brew, clone subject repositories
 
@@ -43,3 +44,11 @@ BackSlice (BackportSlicer) - Provide semantic slices by analyzing changesets in 
     - source ~/.zshrc
     - echo $OPENAI_API_KEY   
 - pip install tiktoken    
+
+
+# BackTrans Ubuntu
+
+- nano ~/.bashrc
+- export OPENAI_API_KEY='your-api-key-here'
+- source ~/.bashrc
+- echo $OPENAI_API_KEY

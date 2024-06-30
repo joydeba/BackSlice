@@ -11,7 +11,7 @@ from nltk.translate.bleu_score import SmoothingFunction
 from rouge import Rouge
 import csv
 import sacrebleu
-from codebleu import calc_codebleu
+# from codebleu import calc_codebleu
 
 def calculate_bleu_score(reference, candidate):
     reference_tokens = nltk.word_tokenize(reference)
@@ -67,9 +67,9 @@ def calculate_average_meteor_score(paired_list):
     return average_meteor_score, all_meteor_scores
 
 
-def calculate_code_bleu_score(reference, candidate):
-    code_bleu_score = calc_codebleu([reference], [candidate], lang="python", weights=(0.25, 0.25, 0.25, 0.25), tokenizer=None)
-    return code_bleu_score['codebleu']
+# def calculate_code_bleu_score(reference, candidate):
+#     code_bleu_score = calc_codebleu([reference], [candidate], lang="python", weights=(0.25, 0.25, 0.25, 0.25), tokenizer=None)
+#     return code_bleu_score['codebleu']
 
 def calculate_average_code_bleu_score(paired_list):
     total_code_bleu_score = 0
