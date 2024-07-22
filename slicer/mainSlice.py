@@ -203,7 +203,7 @@ def get_targetfile(repo, pull_id_original, pull_id_backport, filepathBackport):
     return filepathBackport, previousBackportfullFileTarget                                                                                                   
                                 
 def saveMetricResults(slicedPRs, projectName, data_read, numberofSlicingRequired, numberofDifferences, has_test_and_code, numberOfSuccesfulSlicing):
-    with open("slicerOutput/"+projectName+"InconICFDiffzBackTransNoNeedTestDiff.txt", 'w') as f:   
+    with open("slicerOutput/"+projectName+"InconICFDiffzBackTransNoNeedTestDiffIllustrations.txt", 'w') as f:   
         print("Total Labeled Backporting PRs", len(data_read), file=f)
         print("Total Sliced Required", numberofSlicingRequired, file=f)
         print("Total Number of Hunk Differences", numberofDifferences, file=f)
@@ -399,12 +399,12 @@ ansibleDefault_branch = 'devel' # Python 87.8% ---------
 
 # file_regex = ":*.cpp", ":*.py", ":*.c"
 
-mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRsNoTestNeeded.csv', 
+mainCSLICER('data_cmp_incmpWithTest/Manual_incmp_Ansible_backport_keywordsPRsNoTestNeededIllustrations.csv', 
 ansibleDefault_branch,
 ansibleDictOfActiveBranches,
 'ansible',
 'ansible',
-'slicerOutput/Incmp_BackTrans_Ansible_backport_keywordsPRsNoNeedTestDiff.csv',
+'slicerOutput/Incmp_BackTrans_Ansible_backport_keywordsPRsNoNeedTestDiffIllustrations.csv',
 trainingFile = 'transInput/TrainingSample.jsonl',
 testingFile =''
 )
