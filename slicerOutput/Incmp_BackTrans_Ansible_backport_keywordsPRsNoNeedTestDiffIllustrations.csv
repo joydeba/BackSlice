@@ -6,7 +6,8 @@
         found_virt = True
 "
 -------------------------------------------------------------------------
-"guest_tech.add('bhyve')
+"if 'BHYVE' in out:
+    guest_tech.add('bhyve')
     if not found_virt:
         virtual_facts['virtualization_type'] = 'bhyve'
         virtual_facts['virtualization_role'] = 'guest'
@@ -45,13 +46,14 @@ def test_get_virtual_facts_bhyve(mocker):
     assert facts == expected
 "
 -------------------------------------------------------------------------
-"mocker.patch('os.path.exists', return_value=False)
+"def test_get_virtual_facts_bhyve(mocker):
+    mocker.patch('os.path.exists', return_value=False)
     mocker.patch('ansible.module_utils.facts.virtual.linux.get_file_content', return_value='')
     mocker.patch('ansible.module_utils.facts.virtual.linux.get_file_lines', return_value=[])
 
     module = mocker.Mock()
     module.run_command.return_value = (0, 'BHYVE\n', '')
-    inst = linux.LinuxVirtual(module)
+    inst = ansible.module_utils.facts.virtual.linux.LinuxVirtual(module)
 
     facts = inst.get_virtual_facts()
     expected = {
