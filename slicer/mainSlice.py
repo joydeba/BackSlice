@@ -124,12 +124,11 @@ def get_hunk_details(commits_diffs_original, commits_diffs_backport):
     codehunks_backport = []
     codehunks_original_withContext = []
     codehunks_backport_withContext = []  
-    filepathBackport = ""  
+    filepathBackport = [] 
     if len(commits_diffs_backport) == len(commits_diffs_original):
         for indexO in range(1, len(commits_diffs_original)):
             if commits_diffs_original[indexO] is not None:
                 filepath = commits_diffs_original[indexO].split("\n")[0]
-                filepathBackport = commits_diffs_backport[indexO].split("\n")[0]   
 
                 commits_diffs_original_contextHunks = commits_diffs_original[indexO].split("\n@@ ")
                 commits_diffs_backport_contextHunks = commits_diffs_backport[indexO].split("\n@@ ")  
@@ -158,6 +157,8 @@ def get_hunk_details(commits_diffs_original, commits_diffs_backport):
                         if commits_hunk_backportLines:    
                             codehunks_backport.append(commits_hunk_backportLines)
                             codehunks_backport_withContext.append(commits_diffs_backport_contextHunks[indexHunks0])
+                            
+                        filepathBackport.append(commits_diffs_backport[indexO].split("\n")[0])    
 
     return  codehunks_original, codehunks_backport, testhunks_original, codehunks_original_withContext, filepathBackport
 
@@ -330,7 +331,7 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                             sourcebackport = codeHunkBackport, 
                                             astdiffsHistory = astdiffshistory, 
                                             context = get_hunk_context(file_content = codehunks_original_withContext[context_index]), 
-                                            method_name = get_method_name(codehunks_original_withContext[context_index]),
+                                            method_name = get_method_or_class_name(codehunks_original_withContext[context_index]),
                                             dependencies = get_changeset_dependencies(previousBackportfullFileTarget), 
                                             metadata = get_changesets_and_metadata(pull_request = pull_backport, sourceO = codeHunk), 
                                             functionalSet = functionalSetforHunk, 
