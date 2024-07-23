@@ -157,51 +157,55 @@ def get_hunk_details(commits_diffs_original, commits_diffs_backport):
                         if commits_hunk_backportLines:    
                             codehunks_backport.append(commits_hunk_backportLines)
                             codehunks_backport_withContext.append(commits_diffs_backport_contextHunks[indexHunks0])
-                            
+
                         filepathBackport.append(commits_diffs_backport[indexO].split("\n")[0])    
 
     return  codehunks_original, codehunks_backport, testhunks_original, codehunks_original_withContext, filepathBackport
 
-def get_targetfile(repo, pull_id_original, pull_id_backport, filepathBackport):
-    previousBackportfullFileTarget = None
-    pullOriginal = repo.get_pull(int(pull_id_original))
-    pullBackport = repo.get_pull(int(pull_id_backport))
-    backport_filesContents = []
-    previous_backport_filesContents = []     
-    for fileB in pullBackport.get_files():
-        try:
-            previous_backport_filesContents.append({fileB.filename: repo.get_contents(fileB.filename, ref=pullBackport.base.sha).decoded_content.decode('utf-8')})
-        except Exception as e:
-            print("Error occurred in retrieving previous backport files:", e)
+def get_targetfile(repo, pull_id_original, pull_id_backport, filepathsBackport):
+    filePaths = []
+    filesContent = []
+    for filepathBackport in filepathsBackport:
+        previousBackportfullFileTarget = None
+        pullOriginal = repo.get_pull(int(pull_id_original))
+        pullBackport = repo.get_pull(int(pull_id_backport))
+        backport_filesContents = []
+        previous_backport_filesContents = []     
+        for fileB in pullBackport.get_files():
             try:
-                backport_filesContents.append({fileB.filename: repo.get_contents(fileB.filename, ref=pullBackport.head.sha).decoded_content.decode('utf-8')})
+                previous_backport_filesContents.append({fileB.filename: repo.get_contents(fileB.filename, ref=pullBackport.base.sha).decoded_content.decode('utf-8')})
             except Exception as e:
-                print("Error occurred in retrieving backport files:", e)
-                continue                
-    try:
-        file_path = filepathBackport.split(" ")[2]
-    except: 
-        file_path = filepathBackport.split(" ")[0]      
+                print("Error occurred in retrieving previous backport files:", e)
+                try:
+                    backport_filesContents.append({fileB.filename: repo.get_contents(fileB.filename, ref=pullBackport.head.sha).decoded_content.decode('utf-8')})
+                except Exception as e:
+                    print("Error occurred in retrieving backport files:", e)
+                    continue                
+        try:
+            file_path = filepathBackport.split(" ")[2]
+        except: 
+            file_path = filepathBackport.split(" ")[0]      
 
-    if previous_backport_filesContents:
-        for itemBcontent in previous_backport_filesContents:
-            temp_itemBcontent = itemBcontent.copy()
-            filepathBackport, fullFilecontentBackport = temp_itemBcontent.popitem()
-            if filepathBackport == file_path[2:]:    
-                previousBackportfullFileTarget = fullFilecontentBackport  
+        if previous_backport_filesContents:
+            for itemBcontent in previous_backport_filesContents:
+                temp_itemBcontent = itemBcontent.copy()
+                filepathBackport, fullFilecontentBackport = temp_itemBcontent.popitem()
+                if filepathBackport == file_path[2:]:    
+                    previousBackportfullFileTarget = fullFilecontentBackport  
 
-    backport_fullFileTarget = None
-    if backport_filesContents and previousBackportfullFileTarget is None:
-        for itemBcontent in backport_filesContents:
-            temp_itemBcontent = itemBcontent.copy()
-            filepathBackport, fullFilecontentBackport = temp_itemBcontent.popitem()
-            if filepathBackport == file_path[2:]:
-                backport_fullFileTarget = fullFilecontentBackport  
+        backport_fullFileTarget = None
+        if backport_filesContents and previousBackportfullFileTarget is None:
+            for itemBcontent in backport_filesContents:
+                temp_itemBcontent = itemBcontent.copy()
+                filepathBackport, fullFilecontentBackport = temp_itemBcontent.popitem()
+                if filepathBackport == file_path[2:]:
+                    backport_fullFileTarget = fullFilecontentBackport  
 
-    if previousBackportfullFileTarget is None:
-        previousBackportfullFileTarget = backport_fullFileTarget    
-
-    return filepathBackport, previousBackportfullFileTarget                                                                                                   
+        if previousBackportfullFileTarget is None:
+            previousBackportfullFileTarget = backport_fullFileTarget    
+        filePaths.append(filepathBackport)
+        filesContent.append(previousBackportfullFileTarget)
+    return filePaths, filesContent                                                                                                   
                                 
 def saveMetricResults(slicedPRs, projectName, data_read, numberofSlicingRequired, numberofDifferences, has_test_and_code, numberOfSuccesfulSlicing):
     with open("slicerOutput/"+projectName+"InconICFDiffzBackTransNoNeedTestDiffIllustrations.txt", 'w') as f:   
@@ -340,7 +344,6 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                                             targetfile = previousBackportfullFileTarget,
                                             tfileName=filepathBackport)                                                    
                     
-                         
                         # data = slicer.prepareFinetuneData()
                         # slicer.saveData(data, 'transInput/'+projectName+'BackportsRefactored.jsonl')   
 
