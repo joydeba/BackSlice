@@ -126,7 +126,7 @@ class BackTransformer():
             key_components = ', '.join(unique_identifiers)
             return key_components
         
-        method = extract_method_definition(self.targetfile, self.method_name)
+        method = extract_method_class_definition(self.targetfile, self.method_name)
 
 
         return (

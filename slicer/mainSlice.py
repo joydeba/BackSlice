@@ -330,19 +330,19 @@ def mainCSLICER(prlist = 'prlist.csv', default_branch='main', dictOfActiveBranch
                     slicebyCslicer = None
                     try:                        
                         functionalSetforHunk = get_functional_set(codeHunk, testCases = testhunks_original)
-                        astdiffshistory = get_ast_diffs(source_commits = pull_commitsSubmitted, startCommit=None, endCommit=None, startDate = None, endDate = None, repoName=repoName, projectName =projectName, fileInfo = filepathBackport) 
+                        astdiffshistory = get_ast_diffs(source_commits = pull_commitsSubmitted, startCommit=None, endCommit=None, startDate = None, endDate = None, repoName=repoName, projectName =projectName, fileInfo = filepathBackport[context_index]) 
                         slicer = BackTransformer(sourceOriginal = codeHunk,
                                             sourcebackport = codeHunkBackport, 
                                             astdiffsHistory = astdiffshistory, 
                                             context = get_hunk_context(file_content = codehunks_original_withContext[context_index]), 
                                             method_name = get_method_or_class_name(codehunks_original_withContext[context_index]),
-                                            dependencies = get_changeset_dependencies(previousBackportfullFileTarget), 
+                                            dependencies = get_changeset_dependencies(previousBackportfullFileTarget[context_index]), 
                                             metadata = get_changesets_and_metadata(pull_request = pull_backport, sourceO = codeHunk), 
                                             functionalSet = functionalSetforHunk, 
                                             compilationSet= get_compilation_set(sourceCode = codeHunk, functional_set = functionalSetforHunk), 
                                             stableLibraris = get_stable_version_libraries(owner = repoName, repo = projectName, branch = stableBranch, github_token=ghkey, cache_file= projectName+"StableLibraryCsche"), 
-                                            targetfile = previousBackportfullFileTarget,
-                                            tfileName=filepathBackport)                                                    
+                                            targetfile = previousBackportfullFileTarget[context_index],
+                                            tfileName=filepathBackport[context_index])                                                    
                     
                         # data = slicer.prepareFinetuneData()
                         # slicer.saveData(data, 'transInput/'+projectName+'BackportsRefactored.jsonl')   

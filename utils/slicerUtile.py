@@ -491,13 +491,19 @@ def find_missing_imports(code: str) -> list:
 
 
 
-def extract_method_definition(file_content, method_name):
+def extract_method_class_definition(file_content, name):
     tree = ast.parse(file_content)
     for node in ast.walk(tree):
-        if isinstance(node, ast.FunctionDef) and node.name == method_name:
+        if isinstance(node, ast.FunctionDef) and node.name == name:
             start_lineno = node.lineno
             end_lineno = node.body[-1].end_lineno
             lines = file_content.splitlines()[start_lineno-1:end_lineno]
             method_definition = '\n'.join(lines).strip()
             return method_definition
+        elif isinstance(node, ast.ClassDef) and node.name == name:
+            start_lineno = node.lineno
+            end_lineno = node.body[-1].end_lineno
+            lines = file_content.splitlines()[start_lineno-1:end_lineno]
+            class_definition = '\n'.join(lines).strip()
+            return class_definition
     return ""
