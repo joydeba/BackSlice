@@ -54,25 +54,21 @@ def get_ast_diffs(source_commits, startCommit=None, endCommit=None, startDate = 
         try:
             source_code = ""
             source_commit = repo.get_commit(commit['oid'])
-
             for file in source_commit.files:
                 if os.path.basename(file.filename) in fileInfo and file.filename.endswith('.py'):
-                    source_hunks = file.patch.split("@@\n")
-                    for indexhunk in range(1, len(source_hunks)):
-                        cleanhunk = source_hunks[indexhunk].split("@@")[0]
-                        cleanhunk = cleanhunk.split("\n")
-                        leadingSpacesOri = 0
-                        cleanhunkLines = ""
-                        for c_line in cleanhunk:
-                            if c_line.startswith(("+")):
-                                c_line = c_line.replace("+", "")
-                                if leadingSpacesOri == 0:
-                                    leadingSpacesOri = len(c_line) - len(c_line.lstrip())
-                                    cleanhunkLines = cleanhunkLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n"
-                        
-                        source_code = remove_comments_docstrings_fromString(cleanhunkLines)
-                        parsed_ast = ast.parse(source_code)
-                        asts.append((commit['oid'], parsed_ast))
+                    cleanhunk = file.patch.split("\n")
+                    leadingSpacesOri = 0
+                    cleanhunkLines = ""
+                    for c_line in cleanhunk:
+                        if c_line.startswith(("+")):
+                            c_line = c_line.replace("+", "")
+                            if leadingSpacesOri == 0:
+                                leadingSpacesOri = len(c_line) - len(c_line.lstrip())
+                            cleanhunkLines = cleanhunkLines + c_line.replace(c_line[:leadingSpacesOri], "") + "\n"
+                                
+                    source_code = remove_comments_docstrings_fromString(cleanhunkLines)
+                    parsed_ast = ast.parse(source_code)
+                    asts.append((commit['oid'], parsed_ast))
         except Exception as e:
             # We have to ignore this since the error is mostly for incomplete code
             print(f"Ignore for some - SyntaxError in {commit['oid']}: {e}")

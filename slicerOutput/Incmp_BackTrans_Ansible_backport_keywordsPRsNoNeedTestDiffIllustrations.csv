@@ -6,10 +6,7 @@
         found_virt = True
 "
 -------------------------------------------------------------------------
-"In this adaptation, the conditional block will be integrated into the `get_virtual_facts` method. The `if not found_virt:` condition will ensure that the virtualization facts are only set to 'bhyve' if it hasn't been set yet. Here is the adapted code snippet:
-
-
-if 'BHYVE' in out:
+"if 'BHYVE' in out:
     guest_tech.add('bhyve')
     if not found_virt:
         virtual_facts['virtualization_type'] = 'bhyve'
@@ -49,7 +46,14 @@ def test_get_virtual_facts_bhyve(mocker):
     assert facts == expected
 "
 -------------------------------------------------------------------------
-"from ansible.module_utils.facts.virtual import linux
+"# -*- coding: utf-8 -*-
+# Copyright (c) 2020 Ansible Project
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+from __future__ import absolute_import, division, print_function
+__metaclass__ = type
+
+from ansible.module_utils.facts.virtual import linux
 
 def test_get_virtual_facts_bhyve(mocker):
     mocker.patch('os.path.exists', return_value=False)
