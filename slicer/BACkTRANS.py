@@ -136,11 +136,11 @@ class BackTransformer():
             "Original metadata: " + metadata + "\n" +
             "Functional set for the hunk: " + f_set + "\n" +
             "Compilation set for the hunk: " + c_set + "\n" +
-            # "Library information from Stable: " + nested_values_libraries + "\n" +
-            # "Function name information from Stable: " + nested_values_function_names + "\n" +
-            # "Function call information from Stable: " + nested_values_function_calls + "\n" +
-            # "Class name information from Stable: " + nested_values_class_names + "\n" + 
-            # "Class method call information from Stable: " + nested_values_class_method_calls + "\n" + 
+            "Library information from Stable: " + nested_values_libraries + "\n" +
+            "Function name information from Stable: " + nested_values_function_names + "\n" +
+            "Function call information from Stable: " + nested_values_function_calls + "\n" +
+            "Class name information from Stable: " + nested_values_class_names + "\n" + 
+            "Class method call information from Stable: " + nested_values_class_method_calls + "\n" + 
             "Target file: " + self.targetfile + "\n" +                                
             "Target method: " + method
         )
@@ -262,19 +262,16 @@ class BackTransformer():
                         "role": "system",
                         "content": (
                             "Adapt the given code snippet based on the stable information below:\n"
-                            + promptData+ "\n"
-                            "Also follow these instructions carefully for precise adaptation.\n"
-                            "- If the AST differences include statements that can align the adapted hunk with the STABLE version, incorporate them into the adapted code.\n"
-                            "- Include required dependencies if they are new and not present in the stable version.\n"
-                            "- If metadata mentions adding or removing statements for the stable version, make those changes in the adapted code.\n"
-                            "- Preserve statements related to Compilation and Functional sets in the adapted code.\n"
-                            "- Replace identifiers in the adapted code with those from library information, function calls, function names, class names, and class method calls of the stable version that are closely similar to the source code.\n"
-                            "- Remove statements that are not required in the stable version or the target method.\n"
-                            "- Integrate the adapted code into the target method, adding or removing statements as needed to ensure proper functionality within the target method.\n"
+                            + promptData+ "\n" +
+                            "Also follow these instructions carefully for precise adaptation.\n" 
+                            "- Exclude statements in the adapted hunk from the source hunk if their identifiers are not initialized within the target method or class.\n"
+                            # "- Replace identifiers in the adapted code with those from library information, function calls, function names, class names, and class method calls of the stable version that are closely similar to the source code.\n"
                             "- Do not remove comments from the original source.\n"
-                            # "- Providing a code hunk is acceptable; there's no need to provide the complete code.\n"
-                            "- Maintain the original indentation.\n"
-                            
+                            "- Maintain the original indentation.\n"                            
+                            # "- If the AST differences include statements that can align the adapted hunk with the STABLE version, incorporate them into the adapted code.\n"
+                            "- Include required dependencies if they are new and not present in the stable version.\n"
+                            # "- If metadata mentions adding or removing statements for the stable version, make those changes in the adapted code.\n"
+                            # "- Preserve statements related to Compilation and Functional sets in the adapted code.\n"                            
                         )
                     },
                     {
