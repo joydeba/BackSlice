@@ -129,23 +129,24 @@ class BackTransformer():
         method = extract_method_class_definition(self.targetfile, self.method_name)
 
 
-        return (
-            "All ASTs from commit history: " + allast_snippets + "\n" +
+        return {
+            "All ASTs from commit history" : allast_snippets,
             # "Current context: " + self.context + "\n" +
-            "Required dependency: " + all_library_names + "\n" +
-            "Original metadata: " + metadata + "\n" +
-            "Functional set for the hunk: " + f_set + "\n" +
-            "Compilation set for the hunk: " + c_set + "\n" +
-            "Library information from Stable: " + nested_values_libraries + "\n" +
-            "Function name information from Stable: " + nested_values_function_names + "\n" +
-            "Function call information from Stable: " + nested_values_function_calls + "\n" +
-            "Class name information from Stable: " + nested_values_class_names + "\n" + 
-            "Class method call information from Stable: " + nested_values_class_method_calls + "\n" + 
-            "Target file: " + self.targetfile + "\n" +                                
-            "Target method: " + method
-        )
+            "Required dependency" : all_library_names,
+            "Original metadata" : metadata ,
+            "Functional set for the hunk" : f_set,
+            "Compilation set for the hunk" : c_set,
+            "Library information from Stable" : nested_values_libraries ,
+            "Function name information from Stable" : nested_values_function_names,
+            "Function call information from Stable" : nested_values_function_calls,
+            "Class name information from Stable" : nested_values_class_names,
+            "Class method call information from Stable" : nested_values_class_method_calls,
+            "Target file" : self.targetfile,                           
+            "Target method" : method
+        }
 
 
+    
     def prepareFinetuneData(self):
         """
         Prepare data for fine-tuning the transformer
@@ -230,7 +231,12 @@ class BackTransformer():
         with open(filename, 'a') as f:
                 f.write(json.dumps(data) + '\n')
              
-
+    def get_string_representation(self, data):
+        result = []
+        for key, value in data.items():
+            result.append(f'"{key}" : {value}')
+        return "\n".join(result)
+    
     def analyzeProgram(self, fineTuning = False, fineTuningFile = "transInput/Backports.jsonl", ftTraining = False, prompt = False, testingFile = ""):
         """
         Adapt the sourceOriginal to a stable version based on various inputs.
@@ -262,15 +268,15 @@ class BackTransformer():
                         "role": "system",
                         "content": (
                             "Adapt the given code snippet based on the stable information below:\n"
-                            + promptData+ "\n" +
+                            + self.get_string_representation(promptData) + "\n" +
                             "Also follow these instructions carefully for precise adaptation.\n" 
-                            "- Exclude statements in the adapted hunk from the source hunk if their identifiers are not initialized within the target method or class.\n"
-                            # "- Replace identifiers in the adapted code with those from library information, function calls, function names, class names, and class method calls of the stable version that are closely similar to the source code.\n"
+                            "- Include or exclude statements in the adapted hunk from the source hunk if their identifiers are initialized / not initialized within this target method or class"+ promptData["Target method"] +"\n"
+                            "- Replace identifiers in the adapted code with those from library information, function calls, function names, class names, and class method calls of the stable version that are closely similar to the source code.\n"
                             "- Do not remove comments from the original source.\n"
                             "- Maintain the original indentation.\n"                            
-                            # "- If the AST differences include statements that can align the adapted hunk with the STABLE version, incorporate them into the adapted code.\n"
+                            "- If the AST differences include statements that can align the adapted hunk with the STABLE version, incorporate them into the adapted code.\n"
                             "- Include required dependencies if they are new and not present in the stable version.\n"
-                            # "- If metadata mentions adding or removing statements for the stable version, make those changes in the adapted code.\n"
+                            "- If metadata mentions adding or removing statements for the stable version, make those changes in the adapted code.\n"
                             # "- Preserve statements related to Compilation and Functional sets in the adapted code.\n"                            
                         )
                     },
