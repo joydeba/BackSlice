@@ -134,13 +134,13 @@ class BackTransformer():
             # "Current context: " + self.context + "\n" +
             "Required dependency" : all_library_names,
             "Original metadata" : metadata ,
-            "Functional set for the hunk" : f_set,
-            "Compilation set for the hunk" : c_set,
-            "Library information from Stable" : nested_values_libraries ,
-            "Function name information from Stable" : nested_values_function_names,
-            "Function call information from Stable" : nested_values_function_calls,
-            "Class name information from Stable" : nested_values_class_names,
-            "Class method call information from Stable" : nested_values_class_method_calls,
+            # "Functional set for the hunk" : f_set,
+            # "Compilation set for the hunk" : c_set,
+            # "Library information from Stable" : nested_values_libraries ,
+            # "Function name information from Stable" : nested_values_function_names,
+            # "Function call information from Stable" : nested_values_function_calls,
+            # "Class name information from Stable" : nested_values_class_names,
+            # "Class method call information from Stable" : nested_values_class_method_calls,
             "Target file" : self.targetfile,                           
             "Target method" : method
         }
@@ -270,11 +270,11 @@ class BackTransformer():
                             "Adapt the given code snippet based on the stable information below:\n"
                             + self.get_string_representation(promptData) + "\n" +
                             "Also follow these instructions carefully for precise adaptation.\n" 
-                            "- Include or exclude statements in the adapted hunk from the source hunk if their identifiers are initialized / not initialized within this target method or class"+ promptData["Target method"] +"\n"
+                            "- Remove statements in the adapted hunk from the source hunk if their identifiers are not initialized within this target method or class"+ promptData["Target method"] +"\n"
                             "- Replace identifiers in the adapted code with those from library information, function calls, function names, class names, and class method calls of the stable version that are closely similar to the source code.\n"
                             "- Do not remove comments from the original source.\n"
                             "- Maintain the original indentation.\n"                            
-                            "- If the AST differences include statements that can align the adapted hunk with the STABLE version, incorporate them into the adapted code.\n"
+                            # "- If the AST differences include statements that can align the adapted hunk with the STABLE version, incorporate them into the adapted code.\n"
                             "- Include required dependencies if they are new and not present in the stable version.\n"
                             "- If metadata mentions adding or removing statements for the stable version, make those changes in the adapted code.\n"
                             # "- Preserve statements related to Compilation and Functional sets in the adapted code.\n"                            
