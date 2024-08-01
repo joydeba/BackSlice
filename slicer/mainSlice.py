@@ -90,21 +90,24 @@ def get_file_and_file_content(pull_id_original, pull_id_backport, line, repo, gL
 
 
 def getsimilarHunks(commits_diffs_original_contextHunks, commits_diffs_backport_contextHunks, indexHunks0, min_hunks_count):
-    commits_hunkline_original_context = commits_diffs_original_contextHunks[indexHunks0].split("\n")
-    commits_hunkline_backport_context = commits_diffs_backport_contextHunks[indexHunks0].split("\n")
+    paddedOriginal = get_padded_addedLines(commits_diffs_original_contextHunks[indexHunks0].split("\n"))
+    paddedBackport = get_padded_addedLines(commits_diffs_backport_contextHunks[indexHunks0].split("\n"))
+    commits_hunkline_original_context = paddedOriginal.split("\n")
+    commits_hunkline_backport_context = paddedBackport.split("\n")
     similarity_score = difflib.SequenceMatcher(None, commits_hunkline_original_context[0], commits_hunkline_backport_context[0]).ratio()
     if similarity_score <= 0.85:
         for indexH in range(1, min_hunks_count):
-            commits_hunkline_backport_context = commits_diffs_backport_contextHunks[indexH].split("\n")
+            paddedBackport = get_padded_addedLines(commits_diffs_backport_contextHunks[indexH].split("\n"))
+            commits_hunkline_backport_context = paddedBackport.split("\n")
             similarity_score = difflib.SequenceMatcher(None, commits_hunkline_original_context[0], commits_hunkline_backport_context[0]).ratio()
             if similarity_score > 0.85:
                 break
             if similarity_score <= 0.85 and indexH == min_hunks_count - 1:
                 return None, None                    
     else:
-        commits_hunkline_backport_context = commits_diffs_backport_contextHunks[indexHunks0].split("\n")
+        paddedBackport = get_padded_addedLines(commits_diffs_backport_contextHunks[indexHunks0].split("\n"))
 
-    return  commits_hunkline_original_context, commits_hunkline_backport_context                  
+    return  paddedOriginal, paddedBackport                  
 
 def get_padded_addedLines(commits_hunkline_context):
     leadingSpaces = -1
@@ -140,15 +143,15 @@ def get_hunk_details(commits_diffs_original, commits_diffs_backport):
 
                 for indexHunks0 in range(1, min_hunks_count):                                                                          
 
-                    commits_hunkline_original_context, commits_hunkline_backport_context = getsimilarHunks(commits_diffs_original_contextHunks, commits_diffs_backport_contextHunks, indexHunks0, min_hunks_count)
+                    commits_hunk_originalLines, commits_hunk_backportLines = getsimilarHunks(commits_diffs_original_contextHunks, commits_diffs_backport_contextHunks, indexHunks0, min_hunks_count)
 
                     # hunkStartLnNo = commits_hunkline_original_context[0].split(" ")[0][1:].split(",")
                     # hunkEndlnNo = commits_hunkline_original_context[0].split(" ")[1][1:].split(",")
 
-                    if commits_hunkline_original_context and commits_hunkline_backport_context:
+                    if commits_hunk_originalLines and commits_hunk_backportLines:
 
-                        commits_hunk_originalLines = get_padded_addedLines(commits_hunkline_original_context)    
-                        commits_hunk_backportLines = get_padded_addedLines(commits_hunkline_backport_context)                                  
+                        # commits_hunk_originalLines = get_padded_addedLines(commits_hunkline_original_context)    
+                        # commits_hunk_backportLines = get_padded_addedLines(commits_hunkline_backport_context)                                  
 
                         if commits_hunk_originalLines:    
                             codehunks_original.append(commits_hunk_originalLines)
