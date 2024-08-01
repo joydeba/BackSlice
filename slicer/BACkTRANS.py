@@ -267,17 +267,18 @@ class BackTransformer():
                     {
                         "role": "system",
                         "content": (
-                            "Adapt the given code snippet based on the stable information below:\n"
+                            "Adapt the given code snippet at the statement level, maintaining the same functionality, based on the stable information below:\n"
                             + self.get_string_representation(promptData) + "\n" +
                             "Also follow these instructions carefully for precise adaptation.\n" 
                             "- Remove statements in the adapted hunk from the source hunk if their identifiers are not initialized within this target method or class"+ promptData["Target method"] +"\n"
                             "- Replace identifiers in the adapted code with those from library information, function calls, function names, class names, and class method calls of the stable version that are closely similar to the source code.\n"
                             "- Do not remove comments from the original source.\n"
                             "- Maintain the original indentation.\n"                            
-                            # "- If the AST differences include statements that can align the adapted hunk with the STABLE version, incorporate them into the adapted code.\n"
+                            "- If the AST differences include statements that can align the adapted hunk with the STABLE version, incorporate the code statements from ASTs into the adapted code.\n"
                             "- Include required dependencies if they are new and not present in the stable version.\n"
                             "- If metadata mentions adding or removing statements for the stable version, make those changes in the adapted code.\n"
-                            # "- Preserve statements related to Compilation and Functional sets in the adapted code.\n"                            
+                            "- Providing a code hunk is acceptable; there's no need to provide the complete code.\n"
+                            "- Give the code hunk only. No extra description, please.\n"                          
                         )
                     },
                     {
