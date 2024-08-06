@@ -277,7 +277,7 @@ class BackTransformer():
                             "- If the AST differences include statements that can align the adapted hunk with the STABLE version, incorporate the code statements from ASTs into the adapted code.\n"
                             "- Include required dependencies if they are new and not present in the stable version.\n"
                             "- If metadata mentions adding or removing statements for the stable version, make those changes in the adapted code.\n"
-                            "- Providing a code hunk is acceptable; there's no need to provide the complete code.\n"
+                            "- Providing a code hunk is acceptable; there's no need to provide the complete code or extra statements.\n"
                             "- Give the code hunk only. No extra description, please.\n"                          
                         )
                     },

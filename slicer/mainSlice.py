@@ -74,17 +74,18 @@ def get_file_and_file_content(pull_id_original, pull_id_backport, line, repo, gL
     backport_parents_count = int(gLocal.execute(["git", "rev-list", "--parents", "-n", "1", backport_mergeCommits]).count(" "))       
 
     if original_parents_count == 2:
-        commits_diffs_original = gLocal.execute(["git", "show", gLocal.execute(["git", "rev-list", "--parents", "-n", "1", original_mergeCommits]).split(" ")[-1], ":*.cc", ":*.py", ":*.c"]).split("\ndiff ") if original_mergeCommits else print("Merge commit missing")
+        # commits_diffs_original = gLocal.execute(["git", "show", gLocal.execute(["git", "rev-list", "--parents", "-n", "1", original_mergeCommits]).split(" ")[-1], ":*.py"]).split("\ndiff ") if original_mergeCommits else print("Merge commit missing")
+        commits_diffs_original = gLocal.execute(["git", "show", gLocal.execute(["git", "rev-list", "--parents", "-n", "1", original_mergeCommits]).split(" ")[-1], ":*.py"]).split("\ndiff ") if original_mergeCommits else print("Merge commit missing")
         if commits_diffs_original[0] == '':
-            commits_diffs_original = gLocal.execute(["git", "show", gLocal.execute(["git", "rev-list", "--parents", "-n", "1", original_mergeCommits]).split(" ")[0], ":*.cc", ":*.py", ":*.c"]).split("\ndiff ") if original_mergeCommits else print("Merge commit missing")
+            commits_diffs_original = gLocal.execute(["git", "show", gLocal.execute(["git", "rev-list", "--parents", "-n", "1", original_mergeCommits]).split(" ")[0], ":*.py"]).split("\ndiff ") if original_mergeCommits else print("Merge commit missing")
     else:    
-        commits_diffs_original = gLocal.execute(["git", "show", original_mergeCommits, ":*.cc", ":*.py", ":*.c"]).split("\ndiff ") if original_mergeCommits else print("Merge commit missing")
+        commits_diffs_original = gLocal.execute(["git", "show", original_mergeCommits, ":*.py"]).split("\ndiff ") if original_mergeCommits else print("Merge commit missing")
     if backport_parents_count == 2:
-        commits_diffs_backport = gLocal.execute(["git", "show", gLocal.execute(["git", "rev-list", "--parents", "-n", "1", backport_mergeCommits]).split(" ")[-1], ":*.cc", ":*.py", ":*.c"]).split("\ndiff ") if backport_mergeCommits else print("Merge commit missing") 
+        commits_diffs_backport = gLocal.execute(["git", "show", gLocal.execute(["git", "rev-list", "--parents", "-n", "1", backport_mergeCommits]).split(" ")[-1], ":*.py"]).split("\ndiff ") if backport_mergeCommits else print("Merge commit missing") 
         if commits_diffs_backport[0] == '':
-            commits_diffs_backport = gLocal.execute(["git", "show", gLocal.execute(["git", "rev-list", "--parents", "-n", "1", backport_mergeCommits]).split(" ")[0], ":*.cc", ":*.py", ":*.c"]).split("\ndiff ") if backport_mergeCommits else print("Merge commit missing")                                     
+            commits_diffs_backport = gLocal.execute(["git", "show", gLocal.execute(["git", "rev-list", "--parents", "-n", "1", backport_mergeCommits]).split(" ")[0], ":*.py"]).split("\ndiff ") if backport_mergeCommits else print("Merge commit missing")                                     
     else:          
-        commits_diffs_backport = gLocal.execute(["git", "show", backport_mergeCommits, ":*.cc", ":*.py", ":*.c"]).split("\ndiff ") if backport_mergeCommits else print("Merge commit missing")    
+        commits_diffs_backport = gLocal.execute(["git", "show", backport_mergeCommits, ":*.py"]).split("\ndiff ") if backport_mergeCommits else print("Merge commit missing")    
 
     return commits_diffs_original, commits_diffs_backport, pull_commitsSubmitted, pull_backport
 
