@@ -1,0 +1,512 @@
+"def test_issue42383(self):
+    with os_helper.temp_cwd() as cwd:
+        with open('foo.py', 'w') as f:
+            s = textwrap.dedent(""""""
+                print('The correct file was executed')
+                import os
+                os.chdir(""subdir"")
+            """""")
+            f.write(s)
+        subdir = os.path.join(cwd, 'subdir')
+        os.mkdir(subdir)
+        os.mkdir(os.path.join(subdir, 'subdir'))
+        wrong_file = os.path.join(subdir, 'foo.py')
+        with open(wrong_file, 'w') as f:
+            f.write('print(""The wrong file was executed"")')
+        stdout, stderr = self._run_pdb(['foo.py'], 'c\nc\nq')
+        expected = '(Pdb) The correct file was executed'
+        self.assertEqual(stdout.split('\n')[6].rstrip('\r'), expected)
+"
+-------------------------------------------------------------------------
+"def test_issue42383_symlink(self):
+    '''When running `python foo.py` sys.path[0] resolves symlinks. `python -m pdb foo.py` should behave the same'''
+
+    script = textwrap.dedent(""""""
+        import sys
+        print('sys.path[0] is', sys.path[0])
+    """""")
+    
+    commands = 'c\nq'
+
+    with os_helper.temp_cwd() as cwd:
+        cwd = os.path.realpath(cwd)
+        dir_one = os.path.join(cwd, 'dir_one')
+        dir_two = os.path.join(cwd, 'dir_two')
+        expected = f'(Pdb) sys.path[0] is {dir_one}'
+
+        os.mkdir(dir_one)
+        with open(os.path.join(dir_one, 'foo.py'), 'w') as f:
+            f.write(script)
+        os.mkdir(dir_two)
+        os.symlink(os.path.join(dir_one, 'foo.py'), os.path.join(dir_two, 'foo.py'))
+
+        stdout, stderr = self._run_pdb([os.path.join('dir_two', 'foo.py')], commands)
+
+        self.assertEqual(stdout.split('\n')[2].rstrip('\r'), expected)"
+-------------------------------------------------------------------------
+"def test_issue42383(self):
+    with support.temp_cwd() as cwd:
+        with open('foo.py', 'w') as f:
+            s = textwrap.dedent(""""""
+                print('The correct file was executed')
+                import os
+                os.chdir(""subdir"")
+            """""")
+            f.write(s)
+        subdir = os.path.join(cwd, 'subdir')
+        os.mkdir(subdir)
+        os.mkdir(os.path.join(subdir, 'subdir'))
+        wrong_file = os.path.join(subdir, 'foo.py')
+        with open(wrong_file, 'w') as f:
+            f.write('print(""The wrong file was executed"")')
+        stdout, stderr = self._run_pdb(['foo.py'], 'c\nc\nq')
+        expected = '(Pdb) The correct file was executed'
+        self.assertEqual(stdout.split('\n')[6].rstrip('\r'), expected)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 23412, 24323"
+-------------------------------------------------------------------------
+=========================================================================
+"def test_issue42383(self):
+    with os_helper.temp_cwd() as cwd:
+        with open('foo.py', 'w') as f:
+            s = textwrap.dedent(""""""
+                print('The correct file was executed')
+                import os
+                os.chdir(""subdir"")
+            """""")
+            f.write(s)
+        subdir = os.path.join(cwd, 'subdir')
+        os.mkdir(subdir)
+        os.mkdir(os.path.join(subdir, 'subdir'))
+        wrong_file = os.path.join(subdir, 'foo.py')
+        with open(wrong_file, 'w') as f:
+            f.write('print(""The wrong file was executed"")')
+        stdout, stderr = self._run_pdb(['foo.py'], 'c\nc\nq')
+        expected = '(Pdb) The correct file was executed'
+        self.assertEqual(stdout.split('\n')[6].rstrip('\r'), expected)
+"
+-------------------------------------------------------------------------
+"def test_issue42383_symlink(self):
+    '''When running `python foo.py` sys.path[0] resolves symlinks. `python -m pdb foo.py` should behave the same'''
+    script = textwrap.dedent(""""""
+        import sys
+        print('sys.path[0] is', sys.path[0])
+    """""")
+    commands = 'c\nq'
+
+    with support.temp_cwd() as cwd:
+        cwd = os.path.realpath(cwd)
+        dir_one = os.path.join(cwd, 'dir_one')
+        dir_two = os.path.join(cwd, 'dir_two')
+        expected = f'(Pdb) sys.path[0] is {dir_one}'
+
+        os.mkdir(dir_one)
+        with open(os.path.join(dir_one, 'foo.py'), 'w') as f:
+            f.write(script)
+        os.mkdir(dir_two)
+        os.symlink(os.path.join(dir_one, 'foo.py'), os.path.join(dir_two, 'foo.py'))
+
+        stdout, stderr = self._run_pdb([os.path.join('dir_two', 'foo.py')], commands)
+
+        self.assertEqual(stdout.split('\n')[2].rstrip('\r'), expected)"
+-------------------------------------------------------------------------
+"def test_issue42383(self):
+    with support.temp_cwd() as cwd:
+        with open('foo.py', 'w') as f:
+            s = textwrap.dedent(""""""
+                print('The correct file was executed')
+                import os
+                os.chdir(""subdir"")
+            """""")
+            f.write(s)
+        subdir = os.path.join(cwd, 'subdir')
+        os.mkdir(subdir)
+        os.mkdir(os.path.join(subdir, 'subdir'))
+        wrong_file = os.path.join(subdir, 'foo.py')
+        with open(wrong_file, 'w') as f:
+            f.write('print(""The wrong file was executed"")')
+        stdout, stderr = self._run_pdb(['foo.py'], 'c\nc\nq')
+        expected = '(Pdb) The correct file was executed'
+        self.assertEqual(stdout.split('\n')[6].rstrip('\r'), expected)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 23412, 24322"
+-------------------------------------------------------------------------
+=========================================================================
+"def _test_ddir_only(self, *, ddir, parallel=True):
+    """"""Recursive compile_dir ddir must contain package paths; bpo39769.""""""
+    fullpath = [""test"", ""foo""]
+    path = self.directory
+    mods = []
+    for subdir in fullpath:
+        path = os.path.join(path, subdir)
+        os.mkdir(path)
+        script_helper.make_script(path, ""__init__"", """")
+        mods.append(script_helper.make_script(path, ""mod"",
+                                              ""def fn(): 1/0\nfn()\n""))
+    compileall.compile_dir(
+            self.directory, quiet=True, ddir=ddir,
+            workers=2 if parallel else 1)
+    self.assertTrue(mods)
+    for mod in mods:
+        self.assertTrue(mod.startswith(self.directory), mod)
+        modcode = importlib.util.cache_from_source(mod)
+        modpath = mod[len(self.directoryos.sep):]
+        _, _, err = script_helper.assert_python_failure(modcode)
+        expected_in = os.path.join(ddir, modpath)
+        mod_code_obj = test.test_importlib.util.get_code_from_pyc(modcode)
+        self.assertEqual(mod_code_obj.co_filename, expected_in)
+        self.assertIn(f'""{expected_in}""', os.fsdecode(err))
+def test_ddir_only_one_worker(self):
+    """"""Recursive compile_dir ddir= contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir=""<a prefix>"", parallel=False)
+def test_ddir_multiple_workers(self):
+    """"""Recursive compile_dir ddir= contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir=""<a prefix>"", parallel=True)
+def test_ddir_empty_only_one_worker(self):
+    """"""Recursive compile_dir ddir='' contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir="""", parallel=False)
+def test_ddir_empty_multiple_workers(self):
+    """"""Recursive compile_dir ddir='' contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir="""", parallel=True)
+"
+-------------------------------------------------------------------------
+"def _test_ddir_only(self, *, ddir, parallel=True):
+    """"""Recursive compile_dir ddir must contain package paths; bpo39769.""""""
+    fullpath = [""test"", ""foo""]
+    path = self.directory
+    mods = []
+    for subdir in fullpath:
+        path = os.path.join(path, subdir)
+        os.mkdir(path)
+        script_helper.make_script(path, ""__init__"", """")
+        mods.append(script_helper.make_script(path, ""mod"",
+                                              ""def fn(): 1/0\nfn()\n""))
+    compileall.compile_dir(
+            self.directory, quiet=True, ddir=pathlib.Path(ddir),
+            workers=2 if parallel else 1)
+    self.assertTrue(mods)
+    for mod in mods:
+        self.assertTrue(mod.startswith(self.directory), mod)
+        modcode = importlib.util.cache_from_source(mod)
+        modpath = mod[len(self.directory) + len(os.sep):]
+        _, _, err = script_helper.assert_python_failure(modcode)
+        expected_in = pathlib.Path(ddir) / modpath
+        mod_code_obj = test.test_importlib.util.get_code_from_pyc(modcode)
+        self.assertEqual(mod_code_obj.co_filename, str(expected_in))
+        self.assertIn(f'""{expected_in}""', os.fsdecode(err))
+
+def test_ddir_only_one_worker(self):
+    """"""Recursive compile_dir ddir= contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir=""<a prefix>"", parallel=False)
+
+def test_ddir_multiple_workers(self):
+    """"""Recursive compile_dir ddir= contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir=""<a prefix>"", parallel=True)
+
+def test_ddir_empty_only_one_worker(self):
+    """"""Recursive compile_dir ddir='' contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir="""", parallel=False)
+
+def test_ddir_empty_multiple_workers(self):
+    """"""Recursive compile_dir ddir='' contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir="""", parallel=True)"
+-------------------------------------------------------------------------
+"def _test_ddir_only(self, *, ddir, parallel=True):
+    """"""Recursive compile_dir ddir must contain package paths; bpo39769.""""""
+    fullpath = [""test"", ""foo""]
+    path = self.directory
+    mods = []
+    for subdir in fullpath:
+        path = os.path.join(path, subdir)
+        os.mkdir(path)
+        script_helper.make_script(path, ""__init__"", """")
+        mods.append(script_helper.make_script(path, ""mod"",
+                                              ""def fn(): 1/0\nfn()\n""))
+    compileall.compile_dir(
+            self.directory, quiet=True, ddir=ddir,
+            workers=2 if parallel else 1)
+    self.assertTrue(mods)
+    for mod in mods:
+        self.assertTrue(mod.startswith(self.directory), mod)
+        modcode = importlib.util.cache_from_source(mod)
+        modpath = mod[len(self.directoryos.sep):]
+        _, _, err = script_helper.assert_python_failure(modcode)
+        expected_in = os.path.join(ddir, modpath)
+        mod_code_obj = test.test_importlib.util._get_code_from_pyc(modcode)
+        self.assertEqual(mod_code_obj.co_filename, expected_in)
+        self.assertIn(f'""{expected_in}""', os.fsdecode(err))
+def test_ddir_only_one_worker(self):
+    """"""Recursive compile_dir ddir= contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir=""<a prefix>"", parallel=False)
+def test_ddir_multiple_workers(self):
+    """"""Recursive compile_dir ddir= contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir=""<a prefix>"", parallel=True)
+def test_ddir_empty_only_one_worker(self):
+    """"""Recursive compile_dir ddir='' contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir="""", parallel=False)
+def test_ddir_empty_multiple_workers(self):
+    """"""Recursive compile_dir ddir='' contains package paths; bpo39769.""""""
+    return self._test_ddir_only(ddir="""", parallel=True)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 18676, 18718"
+-------------------------------------------------------------------------
+=========================================================================
+"def get_code_from_pyc(pyc_path):
+    """"""Reads a pyc file and returns the unmarshalled code object within.
+    No header validation is performed.
+    """"""
+    with open(pyc_path, 'rb') as pyc_f:
+        pyc_f.seek(16)
+        return marshal.load(pyc_f)
+"
+-------------------------------------------------------------------------
+"def get_code_from_pyc(pyc_path):
+    """"""Reads a pyc file and returns the unmarshalled code object within.
+    No header validation is performed.
+    """"""
+    with open(pyc_path, 'rb') as pyc_f:
+        pyc_f.seek(16)
+        return importlib._bootstrap_external.marshal.load(pyc_f)"
+-------------------------------------------------------------------------
+"def _get_code_from_pyc(pyc_path):
+    """"""Reads a pyc file and returns the unmarshalled code object within.
+    No header validation is performed.
+    """"""
+    with open(pyc_path, 'rb') as pyc_f:
+        pyc_f.seek(16)
+        return marshal.load(pyc_f)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 18676, 18718"
+-------------------------------------------------------------------------
+=========================================================================
+"import copy
+from functools import partial
+"
+-------------------------------------------------------------------------
+"import copy
+from functools import partial"
+-------------------------------------------------------------------------
+"import copy
+import pickle
+import sys
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 9106, 9133"
+-------------------------------------------------------------------------
+=========================================================================
+"r = repr(d)
+# Cannot perform a stronger test, as the contents of the repr
+# are implementation-dependent.  All we can say is that we
+# want a str result, not an exception of any sort.
+self.assertIsInstance(r, str)
+d[42] = d.items()
+r = repr(d)
+# Again.
+self.assertIsInstance(r, str)
+test_deeply_nested_repr(self):
+d = {}
+for i in range(sys.getrecursionlimit()  100):
+    d = {42: d.values()}
+"
+-------------------------------------------------------------------------
+"d[42] = d.viewitems()
+        self.assertRaises(RuntimeError, repr, d)
+
+        d = {}
+        for i in range(sys.getrecursionlimit() - 100):
+            d = {42: d.viewvalues()}"
+-------------------------------------------------------------------------
+"r = repr(d)
+# Cannot perform a stronger test, as the contents of the repr
+# are implementation-dependent.  All we can say is that we
+# want a str result, not an exception of any sort.
+self.assertIsInstance(r, str)
+d[42] = d.viewitems()
+r = repr(d)
+# Again.
+self.assertIsInstance(r, str)
+test_deeply_nested_repr(self):
+d = {}
+for i in range(sys.getrecursionlimit()  100):
+    d = {42: d.viewvalues()}
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 4823, 5357"
+-------------------------------------------------------------------------
+=========================================================================
+"def test_repr_recursive_values(self):
+    OrderedDict = self.OrderedDict
+    od = OrderedDict()
+    od[42] = od.values()
+    r = repr(od)
+    # Cannot perform a stronger test, as the contents of the repr
+    # are implementation-dependent.  All we can say is that we
+    # want a str result, not an exception of any sort.
+    self.assertIsInstance(r, str)
+    od[42] = od.items()
+    r = repr(od)
+    # Again.
+    self.assertIsInstance(r, str)
+"
+-------------------------------------------------------------------------
+"def test_repr_recursive_values(self):
+    OrderedDict = self.OrderedDict
+    od = OrderedDict()
+    od[42] = od.viewvalues()
+    self.assertRaises(RuntimeError, repr, od)
+    od[42] = od.viewitems()
+    self.assertRaises(RuntimeError, repr, od)"
+-------------------------------------------------------------------------
+"def test_repr_recursive_values(self):
+    od = OrderedDict()
+    od[42] = od.viewvalues()
+    r = repr(od)
+    # Cannot perform a stronger test, as the contents of the repr
+    # are implementation-dependent.  All we can say is that we
+    # want a str result, not an exception of any sort.
+    self.assertIsInstance(r, str)
+    od[42] = od.viewitems()
+    r = repr(od)
+    # Again.
+    self.assertIsInstance(r, str)
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 4823, 5357"
+-------------------------------------------------------------------------
+=========================================================================
+"# bpo-32502: UUID1 requires a 48-bit identifier, but hardware identifiers
+# need not necessarily be 48 bits (e.g., EUI-64).
+def test_uuid1_eui64(self):
+    # Confirm that uuid.getnode ignores hardware addresses larger than 48
+    # bits. Mock out each platform's *_getnode helper functions to return
+    # something just larger than 48 bits to test. This will cause
+    # uuid.getnode to fall back on uuid._random_getnode, which will
+    # generate a valid value.
+    too_large_getter = lambda: 1 << 48
+    with unittest.mock.patch.multiple(
+        self.uuid,
+        _node=None,  # Ignore any cached node value.
+        _NODE_GETTERS_WIN32=[too_large_getter],
+        _NODE_GETTERS_UNIX=[too_large_getter],
+    ):
+        node = self.uuid.getnode()
+    self.assertTrue(0 < node < (1 << 48), '%012x' % node)
+    # Confirm that uuid1 can use the generated node, i.e., the that
+    # uuid.getnode fell back on uuid._random_getnode() rather than using
+    # the value from too_large_getter above.
+    try:
+        self.uuid.uuid1(node=node)
+    except ValueError as e:
+        self.fail('uuid1 was given an invalid node ID')
+"
+-------------------------------------------------------------------------
+"def test_uuid1_eui64(self):
+    # Confirm that uuid.getnode ignores hardware addresses larger than 48
+    # bits. Mock out each platform's *_getnode helper functions to return
+    # something just larger than 48 bits to test. This will cause
+    # uuid.getnode to fall back on uuid._random_getnode, which will
+    # generate a valid value.
+    too_large_getter = lambda: 1 << 48
+    with unittest.mock.patch.multiple(
+        uuid,
+        _node=None,  # Ignore any cached node value.
+        _NODE_GETTERS_WIN32=[[too_large_getter]],
+        _NODE_GETTERS_UNIX=[[too_large_getter]],
+    ):
+        node = uuid.getnode()
+    self.assertTrue(0 < node < (1 << 48), '%012x' % node)
+    # Confirm that uuid1 can use the generated node, i.e., the that
+    # uuid.getnode fell back on uuid._random_getnode() rather than using
+    # the value from too_large_getter above.
+    try:
+        uuid.uuid1(node=node)
+    except ValueError as e:
+        self.fail('uuid1 was given an invalid node ID')"
+-------------------------------------------------------------------------
+"# bpo-32502: UUID1 requires a 48-bit identifier, but hardware identifiers
+# need not necessarily be 48 bits (e.g., EUI-64).
+def test_uuid1_eui64(self):
+    # Confirm that uuid.getnode ignores hardware addresses larger than 48
+    # bits. Mock out each platform's *_getnode helper functions to return
+    # something just larger than 48 bits to test. This will cause
+    # uuid.getnode to fall back on uuid._random_getnode, which will
+    # generate a valid value.
+    too_large_getter = lambda: 1 << 48
+    with unittest.mock.patch.multiple(
+        uuid,
+        _node=None,  # Ignore any cached node value.
+        _NODE_GETTERS_WIN32=[too_large_getter],
+        _NODE_GETTERS_UNIX=[too_large_getter],
+    ):
+        node = uuid.getnode()
+    self.assertTrue(0 < node < (1 << 48), '%012x' % node)
+    # Confirm that uuid1 can use the generated node, i.e., the that
+    # uuid.getnode fell back on uuid._random_getnode() rather than using
+    # the value from too_large_getter above.
+    try:
+        uuid.uuid1(node=node)
+    except ValueError as e:
+        self.fail('uuid1 was given an invalid node ID')
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 5254, 5290"
+-------------------------------------------------------------------------
+=========================================================================
+"_NODE_GETTERS_WIN32 = [_windll_getnode, _netbios_getnode, _ipconfig_getnode]
+_NODE_GETTERS_UNIX = [_unix_getnode, _ifconfig_getnode, _ip_getnode,
+                      _arp_getnode, _lanscan_getnode, _netstat_getnode]
+def getnode(*, getters=None):
+"
+-------------------------------------------------------------------------
+"def getnode(*, getters=None):
+    if getters is None:
+        getters = [_windll_getnode, _netbios_getnode, _ipconfig_getnode] if sys.platform == 'win32' else [_unixdll_getnode, _ifconfig_getnode, _ip_getnode,
+                                                                                                     _arp_getnode, _lanscan_getnode, _netstat_getnode]"
+-------------------------------------------------------------------------
+"_NODE_GETTERS_WIN32 = [_windll_getnode, _netbios_getnode, _ipconfig_getnode]
+_NODE_GETTERS_UNIX = [_unixdll_getnode, _ifconfig_getnode, _ip_getnode,
+                      _arp_getnode, _lanscan_getnode, _netstat_getnode]
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 5254, 5290"
+-------------------------------------------------------------------------
+=========================================================================
+"# issue29990
+(b""\xff\x30\x81\x30"", ""strict"", None),
+(b""\x81\x30\xff\x30"", ""strict"", None),
+(b""abc\x81\x39\xff\x39\xc1\xc4"", ""replace"", ""abc\ufffd\x39\ufffd\x39\u804a""),
+(b""abc\xab\x36\xff\x30def"", ""replace"", 'abc\ufffd\x36\ufffd\x30def'),
+(b""abc\xbf\x38\xff\x32\xc1\xc4"", ""ignore"",  ""abc\x38\x32\u804a""),
+"
+-------------------------------------------------------------------------
+"(b""\xff0\x810"", ""strict"", None),
+(b""\x810\xff0"", ""strict"", None),
+(b""abc\x819\xff9\xc1\xc4"", ""replace"", ""abc\ufffd9\ufffd9聊""),
+(b""abc\xab6\xff0def"", ""replace"", 'abc\ufffd6\ufffd0def'),
+(b""abc\xbf8\xff2\xc1\xc4"", ""ignore"",  ""abc82聊""),"
+-------------------------------------------------------------------------
+"# issue29990
+(""\xff\x30\x81\x30"", ""strict"", None),
+(""\x81\x30\xff\x30"", ""strict"", None),
+(""abc\x81\x39\xff\x39\xc1\xc4"", ""replace"", u""abc\ufffd\u804a""),
+(""abc\xab\x36\xff\x30def"", ""replace"", u'abc\ufffddef'),
+(""abc\xbf\x38\xff\x32\xc1\xc4"", ""ignore"", u""abc\u804a""),
+"
+-------------------------------------------------------------------------
+"Recom
+PRs: 1495, 1509"
+-------------------------------------------------------------------------
+=========================================================================
